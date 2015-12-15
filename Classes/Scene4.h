@@ -1,0 +1,28 @@
+#ifndef ___CLASSES_SCENE4_H_
+#define ___CLASSES_SCENE4_H_
+#include "GameTool.h"
+
+class Scene4:
+  public CCObject,
+  public Scene
+{
+  public:
+    virtual bool init(){return true;};
+    CREATE_FUNC(Scene4);
+    virtual void loadScene();
+    virtual void unloadScene();
+    virtual void createScene(CCNode * bg, CCNode * fbg, CCNode * fg, RingTile * tiles); 
+    virtual void update(float delta);
+    virtual void release(){};
+
+    RingTile *mTiles;
+    CCNode *mFront;
+    CCNode *mBg;
+    int mTileCount;
+    int mTileState;
+    
+    CCSprite *mFronts[6];
+    CCSprite *mBgs[6];
+    CCSprite *mClouds[2];
+};
+#endif

@@ -1,0 +1,403 @@
+#include "PauseMenuClassic.h"
+#include "GamePlay.h"
+#include "SimpleAudioEngine.h"
+#include "GameRecord.h"
+#include "UniversalFit.h"
+
+USING_NS_CC;
+USING_NS_CC_EXT;
+
+PauseMenuClassic* PauseMenuClassic::pauseMenu() 
+{
+  return PauseMenuClassic::create();
+}
+
+void PauseMenuClassic::updateClassic() 
+{
+    //update objectives
+    if( GameRecord::sharedGameRecord()->task->dailyObjective->uiid >= 0 )
+    {
+        Achievement *obj = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
+        mDailyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode , obj->achieveNumber ,GameRecord::sharedGameRecord()->task->dailyObjective->count)->getCString());
+        mDailyObjective->setColor(ccc3(255, 255, 255));
+        
+        mDailyIcon->setVisible(true);
+        Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
+        CCSprite *icon = CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+        icon->setPosition(ccp(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+        mDailyIcon->addChild(icon);
+        
+        //判断是否完成
+        if( GameRecord::sharedGameRecord()->task->dailyObjective->count >= ach->achieveNumber )
+        {
+            mDailyObjective->setColor(ccc3(128, 128, 128));
+        }
+    }
+    else {
+        mDailyObjective->setString("已完成！");
+        mDailyObjective->setColor(ccc3(128, 128, 128));
+    }
+    if( GameRecord::sharedGameRecord()->task->weeklyObjective->uiid >= 0 )
+    {
+        Achievement *obj = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
+        mWeeklyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode ,obj->achieveNumber ,GameRecord::sharedGameRecord()->task->weeklyObjective->count)->getCString());
+        mWeeklyObjective->setColor(ccc3(255, 255, 255));
+        
+        mWeeklyIcon->setVisible(true);
+        Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
+        CCSprite *icon = CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+        icon->setPosition(ccp(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+        mWeeklyIcon->addChild(icon);
+        
+        //判断是否完成
+        if( GameRecord::sharedGameRecord()->task->weeklyObjective->count >= ach->achieveNumber )
+        {
+            mWeeklyObjective->setColor(ccc3(128, 128, 128));
+        }
+    }
+    else {
+        mWeeklyObjective->setString("已完成！");
+        mWeeklyObjective->setColor(ccc3(128, 128, 128));
+    }
+    if( GameRecord::sharedGameRecord()->task->monthlyObjective->uiid >= 0 )
+    {
+        Achievement *obj = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
+        mMonthlyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode ,obj->achieveNumber ,GameRecord::sharedGameRecord()->task->monthlyObjective->count)->getCString());
+        mMonthlyObjective->setColor(ccc3(255, 255, 255));
+        
+        mMonthlyIcon->setVisible(true);
+        Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
+        CCSprite *icon = CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+        icon->setPosition(ccp(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+        mMonthlyIcon->addChild(icon);
+        
+        //判断是否完成
+        if( GameRecord::sharedGameRecord()->task->monthlyObjective->count >= ach->achieveNumber )
+        {
+            mMonthlyObjective->setColor(ccc3(128, 128, 128));
+        }
+    }
+    else {
+        mMonthlyObjective->setString("已完成！");
+        mMonthlyObjective->setColor(ccc3(128, 128, 128));
+    }
+    //update crown
+    for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
+    {
+        CCSprite *crown = CCSprite::createWithSpriteFrameName(CCString::createWithFormat("crown%d.png", i)->getCString());
+        crown->setPosition(ccp(32-16*i, 0));
+        mDailyCrown->addChild(crown);
+    }
+    for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective->index; ++i)
+    {
+        CCSprite *crown = CCSprite::createWithSpriteFrameName(CCString::createWithFormat("crown%d.png", i)->getCString());
+        crown->setPosition(ccp(32-16*i, 0));
+        mWeeklyCrown->addChild(crown);
+    }
+    for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective->index; ++i)
+    {
+        CCSprite *crown = CCSprite::createWithSpriteFrameName(CCString::createWithFormat("crown%d.png", i)->getCString());
+        crown->setPosition(ccp(32-16*i, 0));
+        mMonthlyCrown->addChild(crown);
+    }
+    
+    //update best score
+    mBest->setString(CCString::createWithFormat("最佳: %dm", GameRecord::sharedGameRecord()->score_high)->getCString());
+}
+
+void PauseMenuClassic::updateArcade() 
+{
+    //update trophies
+    //gold
+    {
+        if( GameRecord::sharedGameRecord()->task->goldPrize->prize < 0 )
+        {//completed
+            mGoldCoin->setVisible(false);
+            mGoldPrize->setVisible(false);
+            mGoldScore->setString("已完成！");
+            mGoldScore->setColor(ccc3(128, 128, 128));
+        }
+        else
+        {//not completed
+            mGoldScore->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->score)->getCString());
+            mGoldPrize->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->prize)->getCString());
+        }
+    }
+    //silver
+    {
+        if( GameRecord::sharedGameRecord()->task->silverPrize->prize < 0 )
+        {//completed
+            mSilverCoin->setVisible(false);
+            mSilverPrize->setVisible(false);
+            mSilverScore->setString("已完成！");
+            mSilverScore->setColor(ccc3(128, 128, 128));
+        }
+        else
+        {//not completed
+            mSilverScore->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->score)->getCString());
+            mSilverPrize->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->prize)->getCString());
+        }
+    }
+    //bronze
+    {
+        if( GameRecord::sharedGameRecord()->task->bronzePrize->prize < 0 )
+        {//completed
+            mBronzeCoin->setVisible(false);
+            mBronzePrize->setVisible(false);
+            mBronzeScore->setString("已完成！");
+            mBronzeScore->setColor(ccc3(128, 128, 128));
+        }
+        else
+        {//not completed
+            mBronzeScore->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score)->getCString());
+            mBronzePrize->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize)->getCString());
+        }
+    }
+    
+    //update best score
+    mBest->setString(CCString::createWithFormat("最佳: %d", GameRecord::sharedGameRecord()->arcade_high)->getCString());
+}
+
+void PauseMenuClassic::onCreate() 
+{
+    //hot load pause resource
+    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-pause.plist");
+    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-change.plist");
+    
+    GamePlay *play = GamePlay::sharedGamePlay();
+    play->scheduleMask(ccc3(0, 0, 0), 128, 0);
+    
+    NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
+    CCBReader *pReader = new CCBReader(pNodeLib, this, this);
+    CCNode *node = pReader->readNodeGraphFromFile("pause_classic.ccbi", this);
+    pReader->release();
+    
+    mBoard = CEClipedNode::create();
+    mBoard->addChild(node);
+    CCRect rect = CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
+    //CCRect rect = CCRectMake(60, 0, SCREEN_WIDTH*4, SCREEN_HEIGHT*4);
+    mBoard->setClipRect(new CCRect(UniversalFit::sharedUniversalFit()->transformRect(rect)));
+    mBoard->setPosition(ccp(UniversalFit::sharedUniversalFit()->baseLeft-301, 68));
+    play->ui()->addChild(mBoard);
+    
+    mRode = CCSprite::createWithSpriteFrameName("zt_jz.png");
+    mRode->setPosition(ccp(UniversalFit::sharedUniversalFit()->baseLeft + 60, 180));
+    play->ui()->addChild(mRode);
+    mTimer = 0;
+    mFlag = false;
+    
+    //update change
+    switch (GameRecord::sharedGameRecord()->curr_char) {
+        case 0:
+        {
+            mChange->setNormalImage(CCSprite::createWithSpriteFrameName("go_change1.png"));
+            mChange->setSelectedImage(CCSprite::createWithSpriteFrameName("go_change2.png"));
+        }
+            break;
+        case 1:
+        {
+            mChange->setNormalImage(CCSprite::createWithSpriteFrameName("go_change3.png"));
+            mChange->setSelectedImage(CCSprite::createWithSpriteFrameName("go_change4.png"));
+        }
+            break;
+        case 2:
+        {
+            mChange->setNormalImage(CCSprite::createWithSpriteFrameName("go_change5.png"));
+            mChange->setSelectedImage(CCSprite::createWithSpriteFrameName("go_change6.png"));
+        }
+            break;
+        case 3:
+        {
+            mChange->setNormalImage(CCSprite::createWithSpriteFrameName("go_change7.png"));
+            mChange->setSelectedImage(CCSprite::createWithSpriteFrameName("go_change8.png"));
+        }
+            break;
+    }
+    
+    //sychornize music & sfx
+    if( SimpleAudioEngine::sharedEngine()->getBackgroundMusicVolume() == 0 )
+    {
+        mMusic->setNormalImage(CCSprite::createWithSpriteFrameName("zt_yy3.png"));
+        mMusic->setSelectedImage(CCSprite::createWithSpriteFrameName("zt_yy4.png"));
+    }
+    else {
+        mMusic->setNormalImage(CCSprite::createWithSpriteFrameName("zt_yy1.png"));
+        mMusic->setSelectedImage(CCSprite::createWithSpriteFrameName("zt_yy2.png"));
+    }
+    if( SimpleAudioEngine::sharedEngine()->getEffectsVolume() == 0 )
+    {
+        mSfx->setNormalImage(CCSprite::createWithSpriteFrameName("zt_yx3.png"));
+        mSfx->setSelectedImage(CCSprite::createWithSpriteFrameName("zt_yx4.png"));
+    }
+    else {
+        mSfx->setNormalImage(CCSprite::createWithSpriteFrameName("zt_yx.png"));
+        mSfx->setSelectedImage(CCSprite::createWithSpriteFrameName("zt_yx2.png"));
+    }
+    
+    if( play->mode == MODE_CLASSIC )
+    {
+        mClassic->setVisible(true);
+        mArcade->setVisible(false);
+        this->updateClassic();
+    }
+    else
+    {
+        mArcade->setVisible(true);
+        mClassic->setVisible(false);
+        this->updateArcade();
+    }
+}
+
+void PauseMenuClassic::onUpdate(float delta) 
+{
+    GamePlay *play = GamePlay::sharedGamePlay();
+    mTimer += play->deltaTime;
+    if( mTimer <= 0.2f )
+    {
+        mBoard->setPosition(ccp( UniversalFit::sharedUniversalFit()->baseLeft-301 + 371*mTimer/0.2f, 68));
+    }
+    if ( mTimer > 0.2f && !mFlag ) 
+    {
+        mFlag = true;
+        mBoard->setPosition(ccp( UniversalFit::sharedUniversalFit()->baseLeft-301 + 371, 68));
+        mQuit->setVisible(true);
+        mResume->setVisible(true);
+        mRetry->setVisible(true);
+    }
+}
+
+void PauseMenuClassic::onDestroy() 
+{
+    GamePlay *play = GamePlay::sharedGamePlay();
+    play->unscheduleMask();
+    play->ui()->removeChild(mRode,true);
+    play->ui()->removeChild(mBoard,true);
+    
+    //hot release pause resource
+    CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-pause.plist");
+    unloadTextureFromeSpriteFrameFile("ui-pause.plist");
+    CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-change.plist");
+    unloadTextureFromeSpriteFrameFile("ui-change.plist");
+}
+
+void PauseMenuClassic::toggleSfx(Ref* ref)
+{
+    if( GameRecord::sharedGameRecord()->setting_sfx )
+    {
+        GameRecord::sharedGameRecord()->setting_sfx = 0;
+        mSfx->setNormalImage(CCSprite::createWithSpriteFrameName("zt_yx3.png"));
+        mSfx->setSelectedImage(CCSprite::createWithSpriteFrameName("zt_yx4.png"));
+        SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
+    }
+    else{
+        GameRecord::sharedGameRecord()->setting_sfx = 1;
+        mSfx->setNormalImage(CCSprite::createWithSpriteFrameName("zt_yx.png"));
+        mSfx->setSelectedImage(CCSprite::createWithSpriteFrameName("zt_yx2.png"));
+        SimpleAudioEngine::sharedEngine()->setEffectsVolume(1);
+    }
+}
+
+void PauseMenuClassic::toggleMusic(Ref* ref)
+{
+    if( GameRecord::sharedGameRecord()->setting_music )
+    {
+        GameRecord::sharedGameRecord()->setting_music = 0;
+        mMusic->setNormalImage(CCSprite::createWithSpriteFrameName("zt_yy3.png"));
+        mMusic->setSelectedImage(CCSprite::createWithSpriteFrameName("zt_yy4.png"));
+        SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0);
+    }
+    else{
+        GameRecord::sharedGameRecord()->setting_music = 1;
+        mMusic->setNormalImage(CCSprite::createWithSpriteFrameName("zt_yy1.png"));
+        mMusic->setSelectedImage(CCSprite::createWithSpriteFrameName("zt_yy2.png"));
+        SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(1);
+    }
+}
+
+void PauseMenuClassic::quit(Ref* ref)
+{
+    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GamePlay *play = GamePlay::sharedGamePlay();
+    play->manager->removeGameObject(this);
+    play->exit();
+}
+
+void PauseMenuClassic::resume(Ref* ref)
+{
+    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GamePlay *play = GamePlay::sharedGamePlay();
+    play->manager->removeGameObject(this);
+    play->resume();
+}
+
+void PauseMenuClassic::retry(Ref* ref)
+{
+    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GamePlay *play = GamePlay::sharedGamePlay();
+    play->manager->removeGameObject(this);
+    play->restart();
+}
+
+void PauseMenuClassic::change(Ref* ref)
+{
+    /*
+    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GamePlay *play = GamePlay::sharedGamePlay();
+    play->change();
+     */
+}
+
+//cocosbuilder support
+bool PauseMenuClassic::onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+{
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF*, mDailyObjective);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF*, mWeeklyObjective);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF*, mMonthlyObjective);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", CCNode*, mDailyCrown);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", CCNode*, mWeeklyCrown);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", CCNode*, mMonthlyCrown);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", CCSprite*, mDailyIcon);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", CCSprite*, mWeeklyIcon);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", CCSprite*, mMonthlyIcon);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", CCNode*, mClassic);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", CCNode*, mArcade);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", CCSprite*, mGoldCoin);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", CCSprite*, mSilverCoin);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", CCSprite*, mBronzeCoin);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", CCLabelBMFont*, mGoldScore);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", CCLabelBMFont*, mGoldPrize);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", CCLabelBMFont*, mSilverScore);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverPrize", CCLabelBMFont*, mSilverPrize);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", CCLabelBMFont*, mBronzeScore);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", CCLabelBMFont*, mBronzePrize);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu*, mMenu);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjDaily", CCNode*, mObjDaily);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjWeekly", CCNode*, mObjWeekly);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjMonthly", CCNode*, mObjMonthly);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBest", CCLabelTTF*, mBest);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", CCMenuItemImage*, mSfx);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", CCMenuItemImage*, mMusic);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mQuit", CCMenuItemImage*, mQuit);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mResume", CCMenuItemImage*, mResume);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRetry", CCMenuItemImage*, mRetry);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mChange", CCMenuItemImage*, mChange);
+    
+    return false;
+}
+
+SEL_MenuHandler  PauseMenuClassic::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+{
+    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "toggleSfx", PauseMenuClassic::toggleSfx);
+    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "toggleMusic", PauseMenuClassic::toggleMusic);
+    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "quit", PauseMenuClassic::quit);
+    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "resume", PauseMenuClassic::resume);
+    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "retry", PauseMenuClassic::retry);
+    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "change", PauseMenuClassic::change);
+    
+    return NULL;
+}
+
+cocos2d::extension::Control::Handler  PauseMenuClassic::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
+{
+    return NULL;
+}
