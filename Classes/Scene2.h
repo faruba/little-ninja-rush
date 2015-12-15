@@ -2,10 +2,9 @@
 #define ___CLASSES_SCENE2_H_
 
 #include "GameTool.h"
+#include "Scene.h"
 
-class Scene2:
-  public CCObject,
-  public Scene
+class Scene2: public SceneInterface
 {
   public:
     virtual bool init(){return true;};

@@ -12,13 +12,11 @@
 #include "cocos2d.h"
 #include "RingTile.h"
 
-@protocol Scene <CCObject>
+class SceneInterface: cocos2d::Object {
+    virtual void loadScene() = 0;
+    virtual void unloadScene() = 0;
 
-void loadScene();
-void unloadScene();
-
-void createScene(CCNode* bg, CCNode* fbg, CCNode* fg, RingTile* tiles);
-void update(float delta);
-
+    virtual void createScene(CCNode* bg, CCNode* fbg, CCNode* fg, RingTile* tiles) = 0;
+    virtual void update(float delta) = 0;
 };
 #endif

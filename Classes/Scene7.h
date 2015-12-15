@@ -2,10 +2,9 @@
 #define ___CLASSES_SCENE7_H_
 #include "GameTool.h"
 
-class Scene7:
-  public CCObject,
-  public Scene
-{
+#include "Scene.h"
+
+class Scene7: public SceneInterface{
   public:
     virtual bool init(){return true;};
     CREATE_FUNC(Scene7);

@@ -1,10 +1,9 @@
 #ifndef ___CLASSES_SCENE5_H_
 #define ___CLASSES_SCENE5_H_
 #include "GameTool.h"
+#include "Scene.h"
 
-class Scene5:
-  public CCObject,
-  public Scene
+class Scene5: public SceneInterface
 {
   public:
     virtual bool init(){return true;};

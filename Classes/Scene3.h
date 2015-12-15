@@ -1,9 +1,9 @@
 #ifndef ___CLASSES_SCENE3_H_
 #define ___CLASSES_SCENE3_H_
 #include "GameTool.h"
+#include "Scene.h"
 
-class Scene3:
-public cocos2d::Scene
+class Scene3: public SceneInterface
 {
   public:
     virtual bool init(){return true;};
