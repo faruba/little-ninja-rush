@@ -15,25 +15,25 @@ class IceSpike:
   public Role
 {
   public:
-    static IceSpike* spike(CCPoint pos, CCNode* parent);
+    static IceSpike* spike(cocos2d::Point pos, CCNode* parent);
     CREATE_FUNC(IceSpike);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
 
-    virtual bool collisionWithCircle(CCPoint cc, float rad);
-    virtual bool deliverHit(int type, CCPoint dir);
-    virtual CCPoint position();
-    virtual void setPosition(CCPoint pos);
-    virtual CCPoint center();
+    virtual bool collisionWithCircle(cocos2d::Point cc, float rad);
+    virtual bool deliverHit(int type, cocos2d::Point dir);
+    virtual cocos2d::Point position();
+    virtual void setPosition(cocos2d::Point pos);
+    virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
 
     CCNode *mParent;
 
     GTAnimatedSprite *mSprite;
-    CCPoint mPos;
+    cocos2d::Point mPos;
 
     int mState;
     bool mFlag;

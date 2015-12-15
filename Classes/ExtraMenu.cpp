@@ -10,14 +10,14 @@
 
 CCScene* ExtraMenu::scene(int mode) 
 {
-  CCScene *ret = CCScene::create();
+  CCScene *ret = cocos2d::CCScene::create();
 
   ExtraMenu *tm = ExtraMenu::create();
   tm->mMode = mode;
 
   //universal
   ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-  ret->setAnchorPoint(ccp(0, 0));
+  ret->setAnchorPoint(cocos2d::ccp(0, 0));
   ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
 
   CEClipedNode *clip = CEClipedNode::create();
@@ -46,14 +46,14 @@ void ExtraMenu::onEnter()
   }
 
   mClipedList = CEClipedNode::create();
-  mClipedList->setClipRect(new CCRect((UniversalFit::sharedUniversalFit()->transformRect(CCRectMake(12, 12, 455, 264)))));
+  mClipedList->setClipRect(new CCRect((UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(12, 12, 455, 264)))));
   mList->addChild(mClipedList);
-  mItemList = CCNode::create();
+  mItemList = cocos2d::CCNode::create();
   mClipedList->addChild(mItemList);
   mFly = false;
 
-  mScrollBody = CCSprite::createWithSpriteFrameName("sp_scroll2.png");
-  mScrollBody->setAnchorPoint(ccp(0, 1));
+  mScrollBody = cocos2d::CCSprite::createWithSpriteFrameName("sp_scroll2.png");
+  mScrollBody->setAnchorPoint(cocos2d::ccp(0, 1));
   mClipedList->addChild(mScrollBody);
 
   mSceneIntro = NULL;
@@ -69,19 +69,19 @@ void ExtraMenu::onEnter()
   switch (mMode) {
     case 0:
       {
-        mBanner->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb6.png"));
+        mBanner->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb6.png"));
         this->loadAchievements();
       }
       break;
     case 1:
       {
-        mBanner->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb7.png"));
+        mBanner->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb7.png"));
         this->loadStatistics();
       }
       break;
     case 2:
       {
-        mBanner->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb5.png"));
+        mBanner->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb5.png"));
         this->loadAboutUs();
       }
       break;
@@ -101,7 +101,7 @@ void ExtraMenu::activate(int cid)
   bool unfold = false;
   if( newitem->isFoldable() )
   {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/ui-cancel.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/ui-cancel.mp3").c_str());
     if( cid == mCurrUnFold )
     {
       //fold
@@ -127,7 +127,7 @@ void ExtraMenu::activate(int cid)
     CCARRAY_FOREACH(mItemList->getChildren(), node)
     {
       FoldItem *it = (FoldItem*)node;
-      it->setPosition(ccp(0, mOffset));
+      it->setPosition(cocos2d::ccp(0, mOffset));
       mOffset -= it->getContentSize().height + PADDING;
     }
     if( unfold )
@@ -135,14 +135,14 @@ void ExtraMenu::activate(int cid)
       float upbound = -newitem->getPosition().y - mItemList->getPosition().y;
       if( upbound < 0 )
       {
-        CCPoint np = mItemList->getPosition();
+        cocos2d::Point np = mItemList->getPosition();
         np.y = -newitem->getPosition().y;
         mItemList->setPosition(np);
       }
       float downbound = upbound + newitem->getContentSize().height;
       if( downbound > 264 )
       {
-        CCPoint np = mItemList->getPosition();
+        cocos2d::Point np = mItemList->getPosition();
         np.y = -newitem->getPosition().y + newitem->getContentSize().height - 264;
         mItemList->setPosition(np);
       }
@@ -161,7 +161,7 @@ void ExtraMenu::onBack()
 {
     if( !mIntroFlag )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
         setSceneOutro(ExtraSelect::scene());
     }
 }
@@ -222,7 +222,7 @@ void ExtraMenu::update(float delta)
         
         //运动
         float dy = mFlySpeed*delta;
-        CCPoint np = mItemList->getPosition();
+        cocos2d::Point np = mItemList->getPosition();
         np.y += dy;
         mItemList->setPosition(np);
         
@@ -240,7 +240,7 @@ void ExtraMenu::updateScorll()
     float length = 264.0f*(264.0f/-mOffset)/100;
     float begin = -264.0f*(mItemList->getPosition().y/-mOffset);
     mScrollBody->setScaleY(length);
-    mScrollBody->setPosition(ccp(441, begin));
+    mScrollBody->setPosition(cocos2d::ccp(441, begin));
 }
 
 void ExtraMenu::loadAchievements() 
@@ -261,7 +261,7 @@ void ExtraMenu::loadAchievements()
       achnum = 1;
     }
     FoldItem *fi = FoldItem::foldItem(ach->name->getCString(), ach->icon->getCString(), ach->desc->getCString(), achnum, ach->achieveCount, this);
-    fi->setPosition(ccp(0, mOffset));
+    fi->setPosition(cocos2d::ccp(0, mOffset));
     mItemList->addChild(fi, 1, mItemList->getChildrenCount());
     mOffset -= fi->getContentSize().height + PADDING;
   }
@@ -280,25 +280,25 @@ void ExtraMenu::loadStatistics()
         
         if( sta->achieveCode != -1 )
         {//normal statistics
-            //CCLabelBMFont *title = CCLabelBMFont::create(sta->name->getCString(), "ab34.fnt");
-            CCLabelTTF *title = CCLabelTTF::create(sta->name->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
-            title->setAnchorPoint(ccp(0, 1));
-            title->setPosition(ccp(10, mOffset));
+            //CCLabelBMFont *title = cocos2d::CCLabelBMFont::create(sta->name->getCString(), "ab34.fnt");
+            CCLabelTTF *title = cocos2d::CCLabelTTF::create(sta->name->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
+            title->setAnchorPoint(cocos2d::ccp(0, 1));
+            title->setPosition(cocos2d::ccp(10, mOffset));
             mItemList->addChild(title, 1, mItemList->getChildrenCount());
             if( sta->achieveCode >= 0 )
             {
-                CCString *val = CCString::createWithFormat("%d%", sta->achieveCount, sta->psfx);
-                CCLabelBMFont *result = CCLabelBMFont::create(val->getCString(), "ab34.fnt");
-                result->setAnchorPoint(ccp(1, 1));
-                result->setPosition(ccp(426, mOffset));
+                CCString *val = cocos2d::CCString::createWithFormat("%d%", sta->achieveCount, sta->psfx);
+                CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(), "ab34.fnt");
+                result->setAnchorPoint(cocos2d::ccp(1, 1));
+                result->setPosition(cocos2d::ccp(426, mOffset));
                 mItemList->addChild(result, 1, mItemList->getChildrenCount());
             }
             else if( sta->achieveCode == -2 )
             {
-                CCString *val = CCString::createWithFormat("%d%", GameRecord::sharedGameRecord()->combo_high, sta->psfx);
-                CCLabelBMFont *result = CCLabelBMFont::create(val->getCString(), "ab34.fnt");
-                result->setAnchorPoint(ccp(1, 1));
-                result->setPosition(ccp(426, mOffset));
+                CCString *val = cocos2d::CCString::createWithFormat("%d%", GameRecord::sharedGameRecord()->combo_high, sta->psfx);
+                CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(), "ab34.fnt");
+                result->setAnchorPoint(cocos2d::ccp(1, 1));
+                result->setPosition(cocos2d::ccp(426, mOffset));
                 mItemList->addChild(result, 1, mItemList->getChildrenCount());
             }
             
@@ -306,14 +306,14 @@ void ExtraMenu::loadStatistics()
         }
         else {
             //category label
-            CCSprite *line = CCSprite::createWithSpriteFrameName("ex-line.png");
-            line->setAnchorPoint(ccp(0.5f, 1));
-            line->setPosition(ccp(218, mOffset - 10));
+            CCSprite *line = cocos2d::CCSprite::createWithSpriteFrameName("ex-line.png");
+            line->setAnchorPoint(cocos2d::ccp(0.5f, 1));
+            line->setPosition(cocos2d::ccp(218, mOffset - 10));
             mItemList->addChild(line, 1, mItemList->getChildrenCount());
             
-            CCSprite *label = CCSprite::createWithSpriteFrameName(sta->name->getCString());
-            label->setAnchorPoint(ccp(0.5f, 1));
-            label->setPosition(ccp(line->getContentSize().width/2, 20));
+            CCSprite *label = cocos2d::CCSprite::createWithSpriteFrameName(sta->name->getCString());
+            label->setAnchorPoint(cocos2d::ccp(0.5f, 1));
+            label->setPosition(cocos2d::ccp(line->getContentSize().width/2, 20));
             line->addChild(label, 1, mItemList->getChildrenCount());
             
             mOffset -= line->getContentSize().height + PADDING + 20;
@@ -354,7 +354,7 @@ bool ExtraMenu::onTouchBegan(Touch * touch, Event * event)
   LNR_GET_TOUCH_POS;
     
     mTouchBegin = pos;
-    CCRect rect = CCRectMake(12, 12, 455, 264);
+    CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
     if( rect.containsPoint(pos) )
     {
         mBeginPressY = pos.y;
@@ -372,7 +372,7 @@ void ExtraMenu::onTouchMoved(Touch * touch, Event * event)
     
     float dy = pos.y - mBeginPressY;
     float y = mBeginNodeY + dy;
-    CCPoint np = mItemList->getPosition();
+    cocos2d::Point np = mItemList->getPosition();
     np.y = y;
     mItemList->setPosition(np);
     //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
@@ -382,7 +382,7 @@ void ExtraMenu::onTouchMoved(Touch * touch, Event * event)
     {
         float ds = np.y - mLastY;
         //float dt = time - mLastTime;
-        float dt = CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
+        float dt = cocos2d::CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
         mFlySpeed = ds/dt;
     }
     mLastY = np.y;
@@ -395,7 +395,7 @@ void ExtraMenu::onTouchEnded(Touch * touch, Event * event)
     mFly = true;
   LNR_GET_TOUCH_POS;
     
-    CCRect rect = CCRectMake(12, 12, 455, 264);
+    CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
     if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
        rect.containsPoint(pos) && mCurrState == 0 )//only available in achievement state
     {
@@ -405,7 +405,7 @@ void ExtraMenu::onTouchEnded(Touch * touch, Event * event)
         CCObject *node;
         CCARRAY_FOREACH(mItemList->getChildren(), node)
         {
-            CCNode *item = (CCNode*) node;
+            CCNode *item = (cocos2d::CCNode*) node;
             float upbound = offset - mItemList->getPosition().y;
             float downbound = upbound + item->getContentSize().height + PADDING;
             if( dy >= upbound && dy < downbound )
@@ -424,7 +424,7 @@ void ExtraMenu::setSceneIntro()
   doSceneIntro(mSceneIntro, this);
 }
 
-void ExtraMenu::setSceneOutro(CCScene* newscene) 
+void ExtraMenu::setSceneOutro(cocos2d::CCScene* newscene) 
 {
   if( mIntroFlag )
   {
@@ -443,7 +443,7 @@ void ExtraMenu::doneOutro()
     mNewScene->release();
 }
 
-SEL_MenuHandler ExtraMenu::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler ExtraMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraMenu::onBack);
 
@@ -451,12 +451,12 @@ SEL_MenuHandler ExtraMenu::onResolveCCBCCMenuItemSelector(CCObject * pTarget, co
     return NULL;
 }
 
-SEL_CCControlHandler ExtraMenu::onResolveCCBCCControlSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_CCControlHandler ExtraMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   CCLog("Control");
   return NULL;
 }
-bool ExtraMenu::onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ExtraMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *,  mCoins);
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", CCNode *, mList);

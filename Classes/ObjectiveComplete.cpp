@@ -39,16 +39,16 @@ void ObjectiveComplete::onCreate()
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(0, 0, 0), 128, 0);
-    CCNodeLoaderLibrary *pNodeLib = CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
+    CCNodeLoaderLibrary *pNodeLib = cocos2d::CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
     CCBReader *pReader = new CCBReader(pNodeLib, this, this);
     mNode = pReader->readNodeGraphFromFile("ui-scroll", this);
     pReader->release();
-    mNode->setPosition(ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
+    mNode->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
     play->addChild(mNode, LAYER_MASK+1);
-    CCRect clip = UniversalFit::sharedUniversalFit()->transformRect(CCRectMake(0, 142, UniversalFit::sharedUniversalFit()->playSize.width, 36));
+    CCRect clip = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(0, 142, UniversalFit::sharedUniversalFit()->playSize.width, 36));
     mObjRect = CEClipedNode::create();
     mObjRect->setClipRect(&clip);
-    mObjRect->setPosition(ccp(12, 12));
+    mObjRect->setPosition(cocos2d::ccp(12, 12));
     mBanner->addChild(mObjRect);
     
     mState = 0;
@@ -65,7 +65,7 @@ void ObjectiveComplete::onUpdate(float delta)
         mSoundTimer += delta;
         if( mSoundTimer > 0.1 )
         {
-            SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
             mSoundTimer = 0;
         }
         int dst = mTargetBounsCoins - mCurrBounsCoins;
@@ -78,12 +78,12 @@ void ObjectiveComplete::onUpdate(float delta)
         else {
             mCurrBounsCoins += ds;
         }
-        mBounsCoins->setString(CCString::createWithFormat("%04d", mCurrBounsCoins)->getCString());
+        mBounsCoins->setString(cocos2d::CCString::createWithFormat("%04d", mCurrBounsCoins)->getCString());
     }
     if( mCurrBounsScrolls != mTargetBounsScrolls )
     {
         mScroll->setVisible(true);
-        mBounsScroll->setString(CCString::createWithFormat("x%d", mTargetBounsScrolls)->getCString());
+        mBounsScroll->setString(cocos2d::CCString::createWithFormat("x%d", mTargetBounsScrolls)->getCString());
         mCurrBounsScrolls = mTargetBounsScrolls;
     }
     
@@ -107,24 +107,24 @@ void ObjectiveComplete::onUpdate(float delta)
                 //--- to move ---
                 mState = STATE_MOVE;
                 //add objective detail
-                CCSpriteFrameCache *cache = CCSpriteFrameCache::sharedSpriteFrameCache();
-                mObjType->setDisplayFrame(cache->spriteFrameByName(CCString::createWithFormat("objc-%d.png", mCurrIndex)->getCString()));
-                mObjRect->setPosition(ccp(12, 12));
+                CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+                mObjType->setDisplayFrame(cache->spriteFrameByName(cocos2d::CCString::createWithFormat("objc-%d.png", mCurrIndex)->getCString()));
+                mObjRect->setPosition(cocos2d::ccp(12, 12));
                 CCNode *currobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
-                currobj->setPosition(ccp(18, 18));
+                currobj->setPosition(cocos2d::ccp(18, 18));
                 mObjRect->addChild(currobj);
-                CCPoint np = mBanner->getPosition();
+                cocos2d::Point np = mBanner->getPosition();
                 np.x = -240;
                 mBanner->setPosition(np);
                 //add crowns
                 for(int i=0; i<mCurrObj->index; ++i)
                 {
-                    CCSprite *crown = CCSprite::createWithSpriteFrameName(CCString::createWithFormat("crown%d.png", i)->getCString());
-                    crown->setPosition(ccp(-20*i, 0));
+                    CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+                    crown->setPosition(cocos2d::ccp(-20*i, 0));
                     mCrowns->addChild(crown);
                 }
                 mStateTimer = 0;
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
             }
             else {
                 //Finish of ObjectiveComplete
@@ -137,7 +137,7 @@ void ObjectiveComplete::onUpdate(float delta)
             mStateTimer += delta;
             float dst = 240 - mBanner->getPosition().x;
             float stp = delta*MOVESPEED;
-            CCPoint np = mBanner->getPosition();
+            cocos2d::Point np = mBanner->getPosition();
             if( dst <= stp )
             {
                 np.x = 240;
@@ -158,10 +158,10 @@ void ObjectiveComplete::onUpdate(float delta)
             mStateTimer += delta;
             if( mStateTimer >= 2 )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcrown.mp3").c_str());
-                CCString *crownname = CCString::createWithFormat("crown%d.png", mCurrObj->index);
-                CCSprite *crown = CCSprite::createWithSpriteFrameName(crownname->getCString());
-                crown->setPosition(ccp(-20*mCurrObj->index, 0));
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcrown.mp3").c_str());
+                CCString *crownname = cocos2d::CCString::createWithFormat("crown%d.png", mCurrObj->index);
+                CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(crownname->getCString());
+                crown->setPosition(cocos2d::ccp(-20*mCurrObj->index, 0));
                 mCrowns->addChild(crown);
                 for(int i=0; i<10; ++i)
                 {
@@ -227,13 +227,13 @@ void ObjectiveComplete::onUpdate(float delta)
                             break;
                     }
                     CCNode *newobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
-                    newobj->setPosition(ccp(18, 54));
+                    newobj->setPosition(cocos2d::ccp(18, 54));
                     mObjRect->addChild(newobj);
                 }
                 else {
                     mCurrAch = NULL;
                     CCNode *newobj = this->genObjectiveInfo(NULL, mCurrIndex);
-                    newobj->setPosition(ccp(18, 54));
+                    newobj->setPosition(cocos2d::ccp(18, 54));
                     mObjRect->addChild(newobj);
                     //mark completed
                     switch (mCurrIndex) {
@@ -264,7 +264,7 @@ void ObjectiveComplete::onUpdate(float delta)
         {
             float dst = -24 - mObjRect->getPosition().y;
             float stp = delta*FLIPSPEED;
-            CCPoint np = mObjRect->getPosition();
+            cocos2d::Point np = mObjRect->getPosition();
             if( fabsf(dst) <= stp )
             {
                 np.y = -24;
@@ -286,7 +286,7 @@ void ObjectiveComplete::onUpdate(float delta)
             if( mStateTimer >= 2 )
             {
                 mState = STATE_OUT;
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
             }
         }
             break;
@@ -294,7 +294,7 @@ void ObjectiveComplete::onUpdate(float delta)
         {
             float dst = 720 - mBanner->getPosition().x;
             float stp = delta*MOVESPEED;
-            CCPoint np = mBanner->getPosition();
+            cocos2d::Point np = mBanner->getPosition();
             if( dst <= stp )
             {
                 np.x = -240;
@@ -345,32 +345,32 @@ CCNode* ObjectiveComplete::genObjectiveInfo(Achievement * ach, int typ)
 {
     if( ach == NULL )
     {
-        CCNode *sp = CCNode::create();
+        CCNode *sp = cocos2d::CCNode::create();
         switch (typ) {
             case 0:
             {
-                CCLabelTTF *desc = CCLabelTTF::create("日常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL );
+                CCLabelTTF *desc = cocos2d::CCLabelTTF::create("日常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL );
                 desc->setColor(ccc3(128, 128, 128));
-                desc->setAnchorPoint(ccp(0, 0.5f));
-                desc->setPosition(ccp(54, 0));
+                desc->setAnchorPoint(cocos2d::ccp(0, 0.5f));
+                desc->setPosition(cocos2d::ccp(54, 0));
                 sp->addChild(desc);
             }
                 break;
             case 1:
             {
-                CCLabelTTF *desc = CCLabelTTF::create("周常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
+                CCLabelTTF *desc = cocos2d::CCLabelTTF::create("周常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
                 desc->setColor(ccc3(128, 128, 128));
-                desc->setAnchorPoint(ccp(0, 0.5f));
-                desc->setPosition(ccp(54, 0));
+                desc->setAnchorPoint(cocos2d::ccp(0, 0.5f));
+                desc->setPosition(cocos2d::ccp(54, 0));
                 sp->addChild(desc);
             }
                 break;
             case 2:
             {
-                CCLabelTTF *desc = CCLabelTTF::create("月常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
+                CCLabelTTF *desc = cocos2d::CCLabelTTF::create("月常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
                 desc->setColor(ccc3(128, 128, 128));
-                desc->setAnchorPoint(ccp(0, 0.5f));
-                desc->setPosition(ccp(54, 0));
+                desc->setAnchorPoint(cocos2d::ccp(0, 0.5f));
+                desc->setPosition(cocos2d::ccp(54, 0));
                 sp->addChild(desc);
             }
                 break;
@@ -382,26 +382,26 @@ CCNode* ObjectiveComplete::genObjectiveInfo(Achievement * ach, int typ)
         switch (typ) {
             case 0:
             {
-                spbg = CCSprite::createWithSpriteFrameName("ms_bg1.png");
+                spbg = cocos2d::CCSprite::createWithSpriteFrameName("ms_bg1.png");
             }
                 break;
             case 1:
             {
-                spbg = CCSprite::createWithSpriteFrameName("ms_bg3.png");
+                spbg = cocos2d::CCSprite::createWithSpriteFrameName("ms_bg3.png");
             }
                 break;
             case 2:
             {
-                spbg = CCSprite::createWithSpriteFrameName("ms_bg2.png");
+                spbg = cocos2d::CCSprite::createWithSpriteFrameName("ms_bg2.png");
             }
                 break;
         }
-        CCSprite *spicon = CCSprite::createWithSpriteFrameName(ach->icon->getCString());
-        spicon->setPosition(ccp(spbg->getContentSize().width/2, spbg->getContentSize().height/2));
+        CCSprite *spicon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+        spicon->setPosition(cocos2d::ccp(spbg->getContentSize().width/2, spbg->getContentSize().height/2));
         spbg->addChild(spicon, 0, 0);
-        CCLabelBMFont *desc = CCLabelBMFont::create(ach->desc->getCString(), "ab34.fnt");
-        desc->setAnchorPoint(ccp(0, 0.5f));
-        desc->setPosition(ccp(54, 12));
+        CCLabelBMFont *desc = cocos2d::CCLabelBMFont::create(ach->desc->getCString(), "ab34.fnt");
+        desc->setAnchorPoint(cocos2d::ccp(0, 0.5f));
+        desc->setPosition(cocos2d::ccp(54, 12));
         spbg->addChild(desc, 0, 1);
         
         return spbg;
@@ -417,18 +417,18 @@ void ObjectiveComplete::onDestroy()
     play->manager->addGameObject(GameOver::gameOver(play));
 }
 
-SEL_MenuHandler ObjectiveComplete::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler ObjectiveComplete::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
     //  CCLog(pSelectorName);
   return NULL;
 }
 
-SEL_CCControlHandler ObjectiveComplete::onResolveCCBCCControlSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_CCControlHandler ObjectiveComplete::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   CCLog("Control");
   return NULL;
 }
-bool ObjectiveComplete::onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ObjectiveComplete::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBanner", CCSprite *, mBanner)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mObjType", CCSprite *, mObjType)

@@ -14,7 +14,7 @@ class Wood:
   public GameObject
 {
   public:
-    static Wood* wood(CCPoint pos, CCPoint dir, CCNode* parent, GOHandler target, CCPoint anchor);
+    static Wood* wood(cocos2d::Point pos, cocos2d::Point dir, CCNode* parent, GOHandler target, cocos2d::Point anchor);
 
     CREATE_FUNC(Wood);
 
@@ -23,9 +23,9 @@ class Wood:
     virtual void onDestroy();
 
     CCNode *mParent;
-    CCPoint mPos;
-    CCPoint mDir;
-    CCPoint mAnchor;
+    cocos2d::Point mPos;
+    cocos2d::Point mDir;
+    cocos2d::Point mAnchor;
     CCSprite *mSprite;
     float mTimer;
 

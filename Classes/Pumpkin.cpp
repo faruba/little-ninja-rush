@@ -20,7 +20,7 @@
 
 
 
-Pumpkin* Pumpkin::role(CCNode * parent) 
+Pumpkin* Pumpkin::role(cocos2d::CCNode * parent) 
 {
     Pumpkin *em = Pumpkin::create();
     em->mParent = parent;
@@ -31,7 +31,7 @@ void Pumpkin::onCreate()
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("pumpkin"));
     mSprite->playGTAnimation(0, true);
-    mSprite->setPosition(ccp( -100, SCREEN_HEIGHT ));
+    mSprite->setPosition(cocos2d::ccp( -100, SCREEN_HEIGHT ));
     mParent->addChild(mSprite, LAYER_MAINROLE);
     
     mState = 0;
@@ -41,10 +41,10 @@ void Pumpkin::onCreate()
     
     //init parameters
     mTargetPos = ccp(50, 210);
-    mTargetSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-45)), 100);
-    mPumpkinSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-90)), 50);
+    mTargetSpeed = ccpMult(ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(-45)), 100);
+    mPumpkinSpeed = ccpMult(ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(-90)), 50);
     
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkinstart.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkinstart.mp3").c_str());
     
     mFlySound = 3 + 7*CCRANDOM_0_1();
 }
@@ -98,7 +98,7 @@ void Pumpkin::onUpdate(float delta)
                 mSprite->playGTAnimation(0, true);
             }
             {//move target
-                CCPoint ntp = ccpAdd(mTargetPos, ccpMult(mTargetSpeed, delta));
+                cocos2d::Point ntp = ccpAdd(mTargetPos, ccpMult(mTargetSpeed, delta));
                 mTargetPos = ntp;
                 //range check
                 //left && right
@@ -118,7 +118,7 @@ void Pumpkin::onUpdate(float delta)
                 mFlySound -= delta;
                 if( mFlySound < 0 )
                 {
-                    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkinfly.mp3").c_str());
+                    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkinfly.mp3").c_str());
                     mFlySound = 3 + 7*CCRANDOM_0_1();
                 }
             }
@@ -171,11 +171,11 @@ void Pumpkin::onUpdate(float delta)
     }
     if( !ccpFuzzyEqual(mSprite->getPosition(), mTargetPos, 0.1f) && mHurtTimer<0 ){//move with target
         //merge speed
-        CCPoint dr = ccpSub(mTargetPos, mSprite->getPosition());
+        cocos2d::Point dr = ccpSub(mTargetPos, mSprite->getPosition());
         float dt = ccpLength(dr);
         float at = dt*20;//magic k
         dr = ccpNormalize(dr);
-        CCPoint attract = ccpMult(dr, at*delta);
+        cocos2d::Point attract = ccpMult(dr, at*delta);
         mPumpkinSpeed = ccpAdd(mPumpkinSpeed, attract);
         
         //limit speed
@@ -188,7 +188,7 @@ void Pumpkin::onUpdate(float delta)
         }
         
         //move pumpkin
-        CCPoint np = ccpAdd(mSprite->getPosition(), ccpMult(mPumpkinSpeed, delta));
+        cocos2d::Point np = ccpAdd(mSprite->getPosition(), ccpMult(mPumpkinSpeed, delta));
         mSprite->setPosition(np);
     }
     if( removeflag )
@@ -198,11 +198,11 @@ void Pumpkin::onUpdate(float delta)
 }
 
 //碰撞检测
-bool Pumpkin::collisionWithCircle(CCPoint cc, float rad) 
+bool Pumpkin::collisionWithCircle(cocos2d::Point cc, float rad) 
 {
     if( mState < 2 )
     {
-        CCPoint dp = ccpSub(mSprite->getPosition(), cc);
+        cocos2d::Point dp = ccpSub(mSprite->getPosition(), cc);
         float lensq = ccpLengthSQ(dp);
         if( lensq < (rad + RANGE)*(rad + RANGE) )
         {
@@ -220,7 +220,7 @@ bool Pumpkin::collisionWithCircle(CCPoint cc, float rad)
 }
 
 //受到伤害
-bool Pumpkin::deliverHit(int type, CCPoint dir) 
+bool Pumpkin::deliverHit(int type, cocos2d::Point dir) 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     if( mState < 2 )
@@ -232,7 +232,7 @@ bool Pumpkin::deliverHit(int type, CCPoint dir)
             mSprite->playGTAnimation(1, false);
             mHurtTimer = 0;
             mSprite->setColor(ccc3(255, 142, 142));
-            SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkinhurt.mp3").c_str());
+            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkinhurt.mp3").c_str());
             if( mSprite->getScaleX() > 0 )
             {
                 mSprite->setRotation(30);
@@ -247,7 +247,7 @@ bool Pumpkin::deliverHit(int type, CCPoint dir)
             mState = 2;
             // die
             mSprite->playGTAnimation(1, true);
-            SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkindie.mp3").c_str());
+            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkindie.mp3").c_str());
             mTimer = 0;
             mCoinsCounter = 0;
             
@@ -265,17 +265,17 @@ bool Pumpkin::deliverHit(int type, CCPoint dir)
     }
 }
 
-CCPoint Pumpkin::position() 
+cocos2d::Point Pumpkin::position() 
 {
     return mSprite->getPosition();
 }
 
-void Pumpkin::setPosition(CCPoint pos) 
+void Pumpkin::setPosition(cocos2d::Point pos) 
 {
     mSprite->setPosition(pos);
 }
 
-CCPoint Pumpkin::center() 
+cocos2d::Point Pumpkin::center() 
 {
     return mSprite->getPosition();
 }

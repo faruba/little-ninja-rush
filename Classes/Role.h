@@ -6,17 +6,17 @@ class Role:
 {
   public:
     //与圆做碰撞检测
-    virtual bool collisionWithCircle(CCPoint cc, float rad) = 0;
+    virtual bool collisionWithCircle(cocos2d::Point cc, float rad) = 0;
 
     //投递伤害 伤害类型 返回伤害是否被接受
-    virtual bool deliverHit(int type, CCPoint dir) = 0;
+    virtual bool deliverHit(int type, cocos2d::Point dir) = 0;
 
     //获得坐标
-    virtual CCPoint position() = 0;
-    virtual void setPosition(CCPoint pos) = 0;
+    virtual cocos2d::Point position() = 0;
+    virtual void setPosition(cocos2d::Point pos) = 0;
 
     //获得人物中心坐标
-    virtual CCPoint center() = 0;
+    virtual cocos2d::Point center() = 0;
 
     //是否支持辅助瞄准
     virtual bool supportAimAid() = 0;

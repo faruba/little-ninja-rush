@@ -75,10 +75,10 @@ bool ShopMenu::init()
 {
 
   auto listener = EventListenerTouchOneByOne::create();
-  listener->onTouchBegan = CC_CALLBACK_2(ShopMenu::onTouchBegan, this);
-  listener->onTouchEnded = CC_CALLBACK_2(ShopMenu::onTouchEnded, this);
-  listener->onTouchMoved = CC_CALLBACK_2(ShopMenu::onTouchMoved, this);
-  listener->onTouchCancelled = CC_CALLBACK_2(ShopMenu::onTouchEnded, this);
+  listener->onTouchBegan = cocos2d::CC_CALLBACK_2(ShopMenu::onTouchBegan, this);
+  listener->onTouchEnded = cocos2d::CC_CALLBACK_2(ShopMenu::onTouchEnded, this);
+  listener->onTouchMoved = cocos2d::CC_CALLBACK_2(ShopMenu::onTouchMoved, this);
+  listener->onTouchCancelled = cocos2d::CC_CALLBACK_2(ShopMenu::onTouchEnded, this);
   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
   this->setTouchEnabled(true);
@@ -90,8 +90,8 @@ void ShopMenu::onEnter()
 {
     PublicLoad::menuShop()->loadAll();
     
-    CCNode *taskcomplete = CCNode::create();
-    taskcomplete->setPosition(ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT));
+    CCNode *taskcomplete = cocos2d::CCNode::create();
+    taskcomplete->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT));
     this->addChild(taskcomplete);
     GamePlay::setTaskCompleteNode(taskcomplete);
     
@@ -100,14 +100,14 @@ void ShopMenu::onEnter()
       this->addChild(node);
     }
     mClipedList = CEClipedNode::create();
-    mClipedList->setClipRect(new CCRect((UniversalFit::sharedUniversalFit()->transformRect(CCRectMake(12, 12, 455, 264)))));
+    mClipedList->setClipRect(new CCRect((UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(12, 12, 455, 264)))));
     mList->addChild(mClipedList);
-    mItemList = CCNode::create();
+    mItemList = cocos2d::CCNode::create();
     mClipedList->addChild(mItemList);
     mFly = false;
     
-    mScrollBody = CCSprite::createWithSpriteFrameName("sp_scroll2.png");
-    mScrollBody->setAnchorPoint(ccp(0, 1));
+    mScrollBody = cocos2d::CCSprite::createWithSpriteFrameName("sp_scroll2.png");
+    mScrollBody->setAnchorPoint(cocos2d::ccp(0, 1));
     mClipedList->addChild(mScrollBody);
     
     mSceneIntro = NULL;
@@ -115,7 +115,7 @@ void ShopMenu::onEnter()
     
     //--------------
     
-    mCoins->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+    mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
     mOffset = 0;
     mItemList->removeAllChildrenWithCleanup(true);
     mCurrUnFold = -1;
@@ -146,7 +146,7 @@ void ShopMenu::onEnter()
     this->updateScorll();
     
     //----------------
-    mMask = CCLayerColor::create(ccc4(0, 0, 0, 128));
+    mMask = cocos2d::CCLayerColor::create(ccc4(0, 0, 0, 128));
     mMask->setOpacity(128);
     mMask->setVisible(false);
     this->addChild(mMask, 10);
@@ -170,7 +170,7 @@ void ShopMenu::onExit()
 void ShopMenu::addCategory(int cid) 
 {
     FoldItem *fi = FoldItem::foldItem(-1, 0, false, cid, NULL, 0, this);
-    fi->setPosition(ccp(0, mOffset));
+    fi->setPosition(cocos2d::ccp(0, mOffset));
     mItemList->addChild(fi, 1, mItemList->getChildrenCount());
     mOffset -= fi->getContentSize().height + PADDING;
 }
@@ -183,7 +183,7 @@ void ShopMenu::addCharacter(int cid)
         cost = 0;
     }
     FoldItem *fi = FoldItem::foldItem(14, cost, false, -cid, gDetails[3+cid], 1, this);
-    fi->setPosition(ccp(0, mOffset));
+    fi->setPosition(cocos2d::ccp(0, mOffset));
     mItemList->addChild(fi, 1, mItemList->getChildrenCount());
     mOffset -= fi->getContentSize().height + PADDING;
 }
@@ -193,14 +193,14 @@ void ShopMenu::addUtility(int cid)
     if( cid >= 4 )
     {
         FoldItem *fi = FoldItem::foldItem(11+cid, gJoykitCost[cid-4], false, 100+cid, gDetails[25+cid], 1, this);
-        fi->setPosition(ccp(0, mOffset));
+        fi->setPosition(cocos2d::ccp(0, mOffset));
         mItemList->addChild(fi, 1, mItemList->getChildrenCount());
         mOffset -= fi->getContentSize().height + PADDING;
     }
     else
     {
         FoldItem *fi = FoldItem::foldItem(10+cid, gUtilityPrice[cid], false, 100+cid, gDetails[cid], 1, this);
-        fi->setPosition(ccp(0, mOffset));
+        fi->setPosition(cocos2d::ccp(0, mOffset));
         mItemList->addChild(fi, 1, mItemList->getChildrenCount());
         mOffset -= fi->getContentSize().height + PADDING;
     }
@@ -221,7 +221,7 @@ void ShopMenu::addSupply(int cid, int index)
         detoff = 13;
     }
     FoldItem *fi = FoldItem::foldItem(cid, cost, false, icon, gDetails[7+index+detoff], 0, this);
-    fi->setPosition(ccp(0, mOffset));
+    fi->setPosition(cocos2d::ccp(0, mOffset));
     mItemList->addChild(fi, 1, mItemList->getChildrenCount());
     mOffset -= fi->getContentSize().height + PADDING;
 }
@@ -232,7 +232,7 @@ void ShopMenu::activate(int cid)
     bool unfold = false;
     if( newitem->isFoldable() )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/ui-cancel.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/ui-cancel.mp3").c_str());
         if( cid == mCurrUnFold )
         {
             //fold
@@ -258,7 +258,7 @@ void ShopMenu::activate(int cid)
         CCARRAY_FOREACH(mItemList->getChildren(), node)
         {
             FoldItem *it = (FoldItem*)node;
-            it->setPosition(ccp(0, mOffset));
+            it->setPosition(cocos2d::ccp(0, mOffset));
             mOffset -= it->getContentSize().height + PADDING;
         }
         if( unfold )
@@ -266,14 +266,14 @@ void ShopMenu::activate(int cid)
             float upbound = -newitem->getPosition().y - mItemList->getPosition().y;
             if( upbound < 0 )
             {
-                CCPoint np = mItemList->getPosition();
+                cocos2d::Point np = mItemList->getPosition();
                 np.y = -newitem->getPosition().y;
                 mItemList->setPosition(np);
             }
             float downbound = upbound + newitem->getContentSize().height;
             if( downbound > 264 )
             {
-                CCPoint np = mItemList->getPosition();
+                cocos2d::Point np = mItemList->getPosition();
                 np.y = -newitem->getPosition().y + newitem->getContentSize().height - 264;
                 mItemList->setPosition(np);
             }
@@ -295,7 +295,7 @@ void ShopMenu::purchase(int cid)
             {
                 level++;
                 GameRecord::sharedGameRecord()->setItemUpgrade(level, index);
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
                 FoldItem *item = (FoldItem*)(mItemList->getChildByTag(cid));
                 int icon = 4*index + level;
                 int detbase = 7;
@@ -308,7 +308,7 @@ void ShopMenu::purchase(int cid)
                 GameRecord::sharedGameRecord()->makeCoins(-cost);
             }
             else {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
             }
         }
     }
@@ -319,12 +319,12 @@ void ShopMenu::purchase(int cid)
             int cost = 100000;
             if( GameRecord::sharedGameRecord()->coins >= cost )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
                 GameRecord::sharedGameRecord()->makeCoins(-cost);
                 GameRecord::sharedGameRecord()->setCharacterContract(1, cid-9+1);
             }
             else {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
             }
         }
         else if( cid == 1 || cid == 2 || cid == 3 )
@@ -333,7 +333,7 @@ void ShopMenu::purchase(int cid)
             int cost = gJoykitCost[cid-1];
             if( GameRecord::sharedGameRecord()->coins >= cost )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
                 GameRecord::sharedGameRecord()->makeCoins(-cost);
                 switch (cid) {
                     case 9:
@@ -354,7 +354,7 @@ void ShopMenu::purchase(int cid)
                 }
             }
             else {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
             }
         }
         else
@@ -362,7 +362,7 @@ void ShopMenu::purchase(int cid)
             int cost = gUtilityPrice[cid-4];
             if( GameRecord::sharedGameRecord()->coins >= cost )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
                 GameRecord::sharedGameRecord()->makeCoins(-cost);
                 switch (cid) {
                     case 4:
@@ -388,11 +388,11 @@ void ShopMenu::purchase(int cid)
                 }
             }
             else {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
             }
         }
     }
-    mCoins->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+    mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
     GameRecord::sharedGameRecord()->checkPoint();
 }
 
@@ -401,7 +401,7 @@ void ShopMenu::onBack()
     if( mIntroFlag )
         return ;
 
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
     if( gNavBack == 0 )
     {
         setSceneOutro(TitleMenu::scene());
@@ -416,7 +416,7 @@ void ShopMenu::onMoreCoins()
     if( mIntroFlag )
         return ;
 
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
     setSceneOutro(CoinsMenu::scene());
 }
 
@@ -476,7 +476,7 @@ void ShopMenu::update(float delta)
         
         //运动
         float dy = mFlySpeed*delta;
-        CCPoint np = mItemList->getPosition();
+        cocos2d::Point np = mItemList->getPosition();
         np.y += dy;
         mItemList->setPosition(np);
         
@@ -503,17 +503,17 @@ void ShopMenu::updateScorll()
     float length = 264.0f*(264.0f/-mOffset)/100;
     float begin = -264.0f*(mItemList->getPosition().y/-mOffset);
     mScrollBody->setScaleY(length);
-    mScrollBody->setPosition(ccp(441, begin));
+    mScrollBody->setPosition(cocos2d::ccp(441, begin));
 }
 
 bool ShopMenu::onTouchBegan(Touch * touch, Event * event) 
 {
-    CCPoint pos = touch->getLocationInView();
-    pos = CCDirector::sharedDirector()->convertToGL(pos);
+    cocos2d::Point pos = touch->getLocationInView();
+    pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
     pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
     mTouchBegin = pos;
-    CCRect rect = CCRectMake(12, 12, 455, 264);
+    CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
     if( rect.containsPoint(pos) )
     {
         mBeginPressY = pos.y;
@@ -529,13 +529,13 @@ void ShopMenu::onTouchMoved(Touch * touch, Event * event)
 {
     if( !mIsModal )
     {
-        CCPoint pos = touch->getLocationInView();
-        pos = CCDirector::sharedDirector()->convertToGL(pos);
+        cocos2d::Point pos = touch->getLocationInView();
+        pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
         pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
         float dy = pos.y - mBeginPressY;
         float y = mBeginNodeY + dy;
-        CCPoint np = mItemList->getPosition();
+        cocos2d::Point np = mItemList->getPosition();
         np.y = y;
         mItemList->setPosition(np);
         //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
@@ -545,7 +545,7 @@ void ShopMenu::onTouchMoved(Touch * touch, Event * event)
         {
             float ds = np.y - mLastY;
             //float dt = time - mLastTime;
-            float dt = CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
+            float dt = cocos2d::CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
             mFlySpeed = ds/dt;
         }
         mLastY = np.y;
@@ -559,11 +559,11 @@ void ShopMenu::onTouchEnded(Touch * touch, Event * event)
     if( !mIsModal )
     {
         mFly = true;
-        CCPoint pos = touch->getLocationInView();
-        pos = CCDirector::sharedDirector()->convertToGL(pos);
+        cocos2d::Point pos = touch->getLocationInView();
+        pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
         pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
-        CCRect rect = CCRectMake(12, 12, 455, 264);
+        CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
         if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
                 rect.containsPoint(pos) )
         {
@@ -593,7 +593,7 @@ void ShopMenu::setSceneIntro()
   doSceneIntro(mSceneIntro, this);
 }
 
-void ShopMenu::setSceneOutro(CCScene* newscene) 
+void ShopMenu::setSceneOutro(cocos2d::CCScene* newscene) 
 {
   if( mIntroFlag )
   {
@@ -642,20 +642,20 @@ void ShopMenu::setModal(int pid)
                 it->togglePurchaseButton(false);
             }
             
-            CCSprite *spbg = CCSprite::createWithSpriteFrameName("sp-tc.png");
-            spbg->setPosition(ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)));
+            CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
+            spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)));
             mMask->addChild(spbg);
             
-            CCSprite *titlesp = CCSprite::createWithSpriteFrameName("sp-tc3.png");
-            titlesp->setPosition(ccp( spbg->getContentSize().width/2, 105));
+            CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc3.png");
+            titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 105));
             spbg->addChild(titlesp);
             
-            CCSprite *descsp = CCSprite::createWithSpriteFrameName("sp-tc2.png");
-            descsp->setPosition(ccp( spbg->getContentSize().width/2, 55));
+            CCSprite *descsp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc2.png");
+            descsp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 55));
             spbg->addChild(descsp);
             
-            CCRotateBy *rb = CCRotateBy::create(1, 720);
-            CCRepeatForever *rf = CCRepeatForever::create(rb);
+            CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 720);
+            CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
             descsp->runAction(rf);
             
             mModalPurchase = pid;
@@ -694,7 +694,7 @@ void ShopMenu::purchaseVerified(int pid)
         int cid = pid+1;
         FoldItem *item = (FoldItem*)(mItemList->getChildByTag(cid));
         item->updateInfo(-1, 0, gDetails[3+cid], -1);
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
     }
     else {
         GameRecord::sharedGameRecord()->purchaseVerified(pid);
@@ -708,12 +708,12 @@ void ShopMenu::purchaseFailed(int pid)
         //tell user purchase failed.
         mMask->removeAllChildrenWithCleanup(true);
         
-        CCSprite *spbg = CCSprite::createWithSpriteFrameName("sp-tc.png");
-        spbg->setPosition(ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
+        CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
+        spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
         mMask->addChild(spbg);
         
-        CCSprite *titlesp = CCSprite::createWithSpriteFrameName("sp-tc5.png");
-        titlesp->setPosition(ccp( spbg->getContentSize().width/2, 65));
+        CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc5.png");
+        titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 65));
         spbg->addChild(titlesp);
         
         mModalTimer = 3;
@@ -730,12 +730,12 @@ void ShopMenu::purchaseCancelled(int pid)
         //just cancel the modal
         mMask->removeAllChildrenWithCleanup(true);
         
-        CCSprite *spbg = CCSprite::createWithSpriteFrameName("sp-tc.png");
-        spbg->setPosition(ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
+        CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
+        spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
         mMask->addChild(spbg);
         
-        CCSprite *titlesp = CCSprite::createWithSpriteFrameName("sp-tc4.png");
-        titlesp->setPosition(ccp( spbg->getContentSize().width/2, 65));
+        CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc4.png");
+        titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 65));
         spbg->addChild(titlesp);
         
         mModalTimer = 3;
@@ -750,7 +750,7 @@ void ShopMenu::modalOver()
     this->cancelModal();
 }
 
-SEL_MenuHandler ShopMenu::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler ShopMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
     CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ShopMenu::onBack);
     CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMoreCoins", ShopMenu::onMoreCoins);
@@ -759,12 +759,12 @@ SEL_MenuHandler ShopMenu::onResolveCCBCCMenuItemSelector(CCObject * pTarget, con
     return NULL;
 }
 
-SEL_CCControlHandler ShopMenu::onResolveCCBCCControlSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_CCControlHandler ShopMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   CCLog("Control");
   return NULL;
 }
-bool ShopMenu::onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ShopMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", CCNode *, mList);

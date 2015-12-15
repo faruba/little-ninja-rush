@@ -24,7 +24,7 @@
 #include "GamePlay.h"
 #include "Loading.h"
 
-USING_NS_CC;
+;
 USING_NS_CC_EXT;
 using namespace CocosDenshion;
 bool gIntroFlag = false;
@@ -67,7 +67,7 @@ public:
     static PopOption* optionWithType(int typ);//0=set, 1=gainfriend 2=setfriend)
     
     //cocosbuilder support
-    bool onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+    bool onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
     {
         CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", CCMenuItemImage*, mMusic);
         CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", CCMenuItemImage*, mSfx);
@@ -137,7 +137,7 @@ PopOption* PopOption::optionWithType(int typ)
 
 void PopOption::loadSetting()
 {
-    CCNodeLoaderLibrary *pNodeLib = CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
+    CCNodeLoaderLibrary *pNodeLib = cocos2d::CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
     CCBReader *pReader = new CCBReader(pNodeLib, this, this);
     CCNode *node = pReader->readNodeGraphFromFile("menu-titleoption.ccbi", this);
     pReader->release();
@@ -148,51 +148,51 @@ void PopOption::loadSetting()
     //sychornize music & sfx
     if( SimpleAudioEngine::sharedEngine()->getBackgroundMusicVolume() == 0 )
     {
-        mMusic->setNormalImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mMusic->setSelectedImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mMusic->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mMusic->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
     }
     else {
-        mMusic->setNormalImage(CCSprite::createWithSpriteFrameName("settingon.png"));
-        mMusic->setSelectedImage(CCSprite::createWithSpriteFrameName("settingon.png"));
+        mMusic->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mMusic->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
     }
     if( SimpleAudioEngine::sharedEngine()->getEffectsVolume() == 0 )
     {
-        mSfx->setNormalImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mSfx->setSelectedImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mSfx->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mSfx->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
     }
     else {
-        mSfx->setNormalImage(CCSprite::createWithSpriteFrameName("settingon.png"));
-        mSfx->setSelectedImage(CCSprite::createWithSpriteFrameName("settingon.png"));
+        mSfx->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mSfx->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
     }
     //sync push notification
     if( GameRecord::sharedGameRecord()->game_notify < 0 )
     {
-        mPushNotification->setNormalImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mPushNotification->setSelectedImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mPushNotification->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mPushNotification->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
     }
     else {
-        mPushNotification->setNormalImage(CCSprite::createWithSpriteFrameName("settingon.png"));
-        mPushNotification->setSelectedImage(CCSprite::createWithSpriteFrameName("settingon.png"));
+        mPushNotification->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mPushNotification->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
     }
     //sync tutorial
     if( GameRecord::sharedGameRecord()->game_tutorial == 0 )
     {
-        mTutorial->setNormalImage(CCSprite::createWithSpriteFrameName("settingon.png"));
-        mTutorial->setSelectedImage(CCSprite::createWithSpriteFrameName("settingon.png"));
+        mTutorial->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mTutorial->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
     }
     else {
-        mTutorial->setNormalImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mTutorial->setSelectedImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mTutorial->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mTutorial->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
     }
     //sync icloud
     if( GameRecord::sharedGameRecord()->setting_icloud > 0 )
     {
-        miCloud->setNormalImage(CCSprite::createWithSpriteFrameName("settingon.png"));
-        miCloud->setSelectedImage(CCSprite::createWithSpriteFrameName("settingon.png"));
+        miCloud->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        miCloud->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
     }
     else {
-        miCloud->setNormalImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
-        miCloud->setSelectedImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
+        miCloud->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        miCloud->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
     }
 }
 
@@ -201,7 +201,7 @@ void PopOption::loadFriendGain()
     //feature removed from android
 //    CCNode *node = [CCBReader nodeGraphFromFile:"menu-titlefriendgain.ccb" owner:this);
 //    this->addChild(node);
-//    CCString* coin = CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount());
+//    CCString* coin = cocos2d::CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount());
 //    mCoin->setString(coin);
 }
 
@@ -210,10 +210,10 @@ void PopOption::loadFriendAdd()
     //feature removed from android
 //    CCNode *node = [CCBReader nodeGraphFromFile:"menu-titlefriendset.ccb" owner:this);
 //    this->addChild(node);
-//    CCString* coin = CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount());
+//    CCString* coin = cocos2d::CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount());
 //    mCoin->setString(coin);
 //    CCLabelTTF *label = [CCLabelTTF, ABSystem->queryUserCode(), "Helvetica", 24);
-//    label->setAnchorPoint(ccp(0, 0.5f));
+//    label->setAnchorPoint(cocos2d::ccp(0, 0.5f));
 //    mShadeCode->addChild(label);
 }
 
@@ -262,8 +262,8 @@ void PopOption::onAddFriend()
 //        switch (ret) {
 //            case 0:
 //            {
-//                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3");
-//                mCoin->setString(CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount()));
+//                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3");
+//                mCoin->setString(cocos2d::CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount()));
 //                UIAlertView *alert = [UIAlertView->alloc(), "Success", "Share code has been added.", NULL, "OK", NULL);
 //                alert->show();
 //                alert->release();
@@ -308,36 +308,36 @@ void PopOption::onCloseOption()
 
 void PopOption::onToggleSfx()
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     if( GameRecord::sharedGameRecord()->setting_sfx )
     {
         GameRecord::sharedGameRecord()->setting_sfx = 0;
-        mSfx->setNormalImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mSfx->setSelectedImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mSfx->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mSfx->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
         SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
     }
     else{
         GameRecord::sharedGameRecord()->setting_sfx = 1;
-        mSfx->setNormalImage(CCSprite::createWithSpriteFrameName("settingon.png"));
-        mSfx->setSelectedImage(CCSprite::createWithSpriteFrameName("settingon.png"));
+        mSfx->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mSfx->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
         SimpleAudioEngine::sharedEngine()->setEffectsVolume(1);
     }
 }
 
 void PopOption::onToggleMusic()
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     if( GameRecord::sharedGameRecord()->setting_music )
     {
         GameRecord::sharedGameRecord()->setting_music = 0;
-        mMusic->setNormalImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mMusic->setSelectedImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mMusic->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mMusic->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
         SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0);
     }
     else{
         GameRecord::sharedGameRecord()->setting_music = 1;
-        mMusic->setNormalImage(CCSprite::createWithSpriteFrameName("settingon.png"));
-        mMusic->setSelectedImage(CCSprite::createWithSpriteFrameName("settingon.png"));
+        mMusic->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mMusic->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
         SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(1);
     }
 }
@@ -345,17 +345,17 @@ void PopOption::onToggleMusic()
 void PopOption::onTogglePushNotification()
 {
     //feature removed from android
-//    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
+//    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
 //    if( GameRecord::sharedGameRecord()->game_notify < 0 )
 //    {
 //        GameRecord::sharedGameRecord()->game_notify = 1;
-//        mPushNotification->setNormalImage(CCSprite::createWithSpriteFrameName("settingon.png"));
-//        mPushNotification->setSelectedImage(CCSprite::createWithSpriteFrameName("settingon.png"));
+//        mPushNotification->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+//        mPushNotification->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
 //    }
 //    else {
 //        GameRecord::sharedGameRecord()->game_notify = -1;
-//        mPushNotification->setNormalImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
-//        mPushNotification->setSelectedImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
+//        mPushNotification->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+//        mPushNotification->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
 //    }
 //    AppController *delgate = (AppController*)UIApplication->sharedApplication().delegate;
 //    delgate->scheduleLocalNotifuication();
@@ -363,34 +363,34 @@ void PopOption::onTogglePushNotification()
 
 void PopOption::onToggleTutorial()
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     if( GameRecord::sharedGameRecord()->game_tutorial == 0 )
     {
         GameRecord::sharedGameRecord()->game_tutorial = 1;
-        mTutorial->setNormalImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mTutorial->setSelectedImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mTutorial->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mTutorial->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
     }
     else {
         GameRecord::sharedGameRecord()->game_tutorial = 0;
-        mTutorial->setNormalImage(CCSprite::createWithSpriteFrameName("settingon.png"));
-        mTutorial->setSelectedImage(CCSprite::createWithSpriteFrameName("settingon.png"));
+        mTutorial->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mTutorial->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
     }
 }
 
 void PopOption::onToggleiCloud()
 {
     //feature removed from android
-//    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
+//    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
 //    if( GameRecord::sharedGameRecord()->setting_icloud > 0 )
 //    {
 //        GameRecord::sharedGameRecord()->setting_icloud = 0;
-//        miCloud->setNormalImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
-//        miCloud->setSelectedImage(CCSprite::createWithSpriteFrameName("settingoff.png"));
+//        miCloud->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+//        miCloud->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
 //    }
 //    else {
 //        GameRecord::sharedGameRecord()->setting_icloud = 1;
-//        miCloud->setNormalImage(CCSprite::createWithSpriteFrameName("settingon.png"));
-//        miCloud->setSelectedImage(CCSprite::createWithSpriteFrameName("settingon.png"));
+//        miCloud->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+//        miCloud->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
 //    }
 }
 
@@ -452,7 +452,7 @@ public:
     void onClose();
     
     //cocosbuilder support
-    bool onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+    bool onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
     {
         CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF*, mDailyObjective);
         CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF*, mWeeklyObjective);
@@ -513,8 +513,8 @@ void PopObj::displayClassic()
         
         mDailyIcon->setVisible(true);
         Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
-        CCSprite *icon = CCSprite::createWithSpriteFrameName(ach->icon->getCString());
-        icon->setPosition(ccp(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+        icon->setPosition(cocos2d::ccp(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mDailyIcon->addChild(icon);
         
         //判断是否完成
@@ -535,8 +535,8 @@ void PopObj::displayClassic()
         
         mWeeklyIcon->setVisible(true);
         Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
-        CCSprite *icon = CCSprite::createWithSpriteFrameName(ach->icon->getCString());
-        icon->setPosition(ccp(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+        icon->setPosition(cocos2d::ccp(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mWeeklyIcon->addChild(icon);
         
         //判断是否完成
@@ -557,8 +557,8 @@ void PopObj::displayClassic()
         
         mMonthlyIcon->setVisible(true);
         Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
-        CCSprite *icon = CCSprite::createWithSpriteFrameName(ach->icon->getCString());
-        icon->setPosition(ccp(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+        icon->setPosition(cocos2d::ccp(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mMonthlyIcon->addChild(icon);
         
         //判断是否完成
@@ -574,20 +574,20 @@ void PopObj::displayClassic()
     //update crown
     for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
     {
-        CCSprite *crown = CCSprite::createWithSpriteFrameName(CCString::createWithFormat("crown%d.png", i)->getCString());
-        crown->setPosition(ccp(32-16*i, 0));
+        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+        crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mDailyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective->index; ++i)
     {
-        CCSprite *crown = CCSprite::createWithSpriteFrameName(CCString::createWithFormat("crown%d.png", i)->getCString());
-        crown->setPosition(ccp(32-16*i, 0));
+        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+        crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mWeeklyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective->index; ++i)
     {
-        CCSprite *crown = CCSprite::createWithSpriteFrameName(CCString::createWithFormat("crown%d.png", i)->getCString());
-        crown->setPosition(ccp(32-16*i, 0));
+        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+        crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mMonthlyCrown->addChild(crown);
     }
 }
@@ -607,8 +607,8 @@ void PopObj::displayArcade()
         }
         else
         {//not completed
-            mGoldScore->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->score)->getCString());
-            mGoldPrize->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->prize)->getCString());
+            mGoldScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->score)->getCString());
+            mGoldPrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->prize)->getCString());
         }
     }
     //silver
@@ -622,8 +622,8 @@ void PopObj::displayArcade()
         }
         else
         {//not completed
-            mSilverScore->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->score)->getCString());
-            mSilverPrize->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->prize)->getCString());
+            mSilverScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->score)->getCString());
+            mSilverPrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->prize)->getCString());
         }
     }
     //bronze
@@ -637,8 +637,8 @@ void PopObj::displayArcade()
         }
         else
         {//not completed
-            mBronzeScore->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score)->getCString());
-            mBronzePrize->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize)->getCString());
+            mBronzeScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score)->getCString());
+            mBronzePrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize)->getCString());
         }
     }
 }
@@ -648,16 +648,16 @@ void PopObj::onCreate()
     CCNode * node = createUIByCCBI("menu-titlepop", "TitleMenu", TitleMenuLayerLoader::loader(), this);
     mBoard = CEClipedNode::create();
     mBoard->addChild(node);
-    CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
+    CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
     //CCLog("CLIP = %fx%f %fx%f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
     mBoard->setClipRect(&rect);
-    //CCRect rect = CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
+    //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
     //mBoard->setClipRect(&rect);
-    mBoard->setPosition(ccp(-301, 58));
+    mBoard->setPosition(cocos2d::ccp(-301, 58));
     this->addChild(mBoard);
     
-    mRode = CCSprite::createWithSpriteFrameName("index_jz.png");
-    mRode->setPosition(ccp(70, 170));
+    mRode = cocos2d::CCSprite::createWithSpriteFrameName("index_jz.png");
+    mRode->setPosition(cocos2d::ccp(70, 170));
     this->addChild(mRode);
     mTimer = 0;
     mFlag = false;
@@ -678,9 +678,9 @@ void PopObj::onCreate()
     }
     
     //run animation
-    CCMoveTo *mt = CCMoveTo::create(0.2f, ccp(-301+381, 58));
-    CCCallFunc *cf = CCCallFunc::create(this, callfunc_selector(PopObj::onDoneAnimation));
-    CCSequence *seq = CCSequence::createWithTwoActions(mt, cf);
+    CCMoveTo *mt = cocos2d::CCMoveTo::create(0.2f, ccp(-301+381, 58));
+    CCCallFunc *cf = cocos2d::CCCallFunc::create(this, callfunc_selector(PopObj::onDoneAnimation));
+    CCSequence *seq = cocos2d::CCSequence::createWithTwoActions(mt, cf);
     
     mBoard->runAction(seq);
     mSwitch->setVisible(false);
@@ -689,10 +689,10 @@ void PopObj::onCreate()
 
 void PopObj::onDoneAnimation()
 {
-    mBoard->setPosition(ccp( -301 + 381, 58));
+    mBoard->setPosition(cocos2d::ccp( -301 + 381, 58));
     mMenu->setVisible(true);
-    //CCRect rect = CCRectMake(0, 0, UniversalFit::sharedUniversalFit()->screenSize.width, UniversalFit::sharedUniversalFit()->screenSize.height);
-    //CCRect rect = CCRectMake(0, 0, 10000, 10000);
+    //CCRect rect = cocos2d::CCRectMake(0, 0, UniversalFit::sharedUniversalFit()->screenSize.width, UniversalFit::sharedUniversalFit()->screenSize.height);
+    //CCRect rect = cocos2d::CCRectMake(0, 0, 10000, 10000);
     //mBoard->setClipRect(&rect);
     mSwitch->setVisible(true);
     mSwitch2->setVisible(true);
@@ -730,43 +730,43 @@ void PopObj::onChangeDisplay()
     mDisplay = !mDisplay;
     
     //play animation
-    //CCRect rect = CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
-    CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
+    //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
+    CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
     mBoard->setClipRect(&rect);
     
-    CCMoveTo *mt1 = CCMoveTo::create(0.2f, ccp(-301, 58));
-    CCCallFunc *cf1 = CCCallFunc::create(this, (callfunc_selector(PopObj::onFlip)));
-    CCMoveTo *mt2 = CCMoveTo::create(0.2f, ccp(-301+381, 58));
-    CCCallFunc *cf2 = CCCallFunc::create(this, (callfunc_selector(PopObj::onDoneAnimation)));
+    CCMoveTo *mt1 = cocos2d::CCMoveTo::create(0.2f, ccp(-301, 58));
+    CCCallFunc *cf1 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onFlip)));
+    CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.2f, ccp(-301+381, 58));
+    CCCallFunc *cf2 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onDoneAnimation)));
     
-    CCArray *sqa = CCArray::create();
+    CCArray *sqa = cocos2d::CCArray::create();
     sqa->addObject(mt1);
     sqa->addObject(cf1);
     sqa->addObject(mt2);
     sqa->addObject(cf2);
     
-    CCSequence *seq = CCSequence::create(sqa);
-    //CCSequence *seq = CCSequence::create(mt1, cf1, mt2, cf2);
+    CCSequence *seq = cocos2d::CCSequence::create(sqa);
+    //CCSequence *seq = cocos2d::CCSequence::create(mt1, cf1, mt2, cf2);
     
     mBoard->runAction(seq);
     
     mSwitch->setVisible(false);
     mSwitch2->setVisible(false);
     
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
 }
 
 #ifdef TITLESTYLE_SPRING
-Sakura* Sakura::create(CCNode *parent)
+Sakura* Sakura::create(cocos2d::CCNode *parent)
 {
   Sakura *ret = new Sakura;
   ret->init();
-  ret->mSprite = CCSprite::createWithSpriteFrameName("scene-snow.png");
-  ret->mSprite->setPosition(ccp((SCREEN_WIDTH+300)*CCRANDOM_0_1(), SCREEN_HEIGHT+50 ));
+  ret->mSprite = cocos2d::CCSprite::createWithSpriteFrameName("scene-snow.png");
+  ret->mSprite->setPosition(cocos2d::ccp((SCREEN_WIDTH+300)*CCRANDOM_0_1(), SCREEN_HEIGHT+50 ));
   ret->mParent = parent;
   //ret->mFlipX = 0.5f + CCRANDOM_0_1();
-  ret->mWindX = CCRANDOM_0_1();
-  ret->mSpeed = CCRANDOM_0_1()*50 - 80;
+  ret->mWindX = cocos2d::CCRANDOM_0_1();
+  ret->mSpeed = cocos2d::CCRANDOM_0_1()*50 - 80;
   ret->mSpeedY = 40 + 30*CCRANDOM_0_1();
   parent->addChild(ret->mSprite);
   return ret;
@@ -791,7 +791,7 @@ bool Sakura::Update(float delta, float wind)
 //    mFlipX *= -1;
 //  }
   mSprite->setScaleX(fl);
-  CCPoint np = mSprite->getPosition();
+  cocos2d::Point np = mSprite->getPosition();
   np.y -= delta*mSpeedY;
   mSpeed += delta*wind;
   np.x += delta*mSpeed;
@@ -838,8 +838,8 @@ void TitleMenu::onEnter()
   //select SinaWeibo / Twitter
   if(UniversalFit::shouldUsingSinaWeibo())
   {
-    mTwitter->setNormalSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("contact3.png"));
-    mTwitter->setSelectedSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("contact3.png"));
+    mTwitter->setNormalSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("contact3.png"));
+    mTwitter->setSelectedSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("contact3.png"));
   }
   
   for(int i=0; i<RUN; ++i)
@@ -853,24 +853,24 @@ void TitleMenu::onEnter()
       CCSequence *sq0 = createScaleSequence(sq0Duration, sq0Scale, 2);
       mLogo->runAction(sq0);
       
-      CCDelayTime *dt1 = CCDelayTime::create(0.6f);
-      CCShow *st1 = CCShow::create();
-      CCSequence *sq = (CCSequence*)CCSequence::create(dt1, st1, NULL);
+      CCDelayTime *dt1 = cocos2d::CCDelayTime::create(0.6f);
+      CCShow *st1 = cocos2d::CCShow::create();
+      CCSequence *sq = (cocos2d::CCSequence*)CCSequence::create(dt1, st1, NULL);
       mMainButton->runAction(sq);
         
-      CCDelayTime *dt2 = CCDelayTime::create(0.6f);
-      CCShow *st2 = CCShow::create();
-      CCSequence *sq2 = (CCSequence*)CCSequence::create(dt2, st2, NULL);
+      CCDelayTime *dt2 = cocos2d::CCDelayTime::create(0.6f);
+      CCShow *st2 = cocos2d::CCShow::create();
+      CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(dt2, st2, NULL);
       mMainButton->runAction(sq2);
     }
     
-  mSakura = CCArray::create();
+  mSakura = cocos2d::CCArray::create();
   mSakura->retain();
   mWind = 0;
   
   if( !SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying() )
   {
-    SimpleAudioEngine::sharedEngine()->playBackgroundMusic(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu.mp3").c_str(), true);
+    SimpleAudioEngine::sharedEngine()->playBackgroundMusic(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu.mp3").c_str(), true);
   }
   
   // TODO:
@@ -894,16 +894,16 @@ void TitleMenu::onEnter()
   mNew->setVisible(false);
   if( GameRecord::sharedGameRecord()->task->newrefresh )
   {
-      CCDelayTime *dt1 = CCDelayTime::create(1.0f);
-      CCShow *sh1 = CCShow::create();
-      CCScaleTo *st1 = CCScaleTo::create(0.2f, 1.5f);
-      CCScaleTo *st2 = CCScaleTo::create(0.1f, 1.0f);
-      CCArray *sqa = CCArray::create();
+      CCDelayTime *dt1 = cocos2d::CCDelayTime::create(1.0f);
+      CCShow *sh1 = cocos2d::CCShow::create();
+      CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.2f, 1.5f);
+      CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.1f, 1.0f);
+      CCArray *sqa = cocos2d::CCArray::create();
       sqa->addObject(dt1);
       sqa->addObject(sh1);
       sqa->addObject(st1);
       sqa->addObject(st2);
-      CCSequence *sq = CCSequence::create(sqa);
+      CCSequence *sq = cocos2d::CCSequence::create(sqa);
       
       mNew->runAction(sq);
   }
@@ -912,18 +912,18 @@ void TitleMenu::onEnter()
   mCNew->setVisible(false);
   if( GameRecord::sharedGameRecord()->collection->newlist->count() > 0 )
   {
-      CCDelayTime *dt1 = CCDelayTime::create(1.5f);
-      CCShow *sh1 = CCShow::create();
-      CCScaleTo *st1 = CCScaleTo::create(0.2f, 1.5f);
-      CCScaleTo *st2 = CCScaleTo::create(0.1f, 1);
+      CCDelayTime *dt1 = cocos2d::CCDelayTime::create(1.5f);
+      CCShow *sh1 = cocos2d::CCShow::create();
+      CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.2f, 1.5f);
+      CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.1f, 1);
       
-      CCArray *sqa = CCArray::create();
+      CCArray *sqa = cocos2d::CCArray::create();
       sqa->addObject(dt1);
       sqa->addObject(sh1);
       sqa->addObject(st1);
       sqa->addObject(st2);
       
-      CCSequence *sq = CCSequence::create(sqa);
+      CCSequence *sq = cocos2d::CCSequence::create(sqa);
       mCNew->runAction(sq);
   }
 
@@ -936,7 +936,7 @@ void TitleMenu::onEnter()
 //    if( FriendList->sharedFriendList()->canHaveBouns() )
 //    {
 //        [this showOpt:1);
-//        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3");
+//        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3");
 //        GameRecord::sharedGameRecord()->coins += [FriendList->sharedFriendList() bounsCount);
 //        [FriendList->sharedFriendList() dealBouns);
 //    }
@@ -972,7 +972,7 @@ void TitleMenu::showObjs()
 //
 void TitleMenu::hideObjs()
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     mMask->setVisible(false);
     mPop->onDestroy();
     mMask->removeAllChildrenWithCleanup(true);
@@ -998,7 +998,7 @@ void TitleMenu::showOpt(int typ)
 
 void TitleMenu::hideOpt()
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     mMask->setVisible(false);
     mMask->removeAllChildrenWithCleanup(true);
     
@@ -1032,7 +1032,7 @@ void TitleMenu::update(float delta)
   //飘云
   {
     float ds = delta*10;
-    CCPoint np = mCloud1->getPosition();
+    cocos2d::Point np = mCloud1->getPosition();
     np.x -= ds;
     if( np.x < -100 )
     {
@@ -1042,7 +1042,7 @@ void TitleMenu::update(float delta)
   }
   {
     float ds = delta*5;
-    CCPoint np = mCloud2->getPosition();
+    cocos2d::Point np = mCloud2->getPosition();
     np.x -= ds;
     if( np.x < -100 )
     {
@@ -1102,31 +1102,31 @@ void TitleMenu::update(float delta)
                 switch (randomInt(3)) {
                     case 0:
                     {
-                        enm = CCString::create("enemy");
+                        enm = cocos2d::CCString::create("enemy");
                     }
                         break;
                     case 1:
                     {
-                        enm = CCString::create("mninja");
+                        enm = cocos2d::CCString::create("mninja");
                     }
                         break;
                     case 2:
                     {
-                        enm = CCString::create("hninja");
+                        enm = cocos2d::CCString::create("hninja");
                     }
                         break;
                 }
                 mAni[i] = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(enm->getCString()));
-                mAni[i]->setAnchorPoint(ccp(0.4f, 0.0625f));
+                mAni[i]->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
                 mAni[i]->playGTAnimation(0, true);
-                mAni[i]->setPosition(ccp(-50, 64 + CCRANDOM_0_1()*36));
+                mAni[i]->setPosition(cocos2d::ccp(-50, 64 + CCRANDOM_0_1()*36));
                 mEnemies->addChild(mAni[i], 5);
                 mSpeed[i] = 200 + CCRANDOM_0_1()*100;
             }
         }
         else {
             mAni[i]->updateGTAnimation(delta);
-            CCPoint np = mAni[i]->getPosition();
+            cocos2d::Point np = mAni[i]->getPosition();
             np.x += delta*mSpeed[i];
             mAni[i]->setPosition(np);
             if( np.x > SCREEN_WIDTH + 50 )
@@ -1168,40 +1168,40 @@ void TitleMenu::onPlayClassic()
 {
   CCLog("Player");
   GamePlay::sharedGamePlay()->setGameMode(MODE_CLASSIC);
-  SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
   setSceneOutro(SelectMenu::scene());
 }
 
 void TitleMenu::onPlayArcade()
 {
   GamePlay::sharedGamePlay()->setGameMode(MODE_ARCADE);
-  SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
   setSceneOutro(SelectMenu::scene());
 }
 
 void TitleMenu::onCollections()
 {
   CollectionMenu::setNavBack(0);
-  SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
   setSceneOutro(CollectionMenu::scene());
 }
 
 void TitleMenu::onStore()
 {
   ShopMenu::setNavBack(0);
-  SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
   setSceneOutro(ShopMenu::scene());
 }
 
 void TitleMenu::onFacebook()
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
 //    UIApplication->sharedApplication()->openURL([NSURL, "http://www.facebook.com/pages/Little-Ninja-Rush/397668056947647"));
 }
 
 void TitleMenu::onTwitter()
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
 //    if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() )
 //    {
 //        UIApplication->sharedApplication()->openURL([NSURL, "http://weibo.com/u/2810380794"));
@@ -1214,7 +1214,7 @@ void TitleMenu::onTwitter()
 
 void TitleMenu::onLeaderboard()
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
 //    if( GameCenterManager->isGameCenterAvailable() )
 //    {
 //        if( GameCenterManager->isGameCenterLoggedIn() )
@@ -1234,7 +1234,7 @@ void TitleMenu::onLeaderboard()
 
 void TitleMenu::onAchievement()
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
 //    if( GameCenterManager->isGameCenterAvailable() )
 //    {
 //        if( GameCenterManager->isGameCenterLoggedIn() )
@@ -1254,19 +1254,19 @@ void TitleMenu::onAchievement()
 
 void TitleMenu::onExtra()
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
     setSceneOutro(ExtraSelect::scene());
 }
 
 void TitleMenu::onShowObjectives()
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     this->showObjs();
 }
 
 void TitleMenu::onOption()
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
   showOpt(0);
 }
 
@@ -1285,7 +1285,7 @@ void TitleMenu::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 
 void TitleMenu::onShareCode()
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
   showOpt(2);
 }
 
@@ -1294,7 +1294,7 @@ void TitleMenu::setSceneIntro()
   doSceneIntro(mSceneIntro, this);
 }
 
-void TitleMenu::setSceneOutro(CCScene* newscene)
+void TitleMenu::setSceneOutro(cocos2d::CCScene* newscene)
 {
   if( mIntroFlag )
   {
@@ -1313,7 +1313,7 @@ void TitleMenu::doneOutro()
   mNewScene->release();
 }
 
-SEL_MenuHandler TitleMenu::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler TitleMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onLeaderboard", TitleMenu::onLeaderboard)
   CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onShowObjectives", TitleMenu::onShowObjectives)
@@ -1336,7 +1336,7 @@ cocos2d::extension::Control::Handler TitleMenu::onResolveCCBCCControlSelector(co
   CCLog("Control");
   return NULL;
 }
-bool TitleMenu::onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool TitleMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud1", CCSprite*, mCloud1)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud2", CCSprite*, mCloud2)

@@ -11,31 +11,31 @@ class GameScript:public CCNode
     CREATE_FUNC(GameScript);
 
     //四面八方手里剑
-    void invokeSpell0(CCInteger* mid);
+    void invokeSpell0(cocos2d::CCInteger* mid);
 
     //分身术
     void invokeSpell1_0();
 
     //隐身术
-    void invokeSpell2(CCInteger*);
+    void invokeSpell2(cocos2d::CCInteger*);
 
     //子弹时间
-    void invokeSpell3(CCInteger*);
+    void invokeSpell3(cocos2d::CCInteger*);
 
     //加血
-    void invokeSpell4(CCNode*,void*);
+    void invokeSpell4(cocos2d::CCNode*,void*);
 
     //加气
-    void invokeSpell5(CCNode*,void*);
+    void invokeSpell5(cocos2d::CCNode*,void*);
 
     //一闪
-    void invokeSpell6(CCInteger*);
+    void invokeSpell6(cocos2d::CCInteger*);
 
     //流星雨
-    void invokeSpell7(CCInteger*);
+    void invokeSpell7(cocos2d::CCInteger*);
 
     //飞镖无限
-    void invokeSpell8(CCInteger*);
+    void invokeSpell8(cocos2d::CCInteger*);
 
     //全屏分身
     void invokeSpell9();
@@ -52,7 +52,7 @@ class GameScript:public CCNode
     void invokeSpell17();
 
     //大招效果
-    void invokeSpellRelease(CCInteger* sid);
+    void invokeSpellRelease(cocos2d::CCInteger* sid);
 
     void invokeFly();
 

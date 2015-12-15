@@ -1,6 +1,6 @@
 #include "MessageManager.h"
 
-Msg* Msg::msg(CCNode* tar, SEL_CallFuncND sel, CCObject* obj) 
+Msg* Msg::msg(cocos2d::CCNode* tar, SEL_CallFuncND sel, CCObject* obj) 
 {
     Msg *m = Msg::create();
     m->target = tar;
@@ -22,8 +22,8 @@ MessageManager* MessageManager::sharedMessageManager()
 
 bool MessageManager::init() 
 {
-  //mLock = CCLock::create();
-  mMsg = CCArray::create();
+  //mLock = cocos2d::CCLock::create();
+  mMsg = cocos2d::CCArray::create();
   mMsg->retain();
   return true;
 }
@@ -35,7 +35,7 @@ void MessageManager::clearMsg()
     //mLock->unlock();
 }
 
-void MessageManager::pushMsg(CCNode* target, SEL_CallFuncND sel, CCObject* obj) 
+void MessageManager::pushMsg(cocos2d::CCNode* target, SEL_CallFuncND sel, CCObject* obj) 
 {
     //mLock->lock();
     if (obj)
@@ -53,8 +53,8 @@ void MessageManager::onUpdate(float delta)
     {
         Msg *m = (Msg*)mMsg->objectAtIndex(0);
         //m->target->performSelector(m->sel, m->obj);
-        CCCallFuncN *callSelectorAction = CCCallFuncND::create(m->target, m->sel, m->obj);
-        m->target->runAction(CCSequence::create(callSelectorAction,NULL));
+        CCCallFuncN *callSelectorAction = cocos2d::CCCallFuncND::create(m->target, m->sel, m->obj);
+        m->target->runAction(cocos2d::CCSequence::create(callSelectorAction,NULL));
         mMsg->removeObjectAtIndex(0);
     }
     //mLock->unlock();

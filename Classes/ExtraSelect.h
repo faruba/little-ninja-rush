@@ -15,8 +15,8 @@ class ExtraSelect:
 
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ExtraSelect, create);
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *, const char*);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject *, const char*);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
+    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
 
     virtual void onEnter();
     virtual void onExit();
@@ -33,7 +33,7 @@ class ExtraSelect:
     void onTwitter();
     void resetButtons();
 
-    CCSprite* checkButton(CCPoint pos);
+    CCSprite* checkButton(cocos2d::Point pos);
 
 
 
@@ -55,7 +55,7 @@ class ExtraSelect:
     bool mIntroFlag;
     // intro&outro
     void setSceneIntro();
-    void setSceneOutro(CCScene* newscene);
+    void setSceneOutro(cocos2d::CCScene* newscene);
     void doneOutro();
 
     void onBack();

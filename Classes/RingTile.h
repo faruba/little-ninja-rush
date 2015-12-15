@@ -2,9 +2,7 @@
 #define ___CLASSES_RINGTILE_H_
 #include "cocos2d.h"
 
-USING_NS_CC;
-
-class RingTile:public CCNode
+class RingTile:public cocos2d::CCNode
 {
   public:
     virtual bool init();
@@ -12,7 +10,7 @@ class RingTile:public CCNode
 
     float   mTileSize;//砖块尺寸
     float   mWindowSize;//窗口的尺寸
-    CCSprite **mpWindowTiles;//背景贴图
+    cocos2d::CCSprite **mpWindowTiles;//背景贴图
     int     mWindowTileCount;//mpWindowTiles的尺寸
     int     mWindowSpriteIndex;//mpWindowTiles的起始index
     int     mWindowIndex;//Window在Buffer中起始index

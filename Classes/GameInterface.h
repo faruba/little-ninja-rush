@@ -9,7 +9,7 @@
 #define MAXHPMETER (6)
 class GamePlay;
 
-USING_NS_CC;
+;
 USING_NS_CC_EXT;
 using namespace cocosbuilder;
 
@@ -21,14 +21,14 @@ public CCBSelectorResolver
   public:
     bool init(){return true;};
     CREATE_FUNC(GameInterface);
-    static GameInterface* interface(CCNode* parent);
+    static GameInterface* interface(cocos2d::CCNode* parent);
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
     
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *, const char*);
-    virtual Control::Handler onResolveCCBCCControlSelector(CCObject *, const char*);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
+    virtual Control::Handler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
 
     void onUpdateClassic(float delta, GamePlay* play);
     void onUpdateArcade(float delta, GamePlay* play);

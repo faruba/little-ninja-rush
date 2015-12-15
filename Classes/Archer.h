@@ -7,26 +7,26 @@ class Archer:
   public Darts
 {
   public:
-    static Archer* role(CCNode* parent);
+    static Archer* role(cocos2d::CCNode* parent);
     CREATE_FUNC(Archer);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
     virtual bool isEnemy();
-    virtual CCPoint position();
-    virtual void onHitback(CCPoint origin);
-    virtual void setPosition(CCPoint pos);
+    virtual cocos2d::Point position();
+    virtual void onHitback(cocos2d::Point origin);
+    virtual void setPosition(cocos2d::Point pos);
     void toggleVisible(bool flag);
 
     CCNode *mParent;
-    CCPoint mTarget;
+    cocos2d::Point mTarget;
     GTAnimatedSprite *mArrow;
     int mState;
     float mTimer;
     float mLockTimer;
-    CCPoint mFrom;
-    CCPoint mMidPoint;
+    cocos2d::Point mFrom;
+    cocos2d::Point mMidPoint;
     bool mAvaiable;
 
 

@@ -22,7 +22,7 @@ class FootPrint:public GameObject
     virtual void onDestroy();
 
     //a helper function to go foot print
-    static void goFootPrint (float *pv, CCPoint pos);
+    static void goFootPrint (float *pv, cocos2d::Point pos);
 
 };
 #endif

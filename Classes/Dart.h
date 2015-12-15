@@ -8,11 +8,11 @@ class Dart:
 {
   public:
     CREATE_FUNC(Dart);
-    static Dart* dart(CCString* shap, CCPoint pos, CCPoint dir, int typ, CCNode* parent);
+    static Dart* dart(cocos2d::CCString* shap, cocos2d::Point pos, cocos2d::Point dir, int typ, CCNode* parent);
 
     virtual bool isEnemy();
-    virtual CCPoint position();
-    virtual void onHitback(CCPoint origin);
+    virtual cocos2d::Point position();
+    virtual void onHitback(cocos2d::Point origin);
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
@@ -36,14 +36,14 @@ class Dart:
     GOHandler mTrace;
 
     int type;
-    CCPoint direction;
-    CCPoint pos;
+    cocos2d::Point direction;
+    cocos2d::Point pos;
     float speed;
     bool blocked;
 
 
     void traceRole(GOHandler target);//跟踪角色
     void addTail();
-    void addSTail(CCString* ani, int aid);
+    void addSTail(cocos2d::CCString* ani, int aid);
 };
 #endif

@@ -14,7 +14,7 @@
 
 
 
-Star* Star::star(CCPoint pos, CCPoint dir) 
+Star* Star::star(cocos2d::Point pos, cocos2d::Point dir) 
 {
     Star *ret = Star::create();
     ret->mPos = pos;
@@ -25,18 +25,18 @@ Star* Star::star(CCPoint pos, CCPoint dir)
 void Star::onCreate() 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
-    mSprite = CCSprite::createWithSpriteFrameName("lxy.png");
+    mSprite = cocos2d::CCSprite::createWithSpriteFrameName("lxy.png");
     mSprite->setRotation(-90 - CC_RADIANS_TO_DEGREES(ccpToAngle(mDir)));
-    mSprite->setAnchorPoint(ccp(0.5f, 0.5f));
+    mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     mSprite->setPosition(mPos);
     play->addChild(mSprite, LAYER_MAINROLE+1);
     
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/starfall.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/starfall.mp3").c_str());
 }
 
 void Star::onUpdate(float delta) 
 {
-    CCPoint np = mSprite->getPosition();
+    cocos2d::Point np = mSprite->getPosition();
     np = ccpAdd(np, ccpMult(mDir, delta*400));
     mSprite->setPosition(np);
     GamePlay *play = GamePlay::sharedGamePlay();
@@ -51,15 +51,15 @@ void Star::onUpdate(float delta)
             play->manager->removeGameObject(this);
             if( hit )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
                 GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
-                hiteff->setAnchorPoint(ccp(0.5f, 0.5f));
+                hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
                 hiteff->setPosition(em->center());
                 hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(mDir) ) + 60*CCRANDOM_0_1());
                 play->addChild(hiteff, LAYER_MAINROLE+1);
                 
                 GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 11, false);
-                hiteff2->setAnchorPoint(ccp(0.5f, 0.5f));
+                hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
                 hiteff2->setPosition(em->center());
                 play->addChild(hiteff2, LAYER_ROLE);
                 

@@ -19,7 +19,7 @@
 
 
 
-ShadowKilling* ShadowKilling::shadowKilling(CCNode* parent) 
+ShadowKilling* ShadowKilling::shadowKilling(cocos2d::CCNode* parent) 
 {
     ShadowKilling *ret = ShadowKilling::create();
     ret->mParent = parent;
@@ -32,7 +32,7 @@ void ShadowKilling::onCreate()
     mDirection = -1;
     //创建角色动画
     mRole = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(GameData::roleAnimation(GameRecord::sharedGameRecord()->curr_char)->getCString()));
-    mRole->setAnchorPoint(ccp(0.4f, 0.0625f));
+    mRole->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
     mShadow = GTGhostShadow::shadow(mRole, 0.02f, 5);
     mParent->addChild(mRole, LAYER_MAINROLE+2);
     mParent->addChild(mShadow, LAYER_MAINROLE+1);
@@ -84,7 +84,7 @@ void ShadowKilling::onUpdate(float delta)
                 float ds = dr*SLIDE_SPEED*time;
                 if( fabsf(dis) <= fabsf(ds) )
                 {
-                    CCPoint np = mRole->getPosition();
+                    cocos2d::Point np = mRole->getPosition();
                     np.x = mTargetPos;
                     mRole->setPosition(np);
                     mTarget->deliverHit(HIT_MAGIC, ccp(mDirection, 0));
@@ -93,11 +93,11 @@ void ShadowKilling::onUpdate(float delta)
                     {
                         mSteak = 9;
                     }
-                    CCString *sound = CCString::createWithFormat("combo%d.mp3", mSteak);
+                    CCString *sound = cocos2d::CCString::createWithFormat("combo%d.mp3", mSteak);
                     SimpleAudioEngine::sharedEngine()->playEffect(sound->getCString());
                     
                     GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 28, false);
-                    hiteff->setAnchorPoint(ccp(0.5f, 0.5f));
+                    hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
                     hiteff->setPosition(mTarget->center());
                     hiteff->setRotation(90);
                     play->addChild(hiteff, LAYER_MAINROLE+1);
@@ -120,7 +120,7 @@ void ShadowKilling::onUpdate(float delta)
                     mRole->setOpacity(100+155*k);
                     mShadow->opacity = mRole->getOpacity();
                     
-                    CCPoint np = mRole->getPosition();
+                    cocos2d::Point np = mRole->getPosition();
                     np.x += ds;
                     mRole->setPosition(np);
                 }
@@ -146,7 +146,7 @@ void ShadowKilling::onUpdate(float delta)
                     mKillTimer = 0;
                     mDirection *= -1;
                     mRole->setScaleX(mDirection);
-                    CCPoint pos = mTarget->position();
+                    cocos2d::Point pos = mTarget->position();
                     mTargetPos = pos.x + mDirection*(SLIDE_RANGE/2);
                     pos.x += mDirection*-(SLIDE_RANGE/2);
                     mRole->setPosition(pos);
@@ -186,7 +186,7 @@ void ShadowKilling::onUpdate(float delta)
                 play->count_control++;
                 mDirection *= -1;
                 mRole->setScaleX(mDirection);
-                CCPoint pos = mTarget->position();
+                cocos2d::Point pos = mTarget->position();
                 mTargetPos = pos.x + mDirection*(SLIDE_RANGE/2);
                 pos.x += mDirection*-(SLIDE_RANGE/2);
                 mRole->setPosition(pos);

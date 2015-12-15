@@ -14,8 +14,8 @@ class Item:public GameObject{
   public:
     CREATE_FUNC(Item);
     virtual bool init(){return true;};
-    static Item* item(int tid, CCPoint pos, CCNode* parent, bool rock);
-    static void triggerItem(int degree, CCPoint pos);
+    static Item* item(int tid, cocos2d::Point pos, CCNode* parent, bool rock);
+    static void triggerItem(int degree, cocos2d::Point pos);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
@@ -23,7 +23,7 @@ class Item:public GameObject{
 
     CCNode* mParent;
     CCSprite* mSprite;
-    CCPoint mPos;
+    cocos2d::Point mPos;
     int     mTid;
     float   mTimer;
 

@@ -25,7 +25,7 @@ class GameRecord : public CCObject
 
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GameRecord, create);
 
-    void read(CCDictionary* dic);
+    void read(cocos2d::CCDictionary* dic);
     void write(rapidjson::Document &document);
     void readLocal();
     void writeLocal();
@@ -111,7 +111,7 @@ class GameRecord : public CCObject
     void mergeWith(GameRecord * record) ;
 
     //--- local leader board ---
-    void setLocalPlayerName(CCString* name);
+    void setLocalPlayerName(cocos2d::CCString* name);
     void submitScore(int score, CCString* name);
     void submitArcadeScore(int score, CCString* name);
 

@@ -24,7 +24,7 @@
 #define ACCELER_SPEED (250.0f)
 
 
-Messager* Messager::role(CCNode * parent) 
+Messager* Messager::role(cocos2d::CCNode * parent) 
 {
     Messager *ret = Messager::create();
     ret->mParent = parent;
@@ -34,9 +34,9 @@ Messager* Messager::role(CCNode * parent)
 void Messager::onCreate() 
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("messager"));
-    mSprite->setAnchorPoint(ccp(0.5438f, 0.0625f));
-    int y = CCRANDOM_0_1()*RESPAWN_Y;
-    mSprite->setPosition(ccp(-80, RESPAWN_YMIN+y));
+    mSprite->setAnchorPoint(cocos2d::ccp(0.5438f, 0.0625f));
+    int y = cocos2d::CCRANDOM_0_1()*RESPAWN_Y;
+    mSprite->setPosition(cocos2d::ccp(-80, RESPAWN_YMIN+y));
     mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
     
     //预设模式
@@ -44,13 +44,13 @@ void Messager::onCreate()
     if( mode == 0 )//chase mode
     {
         mSprite->playGTAnimation(1, true);
-        mSprite->setPosition(ccp( -80, RESPAWN_YMIN+y));
+        mSprite->setPosition(cocos2d::ccp( -80, RESPAWN_YMIN+y));
         mSpeed = CHASE_SPEED;
         mState = 0;
     }
     else {//drop out mode
         mSprite->playGTAnimation(0, true);
-        mSprite->setPosition(ccp( 80+UniversalFit::sharedUniversalFit()->playSize.width, RESPAWN_YMIN+y));
+        mSprite->setPosition(cocos2d::ccp( 80+UniversalFit::sharedUniversalFit()->playSize.width, RESPAWN_YMIN+y));
         mState = 1;
         mSpeed = DROPOUT_SPEED;
         mAwake = 0.4f*UniversalFit::sharedUniversalFit()->playSize.width + 0.3f*CCRANDOM_0_1()*UniversalFit::sharedUniversalFit()->playSize.width;
@@ -74,7 +74,7 @@ void Messager::onUpdate(float delta)
     if( mState < 3 && play->gameOverTimer >= 0 )
     {//主角死亡的处理
         float ds = delta*(play->levelspeed - play->runspeed);
-        CCPoint np = mSprite->getPosition();
+        cocos2d::Point np = mSprite->getPosition();
         np.x += ds;
         mSprite->setPosition(np);
     }
@@ -82,7 +82,7 @@ void Messager::onUpdate(float delta)
         switch (mState) {
             case 0://chase
             {
-                CCPoint np = mSprite->getPosition();
+                cocos2d::Point np = mSprite->getPosition();
                 np.x += delta*mSpeed;
                 mSprite->setPosition(np);
                 if( mFlagFalldown && mSprite->getPosition().x > mFalldown )
@@ -98,14 +98,14 @@ void Messager::onUpdate(float delta)
                 break;
             case 1://drop out
             {
-                CCPoint np = mSprite->getPosition();
+                cocos2d::Point np = mSprite->getPosition();
                 np.x += delta*mSpeed;
                 mSprite->setPosition(np);
                 if( mSprite->getPosition().x < mAwake )
                 {
                     GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
                     hiteff2->setScale(0.5f);
-                    hiteff2->setAnchorPoint(ccp(0.5f, 0.5f));
+                    hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
                     hiteff2->setPosition(position());
                     play->addChild(hiteff2, LAYER_MAINROLE+1);
                     mState = 2;
@@ -129,7 +129,7 @@ void Messager::onUpdate(float delta)
                 {
                     //fix pos
                     float ds = delta*play->runspeed;
-                    CCPoint np = mSprite->getPosition();
+                    cocos2d::Point np = mSprite->getPosition();
                     np.x -= ds;
                     mSprite->setPosition(np);
                     
@@ -144,11 +144,11 @@ void Messager::onUpdate(float delta)
                     if(mTimer>0.3f && mFlag)
                     {
                         int n = 1 + randomInt(3);
-                        SimpleAudioEngine::sharedEngine()->playEffect(CCString::createWithFormat("ahh%d.mp3", n)->getCString());
+                        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCString::createWithFormat("ahh%d.mp3", n)->getCString());
                         mFlag = false;
                     }
                     //fix pos
-                    CCPoint np = mSprite->getPosition();
+                    cocos2d::Point np = mSprite->getPosition();
                     if( mSprite->animationId() == 5 )
                     {
                         float ra = mTimer/mSprite->playBackTime();
@@ -180,7 +180,7 @@ void Messager::onUpdate(float delta)
     if( play->state == STATE_RUSH )
     {
         float offset = (play->runspeed - play->levelspeed)*delta;
-        CCPoint np = mSprite->getPosition();
+        cocos2d::Point np = mSprite->getPosition();
         np.x -= offset;
         mSprite->setPosition(np);
     }
@@ -189,7 +189,7 @@ void Messager::onUpdate(float delta)
     if( mState < 3 && play->gameOverTimer >= 0 )
     {
         float ds = play->runspeed*delta;
-        CCPoint np = mSprite->getPosition();
+        cocos2d::Point np = mSprite->getPosition();
         np.x += ds;
         mSprite->setPosition(np);
     }
@@ -206,7 +206,7 @@ void Messager::onDestroy()
     mParent->removeChild(mSprite, true);
 }
 
-bool Messager::collisionWithCircle(CCPoint cc, float rad) 
+bool Messager::collisionWithCircle(cocos2d::Point cc, float rad) 
 {
     if( mState == 3 )
     {
@@ -223,7 +223,7 @@ bool Messager::collisionWithCircle(CCPoint cc, float rad)
     return false;
 }
 
-bool Messager::deliverHit(int type, CCPoint dir) 
+bool Messager::deliverHit(int type, cocos2d::Point dir) 
 {
     if( dir.x > 0 )
     {
@@ -259,17 +259,17 @@ bool Messager::deliverHit(int type, CCPoint dir)
     return  true;
 }
 
-CCPoint Messager::position() 
+cocos2d::Point Messager::position() 
 {
     return mSprite->getPosition();
 }
 
-void Messager::setPosition(CCPoint pos) 
+void Messager::setPosition(cocos2d::Point pos) 
 {
     mSprite->setPosition(pos);
 }
 
-CCPoint Messager::center() 
+cocos2d::Point Messager::center() 
 {
     return ccpAdd(mSprite->getPosition(), ccp(0, 21));
 }

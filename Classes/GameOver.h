@@ -10,12 +10,12 @@ class GameOver:
   public cocosbuilder::CCBSelectorResolver
 {
   public:
-    static GameOver* gameOver(CCNode* parent);
+    static GameOver* gameOver(cocos2d::CCNode* parent);
     virtual bool init(){return true;};
     CREATE_FUNC(GameOver);
 
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *, const char*);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref *, const char*);
 
     void updateClassic();
@@ -84,8 +84,8 @@ class GameOver:
     void onFacebook();
     void onTwitter();
 
-    void doneFacebook(CCInteger* res);
-    void doneTwitter(CCInteger* res);
+    void doneFacebook(cocos2d::CCInteger* res);
+    void doneTwitter(cocos2d::CCInteger* res);
 
 };
 #endif

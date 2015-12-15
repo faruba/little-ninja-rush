@@ -11,7 +11,7 @@
 
 
 
-TimedTrigger* TimedTrigger::triggerWithDelay(CCNode*target, SEL_CallFunc selector, float delay) 
+TimedTrigger* TimedTrigger::triggerWithDelay(cocos2d::CCNode*target, SEL_CallFunc selector, float delay) 
 {
     TimedTrigger *ret = TimedTrigger::create();
     ret->mTarget = target;
@@ -21,7 +21,7 @@ TimedTrigger* TimedTrigger::triggerWithDelay(CCNode*target, SEL_CallFunc selecto
     return ret;
 }
 
-TimedTrigger* TimedTrigger::triggerWithCycle(CCNode*target, SEL_CallFunc selector, float cycle, int times) 
+TimedTrigger* TimedTrigger::triggerWithCycle(cocos2d::CCNode*target, SEL_CallFunc selector, float cycle, int times) 
 {
     TimedTrigger *ret = TimedTrigger::create();
     ret->mTarget = target;
@@ -41,7 +41,7 @@ void TimedTrigger::onUpdate(float delta)
     mTimer += delta;
     if( mTimer >= mTime )
     {
-      CCCallFunc *callSelectorAction = CCCallFunc::create(mTarget, mSelector);
+      CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mTarget, mSelector);
       GamePlay::sharedGamePlay()->runAction(callSelectorAction);
       mTimer -= mTime;
       if( mMode >= 0 )

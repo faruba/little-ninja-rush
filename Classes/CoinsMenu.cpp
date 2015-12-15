@@ -37,10 +37,10 @@ bool CoinsMenu::init()
 {
 
     auto listener = EventListenerTouchOneByOne::create();
-    listener->onTouchBegan = CC_CALLBACK_2(CoinsMenu::onTouchBegan, this);
-    listener->onTouchEnded = CC_CALLBACK_2(CoinsMenu::onTouchEnded, this);
-    listener->onTouchMoved = CC_CALLBACK_2(CoinsMenu::onTouchMoved, this);
-    listener->onTouchCancelled = CC_CALLBACK_2(CoinsMenu::onTouchEnded, this);
+    listener->onTouchBegan = cocos2d::CC_CALLBACK_2(CoinsMenu::onTouchBegan, this);
+    listener->onTouchEnded = cocos2d::CC_CALLBACK_2(CoinsMenu::onTouchEnded, this);
+    listener->onTouchMoved = cocos2d::CC_CALLBACK_2(CoinsMenu::onTouchMoved, this);
+    listener->onTouchCancelled = cocos2d::CC_CALLBACK_2(CoinsMenu::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
     this->setTouchEnabled(true);
@@ -56,14 +56,14 @@ void CoinsMenu::onEnter()
     }
 
     mClipedList = CEClipedNode::create();
-    mClipedList->setClipRect(new CCRect((UniversalFit::sharedUniversalFit()->transformRect(CCRectMake(12, 12, 455, 264)))));
+    mClipedList->setClipRect(new CCRect((UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(12, 12, 455, 264)))));
     mList->addChild(mClipedList);
-    mItemList = CCNode::create();
+    mItemList = cocos2d::CCNode::create();
     mClipedList->addChild(mItemList);
     mFly = false;
     
-    mScrollBody = CCSprite::createWithSpriteFrameName("sp_scroll2.png");
-    mScrollBody->setAnchorPoint(ccp(0, 1));
+    mScrollBody = cocos2d::CCSprite::createWithSpriteFrameName("sp_scroll2.png");
+    mScrollBody->setAnchorPoint(cocos2d::ccp(0, 1));
     mClipedList->addChild(mScrollBody);
     
     mSceneIntro = NULL;
@@ -71,7 +71,7 @@ void CoinsMenu::onEnter()
     
     //--------------
     
-    mCoins->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+    mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
     mOffset = 0;
     mItemList->removeAllChildrenWithCleanup(true);
     mCurrUnFold = -1;
@@ -89,7 +89,7 @@ void CoinsMenu::onEnter()
     this->updateScorll();
     
     //----------------
-    mMask = CCLayerColor::create(ccc4(0, 0, 0, 128));
+    mMask = cocos2d::CCLayerColor::create(ccc4(0, 0, 0, 128));
     mMask->setOpacity(128);
     mMask->setVisible(false);
     this->addChild(mMask, 10);
@@ -109,7 +109,7 @@ void CoinsMenu::activate(int cid)
     bool unfold = false;
     if( newitem->isFoldable() )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/ui-cancel.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/ui-cancel.mp3").c_str());
         if( cid == mCurrUnFold )
         {
             //fold
@@ -135,7 +135,7 @@ void CoinsMenu::activate(int cid)
         CCARRAY_FOREACH(mItemList->getChildren(), node)
         {
             FoldItem *it = (FoldItem*)node;
-            it->setPosition(ccp(0, mOffset));
+            it->setPosition(cocos2d::ccp(0, mOffset));
             mOffset -= it->getContentSize().height + PADDING;
         }
         if( unfold )
@@ -143,14 +143,14 @@ void CoinsMenu::activate(int cid)
             float upbound = -newitem->getPosition().y - mItemList->getPosition().y;
             if( upbound < 0 )
             {
-                CCPoint np = mItemList->getPosition();
+                cocos2d::Point np = mItemList->getPosition();
                 np.y = -newitem->getPosition().y;
                 mItemList->setPosition(np);
             }
             float downbound = upbound + newitem->getContentSize().height;
             if( downbound > 264 )
             {
-                CCPoint np = mItemList->getPosition();
+                cocos2d::Point np = mItemList->getPosition();
                 np.y = -newitem->getPosition().y + newitem->getContentSize().height - 264;
                 mItemList->setPosition(np);
             }
@@ -166,7 +166,7 @@ void CoinsMenu::addItem(int iid)
         cost = -1;
     }
     CFoldItem *fi = CFoldItem::foldItem(iid, cost, true, iid, gSDetails[iid-1], 1, this);
-    fi->setPosition(ccp(0, mOffset));
+    fi->setPosition(cocos2d::ccp(0, mOffset));
     mItemList->addChild(fi, 1, mItemList->getChildrenCount());
     mOffset -= fi->getContentSize().height + PADDING;
 }
@@ -183,7 +183,7 @@ void CoinsMenu::onExit()
 
 void CoinsMenu::onBack() 
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
     setSceneOutro(ShopMenu::scene());
 }
 
@@ -243,7 +243,7 @@ void CoinsMenu::update(float delta)
         
         //运动
         float dy = mFlySpeed*delta;
-        CCPoint np = mItemList->getPosition();
+        cocos2d::Point np = mItemList->getPosition();
         np.y += dy;
         mItemList->setPosition(np);
         
@@ -270,7 +270,7 @@ void CoinsMenu::updateScorll()
     float length = 264.0f*(264.0f/-mOffset)/100;
     float begin = -264.0f*(mItemList->getPosition().y/-mOffset);
     mScrollBody->setScaleY(length);
-    mScrollBody->setPosition(ccp(441, begin));
+    mScrollBody->setPosition(cocos2d::ccp(441, begin));
 }
 
 
@@ -279,7 +279,7 @@ bool CoinsMenu::onTouchBegan(Touch * touch, Event * event)
     LNR_GET_TOUCH_POS;
 
     mTouchBegin = pos;
-    CCRect rect = CCRectMake(12, 12, 455, 264);
+    CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
     if( rect.containsPoint(pos) )
     {
         mBeginPressY = pos.y;
@@ -297,7 +297,7 @@ void CoinsMenu::onTouchMoved(Touch * touch, Event * event)
 
     float dy = pos.y - mBeginPressY;
     float y = mBeginNodeY + dy;
-    CCPoint np = mItemList->getPosition();
+    cocos2d::Point np = mItemList->getPosition();
     np.y = y;
     mItemList->setPosition(np);
     //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
@@ -308,7 +308,7 @@ void CoinsMenu::onTouchMoved(Touch * touch, Event * event)
     {
         float ds = np.y - mLastY;
         //float dt = time - mLastTime;
-        float dt = CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
+        float dt = cocos2d::CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
         mFlySpeed = ds/dt;
     }
     mLastY = np.y;
@@ -321,7 +321,7 @@ void CoinsMenu::onTouchEnded(Touch * touch, Event * event)
     mFly = true;
     LNR_GET_TOUCH_POS;
 
-    CCRect rect = CCRectMake(12, 12, 455, 264);
+    CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
     if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
             rect.containsPoint(pos) )
     {
@@ -331,7 +331,7 @@ void CoinsMenu::onTouchEnded(Touch * touch, Event * event)
         CCObject *node;
         CCARRAY_FOREACH(mItemList->getChildren(), node)
         {
-            CCNode *item = (CCNode*) node;
+            CCNode *item = (cocos2d::CCNode*) node;
             float upbound = offset - mItemList->getPosition().y;
             float downbound = upbound + item->getContentSize().height + PADDING;
             if( dy >= upbound && dy < downbound )
@@ -350,7 +350,7 @@ void CoinsMenu::setSceneIntro()
   doSceneIntro(mSceneIntro, this);
 }
 
-void CoinsMenu::setSceneOutro(CCScene* newscene) 
+void CoinsMenu::setSceneOutro(cocos2d::CCScene* newscene) 
 {
   if( mIntroFlag )
   {
@@ -399,20 +399,20 @@ void CoinsMenu::setModal(int pid)
                 it->togglePurchaseButton(false);
             }
             
-            CCSprite *spbg = CCSprite::createWithSpriteFrameName("sp-tc.png");
-            spbg->setPosition(ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)));
+            CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
+            spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)));
             mMask->addChild(spbg);
             
-            CCSprite *titlesp = CCSprite::createWithSpriteFrameName("sp-tc3.png");
-            titlesp->setPosition(ccp( spbg->getContentSize().width/2, 105));
+            CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc3.png");
+            titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 105));
             spbg->addChild(titlesp);
             
-            CCSprite *descsp = CCSprite::createWithSpriteFrameName("sp-tc2.png");
-            descsp->setPosition(ccp( spbg->getContentSize().width/2, 55));
+            CCSprite *descsp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc2.png");
+            descsp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 55));
             spbg->addChild(descsp);
             
-            CCRotateBy *rb = CCRotateBy::create(1, 720);
-            CCRepeatForever *rf = CCRepeatForever::create(rb);
+            CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 720);
+            CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
             descsp->runAction(rf);
             
             mModalPurchase = pid;
@@ -479,8 +479,8 @@ void CoinsMenu::purchaseVerified(int pid)
     else {
         GameRecord::sharedGameRecord()->purchaseVerified(pid);
     }
-    mCoins->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
+    mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
 }
 
 void CoinsMenu::purchaseFailed(int pid) 
@@ -490,12 +490,12 @@ void CoinsMenu::purchaseFailed(int pid)
         //tell user purchase failed.
         mMask->removeAllChildrenWithCleanup(true);
         
-        CCSprite *spbg = CCSprite::createWithSpriteFrameName("sp-tc.png");
-        spbg->setPosition(ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
+        CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
+        spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
         mMask->addChild(spbg);
         
-        CCSprite *titlesp = CCSprite::createWithSpriteFrameName("sp-tc5.png");
-        titlesp->setPosition(ccp( spbg->getContentSize().width/2, 65));
+        CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc5.png");
+        titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 65));
         spbg->addChild(titlesp);
         
         mModalTimer = 3;
@@ -512,12 +512,12 @@ void CoinsMenu::purchaseCancelled(int pid)
         //just cancel the modal
         mMask->removeAllChildrenWithCleanup(true);
         
-        CCSprite *spbg = CCSprite::createWithSpriteFrameName("sp-tc.png");
-        spbg->setPosition(ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
+        CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
+        spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
         mMask->addChild(spbg);
         
-        CCSprite *titlesp = CCSprite::createWithSpriteFrameName("sp-tc4.png");
-        titlesp->setPosition(ccp( spbg->getContentSize().width/2, 65));
+        CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc4.png");
+        titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 65));
         spbg->addChild(titlesp);
         
         mModalTimer = 3;
@@ -532,7 +532,7 @@ void CoinsMenu::modalOver()
     this->cancelModal();
 }
 
-SEL_MenuHandler CoinsMenu::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler CoinsMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
     CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", CoinsMenu::onBack);
 
@@ -540,12 +540,12 @@ SEL_MenuHandler CoinsMenu::onResolveCCBCCMenuItemSelector(CCObject * pTarget, co
     return NULL;
 }
 
-SEL_CCControlHandler CoinsMenu::onResolveCCBCCControlSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_CCControlHandler CoinsMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   CCLog("Control");
   return NULL;
 }
-bool CoinsMenu::onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool CoinsMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", CCNode *, mList);

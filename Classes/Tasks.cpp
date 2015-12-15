@@ -20,10 +20,10 @@ class UploadAchievement :
   public:
     CCString *gcid;
     double percent;
-    UploadAchievement* upload(CCString* gid, double perc);
+    UploadAchievement* upload(cocos2d::CCString* gid, double perc);
 };
 /*
-UploadAchievement* UploadAchievement::upload(CCString * gid, double perc) 
+UploadAchievement* UploadAchievement::upload(cocos2d::CCString * gid, double perc) 
 {
     UploadAchievement *ua = UploadAchievement->alloc()->init()->autorelease();
     ua.gcid = gid;
@@ -67,7 +67,7 @@ Tasks* Tasks::sharedTasks()
 
 bool Tasks::init() 
 {
-  mTasks = CCArray::create();
+  mTasks = cocos2d::CCArray::create();
   mTasks->retain();
   dailyObjective = NULL;
   weeklyObjective = NULL;
@@ -89,7 +89,7 @@ void Tasks::makeArcadePrize(ArcadePrize* p, int lev)
     p->prize = ARCADE_PRIZEPBASE + ARCADE_PRIZEPFACE*lev;
 }
 
-void Tasks::readObjectives(CCDictionary* dic) 
+void Tasks::readObjectives(cocos2d::CCDictionary* dic) 
 {
   if( !gLoadFlag )
   {
@@ -167,7 +167,7 @@ void Tasks::readObjectives(CCDictionary* dic)
     CCARRAY_FOREACH (gAchievements, obj)
     {
       Achievement *ach = (Achievement*)obj;
-      CCString *key = CCString::createWithFormat("achievement__%d", ach->uiid);
+      CCString *key = cocos2d::CCString::createWithFormat("achievement__%d", ach->uiid);
       ach->achieveCount = gtReadInt(dic, key->getCString(), 0);
       //生成Task
       if( ach->achieveCount < ach->achieveNumber )
@@ -210,7 +210,7 @@ void Tasks::readObjectives(CCDictionary* dic)
       Statistics *sta = (Statistics*)pObj;
       if( sta->achieveCode >= 0 )
       {
-        CCString *key = CCString::createWithFormat("statistics__%d", sta->uiid);
+        CCString *key = cocos2d::CCString::createWithFormat("statistics__%d", sta->uiid);
         sta->achieveCount = gtReadInt(dic, key->getCString(), 0);
         //生成Task
         this->assignTask(sta->achieveCode, -1, sta->achieveCount, TASK_STATISTICS, sta->uiid);
@@ -348,7 +348,7 @@ void Tasks::writeObjectives(rapidjson::Document &document)
     CCARRAY_FOREACH (gAchievements, obj)
     {
       Achievement *ach = (Achievement*)obj;
-      CCString *key = CCString::createWithFormat("achievement__%d", ach->uiid);
+      CCString *key = cocos2d::CCString::createWithFormat("achievement__%d", ach->uiid);
       document.AddMember(key->getCString(), ach->achieveCount, document.GetAllocator());
     }
     //写入统计记录
@@ -358,7 +358,7 @@ void Tasks::writeObjectives(rapidjson::Document &document)
       Statistics *sta = (Statistics*)pObj;
         if( sta->achieveCode >= 0 )
         {
-            CCString *key = CCString::createWithFormat("statistics__%d", sta->uiid);
+            CCString *key = cocos2d::CCString::createWithFormat("statistics__%d", sta->uiid);
             document.AddMember(key->getCString(), sta->achieveCount, document.GetAllocator());
         }
     }
@@ -556,7 +556,7 @@ void loadObjectivesFromFile(const char* szJson, CCArray* &pArr)
 {
     if( pArr == NULL )
     {
-        pArr = CCArray::create();
+        pArr = cocos2d::CCArray::create();
         pArr->retain();
     }
     else
@@ -564,16 +564,16 @@ void loadObjectivesFromFile(const char* szJson, CCArray* &pArr)
         pArr->removeAllObjects();
     }
 
-    CCString *path = CCString::createWithFormat("data/%s", szJson);
-    CCString *str = CCString::createWithContentsOfFile(CCFileUtils::sharedFileUtils()->fullPathForFilename(path->getCString()).c_str());
+    CCString *path = cocos2d::CCString::createWithFormat("data/%s", szJson);
+    CCString *str = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename(path->getCString()).c_str());
 
-    CCArray *parsed = (CCArray*)JsonWrapper::parseJson(str);
+    CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(str);
     if (parsed)
     {
     CCObject *pObj = NULL;
     CCARRAY_FOREACH(parsed, pObj)
     {
-      CCDictionary *dic = (CCDictionary*)pObj;
+      CCDictionary *dic = (cocos2d::CCDictionary*)pObj;
       {
         Achievement *ach = Achievement::create();
         ach->uiid = gtReadInt(dic, "uiid");
@@ -607,7 +607,7 @@ void Tasks::loadAchievementsFromFile()
 {
     if( gAchievements == NULL )
     {
-        gAchievements = CCArray::create();
+        gAchievements = cocos2d::CCArray::create();
         gAchievements->retain();
     }
     else
@@ -615,15 +615,15 @@ void Tasks::loadAchievementsFromFile()
         gAchievements->removeAllObjects();
     }
     
-    CCString *str = CCString::createWithContentsOfFile(CCFileUtils::sharedFileUtils()->fullPathForFilename("data/achievements.json").c_str());
+    CCString *str = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("data/achievements.json").c_str());
     
-    CCArray *parsed = (CCArray*)JsonWrapper::parseJson(str);
+    CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(str);
     if (parsed)
     {
         CCObject *pObj = NULL;
         CCARRAY_FOREACH(parsed, pObj)
         {
-            CCDictionary *dic = (CCDictionary*)pObj;
+            CCDictionary *dic = (cocos2d::CCDictionary*)pObj;
             {
                 Achievement *ach = Achievement::create();
                 ach->uiid = gtReadInt(dic, "uiid");
@@ -650,7 +650,7 @@ void Tasks::loadStatisticsFromFile()
 {
   if( gStatistics == NULL )
   {
-    gStatistics = CCArray::create();
+    gStatistics = cocos2d::CCArray::create();
     gStatistics->retain();
   }
   else
@@ -658,16 +658,16 @@ void Tasks::loadStatisticsFromFile()
     gStatistics->removeAllObjects();
   }
 
-  //CCString *str = CCString::createWithContentsOfFile(CCFileUtils::sharedFileUtils()->fullPathFromRelativeFile("statistics.json", "data"));
-  CCString *str = CCString::createWithContentsOfFile(CCFileUtils::sharedFileUtils()->fullPathForFilename("data/statistics.json").c_str());
+  //CCString *str = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathFromRelativeFile("statistics.json", "data"));
+  CCString *str = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("data/statistics.json").c_str());
 
-  CCArray *parsed = (CCArray*)JsonWrapper::parseJson(str);
+  CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(str);
   if (parsed)
   {
     CCObject *pObj = NULL;
     CCARRAY_FOREACH(parsed, pObj)
     {
-      CCDictionary *dic = (CCDictionary*)pObj;
+      CCDictionary *dic = (cocos2d::CCDictionary*)pObj;
       {
         Statistics *sta = Statistics::create();
         sta->uiid = gtReadInt(dic, "uiid");
@@ -892,7 +892,7 @@ void Tasks::checkObjectives()
     today = NULL;
 }
 
-bool Tasks::isDay(CCDate * a, CCDate * b)
+bool Tasks::isDay(cocos2d::CCDate * a, CCDate * b)
 {
     if( a->year() != b->year() )
     {
@@ -1023,12 +1023,12 @@ void Tasks::dealloc()
 }
 */
 
-CCString* Tasks::stringForObjective(CCString * desc, int achcode, int num, int count)
+CCString* Tasks::stringForObjective(cocos2d::CCString * desc, int achcode, int num, int count)
 {
     CCString *all = desc;
     if( achcode < ACH_OVERLINE && num > 1 && num-count > 0 )
     {
-        all = CCString::createWithFormat("%s，还剩%d。", desc->getCString(), num-count);
+        all = cocos2d::CCString::createWithFormat("%s，还剩%d。", desc->getCString(), num-count);
     }
     return all;
 }

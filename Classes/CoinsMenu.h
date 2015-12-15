@@ -7,7 +7,7 @@
 #include "FoldItem.h"
 //#include "IAPHelper.h"
 
-USING_NS_CC;
+;
 USING_NS_CC_EXT;
 
 class CoinsMenu:
@@ -25,8 +25,8 @@ class CoinsMenu:
     LNR_SCENE_METHOD(CoinsMenu);
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CoinsMenu, create);
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *, const char*);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject *, const char*);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
+    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
 
     virtual bool onTouchBegan(Touch * touch, Event * event);
     virtual void onTouchMoved(Touch * touch, Event * event);
@@ -37,7 +37,7 @@ class CoinsMenu:
     CCNode *mItemList;
     float mOffset;
     int mCurrUnFold;
-    CCPoint mTouchBegin;
+    cocos2d::Point mTouchBegin;
     //scrolls
     CCSprite *mScrollHead;
     CCSprite *mScrollBody;
@@ -85,7 +85,7 @@ class CoinsMenu:
 
     //intro&outro
     void setSceneIntro();
-    void setSceneOutro(CCScene* newscene);
+    void setSceneOutro(cocos2d::CCScene* newscene);
     void doneOutro();
 
 };

@@ -7,7 +7,7 @@
 #include "GameRecord.h"
 #include "UniversalFit.h"
 
-Dart* Dart::dart(CCString* shap, CCPoint pos, CCPoint dir, int typ, CCNode* parent) 
+Dart* Dart::dart(cocos2d::CCString* shap, cocos2d::Point pos, cocos2d::Point dir, int typ, CCNode* parent) 
 {
   Dart* ret = Dart::create();
   ret->mParent = parent;
@@ -26,30 +26,30 @@ void Dart::addTail()
 {
   if( mTail == NULL )
   {
-    CCString *tailstr = CCString::createWithFormat("%s_tail.png", mShap->m_sString.substr(0, mShap->m_sString.length()-4).c_str());
-    mTail = CCSprite::createWithSpriteFrameName(tailstr->getCString());
-    mTail->setAnchorPoint(ccp(0.5f, 0.95f));
+    CCString *tailstr = cocos2d::CCString::createWithFormat("%s_tail.png", mShap->m_sString.substr(0, mShap->m_sString.length()-4).c_str());
+    mTail = cocos2d::CCSprite::createWithSpriteFrameName(tailstr->getCString());
+    mTail->setAnchorPoint(cocos2d::ccp(0.5f, 0.95f));
     mTail->setPosition(mSprite->getPosition());
     mTail->setOpacity(0);
     mParent->addChild( mTail, LAYER_ROLE);
     mTail->setRotation(90-CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
-    CCFadeIn *fi = CCFadeIn::create(0.5f);
+    CCFadeIn *fi = cocos2d::CCFadeIn::create(0.5f);
     mTail->runAction(fi);
   }
 }
 
-void Dart::addSTail(CCString * ani, int aid) 
+void Dart::addSTail(cocos2d::CCString * ani, int aid) 
 {
   if( mSTail == NULL )
   {
     mSTail = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(ani->getCString()));
     mSTail->playGTAnimation(aid, true);
-    mSTail->setAnchorPoint(ccp(0.5f, 0.95f));
+    mSTail->setAnchorPoint(cocos2d::ccp(0.5f, 0.95f));
     mSTail->setPosition(mSprite->getPosition());
     mSTail->setOpacity(0);
     mParent->addChild( mSTail, LAYER_ROLE);
     mSTail->setRotation(90-CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
-    CCFadeIn *fi = CCFadeIn::create(0.5f);
+    CCFadeIn *fi = cocos2d::CCFadeIn::create(0.5f);
     mSTail->runAction(fi);
   }
 }
@@ -57,8 +57,8 @@ void Dart::addSTail(CCString * ani, int aid)
 void Dart::onCreate() 
 {
   blocked = false;
-  mSprite = CCSprite::createWithSpriteFrameName(mShap->getCString());
-  mSprite->setAnchorPoint(ccp(0.5f, 0.5f));
+  mSprite = cocos2d::CCSprite::createWithSpriteFrameName(mShap->getCString());
+  mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
   mSprite->setPosition(pos);
   mParent->addChild(mSprite, LAYER_MAINROLE+1);
 
@@ -74,8 +74,8 @@ void Dart::onCreate()
         mSprite->setScale(1.4f);
         mIsEnemy = true;
         speed = NNINJA_DARTSPEED*play->difficulty;
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -84,8 +84,8 @@ void Dart::onCreate()
         mSprite->setScale(1.4f);
         mIsEnemy = true;
         speed = MNINJA_DARTSPEED*play->difficulty;
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -94,8 +94,8 @@ void Dart::onCreate()
         mSprite->setScale(1.4f);
         mIsEnemy = true;
         speed = HNINJA_DARTSPEED*play->difficulty;
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -104,9 +104,9 @@ void Dart::onCreate()
         mSprite->setScale(1.4f);
         mIsEnemy = true;
         speed = HNINJA_DARTSPEED*play->difficulty/2;
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/freeze_fly.mp3").c_str());
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/freeze_fly.mp3").c_str());
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
 
         mParticle = 2;
@@ -117,8 +117,8 @@ void Dart::onCreate()
       {//八方手里剑
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
         speed = 700;
       }
@@ -128,8 +128,8 @@ void Dart::onCreate()
         mSprite->setScale(1.4f);
         mIsEnemy = true;
         speed = HNINJA_DARTSPEED*play->difficulty*2;
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -137,8 +137,8 @@ void Dart::onCreate()
       {//主角的普通飞镖
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -146,8 +146,8 @@ void Dart::onCreate()
       {
         this->addTail();
         mHitEffect = 11;
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
 
         mParticle = 1;
@@ -156,11 +156,11 @@ void Dart::onCreate()
       break;
     case 2://雷飞镖
       {
-        this->addSTail(CCString::create("misc"), 0);
+        this->addSTail(cocos2d::CCString::create("misc"), 0);
         mHitEffect = 12;
         //旋转代码
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -175,8 +175,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
         mHitEffect = 14;
 
@@ -199,8 +199,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
         mHitEffect = 20;
         mHitEffect2 = 21;
@@ -213,8 +213,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
         mHitEffect = 15;
         mHitEffect2 = 16;
@@ -227,8 +227,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
         mHitEffect = 18;
         mHitEffect2 = 19;
@@ -240,8 +240,8 @@ void Dart::onCreate()
     case 9://追踪镖
       {
         mSprite->setScale(1.4f);
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
         GameObject *atar = (GameObject*)play->nearestEnemy(direction);
         if( atar != NULL )
@@ -259,8 +259,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
 
         mParticle = -1;
@@ -271,8 +271,8 @@ void Dart::onCreate()
       {//彩虹镖
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
 
         mHitEffect = 24;
@@ -283,8 +283,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -292,8 +292,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -301,8 +301,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -310,8 +310,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = CCRepeatForever::create(rb);
+        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -356,27 +356,27 @@ void Dart::onUpdate(float delta)
         if( hit )
         {
           GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), mHitEffect2, false);
-          hiteff->setAnchorPoint(ccp(0.5f, 0.5f));
+          hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
           hiteff->setPosition(em->center());
           hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(direction) ) + 60*CCRANDOM_0_1());
           mParent->addChild(hiteff, LAYER_MAINROLE+1);
 
           GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), mHitEffect, false);
-          hiteff2->setAnchorPoint(ccp(0.5f, 0.5f));
+          hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
           hiteff2->setPosition(em->center());
           mParent->addChild(hiteff2, LAYER_ROLE);
 
           switch (type) {
             case 1://fire
               {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit-fire.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit-fire.mp3").c_str());
                 //achievement enemy burnt
                 GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ENEMYBURNT, 1);
               }
               break;
             case 2://thunder
               {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit-thunder.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit-thunder.mp3").c_str());
               }
               break;
             case 6:
@@ -385,7 +385,7 @@ void Dart::onUpdate(float delta)
                 {
                   play->manager->addGameObject(StaticParticle::particleIcePiece(em->center(), direction));
                 }
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/ice-hurt.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/ice-hurt.mp3").c_str());
               }
               break;
             case 7:
@@ -394,22 +394,22 @@ void Dart::onUpdate(float delta)
                 {
                   play->manager->addGameObject(StaticParticle::particleDart(em->center(), direction, 3));
                 }
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
               }
               break;
             case 9://狼牙
               {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/bloodfangs.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/bloodfangs.mp3").c_str());
               }
               break;
             case 10://黄金
               {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/golden.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/golden.mp3").c_str());
               }
               break;
             default:
               {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
               }
           }
           //achievement reflect to death
@@ -425,7 +425,7 @@ void Dart::onUpdate(float delta)
   }
   else {
     bool hit = false;
-    CCPoint xpos;
+    cocos2d::Point xpos;
     if( play->mainrole->collisionWithCircle(pos, 5) )
     {
       hit = play->mainrole->deliverHit(HIT_DART, direction);
@@ -441,15 +441,15 @@ void Dart::onUpdate(float delta)
     }
     if( hit )
     {
-      SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
       GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
-      hiteff->setAnchorPoint(ccp(0.5f, 0.5f));
+      hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
       hiteff->setPosition(xpos);
       hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(direction) ) + 60*CCRANDOM_0_1());
       mParent->addChild(hiteff, LAYER_MAINROLE+1);
 
       GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), mHitEffect, false);
-      hiteff2->setAnchorPoint(ccp(0.5f, 0.5f));
+      hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
       hiteff2->setPosition(xpos);
       mParent->addChild(hiteff2, LAYER_ROLE);
     }
@@ -459,11 +459,11 @@ void Dart::onUpdate(float delta)
   Role *traced = (Role*)play->manager->gameObjectWithHandler(mTrace);
   if( traced != NULL )
   {
-    CCPoint rdir = ccpSub(traced->center(), mSprite->getPosition());
+    cocos2d::Point rdir = ccpSub(traced->center(), mSprite->getPosition());
     float angle = ccpAngleSigned(direction, rdir);
     if( angle == angle )
     {
-      float limit = CC_DEGREES_TO_RADIANS(100.0f*delta);
+      float limit = cocos2d::CC_DEGREES_TO_RADIANS(100.0f*delta);
       if( fabsf(angle) <= limit )
       {
         direction = ccpNormalize(rdir);
@@ -483,8 +483,8 @@ void Dart::onUpdate(float delta)
   }
 
   //飞行
-  CCPoint ds = ccpMult(direction, speed*delta);
-  CCPoint np = ccpAdd(ds, mSprite->getPosition());
+  cocos2d::Point ds = ccpMult(direction, speed*delta);
+  cocos2d::Point np = ccpAdd(ds, mSprite->getPosition());
   mSprite->setPosition(np);
   pos = np;
   if( mTail != NULL )
@@ -558,19 +558,19 @@ bool Dart::isEnemy()
   return mIsEnemy;
 }
 
-CCPoint Dart::position() 
+cocos2d::Point Dart::position() 
 {
   return pos;
 }
 
-void Dart::onHitback(CCPoint origin) 
+void Dart::onHitback(cocos2d::Point origin) 
 {
   if( type != -4 )
   {
     mIsEnemy = false;
     speed = DARTSPEED_HERO;
     //计算反射角
-    CCPoint dcp = ccpSub(origin, pos);
+    cocos2d::Point dcp = ccpSub(origin, pos);
     float ang = ccpAngleSigned(direction, dcp);
     float oga = ccpToAngle(direction);
     oga -= PI - 2*ang;

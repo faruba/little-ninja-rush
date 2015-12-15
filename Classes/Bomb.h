@@ -17,20 +17,20 @@ class Bomb:
 {
   public:
     CREATE_FUNC(Bomb);
-    static Bomb* bomb(CCPoint pos, CCPoint dir, CCNode* parent);
+    static Bomb* bomb(cocos2d::Point pos, cocos2d::Point dir, CCNode* parent);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
     virtual bool isEnemy();
-    virtual CCPoint position();
-    virtual void onHitback(CCPoint origin);
+    virtual cocos2d::Point position();
+    virtual void onHitback(cocos2d::Point origin);
 
     CCNode *mParent;
 
     GTAnimatedSprite *mSprite;
-    CCPoint mPosition;
-    CCPoint mDirection;
+    cocos2d::Point mPosition;
+    cocos2d::Point mDirection;
     float mTimer;
 
     bool mPaused;

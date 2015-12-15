@@ -17,21 +17,21 @@ public:
   virtual void onTouchCancelled(Touch * touch, Event * event);
 
   CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ABScrollContent, create);
-  void setClipRect(CCRect clipRect);
+  void setClipRect(cocos2d::CCRect clipRect);
 
   void resetContentPosition();
-  void addContent(CCNode* content);
-  void removeContent(CCNode* content);
+  void addContent(cocos2d::CCNode* content);
+  void removeContent(cocos2d::CCNode* content);
   void removeAllContent();
 
   CEClipedNode *mClipNode;
   CCNode *contentNode;
   CCObject *clickTarget;
   SEL_CallFunc clickMethod;
-  CCPoint clickPoint;
+  cocos2d::Point clickPoint;
 
 private:
-  CCPoint mTouchBegin;
+  cocos2d::Point mTouchBegin;
   float mBeginPressY;
   float mBeginNodeY;
   bool mFly;

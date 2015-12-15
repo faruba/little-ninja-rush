@@ -16,7 +16,7 @@
 
 
 
-Wood* Wood::wood(CCPoint pos, CCPoint dir, CCNode * parent, GOHandler target, CCPoint anchor) 
+Wood* Wood::wood(cocos2d::Point pos, cocos2d::Point dir, CCNode * parent, GOHandler target, cocos2d::Point anchor) 
 {
     Wood *ret = Wood::create();
     ret->mParent = parent;
@@ -30,8 +30,8 @@ Wood* Wood::wood(CCPoint pos, CCPoint dir, CCNode * parent, GOHandler target, CC
 void Wood::onCreate() 
 {
     mTimer = 0;
-    mSprite = CCSprite::createWithSpriteFrameName("wood.png");
-    mSprite->setAnchorPoint(ccp(0.5f, 0.5f));
+    mSprite = cocos2d::CCSprite::createWithSpriteFrameName("wood.png");
+    mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     mSprite->setPosition(mPos);
     mParent->addChild(mSprite, EFFECT_Z);
     if( mDir.x > 0 )
@@ -59,7 +59,7 @@ void Wood::onUpdate(float delta)
     {
         float dx = mDir.x*delta*70.0f;
         float dy = 200.0f*mTimer + 0.5f*mTimer*mTimer*(-800.0f);
-        CCPoint np = mSprite->getPosition();
+        cocos2d::Point np = mSprite->getPosition();
         np.x += dx;
         np.y = mPos.y + dy;
         if( np.x < 0 )
@@ -77,7 +77,7 @@ void Wood::onUpdate(float delta)
             mTimer = 0;
             mSprite->setVisible(false);
             
-            CCPoint xp = target->position();
+            cocos2d::Point xp = target->position();
             xp.x = mSprite->getPosition().x;
             
             GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 5, false);
@@ -97,7 +97,7 @@ void Wood::onUpdate(float delta)
         if( mTimer >= 0.3f )
         {
             target->toggleVisible(true);
-            CCPoint np = target->position();
+            cocos2d::Point np = target->position();
             np.x = mSprite->getPosition().x;
             target->setPosition(np);
             

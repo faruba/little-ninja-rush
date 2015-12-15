@@ -10,8 +10,8 @@
 #define ICLOUDFILE "littleninjarush.bin"
 
 #define LB_RANK (3)//Local Leader Board
-#define LB_DEFAULT (CCString::create("(ME)"))
-#define LB_EMPITY (CCString::create("EMPITY"))
+#define LB_DEFAULT (cocos2d::CCString::create("(ME)"))
+#define LB_EMPITY (cocos2d::CCString::create("EMPITY"))
 
 #define IAP_COUNT (8)
 
@@ -85,7 +85,7 @@ void GameRecord::loadGameRecordFromNSData(NSData * rawdata)
 
 NSData* GameRecord::toNSData() 
 {
-    CCDictionary *dic = CCDictionary::create();
+    CCDictionary *dic = cocos2d::CCDictionary::create();
 
     this->write(dic);
     
@@ -200,15 +200,15 @@ void GameRecord::readLocal()
 {
   CCLog("GameRecord::readLocal():");
     
-    string path = CCFileUtils::sharedFileUtils()->getWritablePath();
+    string path = cocos2d::CCFileUtils::sharedFileUtils()->getWritablePath();
     path += GAME_RECORD_FILENAME;
     CCLog("RECORD = %s", path.c_str());
     
-  CCString *data = CCString::createWithContentsOfFile(path.c_str());
+  CCString *data = cocos2d::CCString::createWithContentsOfFile(path.c_str());
     
   if( data != NULL )
   {
-    CCDictionary *parsed = (CCDictionary*)JsonWrapper::parseJson(data);
+    CCDictionary *parsed = (cocos2d::CCDictionary*)JsonWrapper::parseJson(data);
     if( parsed != NULL )
     {
       this->read(parsed);
@@ -233,7 +233,7 @@ void GameRecord::writeLocal()
 
   this->write(document);
 
-    string path = CCFileUtils::sharedFileUtils()->getWritablePath();
+    string path = cocos2d::CCFileUtils::sharedFileUtils()->getWritablePath();
     path += GAME_RECORD_FILENAME;
     CCLog("RECORD = %s", path.c_str());
     
@@ -246,7 +246,7 @@ void GameRecord::writeLocal()
 /*
 void GameRecord::writeToURL(NSURL * url) 
 {
-    CCDictionary *dic = CCDictionary::create();
+    CCDictionary *dic = cocos2d::CCDictionary::create();
     
     if( dic != NULL )
     {
@@ -270,7 +270,7 @@ void GameRecord::writeToURL(NSURL * url)
     }
 }
 */
-void GameRecord::read(CCDictionary* dic) 
+void GameRecord::read(cocos2d::CCDictionary* dic) 
 {
     //读入基础数据
     revision = gtReadInt(dic, "revision", 0);
@@ -295,13 +295,13 @@ void GameRecord::read(CCDictionary* dic)
     //读取角色数据
     for( int i=0; i<GAME_CHARCOUNT; ++i)
     {
-        CCString *strHP = CCString::createWithFormat("char_hp__%d", i);
-        CCString *strDart = CCString::createWithFormat("char_dart__%d", i);
-        CCString *strContract = CCString::createWithFormat("char_contract__%d", i);
-        CCString *strEquipDart = CCString::createWithFormat("char_equip_dart__%d", i);
-        CCString *strEquipBlade = CCString::createWithFormat("char_equip_blade__%d", i);
-        CCString *strEquipSpell = CCString::createWithFormat("char_equip_spell__%d", i);
-        CCString *strUseCount = CCString::createWithFormat("char_usecount__%d", i);
+        CCString *strHP = cocos2d::CCString::createWithFormat("char_hp__%d", i);
+        CCString *strDart = cocos2d::CCString::createWithFormat("char_dart__%d", i);
+        CCString *strContract = cocos2d::CCString::createWithFormat("char_contract__%d", i);
+        CCString *strEquipDart = cocos2d::CCString::createWithFormat("char_equip_dart__%d", i);
+        CCString *strEquipBlade = cocos2d::CCString::createWithFormat("char_equip_blade__%d", i);
+        CCString *strEquipSpell = cocos2d::CCString::createWithFormat("char_equip_spell__%d", i);
+        CCString *strUseCount = cocos2d::CCString::createWithFormat("char_usecount__%d", i);
         char_hp[i] = gtReadInt(dic, strHP->getCString(), 0);
         char_dart[i] = gtReadInt(dic, strDart->getCString(), 0);
         if( i == 0 )
@@ -319,7 +319,7 @@ void GameRecord::read(CCDictionary* dic)
     //读取升级数据
     for( int i=0; i<GAME_UPGRADECOUNT; ++i)
     {
-        CCString *key = CCString::createWithFormat("item_upgrade__%d", i);
+        CCString *key = cocos2d::CCString::createWithFormat("item_upgrade__%d", i);
         item_upgrade[i] = gtReadInt(dic, key->getCString(), 0);
     }
     //读取游戏运行数据
@@ -334,7 +334,7 @@ void GameRecord::read(CCDictionary* dic)
     //load iap flags
     for(int i=0; i<IAP_COUNT; ++i)
     {
-        CCString *key = CCString::createWithFormat("iap_flags__%d", i);
+        CCString *key = cocos2d::CCString::createWithFormat("iap_flags__%d", i);
         iap_flag[i] = gtReadInt(dic, key->getCString(), 0);
     }
     
@@ -347,15 +347,15 @@ void GameRecord::read(CCDictionary* dic)
     lb_playername->retain();
     for( int i=0; i<LB_RANK; ++i)
     {
-        CCString *strNameKey = CCString::createWithFormat("lead_name__%d", i);
-        CCString *strScoreKey = CCString::createWithFormat("lead_score__%d", i);
+        CCString *strNameKey = cocos2d::CCString::createWithFormat("lead_name__%d", i);
+        CCString *strScoreKey = cocos2d::CCString::createWithFormat("lead_score__%d", i);
         lb_names[i]->release();
         lb_names[i] = gtReadString(dic, strNameKey->getCString(), LB_EMPITY);
         lb_names[i]->retain();
         lb_scores[i] = gtReadInt(dic, strScoreKey->getCString(), 0);
         //--- load arcade leader board
-        CCString *strArcadeNameKey = CCString::createWithFormat("leada_name__%d", i);
-        CCString *strArcadeScoreKey = CCString::createWithFormat("leada_score__%d", i);
+        CCString *strArcadeNameKey = cocos2d::CCString::createWithFormat("leada_name__%d", i);
+        CCString *strArcadeScoreKey = cocos2d::CCString::createWithFormat("leada_score__%d", i);
         lba_names[i]->release();
         lba_names[i] = gtReadString(dic, strArcadeNameKey->getCString(), LB_EMPITY);
         lba_names[i]->retain();
@@ -392,13 +392,13 @@ void GameRecord::write(rapidjson::Document &document)
     //写入角色数据
     for( int i=0; i<GAME_CHARCOUNT; ++i)
     {
-        CCString *strHP = CCString::createWithFormat("char_hp__%d", i);
-        CCString *strDart = CCString::createWithFormat("char_dart__%d", i);
-        CCString *strContract = CCString::createWithFormat("char_contract__%d", i);
-        CCString *strEquipDart = CCString::createWithFormat("char_equip_dart__%d", i);
-        CCString *strEquipBlade = CCString::createWithFormat("char_equip_blade__%d", i);
-        CCString *strEquipSpell = CCString::createWithFormat("char_equip_spell__%d", i);
-        CCString *strUseCount = CCString::createWithFormat("char_usecount__%d", i);
+        CCString *strHP = cocos2d::CCString::createWithFormat("char_hp__%d", i);
+        CCString *strDart = cocos2d::CCString::createWithFormat("char_dart__%d", i);
+        CCString *strContract = cocos2d::CCString::createWithFormat("char_contract__%d", i);
+        CCString *strEquipDart = cocos2d::CCString::createWithFormat("char_equip_dart__%d", i);
+        CCString *strEquipBlade = cocos2d::CCString::createWithFormat("char_equip_blade__%d", i);
+        CCString *strEquipSpell = cocos2d::CCString::createWithFormat("char_equip_spell__%d", i);
+        CCString *strUseCount = cocos2d::CCString::createWithFormat("char_usecount__%d", i);
         document.AddMember(strHP->getCString(), char_hp[i], document.GetAllocator());
         document.AddMember(strDart->getCString(), char_dart[i], document.GetAllocator());
         document.AddMember(strContract->getCString(), char_contract[i], document.GetAllocator());
@@ -410,7 +410,7 @@ void GameRecord::write(rapidjson::Document &document)
     //写入升级数据
     for( int i=0; i<GAME_UPGRADECOUNT; ++i)
     {
-        CCString *key = CCString::createWithFormat("item_upgrade__%d", i);
+        CCString *key = cocos2d::CCString::createWithFormat("item_upgrade__%d", i);
         document.AddMember(key->getCString(), item_upgrade[i], document.GetAllocator());
     }
     //写入游戏运行信息
@@ -425,7 +425,7 @@ void GameRecord::write(rapidjson::Document &document)
     //write iap flags
     for(int i=0; i<IAP_COUNT; ++i)
     {
-        CCString *key = CCString::createWithFormat("iap_flags__%d", i);
+        CCString *key = cocos2d::CCString::createWithFormat("iap_flags__%d", i);
         document.AddMember(key->getCString(), iap_flag[i], document.GetAllocator());
     }
     
@@ -433,13 +433,13 @@ void GameRecord::write(rapidjson::Document &document)
     document.AddMember("lead_playername", lb_playername, document.GetAllocator());
     for( int i=0; i<LB_RANK; ++i)
     {
-        CCString *strNameKey = CCString::createWithFormat("lead_name__%d", i);
-        CCString *strScoreKey = CCString::createWithFormat("lead_score__%d", i);
+        CCString *strNameKey = cocos2d::CCString::createWithFormat("lead_name__%d", i);
+        CCString *strScoreKey = cocos2d::CCString::createWithFormat("lead_score__%d", i);
         document.AddMember(strNameKey->getCString(), lb_names[i], document.GetAllocator());
         document.AddMember(strScoreKey->getCString(), lb_scores[i], document.GetAllocator());
         //--- write arcade leaderboards
-        CCString *strArcadeNameKey = CCString::createWithFormat("leada_name__%d", i);
-        CCString *strArcadeScoreKey = CCString::createWithFormat("leada_score__%d", i);
+        CCString *strArcadeNameKey = cocos2d::CCString::createWithFormat("leada_name__%d", i);
+        CCString *strArcadeScoreKey = cocos2d::CCString::createWithFormat("leada_score__%d", i);
         document.AddMember(strArcadeNameKey->getCString(), lb_names[i], document.GetAllocator());
         document.AddMember(strArcadeScoreKey->getCString(), lb_scores[i], document.GetAllocator());
     }
@@ -451,7 +451,7 @@ void GameRecord::write(rapidjson::Document &document)
     collection->writeCollections(document);
 }
 
-void GameRecord::setLocalPlayerName(CCString * name) 
+void GameRecord::setLocalPlayerName(cocos2d::CCString * name) 
 {
     lb_playername->release();
     lb_playername = name;

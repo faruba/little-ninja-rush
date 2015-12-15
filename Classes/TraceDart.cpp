@@ -12,7 +12,7 @@
 
 
 
-TraceDart* TraceDart::dart(CCPoint pos, CCPoint dir) 
+TraceDart* TraceDart::dart(cocos2d::Point pos, cocos2d::Point dir) 
 {
     TraceDart *ret = TraceDart::create();
     ret->mPos = pos;
@@ -22,11 +22,11 @@ TraceDart* TraceDart::dart(CCPoint pos, CCPoint dir)
 
 void TraceDart::onCreate() 
 {
-    mSprite = CCSprite::createWithSpriteFrameName("xfshuriken.png");
-    mSprite->setAnchorPoint(ccp(0.5f, 0.5f));
+    mSprite = cocos2d::CCSprite::createWithSpriteFrameName("xfshuriken.png");
+    mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     mSprite->setPosition(mPos);
-    CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-    CCRepeatForever* rf = CCRepeatForever::create(rb);
+    CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+    CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
     mSprite->runAction(rf);
     GamePlay::sharedGamePlay()->addChild(mSprite, LAYER_MAINROLE+1);
     
@@ -72,11 +72,11 @@ void TraceDart::onUpdate(float delta)
         //跟踪
         if( traced != NULL )
         {
-            CCPoint rdir = ccpSub(traced->center(), mSprite->getPosition());
+            cocos2d::Point rdir = ccpSub(traced->center(), mSprite->getPosition());
             float angle = ccpAngleSigned(mDir, rdir);
             if( angle == angle )
             {
-                float limit = CC_DEGREES_TO_RADIANS(180.0f*delta);
+                float limit = cocos2d::CC_DEGREES_TO_RADIANS(180.0f*delta);
                 if( fabsf(angle) <= limit )
                 {
                     mDir = ccpNormalize(rdir);
@@ -96,8 +96,8 @@ void TraceDart::onUpdate(float delta)
         }
     }
     //飞行
-    CCPoint ds = ccpMult(mDir, 400.0f*delta);
-    CCPoint np = ccpAdd(ds, mSprite->getPosition());
+    cocos2d::Point ds = ccpMult(mDir, 400.0f*delta);
+    cocos2d::Point np = ccpAdd(ds, mSprite->getPosition());
     mSprite->setPosition(np);
     //伤害判定
   CCObject* node = NULL;
@@ -109,16 +109,16 @@ void TraceDart::onUpdate(float delta)
             bool hit = em->deliverHit(HIT_MAGIC, mDir);
             if( hit )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
                 GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
-                hiteff->setAnchorPoint(ccp(0.5f, 0.5f));
+                hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
                 hiteff->setPosition(em->center());
                 //hiteff->setRotation(90 - CC_RADIANS_TO_DEGREES( ccpToAngle(direction) ));
                 hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(mDir) ) + 60*CCRANDOM_0_1());
                 play->addChild(hiteff, LAYER_MAINROLE+1);
                 
                 GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
-                hiteff2->setAnchorPoint(ccp(0.5f, 0.5f));
+                hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
                 hiteff2->setPosition(em->center());
                 play->addChild(hiteff2, LAYER_ROLE);
             }

@@ -3,7 +3,7 @@
 
 void GTLoadSpriteSheet(const char* param, bool isload)
 {
-    CCSpriteFrameCache *cache = CCSpriteFrameCache::sharedSpriteFrameCache();
+    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     if( isload )
     {
         CCLog("load spritesheet (%s)", param);
@@ -43,7 +43,7 @@ LoadItem* LoadItem::itemWithInfo(const char * param, loadfunc func)
     ret->loadmethod = func;
     if( param != NULL )
     {
-        ret->stringparam = CCString::create(param);
+        ret->stringparam = cocos2d::CCString::create(param);
         ret->stringparam->retain();
     }
     return ret;
@@ -66,7 +66,7 @@ GTLoadList* GTLoadList::list()
 
 bool GTLoadList::init()
 {
-  mList = CCArray::create();
+  mList = cocos2d::CCArray::create();
   mList->retain();
   mLoadIndex = -1;
   return true;
@@ -95,7 +95,7 @@ int GTLoadList::loadSome()
         CCTime::gettimeofdayCocos2d(&al, NULL);
         
         //cost += al-bl;
-        cost += CCTime::timersubCocos2d(&bl, &al)/1000.0;
+        cost += cocos2d::CCTime::timersubCocos2d(&bl, &al)/1000.0;
         mLoadIndex++;
     }
     return mList->count() - mLoadIndex;

@@ -8,7 +8,7 @@
 #include "rapidjson/prettywriter.h"
 #include "rapidjson/filestream.h"
 
-USING_NS_CC;
+;
 USING_NS_CC_EXT;
 
 class Collections:public CCObject
@@ -25,7 +25,7 @@ public:
   static Collections* sharedCollections();
 
   void createCollections();
-  void readCollections(CCDictionary* dic);
+  void readCollections(cocos2d::CCDictionary* dic);
   void writeCollections(rapidjson::Document &document);
   void mergeWith(Collections* collection);
 

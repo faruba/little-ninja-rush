@@ -10,11 +10,11 @@ class PumpkinFire:
 {
   public:
     CREATE_FUNC(PumpkinFire);
-    static PumpkinFire* dart(CCPoint pos, CCPoint dir, CCNode* parent);
+    static PumpkinFire* dart(cocos2d::Point pos, cocos2d::Point dir, CCNode* parent);
 
     virtual bool isEnemy();
-    virtual CCPoint position();
-    virtual void onHitback(CCPoint origin);
+    virtual cocos2d::Point position();
+    virtual void onHitback(cocos2d::Point origin);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
@@ -27,8 +27,8 @@ class PumpkinFire:
     bool mRemoved;
 
     int type;
-    CCPoint direction;
-    CCPoint pos;
+    cocos2d::Point direction;
+    cocos2d::Point pos;
     float speed;
 
 

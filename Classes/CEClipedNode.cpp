@@ -1,11 +1,11 @@
 #include "CEClipedNode.h"
 #include "UniversalFit.h"
 
-void CEClipedNode::setClipRect(CCRect *rect)
+void CEClipedNode::setClipRect(cocos2d::CCRect *rect)
 {
   if (NULL == rect) return;
     
-  float factor = CCDirector::sharedDirector()->getContentScaleFactor();
+  float factor = cocos2d::CCDirector::sharedDirector()->getContentScaleFactor();
   clipRectInPixel = *rect;
   clipRectInPixel.origin.x *= factor;
   clipRectInPixel.origin.y *= factor;

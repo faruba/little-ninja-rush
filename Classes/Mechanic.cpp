@@ -22,9 +22,9 @@ void Mechanic::onCreate()
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("mechanic"));
-    mSprite->setAnchorPoint(ccp(0.4f, 0.0625f));
-    int y = CCRANDOM_0_1()*RESPAWN_Y;
-    mSprite->setPosition(ccp(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
+    mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
+    int y = cocos2d::CCRANDOM_0_1()*RESPAWN_Y;
+    mSprite->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
     mSprite->playGTAnimation(0, true);
     play->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
     
@@ -40,7 +40,7 @@ void Mechanic::onUpdate(float delta)
     if( mState < 3 && play->gameOverTimer >= 0 )
     {//主角死亡的处理
         float ds = delta*(play->levelspeed - play->runspeed);
-        CCPoint np = mSprite->getPosition();
+        cocos2d::Point np = mSprite->getPosition();
         np.x += ds;
         mSprite->setPosition(np);
     }
@@ -53,7 +53,7 @@ void Mechanic::onUpdate(float delta)
                     mTimer -= delta;
                 }
                 float ds = mSpeed*delta;
-                CCPoint np = mSprite->getPosition();
+                cocos2d::Point np = mSprite->getPosition();
                 np.x -= ds;
                 mSprite->setPosition(np);
                 //may attack
@@ -94,7 +94,7 @@ void Mechanic::onUpdate(float delta)
                     mTimer -= delta;
                     if( mTimer <= 0 )
                     {
-                        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
+                        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
                     }
                 }
                 if( mTimer <= 0 )
@@ -102,8 +102,8 @@ void Mechanic::onUpdate(float delta)
                     if( mCount < MECHANIC_LAUNCH )
                     {
                         //launch dart
-                        CCPoint dir = ccpForAngle(CC_DEGREES_TO_RADIANS(-90-MECHANIC_ANGLE+CCRANDOM_0_1()*MECHANIC_ANGLE*2));
-                        play->darts->addObject(play->manager->addGameObject(Dart::dart(CCString::create("dart.png"), this->center(), dir, -6, play)));
+                        cocos2d::Point dir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(-90-MECHANIC_ANGLE+CCRANDOM_0_1()*MECHANIC_ANGLE*2));
+                        play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), dir, -6, play)));
                         mTimer = MECHANIC_LAUNCHCD;
                         mCount++;
                     }
@@ -120,7 +120,7 @@ void Mechanic::onUpdate(float delta)
                 {
                     //fix pos
                     float ds = delta*play->runspeed;
-                    CCPoint np = mSprite->getPosition();
+                    cocos2d::Point np = mSprite->getPosition();
                     np.x -= ds;
                     mSprite->setPosition(np);
                     
@@ -136,11 +136,11 @@ void Mechanic::onUpdate(float delta)
                     if(mTimer>0.3f && mFlag)
                     {
                         int n = 1 + randomInt(3);
-                        SimpleAudioEngine::sharedEngine()->playEffect(CCString::createWithFormat("ahh%d.mp3", n)->getCString());
+                        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCString::createWithFormat("ahh%d.mp3", n)->getCString());
                         mFlag = false;
                     }
                     //fix pos
-                    CCPoint np = mSprite->getPosition();
+                    cocos2d::Point np = mSprite->getPosition();
                     float ra = mTimer/mSprite->playBackTime();
                     if( ra > 1 )
                     {
@@ -164,7 +164,7 @@ void Mechanic::onUpdate(float delta)
     if( play->state == STATE_RUSH )
     {
         float offset = (play->runspeed - play->levelspeed)*delta;
-        CCPoint np = mSprite->getPosition();
+        cocos2d::Point np = mSprite->getPosition();
         np.x -= offset;
         mSprite->setPosition(np);
     }
@@ -178,7 +178,7 @@ void Mechanic::onUpdate(float delta)
 }
 
 //碰撞检测
-bool Mechanic::collisionWithCircle(CCPoint cc, float rad) 
+bool Mechanic::collisionWithCircle(cocos2d::Point cc, float rad) 
 {
     if( mState == 3 )
     {
@@ -198,18 +198,18 @@ bool Mechanic::collisionWithCircle(CCPoint cc, float rad)
 }
 
 //受到伤害
-bool Mechanic::deliverHit(int type, CCPoint dir) 
+bool Mechanic::deliverHit(int type, cocos2d::Point dir) 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     
     if( dir.x > 0 && type == HIT_DART )
     {
         //block darts
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
         
         GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
         hiteff2->setScale(0.5f);
-        hiteff2->setAnchorPoint(ccp(0.5f, 0.5f));
+        hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
         hiteff2->setPosition(ccpAdd(center(), ccpMult(dir, -17)));
         play->addChild(hiteff2, LAYER_MAINROLE+1);
         
@@ -262,17 +262,17 @@ bool Mechanic::deliverHit(int type, CCPoint dir)
     return false;
 }
 
-CCPoint Mechanic::position() 
+cocos2d::Point Mechanic::position() 
 {
     return mSprite->getPosition();
 }
 
-void Mechanic::setPosition(CCPoint pos) 
+void Mechanic::setPosition(cocos2d::Point pos) 
 {
     mSprite->setPosition(pos);
 }
 
-CCPoint Mechanic::center() 
+cocos2d::Point Mechanic::center() 
 {
     return ccpAdd(mSprite->getPosition(), ccp(9, 20));
 }

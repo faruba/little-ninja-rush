@@ -14,7 +14,7 @@ class Star:
   public GameObject
 {
   public:
-    static Star* star(CCPoint pos, CCPoint dir);
+    static Star* star(cocos2d::Point pos, cocos2d::Point dir);
 
     CREATE_FUNC(Star);
 
@@ -23,8 +23,8 @@ class Star:
     virtual void onDestroy();
 
     CCSprite *mSprite;
-    CCPoint mPos;
-    CCPoint mDir;
+    cocos2d::Point mPos;
+    cocos2d::Point mDir;
 
 
 };

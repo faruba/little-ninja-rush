@@ -15,8 +15,8 @@ class TimedTrigger:
 {
   public:
     CREATE_FUNC(TimedTrigger);
-    static TimedTrigger* triggerWithDelay(CCNode* target, SEL_CallFunc selector, float delay);
-    static TimedTrigger* triggerWithCycle(CCNode* target, SEL_CallFunc selector, float cycle, int times);
+    static TimedTrigger* triggerWithDelay(cocos2d::CCNode* target, SEL_CallFunc selector, float delay);
+    static TimedTrigger* triggerWithCycle(cocos2d::CCNode* target, SEL_CallFunc selector, float cycle, int times);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);

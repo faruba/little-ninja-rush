@@ -5,7 +5,7 @@
 class Msg:public CCObject
 {
   public:
-    static Msg* msg(CCNode* tar, SEL_CallFuncND sel, CCObject* obj);
+    static Msg* msg(cocos2d::CCNode* tar, SEL_CallFuncND sel, CCObject* obj);
     CREATE_FUNC(Msg);
     virtual bool init(){return true;};
     
@@ -29,7 +29,7 @@ class MessageManager:public GameObject{
 
 
     void clearMsg();
-    void pushMsg(CCNode* target, SEL_CallFuncND sel, CCObject* obj);
+    void pushMsg(cocos2d::CCNode* target, SEL_CallFuncND sel, CCObject* obj);
 
 };
 #endif

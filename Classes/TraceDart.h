@@ -15,7 +15,7 @@ class TraceDart:
   public GameObject
 {
   public:
-    static TraceDart* dart(CCPoint pos, CCPoint dir);
+    static TraceDart* dart(cocos2d::Point pos, cocos2d::Point dir);
 
     CREATE_FUNC(TraceDart);
 
@@ -24,8 +24,8 @@ class TraceDart:
     virtual void onDestroy();
 
     CCSprite *mSprite;
-    CCPoint mPos;
-    CCPoint mDir;
+    cocos2d::Point mPos;
+    cocos2d::Point mDir;
     float   mTraceTimer;
 
     GOHandler mTrace;

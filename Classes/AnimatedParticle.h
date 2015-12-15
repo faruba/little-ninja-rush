@@ -20,8 +20,8 @@ class AnimatedParticle:public GameObject
   private:
     CCNode *mParent;
     GTAnimatedSprite *mSprite;
-    CCPoint mDir;
-    CCPoint mPos;
+    cocos2d::Point mDir;
+    cocos2d::Point mPos;
     float mSpeed;
     float mLife;
     float mRotate;
@@ -38,12 +38,12 @@ class AnimatedParticle:public GameObject
 
   public:
 
-    static AnimatedParticle* particleCoinUI(CCPoint pos, int di, CCNode* parent);
-    static AnimatedParticle* particleCoin(CCPoint pos, int di);
-    static AnimatedParticle* particleDeadSlide(CCPoint pos);
-    static AnimatedParticle* particleButterfly(CCPoint pos);
-    static AnimatedParticle* particleDart(CCPoint pos, CCPoint dir, int typ);
-    static AnimatedParticle* particleStepWater(CCPoint pos);
+    static AnimatedParticle* particleCoinUI(cocos2d::Point pos, int di, CCNode* parent);
+    static AnimatedParticle* particleCoin(cocos2d::Point pos, int di);
+    static AnimatedParticle* particleDeadSlide(cocos2d::Point pos);
+    static AnimatedParticle* particleButterfly(cocos2d::Point pos);
+    static AnimatedParticle* particleDart(cocos2d::Point pos, cocos2d::Point dir, int typ);
+    static AnimatedParticle* particleStepWater(cocos2d::Point pos);
 
     bool init();
     CREATE_FUNC(AnimatedParticle);

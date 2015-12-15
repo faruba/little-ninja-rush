@@ -18,7 +18,7 @@
 #include "BombDart.h"
 
 #include "PumpkinCircle.h"
-MainRole* MainRole::role(CCNode* parent) 
+MainRole* MainRole::role(cocos2d::CCNode* parent) 
 {
   MainRole *mr = MainRole::create();
   mr->mRoleId = GameRecord::sharedGameRecord()->curr_char;
@@ -64,7 +64,7 @@ void MainRole::onCreate()
     bladeCD *= 0.5f;
   }
 
-  mSprite->setAnchorPoint(ccp(0.4f, 0.0625f));
+  mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
   mSprite->setPosition(mAIPos);
 
   if( mRoleId == 3 && mShadowCounter > 0 )
@@ -151,7 +151,7 @@ void MainRole::setEquipSpell(int tid)
   activeSP = sp->spac;
 }
 
-void MainRole::setAI(int ai, CCPoint pos) 
+void MainRole::setAI(int ai, cocos2d::Point pos) 
 {
   mAI = ai;
   mAIPos = pos;
@@ -162,7 +162,7 @@ void MainRole::setAI(int ai, CCPoint pos)
   }
 }
 
-void MainRole::fire(CCPoint dir) 
+void MainRole::fire(cocos2d::Point dir) 
 {
   if( flag_dart )
   {
@@ -173,10 +173,10 @@ void MainRole::fire(CCPoint dir)
   }
 }
 
-void MainRole::commitFire(CCNode* p, CCNode* pdata) 
+void MainRole::commitFire(cocos2d::CCNode* p, CCNode* pdata) 
 {
   Vector2d* param = (Vector2d*)pdata;
-  CCPoint dir = param->value;
+  cocos2d::Point dir = param->value;
   GamePlay *play = GamePlay::sharedGamePlay();
   bool fake = false;
   if( play->mainrole2 != NULL && this == play->mainrole2 )
@@ -209,10 +209,10 @@ void MainRole::commitFire(CCNode* p, CCNode* pdata)
     play->darts->addObject(play->manager->addGameObject(d));
     if( dartEffect == 3 )
     {
-      SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/shuriken-laser.mp3").c_str());
+      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/shuriken-laser.mp3").c_str());
     }
     else {
-      SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/throw.mp3").c_str());
+      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/throw.mp3").c_str());
     }
     if( dir.x < 0 )
     {
@@ -314,8 +314,8 @@ void MainRole::commitSlice()
   if( mBlade == NULL )
   {
     mBlade = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("blade"));
-    mBlade->setAnchorPoint(ccp( 0.5f, 0.5f));
-    mBlade->setPosition(ccp( 35, 40 ));
+    mBlade->setAnchorPoint(cocos2d::ccp( 0.5f, 0.5f));
+    mBlade->setPosition(cocos2d::ccp( 35, 40 ));
     mSprite->addChild(mBlade, LAYER_MAINROLE+1);
   }
   mBlade->playGTAnimation(bladeAnim, false);
@@ -398,7 +398,7 @@ void MainRole::commitSlice()
     {
       bouns += ARCADE_BOUNS_DART*(i+1);
     }
-    CCPoint pos = this->center();
+    cocos2d::Point pos = this->center();
     pos.y += 25;
     play->arcade->addScore(bouns, pos);
   }
@@ -414,7 +414,7 @@ void MainRole::commitSlice()
       hit = true;
 
       GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 28, false);
-      hiteff->setAnchorPoint(ccp(0.5f, 0.5f));
+      hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
       hiteff->setPosition(em->center());
       hiteff->setRotation(90);
       play->addChild(hiteff, LAYER_MAINROLE+1);
@@ -431,17 +431,17 @@ void MainRole::commitSlice()
 
   if( hit )
   {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
     play->scheduleSpeed(0, EXP_HITSLOW, 0);
 
     GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 3, false);
-    eff->setAnchorPoint(ccp( 0.5f, 0));
+    eff->setAnchorPoint(cocos2d::ccp( 0.5f, 0));
     eff->setPosition(center());
     mParent->addChild(eff, LAYER_MAINROLE+1);
   }
 }
 
-void MainRole::spell(CCPoint param) 
+void MainRole::spell(cocos2d::Point param) 
 {
   if( flag_spell )
   {
@@ -454,7 +454,7 @@ void MainRole::spell(CCPoint param)
 
 void MainRole::commitSpell(Vector2d* dir) 
 {
-  CCPoint param = dir->value;
+  cocos2d::Point param = dir->value;
   GamePlay *play = GamePlay::sharedGamePlay();
   if( SP >= activeSP && !play->spelling )
   {
@@ -477,14 +477,14 @@ void MainRole::commitSpell(Vector2d* dir)
           {
             spelled = true;
             SP -= activeSP;
-            GameScript::sharedScript()->invokeSpellRelease(CCInteger::create(SPELL_TRIDARTS));
+            GameScript::sharedScript()->invokeSpellRelease(cocos2d::CCInteger::create(SPELL_TRIDARTS));
           }
         }
         break;
       case SPELL_REPLEACE:
         {//替身术
           this->attachEffect("effect", 5, false, true);
-          SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/smoke.mp3").c_str());
+          SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/smoke.mp3").c_str());
           //-------
           mSprite->setVisible(false);
           play->count_control++;
@@ -496,7 +496,7 @@ void MainRole::commitSpell(Vector2d* dir)
       case SPELL_MOONBLADE:
         {//月牙斩
           mSprite->playGTAnimation(3, false);
-          GameScript::sharedScript()->invokeSpellRelease(CCInteger::create(SPELL_MOONBLADE));
+          GameScript::sharedScript()->invokeSpellRelease(cocos2d::CCInteger::create(SPELL_MOONBLADE));
           SP -= activeSP;
           spelled = true;
         }
@@ -520,9 +520,9 @@ void MainRole::commitSpell(Vector2d* dir)
         {//回旋手里剑
           SP -= activeSP;
           float angle = 30 + CCRANDOM_0_1()*120;
-          CCPoint dir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle));
+          cocos2d::Point dir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle));
           play->manager->addGameObject(TraceDart::dart(this->center(), dir));
-          SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
+          SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
           spelled = true;
         }
         break;
@@ -530,9 +530,9 @@ void MainRole::commitSpell(Vector2d* dir)
         {//反弹手里剑
           SP -= activeSP;
           float angle = 30 + CCRANDOM_0_1()*120;
-          CCPoint dir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle));
+          cocos2d::Point dir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle));
           play->manager->addGameObject(ReflectDart::dart(this->center(), dir));
-          SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
+          SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
           spelled = true;
         }
         break;
@@ -546,7 +546,7 @@ void MainRole::commitSpell(Vector2d* dir)
       case SPELL_EVILBLADE:
         {//妖刀
           SP -= activeSP;
-          GameScript::sharedScript()->invokeSpellRelease(CCInteger::create(SPELL_EVILBLADE));
+          GameScript::sharedScript()->invokeSpellRelease(cocos2d::CCInteger::create(SPELL_EVILBLADE));
           spelled = true;
         }
         break;
@@ -555,7 +555,7 @@ void MainRole::commitSpell(Vector2d* dir)
           SP -= activeSP;
           //选择优目标点
           int hs = 0;
-          CCPoint pos = ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, RESPAWN_YMIN + RESPAWN_Y/2);
+          cocos2d::Point pos = ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, RESPAWN_YMIN + RESPAWN_Y/2);
           CCObject *node = NULL;
           CCARRAY_FOREACH(play->enemies, node)
           {
@@ -579,7 +579,7 @@ void MainRole::commitSpell(Vector2d* dir)
               hs = s;
             }
           }
-          CCPoint dir = ccpNormalize(ccpSub(pos, this->center()));
+          cocos2d::Point dir = ccpNormalize(ccpSub(pos, this->center()));
           play->manager->addGameObject(BombDart::dart(this->center(), dir));
           spelled = true;
         }
@@ -602,14 +602,14 @@ void MainRole::commitSpell(Vector2d* dir)
             this->timedInvincible(DASH_TIME);
             spelled = true;
 
-            SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/dash.mp3").c_str());
+            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/dash.mp3").c_str());
           }
         }
         break;
       case SPELL_PUMPKINIMPS:
         {//pumpkin imps
           SP -= activeSP;
-          GameScript::sharedScript()->invokeSpellRelease(CCInteger::create(SPELL_PUMPKINIMPS));
+          GameScript::sharedScript()->invokeSpellRelease(cocos2d::CCInteger::create(SPELL_PUMPKINIMPS));
           spelled = true;
         }
         break;
@@ -747,9 +747,9 @@ void MainRole::onUpdate(float delta)
     {
       //play effect
       GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 8, false);
-      eff->setPosition(ccp( 31, 18));
+      eff->setPosition(cocos2d::ccp( 31, 18));
       mSprite->addChild(eff);
-      SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/blade_ready.mp3").c_str());
+      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/blade_ready.mp3").c_str());
     }
   }
   //武藏专用
@@ -760,9 +760,9 @@ void MainRole::onUpdate(float delta)
     {
       //play effect
       GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 8, false);
-      eff->setPosition(ccp( 31, 18));
+      eff->setPosition(cocos2d::ccp( 31, 18));
       mSprite->addChild(eff);
-      SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/blade_ready.mp3").c_str());
+      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/blade_ready.mp3").c_str());
     }
   }
 
@@ -808,7 +808,7 @@ void MainRole::onUpdate(float delta)
   }
   if( mSpeed != 0 )
   {
-    CCPoint np = mSprite->getPosition();
+    cocos2d::Point np = mSprite->getPosition();
     np.x += mSpeed*delta;
     if( np.x > runmax )
     {
@@ -834,7 +834,7 @@ void MainRole::onUpdate(float delta)
   {
     float ds = delta*runSpeed;
     float dis = mAIPos.x - mSprite->getPosition().x;
-    CCPoint np = mSprite->getPosition();
+    cocos2d::Point np = mSprite->getPosition();
     if( fabsf(dis) > ds )
     {
       if( dis > 0 )
@@ -858,12 +858,12 @@ void MainRole::onUpdate(float delta)
     {
       //            float k = (PLAY_GOSLIDETIME - play->gameOverTimer)/PLAY_GOSLIDETIME;
       //            float ds = k*runSpeed*delta/2;
-      //            CCPoint np = mSprite->getPosition();
+      //            cocos2d::Point np = mSprite->getPosition();
       //            np.x += ds;
       // MainRole::mSprite->setPosition( np);
       if( playend && randomInt(100) < 40 && play->tiles->currentScene() != 4 )
       {
-        CCPoint np = this->center();
+        cocos2d::Point np = this->center();
         np.y = PLAY_PLAYERLINE + 5;
         play->manager->addGameObject(AnimatedParticle::particleDeadSlide(np));
       }
@@ -1008,7 +1008,7 @@ void MainRole::customAction(int key)
 }
 
 //碰撞检测
-bool MainRole::collisionWithCircle(CCPoint cc, float rad) 
+bool MainRole::collisionWithCircle(cocos2d::Point cc, float rad) 
 {
   if( HP < 0 )
   {
@@ -1063,7 +1063,7 @@ void MainRole::onHitClassic(int type)
     }
 
     //sound
-    CCString *hit = CCString::createWithFormat("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
+    CCString *hit = cocos2d::CCString::createWithFormat("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
     SimpleAudioEngine::sharedEngine()->playEffect(hit->getCString());
 
     //achievement wounded
@@ -1081,7 +1081,7 @@ void MainRole::onHitClassic(int type)
     mSprite->playGTAnimation(6, false);
 
     //sound
-    CCString *hit = CCString::createWithFormat("die-%d.mp3", mRoleId);
+    CCString *hit = cocos2d::CCString::createWithFormat("die-%d.mp3", mRoleId);
     SimpleAudioEngine::sharedEngine()->playEffect(hit->getCString());
 
     //achievement death
@@ -1137,7 +1137,7 @@ void MainRole::onHitArcade(int type)
   }
 
   //sound
-  CCString *hit = CCString::createWithFormat("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
+  CCString *hit = cocos2d::CCString::createWithFormat("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
   SimpleAudioEngine::sharedEngine()->playEffect(hit->getCString());
 
   //achievement wounded
@@ -1151,7 +1151,7 @@ void MainRole::onHitArcade(int type)
 }
 
 //受到伤害
-bool MainRole::deliverHit(int type, CCPoint dir) 
+bool MainRole::deliverHit(int type, cocos2d::Point dir) 
 {
   GamePlay *play = GamePlay::sharedGamePlay();
   if( HP <= 0 )
@@ -1186,7 +1186,7 @@ bool MainRole::deliverHit(int type, CCPoint dir)
   return true;
 }
 
-CCPoint MainRole::position() 
+cocos2d::Point MainRole::position() 
 {
   if( mSprite == NULL )
   {
@@ -1197,7 +1197,7 @@ CCPoint MainRole::position()
   }
 }
 
-void MainRole::setPosition(CCPoint pos) 
+void MainRole::setPosition(cocos2d::Point pos) 
 {
   mSprite->setPosition(pos);
 }
@@ -1207,7 +1207,7 @@ void MainRole::setShadowSpeed(float speed)
   mGhost->setMoveSpeed(speed);
 }
 
-CCPoint MainRole::center() 
+cocos2d::Point MainRole::center() 
 {
   if( mRoleId == 2 )
   {
@@ -1233,12 +1233,12 @@ void MainRole::attachEffect(const char * aniset, int aniid, bool loop, bool toro
   GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet(aniset), aniid, loop);
   if( toroot )
   {
-    eff->setAnchorPoint(ccp(0.4f, 0.0625f));
+    eff->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
     eff->setPosition(position());
     mParent->addChild(eff, LAYER_MAINROLE+1);
   }
   else {
-    eff->setPosition(ccp( 9, 20));
+    eff->setPosition(cocos2d::ccp( 9, 20));
     mSprite->addChild(eff);
   }
 }
@@ -1267,7 +1267,7 @@ bool MainRole::cancelMain2()
     this->attachEffect("effect", 5, false, true);
     if( this == play->mainrole )
     {
-      CCPoint np = play->mainrole2->position();
+      cocos2d::Point np = play->mainrole2->position();
       play->mainrole->setAI(2, np);
     }
     //删除第二个角色

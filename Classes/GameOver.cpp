@@ -21,7 +21,7 @@
 
 
 
-GameOver* GameOver::gameOver(CCNode* parent) 
+GameOver* GameOver::gameOver(cocos2d::CCNode* parent) 
 {
     GameOver *ret = GameOver::create();
     ret->mParent = parent;
@@ -33,8 +33,8 @@ void GameOver::updateClassic()
     GamePlay *play = GamePlay::sharedGamePlay();
     
     int dm = play->distance/PLAY_DISMETER;
-    mDistance->setString(CCString::createWithFormat("%dm", dm)->getCString());
-    mCoins->setString(CCString::createWithFormat("%d", play->coins)->getCString());
+    mDistance->setString(cocos2d::CCString::createWithFormat("%dm", dm)->getCString());
+    mCoins->setString(cocos2d::CCString::createWithFormat("%d", play->coins)->getCString());
     
     //get coins
     GameRecord::sharedGameRecord()->makeCoins(play->coins);
@@ -76,8 +76,8 @@ void GameOver::updateClassic()
         
         mDailyIcon->setVisible(true);
         Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
-        CCSprite *icon = CCSprite::createWithSpriteFrameName(ach->icon->getCString());
-        icon->setPosition(ccp(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+        icon->setPosition(cocos2d::ccp(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mDailyIcon->addChild(icon);
     }
     else {
@@ -92,8 +92,8 @@ void GameOver::updateClassic()
         
         mWeeklyIcon->setVisible(true);
         Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
-        CCSprite *icon = CCSprite::createWithSpriteFrameName(ach->icon->getCString());
-        icon->setPosition(ccp(mWeeklyIcon->getContentSize().width/2, mWeeklyIcon->getContentSize().height/2));
+        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+        icon->setPosition(cocos2d::ccp(mWeeklyIcon->getContentSize().width/2, mWeeklyIcon->getContentSize().height/2));
         mWeeklyIcon->addChild(icon);
     }
     else {
@@ -108,8 +108,8 @@ void GameOver::updateClassic()
         
         mMonthlyIcon->setVisible(true);
         Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
-        CCSprite *icon = CCSprite::createWithSpriteFrameName(ach->icon->getCString());
-        icon->setPosition(ccp(mMonthlyIcon->getContentSize().width/2, mMonthlyIcon->getContentSize().height/2));
+        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+        icon->setPosition(cocos2d::ccp(mMonthlyIcon->getContentSize().width/2, mMonthlyIcon->getContentSize().height/2));
         mMonthlyIcon->addChild(icon);
     }
     else {
@@ -119,27 +119,27 @@ void GameOver::updateClassic()
     //update crown
     for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
     {
-        CCSprite *crown = CCSprite::createWithSpriteFrameName(CCString::createWithFormat("crown%d.png", i)->getCString());
-        crown->setPosition(ccp(32-16*i, 0));
+        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+        crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mDailyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective->index; ++i)
     {
-        CCSprite *crown = CCSprite::createWithSpriteFrameName(CCString::createWithFormat("crown%d.png", i)->getCString());
-        crown->setPosition(ccp(32-16*i, 0));
+        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+        crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mWeeklyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective->index; ++i)
     {
-        CCSprite *crown = CCSprite::createWithSpriteFrameName(CCString::createWithFormat("crown%d.png", i)->getCString());
-        crown->setPosition(ccp(32-16*i, 0));
+        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+        crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mMonthlyCrown->addChild(crown);
     }
     
     //---- No.1 ----
     if( GameRecord::sharedGameRecord()->lb_scores[0] > 0 )
     {
-        mLeadLb0->setString(CCString::createWithFormat("%dm", GameRecord::sharedGameRecord()->lb_scores[0])->getCString());
+        mLeadLb0->setString(cocos2d::CCString::createWithFormat("%dm", GameRecord::sharedGameRecord()->lb_scores[0])->getCString());
     }
     else {
         mLeadLb0->setString("-");
@@ -147,7 +147,7 @@ void GameOver::updateClassic()
     //---- No.2 ----
     if( GameRecord::sharedGameRecord()->lb_scores[1] > 0 )
     {
-        mLeadLb1->setString(CCString::createWithFormat("%dm", GameRecord::sharedGameRecord()->lb_scores[1])->getCString());
+        mLeadLb1->setString(cocos2d::CCString::createWithFormat("%dm", GameRecord::sharedGameRecord()->lb_scores[1])->getCString());
     }
     else {
         mLeadLb1->setString("-");
@@ -155,7 +155,7 @@ void GameOver::updateClassic()
     //---- No.3 ----
     if( GameRecord::sharedGameRecord()->lb_scores[2] > 0 )
     {
-        mLeadLb2->setString(CCString::createWithFormat("%dm", GameRecord::sharedGameRecord()->lb_scores[2])->getCString());
+        mLeadLb2->setString(cocos2d::CCString::createWithFormat("%dm", GameRecord::sharedGameRecord()->lb_scores[2])->getCString());
     }
     else {
         mLeadLb2->setString("-");
@@ -167,7 +167,7 @@ void GameOver::updateArcade()
     GamePlay *play = GamePlay::sharedGamePlay();
     int score = play->arcade->score;
 
-    mArcadeScore->setString(CCString::createWithFormat("%d", score)->getCString());
+    mArcadeScore->setString(cocos2d::CCString::createWithFormat("%d", score)->getCString());
     switch (play->arcade->cup) {
         case 0:
         {
@@ -177,19 +177,19 @@ void GameOver::updateArcade()
         case 1:
         {
             mCup->setVisible(true);
-            mCup->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-bronze.png"));
+            mCup->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-bronze.png"));
         }
             break;
         case 2:
         {
             mCup->setVisible(true);
-            mCup->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-silver.png"));
+            mCup->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-silver.png"));
         }
             break;
         case 3:
         {
             mCup->setVisible(true);
-            mCup->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-gold.png"));
+            mCup->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-gold.png"));
         }
             break;
     }
@@ -222,8 +222,8 @@ void GameOver::updateArcade()
         }
         else
         {//not completed
-            mGoldScore->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->score)->getCString());
-            mGoldPrize->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->prize)->getCString());
+            mGoldScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->score)->getCString());
+            mGoldPrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->prize)->getCString());
         }
     }
     //silver
@@ -237,8 +237,8 @@ void GameOver::updateArcade()
         }
         else
         {//not completed
-            mSilverScore->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->score)->getCString());
-            mSilverPrize->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->prize)->getCString());
+            mSilverScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->score)->getCString());
+            mSilverPrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->prize)->getCString());
         }
     }
     //bronze
@@ -252,8 +252,8 @@ void GameOver::updateArcade()
         }
         else
         {//not completed
-            mBronzeScore->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score)->getCString());
-            mBronzePrize->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize)->getCString());
+            mBronzeScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score)->getCString());
+            mBronzePrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize)->getCString());
         }
     }
     
@@ -261,7 +261,7 @@ void GameOver::updateArcade()
     //---- No.1 ----
     if( GameRecord::sharedGameRecord()->lba_scores[0] > 0 )
     {
-        mLeadLb0->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->lba_scores[0])->getCString());
+        mLeadLb0->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->lba_scores[0])->getCString());
     }
     else {
         mLeadLb0->setString("-");
@@ -269,7 +269,7 @@ void GameOver::updateArcade()
     //---- No.2 ----
     if( GameRecord::sharedGameRecord()->lba_scores[1] > 0 )
     {
-        mLeadLb1->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->lba_scores[1])->getCString());
+        mLeadLb1->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->lba_scores[1])->getCString());
     }
     else {
         mLeadLb1->setString("-");
@@ -277,7 +277,7 @@ void GameOver::updateArcade()
     //---- No.3 ----
     if( GameRecord::sharedGameRecord()->lba_scores[2] > 0 )
     {
-        mLeadLb2->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->lba_scores[2])->getCString());
+        mLeadLb2->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->lba_scores[2])->getCString());
     }
     else {
         mLeadLb2->setString("-");
@@ -299,21 +299,21 @@ void GameOver::onCreate()
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(0, 0, 0), 128, 0);
 
-    CCNodeLoaderLibrary *pNodeLib = CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
+    CCNodeLoaderLibrary *pNodeLib = cocos2d::CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
     CCBReader *pReader = new CCBReader(pNodeLib, this, this);
     mNode = pReader->readNodeGraphFromFile("ui-gameover.ccbi", this);
     //mNode = createUIByCCBI("ui-gameover.ccb", "CoinsMenu", GameOverLoader::loader(), this);
     pReader->release();
-    mNode->setPosition(ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
+    mNode->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
     mParent->addChild(mNode, LAYER_MASK+1);
     
     //1.2.0 SinaWeibo
     if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() )
     {
       /*
-        mTwitter->setNormalSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gowb.png"));
-        mTwitter->setSelectedSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gowb2.png"));
-        mTwitterAction->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gowb3.png"));
+        mTwitter->setNormalSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gowb.png"));
+        mTwitter->setSelectedSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gowb2.png"));
+        mTwitterAction->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gowb3.png"));
         */
     }
     
@@ -321,26 +321,26 @@ void GameOver::onCreate()
     switch (GameRecord::sharedGameRecord()->curr_char) {
         case 0:
         {
-            mChange->setNormalImage(CCSprite::createWithSpriteFrameName("go_change1.png"));
-            mChange->setSelectedImage(CCSprite::createWithSpriteFrameName("go_change2.png"));
+            mChange->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change1.png"));
+            mChange->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change2.png"));
         }
             break;
         case 1:
         {
-            mChange->setNormalImage(CCSprite::createWithSpriteFrameName("go_change3.png"));
-            mChange->setSelectedImage(CCSprite::createWithSpriteFrameName("go_change4.png"));
+            mChange->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change3.png"));
+            mChange->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change4.png"));
         }
             break;
         case 2:
         {
-            mChange->setNormalImage(CCSprite::createWithSpriteFrameName("go_change5.png"));
-            mChange->setSelectedImage(CCSprite::createWithSpriteFrameName("go_change6.png"));
+            mChange->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change5.png"));
+            mChange->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change6.png"));
         }
             break;
         case 3:
         {
-            mChange->setNormalImage(CCSprite::createWithSpriteFrameName("go_change7.png"));
-            mChange->setSelectedImage(CCSprite::createWithSpriteFrameName("go_change8.png"));
+            mChange->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change7.png"));
+            mChange->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change8.png"));
         }
             break;
     }
@@ -348,13 +348,13 @@ void GameOver::onCreate()
     //update Play Again
     if( GameRecord::sharedGameRecord()->char_contract[play->roleId] > 0 )
     {
-        mPlayAgain->setNormalImage(CCSprite::createWithSpriteFrameName("go_pa1.png"));
-        mPlayAgain->setSelectedImage(CCSprite::createWithSpriteFrameName("go_pa2.png"));
+        mPlayAgain->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("go_pa1.png"));
+        mPlayAgain->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("go_pa2.png"));
         mCost = 0;
     }
     else {
-        mPlayAgain->setNormalImage(CCSprite::createWithSpriteFrameName("go_pa1x.png"));
-        mPlayAgain->setSelectedImage(CCSprite::createWithSpriteFrameName("go_pa2x.png"));
+        mPlayAgain->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("go_pa1x.png"));
+        mPlayAgain->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("go_pa2x.png"));
         mCost = 100;
     }
     
@@ -428,7 +428,7 @@ void GameOver::onDestroy()
 
 void GameOver::onChange() 
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     GamePlay *play = GamePlay::sharedGamePlay();
     play->change();
 }
@@ -436,19 +436,19 @@ void GameOver::onChange()
 void GameOver::onMenu() 
 {
     
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     GamePlay *play = GamePlay::sharedGamePlay();
     play->exit();
 }
 
 void GameOver::onRestart() 
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     if( GameRecord::sharedGameRecord()->coins >= mCost )
     {
         if( mCost > 0 )
         {
-            SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
             CCLog("cost=%d", mCost);
         }
         GameRecord::sharedGameRecord()->makeCoins(-mCost);
@@ -456,7 +456,7 @@ void GameOver::onRestart()
         play->restart();
     }
     else {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
     }
 }
 
@@ -466,14 +466,14 @@ void GameOver::onFacebook()
 //    {
 //        mPostingFacebook = true;
 //        
-//        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
+//        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
 //        
 //        //do some facebook actions
 //        
-//        mFacebookAction->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("ftloading.png"));
+//        mFacebookAction->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("ftloading.png"));
 //        mFacebookAction->stopAllActions();
-//        CCRotateBy *rb = CCRotateBy::create(1, 360);
-//        CCRepeatForever *rf = CCRepeatForever::create(rb);
+//        CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 360);
+//        CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
 //        mFacebookAction->runAction(rf);
 //    }
 }
@@ -484,7 +484,7 @@ void GameOver::onTwitter()
 //    {
 //        mPostingTwitter = true;
 //        
-//        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
+//        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
 //        AppController *del = (AppController*)UIApplication->sharedApplication().delegate;
 //        
 //        bool sina = UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo();
@@ -492,12 +492,12 @@ void GameOver::onTwitter()
 //        if( sina )
 //        {
 //            social = ABSocial->feedOnSinaWeibo();
-//            social.text = CCString::createWithFormat("刚刚在#LittleNinjaRush#的标准模式中跑了%dm，谁来挑战！", mScore);;
+//            social.text = cocos2d::CCString::createWithFormat("刚刚在#LittleNinjaRush#的标准模式中跑了%dm，谁来挑战！", mScore);;
 //        }
 //        else
 //        {
 //            social = ABSocial->feedOnTwitter();
-//            social.text = CCString::createWithFormat("I have just got %dm in #LittleNinjaRush, beat that!", mScore);
+//            social.text = cocos2d::CCString::createWithFormat("I have just got %dm in #LittleNinjaRush, beat that!", mScore);
 //        }
 //        /*
 //        social.image = makeScreenshot();
@@ -507,10 +507,10 @@ void GameOver::onTwitter()
 //        social->present(del.navController);
 //        */
 //        
-//        mTwitterAction->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("ftloading.png"));
+//        mTwitterAction->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("ftloading.png"));
 //        mTwitterAction->stopAllActions();
-//        CCRotateBy *rb = CCRotateBy::create(1, 360);
-//        CCRepeatForever *rf = CCRepeatForever::create(rb);
+//        CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 360);
+//        CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
 //        mTwitterAction->runAction(rf);
 //    }
 }
@@ -541,19 +541,19 @@ bool GameOver::haveTwitterCoins()
     return false;
 }
 
-void GameOver::doneFacebook(CCInteger* res) 
+void GameOver::doneFacebook(cocos2d::CCInteger* res) 
 {
 //    int result = res->intValue();
 //    mPostingFacebook = false;
 //    
 //    mFacebookAction->stopAllActions();
 //    mFacebookAction->setRotation(0);
-//    mFacebookAction->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gofb3.png"));
+//    mFacebookAction->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gofb3.png"));
 //    
 //    if( this->haveFacebookCoins() && result > 0 )
 //    {
 //        GameRecord::sharedGameRecord()->makeCoins(100);
-//        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3");
+//        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3");
 //        GameRecord::sharedGameRecord()->share_facebook = NSDate->date()->timeIntervalSince1970();
 //        GameRecord::sharedGameRecord()->checkPoint();
 //        
@@ -562,7 +562,7 @@ void GameOver::doneFacebook(CCInteger* res)
 //    }
 }
 
-void GameOver::doneTwitter(CCInteger* res) 
+void GameOver::doneTwitter(cocos2d::CCInteger* res) 
 {
 //    int result = res->intValue();
 //    mPostingTwitter = false;
@@ -571,17 +571,17 @@ void GameOver::doneTwitter(CCInteger* res)
 //    mTwitterAction->setRotation(0);
 //    if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() )
 //    {
-//        mTwitterAction->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gowb3.png"));
+//        mTwitterAction->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gowb3.png"));
 //    }
 //    else
 //    {
-//        mTwitterAction->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gott3.png"));
+//        mTwitterAction->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gott3.png"));
 //    }
 //    
 //    if( this->haveTwitterCoins() && result > 0 )
 //    {
 //        GameRecord::sharedGameRecord()->makeCoins(100);
-//        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3");
+//        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3");
 //        GameRecord::sharedGameRecord()->share_twitter = NSDate->date()->timeIntervalSince1970();
 //        GameRecord::sharedGameRecord()->checkPoint();
 //        
@@ -591,7 +591,7 @@ void GameOver::doneTwitter(CCInteger* res)
 }
 
 
-SEL_MenuHandler GameOver::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler GameOver::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
     CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChange", GameOver::onChange);
     CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMenu", GameOver::onMenu);
@@ -602,12 +602,12 @@ SEL_MenuHandler GameOver::onResolveCCBCCMenuItemSelector(CCObject * pTarget, con
     return NULL;
 }
 
-SEL_CCControlHandler GameOver::onResolveCCBCCControlSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_CCControlHandler GameOver::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   CCLog("Control");
   return NULL;
 }
-bool GameOver::onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool GameOver::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
   //CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDistance", CCLabelBMFont *, mDistance);

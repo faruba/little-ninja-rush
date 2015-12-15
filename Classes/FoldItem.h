@@ -4,7 +4,7 @@
 #include "cocos-ext.h"
 #include "cocosbuilder/CocosBuilder.h"
 
-USING_NS_CC;
+;
 USING_NS_CC_EXT;
 
 class FoldItemController
@@ -13,7 +13,9 @@ public:
     virtual void purchase(int cid) = 0;
 };
 
-class FoldItem : public CCNode
+class FoldItem : public cocos2d::CCNode
+
+
 {
   public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(FoldItem, create);
@@ -31,18 +33,18 @@ class FoldItem : public CCNode
   private:
     int mTitle;
     int mIconId;
-    CCString *mDetail;
+    cocos2d::CCString *mDetail;
     int mBtnType;
     bool mIsIAP;
     int mCostNumber;
     //--------------------
-    CCSprite *mIcon;
-    CCMenu *mMenu;
-    CCSprite *mBgButton;
-    CCMenuItemImage *mPurchase;
-    CCNode *mCost;
-    CCSprite *mTitleSp;
-    CCLabelTTF *mDetailSp;
+   cocos2d::CCSpritee *mIcon;
+    cocos2d::CCMenu *mMenu;
+    cocos2d::CCSprite *mBgButton;
+    cocos2d::CCMenuItemImage *mPurchase;
+   cocos2d::CCNodee *mCost;
+    cocos2d::CCSprite *mTitleSp;
+    cocos2d::LabelTTF *mDetailSp;
 
     FoldItemController *mController;
     bool mIsAchievement;

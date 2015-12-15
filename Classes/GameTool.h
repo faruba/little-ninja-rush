@@ -17,7 +17,7 @@
 #include <time.h>
 
 USING_NS_CC_EXT;
-USING_NS_CC;
+;
 using namespace CocosDenshion;
 
 #define MAX2(a,b) ((a)>(b))?(b):(a)
@@ -30,10 +30,10 @@ CFAbsoluteTime CFAbsoluteTimeGetCurrent();
 #endif
 
 #define LNR_SCENE_METHOD(T) static CCScene* scene() { \
-    CCScene *ret = CCScene::create(); \
+    CCScene *ret = cocos2d::CCScene::create(); \
     T *tm = T::create(); \
     ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor); \
-    ret->setAnchorPoint(ccp(0, 0)); \
+    ret->setAnchorPoint(cocos2d::ccp(0, 0)); \
     ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset); \
     CEClipedNode *clip = CEClipedNode::create(); \
     clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect)); \
@@ -43,8 +43,8 @@ CFAbsoluteTime CFAbsoluteTimeGetCurrent();
 }
 
 #define LNR_GET_TOUCH_POS \
-    CCPoint pos = touch->getLocationInView(); \
-    pos = CCDirector::sharedDirector()->convertToGL(pos); \
+    cocos2d::Point pos = touch->getLocationInView(); \
+    pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos); \
     pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
 class Scene
@@ -53,7 +53,7 @@ class Scene
    virtual void loadScene() = 0;
    virtual void unloadScene() = 0;
 
-   virtual void createScene(CCNode* bg, CCNode* fbg, CCNode* fg, RingTile* tiles) = 0;
+   virtual void createScene(cocos2d::CCNode* bg, CCNode* fbg, CCNode* fg, RingTile* tiles) = 0;
    virtual void update(float delta) = 0;
    virtual void release() = 0;
 };
@@ -62,22 +62,22 @@ void initRandom(int seed);
 
 int randomInt(int max);
 
-bool exCollisionWithCircles(CCPoint op, float ox, float oy, float r, CCPoint p, float pr);
+bool exCollisionWithCircles(cocos2d::Point op, float ox, float oy, float r, cocos2d::Point p, float pr);
 
-int gtReadInt(CCDictionary *dic, const char *key, int def=0);
+int gtReadInt(cocos2d::CCDictionary *dic, const char *key, int def=0);
 
-float gtReadFloat(CCDictionary *dic, const char *key, float def=0.0f);
+float gtReadFloat(cocos2d::CCDictionary *dic, const char *key, float def=0.0f);
 
-double gtReadDouble(CCDictionary *dic, const char *key, double def=0.0f);
+double gtReadDouble(cocos2d::CCDictionary *dic, const char *key, double def=0.0f);
 
-CCString* gtReadString(CCDictionary *dic, const char *key, CCString *def=NULL);
+CCString* gtReadString(cocos2d::CCDictionary *dic, const char *key, CCString *def=NULL);
 
 void unloadTextureFromeSpriteFrameFile(const char *plist);
 
 //UIImage* makeScreenshot();
 CCSequence *createScaleSequence(float fDuration[], float fScale[], int count);
 CCNode *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, CCObject *target);
-void doSceneIntro(CCNode *&mSceneIntro, CCNode *target);
-CCScene* doSceneOutro(CCScene* mNewScene, CCNode *&mSceneIntro, SEL_CallFunc callBack, CCNode *target);
+void doSceneIntro(cocos2d::CCNode *&mSceneIntro, CCNode *target);
+CCScene* doSceneOutro(cocos2d::CCScene* mNewScene, CCNode *&mSceneIntro, SEL_CallFunc callBack, CCNode *target);
 
 #endif

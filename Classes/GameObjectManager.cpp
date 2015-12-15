@@ -26,11 +26,11 @@ OperationCache* OperationCache::cacheClear()
 
 bool GameObjectManager::init() 
 {
-  mList = CCArray::create();
+  mList = cocos2d::CCArray::create();
   mList->retain();
-  mCache = CCArray::create();
+  mCache = cocos2d::CCArray::create();
   mCache->retain();
-  mFree = CCArray::create();
+  mFree = cocos2d::CCArray::create();
   mFree->retain();
   mCaching = false;
   mAddCount = 0;
@@ -49,7 +49,7 @@ GameObject* GameObjectManager::addGameObject(GameObject* Obj)
     int index = -1;
     if( mFree->count() > 0 )
     {
-      index = ((CCInteger*)(mFree->objectAtIndex(0)))->getValue();
+      index = ((cocos2d::CCInteger*)(mFree->objectAtIndex(0)))->getValue();
       mFree->removeObjectAtIndex(0);
       mList->replaceObjectAtIndex(index, Obj);
     }
@@ -74,11 +74,11 @@ void GameObjectManager::removeGameObject(GameObject* ObjId)
   }
   else {
     unsigned int index = mList->indexOfObject(ObjId);
-    if( index != CC_INVALID_INDEX )
+    if( index != cocos2d::CC_INVALID_INDEX )
     {
       ObjId->onDestroy();
       mList->replaceObjectAtIndex(index, GameObject::dummyObject());
-      CCInteger *num = CCInteger::create(index);
+      CCInteger *num = cocos2d::CCInteger::create(index);
       mFree->addObject(num);
     }
   }
@@ -124,7 +124,7 @@ void GameObjectManager::flushOperation()
             int index = -1;
             if( mFree->count() > 0 )
             {
-              index = ((CCInteger*)mFree->objectAtIndex(0))->getValue();
+              index = ((cocos2d::CCInteger*)mFree->objectAtIndex(0))->getValue();
               mFree->removeObjectAtIndex(0);
               mList->replaceObjectAtIndex(index, oc->opn);
             }
@@ -145,11 +145,11 @@ void GameObjectManager::flushOperation()
             if( todel != NULL )
             {
               unsigned int index = oc->opr.index;
-              if( index != CC_INVALID_INDEX )
+              if( index != cocos2d::CC_INVALID_INDEX )
               {
                 todel->onDestroy();
                 mList->replaceObjectAtIndex(index, GameObject::dummyObject());
-                CCInteger *num = CCInteger::create(index);
+                CCInteger *num = cocos2d::CCInteger::create(index);
                 mFree->addObject(num);
               }
             }

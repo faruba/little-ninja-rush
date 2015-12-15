@@ -7,7 +7,7 @@
 #include "extensions/cocos-ext.h"
 #include "cocosbuilder/CocosBuilder.h"
 
-USING_NS_CC;
+;
 
 /* 此类用于生成GTAnimatedSprite对象 */
 typedef struct{

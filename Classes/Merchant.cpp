@@ -16,7 +16,7 @@
 
 
 
-Merchant* Merchant::role(CCNode * parent) 
+Merchant* Merchant::role(cocos2d::CCNode * parent) 
 {
     Merchant *ret = Merchant::create();
     ret->mParent = parent;
@@ -26,8 +26,8 @@ Merchant* Merchant::role(CCNode * parent)
 void Merchant::onCreate() 
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("merchant"));
-    mSprite->setAnchorPoint(ccp(0.5f , 0));
-    mSprite->setPosition(ccp(-50, PLAY_PLAYERLINE+5));
+    mSprite->setAnchorPoint(cocos2d::ccp(0.5f , 0));
+    mSprite->setPosition(cocos2d::ccp(-50, PLAY_PLAYERLINE+5));
     mSprite->playGTAnimation(0, true);
     mParent->addChild(mSprite, LAYER_MAINROLE-1);
     
@@ -41,7 +41,7 @@ void Merchant::onUpdate(float delta)
     mSprite->updateGTAnimation(delta);
     if( play->state != STATE_MERCHANT )
     {
-        CCPoint np = mSprite->getPosition();
+        cocos2d::Point np = mSprite->getPosition();
         np.x += delta*100.0f;
         mSprite->setPosition(np);
         
@@ -78,22 +78,22 @@ void Merchant::onDestroy()
     mParent->removeChild(mSprite, true);
 }
 
-bool Merchant::collisionWithCircle(CCPoint cc, float rad) 
+bool Merchant::collisionWithCircle(cocos2d::Point cc, float rad) 
 {
     return false;
 }
 
-bool Merchant::deliverHit(int type, CCPoint dir) 
+bool Merchant::deliverHit(int type, cocos2d::Point dir) 
 {
     return false;
 }
 
-CCPoint Merchant::position() 
+cocos2d::Point Merchant::position() 
 {
     return mSprite->getPosition();
 }
 
-CCPoint Merchant::center() 
+cocos2d::Point Merchant::center() 
 {
     return ccpAdd(mSprite->getPosition(), ccp(42.5f, 26.0f));
 }
@@ -108,7 +108,7 @@ void Merchant::toggleVisible(bool flag)
     mSprite->setVisible(flag);
 }
 
-void Merchant::setPosition(CCPoint pos) 
+void Merchant::setPosition(cocos2d::Point pos) 
 {
     mSprite->setPosition(pos);
 }

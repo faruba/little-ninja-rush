@@ -43,19 +43,19 @@ void MerchantPanel::onCreate()
     CCNode *node = pReader->readNodeGraphFromFile("merchant", this);
     pReader->release();
     mMerchantbox = node;
-    mMerchantbox->setPosition(ccp(UniversalFit::sharedUniversalFit()->baseLeft, -SCREEN_HEIGHT));
+    mMerchantbox->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, -SCREEN_HEIGHT));
     play->addChild(mMerchantbox, LAYER_MASK+1);
     
     //animation set
-    CCMoveTo *mt1 = CCMoveTo::create(0.5f, ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
+    CCMoveTo *mt1 = cocos2d::CCMoveTo::create(0.5f, ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
     mMerchantbox->runAction(mt1);
     
-    CCDelayTime *dt2 = CCDelayTime::create(0.5f);
-    CCFadeIn *fi2 = CCFadeIn::create(0.5f);
-    CCSequence *sq2 = CCSequence::create(dt2, fi2, NULL);
+    CCDelayTime *dt2 = cocos2d::CCDelayTime::create(0.5f);
+    CCFadeIn *fi2 = cocos2d::CCFadeIn::create(0.5f);
+    CCSequence *sq2 = cocos2d::CCSequence::create(dt2, fi2, NULL);
     mTalkbox->runAction(sq2);
     
-    mCoins->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+    mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
     //统计还剩多少片
     int shuriken = 0;
     for(int i=ITEM_SHURIKENSTART; i<ITEM_SHURIKENEND; ++i)
@@ -109,48 +109,48 @@ void MerchantPanel::updateBuy1()
 {
     if( mIC1 > 0 )
     {
-        mBuyItem1->setNormalImage(CCSprite::createWithSpriteFrameName("lt_buy.png"));
-        mBuyItem1->setSelectedImage(CCSprite::createWithSpriteFrameName("lt_buy.png"));
+        mBuyItem1->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("lt_buy.png"));
+        mBuyItem1->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("lt_buy.png"));
     }
     else {
-        mBuyItem1->setNormalImage(CCSprite::createWithSpriteFrameName("lt_soldout.png"));
-        mBuyItem1->setSelectedImage(CCSprite::createWithSpriteFrameName("lt_soldout.png"));
+        mBuyItem1->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("lt_soldout.png"));
+        mBuyItem1->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("lt_soldout.png"));
     }
-    mItemCount1->setString(CCString::createWithFormat("%d", mIC1)->getCString());
+    mItemCount1->setString(cocos2d::CCString::createWithFormat("%d", mIC1)->getCString());
 }
 
 void MerchantPanel::updateBuy2() 
 {
     if( mIC2 > 0 )
     {
-        mBuyItem2->setNormalImage(CCSprite::createWithSpriteFrameName("lt_buy.png"));
-        mBuyItem2->setSelectedImage(CCSprite::createWithSpriteFrameName("lt_buy.png"));
+        mBuyItem2->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("lt_buy.png"));
+        mBuyItem2->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("lt_buy.png"));
     }
     else {
-        mBuyItem2->setNormalImage(CCSprite::createWithSpriteFrameName("lt_soldout.png"));
-        mBuyItem2->setSelectedImage(CCSprite::createWithSpriteFrameName("lt_soldout.png"));
+        mBuyItem2->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("lt_soldout.png"));
+        mBuyItem2->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("lt_soldout.png"));
     }
-    mItemCount2->setString(CCString::createWithFormat("%d", mIC2)->getCString());
+    mItemCount2->setString(cocos2d::CCString::createWithFormat("%d", mIC2)->getCString());
 }
 
 void MerchantPanel::updateBuy3() 
 {
     if( mIC3 > 0 )
     {
-        mBuyItem3->setNormalImage(CCSprite::createWithSpriteFrameName("lt_buy.png"));
-        mBuyItem3->setSelectedImage(CCSprite::createWithSpriteFrameName("lt_buy.png"));
+        mBuyItem3->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("lt_buy.png"));
+        mBuyItem3->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("lt_buy.png"));
     }
     else {
-        mBuyItem3->setNormalImage(CCSprite::createWithSpriteFrameName("lt_soldout.png"));
-        mBuyItem3->setSelectedImage(CCSprite::createWithSpriteFrameName("lt_soldout.png"));
+        mBuyItem3->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("lt_soldout.png"));
+        mBuyItem3->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("lt_soldout.png"));
     }
-    mItemCount3->setString(CCString::createWithFormat("%d", mIC3)->getCString());
+    mItemCount3->setString(cocos2d::CCString::createWithFormat("%d", mIC3)->getCString());
 }
 
 //商人系统
 void MerchantPanel::onMerchantClose() 
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     GamePlay* play = GamePlay::sharedGamePlay();
     play->state = STATE_NORMAL;
     play->scheduleMask(ccc3(0, 0, 0), 0.2f, 1);
@@ -158,10 +158,10 @@ void MerchantPanel::onMerchantClose()
     
     if( randomInt(2) == 0)
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/laugh1.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/laugh1.mp3").c_str());
     }
     else {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/laugh2.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/laugh2.mp3").c_str());
     }
     play->manager->removeGameObject(this);
 }
@@ -244,45 +244,45 @@ void MerchantPanel::onMerchantBuy1()
     int cost = gCost[0];
     if( GameRecord::sharedGameRecord()->coins >= cost )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
         this->gainShurikenPiece();
         switch (randomInt(3)) {
             case 0:
             {
-                mTalkText->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text2.png"));
+                mTalkText->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text2.png"));
             }
                 break;
             case 1:
             {
-                mTalkText->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text3.png"));
+                mTalkText->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text3.png"));
             }
                 break;
             case 2:
             {
-                mTalkText->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text4.png"));
+                mTalkText->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text4.png"));
             }
                 break;
         }
         mIC1--;
-        mItemCount1->setString(CCString::createWithFormat("%d", mIC1)->getCString());
+        mItemCount1->setString(cocos2d::CCString::createWithFormat("%d", mIC1)->getCString());
         GameRecord::sharedGameRecord()->makeCoins(-cost);
         GameRecord::sharedGameRecord()->checkPoint();
-        mCoins->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+        mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
         
         mItem1->stopAllActions();
-        CCFadeOut *fo1 = CCFadeOut::create(0.5f);
-        CCFadeIn *fi1 = CCFadeIn::create(0);
-        CCSequence *sq = CCSequence::create(fo1, fi1, NULL);
+        CCFadeOut *fo1 = cocos2d::CCFadeOut::create(0.5f);
+        CCFadeIn *fi1 = cocos2d::CCFadeIn::create(0);
+        CCSequence *sq = cocos2d::CCSequence::create(fo1, fi1, NULL);
         mItem1->runAction(sq);
-        CCScaleTo *st1 = CCScaleTo::create(0.5f, 1.5f);
-        CCScaleTo *st2 = CCScaleTo::create(0, 1);
-        CCSequence *sq2 = CCSequence::create(st1, st2, NULL);
+        CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.5f, 1.5f);
+        CCScaleTo *st2 = cocos2d::CCScaleTo::create(0, 1);
+        CCSequence *sq2 = cocos2d::CCSequence::create(st1, st2, NULL);
         mItem1->runAction(sq2);
         
         this->updateBuy1();
     }
     else {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
     }
 }
 
@@ -295,45 +295,45 @@ void MerchantPanel::onMerchantBuy2()
      int cost = gCost[1];
      if( GameRecord::sharedGameRecord()->coins >= cost )
      {
-         SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+         SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
          this->gainKatanaPiece();
          switch (randomInt(3)) {
              case 0:
              {
-                 mTalkText->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text2.png"));
+                 mTalkText->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text2.png"));
              }
                  break;
              case 1:
              {
-                 mTalkText->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text3.png"));
+                 mTalkText->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text3.png"));
              }
                  break;
              case 2:
              {
-                 mTalkText->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text4.png"));
+                 mTalkText->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text4.png"));
              }
                  break;
          }
          mIC2--;
-         mItemCount2->setString(CCString::createWithFormat("%d", mIC2)->getCString());
+         mItemCount2->setString(cocos2d::CCString::createWithFormat("%d", mIC2)->getCString());
          GameRecord::sharedGameRecord()->makeCoins(-cost);
          GameRecord::sharedGameRecord()->checkPoint();
-         mCoins->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+         mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
          
          mItem2->stopAllActions();
-         CCFadeOut *fo1 = CCFadeOut::create(0.5f);
-         CCFadeIn *fi1 = CCFadeIn::create(0);
-         CCSequence *sq = CCSequence::create(fo1, fi1, NULL);
+         CCFadeOut *fo1 = cocos2d::CCFadeOut::create(0.5f);
+         CCFadeIn *fi1 = cocos2d::CCFadeIn::create(0);
+         CCSequence *sq = cocos2d::CCSequence::create(fo1, fi1, NULL);
          mItem2->runAction(sq);
-         CCScaleTo *st1 = CCScaleTo::create(0.5f, 1.5f);
-         CCScaleTo *st2 = CCScaleTo::create(0, 1);
-         CCSequence *sq2 = CCSequence::create(st1, st2, NULL);
+         CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.5f, 1.5f);
+         CCScaleTo *st2 = cocos2d::CCScaleTo::create(0, 1);
+         CCSequence *sq2 = cocos2d::CCSequence::create(st1, st2, NULL);
          mItem2->runAction(sq2);
          
          this->updateBuy2();
      }
      else {
-         SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+         SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
      }
 }
 
@@ -346,45 +346,45 @@ void MerchantPanel::onMerchantBuy3()
     int cost = gCost[2];
     if( GameRecord::sharedGameRecord()->coins >= cost )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
         this->gainSpecialPiece();
         switch (randomInt(3)) {
             case 0:
             {
-                mTalkText->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text2.png"));
+                mTalkText->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text2.png"));
             }
                 break;
             case 1:
             {
-                mTalkText->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text3.png"));
+                mTalkText->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text3.png"));
             }
                 break;
             case 2:
             {
-                mTalkText->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text4.png"));
+                mTalkText->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text4.png"));
             }
                 break;
         }
         mIC3--;
-        mItemCount3->setString(CCString::createWithFormat("%d", mIC3)->getCString());
+        mItemCount3->setString(cocos2d::CCString::createWithFormat("%d", mIC3)->getCString());
         GameRecord::sharedGameRecord()->makeCoins(-cost);
         GameRecord::sharedGameRecord()->checkPoint();
-        mCoins->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+        mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
         
         mItem3->stopAllActions();
-        CCFadeOut *fo1 = CCFadeOut::create(0.5f);
-        CCFadeIn *fi1 = CCFadeIn::create(0);
-        CCSequence *sq = CCSequence::create(fo1, fi1, NULL);
+        CCFadeOut *fo1 = cocos2d::CCFadeOut::create(0.5f);
+        CCFadeIn *fi1 = cocos2d::CCFadeIn::create(0);
+        CCSequence *sq = cocos2d::CCSequence::create(fo1, fi1, NULL);
         mItem3->runAction(sq);
-        CCScaleTo *st1 = CCScaleTo::create(0.5f, 1.5f);
-        CCScaleTo *st2 = CCScaleTo::create(0, 1);
-        CCSequence *sq2 = CCSequence::create(st1, st2, NULL);
+        CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.5f, 1.5f);
+        CCScaleTo *st2 = cocos2d::CCScaleTo::create(0, 1);
+        CCSequence *sq2 = cocos2d::CCSequence::create(st1, st2, NULL);
         mItem3->runAction(sq2);
         
         this->updateBuy3();
     }
     else {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
     }
 }
 
@@ -393,41 +393,41 @@ void MerchantPanel::onMerchantBuy4()
     int cost = gCost[3];
     if( GameRecord::sharedGameRecord()->coins >= cost )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
         GameRecord::sharedGameRecord()->collection->magic_piece++;
         switch (randomInt(3)) {
             case 0:
             {
-                mTalkText->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text2.png"));
+                mTalkText->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text2.png"));
             }
                 break;
             case 1:
             {
-                mTalkText->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text3.png"));
+                mTalkText->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text3.png"));
             }
                 break;
             case 2:
             {
-                mTalkText->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text4.png"));
+                mTalkText->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text4.png"));
             }
                 break;
         }
         GameRecord::sharedGameRecord()->makeCoins(-cost);
         GameRecord::sharedGameRecord()->checkPoint();
-        mCoins->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+        mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
         
         mItem4->stopAllActions();
-        CCFadeOut *fo1 = CCFadeOut::create(0.5f);
-        CCFadeIn *fi1 = CCFadeIn::create(0);
-        CCSequence *sq = CCSequence::create(fo1, fi1, NULL);
+        CCFadeOut *fo1 = cocos2d::CCFadeOut::create(0.5f);
+        CCFadeIn *fi1 = cocos2d::CCFadeIn::create(0);
+        CCSequence *sq = cocos2d::CCSequence::create(fo1, fi1, NULL);
         mItem4->runAction(sq);
-        CCScaleTo *st1 = CCScaleTo::create(0.5f, 1.5f);
-        CCScaleTo *st2 = CCScaleTo::create(0, 1);
-        CCSequence *sq2 = CCSequence::create(st1, st2, NULL);
+        CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.5f, 1.5f);
+        CCScaleTo *st2 = cocos2d::CCScaleTo::create(0, 1);
+        CCSequence *sq2 = cocos2d::CCSequence::create(st1, st2, NULL);
         mItem4->runAction(sq2);
     }
     else {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
     }
 }
 

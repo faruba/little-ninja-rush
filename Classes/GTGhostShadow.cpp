@@ -41,7 +41,7 @@ void GTGhostShadow::syncShadow(float delta)
     else {
       mCount++;
     }
-    mShadows[newid] = CCSprite::createWithSpriteFrame(mCopy->displayFrame());
+    mShadows[newid] = cocos2d::CCSprite::createWithSpriteFrame(mCopy->displayFrame());
     mShadows[newid]->setAnchorPoint(mCopy->getAnchorPoint());
     mShadows[newid]->setPosition(mCopy->getPosition());
     mShadows[newid]->setScaleX(mCopy->getScaleX());
@@ -61,7 +61,7 @@ void GTGhostShadow::syncShadow(float delta)
       mShadows[one]->setOpacity(p*opacity);
     }
     float offset = mMove*delta;
-    CCPoint np = mShadows[one]->getPosition();
+    cocos2d::Point np = mShadows[one]->getPosition();
     np.x += offset;
     mShadows[one]->setPosition(np);
     //mShadows[one]->setDisplayFrame(mCopy->displayedFrame);//使残影与真身动作一致

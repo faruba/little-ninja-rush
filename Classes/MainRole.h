@@ -8,7 +8,7 @@ class Vector2d:public CCNode
   public:
     virtual bool init() {return true;};
     CREATE_FUNC(Vector2d);
-    CCPoint value;
+    cocos2d::Point value;
 };
 
 class MainRole:
@@ -36,7 +36,7 @@ class MainRole:
     float   mBladeTimer;
     float   mDrainAdder;
     int     mAI;
-    CCPoint mAIPos;
+    cocos2d::Point mAIPos;
     bool    mInvincible;
     //计次开关
     int     mVisibleCounter;
@@ -89,24 +89,24 @@ class MainRole:
     bool flag_spell;
     bool flag_move;
 
-    static MainRole* role(CCNode* parent);
+    static MainRole* role(cocos2d::CCNode* parent);
 
     void setEquipDart(int tid);
     void setEquipBlade(int tid);
     void setEquipSpell(int tid);
 
     //设置角色AI
-    void setAI(int ai, CCPoint pos);
+    void setAI(int ai, cocos2d::Point pos);
     //发射飞镖
-    void fire(CCPoint dir);
+    void fire(cocos2d::Point dir);
     //结算飞镖
-    void commitFire(CCNode* param, CCNode* pdata);
+    void commitFire(cocos2d::CCNode* param, CCNode* pdata);
     //拔刀
     void slice();
     //结算拔刀
     void commitSlice();
     //使用技能
-    void spell(CCPoint param);
+    void spell(cocos2d::Point param);
     //结算技能
     void commitSpell(Vector2d* dir);
     //设置移动标记
@@ -133,11 +133,11 @@ class MainRole:
     //取消分身术
     bool cancelMain2();
 
-    virtual bool collisionWithCircle(CCPoint cc, float rad);
-    virtual bool deliverHit(int type, CCPoint dir);
-    virtual CCPoint position();
-    virtual void setPosition(CCPoint pos);
-    virtual CCPoint center();
+    virtual bool collisionWithCircle(cocos2d::Point cc, float rad);
+    virtual bool deliverHit(int type, cocos2d::Point dir);
+    virtual cocos2d::Point position();
+    virtual void setPosition(cocos2d::Point pos);
+    virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
 

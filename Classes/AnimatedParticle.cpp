@@ -20,7 +20,7 @@ bool AnimatedParticle::init()
     return true;
 }
 
-AnimatedParticle* AnimatedParticle::particleCoinUI(CCPoint pos, int di, CCNode* parent)
+AnimatedParticle* AnimatedParticle::particleCoinUI(cocos2d::Point pos, int di, CCNode* parent)
 {
     AnimatedParticle *ret = AnimatedParticle::create();
     ret->mDir = ccpForAngle(0.628318f*di);
@@ -30,7 +30,7 @@ AnimatedParticle* AnimatedParticle::particleCoinUI(CCPoint pos, int di, CCNode* 
     ret->mSprite->retain();
     ret->mSprite->playGTAnimation(0,false);
     //位置抖动
-    CCPoint diter = ccp( -10 + 20*CCRANDOM_0_1(), -10 + 20*CCRANDOM_0_1() );
+    cocos2d::Point diter = ccp( -10 + 20*CCRANDOM_0_1(), -10 + 20*CCRANDOM_0_1() );
     ret->mSprite->setPosition(ccpAdd(pos, diter));
     ret->mStickScene = false;
     ret->mLayer = LAYER_MAINROLE+1;
@@ -43,7 +43,7 @@ AnimatedParticle* AnimatedParticle::particleCoinUI(CCPoint pos, int di, CCNode* 
     return ret;
 }
 
-AnimatedParticle* AnimatedParticle::particleCoin(CCPoint pos, int di) 
+AnimatedParticle* AnimatedParticle::particleCoin(cocos2d::Point pos, int di) 
 {
     AnimatedParticle *ret = AnimatedParticle::create();
     ret->mDir = ccpForAngle(0.628318f*di);
@@ -53,7 +53,7 @@ AnimatedParticle* AnimatedParticle::particleCoin(CCPoint pos, int di)
     ret->mSprite->retain();
     ret->mSprite->playGTAnimation(0, false);
     //位置抖动
-    CCPoint diter = ccp( -10 + 20*CCRANDOM_0_1(), -10 + 20*CCRANDOM_0_1() );
+    cocos2d::Point diter = ccp( -10 + 20*CCRANDOM_0_1(), -10 + 20*CCRANDOM_0_1() );
     ret->mSprite->setPosition(ccpAdd(pos, diter));
     ret->mStickScene = false;
     ret->mLayer = LAYER_MAINROLE+1;
@@ -66,10 +66,10 @@ AnimatedParticle* AnimatedParticle::particleCoin(CCPoint pos, int di)
     return ret;
 }
 
-AnimatedParticle* AnimatedParticle::particleDeadSlide(CCPoint pos) 
+AnimatedParticle* AnimatedParticle::particleDeadSlide(cocos2d::Point pos) 
 {
     AnimatedParticle *ret = AnimatedParticle::create();
-    ret->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(150 + 30*CCRANDOM_0_1()));
+    ret->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(150 + 30*CCRANDOM_0_1()));
     ret->mLife = 0.5f;
     ret->mSpeed = 100 + 50*CCRANDOM_0_1();
     ret->mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("effect"));
@@ -86,14 +86,14 @@ AnimatedParticle* AnimatedParticle::particleDeadSlide(CCPoint pos)
     return ret;
 }
 
-AnimatedParticle* AnimatedParticle::particleButterfly(CCPoint pos) 
+AnimatedParticle* AnimatedParticle::particleButterfly(cocos2d::Point pos) 
 {
     AnimatedParticle *pat = AnimatedParticle::create();
     pat->mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("misc"));
     pat->mSprite->playGTAnimation(2+randomInt(4) ,true);
     pat->mSprite->setPosition(pos);
     pat->mSprite->retain();
-    pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(180.0f*CCRANDOM_0_1()));
+    pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(180.0f*CCRANDOM_0_1()));
     pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
     pat->mLife = 2.0f + 2.0f*CCRANDOM_0_1();
     pat->mRotate = 0;
@@ -108,16 +108,16 @@ AnimatedParticle* AnimatedParticle::particleButterfly(CCPoint pos)
     return pat;
 }
 
-AnimatedParticle* AnimatedParticle::particleDart(CCPoint pos, CCPoint dir, int typ) 
+AnimatedParticle* AnimatedParticle::particleDart(cocos2d::Point pos, cocos2d::Point dir, int typ) 
 {
     AnimatedParticle *pat = NULL;
-    CCPoint odir = ccpMult(dir, -1);
-    float angle = CC_RADIANS_TO_DEGREES(ccpToAngle(odir));
+    cocos2d::Point odir = ccpMult(dir, -1);
+    float angle = cocos2d::CC_RADIANS_TO_DEGREES(ccpToAngle(odir));
     switch (typ) {
         case 1://金镖
         {
             pat = AnimatedParticle::create();
-            pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle -60 + CCRANDOM_0_1()*120));
+            pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle -60 + CCRANDOM_0_1()*120));
             pat->mLife = 0.3f;
             pat->mSpeed = 100 + 30*CCRANDOM_0_1();
             pat->mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("effect"));
@@ -139,7 +139,7 @@ AnimatedParticle* AnimatedParticle::particleDart(CCPoint pos, CCPoint dir, int t
             pat->mSprite->playGTAnimation(2+randomInt(4) ,true);
             pat->mSprite->setPosition(pos);
             pat->mSprite->retain();
-            pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
+            pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
             pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
             pat->mLife = 1.0f + 1.0f*CCRANDOM_0_1();
             pat->mRotate = 0;
@@ -157,11 +157,11 @@ AnimatedParticle* AnimatedParticle::particleDart(CCPoint pos, CCPoint dir, int t
     return pat;
 }
 
-AnimatedParticle* AnimatedParticle::particleStepWater(CCPoint pos) 
+AnimatedParticle* AnimatedParticle::particleStepWater(cocos2d::Point pos) 
 {
     AnimatedParticle *pat = AnimatedParticle::create();
     pat->mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("misc"));
-    pat->mSprite->setAnchorPoint(ccp(0.5f, 0.25f));
+    pat->mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.25f));
     pat->mSprite->playGTAnimation(6 ,false);
     pat->mSprite->setPosition(pos);
     pat->mSprite->retain();
@@ -203,7 +203,7 @@ void AnimatedParticle::onUpdate(float delta)
     float r = 1.0f - k;
     //move
     float step = mSpeed*mTimer;
-    CCPoint np = ccpAdd(mPos, ccpMult(mDir, step));
+    cocos2d::Point np = ccpAdd(mPos, ccpMult(mDir, step));
     //gravity
     if( mGravityY != 0 )
     {

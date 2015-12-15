@@ -10,7 +10,7 @@ class Scene7: public SceneInterface{
     CREATE_FUNC(Scene7);
     virtual void loadScene();
     virtual void unloadScene();
-    virtual void createScene(CCNode * bg, CCNode * fbg, CCNode * fg, RingTile * tiles); 
+    virtual void createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTile * tiles); 
     virtual void update(float delta);
     virtual void release(){};
 
@@ -51,7 +51,7 @@ class Snow :
     CREATE_FUNC(Snow);
     bool update(float delta, float wind);
 
-    static Snow* snow(CCNode* parent);
+    static Snow* snow(cocos2d::CCNode* parent);
     CCNode *mParent;
     CCSprite *mSprite;
     float mWindX;

@@ -22,8 +22,8 @@ class ObjectiveComplete:
     CREATE_FUNC(ObjectiveComplete);
 
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *, const char*);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject *, const char*);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
+    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);

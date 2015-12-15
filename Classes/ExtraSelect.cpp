@@ -11,10 +11,10 @@
 bool ExtraSelect::init() 
 {
     auto listener = EventListenerTouchOneByOne::create();
-    listener->onTouchBegan = CC_CALLBACK_2(ExtraSelect::onTouchBegan, this);
-    listener->onTouchEnded = CC_CALLBACK_2(ExtraSelect::onTouchEnded, this);
-    listener->onTouchMoved = CC_CALLBACK_2(ExtraSelect::onTouchMoved, this);
-    listener->onTouchCancelled = CC_CALLBACK_2(ExtraSelect::onTouchEnded, this);
+    listener->onTouchBegan = cocos2d::CC_CALLBACK_2(ExtraSelect::onTouchBegan, this);
+    listener->onTouchEnded = cocos2d::CC_CALLBACK_2(ExtraSelect::onTouchEnded, this);
+    listener->onTouchMoved = cocos2d::CC_CALLBACK_2(ExtraSelect::onTouchMoved, this);
+    listener->onTouchCancelled = cocos2d::CC_CALLBACK_2(ExtraSelect::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
     this->setTouchEnabled(true);
@@ -30,7 +30,7 @@ void ExtraSelect::onEnter()
 
 //    if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() )
 //    {
-//        mTwitterBanner->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb10.png"));
+//        mTwitterBanner->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb10.png"));
 //    }
     
     this->setSceneIntro();
@@ -47,7 +47,7 @@ void ExtraSelect::onBack()
 {
     if( !mIntroFlag )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
         setSceneOutro(TitleMenu::scene());
     }
 }
@@ -56,7 +56,7 @@ void ExtraSelect::onAchievement()
 {
     if( !mIntroFlag )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
         setSceneOutro(ExtraMenu::scene(0));
     }
 }
@@ -65,7 +65,7 @@ void ExtraSelect::onCredits()
 {
     if( !mIntroFlag )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
         setSceneOutro(ExtraMenu::scene(2));
     }
 }
@@ -74,7 +74,7 @@ void ExtraSelect::onStatics()
 {
     if( !mIntroFlag )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
         setSceneOutro(ExtraMenu::scene(1));
     }
 }
@@ -83,7 +83,7 @@ void ExtraSelect::onTips()
 {
     if( !mIntroFlag )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
         setSceneOutro(TipsMenu::scene());
     }
 }
@@ -117,7 +117,7 @@ void ExtraSelect::resetButtons()
     mSelect = NULL;
 }
 
-CCSprite* ExtraSelect::checkButton(CCPoint pos) 
+CCSprite* ExtraSelect::checkButton(cocos2d::Point pos) 
 {
     if( mAchievement->getParent()->boundingBox().containsPoint(pos) )
     {
@@ -220,7 +220,7 @@ void ExtraSelect::setSceneIntro()
   doSceneIntro(mSceneIntro, this);
 }
 
-void ExtraSelect::setSceneOutro(CCScene* newscene) 
+void ExtraSelect::setSceneOutro(cocos2d::CCScene* newscene) 
 {
   if( mIntroFlag )
   {
@@ -240,7 +240,7 @@ void ExtraSelect::doneOutro()
 }
 
 
-SEL_MenuHandler ExtraSelect::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler ExtraSelect::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraSelect::onBack)
 
@@ -248,12 +248,12 @@ SEL_MenuHandler ExtraSelect::onResolveCCBCCMenuItemSelector(CCObject * pTarget, 
     return NULL;
 }
 
-SEL_CCControlHandler ExtraSelect::onResolveCCBCCControlSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_CCControlHandler ExtraSelect::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   CCLog("Control");
   return NULL;
 }
-bool ExtraSelect::onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ExtraSelect::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 //  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMask", CCLayerColor*, mMask) 
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mAchievement", CCSprite*, mAchievement)

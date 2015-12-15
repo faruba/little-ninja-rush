@@ -101,25 +101,25 @@ void GameData::loadShurikens()
     }
     gShurikens = new CCArray();
     gShurikens->retain();
-    CCString *data = CCString::createWithContentsOfFile(CCFileUtils::sharedFileUtils()->fullPathForFilename("data/shuriken.json").c_str());
+    CCString *data = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("data/shuriken.json").c_str());
     if( data != NULL )
     {
-        CCArray *parsed = (CCArray*)JsonWrapper::parseJson(data);
+        CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(data);
         CCObject *pObj = NULL;
         CCARRAY_FOREACH(parsed, pObj)
         {
-            CCDictionary *pDic = (CCDictionary*)pObj;
+            CCDictionary *pDic = (cocos2d::CCDictionary*)pObj;
             Shuriken *sh = new Shuriken();
-            sh->uiid = ((CCNumber*)pDic->objectForKey("uiid"))->getInt();
-            sh->titl = (CCString*)pDic->objectForKey("titl");
-            sh->name = (CCString*)pDic->objectForKey("name");
-            sh->desc = (CCString*)pDic->objectForKey("desc");
-            sh->icon = (CCString*)pDic->objectForKey("icon");
-            sh->shap = (CCString*)pDic->objectForKey("shap");
-            sh->flys = ((CCNumber*)pDic->objectForKey("flys"))->getFloat();
-            sh->reld = ((CCNumber*)pDic->objectForKey("reld"))->getFloat();
-            sh->efft = ((CCNumber*)pDic->objectForKey("efft"))->getInt();
-            sh->wght = ((CCNumber*)pDic->objectForKey("wght"))->getFloat();
+            sh->uiid = ((cocos2d::CCNumber*)pDic->objectForKey("uiid"))->getInt();
+            sh->titl = (cocos2d::CCString*)pDic->objectForKey("titl");
+            sh->name = (cocos2d::CCString*)pDic->objectForKey("name");
+            sh->desc = (cocos2d::CCString*)pDic->objectForKey("desc");
+            sh->icon = (cocos2d::CCString*)pDic->objectForKey("icon");
+            sh->shap = (cocos2d::CCString*)pDic->objectForKey("shap");
+            sh->flys = ((cocos2d::CCNumber*)pDic->objectForKey("flys"))->getFloat();
+            sh->reld = ((cocos2d::CCNumber*)pDic->objectForKey("reld"))->getFloat();
+            sh->efft = ((cocos2d::CCNumber*)pDic->objectForKey("efft"))->getInt();
+            sh->wght = ((cocos2d::CCNumber*)pDic->objectForKey("wght"))->getFloat();
             gShurikens->addObject(sh);
         }
         
@@ -140,27 +140,27 @@ void GameData::loadKatanas()
     }
     gKatanas = new CCArray();
     gKatanas->retain();
-    CCString *data = CCString::createWithContentsOfFile(CCFileUtils::sharedFileUtils()->fullPathForFilename("data/katana.json").c_str());
-    //CCString *data = CCString::createWithContentsOfFile(CCFileUtils::sharedFileUtils()->fullPathFromRelativePath("data/katana.json"));
+    CCString *data = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("data/katana.json").c_str());
+    //CCString *data = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathFromRelativePath("data/katana.json"));
     if( data != NULL )
     {
-        CCArray *parsed = (CCArray*)JsonWrapper::parseJson(data);
+        CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(data);
         CCObject *pObj = NULL;
         CCARRAY_FOREACH(parsed, pObj)
         {
-            CCDictionary *pDic = (CCDictionary*)pObj;
+            CCDictionary *pDic = (cocos2d::CCDictionary*)pObj;
             Katana *sh = new Katana();
-            sh->uiid = ((CCNumber*)pDic->objectForKey("uiid"))->getInt();
-            sh->titl = (CCString*)pDic->objectForKey("titl");
-            sh->name = (CCString*)pDic->objectForKey("name");
-            sh->desc = (CCString*)pDic->objectForKey("desc");
-            sh->icon = (CCString*)pDic->objectForKey("icon");
-            sh->anim = ((CCNumber*)pDic->objectForKey("anim"))->getInt();
-            sh->sond = (CCString*)pDic->objectForKey("sond");
-            sh->rang = ((CCNumber*)pDic->objectForKey("rang"))->getFloat();
-            sh->efft = ((CCNumber*)pDic->objectForKey("efft"))->getInt();
-            sh->reld = ((CCNumber*)pDic->objectForKey("reld"))->getFloat();
-            sh->wght = ((CCNumber*)pDic->objectForKey("wght"))->getFloat();
+            sh->uiid = ((cocos2d::CCNumber*)pDic->objectForKey("uiid"))->getInt();
+            sh->titl = (cocos2d::CCString*)pDic->objectForKey("titl");
+            sh->name = (cocos2d::CCString*)pDic->objectForKey("name");
+            sh->desc = (cocos2d::CCString*)pDic->objectForKey("desc");
+            sh->icon = (cocos2d::CCString*)pDic->objectForKey("icon");
+            sh->anim = ((cocos2d::CCNumber*)pDic->objectForKey("anim"))->getInt();
+            sh->sond = (cocos2d::CCString*)pDic->objectForKey("sond");
+            sh->rang = ((cocos2d::CCNumber*)pDic->objectForKey("rang"))->getFloat();
+            sh->efft = ((cocos2d::CCNumber*)pDic->objectForKey("efft"))->getInt();
+            sh->reld = ((cocos2d::CCNumber*)pDic->objectForKey("reld"))->getFloat();
+            sh->wght = ((cocos2d::CCNumber*)pDic->objectForKey("wght"))->getFloat();
             gKatanas->addObject(sh);
         }
         
@@ -181,25 +181,25 @@ void GameData::loadSpecials()
     }
     gSpecials = new CCArray();
     gSpecials->retain();
-    CCString *data = CCString::createWithContentsOfFile(CCFileUtils::sharedFileUtils()->fullPathForFilename("data/special.json").c_str());
+    CCString *data = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("data/special.json").c_str());
     if( data != NULL )
     {
-        CCArray *parsed = (CCArray*)JsonWrapper::parseJson(data);
+        CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(data);
         CCObject *pObj = NULL;
         CCARRAY_FOREACH(parsed, pObj)
         {
-            CCDictionary *pDic = (CCDictionary*)pObj;
+            CCDictionary *pDic = (cocos2d::CCDictionary*)pObj;
             Special *sh = new Special();
-            sh->uiid = ((CCNumber*)pDic->objectForKey("uiid"))->getInt();
-            sh->titl = (CCString*)pDic->objectForKey("titl");
-            sh->name = (CCString*)pDic->objectForKey("name");
-            sh->desc = (CCString*)pDic->objectForKey("desc");
-            sh->icon = (CCString*)pDic->objectForKey("icon");
-            sh->shap = (CCString*)pDic->objectForKey("shap");
-            sh->spmx = ((CCNumber*)pDic->objectForKey("spmx"))->getInt();
-            sh->spac = ((CCNumber*)pDic->objectForKey("spac"))->getInt();
-            sh->skid = ((CCNumber*)pDic->objectForKey("skid"))->getInt();
-            sh->wght = ((CCNumber*)pDic->objectForKey("wght"))->getFloat();
+            sh->uiid = ((cocos2d::CCNumber*)pDic->objectForKey("uiid"))->getInt();
+            sh->titl = (cocos2d::CCString*)pDic->objectForKey("titl");
+            sh->name = (cocos2d::CCString*)pDic->objectForKey("name");
+            sh->desc = (cocos2d::CCString*)pDic->objectForKey("desc");
+            sh->icon = (cocos2d::CCString*)pDic->objectForKey("icon");
+            sh->shap = (cocos2d::CCString*)pDic->objectForKey("shap");
+            sh->spmx = ((cocos2d::CCNumber*)pDic->objectForKey("spmx"))->getInt();
+            sh->spac = ((cocos2d::CCNumber*)pDic->objectForKey("spac"))->getInt();
+            sh->skid = ((cocos2d::CCNumber*)pDic->objectForKey("skid"))->getInt();
+            sh->wght = ((cocos2d::CCNumber*)pDic->objectForKey("wght"))->getFloat();
             gSpecials->addObject(sh);
         }
         
@@ -232,14 +232,14 @@ void GameData::loadTips()
     szFileName = "tips.json";
     CCLog("loading tips.json");
   }
-  data = CCString::createWithContentsOfFile(CCFileUtils::sharedFileUtils()->fullPathForFilename("data/tipschs.json").c_str());
+  data = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("data/tipschs.json").c_str());
   if( data != NULL )
   {
-    CCArray *parsed = (CCArray*)JsonWrapper::parseJson(data);
+    CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(data);
     CCObject *pObj = NULL;
     CCARRAY_FOREACH(parsed, pObj)
     {
-      CCString *pTip = (CCString*)pObj;
+      CCString *pTip = (cocos2d::CCString*)pObj;
       gTips->addObject(pTip);
     }
   }
@@ -254,7 +254,7 @@ CCString* GameData::randomTip()
 {
     srand(time(NULL));
     int n = rand()%gTips->count();
-    return (CCString*)gTips->objectAtIndex(n);
+    return (cocos2d::CCString*)gTips->objectAtIndex(n);
 }
 
 CCArray* GameData::fetchShurikens()

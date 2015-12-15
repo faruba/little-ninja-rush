@@ -12,7 +12,7 @@
 
 
 
-ReflectDart* ReflectDart::dart(CCPoint pos, CCPoint dir) 
+ReflectDart* ReflectDart::dart(cocos2d::Point pos, cocos2d::Point dir) 
 {
     ReflectDart *ret = ReflectDart::create();
     ret->mPos = pos;
@@ -22,11 +22,11 @@ ReflectDart* ReflectDart::dart(CCPoint pos, CCPoint dir)
 
 void ReflectDart::onCreate() 
 {
-    mSprite = CCSprite::createWithSpriteFrameName("tjshuriken.png");
-    mSprite->setAnchorPoint(ccp(0.5f, 0.5f));
+    mSprite = cocos2d::CCSprite::createWithSpriteFrameName("tjshuriken.png");
+    mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     mSprite->setPosition(mPos);
-    CCRotateBy* rb = CCRotateBy::create(0.5f, 720);
-    CCRepeatForever* rf = CCRepeatForever::create(rb);
+    CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+    CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
     mSprite->runAction(rf);
     GamePlay::sharedGamePlay()->addChild(mSprite, LAYER_MAINROLE+1);
     
@@ -78,8 +78,8 @@ void ReflectDart::onUpdate(float delta)
         }
     }
     //飞行
-    CCPoint ds = ccpMult(mDir, 400.0f*delta);
-    CCPoint np = ccpAdd(ds, mSprite->getPosition());
+    cocos2d::Point ds = ccpMult(mDir, 400.0f*delta);
+    cocos2d::Point np = ccpAdd(ds, mSprite->getPosition());
     mSprite->setPosition(np);
     //伤害判定
   CCObject* node = NULL;
@@ -91,16 +91,16 @@ void ReflectDart::onUpdate(float delta)
             bool hit = em->deliverHit(HIT_MAGIC, mDir);
             if( hit )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
                 GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
-                hiteff->setAnchorPoint(ccp(0.5f, 0.5f));
+                hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
                 hiteff->setPosition(em->center());
                 //hiteff->setRotation(90 - CC_RADIANS_TO_DEGREES( ccpToAngle(direction) ));
                 hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(mDir) ) + 60*CCRANDOM_0_1());
                 play->addChild(hiteff, LAYER_MAINROLE+1);
                 
                 GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
-                hiteff2->setAnchorPoint(ccp(0.5f, 0.5f));
+                hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
                 hiteff2->setPosition(em->center());
                 play->addChild(hiteff2, LAYER_ROLE);
             }
@@ -120,7 +120,7 @@ void ReflectDart::onUpdate(float delta)
     }
     if( ref )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
     }
 
     //越界判定

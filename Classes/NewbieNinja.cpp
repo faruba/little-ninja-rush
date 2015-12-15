@@ -8,7 +8,7 @@
 
 
 
-NewbieNinja* NewbieNinja::role(CCNode * parent) 
+NewbieNinja* NewbieNinja::role(cocos2d::CCNode * parent) 
 {
     NewbieNinja *em = NewbieNinja::create();
     em->mParent = parent;
@@ -19,14 +19,14 @@ void NewbieNinja::onCreate()
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("enemy"));
-    mSprite->setAnchorPoint(ccp(0.4f, 0.0625f));
-    int y = CCRANDOM_0_1()*RESPAWN_Y;
+    mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
+    int y = cocos2d::CCRANDOM_0_1()*RESPAWN_Y;
     if( play->state == STATE_RUSH )
     {
-        mSprite->setPosition(ccp(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
+        mSprite->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
     }
     else {
-        mSprite->setPosition(ccp(-100, RESPAWN_YMIN+y));
+        mSprite->setPosition(cocos2d::ccp(-100, RESPAWN_YMIN+y));
     }
     mSprite->playGTAnimation(0, true);
     mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
@@ -47,7 +47,7 @@ void NewbieNinja::onUpdate(float delta)
     if( mState < 5 && play->gameOverTimer >= 0 && mState != 0 )
     {//主角死亡的处理
         float ds = delta*(play->levelspeed - play->runspeed);
-        CCPoint np = mSprite->getPosition();
+        cocos2d::Point np = mSprite->getPosition();
         np.x += ds;
         mSprite->setPosition(np);
     }
@@ -57,7 +57,7 @@ void NewbieNinja::onUpdate(float delta)
         {
             float ds = delta*mSpeed;
             float dis = mTargetPos - mSprite->getPosition().x;
-            CCPoint np = mSprite->getPosition();
+            cocos2d::Point np = mSprite->getPosition();
             if( fabsf(dis) > ds )
             {
                 if( dis > 0 )
@@ -95,7 +95,7 @@ void NewbieNinja::onUpdate(float delta)
                         mSprite->playGTAnimation(6, true);
                         //play effect
                         GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
-                        eff->setPosition(ccp(47, 19));
+                        eff->setPosition(cocos2d::ccp(47, 19));
                         mSprite->addChild(eff);
                     }
                     else {
@@ -128,7 +128,7 @@ void NewbieNinja::onUpdate(float delta)
             break;
         case 3:// shoot
         {
-            CCPoint target = play->mainrole->center();
+            cocos2d::Point target = play->mainrole->center();
             if( play->mainrole2 != NULL )
             {
                 if( randomInt(2) == 0 )
@@ -136,11 +136,11 @@ void NewbieNinja::onUpdate(float delta)
                     target = play->mainrole2->center();
                 }
             }
-            CCPoint dir = ccpNormalize(ccpSub(target, this->center()));
+            cocos2d::Point dir = ccpNormalize(ccpSub(target, this->center()));
             float angle = ccpToAngle(dir);
-            angle += CC_DEGREES_TO_RADIANS(-NNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*NNINJA_ACCURATE)*CCRANDOM_0_1();
+            angle += cocos2d::CC_DEGREES_TO_RADIANS(-NNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*NNINJA_ACCURATE)*CCRANDOM_0_1();
             dir = ccpForAngle(angle);
-            play->darts->addObject(play->manager->addGameObject(Dart::dart(CCString::create("dart.png"), this->center(), dir, -1, mParent)));
+            play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), dir, -1, mParent)));
             mSprite->playGTAnimation(5, false);
             
             if( randomInt(2) == 0 )
@@ -159,7 +159,7 @@ void NewbieNinja::onUpdate(float delta)
             float ds = delta*ENEMY_NNRUNSPEED;
             if( mSprite->getPosition().x > -100 )
             {
-                CCPoint np = mSprite->getPosition();
+                cocos2d::Point np = mSprite->getPosition();
                 np.x -= ds;
                 mSprite->setPosition(np);
             }
@@ -175,7 +175,7 @@ void NewbieNinja::onUpdate(float delta)
             {
                 //fix pos
                 float ds = delta*play->runspeed;
-                CCPoint np = mSprite->getPosition();
+                cocos2d::Point np = mSprite->getPosition();
                 np.x -= ds;
                 mSprite->setPosition(np);
                 
@@ -189,11 +189,11 @@ void NewbieNinja::onUpdate(float delta)
                 if(mTimer>0.3f && mFlag)
                 {
                     int n = 1 + randomInt(3);
-                    SimpleAudioEngine::sharedEngine()->playEffect(CCString::createWithFormat("ahh%d.mp3", n)->getCString());
+                    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCString::createWithFormat("ahh%d.mp3", n)->getCString());
                     mFlag = false;
                 }
                 //fix pos
-                CCPoint np = mSprite->getPosition();
+                cocos2d::Point np = mSprite->getPosition();
                 if( mSprite->animationId() == 3 )
                 {
                     float ra = mTimer/mSprite->playBackTime();
@@ -224,7 +224,7 @@ void NewbieNinja::onUpdate(float delta)
     if( play->state == STATE_RUSH )
     {
         float offset = (play->runspeed - play->levelspeed)*delta;
-        CCPoint np = mSprite->getPosition();
+        cocos2d::Point np = mSprite->getPosition();
         np.x -= offset;
         mSprite->setPosition(np);
     }
@@ -248,7 +248,7 @@ void NewbieNinja::onUpdate(float delta)
 }
 
 //碰撞检测
-bool NewbieNinja::collisionWithCircle(CCPoint cc, float rad) 
+bool NewbieNinja::collisionWithCircle(cocos2d::Point cc, float rad) 
 {
     if( mState == 5 )
     {
@@ -272,7 +272,7 @@ bool NewbieNinja::collisionWithCircle(CCPoint cc, float rad)
 }
 
 //受到伤害
-bool NewbieNinja::deliverHit(int type, CCPoint dir) 
+bool NewbieNinja::deliverHit(int type, cocos2d::Point dir) 
 {
     mTimer = 0;
     if( mState == 5 )
@@ -331,17 +331,17 @@ bool NewbieNinja::deliverHit(int type, CCPoint dir)
     return true;
 }
 
-CCPoint NewbieNinja::position() 
+cocos2d::Point NewbieNinja::position() 
 {
     return mSprite->getPosition();
 }
 
-void NewbieNinja::setPosition(CCPoint pos) 
+void NewbieNinja::setPosition(cocos2d::Point pos) 
 {
     mSprite->setPosition(pos);
 }
 
-CCPoint NewbieNinja::center() 
+cocos2d::Point NewbieNinja::center() 
 {
     return ccpAdd(mSprite->getPosition(), ccp(9, 20));
 }

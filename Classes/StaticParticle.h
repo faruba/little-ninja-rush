@@ -20,7 +20,7 @@ class StaticParticle:public GameObject{
     virtual void onDestroy();
 
     CCSprite *mSprite;
-    CCPoint mDir;
+    cocos2d::Point mDir;
     float mSpeed;
     float mLife;
     float mRotate;
@@ -33,17 +33,17 @@ class StaticParticle:public GameObject{
 
     float mTimer;
 
-    static StaticParticle* particleSakura(CCPoint pos);
-    static StaticParticle* particleIce(CCPoint pos, bool up);
-    static StaticParticle* particleDart(CCPoint pos, CCPoint dir, int typ);
-    static StaticParticle* particleShadow(CCPoint pos);
-    static StaticParticle* particleIceAir(CCPoint pos, bool up);
-    static StaticParticle* particleIcePiece(CCPoint pos, CCPoint dir);
-    static StaticParticle* particleAddHP(CCPoint pos);
-    static StaticParticle* particleDash(CCPoint pos);
-    static StaticParticle* particlePumpkinTail(CCPoint pos, int typ);
+    static StaticParticle* particleSakura(cocos2d::Point pos);
+    static StaticParticle* particleIce(cocos2d::Point pos, bool up);
+    static StaticParticle* particleDart(cocos2d::Point pos, cocos2d::Point dir, int typ);
+    static StaticParticle* particleShadow(cocos2d::Point pos);
+    static StaticParticle* particleIceAir(cocos2d::Point pos, bool up);
+    static StaticParticle* particleIcePiece(cocos2d::Point pos, cocos2d::Point dir);
+    static StaticParticle* particleAddHP(cocos2d::Point pos);
+    static StaticParticle* particleDash(cocos2d::Point pos);
+    static StaticParticle* particlePumpkinTail(cocos2d::Point pos, int typ);
 
-    static StaticParticle* particleStepDust(CCPoint pos);
+    static StaticParticle* particleStepDust(cocos2d::Point pos);
 
 };
 #endif

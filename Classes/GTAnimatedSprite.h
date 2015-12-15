@@ -5,7 +5,7 @@
 #include "cocos-ext.h"
 #include "cocosbuilder/CocosBuilder.h"
 
-USING_NS_CC;
+;
 USING_NS_CC_EXT;
 
 class GTAnimatedSprite : 
@@ -13,7 +13,7 @@ class GTAnimatedSprite :
 {
   public:
     virtual bool init(){return CCSprite::init();};  
-    virtual bool initWithTexture(CCTexture2D * texture, CCRect rect);
+    virtual bool initWithTexture(cocos2d::CCTexture2D * texture, CCRect rect);
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GTAnimatedSprite, create);
 
     static GTAnimatedSprite* spriteWithGTAnimation(GTAnimation * animation);

@@ -87,23 +87,23 @@ void RingTile::initTiles(int * Tiles, int Count)
   if(Count >= mWindowTileCount)
   {
     mWindowSpriteIndex = 0;
-    CCSpriteFrameCache *cache = CCSpriteFrameCache::sharedSpriteFrameCache();
+    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     for(int i=0; i<mWindowTileCount; ++i)
     {
       mpBuffer[i] = Tiles[i];
       //generate ccsprite
       if( mpWindowTiles[i] != NULL )
       {
-        mpWindowTiles[i]->setDisplayFrame(cache->spriteFrameByName(CCString::createWithFormat("tile_%d.png", Tiles[i])->getCString()));
+        mpWindowTiles[i]->setDisplayFrame(cache->spriteFrameByName(cocos2d::CCString::createWithFormat("tile_%d.png", Tiles[i])->getCString()));
       }
       else {
-        mpWindowTiles[i] = CCSprite::createWithSpriteFrameName(CCString::createWithFormat("tile_%d.png", Tiles[i])->getCString());
+        mpWindowTiles[i] = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("tile_%d.png", Tiles[i])->getCString());
         //mpWindowTiles[i]->retain();
         this->addChild(mpWindowTiles[i]);
       }
       mpWindowTiles[i]->getTexture()->setAliasTexParameters();//v1.0.4
-      mpWindowTiles[i]->setPosition(ccp( mTileSize*i, 0));
-      mpWindowTiles[i]->setAnchorPoint(ccp(0, 0));
+      mpWindowTiles[i]->setPosition(cocos2d::ccp( mTileSize*i, 0));
+      mpWindowTiles[i]->setAnchorPoint(cocos2d::ccp(0, 0));
 
     }
     int left = Count - mWindowTileCount;
@@ -165,7 +165,7 @@ void RingTile::runTiles(float delta)
             int si = (mWindowSpriteIndex + i) % mWindowTileCount;
             //加载前n个pending精灵
             int pi = (mWindowIndex + mWindowTileCount + i) % mBufferSize;
-            mpWindowTiles[si]->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("tile_%d.png", mpBuffer[pi])->getCString()));
+            mpWindowTiles[si]->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(cocos2d::CCString::createWithFormat("tile_%d.png", mpBuffer[pi])->getCString()));
             mpWindowTiles[si]->getTexture()->setAliasTexParameters();//1.0.4
         }
         mWindowIndex = (mWindowIndex + n) % mBufferSize;
@@ -181,6 +181,6 @@ void RingTile::runTiles(float delta)
     {
         int si = (mWindowSpriteIndex + i) % mWindowTileCount;
         int off = mAccmulator;
-        mpWindowTiles[si]->setPosition(ccp( mTileSize*i - off, 0));
+        mpWindowTiles[si]->setPosition(cocos2d::ccp( mTileSize*i - off, 0));
     }
 }

@@ -66,27 +66,27 @@ void CommitScroll::onCreate()
     
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(0, 0, 0), 128, 0);
-    CCNodeLoaderLibrary *pNodeLib = CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
+    CCNodeLoaderLibrary *pNodeLib = cocos2d::CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
     CCBReader *pReader = new CCBReader(pNodeLib, this, this);
     mNode = pReader->readNodeGraphFromFile("ui-scroll", this);
     pReader->release();
 
-    mNode->setPosition(ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
+    mNode->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
     play->addChild(mNode, LAYER_MASK+1);
     
     //TODO: 
     //mFlash->blendFunc =  (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };//fix flash bug
     
-    mScrollCount->setString(CCString::createWithFormat("x%d", play->scrolls)->getCString());
+    mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
     mOver = false;
-    CCRotateBy *rb1 = CCRotateBy::create(1, 60);
-    CCRepeatForever *rf1 = CCRepeatForever::create(rb1);
+    CCRotateBy *rb1 = cocos2d::CCRotateBy::create(1, 60);
+    CCRepeatForever *rf1 = cocos2d::CCRepeatForever::create(rb1);
     mRotateCW->runAction(rf1);
-    CCRotateBy *rb2 = CCRotateBy::create(1, -30);
-    CCRepeatForever *rf2 = CCRepeatForever::create(rb2);
+    CCRotateBy *rb2 = cocos2d::CCRotateBy::create(1, -30);
+    CCRepeatForever *rf2 = cocos2d::CCRepeatForever::create(rb2);
     mRotateACW->runAction(rf2);
-    CCRotateBy *rb3 = CCRotateBy::create(1, 20);
-    CCRepeatForever *rf3 = CCRepeatForever::create(rb3);
+    CCRotateBy *rb3 = cocos2d::CCRotateBy::create(1, 20);
+    CCRepeatForever *rf3 = cocos2d::CCRepeatForever::create(rb3);
     mLightBack->runAction(rf3);
     mState = 0;
     mPrize = 0;
@@ -133,12 +133,12 @@ void CommitScroll::onUpdate(float delta)
             CCObject* node = NULL;
             CCARRAY_FOREACH( mRotateCW->getChildren(), node)
             {
-              CCSprite *sp = (CCSprite*)node;
+              CCSprite *sp = (cocos2d::CCSprite*)node;
               sp->setOpacity(op);
             }
             CCARRAY_FOREACH( mRotateACW->getChildren(), node)
             {
-              CCSprite *sp = (CCSprite*)node;
+              CCSprite *sp = (cocos2d::CCSprite*)node;
               sp->setOpacity(op);
             }
             if( mTimer > 1 )
@@ -146,12 +146,12 @@ void CommitScroll::onUpdate(float delta)
                 mLightBack->setOpacity(255);
                 CCARRAY_FOREACH( mRotateCW->getChildren(), node)
                 {
-                  CCSprite *sp = (CCSprite*)node;
+                  CCSprite *sp = (cocos2d::CCSprite*)node;
                   sp->setOpacity(255);
                 }
                 CCARRAY_FOREACH( mRotateACW->getChildren(), node)
                 {
-                  CCSprite *sp = (CCSprite*)node;
+                  CCSprite *sp = (cocos2d::CCSprite*)node;
                   sp->setOpacity(255);
                 }
                 mFlash->setVisible(false);
@@ -166,10 +166,10 @@ void CommitScroll::onUpdate(float delta)
                 }
                 else {
                     mScroll->stopAllActions();
-                    mScroll->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("js_bjzd.png"));
-                    CCScaleTo *sc1 = CCScaleTo::create(0.3f, 1.2f);
-                    CCScaleTo *sc2 = CCScaleTo::create(0.1f, 1.0f);
-                    CCSequence *sq = CCSequence::create(sc1, sc2, NULL);
+                    mScroll->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("js_bjzd.png"));
+                    CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.3f, 1.2f);
+                    CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.1f, 1.0f);
+                    CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
                     mScroll->runAction(sq);
                 }
             }
@@ -184,10 +184,10 @@ void CommitScroll::onUpdate(float delta)
             else {
                 mScroll->setVisible(true);
                 mScroll->stopAllActions();
-                mScroll->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("js_bjzd.png"));
-                CCScaleTo *sc1 = CCScaleTo::create(0.3f, 1.2f);
-                CCScaleTo *sc2 = CCScaleTo::create(0.1f, 1.0f);
-                CCSequence *sq = CCSequence::create(sc1, sc2, NULL);
+                mScroll->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("js_bjzd.png"));
+                CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.3f, 1.2f);
+                CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.1f, 1.0f);
+                CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
                 mScroll->runAction(sq);
             }
         }
@@ -211,10 +211,10 @@ void CommitScroll::onCashIn()
         //achievement cash in
         GameRecord::sharedGameRecord()->task->dispatchTask(ACH_CASHEDIN, play->scrolls);
         
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
         play->coins += play->scrolls*PLAY_SCROLLPRICE;
         play->scrolls = 0;
-        mScrollCount->setString(CCString::createWithFormat("x%d", play->scrolls)->getCString());
+        mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
         mOver = true;
         mOverTimer = 0;
     }
@@ -228,7 +228,7 @@ void CommitScroll::onScroll()
         if( play->scrolls > 0 )
         {
             play->scrolls--;
-            mScrollCount->setString(CCString::createWithFormat("x%d", play->scrolls)->getCString());
+            mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
             
             int prize = this->lottery();
             if( prize == 0 )
@@ -240,18 +240,18 @@ void CommitScroll::onScroll()
             mScroll->stopAllActions();
             if( prize < 2 )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/smoke.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/smoke.mp3").c_str());
                 mEffect->playGTAnimation(5, false);
                 mEffect->setVisible(true);
                 
                 if( prize == 1 )
                 {
                     const char *filename = "prize-1.png";
-                    mScroll->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename));
+                    mScroll->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename));
                     mScroll->setScale(0.01f);
-                    CCScaleTo *sc1 = CCScaleTo::create(0.4f, 1.5f);
-                    CCScaleTo *sc2 = CCScaleTo::create(0.2f, 1.0f);
-                    CCSequence *sq = CCSequence::create(sc1, sc2, NULL);
+                    CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.4f, 1.5f);
+                    CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.2f, 1.0f);
+                    CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
                     mScroll->runAction(sq);
                 }
                 else {
@@ -259,18 +259,18 @@ void CommitScroll::onScroll()
                 }
             }
             else {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/openscroll.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/openscroll.mp3").c_str());
                 mFlash->setVisible(true);
-                CCFadeOut *fo1 = CCFadeOut::create(3);
+                CCFadeOut *fo1 = cocos2d::CCFadeOut::create(3);
                 mFlash->runAction(fo1);
                 mRotateNode->setVisible(true);
                 
-                const char *filename = CCString::createWithFormat("prize-%d.png", prize)->getCString();
-                mScroll->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename));
+                const char *filename = cocos2d::CCString::createWithFormat("prize-%d.png", prize)->getCString();
+                mScroll->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename));
                 mScroll->setScale(0.01f);
-                CCScaleTo *sc1 = CCScaleTo::create(0.4f, 1.5f);
-                CCScaleTo *sc2 = CCScaleTo::create(0.2f, 1.0f);
-                CCSequence *sq = CCSequence::create(sc1, sc2, NULL);
+                CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.4f, 1.5f);
+                CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.2f, 1.0f);
+                CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
                 mScroll->runAction(sq);
             }
             
@@ -284,9 +284,9 @@ void CommitScroll::onScroll()
         this->implementPrize();
         
         mScroll->stopAllActions();
-        CCScaleTo *sc1 = CCScaleTo::create(0.1f, 1.2f);
-        CCScaleTo *sc2 = CCScaleTo::create(0.3f, 0);
-        CCSequence *sq = CCSequence::create(sc1, sc2, NULL);
+        CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.1f, 1.2f);
+        CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.3f, 0);
+        CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
         mScroll->runAction(sq);
         
         mState = 2;
@@ -404,7 +404,7 @@ int CommitScroll::lottery()
     mPrize = prize;
     mItemName->setString(gPrizeItem[mPrize]);
     mItemName->stopAllActions();
-    CCFadeIn *fo = CCFadeIn::create(2);
+    CCFadeIn *fo = cocos2d::CCFadeIn::create(2);
     mItemName->runAction(fo);
     return prize;
 }
@@ -417,32 +417,32 @@ void CommitScroll::implementPrize()
         case 1://Gold 10
         {
             play->coins += 10;
-            SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
         }
             break;
         case 2://Gold 100
         {
             play->coins += 100;
-            SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
         }
             break;
         case 3://Gold 500
         {
             play->coins += 500;
-            SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
         }
             break;
         case 4://Revive
         {
             mReviveFlag = true;
-            SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
+            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
             play->reviveCount++;
         }
             break;
         case 5://x2 Gold Next Run
         {
             GameRecord::sharedGameRecord()->game_doublecoin++;
-            SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
         }
             break;
             
@@ -602,7 +602,7 @@ void CommitScroll::implementPrize()
             //pop notification
             if( GameRecord::sharedGameRecord()->collection->life_piece%9 == 0 )
             {
-                GamePlay::pushNotification(CCString::create("lifeplus.png"), CCString::create("pulife.png"), 4);
+                GamePlay::pushNotification(cocos2d::CCString::create("lifeplus.png"), CCString::create("pulife.png"), 4);
             }
         }
             break;
@@ -612,7 +612,7 @@ void CommitScroll::implementPrize()
             //pop notification
             if( GameRecord::sharedGameRecord()->collection->dart_piece%9 == 0 )
             {
-                GamePlay::pushNotification(CCString::create("dartplus.png"), CCString::create("pushuriken.png"), 4);
+                GamePlay::pushNotification(cocos2d::CCString::create("dartplus.png"), CCString::create("pushuriken.png"), 4);
             }
         }
             break;
@@ -715,7 +715,7 @@ void CommitScroll::onDestroy()
     unloadTextureFromeSpriteFrameFile("ui-scroll.plist");
 }
 
-SEL_MenuHandler CommitScroll::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler CommitScroll::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCashIn", CommitScroll::onCashIn)
   CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onScroll", CommitScroll::onScroll)
@@ -723,12 +723,12 @@ SEL_MenuHandler CommitScroll::onResolveCCBCCMenuItemSelector(CCObject * pTarget,
   return NULL;
 }
 
-SEL_CCControlHandler CommitScroll::onResolveCCBCCControlSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_CCControlHandler CommitScroll::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   CCLog("Control");
   return NULL;
 }
-bool CommitScroll::onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool CommitScroll::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mArrow", CCSprite *, mArrow)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScroll", CCSprite *, mScroll)

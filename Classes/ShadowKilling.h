@@ -18,7 +18,7 @@ class ShadowKilling:
   public:
     CREATE_FUNC(ShadowKilling);
     virtual bool init(){return true;};
-    static ShadowKilling* shadowKilling(CCNode* parent);
+    static ShadowKilling* shadowKilling(cocos2d::CCNode* parent);
 
     void seekTarget();
     virtual void onCreate();

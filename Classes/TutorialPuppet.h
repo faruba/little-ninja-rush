@@ -15,18 +15,18 @@ class TutorialPuppet:
     virtual void onUpdate(float delta);
     virtual void onDestroy();
 
-    virtual bool collisionWithCircle(CCPoint cc, float rad);
-    virtual bool deliverHit(int type, CCPoint dir);
-    virtual CCPoint position();
-    virtual void setPosition(CCPoint pos);
-    virtual CCPoint center();
+    virtual bool collisionWithCircle(cocos2d::Point cc, float rad);
+    virtual bool deliverHit(int type, cocos2d::Point dir);
+    virtual cocos2d::Point position();
+    virtual void setPosition(cocos2d::Point pos);
+    virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
 
     GTAnimatedSprite *mSprite;
     //AI PARAM
     int mState;//0-idle 1-move to 2-fire 3-waitkilled 4-dead
-    CCPoint mTarget;
+    cocos2d::Point mTarget;
     GameObject* mCallback;
     SEL_CallFunc mSelector;
     float mTimer;
@@ -41,9 +41,9 @@ class TutorialPuppet:
 
     //AI CONTROL
     void reset();
-    void setPos(CCPoint pos);
-    void moveTo(CCPoint pos, GameObject* tar, SEL_CallFunc sel);
-    void fireAt(CCPoint pos, GameObject* tar, SEL_CallFunc sel);
+    void setPos(cocos2d::Point pos);
+    void moveTo(cocos2d::Point pos, GameObject* tar, SEL_CallFunc sel);
+    void fireAt(cocos2d::Point pos, GameObject* tar, SEL_CallFunc sel);
     void waitKilled(GameObject* tar, SEL_CallFunc sel);
     void waitCleanup(GameObject* tar, SEL_CallFunc sel);
 };

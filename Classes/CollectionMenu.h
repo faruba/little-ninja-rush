@@ -4,7 +4,7 @@
 #include "cocos-ext.h"
 #include "ABScrollContent.h"
 
-USING_NS_CC;
+;
 USING_NS_CC_EXT;
 
 class CollectionMenu : 
@@ -15,8 +15,8 @@ class CollectionMenu :
   public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *, const char*);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject *, const char*);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
+    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
 
     static CCScene* scene();
     virtual bool init(){return true;};
@@ -58,11 +58,11 @@ class CollectionMenu :
 
     //intro&outro
     void setSceneIntro();
-    void setSceneOutro(CCScene* newscene);
+    void setSceneOutro(cocos2d::CCScene* newscene);
     void doneOutro();
 
 
-    CCPoint mShadowDir;
+    cocos2d::Point mShadowDir;
     int mCurrType;
     int mEquipedItem;
     int mCurrItem;
@@ -133,8 +133,8 @@ class CollectionMenu :
     //bid = 0 :no blink 1:blink hp 2:blink dart
     void updateCharacterInfo(int rid, int bid);
 
-    void doneFacebook(CCInteger* res);
-    void doneTwitter(CCInteger* res);
+    void doneFacebook(cocos2d::CCInteger* res);
+    void doneTwitter(cocos2d::CCInteger* res);
 
     void toggleShare(bool flag);
     void onItemCallback(int i);

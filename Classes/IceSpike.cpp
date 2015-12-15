@@ -13,7 +13,7 @@
 
 
 
-IceSpike* IceSpike::spike(CCPoint pos, CCNode* parent) 
+IceSpike* IceSpike::spike(cocos2d::Point pos, CCNode* parent) 
 {
     IceSpike *ret = IceSpike::create();
     ret->mPos = pos;
@@ -25,14 +25,14 @@ IceSpike* IceSpike::spike(CCPoint pos, CCNode* parent)
 void IceSpike::onCreate() 
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("bullets"));
-    mSprite->setAnchorPoint(ccp(0.5f, 0.085f));
+    mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.085f));
     mSprite->setPosition(mPos);
     mSprite->playGTAnimation(2, false);
     mParent->addChild(mSprite, LAYER_ROLE);
     mState = 0;
     mFlag = false;
     
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/freeze_up.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/freeze_up.mp3").c_str());
 }
 
 void IceSpike::onUpdate(float delta) 
@@ -58,7 +58,7 @@ void IceSpike::onUpdate(float delta)
     }
     //offset
     float ds = delta*play->runspeed;
-    CCPoint np = mSprite->getPosition();
+    cocos2d::Point np = mSprite->getPosition();
     np.x -= ds;
     mSprite->setPosition(np);
     if( np.x < -100 )
@@ -68,7 +68,7 @@ void IceSpike::onUpdate(float delta)
     }
 }
 
-bool IceSpike::collisionWithCircle(CCPoint cc, float rad) 
+bool IceSpike::collisionWithCircle(cocos2d::Point cc, float rad) 
 {
     if( mSprite != NULL )
     {
@@ -81,13 +81,13 @@ bool IceSpike::collisionWithCircle(CCPoint cc, float rad)
     return false;
 }
 
-bool IceSpike::deliverHit(int type, CCPoint dir) 
+bool IceSpike::deliverHit(int type, cocos2d::Point dir) 
 {
     if( mState == 0 )
     {
         mState = 1;
         mSprite->playGTAnimation(3, false);
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/freeze_break.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/freeze_break.mp3").c_str());
         //achievement ice spike
         if( type == HIT_BLADE )
         {
@@ -109,7 +109,7 @@ bool IceSpike::deliverHit(int type, CCPoint dir)
     return false;
 }
 
-CCPoint IceSpike::position() 
+cocos2d::Point IceSpike::position() 
 {
     return mSprite->getPosition();
 }
@@ -119,12 +119,12 @@ void IceSpike::toggleVisible(bool flag)
     mSprite->setVisible(flag);
 }
 
-void IceSpike::setPosition(CCPoint pos) 
+void IceSpike::setPosition(cocos2d::Point pos) 
 {
     mSprite->setPosition(pos);
 }
 
-CCPoint IceSpike::center() 
+cocos2d::Point IceSpike::center() 
 {
     return ccpAdd(mSprite->getPosition(), ccp(0, 20));
 }

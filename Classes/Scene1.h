@@ -12,7 +12,7 @@ class Scene1: public SceneInterface
     CREATE_FUNC(Scene1);
     virtual void loadScene();
     virtual void unloadScene();
-    virtual void createScene(CCNode * bg, CCNode * fbg, CCNode * fg, RingTile * tiles); 
+    virtual void createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTile * tiles); 
     virtual void update(float delta);
     virtual void release(){};
 

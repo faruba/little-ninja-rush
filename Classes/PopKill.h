@@ -13,7 +13,7 @@
 class PopKill:public GameObject
 {
   public:
-    static PopKill* popKill(bool steak, int num, CCPoint pos);
+    static PopKill* popKill(bool steak, int num, cocos2d::Point pos);
     CREATE_FUNC(PopKill);
 
     virtual void onCreate();

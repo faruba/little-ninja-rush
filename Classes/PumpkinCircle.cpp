@@ -97,17 +97,17 @@ void PumpkinCircle::addPumpkin(int type)
     switch (type) {
         case 0:
         {
-            mSprites[mPumpkinCount] = CCSprite::createWithSpriteFrameName("pumpkingold.png");
+            mSprites[mPumpkinCount] = cocos2d::CCSprite::createWithSpriteFrameName("pumpkingold.png");
         }
             break;
         case 1:
         {
-            mSprites[mPumpkinCount] = CCSprite::createWithSpriteFrameName("pumpkinsteel.png");
+            mSprites[mPumpkinCount] = cocos2d::CCSprite::createWithSpriteFrameName("pumpkinsteel.png");
         }
             break;
         case 2:
         {
-            mSprites[mPumpkinCount] = CCSprite::createWithSpriteFrameName("pumpkinfire.png");
+            mSprites[mPumpkinCount] = cocos2d::CCSprite::createWithSpriteFrameName("pumpkinfire.png");
         }
             break;
     }
@@ -153,28 +153,28 @@ void PumpkinCircle::onCreate()
 void PumpkinCircle::onUpdate(float delta) 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
-    CCPoint mainpos = play->mainrole->center();
+    cocos2d::Point mainpos = play->mainrole->center();
     //run the circle
     mCircieAngle += PUMPKIN_ROTATE*delta;
     
     for(int i=0; i<mPumpkinCount; ++i)
     {
         //update the target
-        CCPoint target;
+        cocos2d::Point target;
         {
             float curangle = mCircieAngle+mAngles[i];
-            CCPoint radptr = ccpForAngle(curangle);
+            cocos2d::Point radptr = ccpForAngle(curangle);
             target = ccpAdd(mainpos, ccpMult(radptr, PUMPKIN_FLYRADIUS));
         }
         //move to target
         {
-            CCPoint dp = ccpSub(target, mSprites[i]->getPosition());
+            cocos2d::Point dp = ccpSub(target, mSprites[i]->getPosition());
             float dis = ccpLength(dp);
             float step = PUMPKIN_FLYSPEED*delta;
             if( step < dis )
             {
-                CCPoint dir = ccpNormalize(dp);
-                CCPoint np = ccpAdd(mSprites[i]->getPosition(), ccpMult(dir, step));
+                cocos2d::Point dir = ccpNormalize(dp);
+                cocos2d::Point np = ccpAdd(mSprites[i]->getPosition(), ccpMult(dir, step));
                 mSprites[i]->setPosition(np);
             }
             else
@@ -223,7 +223,7 @@ void PumpkinCircle::onUpdate(float delta)
               }
               if( hit )
               {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
               }
             }
                 break;
@@ -234,7 +234,7 @@ void PumpkinCircle::onUpdate(float delta)
                 {
                     //find a target
                     bool found = false;
-                    CCPoint target;
+                    cocos2d::Point target;
                     {
   CCObject* node = NULL;
   CCARRAY_FOREACH(play->enemies, node)
@@ -251,7 +251,7 @@ void PumpkinCircle::onUpdate(float delta)
                     if( found )
                     {//ready to fire
                         mPowerTimers[i] = 0;
-                        CCPoint dir = ccpSub(target, mSprites[i]->getPosition());
+                        cocos2d::Point dir = ccpSub(target, mSprites[i]->getPosition());
                         dir = ccpNormalize(dir);
                         play->manager->addGameObject(PumpkinFire::dart(mSprites[i]->getPosition(), dir, play));
                     }

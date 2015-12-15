@@ -18,7 +18,7 @@ UniversalFit *UniversalFit::sharedUniversalFit()
 
 void UniversalFit::init()
 {
-  CCDirector *pDirector = CCDirector::sharedDirector();
+  CCDirector *pDirector = cocos2d::CCDirector::sharedDirector();
   if (NULL == pDirector) {
     CCLog("UniversalFit::UniversalFit() NULL == pDirector");
   }
@@ -31,7 +31,7 @@ void UniversalFit::init()
     scaleFactor = 1.0f;
   }
 }
-CCRect UniversalFit::transformRect(CCRect rect)
+CCRect UniversalFit::transformRect(cocos2d::CCRect rect)
 {
   return CCRectMake(rect.origin.x*transform.width + baseLeft, rect.origin.y*transform.height + baseHeight,
       rect.size.width*transform.width, rect.size.height*transform.height);
@@ -89,11 +89,11 @@ bool UniversalFit::UniversalFit::shouldUsingSinaWeibo()
   return true;
 }
 
-void UniversalFit::setAutofit(CCSize size) 
+void UniversalFit::setAutofit(cocos2d::CCSize size) 
 {
   screenSize = size;
   scaleFactor = size.width/SCREEN_WIDTH < size.height/SCREEN_HEIGHT ? size.width/SCREEN_WIDTH : size.height/SCREEN_HEIGHT;//以宽度为基准 (maximum extend)
-    CCSize scaleSize = CCSizeMake(SCREEN_WIDTH*scaleFactor, SCREEN_HEIGHT*scaleFactor);
+    CCSize scaleSize = cocos2d::CCSizeMake(SCREEN_WIDTH*scaleFactor, SCREEN_HEIGHT*scaleFactor);
     sceneOffset = ccp(0, 0);//ccp((size.width - SCREEN_WIDTH*scaleFactor)/2, (size.height - SCREEN_HEIGHT*scaleFactor)/2);
   //clipRect.setRect(0, (size.height - scaleSize.height)/2, size.width, scaleSize.height);
     clipRect.setRect(0, 0, SCREEN_WIDTH*4, SCREEN_HEIGHT*4);//hammer android titlemenu clip test
@@ -101,7 +101,7 @@ void UniversalFit::setAutofit(CCSize size)
     topHeight = SCREEN_HEIGHT;//baseHeight + clipRect.size.height;
     baseLeft = 0;//(size.width - scaleSize.width)/2;
     baseRight = SCREEN_WIDTH;//baseLeft + scaleSize.width;
-  playSize = CCSizeMake(SCREEN_WIDTH + 2*baseLeft, SCREEN_HEIGHT);
+  playSize = cocos2d::CCSizeMake(SCREEN_WIDTH + 2*baseLeft, SCREEN_HEIGHT);
 //#ifdef DEBUG
 //  //Debug output
 //  CCLog("WindowSize = %dx%d", (int)size.width, (int)size.height); 
@@ -116,9 +116,9 @@ void UniversalFit::setAutofit(CCSize size)
     gRetinaGraphics = true;
   }
     
-    CCDirector *pDirector = CCDirector::sharedDirector();
+    CCDirector *pDirector = cocos2d::CCDirector::sharedDirector();
     CCSize surface = pDirector->getOpenGLView()->getFrameSize();
-    CCSize need = CCSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
+    CCSize need = cocos2d::CCSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
     need.width *= pDirector->getContentScaleFactor();
     need.height *= pDirector->getContentScaleFactor();
     transform.width = surface.width/need.width;
@@ -128,9 +128,9 @@ void UniversalFit::setAutofit(CCSize size)
     CCLog("- scale = %f", pDirector->getContentScaleFactor());
 }
 
-CCPoint UniversalFit::restorePoint(CCPoint pos)
+cocos2d::Point UniversalFit::restorePoint(cocos2d::Point pos)
 {
-    CCPoint tp = ccpSub(pos, UniversalFit::sharedUniversalFit()->sceneOffset);
+    cocos2d::Point tp = ccpSub(pos, UniversalFit::sharedUniversalFit()->sceneOffset);
     //tp.x /= UniversalFit::sharedUniversalFit()->scaleFactor;
     //tp.y /= UniversalFit::sharedUniversalFit()->scaleFactor;
     return tp;

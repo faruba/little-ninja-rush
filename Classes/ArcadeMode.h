@@ -41,9 +41,9 @@ class ArcadeMode:
     void onMainHit();
 
     //获得得分 and speed
-    void killScore(int sc, int comb, CCPoint pos);
+    void killScore(int sc, int comb, cocos2d::Point pos);
     //gain score
-    void addScore(int sc, CCPoint pos);
+    void addScore(int sc, cocos2d::Point pos);
 
 };
 #endif

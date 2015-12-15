@@ -3,7 +3,7 @@
 #include "cocos2d.h"
 #include "GTAnimatedSprite.h"
 
-USING_NS_CC;
+;
 
 class GTGhostShadow:public CCNode
 {

@@ -13,8 +13,6 @@
 
 #define OP_RESET (0)
 
-USING_NS_CC;
-
 class GamePlay : 
   public cocos2d::CCLayer
 {
@@ -41,10 +39,10 @@ class GamePlay :
     void startLoopFever();
     void stopLoopFever();
 
-    void taskCompleted(CCString * tile, CCString * icon, int type); 
-    void pieceComplete(CCString * title, CCString * icon);
-    void popText(CCString* text);
-    void scheduleSpellRelease(CCNode* target, SEL_CallFunc sel);
+    void taskCompleted(cocos2d::CCString * tile, CCString * icon, int type); 
+    void pieceComplete(cocos2d::CCString * title, CCString * icon);
+    void popText(cocos2d::CCString* text);
+    void scheduleSpellRelease(cocos2d::CCNode* target, SEL_CallFunc sel);
     bool isPlayingArcade();
     void setGameMode(int mod);
     int getGameMode();
@@ -85,9 +83,9 @@ class GamePlay :
 
     void scheduleVibrate(float dur);
 
-    void slide(CCPoint dir);
-    CCPoint autoAim(CCPoint dir);
-    Role *nearestEnemy(CCPoint dir);
+    void slide(cocos2d::Point dir);
+    cocos2d::Point autoAim(cocos2d::Point dir);
+    Role *nearestEnemy(cocos2d::Point dir);
 
     void operate();
 
@@ -100,18 +98,18 @@ class GamePlay :
 
     //intro&outro
     void setSceneIntro();
-    void setSceneOutro(CCScene* newscene);
+    void setSceneOutro(cocos2d::CCScene* newscene);
     void doneOutro();
     void doneIntro();
 
-    static void setTaskCompleteNode(CCNode* node);
+    static void setTaskCompleteNode(cocos2d::CCNode* node);
     bool completeSomeObjectives();
 
     //0-daily 1-weekly 2-monthly 3-achievement 4-collection 5-text
-    static void pushNotification(CCString* name, CCString* icon, int type);
+    static void pushNotification(cocos2d::CCString* name, CCString* icon, int type);
 
-    void stepDust(CCPoint pos);
-    CCPoint mTouchBegin;
+    void stepDust(cocos2d::Point pos);
+    cocos2d::Point mTouchBegin;
     bool  mTouchProcessed;
     CCLayer *mUI;
     CCMenu *mMenu;//菜单项目
@@ -138,7 +136,7 @@ class GamePlay :
 
     float mScheduleVibrate;
     float mVibrateTimer;
-    CCPoint mVibrateDir;
+    cocos2d::Point mVibrateDir;
 
     //intro&outro
     CCNode *mSceneIntro;

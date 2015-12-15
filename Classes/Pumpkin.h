@@ -8,7 +8,7 @@ class Pumpkin:
   public Role
 {
   public:
-    static Pumpkin* role(CCNode* parent);
+    static Pumpkin* role(cocos2d::CCNode* parent);
 
     CREATE_FUNC(Pumpkin);
 
@@ -16,11 +16,11 @@ class Pumpkin:
     virtual void onUpdate(float delta);
     virtual void onDestroy();
 
-    virtual bool collisionWithCircle(CCPoint cc, float rad);
-    virtual bool deliverHit(int type, CCPoint dir);
-    virtual CCPoint position();
-    virtual void setPosition(CCPoint pos);
-    virtual CCPoint center();
+    virtual bool collisionWithCircle(cocos2d::Point cc, float rad);
+    virtual bool deliverHit(int type, cocos2d::Point dir);
+    virtual cocos2d::Point position();
+    virtual void setPosition(cocos2d::Point pos);
+    virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
 
@@ -32,9 +32,9 @@ class Pumpkin:
     int mHitCount;
     float mHurtTimer;
 
-    CCPoint mPumpkinSpeed;
-    CCPoint mTargetPos;
-    CCPoint mTargetSpeed;
+    cocos2d::Point mPumpkinSpeed;
+    cocos2d::Point mTargetPos;
+    cocos2d::Point mTargetSpeed;
 
     float mFlySound;
 

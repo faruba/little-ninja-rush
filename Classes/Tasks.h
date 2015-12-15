@@ -7,7 +7,7 @@
 #include "rapidjson/prettywriter.h"
 #include "rapidjson/filestream.h"
 
-USING_NS_CC;
+;
 USING_NS_CC_EXT;
 
 #define TASK_OBJECTIVEDAILY (0)
@@ -102,7 +102,7 @@ class Tasks:public CCObject
     //CCArray *uploadingAchievements;
 
     void createObjectives();
-    void readObjectives(CCDictionary* dic);
+    void readObjectives(cocos2d::CCDictionary* dic);
     void doneReadObjectives();
     void writeObjectives(rapidjson::Document &document);
     void mergeWith(Tasks* task);
@@ -132,12 +132,12 @@ class Tasks:public CCObject
 
     //游戏启动时进行的测试
     void checkObjectives();
-    bool isDay(CCDate* a, CCDate* b);
+    bool isDay(cocos2d::CCDate* a, CCDate* b);
     void refreshArcadePrizes();
     void refreshDailyObjective();
     void refreshWeeklyObjective();
     void refreshMonthlyObjective();
-    static CCString* stringForObjective(CCString* desc, int achcode, int num, int count);
+    static CCString* stringForObjective(cocos2d::CCString* desc, int achcode, int num, int count);
 };
 
 

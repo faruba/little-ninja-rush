@@ -14,7 +14,7 @@ class ReflectDart:
   public GameObject
 {
   public:
-    static ReflectDart* dart(CCPoint pos, CCPoint dir);
+    static ReflectDart* dart(cocos2d::Point pos, cocos2d::Point dir);
 
     CREATE_FUNC(ReflectDart);
     virtual void onCreate();
@@ -22,8 +22,8 @@ class ReflectDart:
     virtual void onDestroy();
 
     CCSprite *mSprite;
-    CCPoint mPos;
-    CCPoint mDir;
+    cocos2d::Point mPos;
+    cocos2d::Point mDir;
 
     int mReflectCounter;
     bool mPaused;

@@ -18,7 +18,7 @@
 
 
 
-HighNinja* HighNinja::role(CCNode * parent) 
+HighNinja* HighNinja::role(cocos2d::CCNode * parent) 
 {
     HighNinja *em = HighNinja::create();
     em->mParent = parent;
@@ -28,9 +28,9 @@ HighNinja* HighNinja::role(CCNode * parent)
 void HighNinja::onCreate() 
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("hninja"));
-    mSprite->setAnchorPoint(ccp(0.4f, 0.0625f));
-    int y = CCRANDOM_0_1()*RESPAWN_Y;
-    mSprite->setPosition(ccp(20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1(), RESPAWN_YMIN+y));
+    mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
+    int y = cocos2d::CCRANDOM_0_1()*RESPAWN_Y;
+    mSprite->setPosition(cocos2d::ccp(20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1(), RESPAWN_YMIN+y));
     mSprite->playGTAnimation(0, true);
     mSprite->setVisible(false);
     mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
@@ -62,7 +62,7 @@ void HighNinja::onUpdate(float delta)
     if( mState < 5 && play->gameOverTimer >= 0 && mState != 0 )
     {//主角死亡的处理
         float ds = delta*(play->levelspeed - play->runspeed);
-        CCPoint np = mSprite->getPosition();
+        cocos2d::Point np = mSprite->getPosition();
         np.x += ds;
         mSprite->setPosition(np);
     }
@@ -89,7 +89,7 @@ void HighNinja::onUpdate(float delta)
                 {
                     float ds = delta*mSpeed;
                     float dis = mTargetPos - mSprite->getPosition().x;
-                    CCPoint np = mSprite->getPosition();
+                    cocos2d::Point np = mSprite->getPosition();
                     if( fabsf(dis) > ds )
                     {
                         if( dis > 0 )
@@ -119,7 +119,7 @@ void HighNinja::onUpdate(float delta)
                                 mSprite->playGTAnimation(6, true);
                                 //play effect
                                 GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
-                                eff->setPosition(ccp(47, 19));
+                                eff->setPosition(cocos2d::ccp(47, 19));
                                 mSprite->addChild(eff);
                             }
                         }
@@ -169,7 +169,7 @@ void HighNinja::onUpdate(float delta)
                 mTimer -= delta;
                 if( mTimer <= 0 )
                 {
-                    CCPoint target = play->mainrole->center();
+                    cocos2d::Point target = play->mainrole->center();
                     if( play->mainrole2 != NULL )
                     {
                         if( randomInt(2) == 0 )
@@ -179,19 +179,19 @@ void HighNinja::onUpdate(float delta)
                     }
                     if( mFlag )
                     {//冰锥术
-                        CCPoint dst;
+                        cocos2d::Point dst;
                         dst.x = UniversalFit::sharedUniversalFit()->playSize.width/2 + UniversalFit::sharedUniversalFit()->playSize.width*CCRANDOM_0_1()/2;
                         dst.y = play->mainrole->position().y;
-                        CCPoint dir = ccpNormalize(ccpSub(dst, this->center()));
+                        cocos2d::Point dir = ccpNormalize(ccpSub(dst, this->center()));
                         
-                        play->darts->addObject(play->manager->addGameObject(Dart::dart(CCString::create("bfbdr.png"), this->center(), dir, -4, mParent)));
+                        play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("bfbdr.png"), this->center(), dir, -4, mParent)));
                     }
                     else {
-                        CCPoint dir = ccpNormalize(ccpSub(target, this->center()));
+                        cocos2d::Point dir = ccpNormalize(ccpSub(target, this->center()));
                         float angle = ccpToAngle(dir);
-                        angle += CC_DEGREES_TO_RADIANS(-HNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*HNINJA_ACCURATE)*CCRANDOM_0_1();
+                        angle += cocos2d::CC_DEGREES_TO_RADIANS(-HNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*HNINJA_ACCURATE)*CCRANDOM_0_1();
                         dir = ccpForAngle(angle);
-                        play->darts->addObject(play->manager->addGameObject(Dart::dart(CCString::create("dart.png"), this->center(), dir, -3, mParent)));
+                        play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), dir, -3, mParent)));
                     }
                     
                     mSprite->playGTAnimation(5, false);
@@ -221,7 +221,7 @@ void HighNinja::onUpdate(float delta)
                 float ds = delta*ENEMY_NNRUNSPEED;
                 if( mSprite->getPosition().x > -100 )
                 {
-                    CCPoint np = mSprite->getPosition();
+                    cocos2d::Point np = mSprite->getPosition();
                     np.x -= ds;
                     mSprite->setPosition(np);
                 }
@@ -238,7 +238,7 @@ void HighNinja::onUpdate(float delta)
                 {
                     //fix pos
                     float ds = delta*play->runspeed;
-                    CCPoint np = mSprite->getPosition();
+                    cocos2d::Point np = mSprite->getPosition();
                     np.x -= ds;
                     mSprite->setPosition(np);
                     
@@ -252,11 +252,11 @@ void HighNinja::onUpdate(float delta)
                     if(mTimer>0.3f && mFlag)
                     {
                         int n = 1 + randomInt(3);
-                        SimpleAudioEngine::sharedEngine()->playEffect(CCString::createWithFormat("ahh%d.mp3", n)->getCString());
+                        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCString::createWithFormat("ahh%d.mp3", n)->getCString());
                         mFlag = false;
                     }
                     //fix pos
-                    CCPoint np = mSprite->getPosition();
+                    cocos2d::Point np = mSprite->getPosition();
                     if( mSprite->animationId() == 3 )
                     {
                         float ra = mTimer/mSprite->playBackTime();
@@ -296,7 +296,7 @@ void HighNinja::onUpdate(float delta)
     if( play->state == STATE_RUSH )
     {
         float offset = (play->runspeed - play->levelspeed)*delta;
-        CCPoint np = mSprite->getPosition();
+        cocos2d::Point np = mSprite->getPosition();
         np.x -= offset;
         mSprite->setPosition(np);
     }
@@ -319,7 +319,7 @@ void HighNinja::onUpdate(float delta)
 }
 
 //碰撞检测
-bool HighNinja::collisionWithCircle(CCPoint cc, float rad) 
+bool HighNinja::collisionWithCircle(cocos2d::Point cc, float rad) 
 {
     if( mState == 6 )
     {
@@ -350,7 +350,7 @@ bool HighNinja::collisionWithCircle(CCPoint cc, float rad)
 }
 
 //受到伤害
-bool HighNinja::deliverHit(int type, CCPoint dir) 
+bool HighNinja::deliverHit(int type, cocos2d::Point dir) 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     //替身术
@@ -358,7 +358,7 @@ bool HighNinja::deliverHit(int type, CCPoint dir)
     {
         mSpell = 1;
         //发动替身术
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/smoke.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/smoke.mp3").c_str());
         GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 5, false);
         eff->setAnchorPoint(mSprite->getAnchorPoint());
         eff->setPosition(mSprite->getPosition());
@@ -435,17 +435,17 @@ bool HighNinja::deliverHit(int type, CCPoint dir)
     return true;
 }
 
-CCPoint HighNinja::position() 
+cocos2d::Point HighNinja::position() 
 {
     return mSprite->getPosition();
 }
 
-void HighNinja::setPosition(CCPoint pos) 
+void HighNinja::setPosition(cocos2d::Point pos) 
 {
     mSprite->setPosition(pos);
 }
 
-CCPoint HighNinja::center() 
+cocos2d::Point HighNinja::center() 
 {
     return ccpAdd(mSprite->getPosition(), ccp(9, 20));
 }

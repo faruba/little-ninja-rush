@@ -98,12 +98,12 @@ GTLoadList* PublicLoad::gameLoadingList()
     int special = GameRecord::sharedGameRecord()->char_equip_spell[rid];
     //主角
     {
-        CCString *filename = CCString::createWithFormat("zchar%d.plist", rid+1);
+        CCString *filename = cocos2d::CCString::createWithFormat("zchar%d.plist", rid+1);
         list->addSpriteSheet(filename->getCString());
     }
     //刀刃
     {
-        CCString *filename = CCString::createWithFormat("zblade%d.plist", blade+1);
+        CCString *filename = cocos2d::CCString::createWithFormat("zblade%d.plist", blade+1);
         list->addSpriteSheet(filename->getCString());
         if( blade != 0 )
         {//hack: always load the first sprite frame

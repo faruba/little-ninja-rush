@@ -34,21 +34,21 @@ void CommitArcade::onCreate()
     CCBReader *pReader = new CCBReader(pNodeLib, this, this);
     mNode = pReader->readNodeGraphFromFile("ui-arcadeover", this);
     pReader->release();
-    mNode->setPosition(ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
+    mNode->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
     play->addChild(mNode, LAYER_MASK+1);
     
     // TODO
     //mFlash.blendFunc =  (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };//fix flash bug
     
-    CCString *rolefile = CCString::createWithFormat("sc_role%d0.png", GameRecord::sharedGameRecord()->curr_char);
-    mRole->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(rolefile->getCString()));
+    CCString *rolefile = cocos2d::CCString::createWithFormat("sc_role%d0.png", GameRecord::sharedGameRecord()->curr_char);
+    mRole->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(rolefile->getCString()));
     mLight->setVisible(false);
     mCup->setVisible(false);
-    mScore->setString(CCString::createWithFormat("%d", play->arcade->score)->getCString());
+    mScore->setString(cocos2d::CCString::createWithFormat("%d", play->arcade->score)->getCString());
     mBouns->setString("0");
-    mGoldenTrophy->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->golden_trophy)->getCString());
-    mSilverTrophy->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->silver_trophy)->getCString());
-    mBronzeTrophy->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->bronze_trophy)->getCString());
+    mGoldenTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->golden_trophy)->getCString());
+    mSilverTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->silver_trophy)->getCString());
+    mBronzeTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->bronze_trophy)->getCString());
     
     mCurrentBouns = 0;
     mCurrentScore = play->arcade->score;
@@ -91,7 +91,7 @@ void CommitArcade::onUpdate(float delta)
             mSoundTimer += delta;
             if( mSoundTimer > 0.1f )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
                 mSoundTimer = 0;
             }
             int ds = mTargetBouns - mCurrentBouns;
@@ -111,7 +111,7 @@ void CommitArcade::onUpdate(float delta)
                        mCurrentScore >= GameRecord::sharedGameRecord()->task->goldPrize->score )
                     {
                         ccup = 3;
-                        mCup->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-gold2.png"));
+                        mCup->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-gold2.png"));
                         //take the cup
                         play->coins = GameRecord::sharedGameRecord()->task->goldPrize->prize;
                         GameRecord::sharedGameRecord()->task->goldPrize->prize = -1;
@@ -129,7 +129,7 @@ void CommitArcade::onUpdate(float delta)
                             mCurrentScore >= GameRecord::sharedGameRecord()->task->silverPrize->score )
                     {
                         ccup = 2;
-                        mCup->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-silver2.png"));
+                        mCup->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-silver2.png"));
                         //take the cup
                         play->coins = GameRecord::sharedGameRecord()->task->silverPrize->prize;
                         GameRecord::sharedGameRecord()->task->silverPrize->prize = -1;
@@ -142,7 +142,7 @@ void CommitArcade::onUpdate(float delta)
                             mCurrentScore >= GameRecord::sharedGameRecord()->task->bronzePrize->score )
                     {
                         ccup = 1;
-                        mCup->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-bronze2.png"));
+                        mCup->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-bronze2.png"));
                         //take the cup
                         play->coins = GameRecord::sharedGameRecord()->task->bronzePrize->prize;
                         GameRecord::sharedGameRecord()->task->bronzePrize->prize = -1;
@@ -170,8 +170,8 @@ void CommitArcade::onUpdate(float delta)
                 mCurrentBouns += add;
                 mCurrentScore += add;
             }
-            mScore->setString(CCString::createWithFormat("%d", mCurrentScore)->getCString());
-            mBouns->setString(CCString::createWithFormat("%d", mCurrentBouns)->getCString());
+            mScore->setString(cocos2d::CCString::createWithFormat("%d", mCurrentScore)->getCString());
+            mBouns->setString(cocos2d::CCString::createWithFormat("%d", mCurrentBouns)->getCString());
         }
             break;
         case 2:
@@ -200,42 +200,42 @@ void CommitArcade::onUpdate(float delta)
             if( mTimer > 1 )
             {
                 GamePlay *play = GamePlay::sharedGamePlay();
-                mCoins->setString(CCString::createWithFormat("%d", play->coins)->getCString());
+                mCoins->setString(cocos2d::CCString::createWithFormat("%d", play->coins)->getCString());
                 mState = 2;
                 mTimer = 0;
                 mCup->setScale(0);
                 mCup->setVisible(true);
                 
-                CCScaleTo *cst = CCScaleTo::create(0.2f, 1.5f);
-                CCScaleTo *cst2 = CCScaleTo::create(0.1f, 1);
-                CCDelayTime *dt = CCDelayTime::create(2);
-                CCScaleTo *cst3 = CCScaleTo::create(1, 0);
-                CCSequence *cseq = CCSequence::create(cst, cst2, dt, cst3, NULL);
+                CCScaleTo *cst = cocos2d::CCScaleTo::create(0.2f, 1.5f);
+                CCScaleTo *cst2 = cocos2d::CCScaleTo::create(0.1f, 1);
+                CCDelayTime *dt = cocos2d::CCDelayTime::create(2);
+                CCScaleTo *cst3 = cocos2d::CCScaleTo::create(1, 0);
+                CCSequence *cseq = cocos2d::CCSequence::create(cst, cst2, dt, cst3, NULL);
                 mCup->runAction(cseq);
                 
                 mLight->setScale(0);
                 mLight->setVisible(true);
                 mLight->setOpacity(0);
-                CCFadeIn *lfi = CCFadeIn::create(0.2f);
-                CCDelayTime *ldy = CCDelayTime::create(2);
-                CCFadeOut *lfo = CCFadeOut::create(2);
-                CCSequence *lfs = CCSequence::create(lfi, ldy, lfo, NULL);
+                CCFadeIn *lfi = cocos2d::CCFadeIn::create(0.2f);
+                CCDelayTime *ldy = cocos2d::CCDelayTime::create(2);
+                CCFadeOut *lfo = cocos2d::CCFadeOut::create(2);
+                CCSequence *lfs = cocos2d::CCSequence::create(lfi, ldy, lfo, NULL);
                 mLight->runAction(lfs);
-                CCScaleTo *lst = CCScaleTo::create(1, 3);
+                CCScaleTo *lst = cocos2d::CCScaleTo::create(1, 3);
                 mLight->runAction(lst);
-                CCRotateBy *lrt = CCRotateBy::create(6, 1000);
+                CCRotateBy *lrt = cocos2d::CCRotateBy::create(6, 1000);
                 mLight->runAction(lrt);
                 
                 mFlash->setVisible(true);
-                CCFadeOut *fo1 = CCFadeOut::create(2);
+                CCFadeOut *fo1 = cocos2d::CCFadeOut::create(2);
                 mFlash->runAction(fo1);
                 
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/openscroll.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/openscroll.mp3").c_str());
                 
                 //update trophy count
-                mGoldenTrophy->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->golden_trophy)->getCString());
-                mSilverTrophy->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->silver_trophy)->getCString());
-                mBronzeTrophy->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->bronze_trophy)->getCString());
+                mGoldenTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->golden_trophy)->getCString());
+                mSilverTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->silver_trophy)->getCString());
+                mBronzeTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->bronze_trophy)->getCString());
             }
         }
             break;
@@ -243,7 +243,7 @@ void CommitArcade::onUpdate(float delta)
 }
 
 
-SEL_MenuHandler CommitArcade::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler CommitArcade::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
     //  CCLog(pSelectorName);
   return NULL;
@@ -253,7 +253,7 @@ cocos2d::extension::Control::Handler  CommitArcade::onResolveCCBCCControlSelecto
   CCLog("Control");
   return NULL;
 }
-bool CommitArcade::onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool CommitArcade::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRole", CCSprite *, mRole)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLight", CCSprite *, mLight)

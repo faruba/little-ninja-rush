@@ -7,7 +7,7 @@ class Santa:
   public Role
 {
   public:
-    static Santa* role(CCNode* parent);
+    static Santa* role(cocos2d::CCNode* parent);
 
     CREATE_FUNC(Santa);
 
@@ -15,11 +15,11 @@ class Santa:
     virtual void onUpdate(float delta);
     virtual void onDestroy();
 
-    virtual bool collisionWithCircle(CCPoint cc, float rad);
-    virtual bool deliverHit(int type, CCPoint dir);
-    virtual CCPoint position();
-    virtual void setPosition(CCPoint pos);
-    virtual CCPoint center();
+    virtual bool collisionWithCircle(cocos2d::Point cc, float rad);
+    virtual bool deliverHit(int type, cocos2d::Point dir);
+    virtual cocos2d::Point position();
+    virtual void setPosition(cocos2d::Point pos);
+    virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
 

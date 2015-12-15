@@ -22,14 +22,14 @@ using namespace CocosDenshion;
 CCScene* LogoSplash::scene()
 {
     // 'scene' is an autorelease object
-    CCScene *scene = CCScene::create();
+    CCScene *scene = cocos2d::CCScene::create();
     
     // 'layer' is an autorelease object
     LogoSplash *layer = LogoSplash::create();
 
     // add layer as a child to scene
     scene->addChild(layer);
-    layer->setAnchorPoint(ccp(0, 0));
+    layer->setAnchorPoint(cocos2d::ccp(0, 0));
 
     // return the scene
     return scene;
@@ -50,16 +50,16 @@ bool LogoSplash::init()
 
 void LogoSplash::onEnter()
 {
-  CCLayerColor *bg = CCLayerColor::create(ccc4(255, 255, 255, 255));
+  CCLayerColor *bg = cocos2d::CCLayerColor::create(ccc4(255, 255, 255, 255));
 
   addChild(bg);
 
-  mLogo = CCSprite::create("logo.png");
+  mLogo = cocos2d::CCSprite::create("logo.png");
   mLogo->setOpacity(0);
   mLogo->setPosition(UniversalFit::sharedUniversalFit()->centralPoint);
 
   bg->addChild(mLogo);
-  mSoundId = SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/logo.mp3").c_str());
+  mSoundId = SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/logo.mp3").c_str());
 
   mTimer = 0;
   mLoadFlag = 0;
@@ -132,10 +132,10 @@ void LogoSplash::load()
 //    for(int i=0; i<10; ++i)
 //    {
 //        const char *filename = filenames[i];
-//        CCString *data = CCString::createWithContentsOfFile(CCFileUtils::sharedFileUtils()->fullPathForFilename(filename).c_str());
+//        CCString *data = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename(filename).c_str());
 //        if( data != NULL )
 //        {
-//            CCArray *parsed = (CCArray*)JsonWrapper::parseJson(data);
+//            CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(data);
 //            if( parsed != NULL )
 //            {
 //                CCLog("OK...%s", filename);

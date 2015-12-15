@@ -23,8 +23,8 @@ class ControlLayer :
     CREATE_FUNC(ControlLayer);
 
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *, const char*);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject *, const char*);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
+    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
 
     virtual bool onTouchBegan(Touch * touch, Event * event);
     virtual void onTouchMoved(Touch * touch, Event * event);
@@ -55,18 +55,18 @@ bool ControlLayer::init()
 {
     if( CCLayer::init() )
     {
-      CCNodeLoaderLibrary *pNodeLib = CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
+      CCNodeLoaderLibrary *pNodeLib = cocos2d::CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
       CCBReader *pReader = new CCBReader(pNodeLib, this, this);
       CCNode *node = pReader->readNodeGraphFromFile("ui-continue.ccbi", this);
       pReader->release();
-      node->setPosition(ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
+      node->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
       this->addChild(node);
 
       auto listener = EventListenerTouchOneByOne::create();
-      listener->onTouchBegan = CC_CALLBACK_2(ControlLayer::onTouchBegan, this);
-      listener->onTouchEnded = CC_CALLBACK_2(ControlLayer::onTouchEnded, this);
-      listener->onTouchMoved = CC_CALLBACK_2(ControlLayer::onTouchMoved, this);
-      listener->onTouchCancelled = CC_CALLBACK_2(ControlLayer::onTouchEnded, this);
+      listener->onTouchBegan = cocos2d::CC_CALLBACK_2(ControlLayer::onTouchBegan, this);
+      listener->onTouchEnded = cocos2d::CC_CALLBACK_2(ControlLayer::onTouchEnded, this);
+      listener->onTouchMoved = cocos2d::CC_CALLBACK_2(ControlLayer::onTouchMoved, this);
+      listener->onTouchCancelled = cocos2d::CC_CALLBACK_2(ControlLayer::onTouchEnded, this);
       _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
       mClicked = -1;
@@ -79,13 +79,13 @@ bool ControlLayer::init()
 
 void ControlLayer::tickNumber(int n) 
 {
-    mNumber->setString(CCString::createWithFormat("%d", n)->getCString());
-    CCScaleTo *st1 = CCScaleTo::create(0.2f, 1.5f);
-    CCScaleTo *st2 = CCScaleTo::create(0.4f, 1);
-    CCSequence *seq = CCSequence::create(st1, st2, NULL);
+    mNumber->setString(cocos2d::CCString::createWithFormat("%d", n)->getCString());
+    CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.2f, 1.5f);
+    CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.4f, 1);
+    CCSequence *seq = cocos2d::CCSequence::create(st1, st2, NULL);
     mNumber->runAction(seq);
     
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/feverbgmend.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/feverbgmend.mp3").c_str());
 }
 
 void ControlLayer::updateButton() 
@@ -99,7 +99,7 @@ void ControlLayer::updateButton()
         mBtnBuyStandard->setVisible(false);
         mBtnBuyDeluxe->setVisible(false);
         
-        mCoins->setString(CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_credit)->getCString());
+        mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_credit)->getCString());
     }
     else
     {
@@ -273,18 +273,18 @@ void ControlLayer::onTouchEnded(Touch * touch, Event * event)
     mClicked = -1;
 }
 
-SEL_MenuHandler ControlLayer::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler ControlLayer::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   //  CCLog(pSelectorName);
   return NULL;
 }
 
-SEL_CCControlHandler ControlLayer::onResolveCCBCCControlSelector(CCObject * pTarget, const char* pSelectorName)
+SEL_CCControlHandler ControlLayer::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   CCLog("Control");
   return NULL;
 }
-bool ControlLayer::onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ControlLayer::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mNumber", CCLabelBMFont *, mNumber)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel", CCSprite *, mBtnCancel)
@@ -388,7 +388,7 @@ void ClassicContinue::onUseCredit()
         play->unscheduleMask();
         
         play->manager->removeGameObject(this);
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
     }
 }
 
@@ -438,7 +438,7 @@ void ClassicContinue::onButton(int bid)
         }
             break;
     }
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
 }
 
 void ClassicContinue::onBuyCredit1() 

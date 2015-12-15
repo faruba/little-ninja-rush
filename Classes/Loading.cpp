@@ -4,12 +4,12 @@
 #include "UniversalFit.h"
 #include "CEClipedNode.h"
 
-CCScene *Loading::loadTo(CCScene* dst, GTLoadList* lst, GTLoadList * ull, bool tip)
+CCScene *Loading::loadTo(cocos2d::CCScene* dst, GTLoadList* lst, GTLoadList * ull, bool tip)
 {
   Loading *ll = Loading::create();
   ll->mTip = tip;
   ll->mFinish = false;
-  ll->mScene = CCScene::create();
+  ll->mScene = cocos2d::CCScene::create();
   ll->mDst = dst;
   ll->mDst->retain();
   ll->mLoadlist = lst;
@@ -21,7 +21,7 @@ CCScene *Loading::loadTo(CCScene* dst, GTLoadList* lst, GTLoadList * ull, bool t
   }
 
   ll->mScene->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-  ll->mScene->setAnchorPoint(ccp(0, 0));
+  ll->mScene->setAnchorPoint(cocos2d::ccp(0, 0));
   ll->mScene->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
 
   CEClipedNode *clip = CEClipedNode::create();
@@ -40,9 +40,9 @@ bool Loading::init()
     return false;
 
   auto listener = EventListenerTouchOneByOne::create();
-  listener->onTouchBegan = CC_CALLBACK_2(Loading::onTouchBegan, this);
-  listener->onTouchEnded = CC_CALLBACK_2(Loading::onTouchEnded, this);
-  listener->onTouchCancelled = CC_CALLBACK_2(Loading::onTouchEnded, this);
+  listener->onTouchBegan = cocos2d::CC_CALLBACK_2(Loading::onTouchBegan, this);
+  listener->onTouchEnded = cocos2d::CC_CALLBACK_2(Loading::onTouchEnded, this);
+  listener->onTouchCancelled = cocos2d::CC_CALLBACK_2(Loading::onTouchEnded, this);
   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
   this->setTouchEnabled(true);
@@ -83,10 +83,10 @@ void Loading::update(float delta)
       else {
         removeChild(mLoading, true);
         mLoading = NULL;
-        mLoading = CCSprite::create("tts.png");
-        mLoading->setPosition(ccp( 370, 30 ));
-        CCBlink *bk = CCBlink::create(5, 5);
-        CCRepeatForever *rf = CCRepeatForever::create(bk);
+        mLoading = cocos2d::CCSprite::create("tts.png");
+        mLoading->setPosition(cocos2d::ccp( 370, 30 ));
+        CCBlink *bk = cocos2d::CCBlink::create(5, 5);
+        CCRepeatForever *rf = cocos2d::CCRepeatForever::create(bk);
         mLoading->runAction(rf);
         this->addChild(mLoading);
       }
@@ -96,34 +96,34 @@ void Loading::update(float delta)
 
 void Loading::onEnter() 
 {
-  CCNode *sceneintro = CCNode::create();
+  CCNode *sceneintro = cocos2d::CCNode::create();
   this->addChild(sceneintro);
-  CCSprite *left = CCSprite::create("door.png");
-  left->setAnchorPoint(ccp(1, 0));
-  left->setPosition(ccp(SCREEN_WIDTH/2, 0));
+  CCSprite *left = cocos2d::CCSprite::create("door.png");
+  left->setAnchorPoint(cocos2d::ccp(1, 0));
+  left->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, 0));
   sceneintro->addChild(left, 0, 0);
-  CCSprite *right = CCSprite::create("door.png");
+  CCSprite *right = cocos2d::CCSprite::create("door.png");
   right->setScaleX(-1);
-  right->setAnchorPoint(ccp(1, 0));
-  right->setPosition(ccp(SCREEN_WIDTH/2, 0));
+  right->setAnchorPoint(cocos2d::ccp(1, 0));
+  right->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, 0));
   sceneintro->addChild(right, 0, 1);
 
-  mLoading = CCSprite::create("loading.png");
-  mLoading->setPosition(ccp( 400, 30 ));
+  mLoading = cocos2d::CCSprite::create("loading.png");
+  mLoading->setPosition(cocos2d::ccp( 400, 30 ));
   this->addChild(mLoading);
 
   if( mTip )
   {
     /*
     CCString *tip = GameData::randomTip();
-    CCSize size = CCSizeMake(335, 50);
+    CCSize size = cocos2d::CCSizeMake(335, 50);
     CCSize actualSize = tip->sizeWithFont(UIFont->fontWithName(TIP_FONTNAME, 18), size, UILineBreakModeWordWrap);
-    CCLabelTTF *tips = CCLabelTTF::create(tip->getCString(), TIP_FONTNAME, 18, actualSize, kCCTextAlignmentCenter);
-    tips->setAnchorPoint(ccp(0, 0.5f));
-    tips->setPosition(ccp(90, 38));
+    CCLabelTTF *tips = cocos2d::CCLabelTTF::create(tip->getCString(), TIP_FONTNAME, 18, actualSize, kCCTextAlignmentCenter);
+    tips->setAnchorPoint(cocos2d::ccp(0, 0.5f));
+    tips->setPosition(cocos2d::ccp(90, 38));
 
-    CCSprite *bound = CCSprite::create("tipsbg.png");
-    bound->setPosition(ccp(240, 265));
+    CCSprite *bound = cocos2d::CCSprite::create("tipsbg.png");
+    bound->setPosition(cocos2d::ccp(240, 265));
 
     addChild(bound);
     bound->addChild(tips);

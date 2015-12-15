@@ -17,7 +17,7 @@
 #define BOMB_FLY (1.18f)
 #define BOMB_RANGE (30)
 
-Bomb* Bomb::bomb(CCPoint pos, CCPoint dir, CCNode * parent) 
+Bomb* Bomb::bomb(cocos2d::Point pos, cocos2d::Point dir, CCNode * parent) 
 {
     Bomb* ret = Bomb::create();
     ret->mParent = parent;
@@ -30,15 +30,15 @@ void Bomb::onCreate()
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("bullets"));
     mSprite->playGTAnimation(1, true);
-    mSprite->setAnchorPoint(ccp(0.5f, 0.5f));
+    mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     mSprite->setPosition(mPosition);
     mParent->addChild(mSprite, LAYER_MAINROLE+1);
-    CCRotateBy* rb = CCRotateBy::create(1, 720);
-    CCRepeatForever* rf = CCRepeatForever::create(rb);
+    CCRotateBy* rb = cocos2d::CCRotateBy::create(1, 720);
+    CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
     mSprite->runAction(rf);
     //初始化direction
     mDirection.x = (mDirection.x - mPosition.x)/BOMB_FLY;
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/bomb1.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/bomb1.mp3").c_str());
     mTimer = 0;
 }
 
@@ -59,7 +59,7 @@ void Bomb::onUpdate(float delta)
     mSprite->updateGTAnimation(delta);
     //飞行
     mTimer += delta;
-    CCPoint np;
+    cocos2d::Point np;
     np.y = mPosition.y + BOMB_V0*mTimer + (BOMB_G*mTimer*mTimer)/2;
     np.x = mPosition.x + mDirection.x*mTimer;
     if ( np.y <= PLAY_PLAYERLINE-5 ) {
@@ -81,10 +81,10 @@ void Bomb::onUpdate(float delta)
         }
         
         GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("bullets"), 0, false);
-        eff->setAnchorPoint(ccp(0.5f, 0));
+        eff->setAnchorPoint(cocos2d::ccp(0.5f, 0));
         eff->setPosition(np);
         mParent->addChild(eff, LAYER_ROLE);
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/bomb2.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/bomb2.mp3").c_str());
         
         play->manager->removeGameObject(this);
     }
@@ -98,12 +98,12 @@ bool Bomb::isEnemy()
     return true;
 }
 
-CCPoint Bomb::position() 
+cocos2d::Point Bomb::position() 
 {
     return mSprite->getPosition();
 }
 
-void Bomb::onHitback(CCPoint origin) 
+void Bomb::onHitback(cocos2d::Point origin) 
 {
     //do nothing
 }

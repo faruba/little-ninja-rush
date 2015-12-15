@@ -36,7 +36,7 @@ int gEffectLevel[] = {13, 18, 20, 24};
 
 
 
-Item* Item::item(int tid, CCPoint pos, CCNode * parent, bool rock) 
+Item* Item::item(int tid, cocos2d::Point pos, CCNode * parent, bool rock) 
 {
     Item *ret = Item::create();
     ret->mParent = parent;
@@ -56,7 +56,7 @@ Item* Item::item(int tid, CCPoint pos, CCNode * parent, bool rock)
 }
 
 //掉落规则
-void Item::triggerItem(int degree, CCPoint pos) 
+void Item::triggerItem(int degree, cocos2d::Point pos) 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     int rate =45 + 10*degree;
@@ -150,7 +150,7 @@ bool Item::isItemAccept(int item)
     Role * em = (Role*)node;
                 if( em->supportAimAid() )
                 {
-                    CCPoint pos = em->position();
+                    cocos2d::Point pos = em->position();
                     if( pos.x > 0 && pos.x < UniversalFit::sharedUniversalFit()->playSize.width )
                     {
                         cnt++;
@@ -190,39 +190,39 @@ void Item::onCreate()
             break;
         case 1:
         {
-            mSprite = CCSprite::createWithSpriteFrameName("scroll.png");
+            mSprite = cocos2d::CCSprite::createWithSpriteFrameName("scroll.png");
         }
             break;
         case -1:
         {
-            mSprite = CCSprite::createWithSpriteFrameName("candy.png");
+            mSprite = cocos2d::CCSprite::createWithSpriteFrameName("candy.png");
         }
             break;
         default:
         {
-            mSprite = CCSprite::create(CCString::createWithFormat("icon%d.png", ani)->getCString());
+            mSprite = cocos2d::CCSprite::create(cocos2d::CCString::createWithFormat("icon%d.png", ani)->getCString());
         }
             break;
     }
     
     if( mTid < 2 )
     {
-        CCRotateBy *rot = CCRotateBy::create(1, 1080);
-        CCRepeatForever *rep = CCRepeatForever::create(rot);
+        CCRotateBy *rot = cocos2d::CCRotateBy::create(1, 1080);
+        CCRepeatForever *rep = cocos2d::CCRepeatForever::create(rot);
         mSprite->runAction(rep);
         
         mSprite->setScale(0.1f);
-        CCScaleTo *scale1 = CCScaleTo::create(0.15f, 1.2f);
-        CCScaleTo *scale2 = CCScaleTo::create(0.15f, 1);
-        CCSequence *seq = CCSequence::create(scale1, scale2, NULL);
+        CCScaleTo *scale1 = cocos2d::CCScaleTo::create(0.15f, 1.2f);
+        CCScaleTo *scale2 = cocos2d::CCScaleTo::create(0.15f, 1);
+        CCSequence *seq = cocos2d::CCSequence::create(scale1, scale2, NULL);
         mSprite->runAction(seq);
     }
     else
     {
         mSprite->setScale(0.05f);
-        CCScaleTo *scale1 = CCScaleTo::create(0.15f, 0.95f);
-        CCScaleTo *scale2 = CCScaleTo::create(0.15f, 0.8f);
-        CCSequence *seq = CCSequence::create(scale1, scale2, NULL);
+        CCScaleTo *scale1 = cocos2d::CCScaleTo::create(0.15f, 0.95f);
+        CCScaleTo *scale2 = cocos2d::CCScaleTo::create(0.15f, 0.8f);
+        CCSequence *seq = cocos2d::CCSequence::create(scale1, scale2, NULL);
         mSprite->runAction(seq);
     }
     
@@ -262,7 +262,7 @@ void Item::onUpdate(float delta)
     {
         mSpeed = MINLIMIT;
     }
-    CCPoint np = mSprite->getPosition();
+    cocos2d::Point np = mSprite->getPosition();
     np.y += ds;
     np.x += mSpeedX*delta;
     mSprite->setPosition(np);
@@ -286,7 +286,7 @@ void Item::onUpdate(float delta)
         play->getitem = true;
         play->manager->removeGameObject(this);
         //物品生效的代码
-        CCPoint pos = play->mainrole->center();
+        cocos2d::Point pos = play->mainrole->center();
         if( get == 2 )
         {
             pos = play->mainrole2->center();
@@ -300,7 +300,7 @@ void Item::onUpdate(float delta)
             case -1:
             {
                 play->festivalPieces++;
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
             }
                 break;
             case 0:
@@ -322,7 +322,7 @@ void Item::onUpdate(float delta)
                 {
                     play->manager->addGameObject(AnimatedParticle::particleCoin(pos, i));
                 }
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
             }
                 break;
             case 1:
@@ -334,7 +334,7 @@ void Item::onUpdate(float delta)
                 {
                     play->manager->addGameObject(AnimatedParticle::particleCoin(pos, i));
                 }
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
                 
                 //achievement
                 GameRecord::sharedGameRecord()->task->dispatchTask(ACH_COLLECTSCROLL, 1);
@@ -343,29 +343,29 @@ void Item::onUpdate(float delta)
             case 2://八方手里剑
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell0), CCInteger::create(get));
-                GameScript::sharedScript()->invokeSpell0(CCInteger::create(get));
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                GameScript::sharedScript()->invokeSpell0(cocos2d::CCInteger::create(get));
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
             }
                 break;
             case 3://隐身术
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell2), NULL);
                 GameScript::sharedScript()->invokeSpell2(NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
             }
                 break;
             case 4://子弹时间
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell3), NULL);
                 GameScript::sharedScript()->invokeSpell3(NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
             }
                 break;
             case 5://加血
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell4), NULL);
                 GameScript::sharedScript()->invokeSpell4(NULL, NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
                 for( int i=0; i<5; ++i)
                 {
                     play->manager->addGameObject(StaticParticle::particleAddHP(role->center()));
@@ -376,35 +376,35 @@ void Item::onUpdate(float delta)
             {
 //                MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell5), NULL);
                 GameScript::sharedScript()->invokeSpell5(NULL, NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
             }
                 break;
             case 7://一闪
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell6), NULL);
                 GameScript::sharedScript()->invokeSpell6(NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
             }
                 break;
             case 8://流星雨
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell7), NULL);
                 GameScript::sharedScript()->invokeSpell7(NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
             }
                 break;
             case 9://飞镖无限
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell8), NULL);
                 GameScript::sharedScript()->invokeSpell8(NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
             }
                 break;
             case 10://全屏分身
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpellRelease), CCInteger::create(SPELL_SHADOWKILL));
-                GameScript::sharedScript()->invokeSpellRelease(CCInteger::create(SPELL_SHADOWKILL));
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                GameScript::sharedScript()->invokeSpellRelease(cocos2d::CCInteger::create(SPELL_SHADOWKILL));
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
             }
                 break;
         }
@@ -414,7 +414,7 @@ void Item::onUpdate(float delta)
             int level = GameRecord::sharedGameRecord()->item_upgrade[index];
             int effect = gEffectLevel[level];
             GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), effect, false);
-            hiteff2->setAnchorPoint(ccp(0.5f, 0.5f));
+            hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
             hiteff2->setScale(1.5f);
             hiteff2->setPosition(role->center());
             mParent->addChild(hiteff2, LAYER_ROLE);

@@ -9,15 +9,15 @@ bool ABScrollContent::init()
   //by default don't clip anything
   mClipNode->setClipRect(new CCRect(0, 0, 1024, 768));
   addChild(mClipNode);
-  contentNode = CCNode::create();
-  contentNode->setPosition(ccp(0, clipRect.size.height));
+  contentNode = cocos2d::CCNode::create();
+  contentNode->setPosition(cocos2d::ccp(0, clipRect.size.height));
   mClipNode->addChild(contentNode);
 
   auto listener = EventListenerTouchOneByOne::create();
-  listener->onTouchBegan = CC_CALLBACK_2(ABScrollContent::onTouchBegan, this);
-  listener->onTouchEnded = CC_CALLBACK_2(ABScrollContent::onTouchEnded, this);
-  listener->onTouchMoved = CC_CALLBACK_2(ABScrollContent::onTouchMoved, this);
-  listener->onTouchCancelled = CC_CALLBACK_2(ABScrollContent::onTouchEnded, this);
+  listener->onTouchBegan = cocos2d::CC_CALLBACK_2(ABScrollContent::onTouchBegan, this);
+  listener->onTouchEnded = cocos2d::CC_CALLBACK_2(ABScrollContent::onTouchEnded, this);
+  listener->onTouchMoved = cocos2d::CC_CALLBACK_2(ABScrollContent::onTouchMoved, this);
+  listener->onTouchCancelled = cocos2d::CC_CALLBACK_2(ABScrollContent::onTouchEnded, this);
   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
   setTouchEnabled(true);
@@ -27,15 +27,15 @@ bool ABScrollContent::init()
 
 void ABScrollContent::resetContentPosition() 
 {
-  contentNode->setPosition(ccp(0, clipRect.size.height));
+  contentNode->setPosition(cocos2d::ccp(0, clipRect.size.height));
 }
 
-void ABScrollContent::addContent(CCNode * content) 
+void ABScrollContent::addContent(cocos2d::CCNode * content) 
 {
   contentNode->addChild(content);
 }
 
-void ABScrollContent::removeContent(CCNode * content) 
+void ABScrollContent::removeContent(cocos2d::CCNode * content) 
 {
   contentNode->removeChild(content);
 }
@@ -45,12 +45,12 @@ void ABScrollContent::removeAllContent()
   contentNode->removeAllChildrenWithCleanup(true);
 }
 
-void ABScrollContent::setClipRect(CCRect rect) 
+void ABScrollContent::setClipRect(cocos2d::CCRect rect) 
 {
   clipRect = rect;
   mClipNode->setClipRect(new CCRect(UniversalFit::sharedUniversalFit()->transformRect(clipRect)));
 
-  contentNode->setPosition(ccp(0, clipRect.size.height));
+  contentNode->setPosition(cocos2d::ccp(0, clipRect.size.height));
 }
 
 void ABScrollContent::update(float delta) 
@@ -109,7 +109,7 @@ void ABScrollContent::update(float delta)
 
     //运动
     float dy = mFlySpeed*delta;
-    CCPoint np = contentNode->getPosition();
+    cocos2d::Point np = contentNode->getPosition();
     np.y += dy;
     contentNode->setPosition(np);
 
@@ -128,8 +128,8 @@ void ABScrollContent::update(float delta)
 
 bool ABScrollContent::onTouchBegan(Touch * touch, Event * event) 
 {
-  CCPoint pos = touch->getLocationInView();
-  pos = CCDirector::sharedDirector()->convertToGL(pos);
+  cocos2d::Point pos = touch->getLocationInView();
+  pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
   pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
   mTouchBegin = pos;
@@ -146,13 +146,13 @@ bool ABScrollContent::onTouchBegan(Touch * touch, Event * event)
 
 void ABScrollContent::onTouchMoved(Touch * touch, Event * event) 
 {
-  CCPoint pos = touch->getLocationInView();
-  pos = CCDirector::sharedDirector()->convertToGL(pos);
+  cocos2d::Point pos = touch->getLocationInView();
+  pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
   pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
   float dy = pos.y - mBeginPressY;
   float y = mBeginNodeY + dy;
-  CCPoint np = contentNode->getPosition();
+  cocos2d::Point np = contentNode->getPosition();
   np.y = y;
   contentNode->setPosition(np);
   //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
@@ -162,7 +162,7 @@ void ABScrollContent::onTouchMoved(Touch * touch, Event * event)
   {
     float ds = np.y - mLastY;
     //float dt = time - mLastTime;
-      float dt = CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
+      float dt = cocos2d::CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
     mFlySpeed = ds/dt;
   }
   mLastY = np.y;
@@ -173,21 +173,21 @@ void ABScrollContent::onTouchMoved(Touch * touch, Event * event)
 void ABScrollContent::onTouchEnded(Touch * touch, Event * event) 
 {
   mFly = true;
-  CCPoint pos = touch->getLocationInView();
-  pos = CCDirector::sharedDirector()->convertToGL(pos);
+  cocos2d::Point pos = touch->getLocationInView();
+  pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
   pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
   if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
       clipRect.containsPoint(pos) )//only available in achievement state
   {
-    CCPoint offset = contentNode->convertToWorldSpaceAR(ccp(0, 0));
+    cocos2d::Point offset = contentNode->convertToWorldSpaceAR(cocos2d::ccp(0, 0));
     offset = UniversalFit::sharedUniversalFit()->restorePoint(offset);
-    CCPoint fixed = ccpSub(pos, offset);
+    cocos2d::Point fixed = ccpSub(pos, offset);
     fixed.y *= -1;//reverse the y coordinate
     clickPoint = fixed;
     if( clickTarget != NULL )
     {
-      CCCallFunc *callSelectorAction = CCCallFunc::create(clickTarget, clickMethod);
+      CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(clickTarget, clickMethod);
       this->runAction(callSelectorAction);
     }
   }

@@ -19,7 +19,7 @@
 
 
 
-PumpkinFire* PumpkinFire::dart(CCPoint pos, CCPoint dir, CCNode* parent) 
+PumpkinFire* PumpkinFire::dart(cocos2d::Point pos, cocos2d::Point dir, CCNode* parent) 
 {
     PumpkinFire* ret = PumpkinFire::create();
     ret->mParent = parent;
@@ -30,8 +30,8 @@ PumpkinFire* PumpkinFire::dart(CCPoint pos, CCPoint dir, CCNode* parent)
 
 void PumpkinFire::onCreate() 
 {
-    mSprite = CCSprite::createWithSpriteFrameName("fbh_tail.png");
-    mSprite->setAnchorPoint(ccp(0.5f, 0.95f));
+    mSprite = cocos2d::CCSprite::createWithSpriteFrameName("fbh_tail.png");
+    mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.95f));
     mSprite->setPosition(pos);
     mSprite->setRotation(90-CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
     mParent->addChild(mSprite, LAYER_MAINROLE+1);
@@ -60,17 +60,17 @@ void PumpkinFire::onUpdate(float delta)
             if( hit )
             {
                 GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), PUMPKINHIT_EFF2, false);
-                hiteff->setAnchorPoint(ccp(0.5f, 0.5f));
+                hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
                 hiteff->setPosition(em->center());
                 hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(direction) ) + 60*CCRANDOM_0_1());
                 mParent->addChild(hiteff, LAYER_MAINROLE+1);
                 
                 GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), PUMPKINHIT_EFF1, false);
-                hiteff2->setAnchorPoint(ccp(0.5f, 0.5f));
+                hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
                 hiteff2->setPosition(em->center());
                 mParent->addChild(hiteff2, LAYER_ROLE);
                 
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit-fire.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit-fire.mp3").c_str());
                 //achievement enemy burnt
                 GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ENEMYBURNT, 1);
             }
@@ -80,8 +80,8 @@ void PumpkinFire::onUpdate(float delta)
     
         
     //飞行
-    CCPoint ds = ccpMult(direction, speed*delta);
-    CCPoint np = ccpAdd(ds, mSprite->getPosition());
+    cocos2d::Point ds = ccpMult(direction, speed*delta);
+    cocos2d::Point np = ccpAdd(ds, mSprite->getPosition());
     mSprite->setPosition(np);
     pos = np;
        
@@ -108,12 +108,12 @@ bool PumpkinFire::isEnemy()
     return mIsEnemy;
 }
 
-CCPoint PumpkinFire::position() 
+cocos2d::Point PumpkinFire::position() 
 {
     return pos;
 }
 
-void PumpkinFire::onHitback(CCPoint origin) 
+void PumpkinFire::onHitback(cocos2d::Point origin) 
 {
 }
 

@@ -9,9 +9,9 @@ GTAnimatedSprite* GTAnimatedSprite::spriteWithGTAnimation(GTAnimation * animatio
     return ret;
 }
 
-bool GTAnimatedSprite::initWithTexture(CCTexture2D * texture, CCRect rect)
+bool GTAnimatedSprite::initWithTexture(cocos2d::CCTexture2D * texture, CCRect rect)
 {
-    if(CCSprite::initWithTexture(texture, rect))
+    if(cocos2d::CCSprite::initWithTexture(texture, rect))
     {
         mAnimation = NULL;
         mAnimationId = 0;

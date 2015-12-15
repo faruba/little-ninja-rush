@@ -12,7 +12,7 @@ class Loading:public CCLayer
     virtual bool init();  
 
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(Loading, create);
-    static CCScene *loadTo(CCScene* dst, GTLoadList* lst, GTLoadList * ull, bool tip);
+    static CCScene *loadTo(cocos2d::CCScene* dst, GTLoadList* lst, GTLoadList * ull, bool tip);
 
     virtual bool onTouchBegan(Touch * touch, Event * event);
     virtual void onTouchEnded(Touch * touch, Event * event);

@@ -12,7 +12,7 @@
 
 
 
-MoonWave* MoonWave::wave(CCPoint pos) 
+MoonWave* MoonWave::wave(cocos2d::Point pos) 
 {
     MoonWave *ret = MoonWave::create();
     ret->mPos = pos;
@@ -24,7 +24,7 @@ void MoonWave::onCreate()
     GamePlay *play = GamePlay::sharedGamePlay();
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("effect"));
     mSprite->playGTAnimation(26, true);
-    mSprite->setAnchorPoint(ccp(0, 0));
+    mSprite->setAnchorPoint(cocos2d::ccp(0, 0));
     mSprite->setPosition(mPos);
     play->addChild(mSprite, LAYER_MAINROLE+1);
     
@@ -33,7 +33,7 @@ void MoonWave::onCreate()
     play->addChild(mShadow, LAYER_MAINROLE);
     mShadow->toggleShadow(true);
     
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/moonblade2.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/moonblade2.mp3").c_str());
 }
 
 void MoonWave::onUpdate(float delta) 
@@ -44,7 +44,7 @@ void MoonWave::onUpdate(float delta)
   mShadow->syncShadow(delta);
 
   //运动
-  CCPoint np = mSprite->getPosition();
+  cocos2d::Point np = mSprite->getPosition();
   np.x += delta*400;
   mSprite->setPosition(np);
   //碰撞检测
@@ -71,15 +71,15 @@ void MoonWave::onUpdate(float delta)
       bool hit = em->deliverHit(HIT_MAGIC, ccp(1, 0));
       if( hit )
       {
-        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
         GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
-        hiteff->setAnchorPoint(ccp(0.5f, 0.5f));
+        hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
         hiteff->setPosition(em->center());
-        hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(ccp(1, 0)) ) + 60*CCRANDOM_0_1());
+        hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(cocos2d::ccp(1, 0)) ) + 60*CCRANDOM_0_1());
         play->addChild(hiteff, LAYER_MAINROLE+1);
 
         GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
-        hiteff2->setAnchorPoint(ccp(0.5f, 0.5f));
+        hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
         hiteff2->setPosition(em->center());
         play->addChild(hiteff2, LAYER_ROLE);
       }
@@ -87,7 +87,7 @@ void MoonWave::onUpdate(float delta)
   }
   if( ref )
   {
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
   }
   //越界删除
   if( mSprite->getPosition().x > UniversalFit::sharedUniversalFit()->playSize.width+100 )

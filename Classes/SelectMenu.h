@@ -7,7 +7,7 @@
 #include "cocos-ext.h"
 #include "GTAnimatedSprite.h"
 
-USING_NS_CC;
+;
 
 class SelectMenu :
   public cocos2d::CCLayer, 
@@ -17,8 +17,8 @@ class SelectMenu :
 public:
   CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(SelectMenu, create);
   virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-  virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *, const char*);
-  virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject *, const char*);
+  virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
+  virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
 
   virtual bool onTouchBegan(Touch * touch, Event * event);
   virtual void onTouchMoved(Touch * touch, Event * event);
@@ -43,13 +43,13 @@ public:
 
   //intro&outro
   void setSceneIntro();
-  void setSceneOutro(CCScene* newscene);
+  void setSceneOutro(cocos2d::CCScene* newscene);
   void doneOutro();
 private:
   GTAnimatedSprite *mPreview;
   GTAnimatedSprite *mStart;
   float mStartTimer;
-  CCPoint mShadowDir;
+  cocos2d::Point mShadowDir;
 
   float mSlideAngle;
   float mSlideBegin;

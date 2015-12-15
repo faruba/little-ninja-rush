@@ -15,7 +15,7 @@ class BombDart:
   public GameObject
 {
   public:
-    static BombDart* dart(CCPoint pos, CCPoint dir);
+    static BombDart* dart(cocos2d::Point pos, cocos2d::Point dir);
 
     CREATE_FUNC(BombDart);
 
@@ -24,10 +24,10 @@ class BombDart:
     virtual void onDestroy();
 
     GTAnimatedSprite *mSprite;
-    CCPoint mPos;
-    CCPoint mDir;
-    CCPoint mDst;
-    CCPoint mMid;
+    cocos2d::Point mPos;
+    cocos2d::Point mDir;
+    cocos2d::Point mDst;
+    cocos2d::Point mMid;
     float   mTimer;
 
     bool mPaused;

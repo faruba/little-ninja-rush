@@ -14,7 +14,7 @@
 class MoonWave:public GameObject
 {
   public:
-    static MoonWave* wave(CCPoint pos) ;
+    static MoonWave* wave(cocos2d::Point pos) ;
 
     CREATE_FUNC(MoonWave);
 
@@ -25,7 +25,7 @@ class MoonWave:public GameObject
 
     GTAnimatedSprite *mSprite;
     GTGhostShadow *mShadow;
-    CCPoint mPos;
+    cocos2d::Point mPos;
 
 
 

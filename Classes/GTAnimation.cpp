@@ -9,7 +9,7 @@ void GTAnimation::loadAnimationSet(GTAnimation * Anim, const char * Name)
 {
   if( gAniSetDic == NULL )
   {
-    gAniSetDic = CCDictionary::create();
+    gAniSetDic = cocos2d::CCDictionary::create();
     gAniSetDic->retain();
   }
   gAniSetDic->setObject(Anim, std::string(Name));
@@ -96,7 +96,7 @@ bool GTAnimation::addFrame(const char * FrameName)
 {
   if(mCurrentAnimationId < mAnimationCount && mCurrentFrameId < mpAnimationData[mCurrentAnimationId].framecount)
   {
-    mpAnimationData[mCurrentAnimationId].frames[mCurrentFrameId] = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(FrameName);
+    mpAnimationData[mCurrentAnimationId].frames[mCurrentFrameId] = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(FrameName);
     if (mpAnimationData[mCurrentAnimationId].frames[mCurrentFrameId])
     {
       mpAnimationData[mCurrentAnimationId].frames[mCurrentFrameId]->retain();

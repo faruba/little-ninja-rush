@@ -23,7 +23,7 @@ void TutorialPuppet::reset()
 {
   if( mSprite != NULL )
   {
-    mSprite->setPosition(ccp(-100, RESPAWN_YMIN+RESPAWN_Y/2));
+    mSprite->setPosition(cocos2d::ccp(-100, RESPAWN_YMIN+RESPAWN_Y/2));
     mSprite->playGTAnimation(0, true);
   }
   mState = 0;
@@ -31,12 +31,12 @@ void TutorialPuppet::reset()
   mKillable = false;
 }
 
-void TutorialPuppet::setPos(CCPoint pos) 
+void TutorialPuppet::setPos(cocos2d::Point pos) 
 {
   mSprite->setPosition(pos);
 }
 
-void TutorialPuppet::moveTo(CCPoint pos, GameObject* tar, SEL_CallFunc sel) 
+void TutorialPuppet::moveTo(cocos2d::Point pos, GameObject* tar, SEL_CallFunc sel) 
 {
   mTarget = pos;
   mCallback = tar;
@@ -44,7 +44,7 @@ void TutorialPuppet::moveTo(CCPoint pos, GameObject* tar, SEL_CallFunc sel)
   mState = 1;
 }
 
-void TutorialPuppet::fireAt(CCPoint pos, GameObject* tar, SEL_CallFunc sel) 
+void TutorialPuppet::fireAt(cocos2d::Point pos, GameObject* tar, SEL_CallFunc sel) 
 {
 
   mTarget = ccpNormalize(ccpSub(pos, this->center()));
@@ -56,7 +56,7 @@ void TutorialPuppet::fireAt(CCPoint pos, GameObject* tar, SEL_CallFunc sel)
   mSprite->playGTAnimation(6, true);
   //play effect
   GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
-  eff->setPosition(ccp(47, 19));
+  eff->setPosition(cocos2d::ccp(47, 19));
   mSprite->addChild(eff);
 }
 
@@ -77,7 +77,7 @@ void TutorialPuppet::onCreate()
 {
   GamePlay *play = GamePlay::sharedGamePlay();
   mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("enemy"));
-  mSprite->setAnchorPoint(ccp(0.4f, 0.0625f));
+  mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
   play->addChild(mSprite, LAYER_ROLE+RESPAWN_Y/2);
 
   this->reset();
@@ -91,7 +91,7 @@ void TutorialPuppet::onUpdate(float delta)
     case 1://move to
       {
         float step = delta*ENEMY_NNRUNSPEED;
-        CCPoint dis = ccpSub(mTarget, mSprite->getPosition());
+        cocos2d::Point dis = ccpSub(mTarget, mSprite->getPosition());
         if( ccpLengthSQ(dis) <= step*step )
         {
           mSprite->setPosition(mTarget);
@@ -100,13 +100,13 @@ void TutorialPuppet::onUpdate(float delta)
           {
             GameObject* calltarget = mCallback;
             mCallback = NULL;
-            CCCallFunc *callSelectorAction = CCCallFunc::create(calltarget, mSelector);
+            CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget, mSelector);
             GamePlay::sharedGamePlay()->runAction(callSelectorAction);
           }
         }
         else {
-          CCPoint dir = ccpNormalize(dis);
-          CCPoint np = ccpAdd(mSprite->getPosition(), ccpMult(dir, step));
+          cocos2d::Point dir = ccpNormalize(dis);
+          cocos2d::Point np = ccpAdd(mSprite->getPosition(), ccpMult(dir, step));
           mSprite->setPosition(np);
         }
       }
@@ -120,13 +120,13 @@ void TutorialPuppet::onUpdate(float delta)
           {
             mTimer = 0;
             mSprite->playGTAnimation(5, false);
-            play->darts->addObject(play->manager->addGameObject(Dart::dart(CCString::create("dart.png"), this->center(), mTarget, -1, play)));
+            play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), mTarget, -1, play)));
             mState = 0;
             if( mCallback != NULL )
             {
               GameObject* calltarget = mCallback;
               mCallback = NULL;
-              CCCallFunc *callSelectorAction = CCCallFunc::create(calltarget, mSelector);
+              CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget, mSelector);
               GamePlay::sharedGamePlay()->runAction(callSelectorAction);
             }
           }
@@ -139,7 +139,7 @@ void TutorialPuppet::onUpdate(float delta)
         {
           //fix pos
           float ds = delta*play->runspeed;
-          CCPoint np = mSprite->getPosition();
+          cocos2d::Point np = mSprite->getPosition();
           np.x -= ds;
           mSprite->setPosition(np);
 
@@ -150,7 +150,7 @@ void TutorialPuppet::onUpdate(float delta)
             {
               GameObject* calltarget = mCleanCallback;
               mCleanCallback = NULL;
-              CCCallFunc *callSelectorAction = CCCallFunc::create(calltarget, mCleanSelector);
+              CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget, mCleanSelector);
               GamePlay::sharedGamePlay()->runAction(callSelectorAction);
             }
           }
@@ -161,11 +161,11 @@ void TutorialPuppet::onUpdate(float delta)
           if(mTimer>0.3f && !mFlag)
           {
             int n = 1 + randomInt(3);
-            SimpleAudioEngine::sharedEngine()->playEffect(CCString::createWithFormat("ahh%d.mp3", n)->getCString());
+            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCString::createWithFormat("ahh%d.mp3", n)->getCString());
             mFlag = true;
           }
           //fix pos
-          CCPoint np = mSprite->getPosition();
+          cocos2d::Point np = mSprite->getPosition();
           float ra = mTimer/mSprite->playBackTime();
           if( ra > 1 )
           {
@@ -191,7 +191,7 @@ void TutorialPuppet::onDestroy()
   play->removeChild(mSprite, true);
 }
 
-bool TutorialPuppet::collisionWithCircle(CCPoint cc, float rad) 
+bool TutorialPuppet::collisionWithCircle(cocos2d::Point cc, float rad) 
 {
   if( mState == 5 )
   {
@@ -207,12 +207,12 @@ bool TutorialPuppet::collisionWithCircle(CCPoint cc, float rad)
   return false;
 }
 
-CCPoint TutorialPuppet::center() 
+cocos2d::Point TutorialPuppet::center() 
 {
   return ccpAdd(mSprite->getPosition(), ccp(9, 20));
 }
 
-CCPoint TutorialPuppet::position() 
+cocos2d::Point TutorialPuppet::position() 
 {
   return mSprite->getPosition();
 }
@@ -222,12 +222,12 @@ void TutorialPuppet::toggleVisible(bool flag)
   mSprite->setVisible(flag);
 }
 
-void TutorialPuppet::setPosition(CCPoint pos) 
+void TutorialPuppet::setPosition(cocos2d::Point pos) 
 {
   mSprite->setPosition(pos);
 }
 
-bool TutorialPuppet::deliverHit(int type, CCPoint dir) 
+bool TutorialPuppet::deliverHit(int type, cocos2d::Point dir) 
 {
   if( mKillable )
   {
@@ -239,7 +239,7 @@ bool TutorialPuppet::deliverHit(int type, CCPoint dir)
     {
       GameObject* calltarget = mKillCallback;
       mKillCallback = NULL;
-      CCCallFunc *callSelectorAction = CCCallFunc::create(calltarget, mKillSelector);
+      CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget, mKillSelector);
       GamePlay::sharedGamePlay()->runAction(callSelectorAction);
       mKillable = false;
     }

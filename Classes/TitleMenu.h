@@ -12,7 +12,7 @@ class PopOption;
 
 #define RUN (3)
 
-USING_NS_CC;
+;
 USING_NS_CC_EXT;
 
 class TitleMenu : 
@@ -27,7 +27,7 @@ public:
 
   CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TitleMenu, create);
   virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-  virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *, const char*);
+  virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
   virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
   virtual void onEnter();
@@ -59,7 +59,7 @@ public:
     
   // intro&outro
   void setSceneIntro();
-  void setSceneOutro(CCScene* newscene);
+  void setSceneOutro(cocos2d::CCScene* newscene);
   void doneOutro();
 
 private:
@@ -111,7 +111,7 @@ class TitleMenuLayerLoader : public cocosbuilder::NodeLoader {
 class Sakura : public CCObject
 {
 public:
-  static Sakura* create(CCNode *parent);
+  static Sakura* create(cocos2d::CCNode *parent);
 
   virtual bool init();  
 

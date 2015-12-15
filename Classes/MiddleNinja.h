@@ -8,17 +8,17 @@ class MiddleNinja:
 {
   public:
     CREATE_FUNC(MiddleNinja);
-    static MiddleNinja* role(CCNode* parent);
+    static MiddleNinja* role(cocos2d::CCNode* parent);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
 
-    virtual bool collisionWithCircle(CCPoint cc, float rad);
-    virtual bool deliverHit(int type, CCPoint dir);
-    virtual CCPoint position();
-    virtual void setPosition(CCPoint pos);
-    virtual CCPoint center();
+    virtual bool collisionWithCircle(cocos2d::Point cc, float rad);
+    virtual bool deliverHit(int type, cocos2d::Point dir);
+    virtual cocos2d::Point position();
+    virtual void setPosition(cocos2d::Point pos);
+    virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
 
@@ -27,7 +27,7 @@ class MiddleNinja:
     int    mState;
     float  mTimer;
     int    mDartCount;
-    CCPoint  mTargetPos;
+    cocos2d::Point  mTargetPos;
     bool   mFlag;
     float  mSpeed;
 

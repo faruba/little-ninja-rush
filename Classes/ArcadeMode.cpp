@@ -84,7 +84,7 @@ void ArcadeMode::onUpdate(float delta)
           play->count_respawn++;
 
           //set player AI
-          CCPoint mainpos = play->mainrole->position();
+          cocos2d::Point mainpos = play->mainrole->position();
           mainpos.x = UniversalFit::sharedUniversalFit()->screenSize.width + 100;
           play->mainrole->setAI(1, mainpos);
           if( play->mainrole2 != NULL )
@@ -284,7 +284,7 @@ void ArcadeMode::onMainHit()
   play->scheduleMask(ccc3(255, 0, 0), 0.5f, 1);
 }
 
-void ArcadeMode::killScore(int sc, int comb, CCPoint pos) 
+void ArcadeMode::killScore(int sc, int comb, cocos2d::Point pos) 
 {
   if( mState == ARSTATE_RUN )
   {
@@ -334,7 +334,7 @@ void ArcadeMode::killScore(int sc, int comb, CCPoint pos)
   }
 }
 
-void ArcadeMode::addScore(int sc, CCPoint pos) 
+void ArcadeMode::addScore(int sc, cocos2d::Point pos) 
 {
   if( mState == ARSTATE_RUN )
   {

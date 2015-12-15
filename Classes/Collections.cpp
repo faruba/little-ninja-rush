@@ -48,13 +48,13 @@ void Collections::createCollections()
     {
         pieces[i] = 0;
     }
-    newlist = CCArray::create();
+    newlist = cocos2d::CCArray::create();
     newlist->retain();
     life_piece = 0;
     dart_piece = 0;
 }
 
-void Collections::readCollections(CCDictionary* dic) 
+void Collections::readCollections(cocos2d::CCDictionary* dic) 
 {
     magic_piece = gtReadInt(dic, "magic_piece", 0);
     for( int i=0; i<PIECE_COUNT; ++i)
@@ -70,7 +70,7 @@ void Collections::readCollections(CCDictionary* dic)
             newlist->release();
             newlist = NULL;
         }
-        newlist = (CCArray*)nli;
+        newlist = (cocos2d::CCArray*)nli;
         newlist->retain();
     }
     life_piece = gtReadInt(dic, "life_piece", 0);
@@ -82,7 +82,7 @@ void Collections::writeCollections(rapidjson::Document &document)
     document.AddMember("magic_piece", magic_piece, document.GetAllocator());
     for( int i=0; i<PIECE_COUNT; ++i)
     {
-        document.AddMember(CCString::createWithFormat("pieces__%d", i)->getCString(), pieces[i], document.GetAllocator());
+        document.AddMember(cocos2d::CCString::createWithFormat("pieces__%d", i)->getCString(), pieces[i], document.GetAllocator());
     }
     //write CCArray
     {
@@ -92,7 +92,7 @@ void Collections::writeCollections(rapidjson::Document &document)
             CCObject *pObj = NULL;
             CCARRAY_FOREACH(newlist, pObj)
             {
-                CCInteger *pInt = (CCInteger*)pObj;
+                CCInteger *pInt = (cocos2d::CCInteger*)pObj;
                 lst.AddMember("", pInt->getValue(), document.GetAllocator());
             }
         }
@@ -177,7 +177,7 @@ void Collections::addToNewList(int uiid)
 {
     if( !isContainedInNewList(uiid) )
     {
-        CCInteger *n = CCInteger::create(uiid);
+        CCInteger *n = cocos2d::CCInteger::create(uiid);
         newlist->addObject(n);
     }
 }
@@ -186,7 +186,7 @@ void Collections::removeFromNewList(int uiid)
 {
     for( unsigned int i=0; i<newlist->count(); ++i)
     {
-        CCInteger *del = (CCInteger*)(newlist->objectAtIndex(i));
+        CCInteger *del = (cocos2d::CCInteger*)(newlist->objectAtIndex(i));
         int n = del->getValue();
         if( n == uiid)
         {
@@ -205,7 +205,7 @@ bool Collections::isContainedInNewList(int uiid)
 {
     for( unsigned int i=0; i<newlist->count(); ++i)
     {
-        CCInteger *del = (CCInteger*)(newlist->objectAtIndex(i));
+        CCInteger *del = (cocos2d::CCInteger*)(newlist->objectAtIndex(i));
         int n = del->getValue();
         if( n == uiid)
         {

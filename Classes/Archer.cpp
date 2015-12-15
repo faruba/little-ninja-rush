@@ -22,7 +22,7 @@
 #define ARROW_HEIGHT (SCREEN_HEIGHT+60) //箭矢高度
 #define ARROW_TIME (0.5f) //箭矢飞行的时间
 
-Archer* Archer::role(CCNode * parent) 
+Archer* Archer::role(cocos2d::CCNode * parent) 
 {
     Archer *ret = Archer::create();
     ret->mParent = parent;
@@ -41,7 +41,7 @@ void Archer::onCreate()
     mArrow->playGTAnimation(0, false);
     mArrow->setPosition(mTarget);
     mParent->addChild(mArrow, LAYER_ROLE);
-    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/shoot ready.mp3").c_str());
+    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/shoot ready.mp3").c_str());
 }
 
 void Archer::onUpdate(float delta) 
@@ -56,7 +56,7 @@ void Archer::onUpdate(float delta)
                 mArrow->playGTAnimation(1, true);
             }
             bool lock = false;
-            CCPoint pos = play->mainrole->position();
+            cocos2d::Point pos = play->mainrole->position();
             if( play->mainrole2 != NULL)
             {//瞄准离它最近的一个
                 float dis = pos.x - mTarget.x;
@@ -108,7 +108,7 @@ void Archer::onUpdate(float delta)
                 }
                 mMidPoint = ccpMidpoint(mFrom, mTarget);
                 mMidPoint.y += 75 + CCRANDOM_0_1()*100;
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/lock on.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/lock on.mp3").c_str());
             }
         }
             break;
@@ -124,11 +124,11 @@ void Archer::onUpdate(float delta)
             {
                 mTimer = 0;
                 mArrow->playGTAnimation(4, true);
-                mArrow->setAnchorPoint(ccp( 0.5f, 1));
+                mArrow->setAnchorPoint(cocos2d::ccp( 0.5f, 1));
                 mArrow->setPosition(mFrom);
                 mState = 2;
                 play->darts->addObject(this);
-                SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/shooting.mp3").c_str());
+                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/shooting.mp3").c_str());
             }
         }
             break;
@@ -138,10 +138,10 @@ void Archer::onUpdate(float delta)
             if( mTimer < ARROW_TIME )
             {
                 float k = mTimer/ARROW_TIME;
-                CCPoint a = ccpLerp(mFrom, mMidPoint, k);
-                CCPoint b = ccpLerp(mMidPoint, mTarget, k);
-                CCPoint c = ccpLerp(a, b, k);
-                CCPoint dir = ccpSub(c, mArrow->getPosition());
+                cocos2d::Point a = ccpLerp(mFrom, mMidPoint, k);
+                cocos2d::Point b = ccpLerp(mMidPoint, mTarget, k);
+                cocos2d::Point c = ccpLerp(a, b, k);
+                cocos2d::Point dir = ccpSub(c, mArrow->getPosition());
                 //计算角度
                 float rot = 90 - CC_RADIANS_TO_DEGREES(ccpToAngle(dir));
                 mArrow->setRotation(rot);
@@ -150,7 +150,7 @@ void Archer::onUpdate(float delta)
                 if( mAvaiable )
                 {
                     bool hit = false;
-                    CCPoint pos;
+                    cocos2d::Point pos;
                     if( play->mainrole->collisionWithCircle(mArrow->getPosition(), 5) )
                     {
                         hit = play->mainrole->deliverHit(HIT_ARCHER, dir);
@@ -166,15 +166,15 @@ void Archer::onUpdate(float delta)
                     }
                     if( hit )
                     {
-                        SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+                        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
                         GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
-                        hiteff->setAnchorPoint(ccp(0.5f, 0.5f));
+                        hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
                         hiteff->setPosition(pos);
                         hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(dir) ) + 60*CCRANDOM_0_1());
                         mParent->addChild(hiteff, LAYER_MAINROLE+1);
                         
                         GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
-                        hiteff2->setAnchorPoint(ccp(0.5f, 0.5f));
+                        hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
                         hiteff2->setPosition(pos);
                         mParent->addChild(hiteff2, LAYER_ROLE);
                     }
@@ -184,13 +184,13 @@ void Archer::onUpdate(float delta)
                 mState = 3;
                 mArrow->setPosition(mTarget);
                 mArrow->playGTAnimation(5, true);
-                mArrow->setAnchorPoint(ccp(0.5f, 1));
+                mArrow->setAnchorPoint(cocos2d::ccp(0.5f, 1));
             }
         }
             break;
         case 3:
         {
-            CCPoint np = mArrow->getPosition();
+            cocos2d::Point np = mArrow->getPosition();
             float ds = play->runspeed*delta;
             np.x -= ds;
             mArrow->setPosition(np);
@@ -210,17 +210,17 @@ bool Archer::isEnemy()
     return true;
 }
 
-CCPoint Archer::position() 
+cocos2d::Point Archer::position() 
 {
     return mArrow->getPosition();
 }
 
-void Archer::setPosition(CCPoint pos) 
+void Archer::setPosition(cocos2d::Point pos) 
 {
     mArrow->setPosition(pos);
 }
 
-void Archer::onHitback(CCPoint origin) 
+void Archer::onHitback(cocos2d::Point origin) 
 {
     mAvaiable = false;
     mArrow->setVisible(false);

@@ -1,7 +1,7 @@
 #ifndef ___CLASSES_GAMESCENE_H_
 #define ___CLASSES_GAMESCENE_H_
 #include "GameTool.h"
-
+#include "Scene.h"
 #define SCENE_COUNT (7)
 
 class GameScene:public GameObject{
@@ -11,7 +11,7 @@ class GameScene:public GameObject{
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-    static GameScene* scene(CCNode* parent);
+    static GameScene* scene(cocos2d::CCNode* parent);
     static void initSceneSequence();
     static int  getCurrentSceneId();
     static void nextScene();
@@ -22,7 +22,7 @@ class GameScene:public GameObject{
     CCNode* mSceneFgNode;
     RingTile* mTiles;
     int     mCurrScene;
-    cocos2d::Scene* mScene;
+    SceneInterface* mScene;
 
     //int mStepSound;
 

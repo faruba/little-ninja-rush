@@ -1,7 +1,7 @@
 #include "HelloWorldScene.h"
 #include "LogoSplash.h"
 
-USING_NS_CC;
+;
 
 Scene* HelloWorld::createScene()
 {
@@ -85,7 +85,7 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
     Director::getInstance()->startAnimation();
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#if (cocos2d::CC_TARGET_PLATFORM == cocos2d::CC_PLATFORM_IOS)
     exit(0);
 #endif
 }
