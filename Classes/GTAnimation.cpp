@@ -23,7 +23,7 @@ GTAnimation* GTAnimation::loadedAnimationSet(const char * Name)
     pAnimation = (GTAnimation*)gAniSetDic->objectForKey(std::string(Name));
   if(pAnimation == NULL)
   {
-    CCLog("***,  loadedAnimationSet: '%s' is not loaded", Name);
+cocos2d::CCLog("***,  loadedAnimationSet: '%s' is not loaded", Name);
     return NULL;
   }
   return pAnimation;
@@ -151,7 +151,7 @@ float GTAnimation::animationPlaybackTime(int AnimationId)
   return -1;
 }
 
-CCSpriteFrame* GTAnimation::spriteFrame(int AnimationId, int FrameId) 
+cocos2d::CCSpriteFrame* GTAnimation::spriteFrame(int AnimationId, int FrameId) 
 {
   if(AnimationId >=0 && AnimationId<mAnimationCount)
   {

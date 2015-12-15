@@ -6,19 +6,19 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include "GTAnimatedSprite.h"
-
+#include "cocosbuilder/CocosBuilder.h"
 ;
 
 class SelectMenu :
   public cocos2d::CCLayer, 
-  public cocos2d::extension::CCBMemberVariableAssigner,
-  public cocos2d::extension::CCBSelectorResolver
+  public cocosbuilder::CCBMemberVariableAssigner,
+  public cocosbuilder::CCBSelectorResolver
 {
 public:
-  CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(SelectMenu, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(SelectMenu, create);
   virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
   virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
-  virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
+  virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
   virtual bool onTouchBegan(Touch * touch, Event * event);
   virtual void onTouchMoved(Touch * touch, Event * event);
@@ -33,7 +33,7 @@ public:
   void onChangeDart();
   void onChangeBlade();
   void onChangeSpecial();
-  void onBack();
+  void onBack(cocos2d::Ref*);
   void onLeftRole();
   void onRightRole();
   void onClickMe();
@@ -54,7 +54,7 @@ private:
   float mSlideAngle;
   float mSlideBegin;
   float mSlideBeginX;
-  CCSprite *mProtraits[GAME_CHARCOUNT];
+cocos2d::CCSprite *mProtraits[GAME_CHARCOUNT];
   float   mCurrAngle;
   int mTargetRole;
   int mCurrRole;
@@ -62,42 +62,42 @@ private:
   float mSlideTimer;
 
   //--- auto assign ---
-  CCSprite *mShadow;
-  CCNode *mHero;
-  CCSprite *mDesc;
-  CCNode *mHearts;
-  CCNode *mDarts;
-  CCMenuItemImage *mBtnStart;
-  CCMenuItemImage *mBtnDart;
-  CCMenuItemImage *mBtnBlade;
-  CCMenuItemImage *mBtnSpecial;
-  CCSprite *mEquipDart;
-  CCSprite *mEquipBlade;
-  CCSprite *mEquipSpecial;
-  CCNode *mStartPos;
-  CCSprite *mLeftMark;
-  CCSprite *mRightMark;
-  CCLabelBMFont *mMoney;
-  CCSprite *mCoinMark;
-  CCMenuItemImage *mClickMe;
-  CCSprite *mHeroDesc;
-  CCSprite *mTitle;
-  CCSprite *mParam;
-  CCSprite *mBouns;
+cocos2d::CCSprite *mShadow;
+cocos2d::CCNode *mHero;
+cocos2d::CCSprite *mDesc;
+cocos2d::CCNode *mHearts;
+cocos2d::CCNode *mDarts;
+cocos2d::CCMenuItemImage *mBtnStart;
+cocos2d::CCMenuItemImage *mBtnDart;
+cocos2d::CCMenuItemImage *mBtnBlade;
+cocos2d::CCMenuItemImage *mBtnSpecial;
+cocos2d::CCSprite *mEquipDart;
+cocos2d::CCSprite *mEquipBlade;
+cocos2d::CCSprite *mEquipSpecial;
+cocos2d::CCNode *mStartPos;
+cocos2d::CCSprite *mLeftMark;
+cocos2d::CCSprite *mRightMark;
+cocos2d::CCLabelBMFont *mMoney;
+cocos2d::CCSprite *mCoinMark;
+cocos2d::CCMenuItemImage *mClickMe;
+cocos2d::CCSprite *mHeroDesc;
+cocos2d::CCSprite *mTitle;
+cocos2d::CCSprite *mParam;
+cocos2d::CCSprite *mBouns;
 
   //intro&outro
-  CCNode *mSceneIntro;
-  CCScene *mNewScene;
+cocos2d::CCNode *mSceneIntro;
+cocos2d::CCScene *mNewScene;
   bool mIntroFlag;
 
   bool mButtoned;
 };
 
-class SelectMenuLayerLoader : public cocos2d::extension::CCLayerLoader {
+class SelectMenuLayerLoader : public cocosbuilder::NodeLoader {
   public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(SelectMenuLayerLoader, loader);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(SelectMenuLayerLoader, loader);
 
   protected:
-    CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(SelectMenu);
+CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(SelectMenu);
 };
 #endif

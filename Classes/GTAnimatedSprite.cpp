@@ -9,7 +9,7 @@ GTAnimatedSprite* GTAnimatedSprite::spriteWithGTAnimation(GTAnimation * animatio
     return ret;
 }
 
-bool GTAnimatedSprite::initWithTexture(cocos2d::CCTexture2D * texture, CCRect rect)
+bool GTAnimatedSprite::initWithTexture(cocos2d::CCTexture2D * texture, cocos2d::CCRect rect)
 {
     if(cocos2d::CCSprite::initWithTexture(texture, rect))
     {
@@ -32,7 +32,7 @@ void GTAnimatedSprite::playGTAnimation(int AnimationId, bool LoopPlay)
         this->setDisplayFrame(mAnimation->spriteFrame(AnimationId, 0));
     }
     else {
-        CCLog("GameWarning: GTAnimatedSprite::playGTAnimation > Invaild animation id(%d).", AnimationId);
+cocos2d::CCLog("GameWarning: GTAnimatedSprite::playGTAnimation > Invaild animation id(%d).", AnimationId);
     }
 }
 

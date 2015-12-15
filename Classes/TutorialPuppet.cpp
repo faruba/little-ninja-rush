@@ -100,7 +100,7 @@ void TutorialPuppet::onUpdate(float delta)
           {
             GameObject* calltarget = mCallback;
             mCallback = NULL;
-            CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget, mSelector);
+cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget, mSelector);
             GamePlay::sharedGamePlay()->runAction(callSelectorAction);
           }
         }
@@ -126,7 +126,7 @@ void TutorialPuppet::onUpdate(float delta)
             {
               GameObject* calltarget = mCallback;
               mCallback = NULL;
-              CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget, mSelector);
+cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget, mSelector);
               GamePlay::sharedGamePlay()->runAction(callSelectorAction);
             }
           }
@@ -150,7 +150,7 @@ void TutorialPuppet::onUpdate(float delta)
             {
               GameObject* calltarget = mCleanCallback;
               mCleanCallback = NULL;
-              CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget, mCleanSelector);
+cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget, mCleanSelector);
               GamePlay::sharedGamePlay()->runAction(callSelectorAction);
             }
           }
@@ -239,7 +239,7 @@ bool TutorialPuppet::deliverHit(int type, cocos2d::Point dir)
     {
       GameObject* calltarget = mKillCallback;
       mKillCallback = NULL;
-      CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget, mKillSelector);
+cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget, mKillSelector);
       GamePlay::sharedGamePlay()->runAction(callSelectorAction);
       mKillable = false;
     }

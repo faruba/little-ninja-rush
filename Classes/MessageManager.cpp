@@ -53,9 +53,11 @@ void MessageManager::onUpdate(float delta)
     {
         Msg *m = (Msg*)mMsg->objectAtIndex(0);
         //m->target->performSelector(m->sel, m->obj);
-        CCCallFuncN *callSelectorAction = cocos2d::CCCallFuncND::create(m->target, m->sel, m->obj);
+        /* TODO: uncomment this
+cocos2d::CCCallFuncN *callSelectorAction = cocos2d::CCCallFuncND::create(m->target, m->sel, m->obj);
         m->target->runAction(cocos2d::CCSequence::create(callSelectorAction,NULL));
         mMsg->removeObjectAtIndex(0);
+         */
     }
     //mLock->unlock();
 }

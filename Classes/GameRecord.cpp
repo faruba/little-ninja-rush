@@ -2,10 +2,6 @@
 #include "JsonWrapper.h"
 #include "GameTool.h"
 //#include "GameCenterController.h"
-#include "rapidjson/rapidjson.h"
-#include "rapidjson/document.h"
-#include "rapidjson/prettywriter.h"
-#include "rapidjson/filestream.h"
 
 #define ICLOUDFILE "littleninjarush.bin"
 
@@ -85,7 +81,7 @@ void GameRecord::loadGameRecordFromNSData(NSData * rawdata)
 
 NSData* GameRecord::toNSData() 
 {
-    CCDictionary *dic = cocos2d::CCDictionary::create();
+cocos2d::CCDictionary *dic = cocos2d::CCDictionary::create();
 
     this->write(dic);
     
@@ -107,7 +103,7 @@ NSData* GameRecord::toNSData()
 */
 bool GameRecord::init() 
 {
-  CCLog("GameRecord::init");
+cocos2d::CCLog("GameRecord::init");
   collection = Collections::sharedCollections();
   task = Tasks::create();
   task->retain();
@@ -198,35 +194,34 @@ bool GameRecord::init()
 
 void GameRecord::readLocal() 
 {
-  CCLog("GameRecord::readLocal():");
+cocos2d::CCLog("GameRecord::readLocal():");
     
     string path = cocos2d::CCFileUtils::sharedFileUtils()->getWritablePath();
     path += GAME_RECORD_FILENAME;
-    CCLog("RECORD = %s", path.c_str());
-    
-  CCString *data = cocos2d::CCString::createWithContentsOfFile(path.c_str());
+cocos2d::CCLog("RECORD = %s", path.c_str());
+cocos2d::CCString *data = cocos2d::CCString::createWithContentsOfFile(path.c_str());
     
   if( data != NULL )
   {
-    CCDictionary *parsed = (cocos2d::CCDictionary*)JsonWrapper::parseJson(data);
+cocos2d::CCDictionary *parsed = (cocos2d::CCDictionary*)JsonWrapper::parseJson(data);
     if( parsed != NULL )
     {
       this->read(parsed);
     }
     else
     {
-      CCLog("Fail to parse");
+cocos2d::CCLog("Fail to parse");
     }
   }
   else {
-    CCLog("failed to read");
+cocos2d::CCLog("failed to read");
   }
   task->doneReadObjectives();
 }
 
 void GameRecord::writeLocal() 
 {
-  CCLog("GameRecord::writeLocal():");
+cocos2d::CCLog("GameRecord::writeLocal():");
 
   rapidjson::Document document;
   document.SetObject();
@@ -235,18 +230,19 @@ void GameRecord::writeLocal()
 
     string path = cocos2d::CCFileUtils::sharedFileUtils()->getWritablePath();
     path += GAME_RECORD_FILENAME;
-    CCLog("RECORD = %s", path.c_str());
-    
+cocos2d::CCLog("RECORD = %s", path.c_str());
+    /* TODO: uncomment this
   FILE *fp = fopen(path.c_str(), "w");
-  rapidjson::FileStream f(fp);
+    cocos2d::rapidjson::FileStream f(fp);
   rapidjson::PrettyWriter<rapidjson::FileStream> writer(f);
   document.Accept(writer);  // Accept() traverses the DOM and generates Handler events.
   fclose(fp);
+     */
 }
 /*
 void GameRecord::writeToURL(NSURL * url) 
 {
-    CCDictionary *dic = cocos2d::CCDictionary::create();
+cocos2d::CCDictionary *dic = cocos2d::CCDictionary::create();
     
     if( dic != NULL )
     {
@@ -295,13 +291,13 @@ void GameRecord::read(cocos2d::CCDictionary* dic)
     //读取角色数据
     for( int i=0; i<GAME_CHARCOUNT; ++i)
     {
-        CCString *strHP = cocos2d::CCString::createWithFormat("char_hp__%d", i);
-        CCString *strDart = cocos2d::CCString::createWithFormat("char_dart__%d", i);
-        CCString *strContract = cocos2d::CCString::createWithFormat("char_contract__%d", i);
-        CCString *strEquipDart = cocos2d::CCString::createWithFormat("char_equip_dart__%d", i);
-        CCString *strEquipBlade = cocos2d::CCString::createWithFormat("char_equip_blade__%d", i);
-        CCString *strEquipSpell = cocos2d::CCString::createWithFormat("char_equip_spell__%d", i);
-        CCString *strUseCount = cocos2d::CCString::createWithFormat("char_usecount__%d", i);
+cocos2d::CCString *strHP = cocos2d::CCString::createWithFormat("char_hp__%d", i);
+cocos2d::CCString *strDart = cocos2d::CCString::createWithFormat("char_dart__%d", i);
+cocos2d::CCString *strContract = cocos2d::CCString::createWithFormat("char_contract__%d", i);
+cocos2d::CCString *strEquipDart = cocos2d::CCString::createWithFormat("char_equip_dart__%d", i);
+cocos2d::CCString *strEquipBlade = cocos2d::CCString::createWithFormat("char_equip_blade__%d", i);
+cocos2d::CCString *strEquipSpell = cocos2d::CCString::createWithFormat("char_equip_spell__%d", i);
+cocos2d::CCString *strUseCount = cocos2d::CCString::createWithFormat("char_usecount__%d", i);
         char_hp[i] = gtReadInt(dic, strHP->getCString(), 0);
         char_dart[i] = gtReadInt(dic, strDart->getCString(), 0);
         if( i == 0 )
@@ -319,7 +315,7 @@ void GameRecord::read(cocos2d::CCDictionary* dic)
     //读取升级数据
     for( int i=0; i<GAME_UPGRADECOUNT; ++i)
     {
-        CCString *key = cocos2d::CCString::createWithFormat("item_upgrade__%d", i);
+cocos2d::CCString *key = cocos2d::CCString::createWithFormat("item_upgrade__%d", i);
         item_upgrade[i] = gtReadInt(dic, key->getCString(), 0);
     }
     //读取游戏运行数据
@@ -334,7 +330,7 @@ void GameRecord::read(cocos2d::CCDictionary* dic)
     //load iap flags
     for(int i=0; i<IAP_COUNT; ++i)
     {
-        CCString *key = cocos2d::CCString::createWithFormat("iap_flags__%d", i);
+cocos2d::CCString *key = cocos2d::CCString::createWithFormat("iap_flags__%d", i);
         iap_flag[i] = gtReadInt(dic, key->getCString(), 0);
     }
     
@@ -347,15 +343,15 @@ void GameRecord::read(cocos2d::CCDictionary* dic)
     lb_playername->retain();
     for( int i=0; i<LB_RANK; ++i)
     {
-        CCString *strNameKey = cocos2d::CCString::createWithFormat("lead_name__%d", i);
-        CCString *strScoreKey = cocos2d::CCString::createWithFormat("lead_score__%d", i);
+cocos2d::CCString *strNameKey = cocos2d::CCString::createWithFormat("lead_name__%d", i);
+cocos2d::CCString *strScoreKey = cocos2d::CCString::createWithFormat("lead_score__%d", i);
         lb_names[i]->release();
         lb_names[i] = gtReadString(dic, strNameKey->getCString(), LB_EMPITY);
         lb_names[i]->retain();
         lb_scores[i] = gtReadInt(dic, strScoreKey->getCString(), 0);
         //--- load arcade leader board
-        CCString *strArcadeNameKey = cocos2d::CCString::createWithFormat("leada_name__%d", i);
-        CCString *strArcadeScoreKey = cocos2d::CCString::createWithFormat("leada_score__%d", i);
+cocos2d::CCString *strArcadeNameKey = cocos2d::CCString::createWithFormat("leada_name__%d", i);
+cocos2d::CCString *strArcadeScoreKey = cocos2d::CCString::createWithFormat("leada_score__%d", i);
         lba_names[i]->release();
         lba_names[i] = gtReadString(dic, strArcadeNameKey->getCString(), LB_EMPITY);
         lba_names[i]->retain();
@@ -388,17 +384,17 @@ void GameRecord::write(rapidjson::Document &document)
     document.AddMember("silver_trophy", silver_trophy, document.GetAllocator());
     document.AddMember("bronze_trophy", bronze_trophy, document.GetAllocator());
     document.AddMember("golden_steak", golden_steak, document.GetAllocator());
-    
+    /*TODO:Uncomment this
     //写入角色数据
     for( int i=0; i<GAME_CHARCOUNT; ++i)
     {
-        CCString *strHP = cocos2d::CCString::createWithFormat("char_hp__%d", i);
-        CCString *strDart = cocos2d::CCString::createWithFormat("char_dart__%d", i);
-        CCString *strContract = cocos2d::CCString::createWithFormat("char_contract__%d", i);
-        CCString *strEquipDart = cocos2d::CCString::createWithFormat("char_equip_dart__%d", i);
-        CCString *strEquipBlade = cocos2d::CCString::createWithFormat("char_equip_blade__%d", i);
-        CCString *strEquipSpell = cocos2d::CCString::createWithFormat("char_equip_spell__%d", i);
-        CCString *strUseCount = cocos2d::CCString::createWithFormat("char_usecount__%d", i);
+cocos2d::CCString *strHP = cocos2d::CCString::createWithFormat("char_hp__%d", i);
+cocos2d::CCString *strDart = cocos2d::CCString::createWithFormat("char_dart__%d", i);
+cocos2d::CCString *strContract = cocos2d::CCString::createWithFormat("char_contract__%d", i);
+cocos2d::CCString *strEquipDart = cocos2d::CCString::createWithFormat("char_equip_dart__%d", i);
+cocos2d::CCString *strEquipBlade = cocos2d::CCString::createWithFormat("char_equip_blade__%d", i);
+cocos2d::CCString *strEquipSpell = cocos2d::CCString::createWithFormat("char_equip_spell__%d", i);
+cocos2d::CCString *strUseCount = cocos2d::CCString::createWithFormat("char_usecount__%d", i);
         document.AddMember(strHP->getCString(), char_hp[i], document.GetAllocator());
         document.AddMember(strDart->getCString(), char_dart[i], document.GetAllocator());
         document.AddMember(strContract->getCString(), char_contract[i], document.GetAllocator());
@@ -410,7 +406,7 @@ void GameRecord::write(rapidjson::Document &document)
     //写入升级数据
     for( int i=0; i<GAME_UPGRADECOUNT; ++i)
     {
-        CCString *key = cocos2d::CCString::createWithFormat("item_upgrade__%d", i);
+cocos2d::CCString *key = cocos2d::CCString::createWithFormat("item_upgrade__%d", i);
         document.AddMember(key->getCString(), item_upgrade[i], document.GetAllocator());
     }
     //写入游戏运行信息
@@ -425,7 +421,7 @@ void GameRecord::write(rapidjson::Document &document)
     //write iap flags
     for(int i=0; i<IAP_COUNT; ++i)
     {
-        CCString *key = cocos2d::CCString::createWithFormat("iap_flags__%d", i);
+cocos2d::CCString *key = cocos2d::CCString::createWithFormat("iap_flags__%d", i);
         document.AddMember(key->getCString(), iap_flag[i], document.GetAllocator());
     }
     
@@ -433,20 +429,20 @@ void GameRecord::write(rapidjson::Document &document)
     document.AddMember("lead_playername", lb_playername, document.GetAllocator());
     for( int i=0; i<LB_RANK; ++i)
     {
-        CCString *strNameKey = cocos2d::CCString::createWithFormat("lead_name__%d", i);
-        CCString *strScoreKey = cocos2d::CCString::createWithFormat("lead_score__%d", i);
+cocos2d::CCString *strNameKey = cocos2d::CCString::createWithFormat("lead_name__%d", i);
+cocos2d::CCString *strScoreKey = cocos2d::CCString::createWithFormat("lead_score__%d", i);
         document.AddMember(strNameKey->getCString(), lb_names[i], document.GetAllocator());
         document.AddMember(strScoreKey->getCString(), lb_scores[i], document.GetAllocator());
         //--- write arcade leaderboards
-        CCString *strArcadeNameKey = cocos2d::CCString::createWithFormat("leada_name__%d", i);
-        CCString *strArcadeScoreKey = cocos2d::CCString::createWithFormat("leada_score__%d", i);
+cocos2d::CCString *strArcadeNameKey = cocos2d::CCString::createWithFormat("leada_name__%d", i);
+cocos2d::CCString *strArcadeScoreKey = cocos2d::CCString::createWithFormat("leada_score__%d", i);
         document.AddMember(strArcadeNameKey->getCString(), lb_names[i], document.GetAllocator());
         document.AddMember(strArcadeScoreKey->getCString(), lb_scores[i], document.GetAllocator());
     }
     
     document.AddMember("share_facebook", share_facebook, document.GetAllocator());
     document.AddMember("share_twitter", share_twitter, document.GetAllocator());
-    
+    */
     task->writeObjectives(document);
     collection->writeCollections(document);
 }
@@ -502,7 +498,7 @@ void GameRecord::submitScore(int score, CCString* name)
                 if( lb_scores[j] < lb_scores[j+1] )
                 {
                     int ts = lb_scores[j];
-                    CCString *tn = lb_names[j];
+cocos2d::CCString *tn = lb_names[j];
                     lb_scores[j] = lb_scores[j+1];
                     lb_names[j] = lb_names[j+1];
                     lb_scores[j+1] = ts;
@@ -549,7 +545,7 @@ void GameRecord::submitArcadeScore(int score, CCString* name)
                 if( lba_scores[j] < lba_scores[j+1] )
                 {
                     int ts = lba_scores[j];
-                    CCString *tn = lba_names[j];
+cocos2d::CCString *tn = lba_names[j];
                     lba_scores[j] = lba_scores[j+1];
                     lba_names[j] = lba_names[j+1];
                     lba_scores[j+1] = ts;
@@ -577,7 +573,7 @@ void GameRecord::makeCoins(int num)
 
 void GameRecord::purchaseVerified(int pid) 
 {
-    CCLog("Default Purchase Restored #%d", pid);
+cocos2d::CCLog("Default Purchase Restored #%d", pid);
     switch (pid) {
         case 0:
         case 5:
@@ -633,12 +629,12 @@ void GameRecord::purchaseVerified(int pid)
 
 void GameRecord::purchaseCancelled(int pid) 
 {
-    CCLog("Default Purchase Cancelled #%d", pid);
+cocos2d::CCLog("Default Purchase Cancelled #%d", pid);
 }
 
 void GameRecord::purchaseFailed(int pid) 
 {
-    CCLog("Default Purchase Failed #%d", pid);
+cocos2d::CCLog("Default Purchase Failed #%d", pid);
 }
 /*
 void GameRecord::mergeWith(GameRecord * record) 
@@ -681,9 +677,9 @@ void GameRecord::saveToiCloud(NSURL* icloudurl;)
 {
     NSError *error = NULL;
     NSFileManager *manager = NSFileManager->defaultManager();
-    CCArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
-    CCString *documentsDirectory = paths->objectAtIndex(0);
-    CCString *filename = documentsDirectory->stringByAppendingPathComponent(ICLOUDFILE);
+cocos2d::CCArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
+cocos2d::CCString *documentsDirectory = paths->objectAtIndex(0);
+cocos2d::CCString *filename = documentsDirectory->stringByAppendingPathComponent(ICLOUDFILE);
     NSURL *local = NSURL->fileURLWithPath(filename);
     this->writeToURL(local);
     if( manager->isUbiquitousItemAtURL(icloudurl) )
@@ -710,7 +706,7 @@ void GameRecord::saveToiCloud(NSURL* icloudurl;)
 void GameRecord::syncWithiCloud() 
 {
     NSAutoreleasePool *pool = NSAutoreleasePool->alloc()->init();
-    CCLog("begin sync with icloud.");
+cocos2d::CCLog("begin sync with icloud.");
     //检测icloud是否可用
     NSFileManager *manager = NSFileManager->defaultManager();
     NSURL *ubiquity = NULL;
@@ -743,7 +739,7 @@ void GameRecord::syncWithiCloud()
         }
         else
         {//不存在
-            CCLog("No iCould saves found.");
+cocos2d::CCLog("No iCould saves found.");
             revision++;
             this->saveToiCloud(file);
         }
@@ -754,7 +750,7 @@ void GameRecord::syncWithiCloud()
        ,  system not supported.");
     }
     this->writeLocal();
-    CCLog("done sych with icloud");
+cocos2d::CCLog("done sych with icloud");
     pool->drain();
 }
 */
@@ -790,7 +786,7 @@ void GameRecord::setIAPFlag(int value, int iapid)
 /*
 void GameRecord::dealloc() 
 {
-    CCLog("freed GameRecord");
+cocos2d::CCLog("freed GameRecord");
     collection->release();
     task->release();
     free(char_hp);

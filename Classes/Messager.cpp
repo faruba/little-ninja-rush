@@ -35,7 +35,7 @@ void Messager::onCreate()
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("messager"));
     mSprite->setAnchorPoint(cocos2d::ccp(0.5438f, 0.0625f));
-    int y = cocos2d::CCRANDOM_0_1()*RESPAWN_Y;
+    int y = CCRANDOM_0_1()*RESPAWN_Y;
     mSprite->setPosition(cocos2d::ccp(-80, RESPAWN_YMIN+y));
     mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
     

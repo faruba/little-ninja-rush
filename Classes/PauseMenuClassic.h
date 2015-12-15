@@ -10,47 +10,46 @@ class PauseMenuClassic:
   public cocosbuilder::CCBSelectorResolver
 {
 private:
-    CCSprite *mRode;
+cocos2d::CCSprite *mRode;
     CEClipedNode *mBoard;
     
     float mTimer;
     bool mFlag;
     
     //loaded variable
-    CCNode *mObjDaily;
-    CCNode *mObjWeekly;
-    CCNode *mObjMonthly;
-    CCMenu *mMenu;
-    CCLabelTTF *mBest;
-    CCMenuItemImage *mSfx;
-    CCMenuItemImage *mMusic;
-    CCMenuItemImage *mQuit;
-    CCMenuItemImage *mResume;
-    CCMenuItemImage *mRetry;
-    CCMenuItemImage *mChange;
-    CCLabelTTF *mDailyObjective;
-    CCLabelTTF *mWeeklyObjective;
-    CCLabelTTF *mMonthlyObjective;
-    CCNode *mDailyCrown;
-    CCNode *mWeeklyCrown;
-    CCNode *mMonthlyCrown;
-    CCSprite *mDailyIcon;
-    CCSprite *mWeeklyIcon;
-    CCSprite *mMonthlyIcon;
-    
-    CCNode *mClassic;
-    CCNode *mArcade;
+cocos2d::CCNode *mObjDaily;
+cocos2d::CCNode *mObjWeekly;
+cocos2d::CCNode *mObjMonthly;
+cocos2d::CCMenu *mMenu;
+cocos2d::CCLabelTTF *mBest;
+cocos2d::CCMenuItemImage *mSfx;
+cocos2d::CCMenuItemImage *mMusic;
+cocos2d::CCMenuItemImage *mQuit;
+cocos2d::CCMenuItemImage *mResume;
+cocos2d::CCMenuItemImage *mRetry;
+cocos2d::CCMenuItemImage *mChange;
+cocos2d::CCLabelTTF *mDailyObjective;
+cocos2d::CCLabelTTF *mWeeklyObjective;
+cocos2d::CCLabelTTF *mMonthlyObjective;
+cocos2d::CCNode *mDailyCrown;
+cocos2d::CCNode *mWeeklyCrown;
+cocos2d::CCNode *mMonthlyCrown;
+cocos2d::CCSprite *mDailyIcon;
+cocos2d::CCSprite *mWeeklyIcon;
+cocos2d::CCSprite *mMonthlyIcon;
+cocos2d::CCNode *mClassic;
+cocos2d::CCNode *mArcade;
     
     //-- Arcade --
-    CCLabelBMFont *mGoldScore;
-    CCLabelBMFont *mSilverScore;
-    CCLabelBMFont *mBronzeScore;
-    CCLabelBMFont *mGoldPrize;
-    CCLabelBMFont *mSilverPrize;
-    CCLabelBMFont *mBronzePrize;
-    CCSprite *mGoldCoin;
-    CCSprite *mSilverCoin;
-    CCSprite *mBronzeCoin;
+cocos2d::CCLabelBMFont *mGoldScore;
+cocos2d::CCLabelBMFont *mSilverScore;
+cocos2d::CCLabelBMFont *mBronzeScore;
+cocos2d::CCLabelBMFont *mGoldPrize;
+cocos2d::CCLabelBMFont *mSilverPrize;
+cocos2d::CCLabelBMFont *mBronzePrize;
+cocos2d::CCSprite *mGoldCoin;
+cocos2d::CCSprite *mSilverCoin;
+cocos2d::CCSprite *mBronzeCoin;
 
     void updateClassic();
     void updateArcade();

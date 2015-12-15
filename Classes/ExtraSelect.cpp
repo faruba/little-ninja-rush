@@ -11,10 +11,10 @@
 bool ExtraSelect::init() 
 {
     auto listener = EventListenerTouchOneByOne::create();
-    listener->onTouchBegan = cocos2d::CC_CALLBACK_2(ExtraSelect::onTouchBegan, this);
-    listener->onTouchEnded = cocos2d::CC_CALLBACK_2(ExtraSelect::onTouchEnded, this);
-    listener->onTouchMoved = cocos2d::CC_CALLBACK_2(ExtraSelect::onTouchMoved, this);
-    listener->onTouchCancelled = cocos2d::CC_CALLBACK_2(ExtraSelect::onTouchEnded, this);
+    listener->onTouchBegan = CC_CALLBACK_2(ExtraSelect::onTouchBegan, this);
+    listener->onTouchEnded = CC_CALLBACK_2(ExtraSelect::onTouchEnded, this);
+    listener->onTouchMoved = CC_CALLBACK_2(ExtraSelect::onTouchMoved, this);
+    listener->onTouchCancelled = CC_CALLBACK_2(ExtraSelect::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
     this->setTouchEnabled(true);
@@ -23,7 +23,7 @@ bool ExtraSelect::init()
 
 void ExtraSelect::onEnter() 
 {
-  CCNode * node = createUIByCCBI("menu-extramenu", "ExtraMenu", ExtraSelectLayerLoader::loader(), this);
+cocos2d::CCNode * node = createUIByCCBI("menu-extramenu", "ExtraMenu", ExtraSelectLayerLoader::loader(), this);
   if(node != NULL) {
     this->addChild(node);
   }
@@ -34,16 +34,15 @@ void ExtraSelect::onEnter()
 //    }
     
     this->setSceneIntro();
-    
-    CCLayer::onEnter();
+cocos2d::CCLayer::onEnter();
 }
 
 void ExtraSelect::onExit() 
 {
-    CCLayer::onExit();
+cocos2d::CCLayer::onExit();
 }
 
-void ExtraSelect::onBack() 
+void ExtraSelect::onBack(cocos2d::Ref*) 
 {
     if( !mIntroFlag )
     {
@@ -117,7 +116,7 @@ void ExtraSelect::resetButtons()
     mSelect = NULL;
 }
 
-CCSprite* ExtraSelect::checkButton(cocos2d::Point pos) 
+cocos2d::CCSprite* ExtraSelect::checkButton(cocos2d::Point pos) 
 {
     if( mAchievement->getParent()->boundingBox().containsPoint(pos) )
     {
@@ -235,31 +234,30 @@ void ExtraSelect::setSceneOutro(cocos2d::CCScene* newscene)
 void ExtraSelect::doneOutro() 
 {
     mIntroFlag = false;
-    CCDirector::sharedDirector()->replaceScene(mNewScene);
+cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
     mNewScene->release();
 }
 
 
 SEL_MenuHandler ExtraSelect::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraSelect::onBack)
-
-  CCLog(pSelectorName);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraSelect::onBack)
+cocos2d::CCLog(pSelectorName);
     return NULL;
 }
 
-SEL_CCControlHandler ExtraSelect::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   ExtraSelect::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-  CCLog("Control");
+cocos2d::CCLog("Control");
   return NULL;
 }
 bool ExtraSelect::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 //  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMask", CCLayerColor*, mMask) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mAchievement", CCSprite*, mAchievement)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStatistics", CCSprite*, mStatistics)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTips", CCSprite*, mTips)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCredits", CCSprite*, mCredits)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mAchievement", CCSprite*, mAchievement)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStatistics", CCSprite*, mStatistics)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTips", CCSprite*, mTips)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCredits", CCSprite*, mCredits)
 //  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook", CCSprite*, mFacebook)
 //  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterBanner", CCSprite*, mTwitterBanner)
 //  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter", CCSprite*, mTwitter)

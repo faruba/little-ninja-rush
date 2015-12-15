@@ -40,7 +40,7 @@ void Starfall::onUpdate(float delta)
             cocos2d::Point pos;
             pos.x = 50 + (UniversalFit::sharedUniversalFit()->playSize.width - 150)*CCRANDOM_0_1();
             pos.y = SCREEN_HEIGHT + 50 + 100*CCRANDOM_0_1();
-            float angle = cocos2d::CC_DEGREES_TO_RADIANS(-80.0f + 20.0f*CCRANDOM_0_1());
+            float angle = CC_DEGREES_TO_RADIANS(-80.0f + 20.0f*CCRANDOM_0_1());
             cocos2d::Point dir = ccpForAngle(angle);
             play->manager->addGameObject(Star::star(pos, dir));
         }

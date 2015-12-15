@@ -17,7 +17,7 @@ StaticParticle* StaticParticle::particleSakura(cocos2d::Point pos)
     pat->mSprite = cocos2d::CCSprite::createWithSpriteFrameName("skblade6.png");
     pat->mSprite->setPosition(pos);
     pat->mSprite->retain();
-    pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(180.0f*CCRANDOM_0_1()));
+    pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(180.0f*CCRANDOM_0_1()));
     pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
     pat->mLife = 2.0f + 2.0f*CCRANDOM_0_1();
     pat->mRotate = 60;
@@ -37,10 +37,10 @@ StaticParticle* StaticParticle::particleIce(cocos2d::Point pos, bool up)
     pat->mSprite->retain();
     if( up )
     {
-        pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(180.0f*CCRANDOM_0_1()));
+        pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(180.0f*CCRANDOM_0_1()));
     }
     else {
-        pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(360.0f*CCRANDOM_0_1()));
+        pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(360.0f*CCRANDOM_0_1()));
     }
     pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
     pat->mLife = 1.0f + 1.0f*CCRANDOM_0_1();
@@ -58,7 +58,7 @@ StaticParticle* StaticParticle::particleShadow(cocos2d::Point pos)
     StaticParticle *pat = StaticParticle::create();
     pat->mSprite = cocos2d::CCSprite::createWithSpriteFrameName("ayblade7.png");
     pat->mSprite->retain();
-    pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(180.0f*CCRANDOM_0_1()));
+    pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(180.0f*CCRANDOM_0_1()));
     cocos2d::Point npos = ccpAdd(pos, ccpMult(pat->mDir, 20));
     pat->mSprite->setPosition(npos);
     pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
@@ -80,10 +80,10 @@ StaticParticle* StaticParticle::particleIceAir(cocos2d::Point pos, bool up)
     pat->mSprite->retain();
     if( up )
     {
-        pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(180.0f*CCRANDOM_0_1()));
+        pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(180.0f*CCRANDOM_0_1()));
     }
     else {
-        pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(360.0f*CCRANDOM_0_1()));
+        pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(360.0f*CCRANDOM_0_1()));
     }
     //cocos2d::Point npos = ccpAdd(pos, ccpMult(pat->mDir, 20));
     pat->mSprite->setPosition(pos);
@@ -102,12 +102,12 @@ StaticParticle* StaticParticle::particleIceAir(cocos2d::Point pos, bool up)
 StaticParticle* StaticParticle::particleIcePiece(cocos2d::Point pos, cocos2d::Point dir) 
 {
     cocos2d::Point odir = ccpMult(dir, -1);
-    float angle = cocos2d::CC_RADIANS_TO_DEGREES(ccpToAngle(odir));
+    float angle = CC_RADIANS_TO_DEGREES(ccpToAngle(odir));
     StaticParticle* pat = StaticParticle::create();
     pat->mSprite = cocos2d::CCSprite::createWithSpriteFrameName("bblade6.png");
     pat->mSprite->setPosition(pos);
     pat->mSprite->retain();
-    pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
+    pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
     pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
     pat->mLife = 1.0f*CCRANDOM_0_1();
     pat->mRotate = 180;
@@ -145,7 +145,7 @@ StaticParticle* StaticParticle::particleDart(cocos2d::Point pos, cocos2d::Point 
 {
     StaticParticle *pat = NULL;
     cocos2d::Point odir = ccpMult(dir, -1);
-    float angle = cocos2d::CC_RADIANS_TO_DEGREES(ccpToAngle(odir));
+    float angle = CC_RADIANS_TO_DEGREES(ccpToAngle(odir));
     switch (typ) {
         case 1://火镖
         {
@@ -153,7 +153,7 @@ StaticParticle* StaticParticle::particleDart(cocos2d::Point pos, cocos2d::Point 
             pat->mSprite = cocos2d::CCSprite::createWithSpriteFrameName("fbh3.png");
             pat->mSprite->setPosition(pos);
             pat->mSprite->retain();
-            pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
+            pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
             pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
             pat->mLife = 1.0f*CCRANDOM_0_1();
             pat->mRotate = 180;
@@ -171,7 +171,7 @@ StaticParticle* StaticParticle::particleDart(cocos2d::Point pos, cocos2d::Point 
             pat->mSprite = cocos2d::CCSprite::createWithSpriteFrameName("snow.png");
             pat->mSprite->setPosition(pos);
             pat->mSprite->retain();
-            pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
+            pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
             pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
             pat->mLife = 1.0f*CCRANDOM_0_1();
             pat->mRotate = 180;
@@ -189,7 +189,7 @@ StaticParticle* StaticParticle::particleDart(cocos2d::Point pos, cocos2d::Point 
             pat->mSprite = cocos2d::CCSprite::createWithSpriteFrameName("skblade6.png");
             pat->mSprite->setPosition(pos);
             pat->mSprite->retain();
-            pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
+            pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
             pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
             pat->mLife = 1.0f*CCRANDOM_0_1();
             pat->mRotate = 180;
@@ -207,7 +207,7 @@ StaticParticle* StaticParticle::particleDart(cocos2d::Point pos, cocos2d::Point 
             pat->mSprite = cocos2d::CCSprite::createWithSpriteFrameName("fbzk_tail2.png");
             pat->mSprite->setPosition(pos);
             pat->mSprite->retain();
-            pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
+            pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
             pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
             pat->mLife = 1.0f*CCRANDOM_0_1();
             pat->mRotate = 180;
@@ -225,7 +225,7 @@ StaticParticle* StaticParticle::particleDart(cocos2d::Point pos, cocos2d::Point 
             pat->mSprite = cocos2d::CCSprite::createWithSpriteFrameName("ayblade7.png");
             pat->mSprite->setPosition(pos);
             pat->mSprite->retain();
-            pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
+            pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
             pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
             pat->mLife = 0.5f*CCRANDOM_0_1();
             pat->mRotate = 800;
@@ -267,7 +267,7 @@ StaticParticle* StaticParticle::particleAddHP(cocos2d::Point pos)
     cocos2d::Point diter = ccp( -20 + 40*CCRANDOM_0_1(), -20 + 40*CCRANDOM_0_1() );
     pat->mSprite->setPosition(ccpAdd(pos, diter));
     pat->mSprite->retain();
-    pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(90));
+    pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(90));
     pat->mSpeed = 50.0f + 50.0f*CCRANDOM_0_1();
     pat->mLife = 1.0f + 1.0f*CCRANDOM_0_1();
     pat->mRotate = 0;
@@ -286,7 +286,7 @@ StaticParticle* StaticParticle::particleStepDust(cocos2d::Point pos)
     cocos2d::Point diter = ccp( -20+20*CCRANDOM_0_1(), 6*CCRANDOM_0_1() );
     pat->mSprite->setPosition(ccpAdd(pos, diter));
     pat->mSprite->retain();
-    pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(100 + 60*CCRANDOM_0_1()));
+    pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(100 + 60*CCRANDOM_0_1()));
     pat->mSpeed = 50 + 50*CCRANDOM_0_1();
     pat->mLife = 0.15f + 0.15f*CCRANDOM_0_1();
     pat->mRotate = 300;
@@ -304,7 +304,7 @@ StaticParticle* StaticParticle::particlePumpkinTail(cocos2d::Point pos, int typ)
     StaticParticle *pat = StaticParticle::create();
     pat->mSprite = cocos2d::CCSprite::createWithSpriteFrameName("hw-ngh-tx.png");
     pat->mSprite->retain();
-    pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(360.0f*CCRANDOM_0_1()));
+    pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(360.0f*CCRANDOM_0_1()));
     cocos2d::Point npos = ccpAdd(pos, ccpMult(pat->mDir, 10));
     pat->mSprite->setPosition(npos);
     pat->mSpeed = 50.0f + 50.0f*CCRANDOM_0_1();

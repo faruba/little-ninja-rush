@@ -25,8 +25,8 @@ void ReflectDart::onCreate()
     mSprite = cocos2d::CCSprite::createWithSpriteFrameName("tjshuriken.png");
     mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     mSprite->setPosition(mPos);
-    CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-    CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
     mSprite->runAction(rf);
     GamePlay::sharedGamePlay()->addChild(mSprite, LAYER_MAINROLE+1);
     
@@ -82,8 +82,8 @@ void ReflectDart::onUpdate(float delta)
     cocos2d::Point np = ccpAdd(ds, mSprite->getPosition());
     mSprite->setPosition(np);
     //伤害判定
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;
         if( em->collisionWithCircle(mSprite->getPosition(), 20) )//杀伤半径
@@ -109,7 +109,7 @@ void ReflectDart::onUpdate(float delta)
     }
     //弹镖
   node = NULL;
-  CCARRAY_FOREACH(play->darts, node)
+CCARRAY_FOREACH(play->darts, node)
   {
     Darts *dr = (Darts*)node;
         if( dr->isEnemy() && exCollisionWithCircles(mSprite->getPosition(), 0, 0, 30, dr->position(), 7) && dr->position().y > mSprite->getPosition().y )

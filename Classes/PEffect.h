@@ -21,12 +21,11 @@ class Wood:
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-
-    CCNode *mParent;
+cocos2d::CCNode *mParent;
     cocos2d::Point mPos;
     cocos2d::Point mDir;
     cocos2d::Point mAnchor;
-    CCSprite *mSprite;
+cocos2d::CCSprite *mSprite;
     float mTimer;
 
     GOHandler mTarget;

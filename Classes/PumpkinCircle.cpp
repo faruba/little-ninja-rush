@@ -141,7 +141,7 @@ void PumpkinCircle::removePumpkin(int pid)
     }
     else
     {
-        CCLog("Error: Invaild pumpkin id.");
+cocos2d::CCLog("Error: Invaild pumpkin id.");
     }
 }
 
@@ -211,8 +211,8 @@ void PumpkinCircle::onUpdate(float delta)
             case 1://steel
             {
               bool hit = false;
-              CCObject* node = NULL;
-              CCARRAY_FOREACH(play->darts, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->darts, node)
               {
                 Darts *dr = (Darts*)node;
                 if( dr->isEnemy() && exCollisionWithCircles(mSprites[i]->getPosition(), 0, 0, STEEL_RADIUS, dr->position(), 15) )
@@ -236,8 +236,8 @@ void PumpkinCircle::onUpdate(float delta)
                     bool found = false;
                     cocos2d::Point target;
                     {
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;
                             if( em->supportAimAid() && em->position().x > 0 && em->position().x < UniversalFit::sharedUniversalFit()->playSize.width )

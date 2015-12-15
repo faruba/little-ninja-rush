@@ -30,7 +30,7 @@ CFAbsoluteTime CFAbsoluteTimeGetCurrent();
 #endif
 
 #define LNR_SCENE_METHOD(T) static CCScene* scene() { \
-    CCScene *ret = cocos2d::CCScene::create(); \
+cocos2d::CCScene *ret = cocos2d::CCScene::create(); \
     T *tm = T::create(); \
     ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor); \
     ret->setAnchorPoint(cocos2d::ccp(0, 0)); \
@@ -70,14 +70,14 @@ float gtReadFloat(cocos2d::CCDictionary *dic, const char *key, float def=0.0f);
 
 double gtReadDouble(cocos2d::CCDictionary *dic, const char *key, double def=0.0f);
 
-CCString* gtReadString(cocos2d::CCDictionary *dic, const char *key, CCString *def=NULL);
+cocos2d::CCString* gtReadString(cocos2d::CCDictionary *dic, const char *key, CCString *def=NULL);
 
 void unloadTextureFromeSpriteFrameFile(const char *plist);
 
 //UIImage* makeScreenshot();
-CCSequence *createScaleSequence(float fDuration[], float fScale[], int count);
-CCNode *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, CCObject *target);
+cocos2d::CCSequence *createScaleSequence(float fDuration[], float fScale[], int count);
+cocos2d::CCNode *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, CCObject *target);
 void doSceneIntro(cocos2d::CCNode *&mSceneIntro, CCNode *target);
-CCScene* doSceneOutro(cocos2d::CCScene* mNewScene, CCNode *&mSceneIntro, SEL_CallFunc callBack, CCNode *target);
+cocos2d::CCScene* doSceneOutro(cocos2d::CCScene* mNewScene, CCNode *&mSceneIntro, SEL_CallFunc callBack, CCNode *target);
 
 #endif

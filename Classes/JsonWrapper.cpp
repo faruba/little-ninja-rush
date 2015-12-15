@@ -7,20 +7,19 @@
 //
 
 #include "JsonWrapper.h"
-#include "rapidjson.h"
-#include "document.h"
+#include "json/rapidjson.h"
+#include "json/document.h"
 #include "CCNumber.h"
-
 using namespace std;
 using namespace cocos2d;
 using namespace rapidjson;
 
-CCObject* processNode(const rapidjson::Value& value)
+cocos2d::CCObject* processNode(const rapidjson::Value& value)
 {
-    CCObject *pRet = NULL;
+cocos2d::CCObject *pRet = NULL;
     if( value.IsArray() )
     {
-        CCArray *pArray = new CCArray();
+cocos2d::CCArray *pArray = new CCArray();
         for(SizeType i=0; i<value.Size(); ++i)
         {
             const rapidjson::Value& sub = value[i];
@@ -30,7 +29,7 @@ CCObject* processNode(const rapidjson::Value& value)
     }
     else if( value.IsObject() )
     {
-        CCDictionary *pDictionary = new CCDictionary();
+cocos2d::CCDictionary *pDictionary = new CCDictionary();
         for(rapidjson::Value::ConstMemberIterator iter = value.MemberBegin(); iter != value.MemberEnd(); ++iter)
         {
             pDictionary->setObject(processNode(iter->value), string(iter->name.GetString()));
@@ -39,12 +38,12 @@ CCObject* processNode(const rapidjson::Value& value)
     }
     else if( value.IsString() )
     {
-        CCString *pString = new CCString(value.GetString());
+cocos2d::CCString *pString = new CCString(value.GetString());
         pRet = pString;
     }
     else if( value.IsBool() )
     {
-        CCBool *pBool = new CCBool(value.GetBool());
+cocos2d::CCBool *pBool = new CCBool(value.GetBool());
         pRet = pBool;
     }
     else if( value.IsNumber() )
@@ -72,9 +71,9 @@ CCObject* processNode(const rapidjson::Value& value)
     return pRet;
 }
 
-CCObject* JsonWrapper::parseJson(cocos2d::CCString *pStr)
+cocos2d::CCObject* JsonWrapper::parseJson(cocos2d::CCString *pStr)
 {
-    CCObject *pRet = NULL;
+cocos2d::CCObject *pRet = NULL;
     
     Document doc;
     doc.Parse<0>(pStr->getCString());

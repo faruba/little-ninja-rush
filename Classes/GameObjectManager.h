@@ -38,9 +38,9 @@ class GameObjectManager:
     void removeGameObject(GameObject* ObjId);
     void clear();
   private:
-    CCArray *mList;
-    CCArray *mCache;
-    CCArray *mFree;
+cocos2d::CCArray *mList;
+cocos2d::CCArray *mCache;
+cocos2d::CCArray *mFree;
     bool mCaching;
 
     int mAddCount;

@@ -11,7 +11,7 @@ void CEClipedNode::setClipRect(cocos2d::CCRect *rect)
   clipRectInPixel.origin.y *= factor;
   clipRectInPixel.size.width *= factor;
   clipRectInPixel.size.height *= factor;
-    CCLog("setClip(%f, %f, %f, %f)",clipRectInPixel.origin.x, clipRectInPixel.origin.y, clipRectInPixel.size.width, clipRectInPixel.size.height);
+cocos2d::CCLog("setClip(%f, %f, %f, %f)",clipRectInPixel.origin.x, clipRectInPixel.origin.y, clipRectInPixel.size.width, clipRectInPixel.size.height);
 }
 
 void CEClipedNode::visit(Renderer *renderer, const Mat4& parentTransform, uint32_t parentFlags)
@@ -20,8 +20,8 @@ void CEClipedNode::visit(Renderer *renderer, const Mat4& parentTransform, uint32
 
   glScissor(clipRectInPixel.origin.x, clipRectInPixel.origin.y,
       clipRectInPixel.size.width, clipRectInPixel.size.height);
-
-  CCNode::visit(Renderer *renderer, const Mat4& parentTransform, uint32_t parentFlags);
-
+    /* TODO: uncomment this
+cocos2d::CCNode::visit(Renderer *renderer, const Mat4& parentTransform, uint32_t parentFlags);
+*/
   glDisable(GL_SCISSOR_TEST);
 }

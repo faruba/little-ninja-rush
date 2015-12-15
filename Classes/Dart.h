@@ -16,12 +16,11 @@ class Dart:
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-
-    CCNode* mParent;
-    CCSprite* mSprite;
-    CCSprite* mTail;
+cocos2d::CCNode* mParent;
+cocos2d::CCSprite* mSprite;
+cocos2d::CCSprite* mTail;
     GTAnimatedSprite *mSTail;
-    CCString *mShap;
+cocos2d::CCString *mShap;
     bool mPaused;
     bool mIsEnemy;
     int mHitEffect;

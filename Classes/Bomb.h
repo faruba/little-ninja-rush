@@ -25,8 +25,7 @@ class Bomb:
     virtual bool isEnemy();
     virtual cocos2d::Point position();
     virtual void onHitback(cocos2d::Point origin);
-
-    CCNode *mParent;
+cocos2d::CCNode *mParent;
 
     GTAnimatedSprite *mSprite;
     cocos2d::Point mPosition;

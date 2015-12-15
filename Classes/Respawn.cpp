@@ -75,7 +75,7 @@ void Respawn::setPipleLine(int pc)
     }
     int old = mPiple;
     mPiple = pc;
-    CCLog("PIPLE = %d", mPiple);//hammer debug
+cocos2d::CCLog("PIPLE = %d", mPiple);//hammer debug
     for(int i=old; i<pc; ++i)
     {
         mPT[i] = i - old;
@@ -288,7 +288,7 @@ void Respawn::updateArcade(float delta)
 {
     if( mPiple > 100 )
     {
-        CCLog("XXX PIPLE = %d", mPiple);
+cocos2d::CCLog("XXX PIPLE = %d", mPiple);
         assert(false);
     }
     

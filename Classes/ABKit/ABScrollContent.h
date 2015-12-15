@@ -14,9 +14,8 @@ public:
   virtual bool onTouchBegan(Touch * touch, Event * event);
   virtual void onTouchMoved(Touch * touch, Event * event);
   virtual void onTouchEnded(Touch * touch, Event * event);
-  virtual void onTouchCancelled(Touch * touch, Event * event);
 
-  CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ABScrollContent, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ABScrollContent, create);
   void setClipRect(cocos2d::CCRect clipRect);
 
   void resetContentPosition();
@@ -25,8 +24,8 @@ public:
   void removeAllContent();
 
   CEClipedNode *mClipNode;
-  CCNode *contentNode;
-  CCObject *clickTarget;
+cocos2d::CCNode *contentNode;
+cocos2d::CCObject *clickTarget;
   SEL_CallFunc clickMethod;
   cocos2d::Point clickPoint;
 
@@ -38,9 +37,8 @@ private:
   float mLastY;
   float mFlySpeed;
   //CFAbsoluteTime mLastTime;
-    struct cc_timeval mLastTime;
-
-  CCRect clipRect;
+    time_t mLastTime;
+cocos2d::CCRect clipRect;
   
 
 };

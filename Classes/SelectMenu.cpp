@@ -38,17 +38,16 @@ bool SelectMenu::init()
     return false;
 
   auto listener = EventListenerTouchOneByOne::create();
-  listener->onTouchBegan = cocos2d::CC_CALLBACK_2(SelectMenu::onTouchBegan, this);
-  listener->onTouchEnded = cocos2d::CC_CALLBACK_2(SelectMenu::onTouchEnded, this);
-  listener->onTouchMoved = cocos2d::CC_CALLBACK_2(SelectMenu::onTouchMoved, this);
-  listener->onTouchCancelled = cocos2d::CC_CALLBACK_2(SelectMenu::onTouchEnded, this);
+  listener->onTouchBegan = CC_CALLBACK_2(SelectMenu::onTouchBegan, this);
+  listener->onTouchEnded = CC_CALLBACK_2(SelectMenu::onTouchEnded, this);
+  listener->onTouchMoved = CC_CALLBACK_2(SelectMenu::onTouchMoved, this);
+  listener->onTouchCancelled = CC_CALLBACK_2(SelectMenu::onTouchEnded, this);
   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 
   this->scheduleUpdate();
   this->setTouchEnabled(true);
-
-  CCNode *taskcomplete = cocos2d::CCNode::create();
+cocos2d::CCNode *taskcomplete = cocos2d::CCNode::create();
   taskcomplete->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, 5);
 
@@ -64,8 +63,7 @@ void SelectMenu::onEnter()
   PublicLoad::menuSelect()->loadAll();
   mSceneIntro = NULL;
   mIntroFlag = false;
-
-  CCNode *ui = createUIByCCBI("menu-select", "SelectMenu", SelectMenuLayerLoader::loader(), this);
+cocos2d::CCNode *ui = createUIByCCBI("menu-select", "SelectMenu", SelectMenuLayerLoader::loader(), this);
   this->addChild(ui);
   mStart = NULL;
 
@@ -101,16 +99,15 @@ void SelectMenu::onEnter()
   mSlideTimer = -1;
   mTargetRole = -1;
   //添加动画
-  CCMoveBy *lmb1 = cocos2d::CCMoveBy::create(0.2f, ccp(-10, 0));
-  CCMoveBy *lmb2 = cocos2d::CCMoveBy::create(0.2f, ccp(10, 0));
-  CCSequence *lseq = (cocos2d::CCSequence*)CCSequence::create(lmb1, lmb2, NULL);
-  CCRepeatForever *lrep = cocos2d::CCRepeatForever::create(lseq);
+cocos2d::CCMoveBy *lmb1 = cocos2d::CCMoveBy::create(0.2f, ccp(-10, 0));
+cocos2d::CCMoveBy *lmb2 = cocos2d::CCMoveBy::create(0.2f, ccp(10, 0));
+cocos2d::CCSequence *lseq = (cocos2d::CCSequence*)CCSequence::create(lmb1, lmb2, NULL);
+cocos2d::CCRepeatForever *lrep = cocos2d::CCRepeatForever::create(lseq);
   mLeftMark->runAction(lrep);
-
-  CCMoveBy *rmb1 = cocos2d::CCMoveBy::create(0.2f, ccp(10, 0));
-  CCMoveBy *rmb2 = cocos2d::CCMoveBy::create(0.2f, ccp(-10, 0));
-  CCSequence *rseq = (cocos2d::CCSequence*)CCSequence::create(rmb1, rmb2, NULL);
-  CCRepeatForever *rrep = cocos2d::CCRepeatForever::create(rseq);
+cocos2d::CCMoveBy *rmb1 = cocos2d::CCMoveBy::create(0.2f, ccp(10, 0));
+cocos2d::CCMoveBy *rmb2 = cocos2d::CCMoveBy::create(0.2f, ccp(-10, 0));
+cocos2d::CCSequence *rseq = (cocos2d::CCSequence*)CCSequence::create(rmb1, rmb2, NULL);
+cocos2d::CCRepeatForever *rrep = cocos2d::CCRepeatForever::create(rseq);
   mRightMark->runAction(rrep);
   mCurrRole = GameRecord::sharedGameRecord()->curr_char;
   this->updateCharacterInfo(mCurrRole);
@@ -125,8 +122,7 @@ void SelectMenu::onEnter()
   {
     SimpleAudioEngine::sharedEngine()->playBackgroundMusic("menu.mp3", true);
   }
-
-  CCLayer::onEnter();
+cocos2d::CCLayer::onEnter();
 }
 void SelectMenu::updateCharacterInfo(int rid)
 {
@@ -136,7 +132,7 @@ void SelectMenu::updateCharacterInfo(int rid)
     mHearts->removeAllChildrenWithCleanup(true);
     for(int i=0; i<GameData::roleCurrHP(rid); ++i)
     {
-      CCSprite *heart = cocos2d::CCSprite::createWithSpriteFrameName("heart.png");
+cocos2d::CCSprite *heart = cocos2d::CCSprite::createWithSpriteFrameName("heart.png");
       heart->setPosition(cocos2d::ccp(i*(1+heart->getContentSize().width), 0));
       mHearts->addChild(heart);
     }
@@ -156,7 +152,7 @@ void SelectMenu::updateCharacterInfo(int rid)
   }
   for(int i=0; i<GameData::roleCurrDart(rid); ++i)
   {
-    CCSprite *dart = cocos2d::CCSprite::createWithSpriteFrameName("ui-dart.png");
+cocos2d::CCSprite *dart = cocos2d::CCSprite::createWithSpriteFrameName("ui-dart.png");
     dart->setPosition(cocos2d::ccp(i*dartoff, 0));
     mDarts->addChild(dart);
   }
@@ -212,8 +208,7 @@ void SelectMenu::updateCharacterInfo(int rid)
   if( GameRecord::sharedGameRecord()->char_contract[rid] == 0 )
   {
     mClickMe->setVisible(true);
-
-    CCSprite *hire = cocos2d::CCSprite::createWithSpriteFrameName("hire.png");
+cocos2d::CCSprite *hire = cocos2d::CCSprite::createWithSpriteFrameName("hire.png");
     mStartPos->addChild(hire);
   }
   else {
@@ -239,7 +234,7 @@ void SelectMenu::updateAngle()
       mProtraits[i]->setVisible(false);
     }
     else {
-      float k = sinf(cocos2d::CC_DEGREES_TO_RADIANS(disangle));
+      float k = sinf(CC_DEGREES_TO_RADIANS(disangle));
       float m = 1-k*k;
       float pos = k*100;
       ccColor3B col = ccc3(255*m, 255*m, 255*m);
@@ -351,13 +346,15 @@ void SelectMenu::update(float delta)
     sprintf(szTmp, "%d", GameRecord::sharedGameRecord()->coins);
     mMoney->setString(szTmp);
     cocos2d::Point mp = mMoney->getPosition();
+      /* TODO: uncomment this
     mp.x = 450 - 7.15f*strlen(mMoney->getString());
+       */
     mMoney->setPosition( mp );
     cocos2d::Point cm = mCoinMark->getPosition();
     cm.x = mp.x - 10;
     mCoinMark->setPosition(cm);
   }
-  CCLayer::update(delta);
+cocos2d::CCLayer::update(delta);
 }
 void SelectMenu::onClickMe()
 {
@@ -424,7 +421,7 @@ void SelectMenu::onChangeSpecial()
   }
 }
 
-void SelectMenu::onBack()
+void SelectMenu::onBack(cocos2d::Ref*)
 {
   if( !mIntroFlag )
   {
@@ -547,53 +544,55 @@ void SelectMenu::setSceneOutro(cocos2d::CCScene* newscene)
 void SelectMenu::doneOutro()
 {
   mIntroFlag = false;
-  CCDirector::sharedDirector()->replaceScene(mNewScene);
+cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
   mNewScene->release();
 }
 
 SEL_MenuHandler SelectMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onStart", SelectMenu::onStart)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChangeDart", SelectMenu::onChangeDart)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChangeBlade", SelectMenu::onChangeBlade)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChangeSpecial", SelectMenu::onChangeSpecial)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", SelectMenu::onBack)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onLeftRole", SelectMenu::onLeftRole)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRightRole", SelectMenu::onRightRole)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onClickMe", SelectMenu::onClickMe)
+    /* TODO: uncomment this
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onStart", SelectMenu::onStart)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChangeDart", SelectMenu::onChangeDart)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChangeBlade", SelectMenu::onChangeBlade)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChangeSpecial", SelectMenu::onChangeSpecial)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", SelectMenu::onBack)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onLeftRole", SelectMenu::onLeftRole)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRightRole", SelectMenu::onRightRole)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onClickMe", SelectMenu::onClickMe)
   //  CCLog(pSelectorName);
-    return NULL;
+   */
+     return NULL;
 }
 
-SEL_CCControlHandler SelectMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   SelectMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-  CCLog("Control");
+cocos2d::CCLog("Control");
   return NULL;
 }
 bool SelectMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadow", CCSprite*,  mShadow)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDesc", CCSprite*,  mDesc)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipDart", CCSprite*,  mEquipDart)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipBlade", CCSprite*,  mEquipBlade)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipSpecial", CCSprite*,  mEquipSpecial)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeftMark", CCSprite*,  mLeftMark)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRightMark", CCSprite*,  mRightMark)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoinMark", CCSprite*,  mCoinMark)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHeroDesc", CCSprite*,  mHeroDesc)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTitle", CCSprite*,  mTitle)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mParam", CCSprite*,  mParam)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBouns", CCSprite*,  mBouns)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHero", CCNode*,  mHero)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHearts", CCNode*,  mHearts)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDarts", CCNode*,  mDarts)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStartPos", CCNode*,  mStartPos)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnStart", CCMenuItemImage*,  mBtnStart)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnDart", CCMenuItemImage*,  mBtnDart)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnBlade", CCMenuItemImage*,  mBtnBlade)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnSpecial", CCMenuItemImage*,  mBtnSpecial)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClickMe", CCMenuItemImage*,  mClickMe)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMoney", CCLabelBMFont*,  mMoney)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadow", CCSprite*,  mShadow)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDesc", CCSprite*,  mDesc)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipDart", CCSprite*,  mEquipDart)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipBlade", CCSprite*,  mEquipBlade)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipSpecial", CCSprite*,  mEquipSpecial)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeftMark", CCSprite*,  mLeftMark)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRightMark", CCSprite*,  mRightMark)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoinMark", CCSprite*,  mCoinMark)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHeroDesc", CCSprite*,  mHeroDesc)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTitle", CCSprite*,  mTitle)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mParam", CCSprite*,  mParam)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBouns", CCSprite*,  mBouns)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHero", CCNode*,  mHero)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHearts", CCNode*,  mHearts)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDarts", CCNode*,  mDarts)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStartPos", CCNode*,  mStartPos)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnStart", CCMenuItemImage*,  mBtnStart)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnDart", CCMenuItemImage*,  mBtnDart)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnBlade", CCMenuItemImage*,  mBtnBlade)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnSpecial", CCMenuItemImage*,  mBtnSpecial)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClickMe", CCMenuItemImage*,  mClickMe)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMoney", CCLabelBMFont*,  mMoney)
   //  CCLog(pMemberVariableName);
 
   return false;

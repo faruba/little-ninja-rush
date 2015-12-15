@@ -2,21 +2,20 @@
 #define ___CLASSES_EXTRASELECT_H_
 
 #include "GameTool.h"
-
+#include "cocosbuilder/CocosBuilder.h"
 class ExtraSelect:
   public cocos2d::CCLayer, 
-  public cocos2d::extension::CCBMemberVariableAssigner,
-  public cocos2d::extension::CCBSelectorResolver
+  public cocosbuilder::CCBMemberVariableAssigner,
+  public cocosbuilder::CCBSelectorResolver
 {
   public:
     virtual bool init();  
 
     LNR_SCENE_METHOD(ExtraSelect);
-
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ExtraSelect, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ExtraSelect, create);
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
     virtual void onEnter();
     virtual void onExit();
@@ -32,41 +31,36 @@ class ExtraSelect:
     void onFacebook();
     void onTwitter();
     void resetButtons();
-
-    CCSprite* checkButton(cocos2d::Point pos);
-
-
-
-    CCNode *mNode;
-
-    CCSprite *mSelect;
+cocos2d::CCSprite* checkButton(cocos2d::Point pos);
+cocos2d::CCNode *mNode;
+cocos2d::CCSprite *mSelect;
     //--autoassign--
-    CCSprite *mAchievement;
-    CCSprite *mStatistics;
-    CCSprite *mTips;
-    CCSprite *mCredits;
+cocos2d::CCSprite *mAchievement;
+cocos2d::CCSprite *mStatistics;
+cocos2d::CCSprite *mTips;
+cocos2d::CCSprite *mCredits;
 //    CCSprite *mFacebook;
 //    CCSprite *mTwitter;
 //    CCSprite *mTwitterBanner;
 
     //intro&outro
-    CCNode *mSceneIntro;
-    CCScene *mNewScene;
+cocos2d::CCNode *mSceneIntro;
+cocos2d::CCScene *mNewScene;
     bool mIntroFlag;
     // intro&outro
     void setSceneIntro();
     void setSceneOutro(cocos2d::CCScene* newscene);
     void doneOutro();
 
-    void onBack();
+    void onBack(cocos2d::Ref*);
 
 };
 
-class ExtraSelectLayerLoader : public cocos2d::extension::CCLayerLoader {
+class ExtraSelectLayerLoader : public cocosbuilder::NodeLoader {
   public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(ExtraSelectLayerLoader, loader);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(ExtraSelectLayerLoader, loader);
 
   protected:
-    CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(ExtraSelect);
+CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(ExtraSelect);
 };
 #endif

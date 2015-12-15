@@ -33,8 +33,7 @@ void TutorialDirector::onCreate()
   play->mainrole->setEquipDart(0);
   play->mainrole->setEquipBlade(rid);
   play->mainrole->setEquipSpell(0);
-
-  CCLog("begin tutorial: role id(%d), cacheDartId(%d)", rid, cacheDartId);
+cocos2d::CCLog("begin tutorial: role id(%d), cacheDartId(%d)", rid, cacheDartId);
 
   play->state = STATE_TUTORIAL;
   play->count_respawn++;
@@ -61,11 +60,12 @@ void TutorialDirector::onCreate()
   mTeachText->setAnchorPoint(cocos2d::ccp( 0, 0.5f));
   mTeachText->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width/2 - 60, SCREEN_HEIGHT/2));
   play->addChild(mTeachText, LAYER_UI);
-
-  CCMenuItemImage * skip = cocos2d::CCMenuItemImage::create();
+cocos2d::CCMenuItemImage * skip = cocos2d::CCMenuItemImage::create();
   skip->setNormalSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("jcskip.png"));
   skip->setSelectedSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_jcskip.png"));
-  skip->setTarget(this, menu_selector(TutorialDirector::onSkip));
+  /*TODO:Uncomment this 
+   skip->setTarget(this, menu_selector(TutorialDirector::onSkip));
+   */
   skip->setAnchorPoint(cocos2d::ccp(1, 0));
   skip->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width-5, 200));
   mMenu = cocos2d::CCMenu::create(skip, NULL);
@@ -91,8 +91,8 @@ void TutorialDirector::onUpdate(float delta)
   switch (mState) {
     case 0:
       {
-        CCObject* node = NULL;
-        CCARRAY_FOREACH(play->darts, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->darts, node)
         {
           Darts *d = (Darts*)node;
           if( d->isEnemy())
@@ -108,8 +108,8 @@ void TutorialDirector::onUpdate(float delta)
     case 1:
       {
         bool found = false;
-        CCObject* node = NULL;
-        CCARRAY_FOREACH(play->darts, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->darts, node)
         {
           Darts *d = (Darts*)node;
           if( d->isEnemy())
@@ -180,18 +180,18 @@ void TutorialDirector::onUpdate(float delta)
 void TutorialDirector::playSlideUp() 
 {
     mAnimateNode->removeAllChildrenWithCleanup(true);
-    CCSprite *panel = cocos2d::CCSprite::createWithSpriteFrameName("jc1.png");
+cocos2d::CCSprite *panel = cocos2d::CCSprite::createWithSpriteFrameName("jc1.png");
     panel->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     panel->setPosition(cocos2d::ccp(0, 0));
     mAnimateNode->addChild(panel);
-    CCSprite *finger = cocos2d::CCSprite::createWithSpriteFrameName("jc4.png");
+cocos2d::CCSprite *finger = cocos2d::CCSprite::createWithSpriteFrameName("jc4.png");
     finger->setAnchorPoint(cocos2d::ccp(0.065789f, 0.91666f));
     finger->setPosition(cocos2d::ccp(37.5, 20.5f));
     panel->addChild(finger);
-    CCMoveTo *mt = cocos2d::CCMoveTo::create(1, ccp(64, 36));
-    CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.1, ccp(37.5, 20.5));
-    CCSequence *sq = cocos2d::CCSequence::create(mt, mt2, NULL);
-    CCRepeatForever *rf = cocos2d::CCRepeatForever::create(sq);
+cocos2d::CCMoveTo *mt = cocos2d::CCMoveTo::create(1, ccp(64, 36));
+cocos2d::CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.1, ccp(37.5, 20.5));
+cocos2d::CCSequence *sq = cocos2d::CCSequence::create(mt, mt2, NULL);
+cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(sq);
     finger->runAction(rf);
 }
 
@@ -203,36 +203,36 @@ void TutorialDirector::stopSlide()
 void TutorialDirector::playSlideForward() 
 {
     mAnimateNode->removeAllChildrenWithCleanup(true);
-    CCSprite *panel = cocos2d::CCSprite::createWithSpriteFrameName("jc1.png");
+cocos2d::CCSprite *panel = cocos2d::CCSprite::createWithSpriteFrameName("jc1.png");
     panel->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     panel->setPosition(cocos2d::ccp(0, 0));
     mAnimateNode->addChild(panel);
-    CCSprite *finger = cocos2d::CCSprite::createWithSpriteFrameName("jc4.png");
+cocos2d::CCSprite *finger = cocos2d::CCSprite::createWithSpriteFrameName("jc4.png");
     finger->setAnchorPoint(cocos2d::ccp(0.065789f, 0.91666f));
     finger->setPosition(cocos2d::ccp(34.5f, 28));
     panel->addChild(finger);
-    CCMoveTo *mt = cocos2d::CCMoveTo::create(1, ccp(63.5f, 28));
-    CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.1, ccp(34.5f, 28));
-    CCSequence *sq = cocos2d::CCSequence::create(mt, mt2, NULL);
-    CCRepeatForever *rf = cocos2d::CCRepeatForever::create(sq);
+cocos2d::CCMoveTo *mt = cocos2d::CCMoveTo::create(1, ccp(63.5f, 28));
+cocos2d::CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.1, ccp(34.5f, 28));
+cocos2d::CCSequence *sq = cocos2d::CCSequence::create(mt, mt2, NULL);
+cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(sq);
     finger->runAction(rf);
 }
 
 void TutorialDirector::playSlideDown() 
 {
     mAnimateNode->removeAllChildrenWithCleanup(true);
-    CCSprite *panel = cocos2d::CCSprite::createWithSpriteFrameName("jc1.png");
+cocos2d::CCSprite *panel = cocos2d::CCSprite::createWithSpriteFrameName("jc1.png");
     panel->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     panel->setPosition(cocos2d::ccp(0, 0));
     mAnimateNode->addChild(panel);
-    CCSprite *finger = cocos2d::CCSprite::createWithSpriteFrameName("jc4.png");
+cocos2d::CCSprite *finger = cocos2d::CCSprite::createWithSpriteFrameName("jc4.png");
     finger->setAnchorPoint(cocos2d::ccp(0.065789f, 0.91666f));
     finger->setPosition(cocos2d::ccp(50, 37.5f));
     panel->addChild(finger);
-    CCMoveTo *mt = cocos2d::CCMoveTo::create(1, ccp(50, 20));
-    CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.1, ccp(50, 37.5f));
-    CCSequence *sq = cocos2d::CCSequence::create(mt, mt2, NULL);
-    CCRepeatForever *rf = cocos2d::CCRepeatForever::create(sq);
+cocos2d::CCMoveTo *mt = cocos2d::CCMoveTo::create(1, ccp(50, 20));
+cocos2d::CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.1, ccp(50, 37.5f));
+cocos2d::CCSequence *sq = cocos2d::CCSequence::create(mt, mt2, NULL);
+cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(sq);
     finger->runAction(rf);
 }
 
@@ -311,8 +311,8 @@ void TutorialDirector::waitBlade()
 {
   mTeachText->setString("手指向前滑动来使用忍者刀。");
   GamePlay *play = GamePlay::sharedGamePlay();
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->darts, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->darts, node)
   {
     Darts *d = (Darts*)node;
     if( d->isEnemy() )
@@ -452,7 +452,7 @@ void TutorialDirector::onDestroy()
     play->removeChild(mTeachText, true);
     play->removeChild(mAnimateNode, true);
     play->removeChild(mMenu, true);
-    CCLog("end tutorial");
+cocos2d::CCLog("end tutorial");
     GameRecord::sharedGameRecord()->game_tutorial = 1;
 }
 

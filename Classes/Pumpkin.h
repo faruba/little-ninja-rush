@@ -23,9 +23,7 @@ class Pumpkin:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
-
-
-    CCNode *mParent;
+cocos2d::CCNode *mParent;
     GTAnimatedSprite *mSprite;
     int mState;//0-floating 1-escape 2-dying
     float mTimer;

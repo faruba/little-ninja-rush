@@ -26,55 +26,54 @@ class GameOver:
 
     bool haveFacebookCoins();
     bool haveTwitterCoins();
-    CCNode *mParent;
-    CCNode *mNode;
+cocos2d::CCNode *mParent;
+cocos2d::CCNode *mNode;
     int mCost;
     int mScore;
     bool mPostingFacebook;
     bool mPostingTwitter;
 
     //-- auto assign --
-    CCLabelBMFont *mDistance;
-    CCLabelBMFont *mCoins;
-    CCMenuItemImage *mChange;
-    CCLabelTTF *mDailyObjective;
-    CCLabelTTF *mWeeklyObjective;
-    CCLabelTTF *mMonthlyObjective;
-    CCNode *mDailyCrown;
-    CCNode *mWeeklyCrown;
-    CCNode *mMonthlyCrown;
-    CCSprite *mDailyIcon;
-    CCSprite *mWeeklyIcon;
-    CCSprite *mMonthlyIcon;
-    CCSprite *mLeadSp0;
-    CCSprite *mLeadSp1;
-    CCSprite *mLeadSp2;
-    CCLabelBMFont *mLeadLb0;
-    CCLabelBMFont *mLeadLb1;
-    CCLabelBMFont *mLeadLb2;
-    CCMenuItemImage *mPlayAgain;
-    CCMenuItemImage *mTwitter;
-    CCMenuItemImage *mFacebook;
-    CCSprite *mFacebookAction;
-    CCSprite *mTwitterAction;
-    CCSprite *mFacebookCoins;
-    CCSprite *mTwitterCoins;
-
-    CCNode *mClassic;
-    CCNode *mArcade;
+cocos2d::CCLabelBMFont *mDistance;
+cocos2d::CCLabelBMFont *mCoins;
+cocos2d::CCMenuItemImage *mChange;
+cocos2d::CCLabelTTF *mDailyObjective;
+cocos2d::CCLabelTTF *mWeeklyObjective;
+cocos2d::CCLabelTTF *mMonthlyObjective;
+cocos2d::CCNode *mDailyCrown;
+cocos2d::CCNode *mWeeklyCrown;
+cocos2d::CCNode *mMonthlyCrown;
+cocos2d::CCSprite *mDailyIcon;
+cocos2d::CCSprite *mWeeklyIcon;
+cocos2d::CCSprite *mMonthlyIcon;
+cocos2d::CCSprite *mLeadSp0;
+cocos2d::CCSprite *mLeadSp1;
+cocos2d::CCSprite *mLeadSp2;
+cocos2d::CCLabelBMFont *mLeadLb0;
+cocos2d::CCLabelBMFont *mLeadLb1;
+cocos2d::CCLabelBMFont *mLeadLb2;
+cocos2d::CCMenuItemImage *mPlayAgain;
+cocos2d::CCMenuItemImage *mTwitter;
+cocos2d::CCMenuItemImage *mFacebook;
+cocos2d::CCSprite *mFacebookAction;
+cocos2d::CCSprite *mTwitterAction;
+cocos2d::CCSprite *mFacebookCoins;
+cocos2d::CCSprite *mTwitterCoins;
+cocos2d::CCNode *mClassic;
+cocos2d::CCNode *mArcade;
 
     // -- Arcade --
-    CCLabelBMFont *mArcadeScore;
-    CCSprite *mGoldCoin;
-    CCSprite *mSilverCoin;
-    CCSprite *mBronzeCoin;
-    CCLabelBMFont *mGoldScore;
-    CCLabelBMFont *mSilverScore;
-    CCLabelBMFont *mBronzeScore;
-    CCLabelBMFont *mGoldPrize;
-    CCLabelBMFont *mSilverPrize;
-    CCLabelBMFont *mBronzePrize;
-    CCSprite *mCup;
+cocos2d::CCLabelBMFont *mArcadeScore;
+cocos2d::CCSprite *mGoldCoin;
+cocos2d::CCSprite *mSilverCoin;
+cocos2d::CCSprite *mBronzeCoin;
+cocos2d::CCLabelBMFont *mGoldScore;
+cocos2d::CCLabelBMFont *mSilverScore;
+cocos2d::CCLabelBMFont *mBronzeScore;
+cocos2d::CCLabelBMFont *mGoldPrize;
+cocos2d::CCLabelBMFont *mSilverPrize;
+cocos2d::CCLabelBMFont *mBronzePrize;
+cocos2d::CCSprite *mCup;
 
 
     //-- auto callback --

@@ -12,12 +12,12 @@
 class CEClipedNode : public CCNode
 {
 public:
-  CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(CEClipedNode, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(CEClipedNode, create);
 
   virtual void visit(Renderer *renderer, const Mat4& parentTransform, uint32_t parentFlags);
   void setClipRect(cocos2d::CCRect *rect);
 private:
-  CCRect clipRectInPixel;
+cocos2d::CCRect clipRectInPixel;
 };
 
 

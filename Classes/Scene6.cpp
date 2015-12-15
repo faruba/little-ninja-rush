@@ -15,14 +15,14 @@
 
 void Scene6::loadScene() 
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     cache->addSpriteFramesWithFile("scene11.plist");
     cache->addSpriteFramesWithFile("scene12.plist");
 }
 
 void Scene6::unloadScene() 
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     cache->removeSpriteFramesFromFile("scene11.plist");
     cache->removeSpriteFramesFromFile("scene12.plist");
     unloadTextureFromeSpriteFrameFile("scene11.plist");
@@ -49,29 +49,24 @@ void Scene6::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     }
     //增加静态背景
     {
-        CCSprite *sbg = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg.png");
+cocos2d::CCSprite *sbg = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg.png");
         sbg->setAnchorPoint(cocos2d::ccp(0, 0));
         sbg->setPosition(cocos2d::ccp(0, 0));
         sbg->setScaleX(UniversalFit::sharedUniversalFit()->playSize.width/30);
         mBg->addChild(sbg, 0);
-        
-        CCSprite *moon = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-moon.png");
+cocos2d::CCSprite *moon = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-moon.png");
         moon->setPosition(cocos2d::ccp(324, 301));
         mBg->addChild(moon, 1);
-        
-        CCSprite *star1 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-star1.png");
+cocos2d::CCSprite *star1 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-star1.png");
         star1->setPosition(cocos2d::ccp(110, 284));
         mBg->addChild(star1, 1);
-        
-        CCSprite *star2 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-star2.png");
+cocos2d::CCSprite *star2 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-star2.png");
         star2->setPosition(cocos2d::ccp(78, 305));
         mBg->addChild(star2, 1);
-        
-        CCSprite *star3 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-star1.png");
+cocos2d::CCSprite *star3 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-star1.png");
         star3->setPosition(cocos2d::ccp(221, 278));
         mBg->addChild(star3, 1);
-        
-        CCSprite *star4 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-star2.png");
+cocos2d::CCSprite *star4 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-star2.png");
         star4->setPosition(cocos2d::ccp(386, 284));
         mBg->addChild(star4, 1);
     }

@@ -18,8 +18,7 @@ class StaticParticle:public GameObject{
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-
-    CCSprite *mSprite;
+cocos2d::CCSprite *mSprite;
     cocos2d::Point mDir;
     float mSpeed;
     float mLife;

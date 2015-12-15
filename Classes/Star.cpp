@@ -41,8 +41,8 @@ void Star::onUpdate(float delta)
     mSprite->setPosition(np);
     GamePlay *play = GamePlay::sharedGamePlay();
     //伤害判定
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;
         if( em->collisionWithCircle(mSprite->getPosition(), 20) )//杀伤半径

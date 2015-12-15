@@ -39,13 +39,13 @@ void ObjectiveComplete::onCreate()
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(0, 0, 0), 128, 0);
-    CCNodeLoaderLibrary *pNodeLib = cocos2d::CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
-    CCBReader *pReader = new CCBReader(pNodeLib, this, this);
+NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
+CCBReader *pReader = new CCBReader(pNodeLib, this, this);
     mNode = pReader->readNodeGraphFromFile("ui-scroll", this);
     pReader->release();
     mNode->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
     play->addChild(mNode, LAYER_MASK+1);
-    CCRect clip = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(0, 142, UniversalFit::sharedUniversalFit()->playSize.width, 36));
+cocos2d::CCRect clip = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(0, 142, UniversalFit::sharedUniversalFit()->playSize.width, 36));
     mObjRect = CEClipedNode::create();
     mObjRect->setClipRect(&clip);
     mObjRect->setPosition(cocos2d::ccp(12, 12));
@@ -107,10 +107,10 @@ void ObjectiveComplete::onUpdate(float delta)
                 //--- to move ---
                 mState = STATE_MOVE;
                 //add objective detail
-                CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
                 mObjType->setDisplayFrame(cache->spriteFrameByName(cocos2d::CCString::createWithFormat("objc-%d.png", mCurrIndex)->getCString()));
                 mObjRect->setPosition(cocos2d::ccp(12, 12));
-                CCNode *currobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
+cocos2d::CCNode *currobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
                 currobj->setPosition(cocos2d::ccp(18, 18));
                 mObjRect->addChild(currobj);
                 cocos2d::Point np = mBanner->getPosition();
@@ -119,7 +119,7 @@ void ObjectiveComplete::onUpdate(float delta)
                 //add crowns
                 for(int i=0; i<mCurrObj->index; ++i)
                 {
-                    CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
                     crown->setPosition(cocos2d::ccp(-20*i, 0));
                     mCrowns->addChild(crown);
                 }
@@ -159,8 +159,8 @@ void ObjectiveComplete::onUpdate(float delta)
             if( mStateTimer >= 2 )
             {
                 SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcrown.mp3").c_str());
-                CCString *crownname = cocos2d::CCString::createWithFormat("crown%d.png", mCurrObj->index);
-                CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(crownname->getCString());
+cocos2d::CCString *crownname = cocos2d::CCString::createWithFormat("crown%d.png", mCurrObj->index);
+cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(crownname->getCString());
                 crown->setPosition(cocos2d::ccp(-20*mCurrObj->index, 0));
                 mCrowns->addChild(crown);
                 for(int i=0; i<10; ++i)
@@ -226,13 +226,13 @@ void ObjectiveComplete::onUpdate(float delta)
                         }
                             break;
                     }
-                    CCNode *newobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
+cocos2d::CCNode *newobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
                     newobj->setPosition(cocos2d::ccp(18, 54));
                     mObjRect->addChild(newobj);
                 }
                 else {
                     mCurrAch = NULL;
-                    CCNode *newobj = this->genObjectiveInfo(NULL, mCurrIndex);
+cocos2d::CCNode *newobj = this->genObjectiveInfo(NULL, mCurrIndex);
                     newobj->setPosition(cocos2d::ccp(18, 54));
                     mObjRect->addChild(newobj);
                     //mark completed
@@ -341,15 +341,15 @@ void ObjectiveComplete::retriveObjectiveInfo(int index, Objective ** obj, Achiev
     }
 }
 
-CCNode* ObjectiveComplete::genObjectiveInfo(Achievement * ach, int typ) 
+cocos2d::CCNode* ObjectiveComplete::genObjectiveInfo(Achievement * ach, int typ) 
 {
     if( ach == NULL )
     {
-        CCNode *sp = cocos2d::CCNode::create();
+cocos2d::CCNode *sp = cocos2d::CCNode::create();
         switch (typ) {
             case 0:
             {
-                CCLabelTTF *desc = cocos2d::CCLabelTTF::create("日常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL );
+cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("日常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL );
                 desc->setColor(ccc3(128, 128, 128));
                 desc->setAnchorPoint(cocos2d::ccp(0, 0.5f));
                 desc->setPosition(cocos2d::ccp(54, 0));
@@ -358,7 +358,7 @@ CCNode* ObjectiveComplete::genObjectiveInfo(Achievement * ach, int typ)
                 break;
             case 1:
             {
-                CCLabelTTF *desc = cocos2d::CCLabelTTF::create("周常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
+cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("周常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
                 desc->setColor(ccc3(128, 128, 128));
                 desc->setAnchorPoint(cocos2d::ccp(0, 0.5f));
                 desc->setPosition(cocos2d::ccp(54, 0));
@@ -367,7 +367,7 @@ CCNode* ObjectiveComplete::genObjectiveInfo(Achievement * ach, int typ)
                 break;
             case 2:
             {
-                CCLabelTTF *desc = cocos2d::CCLabelTTF::create("月常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
+cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("月常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
                 desc->setColor(ccc3(128, 128, 128));
                 desc->setAnchorPoint(cocos2d::ccp(0, 0.5f));
                 desc->setPosition(cocos2d::ccp(54, 0));
@@ -378,7 +378,7 @@ CCNode* ObjectiveComplete::genObjectiveInfo(Achievement * ach, int typ)
         return sp;
     }
     else {
-        CCSprite *spbg = NULL;
+cocos2d::CCSprite *spbg = NULL;
         switch (typ) {
             case 0:
             {
@@ -396,10 +396,10 @@ CCNode* ObjectiveComplete::genObjectiveInfo(Achievement * ach, int typ)
             }
                 break;
         }
-        CCSprite *spicon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::CCSprite *spicon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
         spicon->setPosition(cocos2d::ccp(spbg->getContentSize().width/2, spbg->getContentSize().height/2));
         spbg->addChild(spicon, 0, 0);
-        CCLabelBMFont *desc = cocos2d::CCLabelBMFont::create(ach->desc->getCString(), "ab34.fnt");
+cocos2d::CCLabelBMFont *desc = cocos2d::CCLabelBMFont::create(ach->desc->getCString(), "ab34.fnt");
         desc->setAnchorPoint(cocos2d::ccp(0, 0.5f));
         desc->setPosition(cocos2d::ccp(54, 12));
         spbg->addChild(desc, 0, 1);
@@ -423,19 +423,19 @@ SEL_MenuHandler ObjectiveComplete::onResolveCCBCCMenuItemSelector(cocos2d::CCObj
   return NULL;
 }
 
-SEL_CCControlHandler ObjectiveComplete::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   ObjectiveComplete::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-  CCLog("Control");
+cocos2d::CCLog("Control");
   return NULL;
 }
 bool ObjectiveComplete::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBanner", CCSprite *, mBanner)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mObjType", CCSprite *, mObjType)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mCrowns", CCNode *, mCrowns)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBounsCoins", CCLabelBMFont *, mBounsCoins)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScroll", CCSprite *, mScroll)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBounsScroll", CCLabelBMFont *, mBounsScroll)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBanner", CCSprite *, mBanner)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mObjType", CCSprite *, mObjType)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mCrowns", CCNode *, mCrowns)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBounsCoins", CCLabelBMFont *, mBounsCoins)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScroll", CCSprite *, mScroll)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBounsScroll", CCLabelBMFont *, mBounsScroll)
   //  CCLog(pMemberVariableName);
 
   return false;

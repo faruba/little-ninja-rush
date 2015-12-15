@@ -374,8 +374,8 @@ void MainRole::commitSlice()
   //弹飞镖
   bool hit = false;
   int hitcount =0;
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->darts, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->darts, node)
   {
     Darts * dr = (Darts*)node;
     if( dr->isEnemy() && exCollisionWithCircles(this->center(), 0, 0, bladeRange, dr->position(), 7) && dr->position().y > mSprite->getPosition().y )
@@ -405,7 +405,7 @@ void MainRole::commitSlice()
 
   //切武士
   node = NULL;
-  CCARRAY_FOREACH(play->enemies, node)
+CCARRAY_FOREACH(play->enemies, node)
   {
     Role* em = (Role*)node;
     if( em->collisionWithCircle(this->center(), bladeRange) )
@@ -463,8 +463,8 @@ void MainRole::commitSpell(Vector2d* dir)
       case SPELL_TRIDARTS:
         {//三发飞镖
           bool t = false;
-          CCObject *node = NULL;
-          CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject *node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
           {
             Role* em = (Role*)node;
             if( em->supportAimAid() && em->position().x > 0 && em->position().x < UniversalFit::sharedUniversalFit()->playSize.width )
@@ -520,7 +520,7 @@ void MainRole::commitSpell(Vector2d* dir)
         {//回旋手里剑
           SP -= activeSP;
           float angle = 30 + CCRANDOM_0_1()*120;
-          cocos2d::Point dir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle));
+          cocos2d::Point dir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle));
           play->manager->addGameObject(TraceDart::dart(this->center(), dir));
           SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
           spelled = true;
@@ -530,7 +530,7 @@ void MainRole::commitSpell(Vector2d* dir)
         {//反弹手里剑
           SP -= activeSP;
           float angle = 30 + CCRANDOM_0_1()*120;
-          cocos2d::Point dir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle));
+          cocos2d::Point dir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle));
           play->manager->addGameObject(ReflectDart::dart(this->center(), dir));
           SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
           spelled = true;
@@ -556,15 +556,14 @@ void MainRole::commitSpell(Vector2d* dir)
           //选择优目标点
           int hs = 0;
           cocos2d::Point pos = ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, RESPAWN_YMIN + RESPAWN_Y/2);
-          CCObject *node = NULL;
-          CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject *node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
           {
             Role* em = (Role*)node;
             int s = 0;
             float xx = em->position().x;
-
-            CCObject* node = NULL;
-            CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
             {
               Role * im = (Role*)node;
               float dy = fabsf(im->position().x - xx);
@@ -1063,7 +1062,7 @@ void MainRole::onHitClassic(int type)
     }
 
     //sound
-    CCString *hit = cocos2d::CCString::createWithFormat("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
+cocos2d::CCString *hit = cocos2d::CCString::createWithFormat("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
     SimpleAudioEngine::sharedEngine()->playEffect(hit->getCString());
 
     //achievement wounded
@@ -1081,7 +1080,7 @@ void MainRole::onHitClassic(int type)
     mSprite->playGTAnimation(6, false);
 
     //sound
-    CCString *hit = cocos2d::CCString::createWithFormat("die-%d.mp3", mRoleId);
+cocos2d::CCString *hit = cocos2d::CCString::createWithFormat("die-%d.mp3", mRoleId);
     SimpleAudioEngine::sharedEngine()->playEffect(hit->getCString());
 
     //achievement death
@@ -1137,7 +1136,7 @@ void MainRole::onHitArcade(int type)
   }
 
   //sound
-  CCString *hit = cocos2d::CCString::createWithFormat("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
+cocos2d::CCString *hit = cocos2d::CCString::createWithFormat("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
   SimpleAudioEngine::sharedEngine()->playEffect(hit->getCString());
 
   //achievement wounded
@@ -1223,7 +1222,7 @@ bool MainRole::supportAimAid()
   return false;
 }
 
-CCSprite* MainRole::sprite() 
+cocos2d::CCSprite* MainRole::sprite() 
 {
   return mSprite;
 }

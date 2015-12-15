@@ -8,14 +8,14 @@
 
 void Scene3::loadScene() 
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     cache->addSpriteFramesWithFile("scene5.plist");
     cache->addSpriteFramesWithFile("scene6.plist");
 }
 
 void Scene3::unloadScene() 
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     cache->removeSpriteFramesFromFile("scene5.plist");
     cache->removeSpriteFramesFromFile("scene6.plist");
     unloadTextureFromeSpriteFrameFile("scene5.plist");
@@ -36,12 +36,12 @@ void Scene3::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     mTiles->setPosition(cocos2d::ccp(0, 0));
     
     //增加背景
-    CCSprite *sbg = cocos2d::CCSprite::createWithSpriteFrameName("s3_bg.png");
+cocos2d::CCSprite *sbg = cocos2d::CCSprite::createWithSpriteFrameName("s3_bg.png");
     sbg->setAnchorPoint(cocos2d::ccp(0, 1));
     sbg->setPosition(cocos2d::ccp(0, SCREEN_HEIGHT));
     bg->addChild(sbg);
     //extra bg
-    CCSprite *exsbg = cocos2d::CCSprite::createWithSpriteFrameName("cj3_bg2.png");
+cocos2d::CCSprite *exsbg = cocos2d::CCSprite::createWithSpriteFrameName("cj3_bg2.png");
     exsbg->setAnchorPoint(cocos2d::ccp(0, 1));
     exsbg->setPosition(cocos2d::ccp(sbg->getContentSize().width, SCREEN_HEIGHT));
     //calc scale
@@ -89,7 +89,7 @@ void Scene3::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     //增加远山
     for(int i=0; i<3; ++i)
     {
-        CCString *sp = cocos2d::CCString::createWithFormat("cj3_mountain%d.png", i+1);
+cocos2d::CCString *sp = cocos2d::CCString::createWithFormat("cj3_mountain%d.png", i+1);
         mHills[i] = cocos2d::CCSprite::createWithSpriteFrameName(sp->getCString());
         mHills[i]->setAnchorPoint(cocos2d::ccp(0, 0));
         mHills[i]->setPosition(cocos2d::ccp( 100 + 225*i, 262));

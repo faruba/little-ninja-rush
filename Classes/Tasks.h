@@ -2,10 +2,6 @@
 #define ___CLASSES_TASKS_H_
 #include "GameTool.h"
 #include "CCDate.h"
-#include "rapidjson/rapidjson.h"
-#include "rapidjson/document.h"
-#include "rapidjson/prettywriter.h"
-#include "rapidjson/filestream.h"
 
 ;
 USING_NS_CC_EXT;
@@ -18,7 +14,7 @@ USING_NS_CC_EXT;
 class Task : public CCObject
 {
   public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Task, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Task, create);
     int achieveCode;//完成类型
     int achieved;//已完成数
     int achieveNumber;//需要完成的数量
@@ -29,10 +25,10 @@ class Task : public CCObject
 class Statistics : public CCObject
 {
   public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Statistics, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Statistics, create);
     int uiid;
-    CCString *name;
-    CCString *psfx;
+cocos2d::CCString *name;
+cocos2d::CCString *psfx;
     int achieveCode;
     int achieveCount;//已完成数量
 };
@@ -40,13 +36,13 @@ class Statistics : public CCObject
 class Achievement:public CCObject
 {
   public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Achievement, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Achievement, create);
     int uiid;
-    CCString *text;
-    CCString *name;
-    CCString *icon;
-    CCString *desc;
-    CCString *gcid;
+cocos2d::CCString *text;
+cocos2d::CCString *name;
+cocos2d::CCString *icon;
+cocos2d::CCString *desc;
+cocos2d::CCString *gcid;
     int achieveCode;//完成代码
     int achieveNumber;//目标数据
     int prizeType;
@@ -57,7 +53,7 @@ class Achievement:public CCObject
 class Objective:public CCObject
 {
   public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Objective, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Objective, create);
     virtual bool init(){return true;};
     int uiid;
     int count;
@@ -79,10 +75,9 @@ class ArcadePrize:public CCObject
 class Tasks:public CCObject
 {
   public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(Tasks, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(Tasks, create);
     virtual bool init();
-
-    CCArray *mTasks;
+cocos2d::CCArray *mTasks;
     bool mRecordRead;
     static Tasks* sharedTasks();
 
@@ -132,7 +127,7 @@ class Tasks:public CCObject
 
     //游戏启动时进行的测试
     void checkObjectives();
-    bool isDay(cocos2d::CCDate* a, CCDate* b);
+    bool isDay(CCDate* a, CCDate* b);
     void refreshArcadePrizes();
     void refreshDailyObjective();
     void refreshWeeklyObjective();

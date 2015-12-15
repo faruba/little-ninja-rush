@@ -9,14 +9,14 @@ USING_NS_CC_EXT;
 
 class CollectionMenu : 
   public CCLayer, 
-  public extension::CCBMemberVariableAssigner,
-  public extension::CCBSelectorResolver
+  public cocosbuilder::CCBMemberVariableAssigner,
+  public cocosbuilder::CCBSelectorResolver
 {
   public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
     static CCScene* scene();
     virtual bool init(){return true;};
@@ -35,24 +35,24 @@ class CollectionMenu :
     void updatePowerUpButton();
 
     //-- auto callback --
-    void onBack();
-    void onUse();
+    void onBack(cocos2d::Ref*);
+    void onUse(cocos2d::Ref*);
     void onCharacter(int nRole);
-    void onCharacter1(){onCharacter(0);};
-    void onCharacter2(){onCharacter(1);};
-    void onCharacter3(){onCharacter(2);};
-    void onCharacter4(){onCharacter(3);};
+    void onCharacter1(cocos2d::Ref*){onCharacter(0);};
+    void onCharacter2(cocos2d::Ref*){onCharacter(1);};
+    void onCharacter3(cocos2d::Ref*){onCharacter(2);};
+    void onCharacter4(cocos2d::Ref*){onCharacter(3);};
     void onItem(int nItem);
-    void onShuriken(){onItem(0);};
-    void onKatana(){onItem(1);};
-    void onSpecial(){onItem(2);};
-    void onPowerup();
+    void onShuriken(cocos2d::Ref*){onItem(0);};
+    void onKatana(cocos2d::Ref*){onItem(1);};
+    void onSpecial(cocos2d::Ref*){onItem(2);};
+    void onPowerup(cocos2d::Ref*);
 
-    void onFacebook();
-    void onTwitter();
+    void onFacebook(cocos2d::Ref*);
+    void onTwitter(cocos2d::Ref*);
 
-    void onSelectLife();
-    void onSelectDart();
+    void onSelectLife(cocos2d::Ref*);
+    void onSelectDart(cocos2d::Ref*);
 
     void clickMethod();
 
@@ -67,8 +67,8 @@ class CollectionMenu :
     int mEquipedItem;
     int mCurrItem;
     int mItemCount;
-    CCSprite *mEquipedMark;
-    CCSprite *mCurrentMark;
+cocos2d::CCSprite *mEquipedMark;
+cocos2d::CCSprite *mCurrentMark;
     //CCNode *mItemIcons;
     ABScrollContent *mScroll;
 
@@ -77,57 +77,56 @@ class CollectionMenu :
     bool mPostingFacebook;
     bool mPostingTwitter;
     //-- auto assign --
-    CCSprite *mShadow;
-    CCSprite *mItemTitle;
-    CCLabelTTF *mItemDesc;
-    CCLabelBMFont *mScrollCount;
-    CCMenuItemImage *mCharacter1;
-    CCMenuItemImage *mCharacter2;
-    CCMenuItemImage *mCharacter3;
-    CCMenuItemImage *mCharacter4;
-    CCMenuItemImage *mShuriken;
-    CCMenuItemImage *mKatana;
-    CCMenuItemImage *mSpecial;
-    CCMenuItemImage *mPowerup;
-    CCMenuItemImage *mUse;
-    CCMenu *mMenu;
+cocos2d::CCSprite *mShadow;
+cocos2d::CCSprite *mItemTitle;
+cocos2d::CCLabelTTF *mItemDesc;
+cocos2d::CCLabelBMFont *mScrollCount;
+cocos2d::CCMenuItemImage *mCharacter1;
+cocos2d::CCMenuItemImage *mCharacter2;
+cocos2d::CCMenuItemImage *mCharacter3;
+cocos2d::CCMenuItemImage *mCharacter4;
+cocos2d::CCMenuItemImage *mShuriken;
+cocos2d::CCMenuItemImage *mKatana;
+cocos2d::CCMenuItemImage *mSpecial;
+cocos2d::CCMenuItemImage *mPowerup;
+cocos2d::CCMenuItemImage *mUse;
+cocos2d::CCMenu *mMenu;
     //CCMenu *mItems;
-    CCNode *mPowerUp;
-    CCNode *mLifeGuage;
-    CCNode *mDartGuage;
-    CCSprite *mLifeMask;
-    CCSprite *mDartMask;
-    CCLabelBMFont *mLifeCount;
-    CCLabelBMFont *mDartCount;
-    CCLayerColor *mMask;
-    CCMenu *mPowerupMenu;
-    CCMenuItemImage *mFacebook;
-    CCMenuItemImage *mTwitter;
-    CCSprite *mShare;
-    CCSprite *mFacebookAction;
-    CCSprite *mTwitterAction;
-    CCNode *mScrollPoint;
+cocos2d::CCNode *mPowerUp;
+cocos2d::CCNode *mLifeGuage;
+cocos2d::CCNode *mDartGuage;
+cocos2d::CCSprite *mLifeMask;
+cocos2d::CCSprite *mDartMask;
+cocos2d::CCLabelBMFont *mLifeCount;
+cocos2d::CCLabelBMFont *mDartCount;
+cocos2d::CCLayerColor *mMask;
+cocos2d::CCMenu *mPowerupMenu;
+cocos2d::CCMenuItemImage *mFacebook;
+cocos2d::CCMenuItemImage *mTwitter;
+cocos2d::CCSprite *mShare;
+cocos2d::CCSprite *mFacebookAction;
+cocos2d::CCSprite *mTwitterAction;
+cocos2d::CCNode *mScrollPoint;
 
     //intro&outro
-    CCNode *mSceneIntro;
-    CCScene *mNewScene;
+cocos2d::CCNode *mSceneIntro;
+cocos2d::CCScene *mNewScene;
     bool mIntroFlag;
 
     bool mModal;
-    CCObject *mModalTarget;
+cocos2d::CCObject *mModalTarget;
     SEL_CallFunc mModalSel;
 
     void setModal(const char* title, const char* desc, CCObject* target, SEL_CallFunc sel);
-    void onModalConfirm();
-    void onModalCancel();
+    void onModalConfirm(cocos2d::Ref *);
+    void onModalCancel(cocos2d::Ref *);
 
 
     // 0-mainmenu 1-selectmenu
     static void setNavBack(int nid);
     void markUsing(int i);
     void markCurrent(int i);
-
-    CCMenuItemImage* character(int rid);
+cocos2d::CCMenuItemImage* character(int rid);
     void setTypeButton(int typ, bool mod);
 
     //bid = 0 :no blink 1:blink hp 2:blink dart
@@ -140,11 +139,11 @@ class CollectionMenu :
     void onItemCallback(int i);
 
 };
-class CollectionMenuLayerLoader : public cocos2d::extension::CCLayerLoader {
+class CollectionMenuLayerLoader : public cocosbuilder::NodeLoader {
   public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(CollectionMenuLayerLoader, loader);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(CollectionMenuLayerLoader, loader);
 
   protected:
-    CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(CollectionMenu);
+CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(CollectionMenu);
 };
 #endif

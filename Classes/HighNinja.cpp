@@ -29,7 +29,7 @@ void HighNinja::onCreate()
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("hninja"));
     mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
-    int y = cocos2d::CCRANDOM_0_1()*RESPAWN_Y;
+    int y = CCRANDOM_0_1()*RESPAWN_Y;
     mSprite->setPosition(cocos2d::ccp(20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1(), RESPAWN_YMIN+y));
     mSprite->playGTAnimation(0, true);
     mSprite->setVisible(false);
@@ -189,7 +189,7 @@ void HighNinja::onUpdate(float delta)
                     else {
                         cocos2d::Point dir = ccpNormalize(ccpSub(target, this->center()));
                         float angle = ccpToAngle(dir);
-                        angle += cocos2d::CC_DEGREES_TO_RADIANS(-HNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*HNINJA_ACCURATE)*CCRANDOM_0_1();
+                        angle += CC_DEGREES_TO_RADIANS(-HNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*HNINJA_ACCURATE)*CCRANDOM_0_1();
                         dir = ccpForAngle(angle);
                         play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), dir, -3, mParent)));
                     }

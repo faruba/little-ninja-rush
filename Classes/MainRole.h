@@ -23,9 +23,8 @@ class MainRole:
 
     void onHitClassic(int type);
     void onHitArcade(int type);
-    CCSprite* sprite();
-
-    CCNode *mParent;
+cocos2d::CCSprite* sprite();
+cocos2d::CCNode *mParent;
     GTAnimatedSprite *mSprite;
     int     mRoleId;
     int     mMoveFlag;
@@ -82,8 +81,8 @@ class MainRole:
     float bladeRange;
     float dartCD;
     float dartSpeed;
-    CCString *dartShap;
-    CCString *bladeSound;
+cocos2d::CCString *dartShap;
+cocos2d::CCString *bladeSound;
     bool flag_dart;
     bool flag_blade;
     bool flag_spell;

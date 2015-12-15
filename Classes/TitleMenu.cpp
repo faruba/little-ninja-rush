@@ -42,57 +42,57 @@ public CCBSelectorResolver
 {
 public:
     //-- auto assign --
-    CCMenuItemImage *mMusic;
-    CCMenuItemImage *mSfx;
-    CCMenuItemImage *mPushNotification;
-    CCMenuItemImage *mTutorial;
-    CCMenuItemImage *miCloud;
+cocos2d::CCMenuItemImage *mMusic;
+cocos2d::CCMenuItemImage *mSfx;
+cocos2d::CCMenuItemImage *mPushNotification;
+cocos2d::CCMenuItemImage *mTutorial;
+cocos2d::CCMenuItemImage *miCloud;
     
     //---- friends
-    CCLabelBMFont *mCoin;
-    CCNode *mShadeCode;
+cocos2d::CCLabelBMFont *mCoin;
+cocos2d::CCNode *mShadeCode;
 
     TitleMenu *master;
 
-    void onCloseOption();
-    void onToggleMusic();
-    void onToggleSfx();
-    void onTogglePushNotification();
-    void onToggleTutorial();
-    void onRateUs();
-    void onToggleiCloud();
+    void onCloseOption(cocos2d::Ref*);
+    void onToggleMusic(cocos2d::Ref*);
+    void onToggleSfx(cocos2d::Ref*);
+    void onTogglePushNotification(cocos2d::Ref*);
+    void onToggleTutorial(cocos2d::Ref*);
+    void onRateUs(cocos2d::Ref*);
+    void onToggleiCloud(cocos2d::Ref*);
 
-    void onAddFriend();
+    void onAddFriend(cocos2d::Ref*);
 
     static PopOption* optionWithType(int typ);//0=set, 1=gainfriend 2=setfriend)
     
     //cocosbuilder support
     bool onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
     {
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", CCMenuItemImage*, mMusic);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", CCMenuItemImage*, mSfx);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPushNotification", CCMenuItemImage*, mPushNotification);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTutorial", CCMenuItemImage*, mTutorial);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "miCloud", CCMenuItemImage*, miCloud);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoin", CCLabelBMFont*, mCoin);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadeCode", CCNode*, mShadeCode);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", CCMenuItemImage*, mMusic);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", CCMenuItemImage*, mSfx);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPushNotification", CCMenuItemImage*, mPushNotification);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTutorial", CCMenuItemImage*, mTutorial);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "miCloud", CCMenuItemImage*, miCloud);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoin", CCLabelBMFont*, mCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadeCode", CCNode*, mShadeCode);
         return false;
     }
     
     SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
     {
-        CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCloseOption", PopOption::onCloseOption);
-        CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleMusic", PopOption::onToggleMusic);
-        CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleSfx", PopOption::onToggleSfx);
-        CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTogglePushNotification", PopOption::onTogglePushNotification);
-        CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleTutorial", PopOption::onToggleTutorial);
-        CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRateUs", PopOption::onRateUs);
-        CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleiCloud", PopOption::onToggleiCloud);
-        CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onAddFriend", PopOption::onAddFriend);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCloseOption", PopOption::onCloseOption);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleMusic", PopOption::onToggleMusic);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleSfx", PopOption::onToggleSfx);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTogglePushNotification", PopOption::onTogglePushNotification);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleTutorial", PopOption::onToggleTutorial);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRateUs", PopOption::onRateUs);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleiCloud", PopOption::onToggleiCloud);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onAddFriend", PopOption::onAddFriend);
         return NULL;
     }
     
-    SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+    cocos2d::extension::Control::Handler   onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
     {
         return NULL;
     }
@@ -137,9 +137,9 @@ PopOption* PopOption::optionWithType(int typ)
 
 void PopOption::loadSetting()
 {
-    CCNodeLoaderLibrary *pNodeLib = cocos2d::CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
-    CCBReader *pReader = new CCBReader(pNodeLib, this, this);
-    CCNode *node = pReader->readNodeGraphFromFile("menu-titleoption.ccbi", this);
+NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
+CCBReader *pReader = new CCBReader(pNodeLib, this, this);
+cocos2d::CCNode *node = pReader->readNodeGraphFromFile("menu-titleoption.ccbi", this);
     pReader->release();
     
     this->addChild(node);
@@ -231,7 +231,7 @@ void PopOption::loadDelivery()
 //  sp->runAction(seq);
 }
 
-void PopOption::onAddFriend()
+void PopOption::onAddFriend(cocos2d::Ref*)
 {
     //feature removed from android
 //    if( ABSystem->isSystemVersionAbove(ABSYSVER_5) )
@@ -301,12 +301,12 @@ void PopOption::onAddFriend()
 //    master->hideOpt();
 //}
 
-void PopOption::onCloseOption()
+void PopOption::onCloseOption(cocos2d::Ref*)
 {
     master->hideOpt();
 }
 
-void PopOption::onToggleSfx()
+void PopOption::onToggleSfx(cocos2d::Ref*)
 {
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     if( GameRecord::sharedGameRecord()->setting_sfx )
@@ -324,7 +324,7 @@ void PopOption::onToggleSfx()
     }
 }
 
-void PopOption::onToggleMusic()
+void PopOption::onToggleMusic(cocos2d::Ref*)
 {
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     if( GameRecord::sharedGameRecord()->setting_music )
@@ -342,7 +342,7 @@ void PopOption::onToggleMusic()
     }
 }
 
-void PopOption::onTogglePushNotification()
+void PopOption::onTogglePushNotification(cocos2d::Ref*)
 {
     //feature removed from android
 //    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
@@ -361,7 +361,7 @@ void PopOption::onTogglePushNotification()
 //    delgate->scheduleLocalNotifuication();
 }
 
-void PopOption::onToggleTutorial()
+void PopOption::onToggleTutorial(cocos2d::Ref*)
 {
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     if( GameRecord::sharedGameRecord()->game_tutorial == 0 )
@@ -377,7 +377,7 @@ void PopOption::onToggleTutorial()
     }
 }
 
-void PopOption::onToggleiCloud()
+void PopOption::onToggleiCloud(cocos2d::Ref*)
 {
     //feature removed from android
 //    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
@@ -394,7 +394,7 @@ void PopOption::onToggleiCloud()
 //    }
 }
 
-void PopOption::onRateUs()
+void PopOption::onRateUs(cocos2d::Ref*)
 {
     //feature removed from android
 //CCString *str = "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=540290969";
@@ -410,33 +410,33 @@ public CCBSelectorResolver
 {
 public:
     CEClipedNode *mBoard;
-    CCNode *mRode;
+cocos2d::CCNode *mRode;
     float mTimer;
     bool mFlag;
     //-- auto assign --
-    CCLabelTTF *mDailyObjective;
-    CCLabelTTF *mWeeklyObjective;
-    CCLabelTTF *mMonthlyObjective;
-    CCNode *mDailyCrown;
-    CCNode *mWeeklyCrown;
-    CCNode *mMonthlyCrown;
-    CCSprite *mDailyIcon;
-    CCSprite *mWeeklyIcon;
-    CCSprite *mMonthlyIcon;
-    CCNode *mClassic;
-    CCNode *mArcade;
-    CCSprite *mGoldCoin;
-    CCSprite *mSilverCoin;
-    CCSprite *mBronzeCoin;
-    CCLabelBMFont *mGoldScore;
-    CCLabelBMFont *mGoldPrize;
-    CCLabelBMFont *mSilverScore;
-    CCLabelBMFont *mSilverPrize;
-    CCLabelBMFont *mBronzeScore;
-    CCLabelBMFont *mBronzePrize;
-    CCMenu *mMenu;
-    CCMenuItemImage *mSwitch;
-    CCMenuItemImage *mSwitch2;
+cocos2d::CCLabelTTF *mDailyObjective;
+cocos2d::CCLabelTTF *mWeeklyObjective;
+cocos2d::CCLabelTTF *mMonthlyObjective;
+cocos2d::CCNode *mDailyCrown;
+cocos2d::CCNode *mWeeklyCrown;
+cocos2d::CCNode *mMonthlyCrown;
+cocos2d::CCSprite *mDailyIcon;
+cocos2d::CCSprite *mWeeklyIcon;
+cocos2d::CCSprite *mMonthlyIcon;
+cocos2d::CCNode *mClassic;
+cocos2d::CCNode *mArcade;
+cocos2d::CCSprite *mGoldCoin;
+cocos2d::CCSprite *mSilverCoin;
+cocos2d::CCSprite *mBronzeCoin;
+cocos2d::CCLabelBMFont *mGoldScore;
+cocos2d::CCLabelBMFont *mGoldPrize;
+cocos2d::CCLabelBMFont *mSilverScore;
+cocos2d::CCLabelBMFont *mSilverPrize;
+cocos2d::CCLabelBMFont *mBronzeScore;
+cocos2d::CCLabelBMFont *mBronzePrize;
+cocos2d::CCMenu *mMenu;
+cocos2d::CCMenuItemImage *mSwitch;
+cocos2d::CCMenuItemImage *mSwitch2;
     
     bool mDisplay;//display content true=classic false=arcade
 
@@ -448,47 +448,47 @@ public:
     void onDoneAnimation();
     
     //callbacks
-    void onChangeDisplay();
-    void onClose();
+    void onChangeDisplay(cocos2d::Ref*);
+    void onClose(cocos2d::Ref*);
     
     //cocosbuilder support
     bool onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
     {
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF*, mDailyObjective);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF*, mWeeklyObjective);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF*, mMonthlyObjective);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", CCNode*, mDailyCrown);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", CCNode*, mWeeklyCrown);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", CCNode*, mMonthlyCrown);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", CCSprite*, mDailyIcon);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", CCSprite*, mWeeklyIcon);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", CCSprite*, mMonthlyIcon);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", CCNode*, mClassic);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", CCNode*, mArcade);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", CCSprite*, mGoldCoin);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", CCSprite*, mSilverCoin);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", CCSprite*, mBronzeCoin);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", CCLabelBMFont*, mGoldScore);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", CCLabelBMFont*, mGoldPrize);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", CCLabelBMFont*, mSilverScore);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverPrize", CCLabelBMFont*, mSilverPrize);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", CCLabelBMFont*, mBronzeScore);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", CCLabelBMFont*, mBronzePrize);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu*, mMenu);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSwitch", CCMenuItemImage*, mSwitch);
-        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSwitch2", CCMenuItemImage*, mSwitch2);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF*, mDailyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF*, mWeeklyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF*, mMonthlyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", CCNode*, mDailyCrown);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", CCNode*, mWeeklyCrown);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", CCNode*, mMonthlyCrown);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", CCSprite*, mDailyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", CCSprite*, mWeeklyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", CCSprite*, mMonthlyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", CCNode*, mClassic);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", CCNode*, mArcade);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", CCSprite*, mGoldCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", CCSprite*, mSilverCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", CCSprite*, mBronzeCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", CCLabelBMFont*, mGoldScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", CCLabelBMFont*, mGoldPrize);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", CCLabelBMFont*, mSilverScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverPrize", CCLabelBMFont*, mSilverPrize);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", CCLabelBMFont*, mBronzeScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", CCLabelBMFont*, mBronzePrize);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu*, mMenu);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSwitch", CCMenuItemImage*, mSwitch);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSwitch2", CCMenuItemImage*, mSwitch2);
         return false;
     }
     
     SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
     {
         // TODO:
-        CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onClose", PopObj::onClose);
-        CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChangeDisplay", PopObj::onChangeDisplay);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onClose", PopObj::onClose);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChangeDisplay", PopObj::onChangeDisplay);
         return NULL;
     }
     
-    SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+    cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
     {
         return NULL;
     }
@@ -513,7 +513,7 @@ void PopObj::displayClassic()
         
         mDailyIcon->setVisible(true);
         Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
-        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mDailyIcon->addChild(icon);
         
@@ -535,7 +535,7 @@ void PopObj::displayClassic()
         
         mWeeklyIcon->setVisible(true);
         Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
-        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mWeeklyIcon->addChild(icon);
         
@@ -557,7 +557,7 @@ void PopObj::displayClassic()
         
         mMonthlyIcon->setVisible(true);
         Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
-        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mMonthlyIcon->addChild(icon);
         
@@ -574,19 +574,19 @@ void PopObj::displayClassic()
     //update crown
     for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
     {
-        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mDailyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective->index; ++i)
     {
-        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mWeeklyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective->index; ++i)
     {
-        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mMonthlyCrown->addChild(crown);
     }
@@ -645,10 +645,10 @@ void PopObj::displayArcade()
 
 void PopObj::onCreate()
 {
-    CCNode * node = createUIByCCBI("menu-titlepop", "TitleMenu", TitleMenuLayerLoader::loader(), this);
+cocos2d::CCNode * node = createUIByCCBI("menu-titlepop", "TitleMenu", TitleMenuLayerLoader::loader(), this);
     mBoard = CEClipedNode::create();
     mBoard->addChild(node);
-    CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
+cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
     //CCLog("CLIP = %fx%f %fx%f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
     mBoard->setClipRect(&rect);
     //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
@@ -678,9 +678,9 @@ void PopObj::onCreate()
     }
     
     //run animation
-    CCMoveTo *mt = cocos2d::CCMoveTo::create(0.2f, ccp(-301+381, 58));
-    CCCallFunc *cf = cocos2d::CCCallFunc::create(this, callfunc_selector(PopObj::onDoneAnimation));
-    CCSequence *seq = cocos2d::CCSequence::createWithTwoActions(mt, cf);
+cocos2d::CCMoveTo *mt = cocos2d::CCMoveTo::create(0.2f, ccp(-301+381, 58));
+cocos2d::CCCallFunc *cf = cocos2d::CCCallFunc::create(this, callfunc_selector(PopObj::onDoneAnimation));
+cocos2d::CCSequence *seq = cocos2d::CCSequence::createWithTwoActions(mt, cf);
     
     mBoard->runAction(seq);
     mSwitch->setVisible(false);
@@ -704,7 +704,7 @@ void PopObj::onDestroy()
     this->removeChild(mBoard, true);
 }
 
-void PopObj::onClose()
+void PopObj::onClose(cocos2d::Ref*)
 {
     master->hideObjs();
 }
@@ -725,30 +725,29 @@ void PopObj::onFlip()
     }
 }
                            
-void PopObj::onChangeDisplay()
+void PopObj::onChangeDisplay(cocos2d::Ref*)
 {
     mDisplay = !mDisplay;
     
     //play animation
     //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
-    CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
+cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
     mBoard->setClipRect(&rect);
-    
-    CCMoveTo *mt1 = cocos2d::CCMoveTo::create(0.2f, ccp(-301, 58));
-    CCCallFunc *cf1 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onFlip)));
-    CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.2f, ccp(-301+381, 58));
-    CCCallFunc *cf2 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onDoneAnimation)));
-    
-    CCArray *sqa = cocos2d::CCArray::create();
-    sqa->addObject(mt1);
-    sqa->addObject(cf1);
-    sqa->addObject(mt2);
-    sqa->addObject(cf2);
-    
-    CCSequence *seq = cocos2d::CCSequence::create(sqa);
+cocos2d::CCMoveTo *mt1 = cocos2d::CCMoveTo::create(0.2f, ccp(-301, 58));
+cocos2d::CCCallFunc *cf1 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onFlip)));
+cocos2d::CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.2f, ccp(-301+381, 58));
+cocos2d::CCCallFunc *cf2 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onDoneAnimation)));
+    std::vector<FiniteTimeAction*> *sqa = new std::vector<FiniteTimeAction*>(); //TODO:memory management?
+    sqa->push_back(mt1);
+    sqa->push_back(cf1);
+    sqa->push_back(mt2);
+    sqa->push_back(cf2);
+    /* TODO:uncomment this
+cocos2d::CCSequence *seq = cocos2d::CCSequence::create(sqa);
     //CCSequence *seq = cocos2d::CCSequence::create(mt1, cf1, mt2, cf2);
     
     mBoard->runAction(seq);
+     */
     
     mSwitch->setVisible(false);
     mSwitch2->setVisible(false);
@@ -765,8 +764,8 @@ Sakura* Sakura::create(cocos2d::CCNode *parent)
   ret->mSprite->setPosition(cocos2d::ccp((SCREEN_WIDTH+300)*CCRANDOM_0_1(), SCREEN_HEIGHT+50 ));
   ret->mParent = parent;
   //ret->mFlipX = 0.5f + CCRANDOM_0_1();
-  ret->mWindX = cocos2d::CCRANDOM_0_1();
-  ret->mSpeed = cocos2d::CCRANDOM_0_1()*50 - 80;
+  ret->mWindX = CCRANDOM_0_1();
+  ret->mSpeed = CCRANDOM_0_1()*50 - 80;
   ret->mSpeedY = 40 + 30*CCRANDOM_0_1();
   parent->addChild(ret->mSprite);
   return ret;
@@ -830,8 +829,7 @@ void TitleMenu::onEnter()
 
     //enable keypad for back button
     this->setKeypadEnabled(true);
-    
-  CCNode * node = createUIByCCBI("menu-title", "TitleMenu", TitleMenuLayerLoader::loader(), this);
+cocos2d::CCNode * node = createUIByCCBI("menu-title", "TitleMenu", TitleMenuLayerLoader::loader(), this);
   if(node != NULL) {
     this->addChild(node);
   }
@@ -850,17 +848,15 @@ void TitleMenu::onEnter()
     {
       float sq0Duration[] = {0.2f, 0.2f};
       float sq0Scale[] = {1.2f, 1.0f};
-      CCSequence *sq0 = createScaleSequence(sq0Duration, sq0Scale, 2);
+cocos2d::CCSequence *sq0 = createScaleSequence(sq0Duration, sq0Scale, 2);
       mLogo->runAction(sq0);
-      
-      CCDelayTime *dt1 = cocos2d::CCDelayTime::create(0.6f);
-      CCShow *st1 = cocos2d::CCShow::create();
-      CCSequence *sq = (cocos2d::CCSequence*)CCSequence::create(dt1, st1, NULL);
+cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(0.6f);
+cocos2d::CCShow *st1 = cocos2d::CCShow::create();
+cocos2d::CCSequence *sq = (cocos2d::CCSequence*)CCSequence::create(dt1, st1, NULL);
       mMainButton->runAction(sq);
-        
-      CCDelayTime *dt2 = cocos2d::CCDelayTime::create(0.6f);
-      CCShow *st2 = cocos2d::CCShow::create();
-      CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(dt2, st2, NULL);
+cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(0.6f);
+cocos2d::CCShow *st2 = cocos2d::CCShow::create();
+cocos2d::CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(dt2, st2, NULL);
       mMainButton->runAction(sq2);
     }
     
@@ -894,37 +890,39 @@ void TitleMenu::onEnter()
   mNew->setVisible(false);
   if( GameRecord::sharedGameRecord()->task->newrefresh )
   {
-      CCDelayTime *dt1 = cocos2d::CCDelayTime::create(1.0f);
-      CCShow *sh1 = cocos2d::CCShow::create();
-      CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.2f, 1.5f);
-      CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.1f, 1.0f);
-      CCArray *sqa = cocos2d::CCArray::create();
+cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(1.0f);
+cocos2d::CCShow *sh1 = cocos2d::CCShow::create();
+cocos2d::CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.2f, 1.5f);
+cocos2d::CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.1f, 1.0f);
+cocos2d::CCArray *sqa = cocos2d::CCArray::create();
       sqa->addObject(dt1);
       sqa->addObject(sh1);
       sqa->addObject(st1);
       sqa->addObject(st2);
-      CCSequence *sq = cocos2d::CCSequence::create(sqa);
+      /* TODO:uncomment this
+cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sqa);
       
       mNew->runAction(sq);
+       */
   }
 
   //check new collections
   mCNew->setVisible(false);
   if( GameRecord::sharedGameRecord()->collection->newlist->count() > 0 )
   {
-      CCDelayTime *dt1 = cocos2d::CCDelayTime::create(1.5f);
-      CCShow *sh1 = cocos2d::CCShow::create();
-      CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.2f, 1.5f);
-      CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.1f, 1);
-      
-      CCArray *sqa = cocos2d::CCArray::create();
+cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(1.5f);
+cocos2d::CCShow *sh1 = cocos2d::CCShow::create();
+cocos2d::CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.2f, 1.5f);
+cocos2d::CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.1f, 1);
+cocos2d::CCArray *sqa = cocos2d::CCArray::create();
       sqa->addObject(dt1);
       sqa->addObject(sh1);
       sqa->addObject(st1);
       sqa->addObject(st2);
-      
-      CCSequence *sq = cocos2d::CCSequence::create(sqa);
+      /* TODO:uncomment this
+cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sqa);
       mCNew->runAction(sq);
+       */
   }
 
   for(int i=0; i<5; ++i)
@@ -950,8 +948,7 @@ void TitleMenu::onEnter()
           gPopFlag = true;
       }
   }
-
-    CCLayer::onEnter();
+cocos2d::CCLayer::onEnter();
 }
 
 void TitleMenu::showObjs()
@@ -1098,7 +1095,7 @@ void TitleMenu::update(float delta)
         {
             if( CCRANDOM_0_1() < 0.0005f )
             {
-                CCString *enm = NULL;
+cocos2d::CCString *enm = NULL;
                 switch (randomInt(3)) {
                     case 0:
                     {
@@ -1161,12 +1158,12 @@ void TitleMenu::onExit()
 {
     removeAllChildrenWithCleanup(true);
     PublicLoad::menuTitle()->unloadAll();
-    CCLayer::onExit();
+cocos2d::CCLayer::onExit();
 }
 
 void TitleMenu::onPlayClassic()
 {
-  CCLog("Player");
+cocos2d::CCLog("Player");
   GamePlay::sharedGamePlay()->setGameMode(MODE_CLASSIC);
   SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
   setSceneOutro(SelectMenu::scene());
@@ -1277,8 +1274,8 @@ void TitleMenu::onMoreFun()
 
 void TitleMenu::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
-  if (keyCode == KEY_BACKSPACE) {
-    CCLog("KEY BACK CLICKED");
+    if (keyCode == EventKeyboard::KeyCode::KEY_BACKSPACE) {
+cocos2d::CCLog("KEY BACK CLICKED");
     exit(0);
   }
 }
@@ -1309,55 +1306,56 @@ void TitleMenu::setSceneOutro(cocos2d::CCScene* newscene)
 void TitleMenu::doneOutro()
 {
   mIntroFlag = false;
-  CCDirector::sharedDirector()->replaceScene(mNewScene);
+cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
   mNewScene->release();
 }
 
 SEL_MenuHandler TitleMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onLeaderboard", TitleMenu::onLeaderboard)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onShowObjectives", TitleMenu::onShowObjectives)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onOption", TitleMenu::onOption)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onFacebook", TitleMenu::onFacebook)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTwitter", TitleMenu::onTwitter)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onAchievement", TitleMenu::onAchievement)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onShareCode", TitleMenu::onShareCode)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onPlayClassic", TitleMenu::onPlayClassic)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCollections", TitleMenu::onCollections)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onStore", TitleMenu::onStore)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onExtra", TitleMenu::onExtra)
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onPlayArcade", TitleMenu::onPlayArcade)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMoreFun", TitleMenu::onMoreFun)
-    return NULL;
+    /* TODO: uncomment this
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onLeaderboard", TitleMenu::onLeaderboard)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onShowObjectives", TitleMenu::onShowObjectives)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onOption", TitleMenu::onOption)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onFacebook", TitleMenu::onFacebook)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTwitter", TitleMenu::onTwitter)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onAchievement", TitleMenu::onAchievement)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onShareCode", TitleMenu::onShareCode)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onPlayClassic", TitleMenu::onPlayClassic)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCollections", TitleMenu::onCollections)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onStore", TitleMenu::onStore)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onExtra", TitleMenu::onExtra)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onPlayArcade", TitleMenu::onPlayArcade)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMoreFun", TitleMenu::onMoreFun)
+    */
+     return NULL;
 }
 
 cocos2d::extension::Control::Handler TitleMenu::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-  CCLog("Control");
+cocos2d::CCLog("Control");
   return NULL;
 }
 bool TitleMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud1", CCSprite*, mCloud1)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud2", CCSprite*, mCloud2)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLogo", CCSprite*, mLogo)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar1", CCSprite*, mStar1) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar2", CCSprite*, mStar2) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar3", CCSprite*, mStar3) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar4", CCSprite*, mStar4) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar5", CCSprite*, mStar5) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCNew", CCSprite*, mCNew) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mNew", CCSprite*, mNew) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSakuraNode", CCNode*, mSakuraNode)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSakuraNode2", CCNode*, mSakuraNode2)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEnemies", CCNode*, mEnemies)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMiniButton", CCMenu*, mMiniButton) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainButton", CCMenu*, mMainButton) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mOption", CCMenuItemImage*, mOption) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter", CCMenuItemImage*, mTwitter) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMask", CCLayerColor*, mMask) 
-
-  CCLog(pMemberVariableName);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud1", CCSprite*, mCloud1)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud2", CCSprite*, mCloud2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLogo", CCSprite*, mLogo)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar1", CCSprite*, mStar1) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar2", CCSprite*, mStar2) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar3", CCSprite*, mStar3) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar4", CCSprite*, mStar4) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar5", CCSprite*, mStar5) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCNew", CCSprite*, mCNew) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mNew", CCSprite*, mNew) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSakuraNode", CCNode*, mSakuraNode)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSakuraNode2", CCNode*, mSakuraNode2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEnemies", CCNode*, mEnemies)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMiniButton", CCMenu*, mMiniButton) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainButton", CCMenu*, mMainButton) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mOption", CCMenuItemImage*, mOption) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter", CCMenuItemImage*, mTwitter) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMask", CCLayerColor*, mMask) 
+cocos2d::CCLog(pMemberVariableName);
 
   return false;
 }

@@ -7,14 +7,14 @@
 
 void Scene2::loadScene() 
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     cache->addSpriteFramesWithFile("scene3.plist");
     cache->addSpriteFramesWithFile("scene4.plist");
 }
 
 void Scene2::unloadScene() 
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     cache->removeSpriteFramesFromFile("scene3.plist");
     cache->removeSpriteFramesFromFile("scene4.plist");
     unloadTextureFromeSpriteFrameFile("scene3.plist");
@@ -27,10 +27,9 @@ void Scene2::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     
     mBg = bg;
     mFront = fg;
-    
-    CCLayerColor *sbg = cocos2d::CCLayerColor::create(ccc4(135, 206, 233, 255));
+cocos2d::CCLayerColor *sbg = cocos2d::CCLayerColor::create(ccc4(135, 206, 233, 255));
     mBg->addChild(sbg, 0);
-    CCSprite *sun = cocos2d::CCSprite::createWithSpriteFrameName("s2_sun.png");
+cocos2d::CCSprite *sun = cocos2d::CCSprite::createWithSpriteFrameName("s2_sun.png");
     sun->setPosition(cocos2d::ccp(433, 300));
     mBg->addChild(sun, 1);
     //1

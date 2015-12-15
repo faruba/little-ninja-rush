@@ -93,7 +93,7 @@ void ShadowKilling::onUpdate(float delta)
                     {
                         mSteak = 9;
                     }
-                    CCString *sound = cocos2d::CCString::createWithFormat("combo%d.mp3", mSteak);
+cocos2d::CCString *sound = cocos2d::CCString::createWithFormat("combo%d.mp3", mSteak);
                     SimpleAudioEngine::sharedEngine()->playEffect(sound->getCString());
                     
                     GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 28, false);
@@ -210,8 +210,8 @@ void ShadowKilling::seekTarget()
 {
   GamePlay *play = GamePlay::sharedGamePlay();
   mTarget = NULL;
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;
     if( em->supportAimAid() && em->position().x > TARGET_RANGE && em->position().x < UniversalFit::sharedUniversalFit()->playSize.width-TARGET_RANGE )

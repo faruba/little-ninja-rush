@@ -17,11 +17,10 @@ class Scene1: public SceneInterface
     virtual void release(){};
 
     RingTile *mTiles;
-    CCNode *mFront;
-    CCNode *mBg;
+cocos2d::CCNode *mFront;
+cocos2d::CCNode *mBg;
     int mTileState;
     int mTileCount;
-
-    CCSprite *mFronts[S1_FONTCOUNT];
+cocos2d::CCSprite *mFronts[S1_FONTCOUNT];
 };
 #endif

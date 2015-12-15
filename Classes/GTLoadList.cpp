@@ -3,14 +3,14 @@
 
 void GTLoadSpriteSheet(const char* param, bool isload)
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     if( isload )
     {
-        CCLog("load spritesheet (%s)", param);
+cocos2d::CCLog("load spritesheet (%s)", param);
         cache->addSpriteFramesWithFile(param);
     }
     else {
-        CCLog("unload spritesheet (%s)", param);
+cocos2d::CCLog("unload spritesheet (%s)", param);
         cache->removeSpriteFramesFromFile(param);
         unloadTextureFromeSpriteFrameFile(param);
     }
@@ -84,18 +84,20 @@ int GTLoadList::loadSome()
     float cost = 0;
     while ( mLoadIndex < mList->count() && cost < mMaxInterval ) {
         //CFAbsoluteTime bl = CFAbsoluteTimeGetCurrent();
-        struct cc_timeval bl;
-        CCTime::gettimeofdayCocos2d(&bl, NULL);
+        time_t bl;
+        /* TODO: uncomment this
+cocos2d::CCTime::gettimeofdayCocos2d(&bl, NULL);
         
         LoadItem *item = (LoadItem*)mList->objectAtIndex(mLoadIndex);
         item->execute(true);
         
         //CFAbsoluteTime al = CFAbsoluteTimeGetCurrent();
-        struct cc_timeval al;
-        CCTime::gettimeofdayCocos2d(&al, NULL);
+        time_t al;
+cocos2d::CCTime::gettimeofdayCocos2d(&al, NULL);
         
         //cost += al-bl;
         cost += cocos2d::CCTime::timersubCocos2d(&bl, &al)/1000.0;
+         */
         mLoadIndex++;
     }
     return mList->count() - mLoadIndex;
@@ -103,8 +105,8 @@ int GTLoadList::loadSome()
 
 void GTLoadList::unloadAll() 
 {  
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(mList, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(mList, node)
   {
     LoadItem *li = (LoadItem*)node;
     li->execute(false);
@@ -113,8 +115,8 @@ void GTLoadList::unloadAll()
 
 void GTLoadList::loadAll() 
 {
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(mList, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(mList, node)
   {
     LoadItem *li = (LoadItem*)node;
     li->execute(true);
@@ -130,7 +132,7 @@ void GTLoadList::addSpriteSheet(const char * name)
 {
     if( mLoadIndex < 0 )
     {
-      CCLog(name);
+cocos2d::CCLog(name);
       LoadItem *it = LoadItem::itemWithInfo(name, GTLoadSpriteSheet);
       mList->addObject(it);
     }

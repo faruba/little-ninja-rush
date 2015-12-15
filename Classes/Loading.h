@@ -10,8 +10,7 @@ class Loading:public CCLayer
 {
   public:
     virtual bool init();  
-
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(Loading, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(Loading, create);
     static CCScene *loadTo(cocos2d::CCScene* dst, GTLoadList* lst, GTLoadList * ull, bool tip);
 
     virtual bool onTouchBegan(Touch * touch, Event * event);
@@ -19,16 +18,14 @@ class Loading:public CCLayer
 
     virtual void onEnter();
     virtual void update(float);
-
-    CCScene *mDst;
-    CCScene* mScene;
+cocos2d::CCScene *mDst;
+cocos2d::CCScene* mScene;
     GTLoadList* mLoadlist;
     GTLoadList* mUnloadlist;
     bool unload;
     bool mTip;
     bool mFinish;
-
-    CCSprite *mLoading;
+cocos2d::CCSprite *mLoading;
 
     void prepareLoading();
     void finishLoading();

@@ -22,8 +22,7 @@ class Samuri:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
-    
-    CCNode* mParent;
+cocos2d::CCNode* mParent;
     GTAnimatedSprite* mSprite;
     GTAnimatedSprite *mHint;
     //CCSprite* mMark;

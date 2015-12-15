@@ -144,8 +144,8 @@ bool Item::isItemAccept(int item)
         case 10:
         {
             int cnt = 0;
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;
                 if( em->supportAimAid() )
@@ -207,22 +207,22 @@ void Item::onCreate()
     
     if( mTid < 2 )
     {
-        CCRotateBy *rot = cocos2d::CCRotateBy::create(1, 1080);
-        CCRepeatForever *rep = cocos2d::CCRepeatForever::create(rot);
+cocos2d::CCRotateBy *rot = cocos2d::CCRotateBy::create(1, 1080);
+cocos2d::CCRepeatForever *rep = cocos2d::CCRepeatForever::create(rot);
         mSprite->runAction(rep);
         
         mSprite->setScale(0.1f);
-        CCScaleTo *scale1 = cocos2d::CCScaleTo::create(0.15f, 1.2f);
-        CCScaleTo *scale2 = cocos2d::CCScaleTo::create(0.15f, 1);
-        CCSequence *seq = cocos2d::CCSequence::create(scale1, scale2, NULL);
+cocos2d::CCScaleTo *scale1 = cocos2d::CCScaleTo::create(0.15f, 1.2f);
+cocos2d::CCScaleTo *scale2 = cocos2d::CCScaleTo::create(0.15f, 1);
+cocos2d::CCSequence *seq = cocos2d::CCSequence::create(scale1, scale2, NULL);
         mSprite->runAction(seq);
     }
     else
     {
         mSprite->setScale(0.05f);
-        CCScaleTo *scale1 = cocos2d::CCScaleTo::create(0.15f, 0.95f);
-        CCScaleTo *scale2 = cocos2d::CCScaleTo::create(0.15f, 0.8f);
-        CCSequence *seq = cocos2d::CCSequence::create(scale1, scale2, NULL);
+cocos2d::CCScaleTo *scale1 = cocos2d::CCScaleTo::create(0.15f, 0.95f);
+cocos2d::CCScaleTo *scale2 = cocos2d::CCScaleTo::create(0.15f, 0.8f);
+cocos2d::CCSequence *seq = cocos2d::CCSequence::create(scale1, scale2, NULL);
         mSprite->runAction(seq);
     }
     

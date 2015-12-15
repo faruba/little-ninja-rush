@@ -22,8 +22,7 @@ static Messager* role(cocos2d::CCNode* parent);
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
-
-    CCNode* mParent;
+cocos2d::CCNode* mParent;
     GTAnimatedSprite *mSprite;
     int mState;
     float mAwake;

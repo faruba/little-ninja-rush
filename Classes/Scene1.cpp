@@ -7,14 +7,14 @@
 
 void Scene1::loadScene() 
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     cache->addSpriteFramesWithFile("scene1.plist");
     cache->addSpriteFramesWithFile("scene2.plist");
 }
 
 void Scene1::unloadScene() 
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     cache->removeSpriteFramesFromFile("scene1.plist");
     cache->removeSpriteFramesFromFile("scene2.plist");
     unloadTextureFromeSpriteFrameFile("scene1.plist");
@@ -27,26 +27,21 @@ void Scene1::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     
     mBg = bg;
     mFront = fg;
-    
-    CCLayerColor *sbg = cocos2d::CCLayerColor::create(ccc4(16, 23, 39, 255));
+cocos2d::CCLayerColor *sbg = cocos2d::CCLayerColor::create(ccc4(16, 23, 39, 255));
     mBg->addChild(sbg, 0);
-    
-    CCSprite *StaBg = cocos2d::CCSprite::createWithSpriteFrameName("s1_sbg.png");
+cocos2d::CCSprite *StaBg = cocos2d::CCSprite::createWithSpriteFrameName("s1_sbg.png");
     StaBg->setAnchorPoint(cocos2d::ccp(0, 1));
     StaBg->setPosition(cocos2d::ccp(0, SCREEN_HEIGHT));
     mBg->addChild(StaBg, 0);
-    
-    CCSprite *DynBg0 = cocos2d::CCSprite::createWithSpriteFrameName("s1_dbg.png");
+cocos2d::CCSprite *DynBg0 = cocos2d::CCSprite::createWithSpriteFrameName("s1_dbg.png");
     DynBg0->setAnchorPoint(cocos2d::ccp(0, 0));
     DynBg0->setPosition(cocos2d::ccp(0, 80));
     mBg->addChild(DynBg0, 1, 0);
-    
-    CCSprite *DynBg1 = cocos2d::CCSprite::createWithSpriteFrameName("s1_dbg.png");
+cocos2d::CCSprite *DynBg1 = cocos2d::CCSprite::createWithSpriteFrameName("s1_dbg.png");
     DynBg1->setAnchorPoint(cocos2d::ccp(0, 0));
     DynBg1->setPosition(cocos2d::ccp(DynBg0->getContentSize().width, 80));
     mBg->addChild(DynBg1, 1, 1);
-    
-    CCSprite *DynBg2 = cocos2d::CCSprite::createWithSpriteFrameName("s1_dbg.png");
+cocos2d::CCSprite *DynBg2 = cocos2d::CCSprite::createWithSpriteFrameName("s1_dbg.png");
     DynBg2->setAnchorPoint(cocos2d::ccp(0, 0));
     DynBg2->setPosition(cocos2d::ccp(DynBg0->getContentSize().width*2, 80));
     mBg->addChild(DynBg2, 1, 2);
@@ -71,9 +66,9 @@ void Scene1::update(float delta)
 {
     //run scene
     {
-        CCNode *DynBg0 = (mBg->getChildByTag(0));
-        CCNode *DynBg1 = (mBg->getChildByTag(1));
-        CCNode *DynBg2 = (mBg->getChildByTag(2));
+cocos2d::CCNode *DynBg0 = (mBg->getChildByTag(0));
+cocos2d::CCNode *DynBg1 = (mBg->getChildByTag(1));
+cocos2d::CCNode *DynBg2 = (mBg->getChildByTag(2));
         int woff = mTiles->offset()/2;
         int dr = DynBg0->getContentSize().width;
         int doff = woff%dr;

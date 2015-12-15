@@ -74,11 +74,11 @@ void GameObjectManager::removeGameObject(GameObject* ObjId)
   }
   else {
     unsigned int index = mList->indexOfObject(ObjId);
-    if( index != cocos2d::CC_INVALID_INDEX )
+    if( index != CC_INVALID_INDEX )
     {
       ObjId->onDestroy();
       mList->replaceObjectAtIndex(index, GameObject::dummyObject());
-      CCInteger *num = cocos2d::CCInteger::create(index);
+cocos2d::CCInteger *num = cocos2d::CCInteger::create(index);
       mFree->addObject(num);
     }
   }
@@ -145,11 +145,11 @@ void GameObjectManager::flushOperation()
             if( todel != NULL )
             {
               unsigned int index = oc->opr.index;
-              if( index != cocos2d::CC_INVALID_INDEX )
+              if( index != CC_INVALID_INDEX )
               {
                 todel->onDestroy();
                 mList->replaceObjectAtIndex(index, GameObject::dummyObject());
-                CCInteger *num = cocos2d::CCInteger::create(index);
+cocos2d::CCInteger *num = cocos2d::CCInteger::create(index);
                 mFree->addObject(num);
               }
             }
@@ -181,8 +181,8 @@ int GameObjectManager::objectCount()
 void GameObjectManager::update(float delta) 
 {
   this->cacheOperation();
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(mList, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(mList, node)
   {
     GameObject* go = (GameObject*)node;
     go->onUpdate(delta);

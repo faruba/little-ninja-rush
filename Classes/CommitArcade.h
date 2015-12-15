@@ -35,19 +35,18 @@ class CommitArcade:
     int mTargetScore;
     int mCurrentScore;
     int mCurrentBouns;
-
-    CCNode *mNode;
+cocos2d::CCNode *mNode;
     // --- auto assign ---
-    CCSprite *mRole;
-    CCSprite *mLight;
-    CCSprite *mCup;
-    CCLabelBMFont *mScore;
-    CCLabelBMFont *mBouns;
-    CCLabelBMFont *mGoldenTrophy;
-    CCLabelBMFont *mSilverTrophy;
-    CCLabelBMFont *mBronzeTrophy;
-    CCLabelBMFont *mCoins;
-    CCLayerColor *mFlash;
+cocos2d::CCSprite *mRole;
+cocos2d::CCSprite *mLight;
+cocos2d::CCSprite *mCup;
+cocos2d::CCLabelBMFont *mScore;
+cocos2d::CCLabelBMFont *mBouns;
+cocos2d::CCLabelBMFont *mGoldenTrophy;
+cocos2d::CCLabelBMFont *mSilverTrophy;
+cocos2d::CCLabelBMFont *mBronzeTrophy;
+cocos2d::CCLabelBMFont *mCoins;
+cocos2d::CCLayerColor *mFlash;
 
 
 };

@@ -16,20 +16,19 @@ class Scene6: public SceneInterface
     virtual void release(){};
 
     RingTile *mTiles;
-    CCNode *mFront;
-    CCNode *mBg;
-    
-    CCSprite *mFronts[4];
-    CCSprite *mMountains[4];
+cocos2d::CCNode *mFront;
+cocos2d::CCNode *mBg;
+cocos2d::CCSprite *mFronts[4];
+cocos2d::CCSprite *mMountains[4];
     float mMountainLen;
-    CCSprite *mSmallTrees[4];
+cocos2d::CCSprite *mSmallTrees[4];
     float mSmallDistance;
-    CCSprite *mSmoke1[3];
-    CCSprite *mSmokedObjs[14];
+cocos2d::CCSprite *mSmoke1[3];
+cocos2d::CCSprite *mSmokedObjs[14];
     float mSmokedDistance;
-    CCSprite *mSmoke2[3];
-    CCSprite *mFrontObjs[14];
+cocos2d::CCSprite *mSmoke2[3];
+cocos2d::CCSprite *mFrontObjs[14];
     float mFrontDistance;
-    CCSprite *mBgs1[5];
+cocos2d::CCSprite *mBgs1[5];
 };
 #endif

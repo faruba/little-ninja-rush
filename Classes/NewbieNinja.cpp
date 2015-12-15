@@ -20,7 +20,7 @@ void NewbieNinja::onCreate()
     GamePlay *play = GamePlay::sharedGamePlay();
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("enemy"));
     mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
-    int y = cocos2d::CCRANDOM_0_1()*RESPAWN_Y;
+    int y = CCRANDOM_0_1()*RESPAWN_Y;
     if( play->state == STATE_RUSH )
     {
         mSprite->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
@@ -138,7 +138,7 @@ void NewbieNinja::onUpdate(float delta)
             }
             cocos2d::Point dir = ccpNormalize(ccpSub(target, this->center()));
             float angle = ccpToAngle(dir);
-            angle += cocos2d::CC_DEGREES_TO_RADIANS(-NNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*NNINJA_ACCURATE)*CCRANDOM_0_1();
+            angle += CC_DEGREES_TO_RADIANS(-NNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*NNINJA_ACCURATE)*CCRANDOM_0_1();
             dir = ccpForAngle(angle);
             play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), dir, -1, mParent)));
             mSprite->playGTAnimation(5, false);

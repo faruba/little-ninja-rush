@@ -10,19 +10,15 @@
 //#include "ABDelivery.h"
 
 #include "JsonWrapper.h"
-#include "rapidjson/rapidjson.h"
-#include "rapidjson/document.h"
-#include "rapidjson/prettywriter.h"
-#include "rapidjson/filestream.h"
 
 
 using namespace cocos2d;
 using namespace CocosDenshion;
 
-CCScene* LogoSplash::scene()
+cocos2d::CCScene* LogoSplash::scene()
 {
     // 'scene' is an autorelease object
-    CCScene *scene = cocos2d::CCScene::create();
+cocos2d::CCScene *scene = cocos2d::CCScene::create();
     
     // 'layer' is an autorelease object
     LogoSplash *layer = LogoSplash::create();
@@ -50,7 +46,7 @@ bool LogoSplash::init()
 
 void LogoSplash::onEnter()
 {
-  CCLayerColor *bg = cocos2d::CCLayerColor::create(ccc4(255, 255, 255, 255));
+cocos2d::CCLayerColor *bg = cocos2d::CCLayerColor::create(ccc4(255, 255, 255, 255));
 
   addChild(bg);
 
@@ -68,7 +64,7 @@ void LogoSplash::onEnter()
   // TODO:
   //trigger check delivery
   //ABDelivery->sharedDelivery()->triggerCheckDelivery();
-  CCLayer::onEnter();
+cocos2d::CCLayer::onEnter();
 }
 
 void LogoSplash::update(float delta)
@@ -125,7 +121,7 @@ void LogoSplash::update(float delta)
 
 void LogoSplash::load()
 {
-    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("items.plist");
+cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("items.plist");
 
 //    //test json reader -->
 //    CCLog("TESTING JSON READER");
@@ -168,6 +164,6 @@ void LogoSplash::load()
 void LogoSplash::done()
 {
   SimpleAudioEngine::sharedEngine()->stopEffect(mSoundId);
-  CCDirector::sharedDirector()->replaceScene(TitleMenu::scene());
+cocos2d::CCDirector::sharedDirector()->replaceScene(TitleMenu::scene());
 } 
 

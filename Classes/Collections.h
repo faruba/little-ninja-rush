@@ -3,22 +3,18 @@
 
 #include <cocos2d.h>
 #include "cocos-ext.h"
-#include "rapidjson/rapidjson.h"
-#include "rapidjson/document.h"
-#include "rapidjson/prettywriter.h"
-#include "rapidjson/filestream.h"
-
+#include "GameObject.h"
 ;
 USING_NS_CC_EXT;
 
-class Collections:public CCObject
+class Collections:public GameObject
 {
 public:
-  CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Collections, create);
+  CREATE_FUNC(Collections);
   //万能碎片
   int magic_piece;
   int *pieces;//only merge
-  CCArray *newlist;
+  cocos2d::CCArray *newlist;
   int life_piece;
   int dart_piece;
 

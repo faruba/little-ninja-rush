@@ -14,8 +14,8 @@
 
 class ObjectiveComplete:
   public GameObject,
-  public CCBMemberVariableAssigner,
-  public CCBSelectorResolver
+  public cocosbuilder::CCBMemberVariableAssigner,
+  public cocosbuilder::CCBSelectorResolver
 {
   public:
     static ObjectiveComplete* commitObjective();
@@ -23,7 +23,7 @@ class ObjectiveComplete:
 
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
@@ -44,22 +44,21 @@ class ObjectiveComplete:
 
     Objective *mCurrObj;
     Achievement *mCurrAch;
-
-    CCNode *mNode;
+cocos2d::CCNode *mNode;
     CEClipedNode *mObjRect;
     //--- auto assign ---
-    CCSprite *mBanner;
-    CCSprite *mObjType;
-    CCNode *mCrowns;
-    CCLabelBMFont *mBounsCoins;
-    CCSprite *mScroll;
-    CCLabelBMFont *mBounsScroll;
+cocos2d::CCSprite *mBanner;
+cocos2d::CCSprite *mObjType;
+cocos2d::CCNode *mCrowns;
+cocos2d::CCLabelBMFont *mBounsCoins;
+cocos2d::CCSprite *mScroll;
+cocos2d::CCLabelBMFont *mBounsScroll;
 
 
     void retriveObjectiveInfo(int index, Objective** obj, Achievement** ach);
 
     //typ = 0 日任务 1 周任务 2 月任务
-    CCNode* genObjectiveInfo(Achievement* ach, int typ);
+cocos2d::CCNode* genObjectiveInfo(Achievement* ach, int typ);
 
 };
 #endif

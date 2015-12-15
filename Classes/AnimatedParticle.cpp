@@ -69,7 +69,7 @@ AnimatedParticle* AnimatedParticle::particleCoin(cocos2d::Point pos, int di)
 AnimatedParticle* AnimatedParticle::particleDeadSlide(cocos2d::Point pos) 
 {
     AnimatedParticle *ret = AnimatedParticle::create();
-    ret->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(150 + 30*CCRANDOM_0_1()));
+    ret->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(150 + 30*CCRANDOM_0_1()));
     ret->mLife = 0.5f;
     ret->mSpeed = 100 + 50*CCRANDOM_0_1();
     ret->mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("effect"));
@@ -93,7 +93,7 @@ AnimatedParticle* AnimatedParticle::particleButterfly(cocos2d::Point pos)
     pat->mSprite->playGTAnimation(2+randomInt(4) ,true);
     pat->mSprite->setPosition(pos);
     pat->mSprite->retain();
-    pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(180.0f*CCRANDOM_0_1()));
+    pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(180.0f*CCRANDOM_0_1()));
     pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
     pat->mLife = 2.0f + 2.0f*CCRANDOM_0_1();
     pat->mRotate = 0;
@@ -112,12 +112,12 @@ AnimatedParticle* AnimatedParticle::particleDart(cocos2d::Point pos, cocos2d::Po
 {
     AnimatedParticle *pat = NULL;
     cocos2d::Point odir = ccpMult(dir, -1);
-    float angle = cocos2d::CC_RADIANS_TO_DEGREES(ccpToAngle(odir));
+    float angle = CC_RADIANS_TO_DEGREES(ccpToAngle(odir));
     switch (typ) {
         case 1://金镖
         {
             pat = AnimatedParticle::create();
-            pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle -60 + CCRANDOM_0_1()*120));
+            pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle -60 + CCRANDOM_0_1()*120));
             pat->mLife = 0.3f;
             pat->mSpeed = 100 + 30*CCRANDOM_0_1();
             pat->mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("effect"));
@@ -139,7 +139,7 @@ AnimatedParticle* AnimatedParticle::particleDart(cocos2d::Point pos, cocos2d::Po
             pat->mSprite->playGTAnimation(2+randomInt(4) ,true);
             pat->mSprite->setPosition(pos);
             pat->mSprite->retain();
-            pat->mDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
+            pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle -30 + CCRANDOM_0_1()*60));
             pat->mSpeed = 100.0f + 50.0f*CCRANDOM_0_1();
             pat->mLife = 1.0f + 1.0f*CCRANDOM_0_1();
             pat->mRotate = 0;

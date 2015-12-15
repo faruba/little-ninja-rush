@@ -34,7 +34,7 @@ class ShadowKilling:
     float mTargetPos;
     float mMoveDis;
     int mSteak;
-    CCNode *mParent;
+cocos2d::CCNode *mParent;
 
     int mCount;
 

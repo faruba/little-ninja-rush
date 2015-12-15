@@ -28,8 +28,8 @@ void BombDart::onCreate()
     mSprite->playGTAnimation(1, true);
     mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     mSprite->setPosition(mPos);
-    CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-    CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
     mSprite->runAction(rf);
     GamePlay::sharedGamePlay()->addChild(mSprite, LAYER_MAINROLE+1);
     //计算落点
@@ -73,8 +73,8 @@ void BombDart::onUpdate(float delta)
         float minx = mSprite->getPosition().x - 75;
         float maxx = mSprite->getPosition().x + 75;
         //进行伤害判断
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;
             if( em->position().x > minx && em->position().x < maxx && em->supportAimAid() )//杀伤半径

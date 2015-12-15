@@ -18,8 +18,7 @@ class Archer:
     virtual void onHitback(cocos2d::Point origin);
     virtual void setPosition(cocos2d::Point pos);
     void toggleVisible(bool flag);
-
-    CCNode *mParent;
+cocos2d::CCNode *mParent;
     cocos2d::Point mTarget;
     GTAnimatedSprite *mArrow;
     int mState;

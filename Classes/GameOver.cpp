@@ -38,7 +38,7 @@ void GameOver::updateClassic()
     
     //get coins
     GameRecord::sharedGameRecord()->makeCoins(play->coins);
-    CCLog("%d coins earned.", play->coins);
+cocos2d::CCLog("%d coins earned.", play->coins);
     
     //get festival pieces
     if( play->festivalPieces > 0 )
@@ -76,7 +76,7 @@ void GameOver::updateClassic()
         
         mDailyIcon->setVisible(true);
         Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
-        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mDailyIcon->addChild(icon);
     }
@@ -92,7 +92,7 @@ void GameOver::updateClassic()
         
         mWeeklyIcon->setVisible(true);
         Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
-        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mWeeklyIcon->getContentSize().width/2, mWeeklyIcon->getContentSize().height/2));
         mWeeklyIcon->addChild(icon);
     }
@@ -108,7 +108,7 @@ void GameOver::updateClassic()
         
         mMonthlyIcon->setVisible(true);
         Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
-        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mMonthlyIcon->getContentSize().width/2, mMonthlyIcon->getContentSize().height/2));
         mMonthlyIcon->addChild(icon);
     }
@@ -119,19 +119,19 @@ void GameOver::updateClassic()
     //update crown
     for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
     {
-        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mDailyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective->index; ++i)
     {
-        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mWeeklyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective->index; ++i)
     {
-        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mMonthlyCrown->addChild(crown);
     }
@@ -196,7 +196,7 @@ void GameOver::updateArcade()
     
     //get coins
     GameRecord::sharedGameRecord()->makeCoins(play->coins);
-    CCLog("%d coins earned.", play->coins);
+cocos2d::CCLog("%d coins earned.", play->coins);
 
     //save high score
     mScore = score;
@@ -287,8 +287,8 @@ void GameOver::updateArcade()
 void GameOver::onCreate() 
 {
     //hot load
-    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-gameover.plist");
-    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-change.plist");
+cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-gameover.plist");
+cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-change.plist");
     
     GameRecord::sharedGameRecord()->task->checkObjectives();//check objectives
     
@@ -298,9 +298,8 @@ void GameOver::onCreate()
     
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(0, 0, 0), 128, 0);
-
-    CCNodeLoaderLibrary *pNodeLib = cocos2d::CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
-    CCBReader *pReader = new CCBReader(pNodeLib, this, this);
+NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
+cocosbuilder::CCBReader *pReader = new CCBReader(pNodeLib, this, this);
     mNode = pReader->readNodeGraphFromFile("ui-gameover.ccbi", this);
     //mNode = createUIByCCBI("ui-gameover.ccb", "CoinsMenu", GameOverLoader::loader(), this);
     pReader->release();
@@ -415,9 +414,9 @@ void GameOver::onDestroy()
     mParent->removeChild(mNode, true);
     
     //hot release
-    CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-gameover.plist");
+cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-gameover.plist");
     unloadTextureFromeSpriteFrameFile("ui-gameover.plist");
-    CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-change.plist");
+cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-change.plist");
     unloadTextureFromeSpriteFrameFile("ui-change.plist");
     
     /*
@@ -449,7 +448,7 @@ void GameOver::onRestart()
         if( mCost > 0 )
         {
             SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
-            CCLog("cost=%d", mCost);
+cocos2d::CCLog("cost=%d", mCost);
         }
         GameRecord::sharedGameRecord()->makeCoins(-mCost);
         GamePlay *play = GamePlay::sharedGamePlay();
@@ -592,62 +591,62 @@ void GameOver::doneTwitter(cocos2d::CCInteger* res)
 
 
 SEL_MenuHandler GameOver::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
-{
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChange", GameOver::onChange);
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMenu", GameOver::onMenu);
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRestart", GameOver::onRestart);
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onFacebook", GameOver::onFacebook);
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTwitter", GameOver::onTwitter);
-    
+{/*TODO: uncomment this
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChange", GameOver::onChange);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMenu", GameOver::onMenu);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRestart", GameOver::onRestart);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onFacebook", GameOver::onFacebook);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTwitter", GameOver::onTwitter);
+ */   
     return NULL;
 }
 
-SEL_CCControlHandler GameOver::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   GameOver::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-  CCLog("Control");
+cocos2d::CCLog("Control");
   return NULL;
 }
 bool GameOver::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
   //CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDistance", CCLabelBMFont *, mDistance);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mChange", CCMenuItemImage *, mChange);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF *, mDailyObjective);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF *, mWeeklyObjective);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF *, mMonthlyObjective);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", CCNode *, mDailyCrown);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", CCNode *, mWeeklyCrown);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", CCNode *, mMonthlyCrown);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", CCSprite *, mDailyIcon);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", CCSprite *, mWeeklyIcon);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", CCSprite *, mMonthlyIcon);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadSp0", CCSprite *, mLeadSp0);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadSp1", CCSprite *, mLeadSp1);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadSp2", CCSprite *, mLeadSp2);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadLb0", CCLabelBMFont *, mLeadLb0);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadLb1", CCLabelBMFont *, mLeadLb1);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadLb2", CCLabelBMFont *, mLeadLb2);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPlayAgain", CCMenuItemImage *, mPlayAgain);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter", CCMenuItemImage *, mTwitter);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook", CCMenuItemImage *, mFacebook);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebookAction", CCSprite *, mFacebookAction);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterAction", CCSprite *, mTwitterAction);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebookCoins", CCSprite *, mFacebookCoins);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterCoins", CCSprite *, mTwitterCoins);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", CCNode *, mClassic);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", CCNode *, mArcade);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcadeScore", CCLabelBMFont *, mArcadeScore);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", CCSprite *, mGoldCoin);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", CCSprite *, mSilverCoin);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", CCSprite *, mBronzeCoin);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", CCLabelBMFont *, mGoldScore);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", CCLabelBMFont *, mSilverScore);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", CCLabelBMFont *, mBronzeScore);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", CCLabelBMFont *, mGoldPrize);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverPrize", CCLabelBMFont *, mSilverPrize);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", CCLabelBMFont *, mBronzePrize);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCup", CCSprite *, mCup);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDistance", CCLabelBMFont *, mDistance);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mChange", CCMenuItemImage *, mChange);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF *, mDailyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF *, mWeeklyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF *, mMonthlyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", CCNode *, mDailyCrown);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", CCNode *, mWeeklyCrown);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", CCNode *, mMonthlyCrown);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", CCSprite *, mDailyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", CCSprite *, mWeeklyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", CCSprite *, mMonthlyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadSp0", CCSprite *, mLeadSp0);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadSp1", CCSprite *, mLeadSp1);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadSp2", CCSprite *, mLeadSp2);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadLb0", CCLabelBMFont *, mLeadLb0);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadLb1", CCLabelBMFont *, mLeadLb1);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadLb2", CCLabelBMFont *, mLeadLb2);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPlayAgain", CCMenuItemImage *, mPlayAgain);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter", CCMenuItemImage *, mTwitter);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook", CCMenuItemImage *, mFacebook);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebookAction", CCSprite *, mFacebookAction);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterAction", CCSprite *, mTwitterAction);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebookCoins", CCSprite *, mFacebookCoins);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterCoins", CCSprite *, mTwitterCoins);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", CCNode *, mClassic);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", CCNode *, mArcade);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcadeScore", CCLabelBMFont *, mArcadeScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", CCSprite *, mGoldCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", CCSprite *, mSilverCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", CCSprite *, mBronzeCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", CCLabelBMFont *, mGoldScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", CCLabelBMFont *, mSilverScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", CCLabelBMFont *, mBronzeScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", CCLabelBMFont *, mGoldPrize);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverPrize", CCLabelBMFont *, mSilverPrize);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", CCLabelBMFont *, mBronzePrize);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCup", CCSprite *, mCup);
 
   return false;
 }

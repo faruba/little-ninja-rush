@@ -7,7 +7,7 @@ GTGhostShadow* GTGhostShadow::shadow(GTAnimatedSprite * copy, float interval, in
   ret->mInterval = interval;
   ret->mNumber = number;
   //alloc sprites
-  ret->mShadows = new CCSprite*[number];
+  ret->mShadows = new cocos2d::CCSprite*[number];
   return ret;
 }
 

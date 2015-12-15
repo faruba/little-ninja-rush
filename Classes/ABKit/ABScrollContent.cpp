@@ -3,7 +3,7 @@
 
 bool ABScrollContent::init() 
 {
-  CCLog("ABScrollContent::init");
+cocos2d::CCLog("ABScrollContent::init");
   mFlySpeed = 0.0f;
   mClipNode = CEClipedNode::create();
   //by default don't clip anything
@@ -14,10 +14,10 @@ bool ABScrollContent::init()
   mClipNode->addChild(contentNode);
 
   auto listener = EventListenerTouchOneByOne::create();
-  listener->onTouchBegan = cocos2d::CC_CALLBACK_2(ABScrollContent::onTouchBegan, this);
-  listener->onTouchEnded = cocos2d::CC_CALLBACK_2(ABScrollContent::onTouchEnded, this);
-  listener->onTouchMoved = cocos2d::CC_CALLBACK_2(ABScrollContent::onTouchMoved, this);
-  listener->onTouchCancelled = cocos2d::CC_CALLBACK_2(ABScrollContent::onTouchEnded, this);
+  listener->onTouchBegan = CC_CALLBACK_2(ABScrollContent::onTouchBegan, this);
+  listener->onTouchEnded = CC_CALLBACK_2(ABScrollContent::onTouchEnded, this);
+  listener->onTouchMoved = CC_CALLBACK_2(ABScrollContent::onTouchMoved, this);
+  listener->onTouchCancelled = CC_CALLBACK_2(ABScrollContent::onTouchEnded, this);
   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
   setTouchEnabled(true);
@@ -114,8 +114,7 @@ void ABScrollContent::update(float delta)
     contentNode->setPosition(np);
 
     float chy = np.y - clipRect.size.height;
-
-    CCLog("Fly, %f, %f %f %f", mFlySpeed, chy, minY, maxY );
+cocos2d::CCLog("Fly, %f, %f %f %f", mFlySpeed, chy, minY, maxY );
 
     if( fabsf(mFlySpeed)<1000 && chy >= minY && chy <= maxY )
     {
@@ -156,8 +155,9 @@ void ABScrollContent::onTouchMoved(Touch * touch, Event * event)
   np.y = y;
   contentNode->setPosition(np);
   //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
-    struct cc_timeval time;
-    CCTime::gettimeofdayCocos2d(&time, NULL);
+    time_t time;
+    /* TODO:uncomment this
+cocos2d::CCTime::gettimeofdayCocos2d(&time, NULL);
   if( mLastY > -10000 )
   {
     float ds = np.y - mLastY;
@@ -165,6 +165,7 @@ void ABScrollContent::onTouchMoved(Touch * touch, Event * event)
       float dt = cocos2d::CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
     mFlySpeed = ds/dt;
   }
+     */
   mLastY = np.y;
   mLastTime = time;
   //this->updateScorll();
@@ -187,7 +188,7 @@ void ABScrollContent::onTouchEnded(Touch * touch, Event * event)
     clickPoint = fixed;
     if( clickTarget != NULL )
     {
-      CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(clickTarget, clickMethod);
+cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(clickTarget, clickMethod);
       this->runAction(callSelectorAction);
     }
   }

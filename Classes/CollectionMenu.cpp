@@ -15,9 +15,9 @@
 
 using namespace CocosDenshion;
 static int gNavBack = 0;
-CCScene* CollectionMenu::scene()
+cocos2d::CCScene* CollectionMenu::scene()
 {
-  CCScene *ret = cocos2d::CCScene::create();
+cocos2d::CCScene *ret = cocos2d::CCScene::create();
 
   CollectionMenu *tm = CollectionMenu::create();
 
@@ -53,29 +53,25 @@ void CollectionMenu::setModal(const char * title, const char * desc, CCObject* t
   mTouchEnabled = false;
   mMenu->setTouchEnabled(false);
   mPowerupMenu->setTouchEnabled(false);
-
-  CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
+cocos2d::CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
   spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
   mMask->addChild(spbg);
-
-  CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName(title);
+cocos2d::CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName(title);
   titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 105));
   spbg->addChild(titlesp);
-
-  CCSprite *descsp = cocos2d::CCSprite::createWithSpriteFrameName(desc);
+cocos2d::CCSprite *descsp = cocos2d::CCSprite::createWithSpriteFrameName(desc);
   descsp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 75));
   spbg->addChild(descsp);
-
-  CCMenuItemImage *menuConfirm = cocos2d::CCMenuItemImage::create("pu-confirm1.png", "pu-confirm2.png", this, menu_selector(CollectionMenu::onModalConfirm));
+cocos2d::CCMenuItemImage *menuConfirm = cocos2d::CCMenuItemImage::create("pu-confirm1.png", "pu-confirm2.png", this, menu_selector(CollectionMenu::onModalConfirm));
   menuConfirm->setPosition(cocos2d::ccp(75, 35));
-  CCMenuItemImage *menuCancel = cocos2d::CCMenuItemImage::create("pu-cancel1.png", "pu-cancel2.png", this, menu_selector(CollectionMenu::onModalCancel));
+cocos2d::CCMenuItemImage *menuCancel = cocos2d::CCMenuItemImage::create("pu-cancel1.png", "pu-cancel2.png", this, menu_selector(CollectionMenu::onModalCancel));
   menuCancel->setPosition(cocos2d::ccp(200, 35));
-  CCMenu *menu = cocos2d::CCMenu::create(menuConfirm, menuCancel, NULL);
+cocos2d::CCMenu *menu = cocos2d::CCMenu::create(menuConfirm, menuCancel, NULL);
   menu->setPosition(cocos2d::ccp(0, 0));
   spbg->addChild(menu);
 }
 
-void CollectionMenu::onModalConfirm()
+void CollectionMenu::onModalConfirm(cocos2d::Ref*)
 {
   mModal = false;
   mMask->setVisible(false);
@@ -83,13 +79,12 @@ void CollectionMenu::onModalConfirm()
   mTouchEnabled = true;
   mMenu->setTouchEnabled(true);
   mPowerupMenu->setTouchEnabled(true);
-
-  CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mModalTarget, mModalSel);
+cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mModalTarget, mModalSel);
   this->runAction(callSelectorAction);
   SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
 }
 
-void CollectionMenu::onModalCancel()
+void CollectionMenu::onModalCancel(cocos2d::Ref*)
 {
   mModal = false;
   mMask->setVisible(false);
@@ -143,12 +138,12 @@ void CollectionMenu::onEnter()
   mModal = false;
 
   //do some initialization
-  CCNode *taskcomplete = cocos2d::CCNode::create();
+cocos2d::CCNode *taskcomplete = cocos2d::CCNode::create();
   taskcomplete->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, 5);
   GamePlay::setTaskCompleteNode(taskcomplete);
   //----------
-  CCNode * node = createUIByCCBI("menu-collection", "CollectionMenu", CollectionMenuLayerLoader::loader(), this);
+cocos2d::CCNode * node = createUIByCCBI("menu-collection", "CollectionMenu", CollectionMenuLayerLoader::loader(), this);
   if(node != NULL) {
     this->addChild(node, 5);
   }
@@ -163,7 +158,7 @@ void CollectionMenu::onEnter()
   }
 
   mScroll = ABScrollContent::create();
-  CCRect clip = cocos2d::CCRectMake(mScrollPoint->getPosition().x, mScrollPoint->getPosition().y, 322, 177.5f);
+cocos2d::CCRect clip = cocos2d::CCRectMake(mScrollPoint->getPosition().x, mScrollPoint->getPosition().y, 322, 177.5f);
   mScroll->clickTarget = this;
   mScroll->clickMethod = callfunc_selector(CollectionMenu::clickMethod);
   mScroll->setClipRect(clip);
@@ -183,7 +178,7 @@ void CollectionMenu::onEnter()
   int currRole = GameRecord::sharedGameRecord()->curr_char;
   for(int i=0; i<GAME_CHARCOUNT; ++i)
   {
-    CCMenuItemImage *btn = character(i);
+cocos2d::CCMenuItemImage *btn = character(i);
     if( i == currRole )
     {
       btn->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", i, 0)->getCString()));
@@ -247,8 +242,7 @@ void CollectionMenu::onEnter()
      //MidBridge::sharedMidbridge()->setFacebookCallback(this, menu_selector(CollectionMenu::doneFacebook));
      //MidBridge::sharedMidbridge()->setTwitterCallback(this, menu_selector(CollectionMenu::doneTwitter:));
      //toggleShare(true);
-
-  CCLayer::onEnter();
+cocos2d::CCLayer::onEnter();
 }
 
 void CollectionMenu::onExit()
@@ -258,8 +252,7 @@ void CollectionMenu::onExit()
 
      //MidBridge::sharedMidbridge()->setFacebookCallback(NULL, menu_selector(CollectionMenu::doneFacebook));
      //MidBridge::sharedMidbridge()->setTwitterCallback(NULL, menu_selector(CollectionMenu::doneTwitter));
-
-  CCLayer::onExit();
+cocos2d::CCLayer::onExit();
 }
 
 void CollectionMenu::updateShurikens()
@@ -274,20 +267,17 @@ void CollectionMenu::updateShurikens()
   mCurrentMark = cocos2d::CCSprite::createWithSpriteFrameName("sc_xz.png");
   mCurrentMark->setVisible(false);
   mScroll->contentNode->addChild(mCurrentMark, 4);
-
-  CCArray *shurikens = GameData::fetchShurikens();
+cocos2d::CCArray *shurikens = GameData::fetchShurikens();
   int count = 0;
-
-  CCSize contentSize;//update contentSize
-  CCObject *obj;
-  CCARRAY_FOREACH (shurikens, obj)
+cocos2d::CCSize contentSize;//update contentSize
+cocos2d::CCObject *obj;
+CCARRAY_FOREACH (shurikens, obj)
   {
     Shuriken *sh = (Shuriken*)obj;
     //获取对应飞镖玩家的收集数据
     int piece = GameRecord::sharedGameRecord()->collection->pieces[sh->uiid];
     bool completed = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-
-    CCSprite *item = cocos2d::CCSprite::createWithSpriteFrameName("sc_fbbg2.png");
+cocos2d::CCSprite *item = cocos2d::CCSprite::createWithSpriteFrameName("sc_fbbg2.png");
     int x = count%4;
     int y = count/4;
     item->setPosition(cocos2d::ccp(42 + 79*x, -29.5 - 59*y));
@@ -306,7 +296,7 @@ void CollectionMenu::updateShurikens()
       }
     }
     //ITEM
-    CCSprite *icon = NULL;
+cocos2d::CCSprite *icon = NULL;
     if( piece == 0 && !completed )
     {
       icon = cocos2d::CCSprite::createWithSpriteFrameName("sc_fbbg.png");
@@ -319,15 +309,15 @@ void CollectionMenu::updateShurikens()
     //MASK
     if( piece > 0 && !completed )
     {
-      CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
-      CCSprite *mask = cocos2d::CCSprite::createWithSpriteFrameName(filename->getCString());
+cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
+cocos2d::CCSprite *mask = cocos2d::CCSprite::createWithSpriteFrameName(filename->getCString());
       mask->setPosition(item->getPosition());
       mScroll->contentNode->addChild(mask, 3, count);
     }
     //NEW?
     if( GameRecord::sharedGameRecord()->collection->isContainedInNewList(sh->uiid) )
     {
-      CCSprite *newsp = cocos2d::CCSprite::createWithSpriteFrameName("sc_new.png");
+cocos2d::CCSprite *newsp = cocos2d::CCSprite::createWithSpriteFrameName("sc_new.png");
       newsp->setPosition(ccpAdd(item->getPosition(), ccp(33, 24)));
       mScroll->contentNode->addChild(newsp, 6, 100+count);
     }
@@ -359,13 +349,12 @@ void CollectionMenu::updateKatanas()
   mCurrentMark = cocos2d::CCSprite::createWithSpriteFrameName("sc_xz.png");
   mCurrentMark->setVisible(false);
   mScroll->contentNode->addChild(mCurrentMark, 4);
-
-  CCArray *katanas = GameData::fetchKatanas();
+cocos2d::CCArray *katanas = GameData::fetchKatanas();
   int count = 0;
   int i = 0;
-  CCSize contentSize;//update contentSize
-  CCObject *obj;
-  CCARRAY_FOREACH (katanas, obj)
+cocos2d::CCSize contentSize;//update contentSize
+cocos2d::CCObject *obj;
+CCARRAY_FOREACH (katanas, obj)
   {
     Katana *sh = (Katana *) obj;
     //获取对应飞镖玩家的收集数据
@@ -380,7 +369,7 @@ void CollectionMenu::updateKatanas()
         continue;
       }
     }
-    CCSprite *item = cocos2d::CCSprite::createWithSpriteFrameName("sc_fbbg2.png");
+cocos2d::CCSprite *item = cocos2d::CCSprite::createWithSpriteFrameName("sc_fbbg2.png");
     int x = count%4;
     int y = count/4;
     item->setPosition(cocos2d::ccp( 42 + 79*x, -29.5 - 59*y ));
@@ -399,7 +388,7 @@ void CollectionMenu::updateKatanas()
       }
     }
     //ITEM
-    CCSprite *icon = NULL;
+cocos2d::CCSprite *icon = NULL;
     if( piece == 0 && !completed )
     {
       icon = cocos2d::CCSprite::createWithSpriteFrameName("sc_ktnbg.png");
@@ -412,15 +401,15 @@ void CollectionMenu::updateKatanas()
     //MASK
     if( piece > 0 && !completed )
     {
-      CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
-      CCSprite *mask = cocos2d::CCSprite::createWithSpriteFrameName(filename->getCString());
+cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
+cocos2d::CCSprite *mask = cocos2d::CCSprite::createWithSpriteFrameName(filename->getCString());
       mask->setPosition(item->getPosition());
       mScroll->contentNode->addChild(mask, 3, count);
     }
     //NEW?
     if( GameRecord::sharedGameRecord()->collection->isContainedInNewList(sh->uiid) )
     {
-      CCSprite *newsp = cocos2d::CCSprite::createWithSpriteFrameName("sc_new.png");
+cocos2d::CCSprite *newsp = cocos2d::CCSprite::createWithSpriteFrameName("sc_new.png");
       newsp->setPosition(ccpAdd(item->getPosition(), ccp(33, 24)));
       mScroll->contentNode->addChild(newsp, 6, 100+count);
     }
@@ -457,19 +446,18 @@ void CollectionMenu::updateSpecials()
   mCurrentMark->setVisible(false);
 
   mScroll->contentNode->addChild(mCurrentMark, 4);
-
-  CCArray *specials = GameData::fetchSpecials();
+cocos2d::CCArray *specials = GameData::fetchSpecials();
   int count = 0;
-  CCSize contentSize;//update contentSize
-  CCObject *obj;
-  CCARRAY_FOREACH (specials, obj)
+cocos2d::CCSize contentSize;//update contentSize
+cocos2d::CCObject *obj;
+CCARRAY_FOREACH (specials, obj)
   {
     Special *sh = (Special *) obj;
     //获取对应飞镖玩家的收集数据
     int piece = GameRecord::sharedGameRecord()->collection->pieces[sh->uiid];
     bool completed = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
     //BG
-    CCSprite *item = cocos2d::CCSprite::createWithSpriteFrameName("sc_fbbg2.png");
+cocos2d::CCSprite *item = cocos2d::CCSprite::createWithSpriteFrameName("sc_fbbg2.png");
     int x = count%4;
     int y = count/4;
     item->setPosition(cocos2d::ccp( 42 + 79*x, -29.5 - 59*y ));
@@ -491,7 +479,7 @@ void CollectionMenu::updateSpecials()
     }
 
     //ITEM
-    CCSprite *icon = NULL;
+cocos2d::CCSprite *icon = NULL;
     if( piece == 0 && !completed )
     {
       icon = cocos2d::CCSprite::createWithSpriteFrameName("sc_jnbg.png");
@@ -504,15 +492,15 @@ void CollectionMenu::updateSpecials()
     //MASK
     if( piece > 0 && !completed )
     {
-      CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
-      CCSprite *mask = cocos2d::CCSprite::createWithSpriteFrameName(filename->getCString());
+cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
+cocos2d::CCSprite *mask = cocos2d::CCSprite::createWithSpriteFrameName(filename->getCString());
       mask->setPosition(item->getPosition());
       mScroll->contentNode->addChild(mask, 3, count);
     }
     //NEW?
     if( GameRecord::sharedGameRecord()->collection->isContainedInNewList(sh->uiid) )
     {
-      CCSprite *newsp = cocos2d::CCSprite::createWithSpriteFrameName("sc_new.png");
+cocos2d::CCSprite *newsp = cocos2d::CCSprite::createWithSpriteFrameName("sc_new.png");
       newsp->setPosition(ccpAdd(item->getPosition(), ccp(33, 24)));
       mScroll->contentNode->addChild(newsp, 6, 100+count);
     }
@@ -540,16 +528,16 @@ void CollectionMenu::updatePowerups()
   mUse->setVisible(false);
 
   //update mask
-  CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
   int lm = GameRecord::sharedGameRecord()->collection->life_piece%9;
   int lc = GameRecord::sharedGameRecord()->collection->life_piece/9;
-  CCString *lfn = cocos2d::CCString::createWithFormat("sc_sp%d.png", lm);
+cocos2d::CCString *lfn = cocos2d::CCString::createWithFormat("sc_sp%d.png", lm);
   mLifeMask->setDisplayFrame(cache->spriteFrameByName(lfn->getCString()));
   mLifeCount->setString(cocos2d::CCString::createWithFormat("%d", lc)->getCString());
 
   int dm = GameRecord::sharedGameRecord()->collection->dart_piece%9;
   int dc = GameRecord::sharedGameRecord()->collection->dart_piece/9;
-  CCString *dfn = cocos2d::CCString::createWithFormat("sc_sp%d.png", dm);
+cocos2d::CCString *dfn = cocos2d::CCString::createWithFormat("sc_sp%d.png", dm);
   mDartMask->setDisplayFrame(cache->spriteFrameByName(dfn->getCString()));
   mDartCount->setString(cocos2d::CCString::createWithFormat("%d", dc)->getCString());
   mCurrItem = 0;
@@ -565,7 +553,7 @@ void CollectionMenu::markUsing(int i)
   }
   if( i >= 0 )
   {
-    CCSprite *item = (cocos2d::CCSprite*)(mScroll->contentNode->getChildByTag(i));
+cocos2d::CCSprite *item = (cocos2d::CCSprite*)(mScroll->contentNode->getChildByTag(i));
     mEquipedMark->setPosition(item->getPosition());
   }
   else {
@@ -582,7 +570,7 @@ void CollectionMenu::markCurrent(int i)
   }
   if( i >= 0 )
   {
-    CCSprite *item = (cocos2d::CCSprite*)(mScroll->contentNode->getChildByTag(i));
+cocos2d::CCSprite *item = (cocos2d::CCSprite*)(mScroll->contentNode->getChildByTag(i));
     mCurrentMark->setPosition(item->getPosition());
   }
   else {
@@ -647,7 +635,7 @@ void CollectionMenu::markCurrent(int i)
     }
   }
 }
-CCMenuItemImage* CollectionMenu::character(int rid)
+cocos2d::CCMenuItemImage* CollectionMenu::character(int rid)
 {
   switch (rid) {
     case 0:
@@ -782,7 +770,7 @@ void CollectionMenu::update(float delta)
   }
   mShadow->setPosition(np);
 }
-void CollectionMenu::onBack()
+void CollectionMenu::onBack(cocos2d::Ref*)
 {
   if( !mIntroFlag )
   {
@@ -797,7 +785,7 @@ void CollectionMenu::onBack()
   }
 }
 
-void CollectionMenu::onUse()
+void CollectionMenu::onUse(cocos2d::Ref *)
 {
   if( mCurrType < 3 )
   {
@@ -880,7 +868,7 @@ void CollectionMenu::onUse()
           GameRecord::sharedGameRecord()->collection->magic_piece--;
           GameRecord::sharedGameRecord()->collection->gainItemPiece(uiid);
           //update info
-          CCSprite *mask = (cocos2d::CCSprite*)(mScroll->contentNode->getChildByTag(mCurrItem));
+cocos2d::CCSprite *mask = (cocos2d::CCSprite*)(mScroll->contentNode->getChildByTag(mCurrItem));
           if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
           {
             SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
@@ -891,7 +879,7 @@ void CollectionMenu::onUse()
           else {
             SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
             int piece = GameRecord::sharedGameRecord()->collection->itemTotalPiece(uiid) - GameRecord::sharedGameRecord()->collection->itemLostPiece(uiid);
-            CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
+cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
             mask->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename->getCString()));
             //bugfix
             if( GameRecord::sharedGameRecord()->collection->magic_piece <= 0 )
@@ -1004,12 +992,12 @@ void CollectionMenu::onCharacter(int nRole)
   if( orole == nRole )
     return;
   SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
-  CCMenuItemImage *orl = character(orole);
+cocos2d::CCMenuItemImage *orl = character(orole);
   orl->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", orole, 1)->getCString()));
   orl->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", orole, 0)->getCString()));
 
   int nrole = nRole;
-  CCMenuItemImage *nr = character(nrole);
+cocos2d::CCMenuItemImage *nr = character(nrole);
   nr->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", nrole, 0)->getCString()));
   nr->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", nrole, 1)->getCString()));
   GameRecord::sharedGameRecord()->curr_char = nrole;
@@ -1057,11 +1045,10 @@ void CollectionMenu::onItem(int nItem)
   mScroll->resetContentPosition();
 
   toggleShare(true);
-
-  CCLog("CollectionMenu::onItem");
+cocos2d::CCLog("CollectionMenu::onItem");
 }
 
-void CollectionMenu::onPowerup()
+void CollectionMenu::onPowerup(cocos2d::Ref*)
 {
   if( mCurrType != 3 )
   {
@@ -1073,7 +1060,7 @@ void CollectionMenu::onPowerup()
     this->updatePowerups();
     mPowerUp->setVisible(true);
 
-    this->onSelectLife();
+    this->onSelectLife(nullptr);
 
     toggleShare(false);
   }
@@ -1086,7 +1073,7 @@ void CollectionMenu::updateCharacterInfo(int rid, int bid)
    {
      if( i<GameData::roleCurrHP(rid) )
      {
-       CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName("heart.png");
+cocos2d::CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName("heart.png");
        sp->setPosition(cocos2d::ccp(i*18, 0));
        mLifeGuage->addChild(sp, 0, i);
      }
@@ -1098,7 +1085,7 @@ void CollectionMenu::updateCharacterInfo(int rid, int bid)
          mLifeGuage->addChild(sp);
        }
        else {
-         CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName("pulife2.png");
+cocos2d::CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName("pulife2.png");
          sp->setPosition(cocos2d::ccp(i*18, 0));
          mLifeGuage->addChild(sp);
        }
@@ -1110,7 +1097,7 @@ void CollectionMenu::updateCharacterInfo(int rid, int bid)
    {
      if( i<GameData::roleCurrDart(rid) )
      {
-       CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName("ui-dart.png");
+cocos2d::CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName("ui-dart.png");
        sp->setPosition(cocos2d::ccp(i*12, 0));
        mDartGuage->addChild(sp);
      }
@@ -1122,7 +1109,7 @@ void CollectionMenu::updateCharacterInfo(int rid, int bid)
          mDartGuage->addChild(sp);
        }
        else {
-         CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName("pushuriken2.png");
+cocos2d::CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName("pushuriken2.png");
          sp->setPosition(cocos2d::ccp(i*12, 0));
          mDartGuage->addChild(sp);
        }
@@ -1218,7 +1205,7 @@ void CollectionMenu::updatePowerUpButton()
   }
 }
 
-void CollectionMenu::onSelectLife()
+void CollectionMenu::onSelectLife(cocos2d::Ref*)
 {
   if( mCurrItem != 1 )
   {
@@ -1234,7 +1221,7 @@ void CollectionMenu::onSelectLife()
   }
 }
 
-void CollectionMenu::onSelectDart()
+void CollectionMenu::onSelectDart(cocos2d::Ref*)
 {
   if( mCurrItem != 2 )
   {
@@ -1356,7 +1343,7 @@ id CollectionMenu::getCurrentCollectedItem()
   }
 }
 */
-void CollectionMenu::onFacebook()
+void CollectionMenu::onFacebook(cocos2d::Ref*)
 {/*
   if( !mPostingFacebook )
   {
@@ -1391,8 +1378,8 @@ void CollectionMenu::onFacebook()
 
     mFacebookAction->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("ftloading.png"));
     mFacebookAction->stopAllActions();
-    CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 360);
-    CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 360);
+cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
     mFacebookAction->runAction(rf);
 
     mPostingFacebook = true;
@@ -1411,7 +1398,7 @@ void CollectionMenu::doneFacebook(cocos2d::CCInteger* res)
   */
 }
 
-void CollectionMenu::onTwitter()
+void CollectionMenu::onTwitter(cocos2d::Ref*)
 {/*
   if( !mPostingTwitter )
   {
@@ -1480,8 +1467,8 @@ void CollectionMenu::onTwitter()
 
     mTwitterAction->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("ftloading.png"));
     mTwitterAction->stopAllActions();
-    CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 360);
-    CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 360);
+cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
     mTwitterAction->runAction(rf);
   }
 */
@@ -1521,69 +1508,67 @@ void CollectionMenu::setSceneOutro(cocos2d::CCScene* newscene)
 void CollectionMenu::doneOutro()
 {
   mIntroFlag = false;
-  CCDirector::sharedDirector()->replaceScene(mNewScene);
+cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
   mNewScene->release();
 }
 
 bool CollectionMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadow",         CCSprite*       , mShadow)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScrollCount",    CCLabelBMFont*  , mScrollCount)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mItemDesc",       CCLabelTTF*  , mItemDesc)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerUp",        CCNode*         , mPowerUp)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeGuage",      CCNode*         , mLifeGuage)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartGuage",      CCNode*         , mDartGuage)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeMask",       CCSprite*       , mLifeMask)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartMask",       CCSprite*       , mDartMask)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerupMenu",    CCMenu*         , mPowerupMenu)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeCount",      CCLabelBMFont*  , mLifeCount)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartCount",      CCLabelBMFont*  , mDartCount)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mItemTitle",      CCSprite*       , mItemTitle)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShare",          CCSprite*       , mShare)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu",           CCMenu*         , mMenu)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter1",     CCMenuItemImage*, mCharacter1)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter2",     CCMenuItemImage*, mCharacter2)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter3",     CCMenuItemImage*, mCharacter3)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter4",     CCMenuItemImage*, mCharacter4)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShuriken",       CCMenuItemImage*, mShuriken)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mKatana",         CCMenuItemImage*, mKatana)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSpecial",        CCMenuItemImage*, mSpecial)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerup",        CCMenuItemImage*, mPowerup)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mUse",            CCMenuItemImage*, mUse)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook",       CCMenuItemImage*, mFacebook)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter",        CCMenuItemImage*, mTwitter)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterAction",  CCSprite*       , mTwitterAction)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebookAction", CCSprite*       , mFacebookAction)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScrollPoint",    CCNode*         , mScrollPoint)
-
-    CCLog(pMemberVariableName);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadow",         CCSprite*       , mShadow)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScrollCount",    CCLabelBMFont*  , mScrollCount)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mItemDesc",       CCLabelTTF*  , mItemDesc)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerUp",        CCNode*         , mPowerUp)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeGuage",      CCNode*         , mLifeGuage)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartGuage",      CCNode*         , mDartGuage)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeMask",       CCSprite*       , mLifeMask)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartMask",       CCSprite*       , mDartMask)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerupMenu",    CCMenu*         , mPowerupMenu)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeCount",      CCLabelBMFont*  , mLifeCount)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartCount",      CCLabelBMFont*  , mDartCount)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mItemTitle",      CCSprite*       , mItemTitle)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShare",          CCSprite*       , mShare)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu",           CCMenu*         , mMenu)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter1",     CCMenuItemImage*, mCharacter1)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter2",     CCMenuItemImage*, mCharacter2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter3",     CCMenuItemImage*, mCharacter3)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter4",     CCMenuItemImage*, mCharacter4)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShuriken",       CCMenuItemImage*, mShuriken)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mKatana",         CCMenuItemImage*, mKatana)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSpecial",        CCMenuItemImage*, mSpecial)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerup",        CCMenuItemImage*, mPowerup)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mUse",            CCMenuItemImage*, mUse)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook",       CCMenuItemImage*, mFacebook)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter",        CCMenuItemImage*, mTwitter)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterAction",  CCSprite*       , mTwitterAction)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebookAction", CCSprite*       , mFacebookAction)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScrollPoint",    CCNode*         , mScrollPoint)
+cocos2d::CCLog(pMemberVariableName);
 
   return false;
 }
 SEL_MenuHandler CollectionMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onSelectLife", CollectionMenu::onSelectLife)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onSelectDart", CollectionMenu::onSelectDart)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", CollectionMenu::onBack)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter1", CollectionMenu::onCharacter1)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter2", CollectionMenu::onCharacter2)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter3", CollectionMenu::onCharacter3)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter4", CollectionMenu::onCharacter4)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onShuriken", CollectionMenu::onShuriken)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onKatana", CollectionMenu::onKatana)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onSpecial", CollectionMenu::onSpecial)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onPowerup", CollectionMenu::onPowerup)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onUse", CollectionMenu::onUse)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onFacebook", CollectionMenu::onFacebook)
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTwitter", CollectionMenu::onTwitter)
-
-    CCLog(pSelectorName);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onSelectLife", CollectionMenu::onSelectLife)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onSelectDart", CollectionMenu::onSelectDart)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", CollectionMenu::onBack)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter1", CollectionMenu::onCharacter1)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter2", CollectionMenu::onCharacter2)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter3", CollectionMenu::onCharacter3)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter4", CollectionMenu::onCharacter4)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onShuriken", CollectionMenu::onShuriken)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onKatana", CollectionMenu::onKatana)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onSpecial", CollectionMenu::onSpecial)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onPowerup", CollectionMenu::onPowerup)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onUse", CollectionMenu::onUse)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onFacebook", CollectionMenu::onFacebook)
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTwitter", CollectionMenu::onTwitter)
+cocos2d::CCLog(pSelectorName);
   return NULL;
 }
-SEL_CCControlHandler CollectionMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   CollectionMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
   //CCB_SELECTORRESOLVER_CCCONTROL_GLUE
-  CCLog(pSelectorName);
+cocos2d::CCLog(pSelectorName);
   return NULL;
 }
 

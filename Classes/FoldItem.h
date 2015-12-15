@@ -14,11 +14,9 @@ public:
 };
 
 class FoldItem : public cocos2d::CCNode
-
-
 {
   public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(FoldItem, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(FoldItem, create);
 
     //if title < 0 presents category
     static FoldItem* foldItem(int title, int cost, bool iap, int icon, const char* detail, int btntyp, FoldItemController* controller);
@@ -33,18 +31,18 @@ class FoldItem : public cocos2d::CCNode
   private:
     int mTitle;
     int mIconId;
-    cocos2d::CCString *mDetail;
+cocos2d::CCString *mDetail;
     int mBtnType;
     bool mIsIAP;
     int mCostNumber;
     //--------------------
-   cocos2d::CCSpritee *mIcon;
-    cocos2d::CCMenu *mMenu;
-    cocos2d::CCSprite *mBgButton;
-    cocos2d::CCMenuItemImage *mPurchase;
-   cocos2d::CCNodee *mCost;
-    cocos2d::CCSprite *mTitleSp;
-    cocos2d::LabelTTF *mDetailSp;
+cocos2d::CCSprite *mIcon;
+cocos2d::CCMenu *mMenu;
+cocos2d::CCSprite *mBgButton;
+cocos2d::CCMenuItemImage *mPurchase;
+cocos2d::CCNode *mCost;
+cocos2d::CCSprite *mTitleSp;
+cocos2d::CCLabelTTF *mDetailSp;
 
     FoldItemController *mController;
     bool mIsAchievement;

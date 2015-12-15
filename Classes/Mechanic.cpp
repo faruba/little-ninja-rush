@@ -23,7 +23,7 @@ void Mechanic::onCreate()
     GamePlay *play = GamePlay::sharedGamePlay();
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("mechanic"));
     mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
-    int y = cocos2d::CCRANDOM_0_1()*RESPAWN_Y;
+    int y = CCRANDOM_0_1()*RESPAWN_Y;
     mSprite->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
     mSprite->playGTAnimation(0, true);
     play->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
@@ -102,7 +102,7 @@ void Mechanic::onUpdate(float delta)
                     if( mCount < MECHANIC_LAUNCH )
                     {
                         //launch dart
-                        cocos2d::Point dir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(-90-MECHANIC_ANGLE+CCRANDOM_0_1()*MECHANIC_ANGLE*2));
+                        cocos2d::Point dir = ccpForAngle(CC_DEGREES_TO_RADIANS(-90-MECHANIC_ANGLE+CCRANDOM_0_1()*MECHANIC_ANGLE*2));
                         play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), dir, -6, play)));
                         mTimer = MECHANIC_LAUNCHCD;
                         mCount++;

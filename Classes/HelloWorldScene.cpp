@@ -1,7 +1,7 @@
 #include "HelloWorldScene.h"
 #include "LogoSplash.h"
 
-;
+USING_NS_CC;
 
 Scene* HelloWorld::createScene()
 {
@@ -39,7 +39,7 @@ bool HelloWorld::init()
     auto closeItem = MenuItemImage::create(
                                            "CloseNormal.png",
                                            "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
     
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
                                 origin.y + closeItem->getContentSize().height/2));
@@ -85,7 +85,7 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
     Director::getInstance()->startAnimation();
 
-#if (cocos2d::CC_TARGET_PLATFORM == cocos2d::CC_PLATFORM_IOS)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
 }

@@ -41,7 +41,7 @@ void TimedTrigger::onUpdate(float delta)
     mTimer += delta;
     if( mTimer >= mTime )
     {
-      CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mTarget, mSelector);
+cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mTarget, mSelector);
       GamePlay::sharedGamePlay()->runAction(callSelectorAction);
       mTimer -= mTime;
       if( mMode >= 0 )

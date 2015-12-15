@@ -11,7 +11,7 @@
 
 #include "cocos2d.h"
 
-class CCNumber : public cocos2d::CCObject
+class CCNumber : public cocos2d::Object
 {
 public:
     CCNumber(float v)
@@ -20,6 +20,7 @@ public:
         m_nValue = m_fValue;
         m_bIsFloat = true;
     }
+    
     CCNumber(int v)
     {
         m_nValue = v;

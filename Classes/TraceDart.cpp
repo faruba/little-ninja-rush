@@ -25,8 +25,8 @@ void TraceDart::onCreate()
     mSprite = cocos2d::CCSprite::createWithSpriteFrameName("xfshuriken.png");
     mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     mSprite->setPosition(mPos);
-    CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-    CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
     mSprite->runAction(rf);
     GamePlay::sharedGamePlay()->addChild(mSprite, LAYER_MAINROLE+1);
     
@@ -76,7 +76,7 @@ void TraceDart::onUpdate(float delta)
             float angle = ccpAngleSigned(mDir, rdir);
             if( angle == angle )
             {
-                float limit = cocos2d::CC_DEGREES_TO_RADIANS(180.0f*delta);
+                float limit = CC_DEGREES_TO_RADIANS(180.0f*delta);
                 if( fabsf(angle) <= limit )
                 {
                     mDir = ccpNormalize(rdir);
@@ -100,8 +100,8 @@ void TraceDart::onUpdate(float delta)
     cocos2d::Point np = ccpAdd(ds, mSprite->getPosition());
     mSprite->setPosition(np);
     //伤害判定
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;
         if( em->collisionWithCircle(mSprite->getPosition(), 20) )//杀伤半径

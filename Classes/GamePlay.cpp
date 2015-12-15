@@ -22,7 +22,7 @@ GamePlay* gPlay = NULL;
 float gGravityFix = 1;
 bool gArcadePlaying = false;
 
-CCNode *gTaskComplete = NULL;
+cocos2d::CCNode *gTaskComplete = NULL;
 
 int gGameMode = MODE_CLASSIC;
 /* PopQueue */
@@ -33,14 +33,13 @@ class PopQueue :
     CREATE_FUNC(PopQueue);
 
     bool init(){return true;};
-
-    CCString *title;
-    CCString *icon;
+cocos2d::CCString *title;
+cocos2d::CCString *icon;
     int type;
 };
 
 
-CCArray *gPopQueues = NULL;
+cocos2d::CCArray *gPopQueues = NULL;
 #define VIBRATE_PERIOD (0.04f)
 #define VIBRATE_ZOOM (0.2f)
 #define VIBRATE_MS (400.0f)
@@ -51,9 +50,9 @@ GamePlay::~GamePlay()
     gPlay = NULL;
 }
 
-CCScene* GamePlay::scene()
+cocos2d::CCScene* GamePlay::scene()
 {
-    CCScene *ret = cocos2d::CCScene::create();
+cocos2d::CCScene *ret = cocos2d::CCScene::create();
     
     if( gPlay == NULL )
     {
@@ -128,7 +127,7 @@ bool GamePlay::init()
 void GamePlay::onEnter()
 {
   setAccelerometerEnabled(true);
-  CCNode *taskcomplete = cocos2d::CCNode::create();
+cocos2d::CCNode *taskcomplete = cocos2d::CCNode::create();
   taskcomplete->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, LAYER_MASK+10);
   setTaskCompleteNode(taskcomplete);
@@ -136,8 +135,7 @@ void GamePlay::onEnter()
   this->initGamePlay(gGameMode);
 
   this->setSceneIntro();
-
-  CCLayer::onEnter();
+cocos2d::CCLayer::onEnter();
 }
 
 void GamePlay::onExit()
@@ -148,8 +146,7 @@ void GamePlay::onExit()
   //demo -->
   gPlay->release();
   //demo <--
-
-  CCLayer::onExit();
+cocos2d::CCLayer::onExit();
 }
 
 //初始化游戏
@@ -212,7 +209,7 @@ void GamePlay::initGamePlay(int mod)
   mScheduleVibrate = -1;
   
   //增加菜单
-  CCMenuItemImage *xpause = cocos2d::CCMenuItemImage::create();
+cocos2d::CCMenuItemImage *xpause = cocos2d::CCMenuItemImage::create();
   xpause->setNormalSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
   xpause->setSelectedSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
   xpause->setTarget(this, menu_selector(GamePlay::pause));
@@ -247,7 +244,7 @@ void GamePlay::update(float delta)
       spellMask->setVisible(false);
       if( mScheduleReleaseTarget != NULL )
       {
-        CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mScheduleReleaseTarget, mScheduleReleaseSelector);
+cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mScheduleReleaseTarget, mScheduleReleaseSelector);
         runAction(callSelectorAction);
         mScheduleReleaseTarget = NULL;
       }
@@ -484,7 +481,7 @@ void GamePlay::resetGame()
   scrolls = 0;
   gameOverTimer = -1;
   canPause = true;
-    CCLOG("canPause = %d", canPause);
+CCLOG("canPause = %d", canPause);
   doubleCoin = false;
   doubleCoinIAP = false;
   mFeverMaskTimer = -1;
@@ -583,11 +580,10 @@ void GamePlay::resetGame()
   GameRecord::sharedGameRecord()->task->dispatchTask(ACH_USECHARACTER0+roleId, 1);
 
     SimpleAudioEngine::sharedEngine()->playBackgroundMusic(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/music-menu.mp3").c_str(), true);
-    
-  CCLog("GamePlay:done resetGame");
+cocos2d::CCLog("GamePlay:done resetGame");
 
 #ifdef DEBUG
-  CCTextureCache::sharedTextureCache()->dumpCachedTextureInfo();
+cocos2d::CCTextureCache::sharedTextureCache()->dumpCachedTextureInfo();
 #endif
 }
 
@@ -653,7 +649,7 @@ void GamePlay::triggerDeath()
     }
 }
 
-CCLayer* GamePlay::ui()
+cocos2d::CCLayer* GamePlay::ui()
 {
     return mUI;
 }
@@ -710,8 +706,8 @@ cocos2d::Point GamePlay::autoAim(cocos2d::Point dir)
   cocos2d::Point mainpos = mainrole->center();
   float mindis = PLAY_AUTOAIM*PLAY_AUTOAIM;
   cocos2d::Point rdir = dir;
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(enemies, node)
   {
     Role *en = (Role*)node;
     if( en->supportAimAid() )
@@ -820,8 +816,8 @@ Role* GamePlay::nearestEnemy(cocos2d::Point dir)
   Role *ret = NULL;
   cocos2d::Point mainpos = mainrole->center();
   float mindis = 9999*9999;
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(enemies, node)
   {
     Role *en = (Role*)node;
     if( en->supportAimAid() )
@@ -944,7 +940,7 @@ void GamePlay::makeCombo()
                 cn = 9;
             }
         }
-        CCString *filename = cocos2d::CCString::createWithFormat("combo%d.mp3", cn);
+cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("combo%d.mp3", cn);
         SimpleAudioEngine::sharedEngine()->playEffect(filename->getCString());
     }
     
@@ -978,7 +974,7 @@ void GamePlay::makeCombo()
                 {
                     fn = 5;
                 }
-                CCString *filename = cocos2d::CCString::createWithFormat("fever%d.mp3", fn);
+cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("fever%d.mp3", fn);
                 SimpleAudioEngine::sharedEngine()->playEffect(filename->getCString());
             }
         }
@@ -1040,10 +1036,10 @@ void GamePlay::stopCombo()
 }
 
 //暂停
-void GamePlay::pause(Ref* ref)
+void GamePlay::pause(cocos2d::Ref* ref)
 {
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
-    CCLOG("canPause = %d paused = %d", canPause, paused);
+CCLOG("canPause = %d paused = %d", canPause, paused);
     if( this->canPause && !this->paused )
     {
         this->paused = true;
@@ -1055,9 +1051,9 @@ void GamePlay::pause(Ref* ref)
 }
 
 //恢复
-void GamePlay::resume(Ref* ref)
+void GamePlay::resume()
 {
-    CCLOG("canPause = %d", canPause);
+CCLOG("canPause = %d", canPause);
     if( canPause && paused )
     {
         paused = false;
@@ -1066,20 +1062,20 @@ void GamePlay::resume(Ref* ref)
     }
 }
 
-void GamePlay::restart(Ref* ref)
+void GamePlay::restart()
 {
     this->resume();
     this->resetGame();
 }
 
-void GamePlay::exit(Ref* ref)
+void GamePlay::exit()
 {
     this->resume();
     SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
     this->setSceneOutro(Loading::loadTo(TitleMenu::scene(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false));
 }
 
-void GamePlay::change(Ref* ref)
+void GamePlay::change()
 {
     this->resume();
     SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
@@ -1204,7 +1200,7 @@ void GamePlay::scheduleVibrate(float dur)
 {
     mScheduleVibrate = dur;
     mVibrateTimer = 0;
-    mVibrateDir = ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(360.0f*CCRANDOM_0_1()));
+    mVibrateDir = ccpForAngle(CC_DEGREES_TO_RADIANS(360.0f*CCRANDOM_0_1()));
 }
 
 
@@ -1230,31 +1226,30 @@ void GamePlay::setSceneIntro()
     {
         mSceneIntro = cocos2d::CCNode::create();
         this->addChild(mSceneIntro, LAYER_MASK+99);
-        CCSprite *left = cocos2d::CCSprite::create("door.png");
+cocos2d::CCSprite *left = cocos2d::CCSprite::create("door.png");
         left->setAnchorPoint(cocos2d::ccp(1, 0));
         mSceneIntro->addChild(left, 0, 0);
-        CCSprite *right = cocos2d::CCSprite::create("door.png");
+cocos2d::CCSprite *right = cocos2d::CCSprite::create("door.png");
         right->setScaleX(-1);
         right->setAnchorPoint(cocos2d::ccp(1, 0));
         mSceneIntro->addChild(right, 0, 1);
     }
-    CCSprite *left = (cocos2d::CCSprite*)(mSceneIntro->getChildByTag(0));
+cocos2d::CCSprite *left = (cocos2d::CCSprite*)(mSceneIntro->getChildByTag(0));
     left->setVisible(true);
     left->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
-    CCSprite *right = (cocos2d::CCSprite*)(mSceneIntro->getChildByTag(1));
+cocos2d::CCSprite *right = (cocos2d::CCSprite*)(mSceneIntro->getChildByTag(1));
     right->setVisible(true);
     right->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
-    
-    CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-    CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, ccp(-UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
-    CCHide *hd1 = cocos2d::CCHide::create();
-    CCCallFunc *fn1 = cocos2d::CCCallFunc::create(this, (SEL_CallFunc)(&GamePlay::doneIntro));
-    CCSequence *sq1 = cocos2d::CCSequence::create(dt1, mb1, hd1, fn1, NULL);
+cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
+cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, ccp(-UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
+cocos2d::CCHide *hd1 = cocos2d::CCHide::create();
+cocos2d::CCCallFunc *fn1 = cocos2d::CCCallFunc::create(this, (SEL_CallFunc)(&GamePlay::doneIntro));
+cocos2d::CCSequence *sq1 = cocos2d::CCSequence::create(dt1, mb1, hd1, fn1, NULL);
     left->runAction(sq1);
-    CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-    CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
-    CCHide *hd2 = cocos2d::CCHide::create();
-    CCSequence *sq2 = cocos2d::CCSequence::create(dt2, mb2, hd2, NULL);
+cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
+cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
+cocos2d::CCHide *hd2 = cocos2d::CCHide::create();
+cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(dt2, mb2, hd2, NULL);
     right->runAction(sq2);
     
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/open.mp3").c_str());
@@ -1263,7 +1258,7 @@ void GamePlay::setSceneIntro()
 void GamePlay::doneIntro()
 {
     this->removeChild(mSceneIntro, true);
-    CCTextureCache::sharedTextureCache()->removeTextureForKey("door.png");
+cocos2d::CCTextureCache::sharedTextureCache()->removeTextureForKey("door.png");
     mSceneIntro = NULL;
 }
 
@@ -1281,7 +1276,7 @@ void GamePlay::setSceneOutro(cocos2d::CCScene* newscene)
 
 void GamePlay::doneOutro()
 {
-    CCDirector::sharedDirector()->replaceScene(mNewScene);
+cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
     mNewScene->release();
 }
 
@@ -1322,11 +1317,11 @@ bool GamePlay::completeSomeObjectives()
 
 void GamePlay::taskCompleted(cocos2d::CCString * tile, CCString * icon, int type)
 {
-    CCSprite *board = cocos2d::CCSprite::createWithSpriteFrameName("task-complete.png");
+cocos2d::CCSprite *board = cocos2d::CCSprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::ccp(0.5f, 0));
     gTaskComplete->addChild(board);
-    CCSprite *ibg = NULL;
-    CCLabelTTF *label = NULL;
+cocos2d::CCSprite *ibg = NULL;
+cocos2d::CCLabelTTF *label = NULL;
     switch (type) {
         case 0:
         {
@@ -1355,7 +1350,7 @@ void GamePlay::taskCompleted(cocos2d::CCString * tile, CCString * icon, int type
     }
     ibg->setPosition(cocos2d::ccp(22, 22));
     board->addChild(ibg);
-    CCSprite *iconsp = cocos2d::CCSprite::createWithSpriteFrameName(icon->getCString());
+cocos2d::CCSprite *iconsp = cocos2d::CCSprite::createWithSpriteFrameName(icon->getCString());
     iconsp->setPosition(ibg->getPosition());
     if( type == 3 )
     {
@@ -1365,62 +1360,56 @@ void GamePlay::taskCompleted(cocos2d::CCString * tile, CCString * icon, int type
     label->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     label->setPosition(cocos2d::ccp(100, 20));
     board->addChild(label);
-    
-    CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, ccp(0, -board->getContentSize().height));
-    CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
-    CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, ccp(0, board->getContentSize().height));
-    CCHide *a4 = cocos2d::CCHide::create();
-    CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
-    CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
+cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, ccp(0, -board->getContentSize().height));
+cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
+cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, ccp(0, board->getContentSize().height));
+cocos2d::CCHide *a4 = cocos2d::CCHide::create();
+cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
+cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
     board->runAction(sq);
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/objective-complete.mp3").c_str());
 }
 
 void GamePlay::pieceComplete(cocos2d::CCString * title, CCString * icon)
 {
-    CCSprite *board = cocos2d::CCSprite::createWithSpriteFrameName("task-complete.png");
+cocos2d::CCSprite *board = cocos2d::CCSprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::ccp(0.5f, 0));
     gTaskComplete->addChild(board);
-    CCSprite *item = cocos2d::CCSprite::create(icon->getCString());
+cocos2d::CCSprite *item = cocos2d::CCSprite::create(icon->getCString());
     item->setPosition(cocos2d::ccp(26, 19));
     item->setScale(0.7f);
     board->addChild(item);
-    
-    CCSprite *sname = cocos2d::CCSprite::create(title->getCString());
+cocos2d::CCSprite *sname = cocos2d::CCSprite::create(title->getCString());
     sname->setPosition(cocos2d::ccp(117, 30));
     board->addChild(sname);
-    
-    CCSprite *scoll = cocos2d::CCSprite::create("collected.png");
+cocos2d::CCSprite *scoll = cocos2d::CCSprite::create("collected.png");
     scoll->setPosition(cocos2d::ccp(117, 13));
     board->addChild(scoll);
-    
-    CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, ccp(0, -board->getContentSize().height));
-    CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
-    CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, ccp(0, board->getContentSize().height));
-    CCHide *a4 = cocos2d::CCHide::create();
-    CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
-    CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
+cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, ccp(0, -board->getContentSize().height));
+cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
+cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, ccp(0, board->getContentSize().height));
+cocos2d::CCHide *a4 = cocos2d::CCHide::create();
+cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
+cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
     board->runAction(sq);
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/objective-complete.mp3").c_str());
 }
 
 void GamePlay::popText(cocos2d::CCString* text)
 {
-    CCSprite *board = cocos2d::CCSprite::createWithSpriteFrameName("task-complete.png");
+cocos2d::CCSprite *board = cocos2d::CCSprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::ccp(0.5f, 0));
     gTaskComplete->addChild(board);
-    
-    CCLabelBMFont *label = cocos2d::CCLabelBMFont::create(text->getCString(), "ab34.fnt");
+cocos2d::CCLabelBMFont *label = cocos2d::CCLabelBMFont::create(text->getCString(), "ab34.fnt");
     label->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     label->setPosition(cocos2d::ccp(90, 20));
     board->addChild(label);
-    
-    CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, ccp(0, -board->getContentSize().height));
-    CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
-    CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, ccp(0, board->getContentSize().height));
-    CCHide *a4 = cocos2d::CCHide::create();
-    CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
-    CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
+cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, ccp(0, -board->getContentSize().height));
+cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
+cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, ccp(0, board->getContentSize().height));
+cocos2d::CCHide *a4 = cocos2d::CCHide::create();
+cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
+cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
     board->runAction(sq);
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/objective-complete.mp3").c_str());
 }

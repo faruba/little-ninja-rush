@@ -48,12 +48,12 @@ void MoonWave::onUpdate(float delta)
   np.x += delta*400;
   mSprite->setPosition(np);
   //碰撞检测
-  CCRect rect;
+cocos2d::CCRect rect;
   rect.origin = mSprite->getPosition();
   rect.size = mSprite->getContentSize();
   bool ref = false;
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->darts, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->darts, node)
   {
     Darts *dr = (Darts*)node;
     if(rect.containsPoint(dr->position())){
@@ -63,7 +63,7 @@ void MoonWave::onUpdate(float delta)
   }
   //伤害判定
   node = NULL;
-  CCARRAY_FOREACH(play->enemies, node)
+CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;
     if( rect.containsPoint(em->center()) )//杀伤半径

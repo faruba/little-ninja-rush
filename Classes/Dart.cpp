@@ -26,14 +26,14 @@ void Dart::addTail()
 {
   if( mTail == NULL )
   {
-    CCString *tailstr = cocos2d::CCString::createWithFormat("%s_tail.png", mShap->m_sString.substr(0, mShap->m_sString.length()-4).c_str());
+cocos2d::CCString *tailstr = cocos2d::CCString::createWithFormat("%s_tail.png", mShap->_string.substr(0, mShap->_string.length()-4).c_str());
     mTail = cocos2d::CCSprite::createWithSpriteFrameName(tailstr->getCString());
     mTail->setAnchorPoint(cocos2d::ccp(0.5f, 0.95f));
     mTail->setPosition(mSprite->getPosition());
     mTail->setOpacity(0);
     mParent->addChild( mTail, LAYER_ROLE);
     mTail->setRotation(90-CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
-    CCFadeIn *fi = cocos2d::CCFadeIn::create(0.5f);
+cocos2d::CCFadeIn *fi = cocos2d::CCFadeIn::create(0.5f);
     mTail->runAction(fi);
   }
 }
@@ -49,7 +49,7 @@ void Dart::addSTail(cocos2d::CCString * ani, int aid)
     mSTail->setOpacity(0);
     mParent->addChild( mSTail, LAYER_ROLE);
     mSTail->setRotation(90-CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
-    CCFadeIn *fi = cocos2d::CCFadeIn::create(0.5f);
+cocos2d::CCFadeIn *fi = cocos2d::CCFadeIn::create(0.5f);
     mSTail->runAction(fi);
   }
 }
@@ -74,8 +74,8 @@ void Dart::onCreate()
         mSprite->setScale(1.4f);
         mIsEnemy = true;
         speed = NNINJA_DARTSPEED*play->difficulty;
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -84,8 +84,8 @@ void Dart::onCreate()
         mSprite->setScale(1.4f);
         mIsEnemy = true;
         speed = MNINJA_DARTSPEED*play->difficulty;
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -94,8 +94,8 @@ void Dart::onCreate()
         mSprite->setScale(1.4f);
         mIsEnemy = true;
         speed = HNINJA_DARTSPEED*play->difficulty;
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -105,8 +105,8 @@ void Dart::onCreate()
         mIsEnemy = true;
         speed = HNINJA_DARTSPEED*play->difficulty/2;
         SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/freeze_fly.mp3").c_str());
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
 
         mParticle = 2;
@@ -117,8 +117,8 @@ void Dart::onCreate()
       {//八方手里剑
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
         speed = 700;
       }
@@ -128,8 +128,8 @@ void Dart::onCreate()
         mSprite->setScale(1.4f);
         mIsEnemy = true;
         speed = HNINJA_DARTSPEED*play->difficulty*2;
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -137,8 +137,8 @@ void Dart::onCreate()
       {//主角的普通飞镖
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -146,8 +146,8 @@ void Dart::onCreate()
       {
         this->addTail();
         mHitEffect = 11;
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
 
         mParticle = 1;
@@ -159,8 +159,8 @@ void Dart::onCreate()
         this->addSTail(cocos2d::CCString::create("misc"), 0);
         mHitEffect = 12;
         //旋转代码
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -175,8 +175,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
         mHitEffect = 14;
 
@@ -199,8 +199,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
         mHitEffect = 20;
         mHitEffect2 = 21;
@@ -213,8 +213,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
         mHitEffect = 15;
         mHitEffect2 = 16;
@@ -227,8 +227,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
         mHitEffect = 18;
         mHitEffect2 = 19;
@@ -240,8 +240,8 @@ void Dart::onCreate()
     case 9://追踪镖
       {
         mSprite->setScale(1.4f);
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
         GameObject *atar = (GameObject*)play->nearestEnemy(direction);
         if( atar != NULL )
@@ -259,8 +259,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
 
         mParticle = -1;
@@ -271,8 +271,8 @@ void Dart::onCreate()
       {//彩虹镖
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
 
         mHitEffect = 24;
@@ -283,8 +283,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -292,8 +292,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -301,8 +301,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -310,8 +310,8 @@ void Dart::onCreate()
       {
         mSprite->setScale(1.4f);
         this->addTail();
-        CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-        CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
       }
       break;
@@ -345,8 +345,8 @@ void Dart::onUpdate(float delta)
   //碰撞检测
   if( mIsEnemy == false )
   {
-    CCObject* node = NULL;
-    CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
     {
       Role * em = (Role*)node;
       if( em->collisionWithCircle(pos, 7) )
@@ -463,7 +463,7 @@ void Dart::onUpdate(float delta)
     float angle = ccpAngleSigned(direction, rdir);
     if( angle == angle )
     {
-      float limit = cocos2d::CC_DEGREES_TO_RADIANS(100.0f*delta);
+      float limit = CC_DEGREES_TO_RADIANS(100.0f*delta);
       if( fabsf(angle) <= limit )
       {
         direction = ccpNormalize(rdir);

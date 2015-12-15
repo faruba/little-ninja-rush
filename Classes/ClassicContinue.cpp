@@ -24,7 +24,7 @@ class ControlLayer :
 
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
     virtual bool onTouchBegan(Touch * touch, Event * event);
     virtual void onTouchMoved(Touch * touch, Event * event);
@@ -33,19 +33,18 @@ class ControlLayer :
     virtual bool init();
     void updateButton();
     void tickNumber(int n);
-
-    CCLabelBMFont *mNumber;
-    CCSprite *mBtnCancel;
-    CCSprite *mBtnCancel2;
-    CCSprite *mBtnRevive;
-    CCSprite *mBtnRevive2;
-    CCLabelBMFont *mCoins;
-    CCSprite *mBtnBuyBasic;
-    CCSprite *mBtnBuyBasic2;
-    CCSprite *mBtnBuyStandard;
-    CCSprite *mBtnBuyStandard2;
-    CCSprite *mBtnBuyDeluxe;
-    CCSprite *mBtnBuyDeluxe2;
+cocos2d::CCLabelBMFont *mNumber;
+cocos2d::CCSprite *mBtnCancel;
+cocos2d::CCSprite *mBtnCancel2;
+cocos2d::CCSprite *mBtnRevive;
+cocos2d::CCSprite *mBtnRevive2;
+cocos2d::CCLabelBMFont *mCoins;
+cocos2d::CCSprite *mBtnBuyBasic;
+cocos2d::CCSprite *mBtnBuyBasic2;
+cocos2d::CCSprite *mBtnBuyStandard;
+cocos2d::CCSprite *mBtnBuyStandard2;
+cocos2d::CCSprite *mBtnBuyDeluxe;
+cocos2d::CCSprite *mBtnBuyDeluxe2;
 
     ClassicContinue *master;
     int mClicked;
@@ -55,18 +54,18 @@ bool ControlLayer::init()
 {
     if( CCLayer::init() )
     {
-      CCNodeLoaderLibrary *pNodeLib = cocos2d::CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
-      CCBReader *pReader = new CCBReader(pNodeLib, this, this);
-      CCNode *node = pReader->readNodeGraphFromFile("ui-continue.ccbi", this);
+NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
+CCBReader *pReader = new CCBReader(pNodeLib, this, this);
+cocos2d::CCNode *node = pReader->readNodeGraphFromFile("ui-continue.ccbi", this);
       pReader->release();
       node->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
       this->addChild(node);
 
       auto listener = EventListenerTouchOneByOne::create();
-      listener->onTouchBegan = cocos2d::CC_CALLBACK_2(ControlLayer::onTouchBegan, this);
-      listener->onTouchEnded = cocos2d::CC_CALLBACK_2(ControlLayer::onTouchEnded, this);
-      listener->onTouchMoved = cocos2d::CC_CALLBACK_2(ControlLayer::onTouchMoved, this);
-      listener->onTouchCancelled = cocos2d::CC_CALLBACK_2(ControlLayer::onTouchEnded, this);
+      listener->onTouchBegan = CC_CALLBACK_2(ControlLayer::onTouchBegan, this);
+      listener->onTouchEnded = CC_CALLBACK_2(ControlLayer::onTouchEnded, this);
+      listener->onTouchMoved = CC_CALLBACK_2(ControlLayer::onTouchMoved, this);
+      listener->onTouchCancelled = CC_CALLBACK_2(ControlLayer::onTouchEnded, this);
       _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
       mClicked = -1;
@@ -80,9 +79,9 @@ bool ControlLayer::init()
 void ControlLayer::tickNumber(int n) 
 {
     mNumber->setString(cocos2d::CCString::createWithFormat("%d", n)->getCString());
-    CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.2f, 1.5f);
-    CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.4f, 1);
-    CCSequence *seq = cocos2d::CCSequence::create(st1, st2, NULL);
+cocos2d::CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.2f, 1.5f);
+cocos2d::CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.4f, 1);
+cocos2d::CCSequence *seq = cocos2d::CCSequence::create(st1, st2, NULL);
     mNumber->runAction(seq);
     
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/feverbgmend.mp3").c_str());
@@ -279,25 +278,25 @@ SEL_MenuHandler ControlLayer::onResolveCCBCCMenuItemSelector(cocos2d::CCObject *
   return NULL;
 }
 
-SEL_CCControlHandler ControlLayer::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   ControlLayer::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-  CCLog("Control");
+cocos2d::CCLog("Control");
   return NULL;
 }
 bool ControlLayer::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mNumber", CCLabelBMFont *, mNumber)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel", CCSprite *, mBtnCancel)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel2", CCSprite *, mBtnCancel2)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnRevive", CCSprite *, mBtnRevive)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnRevive2", CCSprite *, mBtnRevive2)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mCoins", CCLabelBMFont *, mCoins)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyBasic", CCSprite *, mBtnBuyBasic)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyBasic2", CCSprite *, mBtnBuyBasic2)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyStandard", CCSprite *, mBtnBuyStandard)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyStandard2", CCSprite *, mBtnBuyStandard2)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyDeluxe", CCSprite *, mBtnBuyDeluxe)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyDeluxe2", CCSprite *, mBtnBuyDeluxe2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mNumber", CCLabelBMFont *, mNumber)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel", CCSprite *, mBtnCancel)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel2", CCSprite *, mBtnCancel2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnRevive", CCSprite *, mBtnRevive)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnRevive2", CCSprite *, mBtnRevive2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mCoins", CCLabelBMFont *, mCoins)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyBasic", CCSprite *, mBtnBuyBasic)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyBasic2", CCSprite *, mBtnBuyBasic2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyStandard", CCSprite *, mBtnBuyStandard)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyStandard2", CCSprite *, mBtnBuyStandard2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyDeluxe", CCSprite *, mBtnBuyDeluxe)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyDeluxe2", CCSprite *, mBtnBuyDeluxe2)
   //  CCLog(pMemberVariableName);
 
   return false;

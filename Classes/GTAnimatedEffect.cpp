@@ -23,7 +23,7 @@ void GTAnimatedEffect::playGTAnimation(int AnimationId, bool LoopPlay)
     this->setDisplayFrame(mAnimation->spriteFrame(AnimationId, 0));
   }
   else {
-    CCLog("GameWarning: GTAnimatedEffect::playGTAnimation > Invaild animation id(%d).", AnimationId);
+cocos2d::CCLog("GameWarning: GTAnimatedEffect::playGTAnimation > Invaild animation id(%d).", AnimationId);
   }
 }
 

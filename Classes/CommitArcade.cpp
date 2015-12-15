@@ -26,12 +26,12 @@ CommitArcade* CommitArcade::commit()
 void CommitArcade::onCreate() 
 {
     //hot load
-    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-scroll.plist");
+cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-scroll.plist");
     
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(0, 0, 0), 128, 0);
     NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
-    CCBReader *pReader = new CCBReader(pNodeLib, this, this);
+CCBReader *pReader = new CCBReader(pNodeLib, this, this);
     mNode = pReader->readNodeGraphFromFile("ui-arcadeover", this);
     pReader->release();
     mNode->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
@@ -39,8 +39,7 @@ void CommitArcade::onCreate()
     
     // TODO
     //mFlash.blendFunc =  (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };//fix flash bug
-    
-    CCString *rolefile = cocos2d::CCString::createWithFormat("sc_role%d0.png", GameRecord::sharedGameRecord()->curr_char);
+cocos2d::CCString *rolefile = cocos2d::CCString::createWithFormat("sc_role%d0.png", GameRecord::sharedGameRecord()->curr_char);
     mRole->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(rolefile->getCString()));
     mLight->setVisible(false);
     mCup->setVisible(false);
@@ -63,7 +62,7 @@ void CommitArcade::onDestroy()
     play->removeChild(mNode, true);
     
     //hot release
-    CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-scroll.plist");
+cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-scroll.plist");
     unloadTextureFromeSpriteFrameFile("ui-scroll.plist");
     
     play->manager->addGameObject(GameOver::gameOver(play));
@@ -205,29 +204,28 @@ void CommitArcade::onUpdate(float delta)
                 mTimer = 0;
                 mCup->setScale(0);
                 mCup->setVisible(true);
-                
-                CCScaleTo *cst = cocos2d::CCScaleTo::create(0.2f, 1.5f);
-                CCScaleTo *cst2 = cocos2d::CCScaleTo::create(0.1f, 1);
-                CCDelayTime *dt = cocos2d::CCDelayTime::create(2);
-                CCScaleTo *cst3 = cocos2d::CCScaleTo::create(1, 0);
-                CCSequence *cseq = cocos2d::CCSequence::create(cst, cst2, dt, cst3, NULL);
+cocos2d::CCScaleTo *cst = cocos2d::CCScaleTo::create(0.2f, 1.5f);
+cocos2d::CCScaleTo *cst2 = cocos2d::CCScaleTo::create(0.1f, 1);
+cocos2d::CCDelayTime *dt = cocos2d::CCDelayTime::create(2);
+cocos2d::CCScaleTo *cst3 = cocos2d::CCScaleTo::create(1, 0);
+cocos2d::CCSequence *cseq = cocos2d::CCSequence::create(cst, cst2, dt, cst3, NULL);
                 mCup->runAction(cseq);
                 
                 mLight->setScale(0);
                 mLight->setVisible(true);
                 mLight->setOpacity(0);
-                CCFadeIn *lfi = cocos2d::CCFadeIn::create(0.2f);
-                CCDelayTime *ldy = cocos2d::CCDelayTime::create(2);
-                CCFadeOut *lfo = cocos2d::CCFadeOut::create(2);
-                CCSequence *lfs = cocos2d::CCSequence::create(lfi, ldy, lfo, NULL);
+cocos2d::CCFadeIn *lfi = cocos2d::CCFadeIn::create(0.2f);
+cocos2d::CCDelayTime *ldy = cocos2d::CCDelayTime::create(2);
+cocos2d::CCFadeOut *lfo = cocos2d::CCFadeOut::create(2);
+cocos2d::CCSequence *lfs = cocos2d::CCSequence::create(lfi, ldy, lfo, NULL);
                 mLight->runAction(lfs);
-                CCScaleTo *lst = cocos2d::CCScaleTo::create(1, 3);
+cocos2d::CCScaleTo *lst = cocos2d::CCScaleTo::create(1, 3);
                 mLight->runAction(lst);
-                CCRotateBy *lrt = cocos2d::CCRotateBy::create(6, 1000);
+cocos2d::CCRotateBy *lrt = cocos2d::CCRotateBy::create(6, 1000);
                 mLight->runAction(lrt);
                 
                 mFlash->setVisible(true);
-                CCFadeOut *fo1 = cocos2d::CCFadeOut::create(2);
+cocos2d::CCFadeOut *fo1 = cocos2d::CCFadeOut::create(2);
                 mFlash->runAction(fo1);
                 
                 SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/openscroll.mp3").c_str());
@@ -250,21 +248,21 @@ SEL_MenuHandler CommitArcade::onResolveCCBCCMenuItemSelector(cocos2d::CCObject *
 }
 
 cocos2d::extension::Control::Handler  CommitArcade::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName) {
-  CCLog("Control");
+cocos2d::CCLog("Control");
   return NULL;
 }
 bool CommitArcade::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRole", CCSprite *, mRole)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLight", CCSprite *, mLight)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCup", CCSprite *, mCup)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScore", CCLabelBMFont *, mScore)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBouns", CCLabelBMFont *, mBouns)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldenTrophy", CCLabelBMFont *, mGoldenTrophy)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverTrophy", CCLabelBMFont *, mSilverTrophy)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeTrophy", CCLabelBMFont *, mBronzeTrophy)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFlash", CCLayerColor *, mFlash)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRole", CCSprite *, mRole)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLight", CCSprite *, mLight)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCup", CCSprite *, mCup)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScore", CCLabelBMFont *, mScore)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBouns", CCLabelBMFont *, mBouns)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldenTrophy", CCLabelBMFont *, mGoldenTrophy)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverTrophy", CCLabelBMFont *, mSilverTrophy)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeTrophy", CCLabelBMFont *, mBronzeTrophy)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFlash", CCLayerColor *, mFlash)
 
   //  CCLog(pMemberVariableName);
 

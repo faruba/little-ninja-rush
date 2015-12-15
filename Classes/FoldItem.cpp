@@ -175,7 +175,7 @@ FoldItem* FoldItem::foldItem(int title, int cost, bool iap, int icon, const char
       }
     }
     else {
-      CCSprite *mark = cocos2d::CCSprite::createWithSpriteFrameName("sp_completed.png");
+cocos2d::CCSprite *mark = cocos2d::CCSprite::createWithSpriteFrameName("sp_completed.png");
       mark->setAnchorPoint(cocos2d::ccp(0, 0.5f));
       mark->setPosition(cocos2d::ccp( ret->getContentSize().width - 60, ret->getContentSize().height - 26));
       ret->mCost = mark;
@@ -184,7 +184,7 @@ FoldItem* FoldItem::foldItem(int title, int cost, bool iap, int icon, const char
 
     //draw title
     {
-      CCString *name = cocos2d::CCString::createWithFormat("shop%d.png", ret->mTitle);
+cocos2d::CCString *name = cocos2d::CCString::createWithFormat("shop%d.png", ret->mTitle);
       ret->mTitleSp = cocos2d::CCSprite::createWithSpriteFrameName(name->getCString());
       ret->mTitleSp->setAnchorPoint(cocos2d::ccp(0, 0.5f));
       ret->mTitleSp->setPosition(cocos2d::ccp(100, ret->getContentSize().height - 26));
@@ -220,7 +220,7 @@ void FoldItem::toggleFold(bool flag)
     
     if( flag )
     {
-        cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
         mBgButton->setDisplayFrame(cache->spriteFrameByName("shoplist.png"));
         mBgButton->setContentSize(cocos2d::CCSizeMake(435, 55));
         setContentSize(mBgButton->getContentSize());
@@ -237,7 +237,7 @@ void FoldItem::toggleFold(bool flag)
         }
     }
     else {
-        cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
         mBgButton->setDisplayFrame(cache->spriteFrameByName("shoplist2.png"));
         mBgButton->setContentSize(cocos2d::CCSizeMake(435, 100));
         setContentSize(mBgButton->getContentSize());
@@ -295,7 +295,7 @@ void FoldItem::updateInfo(int icon, int cost, const char * detail, int btntyp)
         //update icon
         if( mIconId >= 0 )
         {
-            cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("icon%d.png", icon);
+cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("icon%d.png", icon);
             mIcon->setDisplayFrame(cocos2d::CCSprite::create(filename->getCString())->displayFrame());
         }
     }
@@ -305,9 +305,9 @@ void FoldItem::updateInfo(int icon, int cost, const char * detail, int btntyp)
         {
             //update cost
             removeChild(mCost, false);
-            CCSprite *coin = cocos2d::CCSprite::createWithSpriteFrameName("go_coin.png");
+cocos2d::CCSprite *coin = cocos2d::CCSprite::createWithSpriteFrameName("go_coin.png");
             coin->setPosition(cocos2d::ccp( getContentSize().width - 60, getContentSize().height - 26));
-            CCLabelBMFont *font = cocos2d::CCLabelBMFont::create(cocos2d::CCString::createWithFormat("%d", cost)->getCString(), "ra40.fnt");
+cocos2d::CCLabelBMFont *font = cocos2d::CCLabelBMFont::create(cocos2d::CCString::createWithFormat("%d", cost)->getCString(), "ra40.fnt");
             font->setAnchorPoint(cocos2d::ccp(0, 0.5f));
             font->setPosition(cocos2d::ccp(20, 5));
             coin->addChild(font);
@@ -317,7 +317,7 @@ void FoldItem::updateInfo(int icon, int cost, const char * detail, int btntyp)
     }
     else {
         removeChild(mCost, false);
-        CCSprite *mark = cocos2d::CCSprite::createWithSpriteFrameName("sp_completed.png");
+cocos2d::CCSprite *mark = cocos2d::CCSprite::createWithSpriteFrameName("sp_completed.png");
         mark->setAnchorPoint(cocos2d::ccp(0, 0.5f));
         mark->setPosition(cocos2d::ccp( getContentSize().width - 60, getContentSize().height - 26));
         mCost = mark;

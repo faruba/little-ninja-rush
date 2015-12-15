@@ -21,8 +21,7 @@ class TimedTrigger:
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-
-    CCNode* mTarget;
+cocos2d::CCNode* mTarget;
     SEL_CallFunc mSelector;
     int mMode;
     float mTime;

@@ -29,7 +29,7 @@ void Santa::onCreate()
     GamePlay *play = GamePlay::sharedGamePlay();
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("santa"));
     mSprite->setAnchorPoint(cocos2d::ccp(0.5438f, 0.0625f));
-    int y = cocos2d::CCRANDOM_0_1()*RESPAWN_Y;
+    int y = CCRANDOM_0_1()*RESPAWN_Y;
     if( play->state == STATE_RUSH )
     {
         mSprite->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));

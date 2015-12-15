@@ -18,20 +18,20 @@ UniversalFit *UniversalFit::sharedUniversalFit()
 
 void UniversalFit::init()
 {
-  CCDirector *pDirector = cocos2d::CCDirector::sharedDirector();
+cocos2d::CCDirector *pDirector = cocos2d::CCDirector::sharedDirector();
   if (NULL == pDirector) {
-    CCLog("UniversalFit::UniversalFit() NULL == pDirector");
+cocos2d::CCLog("UniversalFit::UniversalFit() NULL == pDirector");
   }
   else
   {
-    CCSize size = pDirector->getWinSize();
+cocos2d::CCSize size = pDirector->getWinSize();
     centralPoint = ccp(size.width/2.0, size.height/2.0);
     sceneOffset = ccp(0, 0);
     fakeScale = false;
     scaleFactor = 1.0f;
   }
 }
-CCRect UniversalFit::transformRect(cocos2d::CCRect rect)
+cocos2d::CCRect UniversalFit::transformRect(cocos2d::CCRect rect)
 {
   return CCRectMake(rect.origin.x*transform.width + baseLeft, rect.origin.y*transform.height + baseHeight,
       rect.size.width*transform.width, rect.size.height*transform.height);
@@ -93,7 +93,7 @@ void UniversalFit::setAutofit(cocos2d::CCSize size)
 {
   screenSize = size;
   scaleFactor = size.width/SCREEN_WIDTH < size.height/SCREEN_HEIGHT ? size.width/SCREEN_WIDTH : size.height/SCREEN_HEIGHT;//以宽度为基准 (maximum extend)
-    CCSize scaleSize = cocos2d::CCSizeMake(SCREEN_WIDTH*scaleFactor, SCREEN_HEIGHT*scaleFactor);
+cocos2d::CCSize scaleSize = cocos2d::CCSizeMake(SCREEN_WIDTH*scaleFactor, SCREEN_HEIGHT*scaleFactor);
     sceneOffset = ccp(0, 0);//ccp((size.width - SCREEN_WIDTH*scaleFactor)/2, (size.height - SCREEN_HEIGHT*scaleFactor)/2);
   //clipRect.setRect(0, (size.height - scaleSize.height)/2, size.width, scaleSize.height);
     clipRect.setRect(0, 0, SCREEN_WIDTH*4, SCREEN_HEIGHT*4);//hammer android titlemenu clip test
@@ -115,17 +115,15 @@ void UniversalFit::setAutofit(cocos2d::CCSize size)
   {
     gRetinaGraphics = true;
   }
-    
-    CCDirector *pDirector = cocos2d::CCDirector::sharedDirector();
-    CCSize surface = pDirector->getOpenGLView()->getFrameSize();
-    CCSize need = cocos2d::CCSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
+cocos2d::CCDirector *pDirector = cocos2d::CCDirector::sharedDirector();
+cocos2d::CCSize surface = pDirector->getOpenGLView()->getFrameSize();
+cocos2d::CCSize need = cocos2d::CCSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
     need.width *= pDirector->getContentScaleFactor();
     need.height *= pDirector->getContentScaleFactor();
     transform.width = surface.width/need.width;
     transform.height = surface.height/need.height;
-    
-    CCLog("- surface size = %fx%f", surface.width, surface.height);
-    CCLog("- scale = %f", pDirector->getContentScaleFactor());
+cocos2d::CCLog("- surface size = %fx%f", surface.width, surface.height);
+cocos2d::CCLog("- scale = %f", pDirector->getContentScaleFactor());
 }
 
 cocos2d::Point UniversalFit::restorePoint(cocos2d::Point pos)

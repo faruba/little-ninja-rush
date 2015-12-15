@@ -5,11 +5,6 @@
 #include "Tasks.h"
 #include "Collections.h"
 
-#include "rapidjson/rapidjson.h"
-#include "rapidjson/document.h"
-#include "rapidjson/prettywriter.h"
-#include "rapidjson/filestream.h"
-
 #include "cocos2d.h"
 #include "cocos-ext.h"
 
@@ -22,8 +17,7 @@ class GameRecord : public CCObject
 
   public:
     virtual bool init();
-
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GameRecord, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GameRecord, create);
 
     void read(cocos2d::CCDictionary* dic);
     void write(rapidjson::Document &document);
@@ -60,12 +54,12 @@ class GameRecord : public CCObject
     int *char_equip_spell;
 
     //Local Leader Board 本地排行榜
-    CCString *lb_playername;
+cocos2d::CCString *lb_playername;
     int *lb_scores;
-    CCString **lb_names;
+cocos2d::CCString **lb_names;
     //--- for arcade mode ---
     int *lba_scores;
-    CCString **lba_names;
+cocos2d::CCString **lba_names;
     double share_facebook;
     double share_twitter;
 

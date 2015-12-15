@@ -6,14 +6,14 @@
 #include "cocos-ext.h"
 #include "FoldItem.h"
 //#include "IAPHelper.h"
-
+#include "cocosbuilder/CocosBuilder.h"
 ;
 USING_NS_CC_EXT;
 
 class CoinsMenu:
   public cocos2d::CCLayer, 
-  public cocos2d::extension::CCBMemberVariableAssigner,
-  public cocos2d::extension::CCBSelectorResolver,
+  public cocosbuilder::CCBMemberVariableAssigner,
+  public cocosbuilder::CCBSelectorResolver,
   public FoldItemController
 {
   public:
@@ -23,25 +23,24 @@ class CoinsMenu:
     virtual void onExit();
 
     LNR_SCENE_METHOD(CoinsMenu);
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CoinsMenu, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CoinsMenu, create);
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
     virtual bool onTouchBegan(Touch * touch, Event * event);
     virtual void onTouchMoved(Touch * touch, Event * event);
     virtual void onTouchEnded(Touch * touch, Event * event);
-
-    CCNode *mNode;
+cocos2d::CCNode *mNode;
     CEClipedNode *mClipedList;
-    CCNode *mItemList;
+cocos2d::CCNode *mItemList;
     float mOffset;
     int mCurrUnFold;
     cocos2d::Point mTouchBegin;
     //scrolls
-    CCSprite *mScrollHead;
-    CCSprite *mScrollBody;
-    CCSprite *mScrollFoot;
+cocos2d::CCSprite *mScrollHead;
+cocos2d::CCSprite *mScrollBody;
+cocos2d::CCSprite *mScrollFoot;
 
     float mBeginPressY;
     float mBeginNodeY;
@@ -49,17 +48,17 @@ class CoinsMenu:
     float mLastY;
     float mFlySpeed;
     //CFAbsoluteTime mLastTime;
-    struct cc_timeval mLastTime;
+    time_t mLastTime;
     //-- auto assign --
-    CCLabelBMFont *mCoins;
-    CCNode *mList;
-    CCMenu *mMenu;
+cocos2d::CCLabelBMFont *mCoins;
+cocos2d::CCNode *mList;
+cocos2d::CCMenu *mMenu;
 
     //intro&outro
-    CCNode *mSceneIntro;
-    CCScene *mNewScene;
+cocos2d::CCNode *mSceneIntro;
+cocos2d::CCScene *mNewScene;
     bool mIntroFlag; 
-    CCLayerColor *mMask;
+cocos2d::CCLayerColor *mMask;
     //---modal---
     bool mIsModal;
     int mModalPurchase;
@@ -89,11 +88,11 @@ class CoinsMenu:
     void doneOutro();
 
 };
-class CoinsMenuLayerLoader : public cocos2d::extension::CCLayerLoader {
+class CoinsMenuLayerLoader : public cocosbuilder::NodeLoader {
   public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(CoinsMenuLayerLoader, loader);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(CoinsMenuLayerLoader, loader);
 
   protected:
-    CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(CoinsMenu);
+CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(CoinsMenu);
 };
 #endif

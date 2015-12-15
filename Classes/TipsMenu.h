@@ -1,22 +1,21 @@
 #ifndef ___CLASSES_TIPSMENU_H_
 #define ___CLASSES_TIPSMENU_H_
 #include "GameTool.h"
-
+#include "cocosbuilder/CocosBuilder.h"
 class TipsMenu:
   public cocos2d::CCLayer, 
-  public cocos2d::extension::CCBMemberVariableAssigner,
-  public cocos2d::extension::CCBSelectorResolver
+  public cocosbuilder::CCBMemberVariableAssigner,
+  public cocosbuilder::CCBSelectorResolver
 {
   public:
     virtual bool init();  
 
     LNR_SCENE_METHOD(TipsMenu);
-
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TipsMenu, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TipsMenu, create);
     
     bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
     SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
-    SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
+    cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
     virtual void onEnter();
     //virtual void update(float);
@@ -27,24 +26,22 @@ private:
     void setSceneIntro();
     void setSceneOutro(cocos2d::CCScene* newscene);
     void doneOutro();
-    
-    CCNode *mNode;
-    CCLabelTTF *mCount;
-    CCLabelTTF *mTip;
+cocos2d::CCNode *mNode;
+cocos2d::CCLabelTTF *mCount;
+cocos2d::CCLabelTTF *mTip;
     int mIndex;
-
-    CCMenuItemImage *mLeft;
-    CCMenuItemImage *mRight;
+cocos2d::CCMenuItemImage *mLeft;
+cocos2d::CCMenuItemImage *mRight;
 
     //intro&outro
-    CCNode *mSceneIntro;
-    CCScene *mNewScene;
+cocos2d::CCNode *mSceneIntro;
+cocos2d::CCScene *mNewScene;
     bool mIntroFlag;
 
 
-    void onBack();
-    void onLeft();
-    void onRight();
+    void onBack(cocos2d::Ref*);
+    void onLeft(cocos2d::Ref*);
+    void onRight(cocos2d::Ref*);
 
 };
 #endif

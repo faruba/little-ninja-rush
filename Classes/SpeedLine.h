@@ -13,8 +13,7 @@ class SpeedLine:public GameObject
     virtual void onDestroy();
 
     static SpeedLine* line();
-
-    CCSprite *mSprite;
+cocos2d::CCSprite *mSprite;
     float     mSpeed;
 
 

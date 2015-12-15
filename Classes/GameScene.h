@@ -15,11 +15,10 @@ class GameScene:public GameObject{
     static void initSceneSequence();
     static int  getCurrentSceneId();
     static void nextScene();
-
-    CCNode* mParent;
-    CCNode* mSceneBgNode;
-    CCNode *mSceneFbNode;
-    CCNode* mSceneFgNode;
+cocos2d::CCNode* mParent;
+cocos2d::CCNode* mSceneBgNode;
+cocos2d::CCNode *mSceneFbNode;
+cocos2d::CCNode* mSceneFgNode;
     RingTile* mTiles;
     int     mCurrScene;
     SceneInterface* mScene;

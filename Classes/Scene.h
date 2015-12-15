@@ -8,11 +8,12 @@
 //  Copyright (c) 2012年 TrinGame. All rights reserved.
 //
 
-#include <Foundation/Foundation.h>
+
 #include "cocos2d.h"
 #include "RingTile.h"
 
-class SceneInterface: cocos2d::Object {
+class SceneInterface: public cocos2d::Object {
+public:
     virtual void loadScene() = 0;
     virtual void unloadScene() = 0;
 

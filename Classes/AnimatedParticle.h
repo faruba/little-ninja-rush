@@ -18,7 +18,7 @@ using namespace cocos2d;
 class AnimatedParticle:public GameObject
 {
   private:
-    CCNode *mParent;
+cocos2d::CCNode *mParent;
     GTAnimatedSprite *mSprite;
     cocos2d::Point mDir;
     cocos2d::Point mPos;

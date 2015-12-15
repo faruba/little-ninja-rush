@@ -15,14 +15,14 @@
 
 void Scene4::loadScene() 
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     cache->addSpriteFramesWithFile("scene7.plist");
     cache->addSpriteFramesWithFile("scene8.plist");
 }
 
 void Scene4::unloadScene() 
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     cache->removeSpriteFramesFromFile("scene7.plist");
     cache->removeSpriteFramesFromFile("scene8.plist");
     unloadTextureFromeSpriteFrameFile("scene7.plist");
@@ -34,11 +34,9 @@ void Scene4::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     mTiles = tiles;
     mBg = bg;
     mFront = fg;
-    
-    CCLayerColor *sbg = cocos2d::CCLayerColor::create(ccc4(201, 239, 251, 255));
+cocos2d::CCLayerColor *sbg = cocos2d::CCLayerColor::create(ccc4(201, 239, 251, 255));
     mBg->addChild(sbg);
-    
-    CCSprite *sky = cocos2d::CCSprite::createWithSpriteFrameName("cj4_bg.png");
+cocos2d::CCSprite *sky = cocos2d::CCSprite::createWithSpriteFrameName("cj4_bg.png");
     sky->setAnchorPoint(cocos2d::ccp(0, 1));
     sky->setPosition(cocos2d::ccp(0, SCREEN_HEIGHT));
     mBg->addChild(sky);

@@ -62,7 +62,7 @@ void Collections::readCollections(cocos2d::CCDictionary* dic)
         pieces[i] = gtReadInt(dic, CCString::createWithFormat("pieces__%d", i)->getCString(), 0);
     }
     //read CCArray
-    CCObject* nli = dic->objectForKey("collection_newlist");
+cocos2d::CCObject* nli = dic->objectForKey("collection_newlist");
     if( nli != NULL )
     {
         if( newlist != NULL )
@@ -78,7 +78,7 @@ void Collections::readCollections(cocos2d::CCDictionary* dic)
 }
 
 void Collections::writeCollections(rapidjson::Document &document) 
-{
+{/*TODO:Uncomment this
     document.AddMember("magic_piece", magic_piece, document.GetAllocator());
     for( int i=0; i<PIECE_COUNT; ++i)
     {
@@ -89,17 +89,17 @@ void Collections::writeCollections(rapidjson::Document &document)
         Value lst(kArrayType);
         if( newlist != NULL )
         {
-            CCObject *pObj = NULL;
-            CCARRAY_FOREACH(newlist, pObj)
+cocos2d::CCObject *pObj = NULL;
+CCARRAY_FOREACH(newlist, pObj)
             {
-                CCInteger *pInt = (cocos2d::CCInteger*)pObj;
+cocos2d::CCInteger *pInt = (cocos2d::CCInteger*)pObj;
                 lst.AddMember("", pInt->getValue(), document.GetAllocator());
             }
         }
         document.AddMember("collection_newlist", lst, document.GetAllocator());
     }
     //document.AddMember("collection_newlist", newlist, document.GetAllocator());
-    
+    */
     document.AddMember("life_piece", life_piece, document.GetAllocator());
     document.AddMember("dart_piece", dart_piece, document.GetAllocator());
 }
@@ -116,7 +116,7 @@ bool Collections::isItemCompleted(int pid)
             return false;
         }
     }
-    CCLog("Logic,  Invalid Piece ID (%d)", pid);
+cocos2d::CCLog("Logic,  Invalid Piece ID (%d)", pid);
     return false;
 }
 
@@ -126,7 +126,7 @@ int Collections::itemTotalPiece(int pid)
     {
         return gPiecesNumber[pid];
     }
-    CCLog("Logic,  Invalid Piece ID (%d)", pid);
+cocos2d::CCLog("Logic,  Invalid Piece ID (%d)", pid);
     return -1;
 }
 
@@ -136,7 +136,7 @@ int Collections::itemLostPiece(int pid)
     {
         return gPiecesNumber[pid] - pieces[pid];
     }
-    CCLog("Logic,  Invalid Piece ID (%d)", pid);
+cocos2d::CCLog("Logic,  Invalid Piece ID (%d)", pid);
     return -1;
 }
 
@@ -168,7 +168,7 @@ void Collections::gainItemPiece(int pid)
         }
     }
     else {
-        CCLog("Logic,  Invalid Piece ID (%d)", pid);
+cocos2d::CCLog("Logic,  Invalid Piece ID (%d)", pid);
     }
 }
 
@@ -177,7 +177,7 @@ void Collections::addToNewList(int uiid)
 {
     if( !isContainedInNewList(uiid) )
     {
-        CCInteger *n = cocos2d::CCInteger::create(uiid);
+cocos2d::CCInteger *n = cocos2d::CCInteger::create(uiid);
         newlist->addObject(n);
     }
 }
@@ -186,7 +186,7 @@ void Collections::removeFromNewList(int uiid)
 {
     for( unsigned int i=0; i<newlist->count(); ++i)
     {
-        CCInteger *del = (cocos2d::CCInteger*)(newlist->objectAtIndex(i));
+cocos2d::CCInteger *del = (cocos2d::CCInteger*)(newlist->objectAtIndex(i));
         int n = del->getValue();
         if( n == uiid)
         {
@@ -205,7 +205,7 @@ bool Collections::isContainedInNewList(int uiid)
 {
     for( unsigned int i=0; i<newlist->count(); ++i)
     {
-        CCInteger *del = (cocos2d::CCInteger*)(newlist->objectAtIndex(i));
+cocos2d::CCInteger *del = (cocos2d::CCInteger*)(newlist->objectAtIndex(i));
         int n = del->getValue();
         if( n == uiid)
         {

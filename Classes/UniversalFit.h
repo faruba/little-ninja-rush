@@ -21,7 +21,7 @@ public:
   cocos2d::Point restorePoint(cocos2d::Point);
   static UniversalFit *sharedUniversalFit();
   static bool  shouldUsingSinaWeibo();
-  CCRect transformRect(cocos2d::CCRect rect);
+cocos2d::CCRect transformRect(cocos2d::CCRect rect);
   cocos2d::Point centralPoint;
   cocos2d::Point sceneOffset;
   bool fakeScale;
@@ -30,11 +30,10 @@ public:
   int baseRight;
   int baseHeight;
   int topHeight;
-  CCRect clipRect;
-  CCSize playSize;
-  CCSize screenSize;
-    
-    CCSize transform;
+cocos2d::CCRect clipRect;
+cocos2d::CCSize playSize;
+cocos2d::CCSize screenSize;
+cocos2d::CCSize transform;
 };
 
 #endif

@@ -10,11 +10,11 @@ class Shuriken:public CCObject
 {
 public:
  int uiid;
- CCString *titl;
- CCString *name;
- CCString *desc;
- CCString *icon;
- CCString *shap;
+cocos2d::CCString *titl;
+cocos2d::CCString *name;
+cocos2d::CCString *desc;
+cocos2d::CCString *icon;
+cocos2d::CCString *shap;
  float flys;
  float reld;
  int efft;
@@ -26,12 +26,12 @@ class Katana:public CCObject
 {
 public:
  int uiid;
- CCString *titl;
- CCString *name;
- CCString *desc;
- CCString *icon;
+cocos2d::CCString *titl;
+cocos2d::CCString *name;
+cocos2d::CCString *desc;
+cocos2d::CCString *icon;
  int anim;
- CCString *sond;
+cocos2d::CCString *sond;
  float rang;
  int efft;
  float reld;
@@ -43,11 +43,11 @@ class Special:public CCObject
 {
 public:
  int uiid;
- CCString *titl;
- CCString *name;
- CCString *desc;
- CCString *icon;
- CCString *shap;
+cocos2d::CCString *titl;
+cocos2d::CCString *name;
+cocos2d::CCString *desc;
+cocos2d::CCString *icon;
+cocos2d::CCString *shap;
  int spmx;
  int spac;
  int skid;

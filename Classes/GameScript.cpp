@@ -41,7 +41,7 @@ void GameScript::invokeSpell0(cocos2d::CCInteger* mid)
     float interval = 120/(darts+1);
     for(int i=0; i<darts; ++i)
     {
-        float angle = cocos2d::CC_DEGREES_TO_RADIANS(30+(i+1)*interval);
+        float angle = CC_DEGREES_TO_RADIANS(30+(i+1)*interval);
         cocos2d::Point dir = ccpForAngle(angle);
         cocos2d::Point fp = play->mainrole->center();
         if( midn == 2 && play->mainrole2 != NULL )
@@ -194,9 +194,8 @@ void GameScript::invokeSpell15()
   int did = GameRecord::sharedGameRecord()->char_equip_dart[cr];
 
   Shuriken *sk = (Shuriken*)GameData::fetchShurikens()->objectAtIndex(did);
-
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;
     if( em->supportAimAid() && em->position().x > 0 && em->position().x < UniversalFit::sharedUniversalFit()->playSize.width )
@@ -233,8 +232,8 @@ void GameScript::invokeSpell16()
   play->manager->addGameObject(FeverBrust::feverbrust(20, false));
   cocos2d::Point mainpos = play->mainrole->position();
   cocos2d::Point maincen = play->mainrole->center();
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->darts, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->darts, node)
   {
     Darts *dr = (Darts*)node;
     if( dr->isEnemy() && exCollisionWithCircles(maincen, 0, 0, 70*2, dr->position(), 7) && dr->position().y > mainpos.y )
@@ -251,8 +250,8 @@ void GameScript::invokeSpell17()
   GamePlay *play = GamePlay::sharedGamePlay();
   play->scheduleMask(ccc3(255, 0, 0), 0.1f, 1);
   SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/blade-clay.mp3").c_str());
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
   {
     Role *em = (Role*)node;
     GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);

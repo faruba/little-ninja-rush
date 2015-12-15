@@ -13,7 +13,7 @@ void FootPrint::goFootPrint (float *pv, cocos2d::Point pos)
             float ds = pos.x - v;
             if( fabs(ds) > FOOTPRINT_INTERVAL )
             {
-                CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName("jiaoyin1.png");
+cocos2d::CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName("jiaoyin1.png");
                 sp->setOpacity(150);
                 sp->setPosition(pos);
                 play->footprints->addChild(sp);
@@ -29,7 +29,7 @@ void FootPrint::goFootPrint (float *pv, cocos2d::Point pos)
             float ds = pos.x - fabs(v);
             if( fabs(ds) > FOOTPRINT_INTERVAL )
             {
-                CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName("jiaoyin2.png");
+cocos2d::CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName("jiaoyin2.png");
                 sp->setOpacity(150);
                 sp->setPosition(pos);
                 play->footprints->addChild(sp);
@@ -64,10 +64,10 @@ void FootPrint::onUpdate(float delta)
         if( play->count_runscene <= 0 || (play->gameOverTimer>=0 && play->gameOverTimer<PLAY_GOSLIDETIME))
         {
             float ds = delta*play->runspeed;
-            
+            /*TODO:Uncomment this
             for(unsigned int i=0; i<play->footprints->getChildrenCount(); ++i)
             {
-                CCSprite *sp = (cocos2d::CCSprite*)play->footprints->getChildren()->objectAtIndex(i);
+cocos2d::CCSprite *sp = (cocos2d::CCSprite*)play->footprints->getChildren()->objectAtIndex(i);
                 cocos2d::Point pos = sp->getPosition();
                 pos.x -= ds;
                 sp->setPosition(pos);
@@ -77,6 +77,7 @@ void FootPrint::onUpdate(float delta)
                     i--;
                 }
             }
+             */
         }
     }
 }

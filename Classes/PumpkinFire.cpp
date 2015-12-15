@@ -49,8 +49,8 @@ void PumpkinFire::onUpdate(float delta)
     bool removeflag = false;
     
     //碰撞检测
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(play->enemies, node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;
         if( em->collisionWithCircle(pos, 7) )

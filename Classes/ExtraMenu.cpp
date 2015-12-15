@@ -8,9 +8,9 @@
 
 #define PADDING (6)
 
-CCScene* ExtraMenu::scene(int mode) 
+cocos2d::CCScene* ExtraMenu::scene(int mode) 
 {
-  CCScene *ret = cocos2d::CCScene::create();
+cocos2d::CCScene *ret = cocos2d::CCScene::create();
 
   ExtraMenu *tm = ExtraMenu::create();
   tm->mMode = mode;
@@ -39,8 +39,7 @@ bool ExtraMenu::init()
 void ExtraMenu::onEnter() 
 {
     PublicLoad::menuExtra()->loadAll();
-    
-  CCNode * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLayerLoader::loader(), this);
+cocos2d::CCNode * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLayerLoader::loader(), this);
   if(node != NULL) {
     this->addChild(node);
   }
@@ -91,8 +90,7 @@ void ExtraMenu::onEnter()
   this->updateScorll();
 
   this->setSceneIntro();
-
-  CCLayer::onEnter();
+cocos2d::CCLayer::onEnter();
 }
 
 void ExtraMenu::activate(int cid) 
@@ -123,13 +121,15 @@ void ExtraMenu::activate(int cid)
     }
     //rearrange items
     mOffset = 0;
-    CCObject* node = NULL;
-    CCARRAY_FOREACH(mItemList->getChildren(), node)
+      /*
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(mItemList->getChildren(), node)
     {
       FoldItem *it = (FoldItem*)node;
       it->setPosition(cocos2d::ccp(0, mOffset));
       mOffset -= it->getContentSize().height + PADDING;
     }
+       */
     if( unfold )
     {
       float upbound = -newitem->getPosition().y - mItemList->getPosition().y;
@@ -153,8 +153,7 @@ void ExtraMenu::activate(int cid)
 void ExtraMenu::onExit() 
 {
     PublicLoad::menuExtra()->unloadAll();
-    
-  CCLayer::onExit();
+cocos2d::CCLayer::onExit();
 }
 
 void ExtraMenu::onBack() 
@@ -248,12 +247,11 @@ void ExtraMenu::loadAchievements()
   mCurrState = 0;
   mItemList->removeAllChildrenWithCleanup(true);
   mOffset = 0;
-  CCObject* node = NULL;
-  CCARRAY_FOREACH(Tasks::getAchievements(), node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(Tasks::getAchievements(), node)
   {
     Achievement *ach = (Achievement *)node;
-      
-      CCLog("*(%d) - %s", ach->achieveCode, ach->text->getCString());
+cocos2d::CCLog("*(%d) - %s", ach->achieveCode, ach->text->getCString());
       
     int achnum = ach->achieveNumber;
     if( ach->achieveCode > ACH_OVERLINE )
@@ -272,8 +270,8 @@ void ExtraMenu::loadStatistics()
     mCurrState = 1;
     mItemList->removeAllChildrenWithCleanup(true);
     mOffset = 0;
-    CCObject* node = NULL;
-    CCARRAY_FOREACH(Tasks::getStatistics(), node)
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(Tasks::getStatistics(), node)
     {
         Statistics *sta = (Statistics *)node;
         //CCLog("*(%d) - %s", sta->achieveCode, sta->name->getCString());
@@ -281,22 +279,22 @@ void ExtraMenu::loadStatistics()
         if( sta->achieveCode != -1 )
         {//normal statistics
             //CCLabelBMFont *title = cocos2d::CCLabelBMFont::create(sta->name->getCString(), "ab34.fnt");
-            CCLabelTTF *title = cocos2d::CCLabelTTF::create(sta->name->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
+cocos2d::CCLabelTTF *title = cocos2d::CCLabelTTF::create(sta->name->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
             title->setAnchorPoint(cocos2d::ccp(0, 1));
             title->setPosition(cocos2d::ccp(10, mOffset));
             mItemList->addChild(title, 1, mItemList->getChildrenCount());
             if( sta->achieveCode >= 0 )
             {
-                CCString *val = cocos2d::CCString::createWithFormat("%d%", sta->achieveCount, sta->psfx);
-                CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(), "ab34.fnt");
+cocos2d::CCString *val = cocos2d::CCString::createWithFormat("%d%", sta->achieveCount, sta->psfx);
+cocos2d::CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(), "ab34.fnt");
                 result->setAnchorPoint(cocos2d::ccp(1, 1));
                 result->setPosition(cocos2d::ccp(426, mOffset));
                 mItemList->addChild(result, 1, mItemList->getChildrenCount());
             }
             else if( sta->achieveCode == -2 )
             {
-                CCString *val = cocos2d::CCString::createWithFormat("%d%", GameRecord::sharedGameRecord()->combo_high, sta->psfx);
-                CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(), "ab34.fnt");
+cocos2d::CCString *val = cocos2d::CCString::createWithFormat("%d%", GameRecord::sharedGameRecord()->combo_high, sta->psfx);
+cocos2d::CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(), "ab34.fnt");
                 result->setAnchorPoint(cocos2d::ccp(1, 1));
                 result->setPosition(cocos2d::ccp(426, mOffset));
                 mItemList->addChild(result, 1, mItemList->getChildrenCount());
@@ -306,12 +304,11 @@ void ExtraMenu::loadStatistics()
         }
         else {
             //category label
-            CCSprite *line = cocos2d::CCSprite::createWithSpriteFrameName("ex-line.png");
+cocos2d::CCSprite *line = cocos2d::CCSprite::createWithSpriteFrameName("ex-line.png");
             line->setAnchorPoint(cocos2d::ccp(0.5f, 1));
             line->setPosition(cocos2d::ccp(218, mOffset - 10));
             mItemList->addChild(line, 1, mItemList->getChildrenCount());
-            
-            CCSprite *label = cocos2d::CCSprite::createWithSpriteFrameName(sta->name->getCString());
+cocos2d::CCSprite *label = cocos2d::CCSprite::createWithSpriteFrameName(sta->name->getCString());
             label->setAnchorPoint(cocos2d::ccp(0.5f, 1));
             label->setPosition(cocos2d::ccp(line->getContentSize().width/2, 20));
             line->addChild(label, 1, mItemList->getChildrenCount());
@@ -325,7 +322,7 @@ void ExtraMenu::loadAboutUs()
 {
     mCurrState = 2;
     mItemList->removeAllChildrenWithCleanup(true);
-    CCNode * node = createUIByCCBI("about", "ExtraMenu", ExtraMenuLayerLoader::loader(), this);
+cocos2d::CCNode * node = createUIByCCBI("about", "ExtraMenu", ExtraMenuLayerLoader::loader(), this);
     if(node != NULL) {
       mItemList->addChild(node);
     }
@@ -354,7 +351,7 @@ bool ExtraMenu::onTouchBegan(Touch * touch, Event * event)
   LNR_GET_TOUCH_POS;
     
     mTouchBegin = pos;
-    CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
+cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
     if( rect.containsPoint(pos) )
     {
         mBeginPressY = pos.y;
@@ -376,8 +373,9 @@ void ExtraMenu::onTouchMoved(Touch * touch, Event * event)
     np.y = y;
     mItemList->setPosition(np);
     //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
-    struct cc_timeval time;
-    CCTime::gettimeofdayCocos2d(&time, NULL);
+    time_t time;
+    /* TODO: uncomment this
+cocos2d::CCTime::gettimeofdayCocos2d(&time, NULL);
     if( mLastY > -10000 )
     {
         float ds = np.y - mLastY;
@@ -385,6 +383,7 @@ void ExtraMenu::onTouchMoved(Touch * touch, Event * event)
         float dt = cocos2d::CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
         mFlySpeed = ds/dt;
     }
+     */
     mLastY = np.y;
     mLastTime = time;
     this->updateScorll();
@@ -394,18 +393,17 @@ void ExtraMenu::onTouchEnded(Touch * touch, Event * event)
 {
     mFly = true;
   LNR_GET_TOUCH_POS;
-    
-    CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
+cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
     if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
        rect.containsPoint(pos) && mCurrState == 0 )//only available in achievement state
     {
         float dy = mList->getPosition().y - pos.y;
         float offset = 0;
         int index = 0;
-        CCObject *node;
-        CCARRAY_FOREACH(mItemList->getChildren(), node)
+cocos2d::CCObject *node;/* TODO: uncomment this
+CCARRAY_FOREACH(mItemList->getChildren(), node)
         {
-            CCNode *item = (cocos2d::CCNode*) node;
+cocos2d::CCNode *item = (cocos2d::CCNode*) node;
             float upbound = offset - mItemList->getPosition().y;
             float downbound = upbound + item->getContentSize().height + PADDING;
             if( dy >= upbound && dy < downbound )
@@ -415,7 +413,7 @@ void ExtraMenu::onTouchEnded(Touch * touch, Event * event)
             }
             offset += item->getContentSize().height + PADDING;
             index++;
-        }
+        }*/
     }
 }
 
@@ -439,28 +437,28 @@ void ExtraMenu::setSceneOutro(cocos2d::CCScene* newscene)
 void ExtraMenu::doneOutro() 
 {
     mIntroFlag = false;
-    CCDirector::sharedDirector()->replaceScene(mNewScene);
+cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
     mNewScene->release();
 }
 
 SEL_MenuHandler ExtraMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
-{
-  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraMenu::onBack);
+{/* TODO: uncomment this
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraMenu::onBack);
 
-  //CCLog(pSelectorName);
+ */ //CCLog(pSelectorName);
     return NULL;
 }
 
-SEL_CCControlHandler ExtraMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   ExtraMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-  CCLog("Control");
+cocos2d::CCLog("Control");
   return NULL;
 }
 bool ExtraMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *,  mCoins);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", CCNode *, mList);
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBanner", CCSprite *, mBanner);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *,  mCoins);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", CCNode *, mList);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBanner", CCSprite *, mBanner);
 
   //CCLog(pMemberVariableName);
 

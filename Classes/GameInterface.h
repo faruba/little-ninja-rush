@@ -34,81 +34,78 @@ public CCBSelectorResolver
     void onUpdateArcade(float delta, GamePlay* play);
     void toggleShowItemButtons(bool flag);
     void rebuildDarts(bool unlimit);
-
-    CCNode *mParent;
+cocos2d::CCNode *mParent;
     //-------- new ui ------------
-    CCSprite *mUIBg;
-    CCSprite *mSpell;
-    CCSprite *mSpellName;
-    CCNode *mSpFgNode;
-    CCSprite *mSpBg;
-    CCSprite *mSpBgTop;
-    CCSprite *mSpellGrid;
+cocos2d::CCSprite *mUIBg;
+cocos2d::CCSprite *mSpell;
+cocos2d::CCSprite *mSpellName;
+cocos2d::CCNode *mSpFgNode;
+cocos2d::CCSprite *mSpBg;
+cocos2d::CCSprite *mSpBgTop;
+cocos2d::CCSprite *mSpellGrid;
     int       mSpCache;
 
     //distance
-    CCLabelBMFont *mDistanceNumber;
-    CCLabelBMFont *mDistanceM;
+cocos2d::CCLabelBMFont *mDistanceNumber;
+cocos2d::CCLabelBMFont *mDistanceM;
     int       mDistanceCache;
 
     //coins
-    CCLabelBMFont *mCoinNumber;
-    CCSprite *mCoinMark;
+cocos2d::CCLabelBMFont *mCoinNumber;
+cocos2d::CCSprite *mCoinMark;
     int       mCoinCache;
 
     //hp
     int mHPCache;
-    CCSprite *mHPMeters[MAXHPMETER];
+cocos2d::CCSprite *mHPMeters[MAXHPMETER];
 
     //darts
-    CCNode *mDartMeter;
+cocos2d::CCNode *mDartMeter;
     int mDartCache;
     float mDartDis;
     bool mUnlimtedDarts;
     float mUnlimtedDartsTimer;
-
-    CCNode *mHitNode;
-    CCNode *mFeverCoins;
-    CCLabelBMFont *mFeverFont;
+cocos2d::CCNode *mHitNode;
+cocos2d::CCNode *mFeverCoins;
+cocos2d::CCLabelBMFont *mFeverFont;
 
     //score * arcade
-    CCLabelBMFont *mScoreNumber;
+cocos2d::CCLabelBMFont *mScoreNumber;
     int mScoreCache;
 
     //speed * boost
-    CCNode *mSpeedBoost;
-    CCSprite *mSpeedMask;
-    CCLayerColor *mSpeedBg;
-    CCLayerColor *mSpeedRed;
-    CCLayerColor *mSpeedNormal;
-    CCLayerColor *mSpeedFever;
+cocos2d::CCNode *mSpeedBoost;
+cocos2d::CCSprite *mSpeedMask;
+cocos2d::CCLayerColor *mSpeedBg;
+cocos2d::CCLayerColor *mSpeedRed;
+cocos2d::CCLayerColor *mSpeedNormal;
+cocos2d::CCLayerColor *mSpeedFever;
     int mSpeedState;//0-normal 1-red flash 2-fever flash
-    CCAction *mSpeedAction;
+cocos2d::CCAction *mSpeedAction;
 
     //arcade * timer
     int mTimerCache;
-    CCLabelBMFont *mTimerLabel;
-    CCSprite *mTimerMark;
+cocos2d::CCLabelBMFont *mTimerLabel;
+cocos2d::CCSprite *mTimerMark;
 
     //arcade * cup
     int mCupCache;
-    CCSprite *mCup;
+cocos2d::CCSprite *mCup;
 
     //arcade x
-    CCLabelBMFont *mArcadeX;
-
-    CCMenu *mMenu;
-    CCMenuItemSprite *mFly;
-    CCMenuItemSprite *mSP;
-    CCSprite *mFlyBg;
-    CCSprite *mSPBg;
-    CCLabelBMFont *mFlyNumber;
-    CCLabelBMFont *mSPNumber;
+cocos2d::CCLabelBMFont *mArcadeX;
+cocos2d::CCMenu *mMenu;
+cocos2d::CCMenuItemSprite *mFly;
+cocos2d::CCMenuItemSprite *mSP;
+cocos2d::CCSprite *mFlyBg;
+cocos2d::CCSprite *mSPBg;
+cocos2d::CCLabelBMFont *mFlyNumber;
+cocos2d::CCLabelBMFont *mSPNumber;
     //----- sub node ---------
-    CCSprite *mHits;
-    CCLabelBMFont *mHitCount;
-    CCSprite *mSpFg;
-    CCSprite *mSpFgTop;
+cocos2d::CCSprite *mHits;
+cocos2d::CCLabelBMFont *mHitCount;
+cocos2d::CCSprite *mSpFg;
+cocos2d::CCSprite *mSpFgTop;
 
     bool mFlyUsed;
     bool mPotionUsed;

@@ -30,8 +30,7 @@ class NewbieNinja:
     virtual void toggleVisible(bool flag);
 
     static NewbieNinja* role(cocos2d::CCNode* parent);
-
-    CCNode *mParent;
+cocos2d::CCNode *mParent;
     GTAnimatedSprite *mSprite;
     int    mState;
     float  mTimer;

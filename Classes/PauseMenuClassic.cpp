@@ -23,7 +23,7 @@ void PauseMenuClassic::updateClassic()
         
         mDailyIcon->setVisible(true);
         Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
-        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mDailyIcon->addChild(icon);
         
@@ -45,7 +45,7 @@ void PauseMenuClassic::updateClassic()
         
         mWeeklyIcon->setVisible(true);
         Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
-        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mWeeklyIcon->addChild(icon);
         
@@ -67,7 +67,7 @@ void PauseMenuClassic::updateClassic()
         
         mMonthlyIcon->setVisible(true);
         Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
-        CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mMonthlyIcon->addChild(icon);
         
@@ -84,19 +84,19 @@ void PauseMenuClassic::updateClassic()
     //update crown
     for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
     {
-        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mDailyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective->index; ++i)
     {
-        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mWeeklyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective->index; ++i)
     {
-        CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mMonthlyCrown->addChild(crown);
     }
@@ -161,20 +161,20 @@ void PauseMenuClassic::updateArcade()
 void PauseMenuClassic::onCreate() 
 {
     //hot load pause resource
-    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-pause.plist");
-    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-change.plist");
+cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-pause.plist");
+cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-change.plist");
     
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(0, 0, 0), 128, 0);
     
     NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
-    CCBReader *pReader = new CCBReader(pNodeLib, this, this);
-    CCNode *node = pReader->readNodeGraphFromFile("pause_classic.ccbi", this);
+CCBReader *pReader = new CCBReader(pNodeLib, this, this);
+cocos2d::CCNode *node = pReader->readNodeGraphFromFile("pause_classic.ccbi", this);
     pReader->release();
     
     mBoard = CEClipedNode::create();
     mBoard->addChild(node);
-    CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
+cocos2d::CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
     //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH*4, SCREEN_HEIGHT*4);
     mBoard->setClipRect(new CCRect(UniversalFit::sharedUniversalFit()->transformRect(rect)));
     mBoard->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft-301, 68));
@@ -274,9 +274,9 @@ void PauseMenuClassic::onDestroy()
     play->ui()->removeChild(mBoard,true);
     
     //hot release pause resource
-    CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-pause.plist");
+cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-pause.plist");
     unloadTextureFromeSpriteFrameFile("ui-pause.plist");
-    CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-change.plist");
+cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-change.plist");
     unloadTextureFromeSpriteFrameFile("ui-change.plist");
 }
 
@@ -350,50 +350,50 @@ void PauseMenuClassic::change(Ref* ref)
 //cocosbuilder support
 bool PauseMenuClassic::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF*, mDailyObjective);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF*, mWeeklyObjective);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF*, mMonthlyObjective);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", CCNode*, mDailyCrown);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", CCNode*, mWeeklyCrown);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", CCNode*, mMonthlyCrown);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", CCSprite*, mDailyIcon);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", CCSprite*, mWeeklyIcon);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", CCSprite*, mMonthlyIcon);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", CCNode*, mClassic);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", CCNode*, mArcade);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", CCSprite*, mGoldCoin);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", CCSprite*, mSilverCoin);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", CCSprite*, mBronzeCoin);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", CCLabelBMFont*, mGoldScore);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", CCLabelBMFont*, mGoldPrize);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", CCLabelBMFont*, mSilverScore);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverPrize", CCLabelBMFont*, mSilverPrize);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", CCLabelBMFont*, mBronzeScore);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", CCLabelBMFont*, mBronzePrize);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu*, mMenu);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjDaily", CCNode*, mObjDaily);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjWeekly", CCNode*, mObjWeekly);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjMonthly", CCNode*, mObjMonthly);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBest", CCLabelTTF*, mBest);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", CCMenuItemImage*, mSfx);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", CCMenuItemImage*, mMusic);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mQuit", CCMenuItemImage*, mQuit);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mResume", CCMenuItemImage*, mResume);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRetry", CCMenuItemImage*, mRetry);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mChange", CCMenuItemImage*, mChange);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF*, mDailyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF*, mWeeklyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF*, mMonthlyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", CCNode*, mDailyCrown);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", CCNode*, mWeeklyCrown);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", CCNode*, mMonthlyCrown);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", CCSprite*, mDailyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", CCSprite*, mWeeklyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", CCSprite*, mMonthlyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", CCNode*, mClassic);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", CCNode*, mArcade);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", CCSprite*, mGoldCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", CCSprite*, mSilverCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", CCSprite*, mBronzeCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", CCLabelBMFont*, mGoldScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", CCLabelBMFont*, mGoldPrize);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", CCLabelBMFont*, mSilverScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverPrize", CCLabelBMFont*, mSilverPrize);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", CCLabelBMFont*, mBronzeScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", CCLabelBMFont*, mBronzePrize);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu*, mMenu);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjDaily", CCNode*, mObjDaily);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjWeekly", CCNode*, mObjWeekly);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjMonthly", CCNode*, mObjMonthly);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBest", CCLabelTTF*, mBest);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", CCMenuItemImage*, mSfx);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", CCMenuItemImage*, mMusic);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mQuit", CCMenuItemImage*, mQuit);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mResume", CCMenuItemImage*, mResume);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRetry", CCMenuItemImage*, mRetry);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mChange", CCMenuItemImage*, mChange);
     
     return false;
 }
 
 SEL_MenuHandler  PauseMenuClassic::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "toggleSfx", PauseMenuClassic::toggleSfx);
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "toggleMusic", PauseMenuClassic::toggleMusic);
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "quit", PauseMenuClassic::quit);
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "resume", PauseMenuClassic::resume);
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "retry", PauseMenuClassic::retry);
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "change", PauseMenuClassic::change);
-    
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "toggleSfx", PauseMenuClassic::toggleSfx);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "toggleMusic", PauseMenuClassic::toggleMusic);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "quit", PauseMenuClassic::quit);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "resume", PauseMenuClassic::resume);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "retry", PauseMenuClassic::retry);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "change", PauseMenuClassic::change);
+
     return NULL;
 }
 

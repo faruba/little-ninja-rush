@@ -14,7 +14,7 @@ RingTile* RingTile::tile(float TileSize, float WindowSize, int BufferSize)
         wtc++;
     }
     tile->mWindowTileCount = wtc;
-    tile->mpWindowTiles = new CCSprite*[wtc];
+    tile->mpWindowTiles = new cocos2d::CCSprite*[wtc];
     for(int i=0; i<wtc; ++i)
     {
         tile->mpWindowTiles[i] = NULL;
@@ -87,7 +87,7 @@ void RingTile::initTiles(int * Tiles, int Count)
   if(Count >= mWindowTileCount)
   {
     mWindowSpriteIndex = 0;
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     for(int i=0; i<mWindowTileCount; ++i)
     {
       mpBuffer[i] = Tiles[i];
@@ -111,12 +111,12 @@ void RingTile::initTiles(int * Tiles, int Count)
     {
       if(this->pushTiles(Tiles+mWindowTileCount, left) == false)
       {
-        CCLog("GameWarning: RingTile::initTiles > buffer data overflow, only visual part were accepted.");
+cocos2d::CCLog("GameWarning: RingTile::initTiles > buffer data overflow, only visual part were accepted.");
       }
     }
   }
   else {
-    CCLog("GameWarning: RingTile::initTiles > Operation ignored for not enough data.");
+cocos2d::CCLog("GameWarning: RingTile::initTiles > Operation ignored for not enough data.");
   }
 }
 
@@ -173,7 +173,7 @@ void RingTile::runTiles(float delta)
         mPendingCount -= n;
         if(mPendingCount<0)
         {
-            CCLog("GameWarning: RingTile::runTiles > Not enough pending tiles.");
+cocos2d::CCLog("GameWarning: RingTile::runTiles > Not enough pending tiles.");
         }
     }
     //重新计算每个tile的坐标

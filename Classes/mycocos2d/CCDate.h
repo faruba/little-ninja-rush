@@ -27,13 +27,11 @@ public:
 		time_ = ::time(NULL); 
 		::localtime_r(&time_, &tm_); 
     }
-	
     CCDate(const CCDate &dt)
     {
 		time_ = dt.time_; 
 		tm_ = dt.tm_;
     }
-	
     CCDate(const struct tm &tm_val)
     {
 		tm_ = tm_val; 

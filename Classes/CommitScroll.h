@@ -13,8 +13,8 @@
 
 class CommitScroll:
   public GameObject,
-  public CCBMemberVariableAssigner,
-  public CCBSelectorResolver
+public cocosbuilder::CCBMemberVariableAssigner,
+public cocosbuilder::CCBSelectorResolver
 {
   public:
     CREATE_FUNC(CommitScroll);
@@ -22,7 +22,7 @@ class CommitScroll:
 
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
@@ -30,7 +30,7 @@ class CommitScroll:
 
     bool mOver;
     float mOverTimer;
-    CCNode *mNode;
+cocos2d::CCNode *mNode;
     GTAnimatedSprite *mEffect;
     int mState;//0-waitting 1-bloom 2-fade
     float mTimer;
@@ -38,16 +38,16 @@ class CommitScroll:
 
     int mPrize;
     //-- auto assign --
-    CCSprite *mArrow;
-    CCSprite *mScroll;
-    CCSprite *mTitle;
-    CCLabelBMFont *mScrollCount;
-    CCNode *mRotateNode;
-    CCSprite *mLightBack;
-    CCNode *mRotateACW;
-    CCNode *mRotateCW;
-    CCLayerColor *mFlash;
-    CCLabelTTF *mItemName;
+cocos2d::CCSprite *mArrow;
+cocos2d::CCSprite *mScroll;
+cocos2d::CCSprite *mTitle;
+cocos2d::CCLabelBMFont *mScrollCount;
+cocos2d::CCNode *mRotateNode;
+cocos2d::CCSprite *mLightBack;
+cocos2d::CCNode *mRotateACW;
+cocos2d::CCNode *mRotateCW;
+cocos2d::CCLayerColor *mFlash;
+cocos2d::CCLabelTTF *mItemName;
 
 
     void onCashIn();

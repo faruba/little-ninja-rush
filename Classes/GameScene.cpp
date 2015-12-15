@@ -122,7 +122,7 @@ void GameScene::onUpdate(float delta)
 void GameScene::setScene(int sid) 
 {
     //debug
-    CCLog("setScene(%d)", sid);
+cocos2d::CCLog("setScene(%d)", sid);
     GamePlay *play = GamePlay::sharedGamePlay();
     mCurrScene = sid;
     mSceneBgNode->removeAllChildrenWithCleanup(true);
@@ -132,7 +132,7 @@ void GameScene::setScene(int sid)
     play->clearFootPrints();
     if( mScene != NULL )
     {
-        CCLog("unload scene");
+cocos2d::CCLog("unload scene");
         mScene->unloadScene();
         mScene->release();
         mScene = NULL;
@@ -200,7 +200,7 @@ void GameScene::setScene(int sid)
         }
         break;
     }
-    CCLog("load scene");
+cocos2d::CCLog("load scene");
     mScene->loadScene();
     mScene->createScene(mSceneBgNode, mSceneFbNode, mSceneFgNode, mTiles);
 
@@ -218,7 +218,7 @@ float GameScene::offset()
 
 void GameScene::onDestroy() 
 {
-    CCLog("unload scene");
+cocos2d::CCLog("unload scene");
     mTiles->reset();
     mScene->unloadScene();
     mParent->removeChild(mSceneBgNode, true);

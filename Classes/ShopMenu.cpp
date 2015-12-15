@@ -75,10 +75,10 @@ bool ShopMenu::init()
 {
 
   auto listener = EventListenerTouchOneByOne::create();
-  listener->onTouchBegan = cocos2d::CC_CALLBACK_2(ShopMenu::onTouchBegan, this);
-  listener->onTouchEnded = cocos2d::CC_CALLBACK_2(ShopMenu::onTouchEnded, this);
-  listener->onTouchMoved = cocos2d::CC_CALLBACK_2(ShopMenu::onTouchMoved, this);
-  listener->onTouchCancelled = cocos2d::CC_CALLBACK_2(ShopMenu::onTouchEnded, this);
+  listener->onTouchBegan = CC_CALLBACK_2(ShopMenu::onTouchBegan, this);
+  listener->onTouchEnded = CC_CALLBACK_2(ShopMenu::onTouchEnded, this);
+  listener->onTouchMoved = CC_CALLBACK_2(ShopMenu::onTouchMoved, this);
+  listener->onTouchCancelled = CC_CALLBACK_2(ShopMenu::onTouchEnded, this);
   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
   this->setTouchEnabled(true);
@@ -89,13 +89,11 @@ bool ShopMenu::init()
 void ShopMenu::onEnter() 
 {
     PublicLoad::menuShop()->loadAll();
-    
-    CCNode *taskcomplete = cocos2d::CCNode::create();
+cocos2d::CCNode *taskcomplete = cocos2d::CCNode::create();
     taskcomplete->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT));
     this->addChild(taskcomplete);
     GamePlay::setTaskCompleteNode(taskcomplete);
-    
-    CCNode * node = createUIByCCBI("menu-shop", "ShopMenu", ShopMenuLayerLoader::loader(), this);
+cocos2d::CCNode * node = createUIByCCBI("menu-shop", "ShopMenu", ShopMenuLayerLoader::loader(), this);
     if(node != NULL) {
       this->addChild(node);
     }
@@ -156,15 +154,14 @@ void ShopMenu::onEnter()
     mModalTimer = -1;
     
     this->setSceneIntro();
-    
-    CCLayer::onEnter();
+cocos2d::CCLayer::onEnter();
 }
 
 void ShopMenu::onExit() 
 {
   GamePlay::setTaskCompleteNode(NULL);
     PublicLoad::menuShop()->unloadAll();
-  CCLayer::onExit();
+cocos2d::CCLayer::onExit();
 }
 
 void ShopMenu::addCategory(int cid) 
@@ -254,8 +251,9 @@ void ShopMenu::activate(int cid)
         }
         //rearrange items
         mOffset = 0;
-        CCObject* node = NULL;
-        CCARRAY_FOREACH(mItemList->getChildren(), node)
+        /*TODO:Uncomment this
+cocos2d::CCObject* node = NULL;
+CCARRAY_FOREACH(mItemList->getChildren(), node)
         {
             FoldItem *it = (FoldItem*)node;
             it->setPosition(cocos2d::ccp(0, mOffset));
@@ -278,12 +276,13 @@ void ShopMenu::activate(int cid)
                 mItemList->setPosition(np);
             }
         }
+         */
     }
 }
 
 void ShopMenu::purchase(int cid) 
 {
-    CCLog("PID = %d", cid);
+cocos2d::CCLog("PID = %d", cid);
     if( cid >= 13 )
     {
         int index = gSupplySequence[cid - 13];
@@ -513,7 +512,7 @@ bool ShopMenu::onTouchBegan(Touch * touch, Event * event)
     pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
     mTouchBegin = pos;
-    CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
+cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
     if( rect.containsPoint(pos) )
     {
         mBeginPressY = pos.y;
@@ -539,8 +538,9 @@ void ShopMenu::onTouchMoved(Touch * touch, Event * event)
         np.y = y;
         mItemList->setPosition(np);
         //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
-        struct cc_timeval time;
-        CCTime::gettimeofdayCocos2d(&time, NULL);
+        /*TODO:Uncomment this
+        time_t time;
+cocos2d::CCTime::gettimeofdayCocos2d(&time, NULL);
         if( mLastY > -10000 )
         {
             float ds = np.y - mLastY;
@@ -550,6 +550,7 @@ void ShopMenu::onTouchMoved(Touch * touch, Event * event)
         }
         mLastY = np.y;
         mLastTime = time;
+         */
         this->updateScorll();
     }
 }
@@ -562,16 +563,16 @@ void ShopMenu::onTouchEnded(Touch * touch, Event * event)
         cocos2d::Point pos = touch->getLocationInView();
         pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
         pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
-
-        CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
+cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
         if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
                 rect.containsPoint(pos) )
         {
             float dy = mList->getPosition().y - pos.y;
             float offset = 0;
             int index = 0;
-            CCObject *node;
-            CCARRAY_FOREACH(mItemList->getChildren(), node)
+cocos2d::CCObject *node;
+            /*TODO:Uncomment this
+CCARRAY_FOREACH(mItemList->getChildren(), node)
             {
                 FoldItem *item = (FoldItem*)node;
                 float upbound = offset - mItemList->getPosition().y;
@@ -584,6 +585,7 @@ void ShopMenu::onTouchEnded(Touch * touch, Event * event)
                 offset += item->getContentSize().height + PADDING;
                 index++;
             }
+             */
         }
     }
 }
@@ -608,7 +610,7 @@ void ShopMenu::setSceneOutro(cocos2d::CCScene* newscene)
 void ShopMenu::doneOutro() 
 {
     mIntroFlag = false;
-    CCDirector::sharedDirector()->replaceScene(mNewScene);
+cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
     mNewScene->release();
 }
 /*
@@ -635,27 +637,23 @@ void ShopMenu::setModal(int pid)
             mMask->removeAllChildrenWithCleanup(true);
             //disable other operations
             mMenu->setTouchEnabled(false);
-            CCObject *node;
-            CCARRAY_FOREACH(mItemList->getChildren(), node)
+cocos2d::CCObject *node;
+CCARRAY_FOREACH(mItemList->getChildren(), node)
             {
                 FoldItem *it = (FoldItem*)node;
                 it->togglePurchaseButton(false);
             }
-            
-            CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
+cocos2d::CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
             spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)));
             mMask->addChild(spbg);
-            
-            CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc3.png");
+cocos2d::CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc3.png");
             titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 105));
             spbg->addChild(titlesp);
-            
-            CCSprite *descsp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc2.png");
+cocos2d::CCSprite *descsp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc2.png");
             descsp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 55));
             spbg->addChild(descsp);
-            
-            CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 720);
-            CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 720);
+cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
             descsp->runAction(rf);
             
             mModalPurchase = pid;
@@ -671,12 +669,14 @@ void ShopMenu::cancelModal()
         mIsModal = false;
         mMask->setVisible(false);
         mMenu->setTouchEnabled(true);
-        CCObject *node;
-        CCARRAY_FOREACH(mItemList->getChildren(), node)
+        /*TODO:Uncomment this
+cocos2d::CCObject *node;
+CCARRAY_FOREACH(mItemList->getChildren(), node)
         {
             FoldItem *it = (FoldItem*)node;
             it->togglePurchaseButton(true);
         }
+         */
     }
 }
 
@@ -689,7 +689,7 @@ void ShopMenu::purchaseVerified(int pid)
         GameRecord::sharedGameRecord()->setIAPFlag(GameRecord::sharedGameRecord()->iap_flag[pid]+1, pid);
         int contractid = pid - 4;
         GameRecord::sharedGameRecord()->setCharacterContract(1, contractid);
-        CCLog("Contract %d Purchased!", contractid);
+cocos2d::CCLog("Contract %d Purchased!", contractid);
         GameRecord::sharedGameRecord()->checkPoint();
         int cid = pid+1;
         FoldItem *item = (FoldItem*)(mItemList->getChildByTag(cid));
@@ -707,12 +707,10 @@ void ShopMenu::purchaseFailed(int pid)
     {
         //tell user purchase failed.
         mMask->removeAllChildrenWithCleanup(true);
-        
-        CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
+cocos2d::CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
         spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
         mMask->addChild(spbg);
-        
-        CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc5.png");
+cocos2d::CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc5.png");
         titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 65));
         spbg->addChild(titlesp);
         
@@ -729,12 +727,10 @@ void ShopMenu::purchaseCancelled(int pid)
     {
         //just cancel the modal
         mMask->removeAllChildrenWithCleanup(true);
-        
-        CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
+cocos2d::CCSprite *spbg = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc.png");
         spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
         mMask->addChild(spbg);
-        
-        CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc4.png");
+cocos2d::CCSprite *titlesp = cocos2d::CCSprite::createWithSpriteFrameName("sp-tc4.png");
         titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 65));
         spbg->addChild(titlesp);
         
@@ -752,23 +748,24 @@ void ShopMenu::modalOver()
 
 SEL_MenuHandler ShopMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ShopMenu::onBack);
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMoreCoins", ShopMenu::onMoreCoins);
-
+    /*TODO:Uncomment this
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ShopMenu::onBack);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMoreCoins", ShopMenu::onMoreCoins);
+*/
     //CCLog(pSelectorName);
     return NULL;
 }
 
-SEL_CCControlHandler ShopMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   ShopMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
 {
-  CCLog("Control");
+cocos2d::CCLog("Control");
   return NULL;
 }
 bool ShopMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
-   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", CCNode *, mList);
-   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu *, mMenu);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", CCNode *, mList);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu *, mMenu);
 
   //CCLog(pMemberVariableName);
 

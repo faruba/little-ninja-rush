@@ -15,15 +15,14 @@ class Scene3: public SceneInterface
     virtual void release(){};
 
     RingTile *mTiles;
-    CCNode *mFront;
-    CCNode *mBg;
+cocos2d::CCNode *mFront;
+cocos2d::CCNode *mBg;
     int mTileCount;
     int mBlock;
-    
-    CCSprite *mFronts[8];
-    CCSprite *mClouds[2]; 
-    CCSprite *mFarHouse[9];
-    CCSprite *mHills[3];
+cocos2d::CCSprite *mFronts[8];
+cocos2d::CCSprite *mClouds[2]; 
+cocos2d::CCSprite *mFarHouse[9];
+cocos2d::CCSprite *mHills[3];
 
 };
 #endif

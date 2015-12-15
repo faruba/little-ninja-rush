@@ -24,8 +24,7 @@ public:
   virtual bool init();  
 
   LNR_SCENE_METHOD(TitleMenu);
-
-  CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TitleMenu, create);
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TitleMenu, create);
   virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
   virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
   virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
@@ -63,28 +62,27 @@ public:
   void doneOutro();
 
 private:
-  CCSprite *mStar1;
-  CCSprite *mStar2;
-  CCSprite *mStar3;
-  CCSprite *mStar4;
-  CCSprite *mStar5;
-  CCSprite *mCloud1;
-  CCSprite *mCloud2;
-  CCMenu *mMainButton;
-  CCMenu *mMiniButton;
-  CCSprite *mLogo;
-  CCNode *mSakuraNode;
-  CCNode *mSakuraNode2;
-  CCNode *mEnemies;
-  CCLayerColor *mMask;
-  CCArray *mSakura;
+cocos2d::CCSprite *mStar1;
+cocos2d::CCSprite *mStar2;
+cocos2d::CCSprite *mStar3;
+cocos2d::CCSprite *mStar4;
+cocos2d::CCSprite *mStar5;
+cocos2d::CCSprite *mCloud1;
+cocos2d::CCSprite *mCloud2;
+cocos2d::CCMenu *mMainButton;
+cocos2d::CCMenu *mMiniButton;
+cocos2d::CCSprite *mLogo;
+cocos2d::CCNode *mSakuraNode;
+cocos2d::CCNode *mSakuraNode2;
+cocos2d::CCNode *mEnemies;
+cocos2d::CCLayerColor *mMask;
+cocos2d::CCArray *mSakura;
   float mWind;
   float mWindx;
-  CCSprite *mNew;
-  CCSprite *mCNew;
-  CCMenuItemImage *mTwitter;
-
-  CCMenuItemImage *mOption;
+cocos2d::CCSprite *mNew;
+cocos2d::CCSprite *mCNew;
+cocos2d::CCMenuItemImage *mTwitter;
+cocos2d::CCMenuItemImage *mOption;
 
   GTAnimatedSprite *mAni[RUN];
   float mSpeed[RUN];
@@ -95,8 +93,8 @@ private:
   PopOption *mOpt;
 
   //intro&outro
-  CCNode *mSceneIntro;
-  CCScene *mNewScene;
+cocos2d::CCNode *mSceneIntro;
+cocos2d::CCScene *mNewScene;
   bool mIntroFlag;
 };
 
@@ -116,9 +114,8 @@ public:
   virtual bool init();  
 
   bool Update(float, float);
-
-  CCNode *mParent;
-  CCSprite *mSprite;
+cocos2d::CCNode *mParent;
+cocos2d::CCSprite *mSprite;
   //float mFlipX;
   float mWindX;
   float mSpeed;

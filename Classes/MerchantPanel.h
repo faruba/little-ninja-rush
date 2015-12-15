@@ -29,28 +29,28 @@ class MerchantPanel:
     void gainShurikenPiece();
     void gainKatanaPiece();
     void gainSpecialPiece();
-    CCNode *mMerchantbox;
+cocos2d::CCNode *mMerchantbox;
 
     int mIC1;
     int mIC2;
     int mIC3;
 
     //auto assign
-    CCMenuItemImage *mBuyItem1;
-    CCMenuItemImage *mBuyItem2;
-    CCMenuItemImage *mBuyItem3;
-    CCSprite *mBody;
-    CCSprite *mHead;
-    CCLabelBMFont *mItemCount1;
-    CCLabelBMFont *mItemCount2;
-    CCLabelBMFont *mItemCount3;
-    CCLabelBMFont *mCoins;
-    CCSprite *mTalkbox;
-    CCSprite *mTalkText;
-    CCSprite *mItem1;
-    CCSprite *mItem2;
-    CCSprite *mItem3;
-    CCSprite *mItem4;
+cocos2d::CCMenuItemImage *mBuyItem1;
+cocos2d::CCMenuItemImage *mBuyItem2;
+cocos2d::CCMenuItemImage *mBuyItem3;
+cocos2d::CCSprite *mBody;
+cocos2d::CCSprite *mHead;
+cocos2d::CCLabelBMFont *mItemCount1;
+cocos2d::CCLabelBMFont *mItemCount2;
+cocos2d::CCLabelBMFont *mItemCount3;
+cocos2d::CCLabelBMFont *mCoins;
+cocos2d::CCSprite *mTalkbox;
+cocos2d::CCSprite *mTalkText;
+cocos2d::CCSprite *mItem1;
+cocos2d::CCSprite *mItem2;
+cocos2d::CCSprite *mItem3;
+cocos2d::CCSprite *mItem4;
 
 
     void onMerchantClose();

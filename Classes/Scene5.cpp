@@ -14,14 +14,14 @@
 
 void Scene5::loadScene() 
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     cache->addSpriteFramesWithFile("scene9.plist");
     cache->addSpriteFramesWithFile("scene10.plist");
 }
 
 void Scene5::unloadScene() 
 {
-    CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
     cache->removeSpriteFramesFromFile("scene9.plist");
     cache->removeSpriteFramesFromFile("scene10.plist");
     unloadTextureFromeSpriteFrameFile("scene9.plist");

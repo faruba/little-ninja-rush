@@ -8,10 +8,9 @@ class Msg:public CCObject
     static Msg* msg(cocos2d::CCNode* tar, SEL_CallFuncND sel, CCObject* obj);
     CREATE_FUNC(Msg);
     virtual bool init(){return true;};
-    
-    CCNode* target;
+cocos2d::CCNode* target;
     SEL_CallFuncND sel;
-    CCObject* obj;
+cocos2d::CCObject* obj;
 };
 
 class MessageManager:public GameObject{
@@ -23,9 +22,8 @@ class MessageManager:public GameObject{
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-
-    CCLock *mLock;
-    CCArray *mMsg;
+//cocos2d::CCLock *mLock;
+cocos2d::CCArray *mMsg;
 
 
     void clearMsg();

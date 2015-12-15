@@ -41,8 +41,8 @@ void Pumpkin::onCreate()
     
     //init parameters
     mTargetPos = ccp(50, 210);
-    mTargetSpeed = ccpMult(ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(-45)), 100);
-    mPumpkinSpeed = ccpMult(ccpForAngle(cocos2d::CC_DEGREES_TO_RADIANS(-90)), 50);
+    mTargetSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-45)), 100);
+    mPumpkinSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-90)), 50);
     
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkinstart.mp3").c_str());
     

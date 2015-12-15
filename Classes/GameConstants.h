@@ -1,5 +1,6 @@
 #ifndef ___CLASSES_GAMECONSTANTS_H_
 #define ___CLASSES_GAMECONSTANTS_H_
+
 //游戏常数
 #define PI (3.14159f)
 

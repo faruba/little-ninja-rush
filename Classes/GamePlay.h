@@ -19,10 +19,8 @@ class GamePlay :
   public:
     ~GamePlay();
     virtual bool init();
-
-    CCScene* scene();
-
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GamePlay, create);
+cocos2d::CCScene* scene();
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GamePlay, create);
 
     virtual void onEnter();
     virtual void update(float);
@@ -49,7 +47,7 @@ class GamePlay :
 
     void initGamePlay(int mod);
     void resetGame();
-    CCLayer* ui();
+cocos2d::CCLayer* ui();
 
     void fixGravity(float val);
 
@@ -57,7 +55,7 @@ class GamePlay :
 
 
     //游戏控制
-    void pause();
+    void pause(cocos2d::Ref*);
     void resume();
     void restart();
     void exit();
@@ -111,12 +109,12 @@ class GamePlay :
     void stepDust(cocos2d::Point pos);
     cocos2d::Point mTouchBegin;
     bool  mTouchProcessed;
-    CCLayer *mUI;
-    CCMenu *mMenu;//菜单项目
+cocos2d::CCLayer *mUI;
+cocos2d::CCMenu *mMenu;//菜单项目
 
     float mFeverAdd;//因为fever游戏加速的程度
     int mFeverBegin;
-    CCLayerColor *mFeverMask;
+cocos2d::CCLayerColor *mFeverMask;
     float mFeverMaskTimer;
 
     float mScheduleSpeedOrigin;
@@ -127,7 +125,7 @@ class GamePlay :
     int   mScheduleSpeedCounter;
 
     float mScheduleSpellRelease;
-    CCNode*      mScheduleReleaseTarget;
+cocos2d::CCNode*      mScheduleReleaseTarget;
     SEL_CallFunc mScheduleReleaseSelector;
 
     float mScheduleMaskTime;
@@ -139,8 +137,8 @@ class GamePlay :
     cocos2d::Point mVibrateDir;
 
     //intro&outro
-    CCNode *mSceneIntro;
-    CCScene *mNewScene;
+cocos2d::CCNode *mSceneIntro;
+cocos2d::CCScene *mNewScene;
     bool mIntroFlag;
 
     //CDSoundSource *mFeverLoop;
@@ -149,17 +147,17 @@ class GamePlay :
     int mFeverLevel;
     GameObjectManager *manager;
     GameScene *tiles;
-    CCArray *enemies;
-    CCArray *darts;
+cocos2d::CCArray *enemies;
+cocos2d::CCArray *darts;
     MainRole *mainrole;
     MainRole *mainrole2;//分身
     GameInterface *interface;
     int state;//游戏状态
 
     int mode;//游戏模式
-    CCLayerColor *mask;
-    CCLayerColor *spellMask;
-    CCSpriteBatchNode *footprints;
+cocos2d::CCLayerColor *mask;
+cocos2d::CCLayerColor *spellMask;
+cocos2d::CCSpriteBatchNode *footprints;
 
     //Arcade Mode
     ArcadeMode *arcade;

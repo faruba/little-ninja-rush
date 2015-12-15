@@ -19,9 +19,8 @@ class PumpkinFire:
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-
-    CCNode* mParent;
-    CCSprite* mSprite;
+cocos2d::CCNode* mParent;
+cocos2d::CCSprite* mSprite;
     bool mIsEnemy;
 
     bool mRemoved;

@@ -19,8 +19,8 @@ class LoadItem:
   public CCObject
 {
   public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(LoadItem, create);
-    CCString* stringparam;
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(LoadItem, create);
+cocos2d::CCString* stringparam;
     loadfunc  loadmethod;
 
     static LoadItem* itemWithInfo(const char* param, loadfunc func);
@@ -32,10 +32,8 @@ class GTLoadList:
 {
   public:
     virtual bool init();
-
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GTLoadList, create);
-
-    CCArray *mList;
+CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GTLoadList, create);
+cocos2d::CCArray *mList;
     int mLoadIndex;
     //CFTimeInterval mMaxInterval;
     float mMaxInterval;

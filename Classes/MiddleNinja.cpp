@@ -25,7 +25,7 @@ MiddleNinja* MiddleNinja::role(cocos2d::CCNode * parent)
 
 void MiddleNinja::onCreate() 
 {
-    int y = cocos2d::CCRANDOM_0_1()*RESPAWN_Y;
+    int y = CCRANDOM_0_1()*RESPAWN_Y;
     mTargetPos.x = UniversalFit::sharedUniversalFit()->playSize.width*(0.75f*CCRANDOM_0_1());
     mTargetPos.y = RESPAWN_YMIN + y;
     //计算起跳点
@@ -190,7 +190,7 @@ void MiddleNinja::onUpdate(float delta)
                     else {
                         cocos2d::Point dir = ccpNormalize(ccpSub(target, this->center()));
                         float angle = ccpToAngle(dir);
-                        angle += cocos2d::CC_DEGREES_TO_RADIANS(-MNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*MNINJA_ACCURATE)*CCRANDOM_0_1();
+                        angle += CC_DEGREES_TO_RADIANS(-MNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*MNINJA_ACCURATE)*CCRANDOM_0_1();
                         dir = ccpForAngle(angle);
                         play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), dir, -2, mParent)));
                     }

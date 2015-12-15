@@ -36,16 +36,15 @@ class TutorialDirector:
     float mPosx;
     int mCount;
     TutorialPuppet *mDummies[3];
-    CCLabelTTF *mTeachText;
+cocos2d::CCLabelTTF *mTeachText;
 
     int cacheDartId;
     int cacheBladeId;
     int cacheSpellId;
-
-    CCLayerColor *mLayer;
-    CCNode *mAnimateNode;
+cocos2d::CCLayerColor *mLayer;
+cocos2d::CCNode *mAnimateNode;
     GTAnimatedSprite *mAnimateSprite;
-    CCMenu *mMenu;
+cocos2d::CCMenu *mMenu;
 
 
     void begin();

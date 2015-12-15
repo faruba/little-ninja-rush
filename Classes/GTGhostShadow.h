@@ -5,7 +5,7 @@
 
 ;
 
-class GTGhostShadow:public CCNode
+class GTGhostShadow:public cocos2d::CCNode
 {
   public:
     virtual bool init();
@@ -15,8 +15,7 @@ class GTGhostShadow:public CCNode
     GTAnimatedSprite *mCopy;
     float mInterval;
     int mNumber;
-
-    CCSprite **mShadows;
+cocos2d::CCSprite **mShadows;
     int mIndex;
     int mCount;
     float mTimer;

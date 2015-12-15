@@ -15,19 +15,18 @@ class Scene7: public SceneInterface{
     virtual void release(){};
 
     RingTile *mTiles;
-    CCNode *mFront;
-    CCNode *mFBg;
-    CCNode *mBg;
-    
-    CCNode *mWhiteTrees;
-    CCSprite *mSnowSlopes[3];
-    CCNode *mWhiteTrees2;
-    CCNode *mGreenTrees2;
-    CCSprite *mHouse;
-    CCNode *mGreenTrees;
-    CCSprite *mGrass[8];
-    CCNode *mDecos;
-    CCNode *mFronts;
+cocos2d::CCNode *mFront;
+cocos2d::CCNode *mFBg;
+cocos2d::CCNode *mBg;
+cocos2d::CCNode *mWhiteTrees;
+cocos2d::CCSprite *mSnowSlopes[3];
+cocos2d::CCNode *mWhiteTrees2;
+cocos2d::CCNode *mGreenTrees2;
+cocos2d::CCSprite *mHouse;
+cocos2d::CCNode *mGreenTrees;
+cocos2d::CCSprite *mGrass[8];
+cocos2d::CCNode *mDecos;
+cocos2d::CCNode *mFronts;
     
     float mWhiteLen;
     float mWhiteLen2;
@@ -37,8 +36,8 @@ class Scene7: public SceneInterface{
     float mFrontLen;
     
     //snow
-    CCNode *mSakuraNode;
-    CCArray *mSakura;
+cocos2d::CCNode *mSakuraNode;
+cocos2d::CCArray *mSakura;
     float mWind;
     float mWindx;
 };
@@ -52,8 +51,8 @@ class Snow :
     bool update(float delta, float wind);
 
     static Snow* snow(cocos2d::CCNode* parent);
-    CCNode *mParent;
-    CCSprite *mSprite;
+cocos2d::CCNode *mParent;
+cocos2d::CCSprite *mSprite;
     float mWindX;
     float mSpeed;
     float mSpeedY;
