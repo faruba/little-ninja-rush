@@ -23,8 +23,7 @@ class TitleMenu :
 public:
   virtual bool init();  
 
-  LNR_SCENE_METHOD(TitleMenu);
-CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TitleMenu, create);
+  CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TitleMenu, create);
   virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
   virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
   virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
@@ -35,19 +34,19 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TitleMenu, create);
 
 //hammer android:不应该是private
 //private:
-  void onPlayClassic();
-  void onPlayArcade();
-  void onCollections();
-  void onStore();
-  void onFacebook();
-  void onTwitter();
-  void onLeaderboard();
-  void onAchievement();
-  void onShareCode();
-  void onExtra();
-  void onShowObjectives();
-  void onOption();
-  void onMoreFun();
+  void onPlayClassic(cocos2d::Ref *);
+  void onPlayArcade(cocos2d::Ref *);
+  void onCollections(cocos2d::Ref *);
+  void onStore(cocos2d::Ref *);
+  void onFacebook(cocos2d::Ref *);
+  void onTwitter(cocos2d::Ref *);
+  void onLeaderboard(cocos2d::Ref *);
+  void onAchievement(cocos2d::Ref *);
+  void onShareCode(cocos2d::Ref *);
+  void onExtra(cocos2d::Ref *);
+  void onShowObjectives(cocos2d::Ref *);
+  void onOption(cocos2d::Ref *);
+  void onMoreFun(cocos2d::Ref *);
   void showObjs();
   void hideObjs();
   void showOpt(int typ);

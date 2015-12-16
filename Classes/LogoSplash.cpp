@@ -104,7 +104,6 @@ void LogoSplash::load()
 {
   cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("items.plist");
 
-
   Tasks::loadObjectivesFromFile();
   Tasks::loadAchievementsFromFile();
   Tasks::loadStatisticsFromFile();
@@ -116,5 +115,5 @@ void LogoSplash::load()
 
 void LogoSplash::done() {
   GameTool::StopSound(mSoundId);
-  cocos2d::CCDirector::sharedDirector()->replaceScene(TitleMenu::scene());
+  cocos2d::Director::getInstance()->replaceScene(GameTool::scene<TitleMenu>());
 } 

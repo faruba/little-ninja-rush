@@ -27,6 +27,22 @@ class GameTool {
     static void StopSound(const int id) {
       CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(id);
     }
+
+    template<typename LayerType>
+      static cocos2d::Scene* scene() { 
+        cocos2d::Scene *ret = cocos2d::Scene::create();
+        LayerType *tm = LayerType::create();
+        //ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
+        ret->setAnchorPoint(cocos2d::ccp(0, 0));
+        //ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
+        //CEClipedNode *clip = CEClipedNode::create();
+        //clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
+        //clip->addChild(tm);
+        //ret->addChild(clip);
+        ret->addChild(tm);
+        return ret;
+
+      }
 };
 
 
@@ -49,15 +65,10 @@ CFAbsoluteTime CFAbsoluteTimeGetCurrent();
 
 #define LNR_SCENE_METHOD(T) static cocos2d::Scene* scene() { \
 cocos2d::Scene *ret = cocos2d::Scene::create(); \
-    T *tm = T::create(); \
-    ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor); \
-    ret->setAnchorPoint(cocos2d::ccp(0, 0)); \
-    ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset); \
-    CEClipedNode *clip = CEClipedNode::create(); \
-    clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect)); \
-    clip->addChild(tm); \
-    ret->addChild(clip); \
-    return ret; \
+T *tm = T::create(); \
+ret->setAnchorPoint(cocos2d::ccp(0, 0)); \
+ret->addChild(tm); \
+return ret; \
 }
 
 #define LNR_GET_TOUCH_POS \

@@ -424,7 +424,7 @@ void SelectMenu::onBack()
   if( !mIntroFlag )
   {
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
-    setSceneOutro(TitleMenu::scene());
+    setSceneOutro(GameTool::scene<TitleMenu>());
   }
 }
 

@@ -401,7 +401,7 @@ void ShopMenu::onBack()
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
     if( gNavBack == 0 )
     {
-        setSceneOutro(TitleMenu::scene());
+        setSceneOutro(GameTool::scene<TitleMenu>());
     }
     else {
         setSceneOutro(SelectMenu::scene());

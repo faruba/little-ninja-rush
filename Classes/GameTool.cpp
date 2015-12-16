@@ -104,30 +104,19 @@ cocos2d::CCTextureCache::sharedTextureCache()->removeTextureForKey(texname->getC
 //    return renderer->getUIImage();//iphone 5
 //}
 
-cocos2d::CCSequence *createScaleSequence(float fDuration[], float fScale[], int count)
-{
-cocos2d::CCArray *pArr = cocos2d::CCArray::create();
-  for (int i = 0; i < count; i++) {
-    pArr->addObject(cocos2d::CCScaleTo::create(fDuration[i],fScale[i]));
-
-  }
-  //return (cocos2d::CCSequence*)CCSequence::create(pArr);
-    return nullptr;
-}
-cocos2d::CCNode *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, Ref *target)
+cocos2d::Node *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, Ref *target)
 {
   /* Create an autorelease CCNodeLoaderLibrary. */
-//cocos2d::CCNodeLoaderLibrary * ccnll = cocos2d::CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
-//  ccnll->registerCCNodeLoader(pClassName, pCCNodeLoader);
-//  /* Create an autorelease CCBReader. */
-//  cocos2d::extension::CCBReader * ccbReader = new cocos2d::extension::CCBReader(ccnll);
+  cocosbuilder::NodeLoaderLibrary * ccnll = cocosbuilder::NodeLoaderLibrary::newDefaultNodeLoaderLibrary();
+  ccnll->registerNodeLoader(pClassName, pCCNodeLoader);
+  /* Create an autorelease CCBReader. */
+  cocosbuilder::CCBReader * ccbReader = new cocosbuilder::CCBReader(ccnll);
 
-//  /* Read a ccbi file. */
-//cocos2d::CCNode * node = ccbReader->readNodeGraphFromFile(szCCBI, target);
-//  ccbReader->release();
+  /* Read a ccbi file. */
+  cocos2d::Node * node = ccbReader->readNodeGraphFromFile(szCCBI, target);
+  ccbReader->release();
 
- // return node;
-    return nullptr;
+  return node;
 }
 
 void doSceneIntro(cocos2d::CCNode *&mSceneIntro, CCNode *target)

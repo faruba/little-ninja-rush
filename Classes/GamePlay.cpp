@@ -1072,7 +1072,7 @@ void GamePlay::exit()
 {
     this->resume();
     SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
-    this->setSceneOutro(Loading::loadTo(TitleMenu::scene(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false));
+    this->setSceneOutro(Loading::loadTo(GameTool::scene<TitleMenu>(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false));
 }
 
 void GamePlay::change()

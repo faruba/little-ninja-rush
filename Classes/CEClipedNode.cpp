@@ -4,7 +4,7 @@
 void CEClipedNode::setClipRect(cocos2d::CCRect *rect)
 {
   if (NULL == rect) return;
-    
+    return;
   float factor = cocos2d::CCDirector::sharedDirector()->getContentScaleFactor();
   clipRectInPixel = *rect;
   clipRectInPixel.origin.x *= factor;
