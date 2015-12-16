@@ -15,14 +15,14 @@
 
 void Scene6::loadScene() 
 {
-cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
     cache->addSpriteFramesWithFile("scene11.plist");
     cache->addSpriteFramesWithFile("scene12.plist");
 }
 
 void Scene6::unloadScene() 
 {
-cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
     cache->removeSpriteFramesFromFile("scene11.plist");
     cache->removeSpriteFramesFromFile("scene12.plist");
     unloadTextureFromeSpriteFrameFile("scene11.plist");
@@ -42,50 +42,50 @@ void Scene6::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     //增加前景
     for( int i=0; i<4; ++i)
     {
-        mFronts[i] = cocos2d::CCSprite::createWithSpriteFrameName("hw-qj.png");
+        mFronts[i] = cocos2d::Sprite::createWithSpriteFrameName("hw-qj.png");
         mFronts[i]->setAnchorPoint(cocos2d::ccp(0, 0));
         mFronts[i]->setPosition(cocos2d::ccp(mFronts[i]->getContentSize().width*i, 0));
         mFront->addChild(mFronts[i]);
     }
     //增加静态背景
     {
-cocos2d::CCSprite *sbg = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg.png");
+cocos2d::Sprite *sbg = cocos2d::Sprite::createWithSpriteFrameName("hw-bg.png");
         sbg->setAnchorPoint(cocos2d::ccp(0, 0));
         sbg->setPosition(cocos2d::ccp(0, 0));
         sbg->setScaleX(UniversalFit::sharedUniversalFit()->playSize.width/30);
         mBg->addChild(sbg, 0);
-cocos2d::CCSprite *moon = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-moon.png");
+cocos2d::Sprite *moon = cocos2d::Sprite::createWithSpriteFrameName("hw-bg-moon.png");
         moon->setPosition(cocos2d::ccp(324, 301));
         mBg->addChild(moon, 1);
-cocos2d::CCSprite *star1 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-star1.png");
+cocos2d::Sprite *star1 = cocos2d::Sprite::createWithSpriteFrameName("hw-bg-star1.png");
         star1->setPosition(cocos2d::ccp(110, 284));
         mBg->addChild(star1, 1);
-cocos2d::CCSprite *star2 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-star2.png");
+cocos2d::Sprite *star2 = cocos2d::Sprite::createWithSpriteFrameName("hw-bg-star2.png");
         star2->setPosition(cocos2d::ccp(78, 305));
         mBg->addChild(star2, 1);
-cocos2d::CCSprite *star3 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-star1.png");
+cocos2d::Sprite *star3 = cocos2d::Sprite::createWithSpriteFrameName("hw-bg-star1.png");
         star3->setPosition(cocos2d::ccp(221, 278));
         mBg->addChild(star3, 1);
-cocos2d::CCSprite *star4 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-star2.png");
+cocos2d::Sprite *star4 = cocos2d::Sprite::createWithSpriteFrameName("hw-bg-star2.png");
         star4->setPosition(cocos2d::ccp(386, 284));
         mBg->addChild(star4, 1);
     }
     
     //增加山的背景
     {
-        mMountains[0] = cocos2d::CCSprite::createWithSpriteFrameName("hw-hj5-1.png");
+        mMountains[0] = cocos2d::Sprite::createWithSpriteFrameName("hw-hj5-1.png");
         mMountains[0]->setAnchorPoint(cocos2d::ccp(0, 0));
         mMountains[0]->setPosition(cocos2d::ccp(0, 43));
         mBg->addChild(mMountains[0], 2);
-        mMountains[1] = cocos2d::CCSprite::createWithSpriteFrameName("hw-hj5-2.png");
+        mMountains[1] = cocos2d::Sprite::createWithSpriteFrameName("hw-hj5-2.png");
         mMountains[1]->setAnchorPoint(cocos2d::ccp(0, 0));
         mMountains[1]->setPosition(cocos2d::ccp(mMountains[0]->getContentSize().width, 43));
         mBg->addChild(mMountains[1], 2);
-        mMountains[2] = cocos2d::CCSprite::createWithSpriteFrameName("hw-hj5-1.png");
+        mMountains[2] = cocos2d::Sprite::createWithSpriteFrameName("hw-hj5-1.png");
         mMountains[2]->setAnchorPoint(cocos2d::ccp(0, 0));
         mMountains[2]->setPosition(cocos2d::ccp(mMountains[0]->getContentSize().width + mMountains[1]->getContentSize().width, 43));
         mBg->addChild(mMountains[2], 2);
-        mMountains[3] = cocos2d::CCSprite::createWithSpriteFrameName("hw-hj5-2.png");
+        mMountains[3] = cocos2d::Sprite::createWithSpriteFrameName("hw-hj5-2.png");
         mMountains[3]->setAnchorPoint(cocos2d::ccp(0, 0));
         mMountains[3]->setPosition(cocos2d::ccp(mMountains[0]->getContentSize().width + mMountains[1]->getContentSize().width + mMountains[2]->getContentSize().width, 43));
         mBg->addChild(mMountains[3], 2);
@@ -97,7 +97,7 @@ cocos2d::CCSprite *star4 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-s
         mSmallDistance = 0;
         for(int i=0; i<4; ++i)
         {
-            mSmallTrees[i] = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("hw-hj4-%d.png", randomInt(6)+1)->getCString());
+            mSmallTrees[i] = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("hw-hj4-%d.png", randomInt(6)+1)->getCString());
             mSmallTrees[i]->setAnchorPoint(cocos2d::ccp(0.5f, 0));
             mSmallTrees[i]->setPosition(cocos2d::ccp(mSmallDistance, 58));
             mSmallDistance += 90 + 110*CCRANDOM_0_1();
@@ -109,7 +109,7 @@ cocos2d::CCSprite *star4 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-s
     {
         for( int i=0; i<3; ++i)
         {
-            mSmoke1[i] = cocos2d::CCSprite::createWithSpriteFrameName("hw-hj3-1.png");
+            mSmoke1[i] = cocos2d::Sprite::createWithSpriteFrameName("hw-hj3-1.png");
             mSmoke1[i]->setAnchorPoint(cocos2d::ccp(0, 0));
             mSmoke1[i]->setPosition(cocos2d::ccp(mSmoke1[i]->getContentSize().width*i, 60));
             mBg->addChild(mSmoke1[i], 4);
@@ -123,7 +123,7 @@ cocos2d::CCSprite *star4 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-s
         float gap[] = {30,125, 40, 25, 30,139, 22, 40,112, 45, 32,131, 55, 32};
         for(int i=0; i<14; ++i)
         {
-            mSmokedObjs[i] = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("hw-smk-%d.png", seq[i])->getCString());
+            mSmokedObjs[i] = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("hw-smk-%d.png", seq[i])->getCString());
             mSmokedObjs[i]->setAnchorPoint(cocos2d::ccp(0, 0));
             mSmokedObjs[i]->setPosition(cocos2d::ccp(mSmokedDistance, 70));
             mSmokedDistance += gap[i];
@@ -135,7 +135,7 @@ cocos2d::CCSprite *star4 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-s
     {
         for( int i=0; i<3; ++i)
         {
-            mSmoke2[i] = cocos2d::CCSprite::createWithSpriteFrameName("hw-hj2-1.png");
+            mSmoke2[i] = cocos2d::Sprite::createWithSpriteFrameName("hw-hj2-1.png");
             mSmoke2[i]->setAnchorPoint(cocos2d::ccp(0, 0));
             mSmoke2[i]->setPosition(cocos2d::ccp(mSmoke1[i]->getContentSize().width*i, 53));
             mBg->addChild(mSmoke2[i], 7);
@@ -149,7 +149,7 @@ cocos2d::CCSprite *star4 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-s
         float gap[] = {30,135, 40, 25, 30,129, 22, 40,142, 45, 32,121, 55, 32};
         for(int i=0; i<14; ++i)
         {
-            mFrontObjs[i] = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("hw-smk-%d.png", seq[i])->getCString());
+            mFrontObjs[i] = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("hw-smk-%d.png", seq[i])->getCString());
             mFrontObjs[i]->setAnchorPoint(cocos2d::ccp(0, 0));
             mFrontObjs[i]->setPosition(cocos2d::ccp(mFrontDistance, 66));
             mFrontDistance += gap[i];
@@ -160,7 +160,7 @@ cocos2d::CCSprite *star4 = cocos2d::CCSprite::createWithSpriteFrameName("hw-bg-s
     //增加背景0
     for( int i=0; i<5; ++i)
     {
-        mBgs1[i] = cocos2d::CCSprite::createWithSpriteFrameName("hw-hj.png");
+        mBgs1[i] = cocos2d::Sprite::createWithSpriteFrameName("hw-hj.png");
         mBgs1[i]->setAnchorPoint(cocos2d::ccp(0, 0));
         mBgs1[i]->setPosition(cocos2d::ccp(mBgs1[i]->getContentSize().width*i, 57));
         mBg->addChild(mBgs1[i], 10);
@@ -203,7 +203,7 @@ void Scene6::update(float delta)
             np.x -= woff;
             if( np.x + mSmallTrees[i]->getContentSize().width < 0 )
             {
-                mSmallTrees[i]->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(cocos2d::CCString::createWithFormat("hw-hj4-%d.png", randomInt(6)+1)->getCString()));
+                mSmallTrees[i]->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(cocos2d::CCString::createWithFormat("hw-hj4-%d.png", randomInt(6)+1)->getCString()));
                 np.x = mSmallDistance;
                 if( np.x < UniversalFit::sharedUniversalFit()->playSize.width + 50 )
                 {

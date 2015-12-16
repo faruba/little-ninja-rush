@@ -14,12 +14,12 @@
 #define OP_RESET (0)
 
 class GamePlay : 
-  public cocos2d::CCLayer
+  public cocos2d::Layer
 {
   public:
     ~GamePlay();
     virtual bool init();
-cocos2d::CCScene* scene();
+cocos2d::Scene* scene();
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GamePlay, create);
 
     virtual void onEnter();
@@ -47,7 +47,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GamePlay, create);
 
     void initGamePlay(int mod);
     void resetGame();
-cocos2d::CCLayer* ui();
+cocos2d::Layer* ui();
 
     void fixGravity(float val);
 
@@ -96,7 +96,7 @@ cocos2d::CCLayer* ui();
 
     //intro&outro
     void setSceneIntro();
-    void setSceneOutro(cocos2d::CCScene* newscene);
+    void setSceneOutro(cocos2d::Scene* newscene);
     void doneOutro();
     void doneIntro();
 
@@ -109,12 +109,12 @@ cocos2d::CCLayer* ui();
     void stepDust(cocos2d::Point pos);
     cocos2d::Point mTouchBegin;
     bool  mTouchProcessed;
-cocos2d::CCLayer *mUI;
+cocos2d::Layer *mUI;
 cocos2d::CCMenu *mMenu;//菜单项目
 
     float mFeverAdd;//因为fever游戏加速的程度
     int mFeverBegin;
-cocos2d::CCLayerColor *mFeverMask;
+cocos2d::LayerColor *mFeverMask;
     float mFeverMaskTimer;
 
     float mScheduleSpeedOrigin;
@@ -138,7 +138,7 @@ cocos2d::CCNode*      mScheduleReleaseTarget;
 
     //intro&outro
 cocos2d::CCNode *mSceneIntro;
-cocos2d::CCScene *mNewScene;
+cocos2d::Scene *mNewScene;
     bool mIntroFlag;
 
     //CDSoundSource *mFeverLoop;
@@ -155,9 +155,9 @@ cocos2d::CCArray *darts;
     int state;//游戏状态
 
     int mode;//游戏模式
-cocos2d::CCLayerColor *mask;
-cocos2d::CCLayerColor *spellMask;
-cocos2d::CCSpriteBatchNode *footprints;
+cocos2d::LayerColor *mask;
+cocos2d::LayerColor *spellMask;
+cocos2d::SpriteBatchNode *footprints;
 
     //Arcade Mode
     ArcadeMode *arcade;

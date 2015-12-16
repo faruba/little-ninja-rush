@@ -3,7 +3,7 @@
 
 void GTLoadSpriteSheet(const char* param, bool isload)
 {
-cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
     if( isload )
     {
 cocos2d::CCLog("load spritesheet (%s)", param);

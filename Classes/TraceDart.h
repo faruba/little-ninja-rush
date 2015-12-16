@@ -22,7 +22,7 @@ class TraceDart:
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-cocos2d::CCSprite *mSprite;
+cocos2d::Sprite *mSprite;
     cocos2d::Point mPos;
     cocos2d::Point mDir;
     float   mTraceTimer;

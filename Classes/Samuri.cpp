@@ -30,7 +30,7 @@ void Samuri::onCreate()
     mParent->addChild(mSprite, LAYER_ROLE);
     
     //add smark
-    //mMark = cocos2d::CCSprite::createWithSpriteFrameName("smark.png");
+    //mMark = cocos2d::Sprite::createWithSpriteFrameName("smark.png");
     //mMark->setAnchorPoint(cocos2d::ccp( 0.5f, 0.5f));
     //mMark->setPosition(cocos2d::ccp( SCREEN_WIDTH/2, SCREEN_HEIGHT/2 ));
     //mParent->addChild(mMark, LAYER_UI);

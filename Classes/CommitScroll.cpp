@@ -62,7 +62,7 @@ CommitScroll* CommitScroll::commitScorll()
 void CommitScroll::onCreate() 
 {
     //hot load
-cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-scroll.plist");
+cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-scroll.plist");
     
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(0, 0, 0), 128, 0);
@@ -133,12 +133,12 @@ void CommitScroll::onUpdate(float delta)
 //cocos2d::Ref* node = NULL;
 //CCARRAY_FOREACH( mRotateCW->getChildren(), node)
 //            {
-//cocos2d::CCSprite *sp = (cocos2d::CCSprite*)node;
+//cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
 //              sp->setOpacity(op);
 //            }
 //CCARRAY_FOREACH( mRotateACW->getChildren(), node)
 //            {
-//cocos2d::CCSprite *sp = (cocos2d::CCSprite*)node;
+//cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
 //              sp->setOpacity(op);
 //            }
 //            if( mTimer > 1 )
@@ -146,12 +146,12 @@ void CommitScroll::onUpdate(float delta)
 //                mLightBack->setOpacity(255);
 //CCARRAY_FOREACH( mRotateCW->getChildren(), node)
 //                {
-//cocos2d::CCSprite *sp = (cocos2d::CCSprite*)node;
+//cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
 //                  sp->setOpacity(255);
 //                }
 //CCARRAY_FOREACH( mRotateACW->getChildren(), node)
 //                {
-//cocos2d::CCSprite *sp = (cocos2d::CCSprite*)node;
+//cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
 //                  sp->setOpacity(255);
 //                }
 //                mFlash->setVisible(false);
@@ -166,7 +166,7 @@ void CommitScroll::onUpdate(float delta)
 //                }
 //                else {
 //                    mScroll->stopAllActions();
-//                    mScroll->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("js_bjzd.png"));
+//                    mScroll->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("js_bjzd.png"));
 //cocos2d::CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.3f, 1.2f);
 //cocos2d::CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.1f, 1.0f);
 //cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
@@ -184,7 +184,7 @@ void CommitScroll::onUpdate(float delta)
 //            else {
 //                mScroll->setVisible(true);
 //                mScroll->stopAllActions();
-//                mScroll->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("js_bjzd.png"));
+//                mScroll->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("js_bjzd.png"));
 //cocos2d::CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.3f, 1.2f);
 //cocos2d::CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.1f, 1.0f);
 //cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
@@ -247,7 +247,7 @@ void CommitScroll::onScroll()
                 if( prize == 1 )
                 {
                     const char *filename = "prize-1.png";
-                    mScroll->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename));
+                    mScroll->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename));
                     mScroll->setScale(0.01f);
 cocos2d::CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.4f, 1.5f);
 cocos2d::CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.2f, 1.0f);
@@ -266,7 +266,7 @@ cocos2d::CCFadeOut *fo1 = cocos2d::CCFadeOut::create(3);
                 mRotateNode->setVisible(true);
                 
                 const char *filename = cocos2d::CCString::createWithFormat("prize-%d.png", prize)->getCString();
-                mScroll->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename));
+                mScroll->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename));
                 mScroll->setScale(0.01f);
 cocos2d::CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.4f, 1.5f);
 cocos2d::CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.2f, 1.0f);
@@ -711,7 +711,7 @@ void CommitScroll::onDestroy()
     }
     
     //hot release
-cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-scroll.plist");
+cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-scroll.plist");
     unloadTextureFromeSpriteFrameFile("ui-scroll.plist");
 }
 
@@ -730,15 +730,15 @@ cocos2d::CCLog("Control");
 }
 bool CommitScroll::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mArrow", CCSprite *, mArrow)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScroll", CCSprite *, mScroll)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mTitle", CCSprite *, mTitle)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mArrow", Sprite *, mArrow)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScroll", Sprite *, mScroll)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mTitle", Sprite *, mTitle)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScrollCount", CCLabelBMFont *, mScrollCount)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateNode", CCNode *, mRotateNode)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mLightBack", CCSprite *, mLightBack)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mLightBack", Sprite *, mLightBack)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateACW", CCNode *, mRotateACW)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateCW", CCNode *, mRotateCW)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mFlash", CCLayerColor *, mFlash)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mFlash", LayerColor *, mFlash)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mItemName", CCLabelTTF *, mItemName)
 
   //  CCLog(pMemberVariableName);

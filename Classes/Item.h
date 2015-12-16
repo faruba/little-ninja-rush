@@ -21,7 +21,7 @@ class Item:public GameObject{
     virtual void onUpdate(float delta);
     virtual void onDestroy();
 cocos2d::CCNode* mParent;
-cocos2d::CCSprite* mSprite;
+cocos2d::Sprite* mSprite;
     cocos2d::Point mPos;
     int     mTid;
     float   mTimer;

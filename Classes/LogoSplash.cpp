@@ -15,10 +15,10 @@
 using namespace cocos2d;
 using namespace CocosDenshion;
 
-cocos2d::CCScene* LogoSplash::scene()
+cocos2d::Scene* LogoSplash::scene()
 {
     // 'scene' is an autorelease object
-cocos2d::CCScene *scene = cocos2d::CCScene::create();
+cocos2d::Scene *scene = cocos2d::Scene::create();
     
     // 'layer' is an autorelease object
     LogoSplash *layer = LogoSplash::create();
@@ -34,7 +34,7 @@ cocos2d::CCScene *scene = cocos2d::CCScene::create();
 // on "init" you need to initialize your instance
 bool LogoSplash::init()
 {
-    if ( !CCLayer::init() )
+    if ( !Layer::init() )
     {
         return false;
     }
@@ -46,11 +46,11 @@ bool LogoSplash::init()
 
 void LogoSplash::onEnter()
 {
-cocos2d::CCLayerColor *bg = cocos2d::CCLayerColor::create(ccc4(255, 255, 255, 255));
+cocos2d::LayerColor *bg = cocos2d::LayerColor::create(ccc4(255, 255, 255, 255));
 
   addChild(bg);
 
-  mLogo = cocos2d::CCSprite::create("logo.png");
+  mLogo = cocos2d::Sprite::create("logo.png");
   mLogo->setOpacity(0);
   mLogo->setPosition(UniversalFit::sharedUniversalFit()->centralPoint);
 
@@ -64,7 +64,7 @@ cocos2d::CCLayerColor *bg = cocos2d::CCLayerColor::create(ccc4(255, 255, 255, 25
   // TODO:
   //trigger check delivery
   //ABDelivery->sharedDelivery()->triggerCheckDelivery();
-cocos2d::CCLayer::onEnter();
+cocos2d::Layer::onEnter();
 }
 
 void LogoSplash::update(float delta)
@@ -121,7 +121,7 @@ void LogoSplash::update(float delta)
 
 void LogoSplash::load()
 {
-cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("items.plist");
+cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("items.plist");
 
 //    //test json reader -->
 //    CCLog("TESTING JSON READER");

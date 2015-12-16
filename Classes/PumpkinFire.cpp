@@ -30,7 +30,7 @@ PumpkinFire* PumpkinFire::dart(cocos2d::Point pos, cocos2d::Point dir, CCNode* p
 
 void PumpkinFire::onCreate() 
 {
-    mSprite = cocos2d::CCSprite::createWithSpriteFrameName("fbh_tail.png");
+    mSprite = cocos2d::Sprite::createWithSpriteFrameName("fbh_tail.png");
     mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.95f));
     mSprite->setPosition(pos);
     mSprite->setRotation(90-CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));

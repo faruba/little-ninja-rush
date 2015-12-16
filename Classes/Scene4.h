@@ -19,8 +19,8 @@ cocos2d::CCNode *mFront;
 cocos2d::CCNode *mBg;
     int mTileCount;
     int mTileState;
-cocos2d::CCSprite *mFronts[6];
-cocos2d::CCSprite *mBgs[6];
-cocos2d::CCSprite *mClouds[2];
+cocos2d::Sprite *mFronts[6];
+cocos2d::Sprite *mBgs[6];
+cocos2d::Sprite *mClouds[2];
 };
 #endif

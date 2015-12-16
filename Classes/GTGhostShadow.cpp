@@ -7,7 +7,7 @@ GTGhostShadow* GTGhostShadow::shadow(GTAnimatedSprite * copy, float interval, in
   ret->mInterval = interval;
   ret->mNumber = number;
   //alloc sprites
-  ret->mShadows = new cocos2d::CCSprite*[number];
+  ret->mShadows = new cocos2d::Sprite*[number];
   return ret;
 }
 
@@ -41,7 +41,7 @@ void GTGhostShadow::syncShadow(float delta)
     else {
       mCount++;
     }
-    mShadows[newid] = cocos2d::CCSprite::createWithSpriteFrame(mCopy->displayFrame());
+    mShadows[newid] = cocos2d::Sprite::createWithSpriteFrame(mCopy->displayFrame());
     mShadows[newid]->setAnchorPoint(mCopy->getAnchorPoint());
     mShadows[newid]->setPosition(mCopy->getPosition());
     mShadows[newid]->setScaleX(mCopy->getScaleX());

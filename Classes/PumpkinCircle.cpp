@@ -97,17 +97,17 @@ void PumpkinCircle::addPumpkin(int type)
     switch (type) {
         case 0:
         {
-            mSprites[mPumpkinCount] = cocos2d::CCSprite::createWithSpriteFrameName("pumpkingold.png");
+            mSprites[mPumpkinCount] = cocos2d::Sprite::createWithSpriteFrameName("pumpkingold.png");
         }
             break;
         case 1:
         {
-            mSprites[mPumpkinCount] = cocos2d::CCSprite::createWithSpriteFrameName("pumpkinsteel.png");
+            mSprites[mPumpkinCount] = cocos2d::Sprite::createWithSpriteFrameName("pumpkinsteel.png");
         }
             break;
         case 2:
         {
-            mSprites[mPumpkinCount] = cocos2d::CCSprite::createWithSpriteFrameName("pumpkinfire.png");
+            mSprites[mPumpkinCount] = cocos2d::Sprite::createWithSpriteFrameName("pumpkinfire.png");
         }
             break;
     }

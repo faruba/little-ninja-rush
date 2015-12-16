@@ -36,12 +36,12 @@ cocos2d::CCString *mDetail;
     bool mIsIAP;
     int mCostNumber;
     //--------------------
-cocos2d::CCSprite *mIcon;
+cocos2d::Sprite *mIcon;
 cocos2d::CCMenu *mMenu;
-cocos2d::CCSprite *mBgButton;
+cocos2d::Sprite *mBgButton;
 cocos2d::CCMenuItemImage *mPurchase;
 cocos2d::CCNode *mCost;
-cocos2d::CCSprite *mTitleSp;
+cocos2d::Sprite *mTitleSp;
 cocos2d::CCLabelTTF *mDetailSp;
 
     FoldItemController *mController;

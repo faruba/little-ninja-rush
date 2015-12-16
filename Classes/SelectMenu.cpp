@@ -34,7 +34,7 @@ using namespace CocosDenshion;
 
 bool SelectMenu::init()
 {
-  if (!CCLayer::init())
+  if (!Layer::init())
     return false;
 
   auto listener = EventListenerTouchOneByOne::create();
@@ -69,28 +69,28 @@ cocos2d::CCNode *ui = createUIByCCBI("menu-select", "SelectMenu", SelectMenuLaye
 
   if( GamePlay::sharedGamePlay()->getGameMode() == MODE_CLASSIC )
   {
-    mTitle->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("classict.png"));
-    mParam->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_jz-life.png"));
+    mTitle->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("classict.png"));
+    mParam->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_jz-life.png"));
   }
   else
   {
-    mTitle->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("arcadet.png"));
-    mParam->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_jz-bouns.png"));
+    mTitle->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("arcadet.png"));
+    mParam->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_jz-bouns.png"));
   }
 
-  mProtraits[0] = cocos2d::CCSprite::createWithSpriteFrameName("xr_main.png");
+  mProtraits[0] = cocos2d::Sprite::createWithSpriteFrameName("xr_main.png");
   mProtraits[0]->setAnchorPoint(cocos2d::ccp(0.5f, 0));
   mProtraits[0]->setVisible(false);
   mHero->addChild(mProtraits[0]);
-  mProtraits[1] = cocos2d::CCSprite::createWithSpriteFrameName("xr_girl.png");
+  mProtraits[1] = cocos2d::Sprite::createWithSpriteFrameName("xr_girl.png");
   mProtraits[1]->setAnchorPoint(cocos2d::ccp(0.5f, 0));
   mProtraits[1]->setVisible(false);
   mHero->addChild(mProtraits[1]);
-  mProtraits[2] = cocos2d::CCSprite::createWithSpriteFrameName("xr_musashi.png");
+  mProtraits[2] = cocos2d::Sprite::createWithSpriteFrameName("xr_musashi.png");
   mProtraits[2]->setAnchorPoint(cocos2d::ccp(0.5f, 0));
   mProtraits[2]->setVisible(false);
   mHero->addChild(mProtraits[2]);
-  mProtraits[3] = cocos2d::CCSprite::createWithSpriteFrameName("xr_cat.png");
+  mProtraits[3] = cocos2d::Sprite::createWithSpriteFrameName("xr_cat.png");
   mProtraits[3]->setAnchorPoint(cocos2d::ccp(0.5f, 0));
   mProtraits[3]->setVisible(false);
   mHero->addChild(mProtraits[3]);
@@ -122,7 +122,7 @@ cocos2d::CCRepeatForever *rrep = cocos2d::CCRepeatForever::create(rseq);
   {
     SimpleAudioEngine::sharedEngine()->playBackgroundMusic("menu.mp3", true);
   }
-cocos2d::CCLayer::onEnter();
+cocos2d::Layer::onEnter();
 }
 void SelectMenu::updateCharacterInfo(int rid)
 {
@@ -132,7 +132,7 @@ void SelectMenu::updateCharacterInfo(int rid)
 //    mHearts->removeAllChildrenWithCleanup(true);
 //    for(int i=0; i<GameData::roleCurrHP(rid); ++i)
 //    {
-//cocos2d::CCSprite *heart = cocos2d::CCSprite::createWithSpriteFrameName("heart.png");
+//cocos2d::Sprite *heart = cocos2d::Sprite::createWithSpriteFrameName("heart.png");
 //      heart->setPosition(cocos2d::ccp(i*(1+heart->getContentSize().width), 0));
 //      mHearts->addChild(heart);
 //    }
@@ -140,7 +140,7 @@ void SelectMenu::updateCharacterInfo(int rid)
 //  }
 //  else
 //  {
-//    mBouns->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(gBouns[rid]));
+//    mBouns->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(gBouns[rid]));
 //    mHearts->setVisible(false);
 //  }
 //  //更新飞镖数
@@ -152,7 +152,7 @@ void SelectMenu::updateCharacterInfo(int rid)
 //  }
 //  for(int i=0; i<GameData::roleCurrDart(rid); ++i)
 //  {
-//cocos2d::CCSprite *dart = cocos2d::CCSprite::createWithSpriteFrameName("ui-dart.png");
+//cocos2d::Sprite *dart = cocos2d::Sprite::createWithSpriteFrameName("ui-dart.png");
 //    dart->setPosition(cocos2d::ccp(i*dartoff, 0));
 //    mDarts->addChild(dart);
 //  }
@@ -165,31 +165,31 @@ void SelectMenu::updateCharacterInfo(int rid)
 //  Katana *ka = (Katana*)GameData::fetchKatanas()->objectAtIndex(blid);
 //  Special *sp = (Special*)GameData::fetchSpecials()->objectAtIndex(spid);
 //
-//  mEquipDart->setDisplayFrame(cocos2d::CCSprite::create(sh->icon->getCString())->displayFrame());
-//  mEquipBlade->setDisplayFrame(cocos2d::CCSprite::create(ka->icon->getCString())->displayFrame());
-//  mEquipSpecial->setDisplayFrame(cocos2d::CCSprite::create(sp->icon->getCString())->displayFrame());
+//  mEquipDart->setDisplayFrame(cocos2d::Sprite::create(sh->icon->getCString())->displayFrame());
+//  mEquipBlade->setDisplayFrame(cocos2d::Sprite::create(ka->icon->getCString())->displayFrame());
+//  mEquipSpecial->setDisplayFrame(cocos2d::Sprite::create(sp->icon->getCString())->displayFrame());
 //
 //  //更新人物显示
 //  switch (rid) {
 //    case 0:
-//      mDesc->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_kt.png"));
-//      mBtnStart->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("xr_st1.png"));
-//      mBtnStart->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("xr_st1.png"));
+//      mDesc->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_kt.png"));
+//      mBtnStart->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st1.png"));
+//      mBtnStart->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st1.png"));
 //      break;
 //    case 1:
-//      mDesc->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_sr.png"));
-//      mBtnStart->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("xr_st2.png"));
-//      mBtnStart->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("xr_st2.png"));
+//      mDesc->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_sr.png"));
+//      mBtnStart->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st2.png"));
+//      mBtnStart->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st2.png"));
 //      break;
 //    case 2:
-//      mDesc->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_ms.png"));
-//      mBtnStart->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("xr_st3.png"));
-//      mBtnStart->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("xr_st3.png"));
+//      mDesc->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_ms.png"));
+//      mBtnStart->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st3.png"));
+//      mBtnStart->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st3.png"));
 //      break;
 //    case 3:
-//      mDesc->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_mr.png"));
-//      mBtnStart->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("xr_st4.png"));
-//      mBtnStart->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("xr_st4.png"));
+//      mDesc->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_mr.png"));
+//      mBtnStart->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st4.png"));
+//      mBtnStart->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st4.png"));
 //      break;
 //  }
 //
@@ -208,7 +208,7 @@ void SelectMenu::updateCharacterInfo(int rid)
 //  if( GameRecord::sharedGameRecord()->char_contract[rid] == 0 )
 //  {
 //    mClickMe->setVisible(true);
-//cocos2d::CCSprite *hire = cocos2d::CCSprite::createWithSpriteFrameName("hire.png");
+//cocos2d::Sprite *hire = cocos2d::Sprite::createWithSpriteFrameName("hire.png");
 //    mStartPos->addChild(hire);
 //  }
 //  else {
@@ -220,7 +220,7 @@ void SelectMenu::updateCharacterInfo(int rid)
 //    mStartPos->addChild(mStart);
 //  }
 //
-//  mHeroDesc->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(gHeroDesc[rid]));
+//  mHeroDesc->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(gHeroDesc[rid]));
 }
 
 void SelectMenu::updateAngle()
@@ -352,7 +352,7 @@ void SelectMenu::update(float delta)
 //    cm.x = mp.x - 10;
 //    mCoinMark->setPosition(cm);
   }
-cocos2d::CCLayer::update(delta);
+cocos2d::Layer::update(delta);
 }
 void SelectMenu::onClickMe()
 {
@@ -528,7 +528,7 @@ void SelectMenu::setSceneIntro()
   doSceneIntro(mSceneIntro, this);
 }
 
-void SelectMenu::setSceneOutro(cocos2d::CCScene* newscene)
+void SelectMenu::setSceneOutro(cocos2d::Scene* newscene)
 {
   if( mIntroFlag )
   {
@@ -567,18 +567,18 @@ cocos2d::CCLog("Control");
 }
 bool SelectMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadow", CCSprite*,  mShadow)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDesc", CCSprite*,  mDesc)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipDart", CCSprite*,  mEquipDart)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipBlade", CCSprite*,  mEquipBlade)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipSpecial", CCSprite*,  mEquipSpecial)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeftMark", CCSprite*,  mLeftMark)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRightMark", CCSprite*,  mRightMark)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoinMark", CCSprite*,  mCoinMark)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHeroDesc", CCSprite*,  mHeroDesc)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTitle", CCSprite*,  mTitle)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mParam", CCSprite*,  mParam)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBouns", CCSprite*,  mBouns)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadow", Sprite*,  mShadow)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDesc", Sprite*,  mDesc)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipDart", Sprite*,  mEquipDart)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipBlade", Sprite*,  mEquipBlade)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipSpecial", Sprite*,  mEquipSpecial)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeftMark", Sprite*,  mLeftMark)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRightMark", Sprite*,  mRightMark)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoinMark", Sprite*,  mCoinMark)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHeroDesc", Sprite*,  mHeroDesc)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTitle", Sprite*,  mTitle)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mParam", Sprite*,  mParam)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBouns", Sprite*,  mBouns)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHero", CCNode*,  mHero)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHearts", CCNode*,  mHearts)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDarts", CCNode*,  mDarts)

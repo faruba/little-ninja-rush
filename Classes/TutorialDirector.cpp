@@ -38,7 +38,7 @@ cocos2d::CCLog("begin tutorial: role id(%d), cacheDartId(%d)", rid, cacheDartId)
   play->state = STATE_TUTORIAL;
   play->count_respawn++;
 
-  mLayer = cocos2d::CCLayerColor::create(ccc4(0, 0, 0, 128), UniversalFit::sharedUniversalFit()->playSize.width, 75);
+  mLayer = cocos2d::LayerColor::create(ccc4(0, 0, 0, 128), UniversalFit::sharedUniversalFit()->playSize.width, 75);
   mLayer->setPosition(cocos2d::ccp(0, 122.5f));
   play->addChild(mLayer, LAYER_UI);
 
@@ -61,8 +61,8 @@ cocos2d::CCLog("begin tutorial: role id(%d), cacheDartId(%d)", rid, cacheDartId)
   mTeachText->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width/2 - 60, SCREEN_HEIGHT/2));
   play->addChild(mTeachText, LAYER_UI);
 cocos2d::CCMenuItemImage * skip = cocos2d::CCMenuItemImage::create();
-  skip->setNormalSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("jcskip.png"));
-  skip->setSelectedSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_jcskip.png"));
+  skip->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("jcskip.png"));
+  skip->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_jcskip.png"));
   /*TODO:Uncomment this 
    skip->setTarget(this, menu_selector(TutorialDirector::onSkip));
    */
@@ -180,11 +180,11 @@ CCARRAY_FOREACH(play->darts, node)
 void TutorialDirector::playSlideUp() 
 {
     mAnimateNode->removeAllChildrenWithCleanup(true);
-cocos2d::CCSprite *panel = cocos2d::CCSprite::createWithSpriteFrameName("jc1.png");
+cocos2d::Sprite *panel = cocos2d::Sprite::createWithSpriteFrameName("jc1.png");
     panel->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     panel->setPosition(cocos2d::ccp(0, 0));
     mAnimateNode->addChild(panel);
-cocos2d::CCSprite *finger = cocos2d::CCSprite::createWithSpriteFrameName("jc4.png");
+cocos2d::Sprite *finger = cocos2d::Sprite::createWithSpriteFrameName("jc4.png");
     finger->setAnchorPoint(cocos2d::ccp(0.065789f, 0.91666f));
     finger->setPosition(cocos2d::ccp(37.5, 20.5f));
     panel->addChild(finger);
@@ -203,11 +203,11 @@ void TutorialDirector::stopSlide()
 void TutorialDirector::playSlideForward() 
 {
     mAnimateNode->removeAllChildrenWithCleanup(true);
-cocos2d::CCSprite *panel = cocos2d::CCSprite::createWithSpriteFrameName("jc1.png");
+cocos2d::Sprite *panel = cocos2d::Sprite::createWithSpriteFrameName("jc1.png");
     panel->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     panel->setPosition(cocos2d::ccp(0, 0));
     mAnimateNode->addChild(panel);
-cocos2d::CCSprite *finger = cocos2d::CCSprite::createWithSpriteFrameName("jc4.png");
+cocos2d::Sprite *finger = cocos2d::Sprite::createWithSpriteFrameName("jc4.png");
     finger->setAnchorPoint(cocos2d::ccp(0.065789f, 0.91666f));
     finger->setPosition(cocos2d::ccp(34.5f, 28));
     panel->addChild(finger);
@@ -221,11 +221,11 @@ cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(sq);
 void TutorialDirector::playSlideDown() 
 {
     mAnimateNode->removeAllChildrenWithCleanup(true);
-cocos2d::CCSprite *panel = cocos2d::CCSprite::createWithSpriteFrameName("jc1.png");
+cocos2d::Sprite *panel = cocos2d::Sprite::createWithSpriteFrameName("jc1.png");
     panel->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     panel->setPosition(cocos2d::ccp(0, 0));
     mAnimateNode->addChild(panel);
-cocos2d::CCSprite *finger = cocos2d::CCSprite::createWithSpriteFrameName("jc4.png");
+cocos2d::Sprite *finger = cocos2d::Sprite::createWithSpriteFrameName("jc4.png");
     finger->setAnchorPoint(cocos2d::ccp(0.065789f, 0.91666f));
     finger->setPosition(cocos2d::ccp(50, 37.5f));
     panel->addChild(finger);

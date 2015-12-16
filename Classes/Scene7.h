@@ -19,12 +19,12 @@ cocos2d::CCNode *mFront;
 cocos2d::CCNode *mFBg;
 cocos2d::CCNode *mBg;
 cocos2d::CCNode *mWhiteTrees;
-cocos2d::CCSprite *mSnowSlopes[3];
+cocos2d::Sprite *mSnowSlopes[3];
 cocos2d::CCNode *mWhiteTrees2;
 cocos2d::CCNode *mGreenTrees2;
-cocos2d::CCSprite *mHouse;
+cocos2d::Sprite *mHouse;
 cocos2d::CCNode *mGreenTrees;
-cocos2d::CCSprite *mGrass[8];
+cocos2d::Sprite *mGrass[8];
 cocos2d::CCNode *mDecos;
 cocos2d::CCNode *mFronts;
     
@@ -52,7 +52,7 @@ class Snow :
 
     static Snow* snow(cocos2d::CCNode* parent);
 cocos2d::CCNode *mParent;
-cocos2d::CCSprite *mSprite;
+cocos2d::Sprite *mSprite;
     float mWindX;
     float mSpeed;
     float mSpeedY;

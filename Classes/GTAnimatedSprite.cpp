@@ -11,7 +11,7 @@ GTAnimatedSprite* GTAnimatedSprite::spriteWithGTAnimation(GTAnimation * animatio
 
 bool GTAnimatedSprite::initWithTexture(cocos2d::CCTexture2D * texture, cocos2d::CCRect rect)
 {
-    if(cocos2d::CCSprite::initWithTexture(texture, rect))
+    if(cocos2d::Sprite::initWithTexture(texture, rect))
     {
         mAnimation = NULL;
         mAnimationId = 0;

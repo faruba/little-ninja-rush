@@ -25,7 +25,7 @@ Star* Star::star(cocos2d::Point pos, cocos2d::Point dir)
 void Star::onCreate() 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
-    mSprite = cocos2d::CCSprite::createWithSpriteFrameName("lxy.png");
+    mSprite = cocos2d::Sprite::createWithSpriteFrameName("lxy.png");
     mSprite->setRotation(-90 - CC_RADIANS_TO_DEGREES(ccpToAngle(mDir)));
     mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     mSprite->setPosition(mPos);

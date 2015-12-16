@@ -47,11 +47,11 @@ class ObjectiveComplete:
 cocos2d::CCNode *mNode;
     CEClipedNode *mObjRect;
     //--- auto assign ---
-cocos2d::CCSprite *mBanner;
-cocos2d::CCSprite *mObjType;
+cocos2d::Sprite *mBanner;
+cocos2d::Sprite *mObjType;
 cocos2d::CCNode *mCrowns;
 cocos2d::CCLabelBMFont *mBounsCoins;
-cocos2d::CCSprite *mScroll;
+cocos2d::Sprite *mScroll;
 cocos2d::CCLabelBMFont *mBounsScroll;
 
 

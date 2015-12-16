@@ -36,13 +36,13 @@ public CCBSelectorResolver
     void rebuildDarts(bool unlimit);
 cocos2d::CCNode *mParent;
     //-------- new ui ------------
-cocos2d::CCSprite *mUIBg;
-cocos2d::CCSprite *mSpell;
-cocos2d::CCSprite *mSpellName;
+cocos2d::Sprite *mUIBg;
+cocos2d::Sprite *mSpell;
+cocos2d::Sprite *mSpellName;
 cocos2d::CCNode *mSpFgNode;
-cocos2d::CCSprite *mSpBg;
-cocos2d::CCSprite *mSpBgTop;
-cocos2d::CCSprite *mSpellGrid;
+cocos2d::Sprite *mSpBg;
+cocos2d::Sprite *mSpBgTop;
+cocos2d::Sprite *mSpellGrid;
     int       mSpCache;
 
     //distance
@@ -52,12 +52,12 @@ cocos2d::CCLabelBMFont *mDistanceM;
 
     //coins
 cocos2d::CCLabelBMFont *mCoinNumber;
-cocos2d::CCSprite *mCoinMark;
+cocos2d::Sprite *mCoinMark;
     int       mCoinCache;
 
     //hp
     int mHPCache;
-cocos2d::CCSprite *mHPMeters[MAXHPMETER];
+cocos2d::Sprite *mHPMeters[MAXHPMETER];
 
     //darts
 cocos2d::CCNode *mDartMeter;
@@ -75,37 +75,37 @@ cocos2d::CCLabelBMFont *mScoreNumber;
 
     //speed * boost
 cocos2d::CCNode *mSpeedBoost;
-cocos2d::CCSprite *mSpeedMask;
-cocos2d::CCLayerColor *mSpeedBg;
-cocos2d::CCLayerColor *mSpeedRed;
-cocos2d::CCLayerColor *mSpeedNormal;
-cocos2d::CCLayerColor *mSpeedFever;
+cocos2d::Sprite *mSpeedMask;
+cocos2d::LayerColor *mSpeedBg;
+cocos2d::LayerColor *mSpeedRed;
+cocos2d::LayerColor *mSpeedNormal;
+cocos2d::LayerColor *mSpeedFever;
     int mSpeedState;//0-normal 1-red flash 2-fever flash
 cocos2d::CCAction *mSpeedAction;
 
     //arcade * timer
     int mTimerCache;
 cocos2d::CCLabelBMFont *mTimerLabel;
-cocos2d::CCSprite *mTimerMark;
+cocos2d::Sprite *mTimerMark;
 
     //arcade * cup
     int mCupCache;
-cocos2d::CCSprite *mCup;
+cocos2d::Sprite *mCup;
 
     //arcade x
 cocos2d::CCLabelBMFont *mArcadeX;
 cocos2d::CCMenu *mMenu;
 cocos2d::CCMenuItemSprite *mFly;
 cocos2d::CCMenuItemSprite *mSP;
-cocos2d::CCSprite *mFlyBg;
-cocos2d::CCSprite *mSPBg;
+cocos2d::Sprite *mFlyBg;
+cocos2d::Sprite *mSPBg;
 cocos2d::CCLabelBMFont *mFlyNumber;
 cocos2d::CCLabelBMFont *mSPNumber;
     //----- sub node ---------
-cocos2d::CCSprite *mHits;
+cocos2d::Sprite *mHits;
 cocos2d::CCLabelBMFont *mHitCount;
-cocos2d::CCSprite *mSpFg;
-cocos2d::CCSprite *mSpFgTop;
+cocos2d::Sprite *mSpFg;
+cocos2d::Sprite *mSpFgTop;
 
     bool mFlyUsed;
     bool mPotionUsed;

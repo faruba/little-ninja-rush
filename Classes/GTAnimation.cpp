@@ -81,7 +81,7 @@ bool GTAnimation::startAnimation(int FrameCount, float Time)
     mCurrentAnimationId++;
     mpAnimationData[mCurrentAnimationId].framecount = FrameCount;
     mpAnimationData[mCurrentAnimationId].playbacktime = Time;
-    mpAnimationData[mCurrentAnimationId].frames = new CCSpriteFrame*[FrameCount];
+    mpAnimationData[mCurrentAnimationId].frames = new SpriteFrame*[FrameCount];
     for(int i=0; i<FrameCount; ++i)
     {
       mpAnimationData[mCurrentAnimationId].frames[i] = NULL;
@@ -96,7 +96,7 @@ bool GTAnimation::addFrame(const char * FrameName)
 {
   if(mCurrentAnimationId < mAnimationCount && mCurrentFrameId < mpAnimationData[mCurrentAnimationId].framecount)
   {
-    mpAnimationData[mCurrentAnimationId].frames[mCurrentFrameId] = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(FrameName);
+    mpAnimationData[mCurrentAnimationId].frames[mCurrentFrameId] = cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(FrameName);
     if (mpAnimationData[mCurrentAnimationId].frames[mCurrentFrameId])
     {
       mpAnimationData[mCurrentAnimationId].frames[mCurrentFrameId]->retain();
@@ -151,7 +151,7 @@ float GTAnimation::animationPlaybackTime(int AnimationId)
   return -1;
 }
 
-cocos2d::CCSpriteFrame* GTAnimation::spriteFrame(int AnimationId, int FrameId) 
+cocos2d::SpriteFrame* GTAnimation::spriteFrame(int AnimationId, int FrameId) 
 {
   if(AnimationId >=0 && AnimationId<mAnimationCount)
   {

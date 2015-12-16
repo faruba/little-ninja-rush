@@ -28,7 +28,7 @@ class PumpkinCircle:public GameObject
   void updateAngles();
   void addPumpkin(int type);
   void removePumpkin(int pid);
-cocos2d::CCSprite *mSprites[PUMPKIN_NUM];
+cocos2d::Sprite *mSprites[PUMPKIN_NUM];
   float mTimers[PUMPKIN_NUM];
   float mPowerTimers[PUMPKIN_NUM];
   int mPumpkinTypes[PUMPKIN_NUM];

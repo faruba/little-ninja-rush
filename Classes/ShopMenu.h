@@ -11,7 +11,7 @@
 USING_NS_CC_EXT;
 
 class ShopMenu:
-  public cocos2d::CCLayer, 
+  public cocos2d::Layer, 
   public cocosbuilder::CCBMemberVariableAssigner,
   public cocosbuilder::CCBSelectorResolver,
   public FoldItemController
@@ -38,8 +38,8 @@ cocos2d::CCNode *mItemList;
     int mCurrUnFold;
     cocos2d::Point mTouchBegin;
     //scrolls
-cocos2d::CCSprite *mScrollBody;
-cocos2d::CCLayerColor *mMask;
+cocos2d::Sprite *mScrollBody;
+cocos2d::LayerColor *mMask;
 
     float mBeginPressY;
     float mBeginNodeY;
@@ -55,7 +55,7 @@ cocos2d::CCMenu *mMenu;
 
     //intro&outro
 cocos2d::CCNode *mSceneIntro;
-cocos2d::CCScene *mNewScene;
+cocos2d::Scene *mNewScene;
     bool mIntroFlag;
 
     //---modal---
@@ -90,7 +90,7 @@ cocos2d::CCScene *mNewScene;
 
     //intro&outro
     void setSceneIntro();
-    void setSceneOutro(cocos2d::CCScene* newscene);
+    void setSceneOutro(cocos2d::Scene* newscene);
     void doneOutro();
 
 };

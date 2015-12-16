@@ -50,9 +50,9 @@ GamePlay::~GamePlay()
     gPlay = NULL;
 }
 
-cocos2d::CCScene* GamePlay::scene()
+cocos2d::Scene* GamePlay::scene()
 {
-cocos2d::CCScene *ret = cocos2d::CCScene::create();
+cocos2d::Scene *ret = cocos2d::Scene::create();
     
     if( gPlay == NULL )
     {
@@ -100,7 +100,7 @@ int GamePlay::getGameMode()
 
 bool GamePlay::init()
 {
-  if(cocos2d::CCLayer::init())
+  if(cocos2d::Layer::init())
   {
     this->scheduleUpdate();
     this->setTouchEnabled(true);
@@ -135,7 +135,7 @@ cocos2d::CCNode *taskcomplete = cocos2d::CCNode::create();
   this->initGamePlay(gGameMode);
 
   this->setSceneIntro();
-cocos2d::CCLayer::onEnter();
+cocos2d::Layer::onEnter();
 }
 
 void GamePlay::onExit()
@@ -146,7 +146,7 @@ void GamePlay::onExit()
   //demo -->
   gPlay->release();
   //demo <--
-cocos2d::CCLayer::onExit();
+cocos2d::Layer::onExit();
 }
 
 //初始化游戏
@@ -172,24 +172,24 @@ void GamePlay::initGamePlay(int mod)
   footprints = NULL;
   arcadeSpeed = 1;
   
-  mask = cocos2d::CCLayerColor::create(ccc4(0, 0, 0, 255), UniversalFit::sharedUniversalFit()->screenSize.width + 20, UniversalFit::sharedUniversalFit()->screenSize.height + 20);
+  mask = cocos2d::LayerColor::create(ccc4(0, 0, 0, 255), UniversalFit::sharedUniversalFit()->screenSize.width + 20, UniversalFit::sharedUniversalFit()->screenSize.height + 20);
   mask->setPosition(cocos2d::ccp(-10, -10));
   mask->retain();
   this->addChild(mask, LAYER_MASK);
   
-  mFeverMask = cocos2d::CCLayerColor::create(ccc4(239, 145, 3, 255));
+  mFeverMask = cocos2d::LayerColor::create(ccc4(239, 145, 3, 255));
   mFeverMask->setVisible(false);
   mFeverMask->setOpacity(0);
   mFeverMask->retain();
   this->addChild(mFeverMask, LAYER_UI-1);
   
-  spellMask = cocos2d::CCLayerColor::create(ccc4(0, 0, 0, 200), UniversalFit::sharedUniversalFit()->playSize.width+VIBRATE_MOVE*3, SCREEN_HEIGHT+VIBRATE_MOVE*3);
+  spellMask = cocos2d::LayerColor::create(ccc4(0, 0, 0, 200), UniversalFit::sharedUniversalFit()->playSize.width+VIBRATE_MOVE*3, SCREEN_HEIGHT+VIBRATE_MOVE*3);
   spellMask->retain();
   spellMask->setVisible(false);
   this->addChild(spellMask, LAYER_MAINROLE-2);
   
   paused = false;
-  mUI = cocos2d::CCLayer::create();
+  mUI = cocos2d::Layer::create();
   mUI->setTouchEnabled(true);
   this->addChild(mUI, LAYER_MASK+1);
   mode = mod;
@@ -210,8 +210,8 @@ void GamePlay::initGamePlay(int mod)
   
   //增加菜单
 cocos2d::CCMenuItemImage *xpause = cocos2d::CCMenuItemImage::create();
-  xpause->setNormalSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
-  xpause->setSelectedSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
+  xpause->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
+  xpause->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
   xpause->setTarget(this, menu_selector(GamePlay::pause));
   xpause->setAnchorPoint(cocos2d::ccp(1, 1));
   xpause->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width, SCREEN_HEIGHT));
@@ -649,7 +649,7 @@ void GamePlay::triggerDeath()
     }
 }
 
-cocos2d::CCLayer* GamePlay::ui()
+cocos2d::Layer* GamePlay::ui()
 {
     return mUI;
 }
@@ -1226,18 +1226,18 @@ void GamePlay::setSceneIntro()
     {
         mSceneIntro = cocos2d::CCNode::create();
         this->addChild(mSceneIntro, LAYER_MASK+99);
-cocos2d::CCSprite *left = cocos2d::CCSprite::create("door.png");
+cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
         left->setAnchorPoint(cocos2d::ccp(1, 0));
         mSceneIntro->addChild(left, 0, 0);
-cocos2d::CCSprite *right = cocos2d::CCSprite::create("door.png");
+cocos2d::Sprite *right = cocos2d::Sprite::create("door.png");
         right->setScaleX(-1);
         right->setAnchorPoint(cocos2d::ccp(1, 0));
         mSceneIntro->addChild(right, 0, 1);
     }
-cocos2d::CCSprite *left = (cocos2d::CCSprite*)(mSceneIntro->getChildByTag(0));
+cocos2d::Sprite *left = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(0));
     left->setVisible(true);
     left->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
-cocos2d::CCSprite *right = (cocos2d::CCSprite*)(mSceneIntro->getChildByTag(1));
+cocos2d::Sprite *right = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(1));
     right->setVisible(true);
     right->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
 cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
@@ -1262,7 +1262,7 @@ cocos2d::CCTextureCache::sharedTextureCache()->removeTextureForKey("door.png");
     mSceneIntro = NULL;
 }
 
-void GamePlay::setSceneOutro(cocos2d::CCScene* newscene)
+void GamePlay::setSceneOutro(cocos2d::Scene* newscene)
 {
   if( mIntroFlag )
   {
@@ -1317,40 +1317,40 @@ bool GamePlay::completeSomeObjectives()
 
 void GamePlay::taskCompleted(std::string tile, std::string icon, int type)
 {
-cocos2d::CCSprite *board = cocos2d::CCSprite::createWithSpriteFrameName("task-complete.png");
+cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::ccp(0.5f, 0));
     gTaskComplete->addChild(board);
-cocos2d::CCSprite *ibg = NULL;
+cocos2d::Sprite *ibg = NULL;
 cocos2d::CCLabelTTF *label = NULL;
     switch (type) {
         case 0:
         {
-            ibg = cocos2d::CCSprite::createWithSpriteFrameName("ms_bg1.png");
+            ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg1.png");
             label = cocos2d::CCLabelTTF::create("日常任务\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
         }
             break;
         case 1:
         {
-            ibg = cocos2d::CCSprite::createWithSpriteFrameName("ms_bg3.png");
+            ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg3.png");
             label = cocos2d::CCLabelTTF::create("周常\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
         }
             break;
         case 2:
         {
-            ibg = cocos2d::CCSprite::createWithSpriteFrameName("ms_bg2.png");
+            ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg2.png");
             label = cocos2d::CCLabelTTF::create("月常\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
         }
             break;
         case 3:
         {
-            ibg = cocos2d::CCSprite::createWithSpriteFrameName("ms_bg4.png");
+            ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg4.png");
             label = cocos2d::CCLabelTTF::create(cocos2d::CCString::createWithFormat("%s\n已完成！", tile.c_str())->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
         }
             break;
     }
     ibg->setPosition(cocos2d::ccp(22, 22));
     board->addChild(ibg);
-cocos2d::CCSprite *iconsp = cocos2d::CCSprite::createWithSpriteFrameName(icon.c_str());
+cocos2d::Sprite *iconsp = cocos2d::Sprite::createWithSpriteFrameName(icon.c_str());
     iconsp->setPosition(ibg->getPosition());
     if( type == 3 )
     {
@@ -1372,17 +1372,17 @@ cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
 
 void GamePlay::pieceComplete(std::string title, std::string icon)
 {
-cocos2d::CCSprite *board = cocos2d::CCSprite::createWithSpriteFrameName("task-complete.png");
+cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::ccp(0.5f, 0));
     gTaskComplete->addChild(board);
-cocos2d::CCSprite *item = cocos2d::CCSprite::create(icon.c_str());
+cocos2d::Sprite *item = cocos2d::Sprite::create(icon.c_str());
     item->setPosition(cocos2d::ccp(26, 19));
     item->setScale(0.7f);
     board->addChild(item);
-cocos2d::CCSprite *sname = cocos2d::CCSprite::create(title.c_str());
+cocos2d::Sprite *sname = cocos2d::Sprite::create(title.c_str());
     sname->setPosition(cocos2d::ccp(117, 30));
     board->addChild(sname);
-cocos2d::CCSprite *scoll = cocos2d::CCSprite::create("collected.png");
+cocos2d::Sprite *scoll = cocos2d::Sprite::create("collected.png");
     scoll->setPosition(cocos2d::ccp(117, 13));
     board->addChild(scoll);
 cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, ccp(0, -board->getContentSize().height));
@@ -1397,7 +1397,7 @@ cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
 
 void GamePlay::popText(std::string text)
 {
-cocos2d::CCSprite *board = cocos2d::CCSprite::createWithSpriteFrameName("task-complete.png");
+cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::ccp(0.5f, 0));
     gTaskComplete->addChild(board);
 cocos2d::CCLabelBMFont *label = cocos2d::CCLabelBMFont::create(text.c_str(), "ab34.fnt");

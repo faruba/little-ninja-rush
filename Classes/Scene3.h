@@ -19,10 +19,10 @@ cocos2d::CCNode *mFront;
 cocos2d::CCNode *mBg;
     int mTileCount;
     int mBlock;
-cocos2d::CCSprite *mFronts[8];
-cocos2d::CCSprite *mClouds[2]; 
-cocos2d::CCSprite *mFarHouse[9];
-cocos2d::CCSprite *mHills[3];
+cocos2d::Sprite *mFronts[8];
+cocos2d::Sprite *mClouds[2]; 
+cocos2d::Sprite *mFarHouse[9];
+cocos2d::Sprite *mHills[3];
 
 };
 #endif

@@ -7,14 +7,14 @@
 
 void Scene1::loadScene() 
 {
-cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
     cache->addSpriteFramesWithFile("scene1.plist");
     cache->addSpriteFramesWithFile("scene2.plist");
 }
 
 void Scene1::unloadScene() 
 {
-cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
     cache->removeSpriteFramesFromFile("scene1.plist");
     cache->removeSpriteFramesFromFile("scene2.plist");
     unloadTextureFromeSpriteFrameFile("scene1.plist");
@@ -27,21 +27,21 @@ void Scene1::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     
     mBg = bg;
     mFront = fg;
-cocos2d::CCLayerColor *sbg = cocos2d::CCLayerColor::create(ccc4(16, 23, 39, 255));
+cocos2d::LayerColor *sbg = cocos2d::LayerColor::create(ccc4(16, 23, 39, 255));
     mBg->addChild(sbg, 0);
-cocos2d::CCSprite *StaBg = cocos2d::CCSprite::createWithSpriteFrameName("s1_sbg.png");
+cocos2d::Sprite *StaBg = cocos2d::Sprite::createWithSpriteFrameName("s1_sbg.png");
     StaBg->setAnchorPoint(cocos2d::ccp(0, 1));
     StaBg->setPosition(cocos2d::ccp(0, SCREEN_HEIGHT));
     mBg->addChild(StaBg, 0);
-cocos2d::CCSprite *DynBg0 = cocos2d::CCSprite::createWithSpriteFrameName("s1_dbg.png");
+cocos2d::Sprite *DynBg0 = cocos2d::Sprite::createWithSpriteFrameName("s1_dbg.png");
     DynBg0->setAnchorPoint(cocos2d::ccp(0, 0));
     DynBg0->setPosition(cocos2d::ccp(0, 80));
     mBg->addChild(DynBg0, 1, 0);
-cocos2d::CCSprite *DynBg1 = cocos2d::CCSprite::createWithSpriteFrameName("s1_dbg.png");
+cocos2d::Sprite *DynBg1 = cocos2d::Sprite::createWithSpriteFrameName("s1_dbg.png");
     DynBg1->setAnchorPoint(cocos2d::ccp(0, 0));
     DynBg1->setPosition(cocos2d::ccp(DynBg0->getContentSize().width, 80));
     mBg->addChild(DynBg1, 1, 1);
-cocos2d::CCSprite *DynBg2 = cocos2d::CCSprite::createWithSpriteFrameName("s1_dbg.png");
+cocos2d::Sprite *DynBg2 = cocos2d::Sprite::createWithSpriteFrameName("s1_dbg.png");
     DynBg2->setAnchorPoint(cocos2d::ccp(0, 0));
     DynBg2->setPosition(cocos2d::ccp(DynBg0->getContentSize().width*2, 80));
     mBg->addChild(DynBg2, 1, 2);
@@ -55,7 +55,7 @@ cocos2d::CCSprite *DynBg2 = cocos2d::CCSprite::createWithSpriteFrameName("s1_dbg
     //增加前景
     for( int i=0; i<S1_FONTCOUNT; ++i)
     {
-        mFronts[i] = cocos2d::CCSprite::createWithSpriteFrameName("cj1_qj.png");
+        mFronts[i] = cocos2d::Sprite::createWithSpriteFrameName("cj1_qj.png");
         mFronts[i]->setAnchorPoint(cocos2d::ccp(0, 0));
         mFronts[i]->setPosition(cocos2d::ccp(mFronts[i]->getContentSize().width*i*2, -10));
         mFront->addChild(mFronts[i]);

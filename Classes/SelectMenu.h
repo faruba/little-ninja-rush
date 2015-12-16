@@ -10,7 +10,7 @@
 ;
 
 class SelectMenu :
-  public cocos2d::CCLayer, 
+  public cocos2d::Layer, 
   public cocosbuilder::CCBMemberVariableAssigner,
   public cocosbuilder::CCBSelectorResolver
 {
@@ -43,7 +43,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(SelectMenu, create);
 
   //intro&outro
   void setSceneIntro();
-  void setSceneOutro(cocos2d::CCScene* newscene);
+  void setSceneOutro(cocos2d::Scene* newscene);
   void doneOutro();
 private:
   GTAnimatedSprite *mPreview;
@@ -54,7 +54,7 @@ private:
   float mSlideAngle;
   float mSlideBegin;
   float mSlideBeginX;
-cocos2d::CCSprite *mProtraits[GAME_CHARCOUNT];
+cocos2d::Sprite *mProtraits[GAME_CHARCOUNT];
   float   mCurrAngle;
   int mTargetRole;
   int mCurrRole;
@@ -62,32 +62,32 @@ cocos2d::CCSprite *mProtraits[GAME_CHARCOUNT];
   float mSlideTimer;
 
   //--- auto assign ---
-cocos2d::CCSprite *mShadow;
+cocos2d::Sprite *mShadow;
 cocos2d::CCNode *mHero;
-cocos2d::CCSprite *mDesc;
+cocos2d::Sprite *mDesc;
 cocos2d::CCNode *mHearts;
 cocos2d::CCNode *mDarts;
 cocos2d::CCMenuItemImage *mBtnStart;
 cocos2d::CCMenuItemImage *mBtnDart;
 cocos2d::CCMenuItemImage *mBtnBlade;
 cocos2d::CCMenuItemImage *mBtnSpecial;
-cocos2d::CCSprite *mEquipDart;
-cocos2d::CCSprite *mEquipBlade;
-cocos2d::CCSprite *mEquipSpecial;
+cocos2d::Sprite *mEquipDart;
+cocos2d::Sprite *mEquipBlade;
+cocos2d::Sprite *mEquipSpecial;
 cocos2d::CCNode *mStartPos;
-cocos2d::CCSprite *mLeftMark;
-cocos2d::CCSprite *mRightMark;
+cocos2d::Sprite *mLeftMark;
+cocos2d::Sprite *mRightMark;
 cocos2d::CCLabelBMFont *mMoney;
-cocos2d::CCSprite *mCoinMark;
+cocos2d::Sprite *mCoinMark;
 cocos2d::CCMenuItemImage *mClickMe;
-cocos2d::CCSprite *mHeroDesc;
-cocos2d::CCSprite *mTitle;
-cocos2d::CCSprite *mParam;
-cocos2d::CCSprite *mBouns;
+cocos2d::Sprite *mHeroDesc;
+cocos2d::Sprite *mTitle;
+cocos2d::Sprite *mParam;
+cocos2d::Sprite *mBouns;
 
   //intro&outro
 cocos2d::CCNode *mSceneIntro;
-cocos2d::CCScene *mNewScene;
+cocos2d::Scene *mNewScene;
   bool mIntroFlag;
 
   bool mButtoned;

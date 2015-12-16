@@ -21,6 +21,6 @@ cocos2d::CCNode *mFront;
 cocos2d::CCNode *mBg;
     int mTileState;
     int mTileCount;
-cocos2d::CCSprite *mFronts[S1_FONTCOUNT];
+cocos2d::Sprite *mFronts[S1_FONTCOUNT];
 };
 #endif

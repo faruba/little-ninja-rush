@@ -1222,7 +1222,7 @@ bool MainRole::supportAimAid()
   return false;
 }
 
-cocos2d::CCSprite* MainRole::sprite() 
+cocos2d::Sprite* MainRole::sprite() 
 {
   return mSprite;
 }

@@ -9,10 +9,10 @@
 USING_NS_CC_EXT;
 
 class GTAnimatedSprite : 
-  public cocos2d::CCSprite
+  public cocos2d::Sprite
 {
   public:
-    virtual bool init(){return cocos2d::CCSprite::init();};  
+    virtual bool init(){return cocos2d::Sprite::init();};  
     virtual bool initWithTexture(cocos2d::CCTexture2D * texture, cocos2d::CCRect rect);
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GTAnimatedSprite, create);
 

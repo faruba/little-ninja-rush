@@ -8,7 +8,7 @@
 USING_NS_CC_EXT;
 
 class CollectionMenu : 
-  public CCLayer, 
+  public Layer, 
   public cocosbuilder::CCBMemberVariableAssigner,
   public cocosbuilder::CCBSelectorResolver
 {
@@ -18,7 +18,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
-    static CCScene* scene();
+    static cocos2d::Scene* scene();
     virtual bool init(){return true;};
     virtual void onEnter();
     virtual void onExit();
@@ -58,7 +58,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
 
     //intro&outro
     void setSceneIntro();
-    void setSceneOutro(cocos2d::CCScene* newscene);
+    void setSceneOutro(cocos2d::Scene* newscene);
     void doneOutro();
 
 
@@ -67,8 +67,8 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
     int mEquipedItem;
     int mCurrItem;
     int mItemCount;
-cocos2d::CCSprite *mEquipedMark;
-cocos2d::CCSprite *mCurrentMark;
+cocos2d::Sprite *mEquipedMark;
+cocos2d::Sprite *mCurrentMark;
     //CCNode *mItemIcons;
     ABScrollContent *mScroll;
 
@@ -77,8 +77,8 @@ cocos2d::CCSprite *mCurrentMark;
     bool mPostingFacebook;
     bool mPostingTwitter;
     //-- auto assign --
-cocos2d::CCSprite *mShadow;
-cocos2d::CCSprite *mItemTitle;
+cocos2d::Sprite *mShadow;
+cocos2d::Sprite *mItemTitle;
 cocos2d::CCLabelTTF *mItemDesc;
 cocos2d::CCLabelBMFont *mScrollCount;
 cocos2d::CCMenuItemImage *mCharacter1;
@@ -95,22 +95,22 @@ cocos2d::CCMenu *mMenu;
 cocos2d::CCNode *mPowerUp;
 cocos2d::CCNode *mLifeGuage;
 cocos2d::CCNode *mDartGuage;
-cocos2d::CCSprite *mLifeMask;
-cocos2d::CCSprite *mDartMask;
+cocos2d::Sprite *mLifeMask;
+cocos2d::Sprite *mDartMask;
 cocos2d::CCLabelBMFont *mLifeCount;
 cocos2d::CCLabelBMFont *mDartCount;
-cocos2d::CCLayerColor *mMask;
+cocos2d::LayerColor *mMask;
 cocos2d::CCMenu *mPowerupMenu;
 cocos2d::CCMenuItemImage *mFacebook;
 cocos2d::CCMenuItemImage *mTwitter;
-cocos2d::CCSprite *mShare;
-cocos2d::CCSprite *mFacebookAction;
-cocos2d::CCSprite *mTwitterAction;
+cocos2d::Sprite *mShare;
+cocos2d::Sprite *mFacebookAction;
+cocos2d::Sprite *mTwitterAction;
 cocos2d::CCNode *mScrollPoint;
 
     //intro&outro
 cocos2d::CCNode *mSceneIntro;
-cocos2d::CCScene *mNewScene;
+cocos2d::Scene *mNewScene;
     bool mIntroFlag;
 
     bool mModal;

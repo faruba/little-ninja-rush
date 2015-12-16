@@ -132,16 +132,16 @@ cocos2d::CCNode *createUIByCCBI(const char* szCCBI, const char *pClassName, coco
 
 void doSceneIntro(cocos2d::CCNode *&mSceneIntro, CCNode *target)
 {
-cocos2d::CCSprite *left, *right; 
+cocos2d::Sprite *left, *right; 
   if( mSceneIntro == NULL )
   {
     mSceneIntro = cocos2d::CCNode::create();
     target->addChild(mSceneIntro, 99);
-    left = cocos2d::CCSprite::create("door.png");
+    left = cocos2d::Sprite::create("door.png");
     left->setAnchorPoint(cocos2d::ccp(1, 0));
     left->setPosition(cocos2d::ccp(0, 0));
     mSceneIntro->addChild(left, 0, 0);
-    right = cocos2d::CCSprite::create("door.png");
+    right = cocos2d::Sprite::create("door.png");
     right->setScaleX(-1);
     right->setAnchorPoint(cocos2d::ccp(1, 0));
     right->setPosition(cocos2d::ccp(SCREEN_WIDTH, 0));
@@ -149,8 +149,8 @@ cocos2d::CCSprite *left, *right;
   }
   else
   {
-    left = (cocos2d::CCSprite*)mSceneIntro->getChildByTag(0);
-    right = (cocos2d::CCSprite*)mSceneIntro->getChildByTag(1);
+    left = (cocos2d::Sprite*)mSceneIntro->getChildByTag(0);
+    right = (cocos2d::Sprite*)mSceneIntro->getChildByTag(1);
   }
   left->setVisible(true);
   left->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, 0));
@@ -167,24 +167,24 @@ cocos2d::CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(dt2, mb2, NU
 
   SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/open.mp3").c_str());
 }
-cocos2d::CCScene* doSceneOutro(cocos2d::CCScene* mNewScene, CCNode *&mSceneIntro, SEL_CallFunc callBack, CCNode *target)
+cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, CCNode *&mSceneIntro, SEL_CallFunc callBack, CCNode *target)
 {
   if( mSceneIntro == NULL )
   {
     mSceneIntro = cocos2d::CCNode::create();
     target->addChild(mSceneIntro, 99);
-cocos2d::CCSprite *left = cocos2d::CCSprite::create("door.png");
+cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
     left->setAnchorPoint(cocos2d::ccp(1, 0));
     mSceneIntro->addChild(left, 0, 0);
-cocos2d::CCSprite *right = cocos2d::CCSprite::create("door.png");
+cocos2d::Sprite *right = cocos2d::Sprite::create("door.png");
     right->setScaleX(-1);
     right->setAnchorPoint(cocos2d::ccp(1, 0));
     mSceneIntro->addChild(right, 0, 1);
   }
-cocos2d::CCSprite *left = (cocos2d::CCSprite*)mSceneIntro->getChildByTag(0);
+cocos2d::Sprite *left = (cocos2d::Sprite*)mSceneIntro->getChildByTag(0);
   left->setVisible(true);
   left->setPosition(cocos2d::ccp(0, 0));
-cocos2d::CCSprite *right = (cocos2d::CCSprite*)mSceneIntro->getChildByTag(1);
+cocos2d::Sprite *right = (cocos2d::Sprite*)mSceneIntro->getChildByTag(1);
   right->setVisible(true);
   right->setPosition(cocos2d::ccp(SCREEN_WIDTH, 0));
 cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, ccp(SCREEN_WIDTH/2, 0));

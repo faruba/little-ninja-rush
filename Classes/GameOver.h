@@ -43,37 +43,37 @@ cocos2d::CCLabelTTF *mMonthlyObjective;
 cocos2d::CCNode *mDailyCrown;
 cocos2d::CCNode *mWeeklyCrown;
 cocos2d::CCNode *mMonthlyCrown;
-cocos2d::CCSprite *mDailyIcon;
-cocos2d::CCSprite *mWeeklyIcon;
-cocos2d::CCSprite *mMonthlyIcon;
-cocos2d::CCSprite *mLeadSp0;
-cocos2d::CCSprite *mLeadSp1;
-cocos2d::CCSprite *mLeadSp2;
+cocos2d::Sprite *mDailyIcon;
+cocos2d::Sprite *mWeeklyIcon;
+cocos2d::Sprite *mMonthlyIcon;
+cocos2d::Sprite *mLeadSp0;
+cocos2d::Sprite *mLeadSp1;
+cocos2d::Sprite *mLeadSp2;
 cocos2d::CCLabelBMFont *mLeadLb0;
 cocos2d::CCLabelBMFont *mLeadLb1;
 cocos2d::CCLabelBMFont *mLeadLb2;
 cocos2d::CCMenuItemImage *mPlayAgain;
 cocos2d::CCMenuItemImage *mTwitter;
 cocos2d::CCMenuItemImage *mFacebook;
-cocos2d::CCSprite *mFacebookAction;
-cocos2d::CCSprite *mTwitterAction;
-cocos2d::CCSprite *mFacebookCoins;
-cocos2d::CCSprite *mTwitterCoins;
+cocos2d::Sprite *mFacebookAction;
+cocos2d::Sprite *mTwitterAction;
+cocos2d::Sprite *mFacebookCoins;
+cocos2d::Sprite *mTwitterCoins;
 cocos2d::CCNode *mClassic;
 cocos2d::CCNode *mArcade;
 
     // -- Arcade --
 cocos2d::CCLabelBMFont *mArcadeScore;
-cocos2d::CCSprite *mGoldCoin;
-cocos2d::CCSprite *mSilverCoin;
-cocos2d::CCSprite *mBronzeCoin;
+cocos2d::Sprite *mGoldCoin;
+cocos2d::Sprite *mSilverCoin;
+cocos2d::Sprite *mBronzeCoin;
 cocos2d::CCLabelBMFont *mGoldScore;
 cocos2d::CCLabelBMFont *mSilverScore;
 cocos2d::CCLabelBMFont *mBronzeScore;
 cocos2d::CCLabelBMFont *mGoldPrize;
 cocos2d::CCLabelBMFont *mSilverPrize;
 cocos2d::CCLabelBMFont *mBronzePrize;
-cocos2d::CCSprite *mCup;
+cocos2d::Sprite *mCup;
 
 
     //-- auto callback --

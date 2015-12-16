@@ -22,7 +22,7 @@ TraceDart* TraceDart::dart(cocos2d::Point pos, cocos2d::Point dir)
 
 void TraceDart::onCreate() 
 {
-    mSprite = cocos2d::CCSprite::createWithSpriteFrameName("xfshuriken.png");
+    mSprite = cocos2d::Sprite::createWithSpriteFrameName("xfshuriken.png");
     mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     mSprite->setPosition(mPos);
 cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);

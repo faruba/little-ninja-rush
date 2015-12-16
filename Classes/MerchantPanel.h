@@ -39,18 +39,18 @@ cocos2d::CCNode *mMerchantbox;
 cocos2d::CCMenuItemImage *mBuyItem1;
 cocos2d::CCMenuItemImage *mBuyItem2;
 cocos2d::CCMenuItemImage *mBuyItem3;
-cocos2d::CCSprite *mBody;
-cocos2d::CCSprite *mHead;
+cocos2d::Sprite *mBody;
+cocos2d::Sprite *mHead;
 cocos2d::CCLabelBMFont *mItemCount1;
 cocos2d::CCLabelBMFont *mItemCount2;
 cocos2d::CCLabelBMFont *mItemCount3;
 cocos2d::CCLabelBMFont *mCoins;
-cocos2d::CCSprite *mTalkbox;
-cocos2d::CCSprite *mTalkText;
-cocos2d::CCSprite *mItem1;
-cocos2d::CCSprite *mItem2;
-cocos2d::CCSprite *mItem3;
-cocos2d::CCSprite *mItem4;
+cocos2d::Sprite *mTalkbox;
+cocos2d::Sprite *mTalkText;
+cocos2d::Sprite *mItem1;
+cocos2d::Sprite *mItem2;
+cocos2d::Sprite *mItem3;
+cocos2d::Sprite *mItem4;
 
 
     void onMerchantClose();

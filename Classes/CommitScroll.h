@@ -38,15 +38,15 @@ cocos2d::CCNode *mNode;
 
     int mPrize;
     //-- auto assign --
-cocos2d::CCSprite *mArrow;
-cocos2d::CCSprite *mScroll;
-cocos2d::CCSprite *mTitle;
+cocos2d::Sprite *mArrow;
+cocos2d::Sprite *mScroll;
+cocos2d::Sprite *mTitle;
 cocos2d::CCLabelBMFont *mScrollCount;
 cocos2d::CCNode *mRotateNode;
-cocos2d::CCSprite *mLightBack;
+cocos2d::Sprite *mLightBack;
 cocos2d::CCNode *mRotateACW;
 cocos2d::CCNode *mRotateCW;
-cocos2d::CCLayerColor *mFlash;
+cocos2d::LayerColor *mFlash;
 cocos2d::CCLabelTTF *mItemName;
 
 

@@ -26,7 +26,7 @@ CommitArcade* CommitArcade::commit()
 void CommitArcade::onCreate() 
 {
     //hot load
-cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-scroll.plist");
+cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-scroll.plist");
     
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(0, 0, 0), 128, 0);
@@ -40,7 +40,7 @@ CCBReader *pReader = new CCBReader(pNodeLib, this, this);
     // TODO
     //mFlash.blendFunc =  (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };//fix flash bug
 cocos2d::CCString *rolefile = cocos2d::CCString::createWithFormat("sc_role%d0.png", GameRecord::sharedGameRecord()->curr_char);
-    mRole->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(rolefile->getCString()));
+    mRole->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(rolefile->getCString()));
     mLight->setVisible(false);
     mCup->setVisible(false);
     mScore->setString(cocos2d::CCString::createWithFormat("%d", play->arcade->score)->getCString());
@@ -62,7 +62,7 @@ void CommitArcade::onDestroy()
     play->removeChild(mNode, true);
     
     //hot release
-cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-scroll.plist");
+cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-scroll.plist");
     unloadTextureFromeSpriteFrameFile("ui-scroll.plist");
     
     play->manager->addGameObject(GameOver::gameOver(play));
@@ -110,7 +110,7 @@ void CommitArcade::onUpdate(float delta)
                        mCurrentScore >= GameRecord::sharedGameRecord()->task->goldPrize->score )
                     {
                         ccup = 3;
-                        mCup->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-gold2.png"));
+                        mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-gold2.png"));
                         //take the cup
                         play->coins = GameRecord::sharedGameRecord()->task->goldPrize->prize;
                         GameRecord::sharedGameRecord()->task->goldPrize->prize = -1;
@@ -128,7 +128,7 @@ void CommitArcade::onUpdate(float delta)
                             mCurrentScore >= GameRecord::sharedGameRecord()->task->silverPrize->score )
                     {
                         ccup = 2;
-                        mCup->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-silver2.png"));
+                        mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-silver2.png"));
                         //take the cup
                         play->coins = GameRecord::sharedGameRecord()->task->silverPrize->prize;
                         GameRecord::sharedGameRecord()->task->silverPrize->prize = -1;
@@ -141,7 +141,7 @@ void CommitArcade::onUpdate(float delta)
                             mCurrentScore >= GameRecord::sharedGameRecord()->task->bronzePrize->score )
                     {
                         ccup = 1;
-                        mCup->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-bronze2.png"));
+                        mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-bronze2.png"));
                         //take the cup
                         play->coins = GameRecord::sharedGameRecord()->task->bronzePrize->prize;
                         GameRecord::sharedGameRecord()->task->bronzePrize->prize = -1;
@@ -253,16 +253,16 @@ cocos2d::CCLog("Control");
 }
 bool CommitArcade::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRole", CCSprite *, mRole)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLight", CCSprite *, mLight)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCup", CCSprite *, mCup)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRole", Sprite *, mRole)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLight", Sprite *, mLight)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCup", Sprite *, mCup)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScore", CCLabelBMFont *, mScore)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBouns", CCLabelBMFont *, mBouns)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldenTrophy", CCLabelBMFont *, mGoldenTrophy)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverTrophy", CCLabelBMFont *, mSilverTrophy)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeTrophy", CCLabelBMFont *, mBronzeTrophy)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFlash", CCLayerColor *, mFlash)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFlash", LayerColor *, mFlash)
 
   //  CCLog(pMemberVariableName);
 

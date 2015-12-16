@@ -13,7 +13,7 @@
 typedef struct{
     int framecount;
     float playbacktime;
-cocos2d::CCSpriteFrame **frames;
+cocos2d::SpriteFrame **frames;
 }GTInternal_AnimationData;
 
 class GTAnimation : public cocos2d::Ref 
@@ -37,7 +37,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GTAnimation, create);
     int animationCount();
     int animationFrameCount(int AnimationId);
     float animationPlaybackTime(int AnimationId);
-cocos2d::CCSpriteFrame* spriteFrame(int AnimationId, int FrameId);
+cocos2d::SpriteFrame* spriteFrame(int AnimationId, int FrameId);
 
     static void loadAnimationSet(GTAnimation * Anim, const char * Name); 
   private:

@@ -30,7 +30,7 @@ Wood* Wood::wood(cocos2d::Point pos, cocos2d::Point dir, CCNode * parent, GOHand
 void Wood::onCreate() 
 {
     mTimer = 0;
-    mSprite = cocos2d::CCSprite::createWithSpriteFrameName("wood.png");
+    mSprite = cocos2d::Sprite::createWithSpriteFrameName("wood.png");
     mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     mSprite->setPosition(mPos);
     mParent->addChild(mSprite, EFFECT_Z);

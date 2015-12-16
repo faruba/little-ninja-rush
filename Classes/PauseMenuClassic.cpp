@@ -23,7 +23,7 @@ void PauseMenuClassic::updateClassic()
         
         mDailyIcon->setVisible(true);
         Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
-cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mDailyIcon->addChild(icon);
         
@@ -45,7 +45,7 @@ cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon
         
         mWeeklyIcon->setVisible(true);
         Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
-cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mWeeklyIcon->addChild(icon);
         
@@ -67,7 +67,7 @@ cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon
         
         mMonthlyIcon->setVisible(true);
         Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
-cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mMonthlyIcon->addChild(icon);
         
@@ -84,19 +84,19 @@ cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon
     //update crown
     for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
     {
-cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mDailyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective->index; ++i)
     {
-cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mWeeklyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective->index; ++i)
     {
-cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mMonthlyCrown->addChild(crown);
     }
@@ -161,8 +161,8 @@ void PauseMenuClassic::updateArcade()
 void PauseMenuClassic::onCreate() 
 {
     //hot load pause resource
-cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-pause.plist");
-cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-change.plist");
+cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-pause.plist");
+cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-change.plist");
     
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(0, 0, 0), 128, 0);
@@ -180,7 +180,7 @@ cocos2d::CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT
     mBoard->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft-301, 68));
     play->ui()->addChild(mBoard);
     
-    mRode = cocos2d::CCSprite::createWithSpriteFrameName("zt_jz.png");
+    mRode = cocos2d::Sprite::createWithSpriteFrameName("zt_jz.png");
     mRode->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft + 60, 180));
     play->ui()->addChild(mRode);
     mTimer = 0;
@@ -190,26 +190,26 @@ cocos2d::CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT
     switch (GameRecord::sharedGameRecord()->curr_char) {
         case 0:
         {
-            mChange->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change1.png"));
-            mChange->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change2.png"));
+            mChange->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("go_change1.png"));
+            mChange->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("go_change2.png"));
         }
             break;
         case 1:
         {
-            mChange->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change3.png"));
-            mChange->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change4.png"));
+            mChange->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("go_change3.png"));
+            mChange->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("go_change4.png"));
         }
             break;
         case 2:
         {
-            mChange->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change5.png"));
-            mChange->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change6.png"));
+            mChange->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("go_change5.png"));
+            mChange->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("go_change6.png"));
         }
             break;
         case 3:
         {
-            mChange->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change7.png"));
-            mChange->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("go_change8.png"));
+            mChange->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("go_change7.png"));
+            mChange->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("go_change8.png"));
         }
             break;
     }
@@ -217,21 +217,21 @@ cocos2d::CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT
     //sychornize music & sfx
     if( SimpleAudioEngine::sharedEngine()->getBackgroundMusicVolume() == 0 )
     {
-        mMusic->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yy3.png"));
-        mMusic->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yy4.png"));
+        mMusic->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yy3.png"));
+        mMusic->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yy4.png"));
     }
     else {
-        mMusic->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yy1.png"));
-        mMusic->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yy2.png"));
+        mMusic->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yy1.png"));
+        mMusic->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yy2.png"));
     }
     if( SimpleAudioEngine::sharedEngine()->getEffectsVolume() == 0 )
     {
-        mSfx->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yx3.png"));
-        mSfx->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yx4.png"));
+        mSfx->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yx3.png"));
+        mSfx->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yx4.png"));
     }
     else {
-        mSfx->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yx.png"));
-        mSfx->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yx2.png"));
+        mSfx->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yx.png"));
+        mSfx->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yx2.png"));
     }
     
     if( play->mode == MODE_CLASSIC )
@@ -274,9 +274,9 @@ void PauseMenuClassic::onDestroy()
     play->ui()->removeChild(mBoard,true);
     
     //hot release pause resource
-cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-pause.plist");
+cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-pause.plist");
     unloadTextureFromeSpriteFrameFile("ui-pause.plist");
-cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-change.plist");
+cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-change.plist");
     unloadTextureFromeSpriteFrameFile("ui-change.plist");
 }
 
@@ -285,14 +285,14 @@ void PauseMenuClassic::toggleSfx(Ref* ref)
     if( GameRecord::sharedGameRecord()->setting_sfx )
     {
         GameRecord::sharedGameRecord()->setting_sfx = 0;
-        mSfx->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yx3.png"));
-        mSfx->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yx4.png"));
+        mSfx->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yx3.png"));
+        mSfx->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yx4.png"));
         SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
     }
     else{
         GameRecord::sharedGameRecord()->setting_sfx = 1;
-        mSfx->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yx.png"));
-        mSfx->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yx2.png"));
+        mSfx->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yx.png"));
+        mSfx->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yx2.png"));
         SimpleAudioEngine::sharedEngine()->setEffectsVolume(1);
     }
 }
@@ -302,14 +302,14 @@ void PauseMenuClassic::toggleMusic(Ref* ref)
     if( GameRecord::sharedGameRecord()->setting_music )
     {
         GameRecord::sharedGameRecord()->setting_music = 0;
-        mMusic->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yy3.png"));
-        mMusic->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yy4.png"));
+        mMusic->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yy3.png"));
+        mMusic->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yy4.png"));
         SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0);
     }
     else{
         GameRecord::sharedGameRecord()->setting_music = 1;
-        mMusic->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yy1.png"));
-        mMusic->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("zt_yy2.png"));
+        mMusic->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yy1.png"));
+        mMusic->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("zt_yy2.png"));
         SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(1);
     }
 }
@@ -356,14 +356,14 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF*, mMonthly
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", CCNode*, mDailyCrown);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", CCNode*, mWeeklyCrown);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", CCNode*, mMonthlyCrown);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", CCSprite*, mDailyIcon);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", CCSprite*, mWeeklyIcon);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", CCSprite*, mMonthlyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", Sprite*, mDailyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", Sprite*, mWeeklyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", Sprite*, mMonthlyIcon);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", CCNode*, mClassic);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", CCNode*, mArcade);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", CCSprite*, mGoldCoin);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", CCSprite*, mSilverCoin);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", CCSprite*, mBronzeCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", Sprite*, mGoldCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", Sprite*, mSilverCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", Sprite*, mBronzeCoin);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", CCLabelBMFont*, mGoldScore);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", CCLabelBMFont*, mGoldPrize);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", CCLabelBMFont*, mSilverScore);

@@ -27,7 +27,7 @@ void Dart::addTail()
   if( mTail == NULL )
   {
 cocos2d::CCString *tailstr = cocos2d::CCString::createWithFormat("%s_tail.png", mShap->_string.substr(0, mShap->_string.length()-4).c_str());
-    mTail = cocos2d::CCSprite::createWithSpriteFrameName(tailstr->getCString());
+    mTail = cocos2d::Sprite::createWithSpriteFrameName(tailstr->getCString());
     mTail->setAnchorPoint(cocos2d::ccp(0.5f, 0.95f));
     mTail->setPosition(mSprite->getPosition());
     mTail->setOpacity(0);
@@ -57,7 +57,7 @@ cocos2d::CCFadeIn *fi = cocos2d::CCFadeIn::create(0.5f);
 void Dart::onCreate() 
 {
   blocked = false;
-  mSprite = cocos2d::CCSprite::createWithSpriteFrameName(mShap->getCString());
+  mSprite = cocos2d::Sprite::createWithSpriteFrameName(mShap->getCString());
   mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
   mSprite->setPosition(pos);
   mParent->addChild(mSprite, LAYER_MAINROLE+1);

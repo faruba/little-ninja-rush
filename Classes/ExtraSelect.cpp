@@ -30,16 +30,16 @@ cocos2d::CCNode * node = createUIByCCBI("menu-extramenu", "ExtraMenu", ExtraSele
 
 //    if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() )
 //    {
-//        mTwitterBanner->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb10.png"));
+//        mTwitterBanner->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb10.png"));
 //    }
     
     this->setSceneIntro();
-cocos2d::CCLayer::onEnter();
+cocos2d::Layer::onEnter();
 }
 
 void ExtraSelect::onExit() 
 {
-cocos2d::CCLayer::onExit();
+cocos2d::Layer::onExit();
 }
 
 void ExtraSelect::onBack() 
@@ -116,7 +116,7 @@ void ExtraSelect::resetButtons()
     mSelect = NULL;
 }
 
-cocos2d::CCSprite* ExtraSelect::checkButton(cocos2d::Point pos) 
+cocos2d::Sprite* ExtraSelect::checkButton(cocos2d::Point pos) 
 {
     if( mAchievement->getParent()->boundingBox().containsPoint(pos) )
     {
@@ -219,7 +219,7 @@ void ExtraSelect::setSceneIntro()
   doSceneIntro(mSceneIntro, this);
 }
 
-void ExtraSelect::setSceneOutro(cocos2d::CCScene* newscene) 
+void ExtraSelect::setSceneOutro(cocos2d::Scene* newscene) 
 {
   if( mIntroFlag )
   {
@@ -253,14 +253,14 @@ cocos2d::CCLog("Control");
 }
 bool ExtraSelect::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-//  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMask", CCLayerColor*, mMask) 
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mAchievement", CCSprite*, mAchievement)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStatistics", CCSprite*, mStatistics)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTips", CCSprite*, mTips)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCredits", CCSprite*, mCredits)
-//  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook", CCSprite*, mFacebook)
-//  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterBanner", CCSprite*, mTwitterBanner)
-//  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter", CCSprite*, mTwitter)
+//  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMask", LayerColor*, mMask) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mAchievement", Sprite*, mAchievement)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStatistics", Sprite*, mStatistics)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTips", Sprite*, mTips)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCredits", Sprite*, mCredits)
+//  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook", Sprite*, mFacebook)
+//  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterBanner", Sprite*, mTwitterBanner)
+//  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter", Sprite*, mTwitter)
 
  // CCLog(pMemberVariableName);
 

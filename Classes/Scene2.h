@@ -19,9 +19,9 @@ class Scene2: public SceneInterface
 cocos2d::CCNode *mFront;
 cocos2d::CCNode *mBg;
     int mTileCount;
-cocos2d::CCSprite *mLight;
-cocos2d::CCSprite *mDynBg[12];
-cocos2d::CCSprite *mUpbg[4];
+cocos2d::Sprite *mLight;
+cocos2d::Sprite *mDynBg[12];
+cocos2d::Sprite *mUpbg[4];
 
 };
 #endif

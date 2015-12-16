@@ -15,7 +15,7 @@ class GTGhostShadow:public cocos2d::CCNode
     GTAnimatedSprite *mCopy;
     float mInterval;
     int mNumber;
-cocos2d::CCSprite **mShadows;
+cocos2d::Sprite **mShadows;
     int mIndex;
     int mCount;
     float mTimer;

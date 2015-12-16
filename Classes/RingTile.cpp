@@ -14,7 +14,7 @@ RingTile* RingTile::tile(float TileSize, float WindowSize, int BufferSize)
         wtc++;
     }
     tile->mWindowTileCount = wtc;
-    tile->mpWindowTiles = new cocos2d::CCSprite*[wtc];
+    tile->mpWindowTiles = new cocos2d::Sprite*[wtc];
     for(int i=0; i<wtc; ++i)
     {
         tile->mpWindowTiles[i] = NULL;
@@ -87,7 +87,7 @@ void RingTile::initTiles(int * Tiles, int Count)
   if(Count >= mWindowTileCount)
   {
     mWindowSpriteIndex = 0;
-cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
     for(int i=0; i<mWindowTileCount; ++i)
     {
       mpBuffer[i] = Tiles[i];
@@ -97,7 +97,7 @@ cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFr
         mpWindowTiles[i]->setDisplayFrame(cache->spriteFrameByName(cocos2d::CCString::createWithFormat("tile_%d.png", Tiles[i])->getCString()));
       }
       else {
-        mpWindowTiles[i] = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("tile_%d.png", Tiles[i])->getCString());
+        mpWindowTiles[i] = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("tile_%d.png", Tiles[i])->getCString());
         //mpWindowTiles[i]->retain();
         this->addChild(mpWindowTiles[i]);
       }
@@ -165,7 +165,7 @@ void RingTile::runTiles(float delta)
             int si = (mWindowSpriteIndex + i) % mWindowTileCount;
             //加载前n个pending精灵
             int pi = (mWindowIndex + mWindowTileCount + i) % mBufferSize;
-            mpWindowTiles[si]->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(cocos2d::CCString::createWithFormat("tile_%d.png", mpBuffer[pi])->getCString()));
+            mpWindowTiles[si]->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(cocos2d::CCString::createWithFormat("tile_%d.png", mpBuffer[pi])->getCString()));
             mpWindowTiles[si]->getTexture()->setAliasTexParameters();//1.0.4
         }
         mWindowIndex = (mWindowIndex + n) % mBufferSize;

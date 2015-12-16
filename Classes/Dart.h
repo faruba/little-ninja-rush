@@ -17,8 +17,8 @@ class Dart:
     virtual void onUpdate(float delta);
     virtual void onDestroy();
 cocos2d::CCNode* mParent;
-cocos2d::CCSprite* mSprite;
-cocos2d::CCSprite* mTail;
+cocos2d::Sprite* mSprite;
+cocos2d::Sprite* mTail;
     GTAnimatedSprite *mSTail;
 cocos2d::CCString *mShap;
     bool mPaused;

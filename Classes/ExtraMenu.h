@@ -5,7 +5,7 @@
 #include "FoldItem.h"
 #include "cocosbuilder/CocosBuilder.h"
 class ExtraMenu:
-  public cocos2d::CCLayer, 
+  public cocos2d::Layer, 
   public cocosbuilder::CCBMemberVariableAssigner,
   public cocosbuilder::CCBSelectorResolver,
   public FoldItemController
@@ -17,7 +17,7 @@ class ExtraMenu:
     virtual void onExit();
 
     LNR_SCENE_METHOD(ExtraMenu);
-    static CCScene* scene(int mode);
+    static cocos2d::Scene* scene(int mode);
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ExtraMenu, create);
     virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
@@ -35,7 +35,7 @@ cocos2d::CCNode *mItemList;
     int mCurrUnFold;
     cocos2d::Point mTouchBegin;
     //scrolls
-cocos2d::CCSprite *mScrollBody;
+cocos2d::Sprite *mScrollBody;
 
     int mCurrState;//0-achievements 1-statistics 2-about us
 
@@ -49,11 +49,11 @@ cocos2d::CCSprite *mScrollBody;
     //-- auto assign --
 cocos2d::CCLabelBMFont *mCoins;
 cocos2d::CCNode *mList;
-cocos2d::CCSprite *mBanner;
+cocos2d::Sprite *mBanner;
 
     //intro&outro
 cocos2d::CCNode *mSceneIntro;
-cocos2d::CCScene *mNewScene;
+cocos2d::Scene *mNewScene;
     bool mIntroFlag;
 
     void activate(int cid);
@@ -75,7 +75,7 @@ cocos2d::CCScene *mNewScene;
 
     //intro&outro
     void setSceneIntro();
-    void setSceneOutro(cocos2d::CCScene* newscene);
+    void setSceneOutro(cocos2d::Scene* newscene);
     void doneOutro();
 
     virtual void purchase(int cid) {};

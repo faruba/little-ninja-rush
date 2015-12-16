@@ -3,7 +3,7 @@
 #include "cocos2d.h"
 #include "GTAnimation.h"
 
-class GTAnimatedEffect:public cocos2d::CCSprite
+class GTAnimatedEffect:public cocos2d::Sprite
 {
 public:
   virtual void update(float);

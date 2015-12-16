@@ -17,10 +17,10 @@ class Scene5: public SceneInterface
     RingTile *mTiles;
 cocos2d::CCNode *mFront;
 cocos2d::CCNode *mBg;
-cocos2d::CCSprite *mFronts[4];
-cocos2d::CCSprite *mBgs1[2];
-cocos2d::CCSprite *mBgs2[3];
-cocos2d::CCSprite *mBgs3[3];
+cocos2d::Sprite *mFronts[4];
+cocos2d::Sprite *mBgs1[2];
+cocos2d::Sprite *mBgs2[3];
+cocos2d::Sprite *mBgs3[3];
 
 };
 #endif

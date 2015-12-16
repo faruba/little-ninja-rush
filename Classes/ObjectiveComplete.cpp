@@ -107,7 +107,7 @@ void ObjectiveComplete::onUpdate(float delta)
                 //--- to move ---
                 mState = STATE_MOVE;
                 //add objective detail
-cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
                 mObjType->setDisplayFrame(cache->spriteFrameByName(cocos2d::CCString::createWithFormat("objc-%d.png", mCurrIndex)->getCString()));
                 mObjRect->setPosition(cocos2d::ccp(12, 12));
 cocos2d::CCNode *currobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
@@ -119,7 +119,7 @@ cocos2d::CCNode *currobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
                 //add crowns
                 for(int i=0; i<mCurrObj->index; ++i)
                 {
-cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
                     crown->setPosition(cocos2d::ccp(-20*i, 0));
                     mCrowns->addChild(crown);
                 }
@@ -160,7 +160,7 @@ cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d:
             {
                 SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcrown.mp3").c_str());
 cocos2d::CCString *crownname = cocos2d::CCString::createWithFormat("crown%d.png", mCurrObj->index);
-cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(crownname->getCString());
+cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname->getCString());
                 crown->setPosition(cocos2d::ccp(-20*mCurrObj->index, 0));
                 mCrowns->addChild(crown);
                 for(int i=0; i<10; ++i)
@@ -378,25 +378,25 @@ cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("月常任务\n已全部
         return sp;
     }
     else {
-cocos2d::CCSprite *spbg = NULL;
+cocos2d::Sprite *spbg = NULL;
         switch (typ) {
             case 0:
             {
-                spbg = cocos2d::CCSprite::createWithSpriteFrameName("ms_bg1.png");
+                spbg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg1.png");
             }
                 break;
             case 1:
             {
-                spbg = cocos2d::CCSprite::createWithSpriteFrameName("ms_bg3.png");
+                spbg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg3.png");
             }
                 break;
             case 2:
             {
-                spbg = cocos2d::CCSprite::createWithSpriteFrameName("ms_bg2.png");
+                spbg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg2.png");
             }
                 break;
         }
-cocos2d::CCSprite *spicon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::Sprite *spicon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
         spicon->setPosition(cocos2d::ccp(spbg->getContentSize().width/2, spbg->getContentSize().height/2));
         spbg->addChild(spicon, 0, 0);
 cocos2d::CCLabelBMFont *desc = cocos2d::CCLabelBMFont::create(ach->desc->getCString(), "ab34.fnt");
@@ -430,11 +430,11 @@ cocos2d::CCLog("Control");
 }
 bool ObjectiveComplete::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBanner", CCSprite *, mBanner)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mObjType", CCSprite *, mObjType)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBanner", Sprite *, mBanner)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mObjType", Sprite *, mObjType)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mCrowns", CCNode *, mCrowns)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBounsCoins", CCLabelBMFont *, mBounsCoins)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScroll", CCSprite *, mScroll)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScroll", Sprite *, mScroll)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBounsScroll", CCLabelBMFont *, mBounsScroll)
   //  CCLog(pMemberVariableName);
 

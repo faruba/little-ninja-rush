@@ -3,7 +3,7 @@
 #include "GameTool.h"
 #include "cocosbuilder/CocosBuilder.h"
 class TipsMenu:
-  public cocos2d::CCLayer, 
+  public cocos2d::Layer, 
   public cocosbuilder::CCBMemberVariableAssigner,
   public cocosbuilder::CCBSelectorResolver
 {
@@ -24,7 +24,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TipsMenu, create);
 private:
     void updateTip(int index);
     void setSceneIntro();
-    void setSceneOutro(cocos2d::CCScene* newscene);
+    void setSceneOutro(cocos2d::Scene* newscene);
     void doneOutro();
 cocos2d::CCNode *mNode;
 cocos2d::CCLabelTTF *mCount;
@@ -35,7 +35,7 @@ cocos2d::CCMenuItemImage *mRight;
 
     //intro&outro
 cocos2d::CCNode *mSceneIntro;
-cocos2d::CCScene *mNewScene;
+cocos2d::Scene *mNewScene;
     bool mIntroFlag;
 
 

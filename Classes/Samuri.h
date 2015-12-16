@@ -25,7 +25,7 @@ class Samuri:
 cocos2d::CCNode* mParent;
     GTAnimatedSprite* mSprite;
     GTAnimatedSprite *mHint;
-    //CCSprite* mMark;
+    //Sprite* mMark;
     int     mState;
     float   mTimer;
     bool    mFlag;

@@ -10,7 +10,7 @@ SpeedLine *SpeedLine::line()
 
 void SpeedLine::onCreate() 
 {
-    mSprite = cocos2d::CCSprite::createWithSpriteFrameName("sdx.png");
+    mSprite = cocos2d::Sprite::createWithSpriteFrameName("sdx.png");
     mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     mSprite->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width+mSprite->getContentSize().width, SCREEN_HEIGHT*CCRANDOM_0_1() ));
     mSpeed = 500 + 400*CCRANDOM_0_1();

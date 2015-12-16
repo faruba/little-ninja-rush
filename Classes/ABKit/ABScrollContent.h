@@ -6,7 +6,7 @@
 
 USING_NS_CC_EXT;
 
-class ABScrollContent : public CCLayer{
+class ABScrollContent : public Layer{
 public:
   virtual bool init();
   virtual void update(float);

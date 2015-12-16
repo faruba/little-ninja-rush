@@ -15,7 +15,7 @@
 //#include "ABSystem.h"
 
 class ControlLayer : 
-  public CCLayer,
+  public Layer,
   public CCBMemberVariableAssigner,
   public CCBSelectorResolver
 {
@@ -34,17 +34,17 @@ class ControlLayer :
     void updateButton();
     void tickNumber(int n);
 cocos2d::CCLabelBMFont *mNumber;
-cocos2d::CCSprite *mBtnCancel;
-cocos2d::CCSprite *mBtnCancel2;
-cocos2d::CCSprite *mBtnRevive;
-cocos2d::CCSprite *mBtnRevive2;
+cocos2d::Sprite *mBtnCancel;
+cocos2d::Sprite *mBtnCancel2;
+cocos2d::Sprite *mBtnRevive;
+cocos2d::Sprite *mBtnRevive2;
 cocos2d::CCLabelBMFont *mCoins;
-cocos2d::CCSprite *mBtnBuyBasic;
-cocos2d::CCSprite *mBtnBuyBasic2;
-cocos2d::CCSprite *mBtnBuyStandard;
-cocos2d::CCSprite *mBtnBuyStandard2;
-cocos2d::CCSprite *mBtnBuyDeluxe;
-cocos2d::CCSprite *mBtnBuyDeluxe2;
+cocos2d::Sprite *mBtnBuyBasic;
+cocos2d::Sprite *mBtnBuyBasic2;
+cocos2d::Sprite *mBtnBuyStandard;
+cocos2d::Sprite *mBtnBuyStandard2;
+cocos2d::Sprite *mBtnBuyDeluxe;
+cocos2d::Sprite *mBtnBuyDeluxe2;
 
     ClassicContinue *master;
     int mClicked;
@@ -52,7 +52,7 @@ cocos2d::CCSprite *mBtnBuyDeluxe2;
 
 bool ControlLayer::init() 
 {
-    if( CCLayer::init() )
+    if( Layer::init() )
     {
 NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
 cocosbuilder::CCBReader *pReader = new CCBReader(pNodeLib, this, this);
@@ -286,17 +286,17 @@ cocos2d::CCLog("Control");
 bool ControlLayer::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mNumber", CCLabelBMFont *, mNumber)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel", CCSprite *, mBtnCancel)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel2", CCSprite *, mBtnCancel2)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnRevive", CCSprite *, mBtnRevive)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnRevive2", CCSprite *, mBtnRevive2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel", Sprite *, mBtnCancel)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel2", Sprite *, mBtnCancel2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnRevive", Sprite *, mBtnRevive)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnRevive2", Sprite *, mBtnRevive2)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mCoins", CCLabelBMFont *, mCoins)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyBasic", CCSprite *, mBtnBuyBasic)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyBasic2", CCSprite *, mBtnBuyBasic2)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyStandard", CCSprite *, mBtnBuyStandard)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyStandard2", CCSprite *, mBtnBuyStandard2)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyDeluxe", CCSprite *, mBtnBuyDeluxe)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyDeluxe2", CCSprite *, mBtnBuyDeluxe2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyBasic", Sprite *, mBtnBuyBasic)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyBasic2", Sprite *, mBtnBuyBasic2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyStandard", Sprite *, mBtnBuyStandard)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyStandard2", Sprite *, mBtnBuyStandard2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyDeluxe", Sprite *, mBtnBuyDeluxe)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyDeluxe2", Sprite *, mBtnBuyDeluxe2)
   //  CCLog(pMemberVariableName);
 
   return false;

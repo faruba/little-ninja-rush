@@ -20,7 +20,7 @@ class PumpkinFire:
     virtual void onUpdate(float delta);
     virtual void onDestroy();
 cocos2d::CCNode* mParent;
-cocos2d::CCSprite* mSprite;
+cocos2d::Sprite* mSprite;
     bool mIsEnemy;
 
     bool mRemoved;

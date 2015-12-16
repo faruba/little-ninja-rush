@@ -23,7 +23,7 @@ class MainRole:
 
     void onHitClassic(int type);
     void onHitArcade(int type);
-cocos2d::CCSprite* sprite();
+cocos2d::Sprite* sprite();
 cocos2d::CCNode *mParent;
     GTAnimatedSprite *mSprite;
     int     mRoleId;

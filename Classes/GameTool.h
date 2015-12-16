@@ -29,8 +29,8 @@ typedef float CFTimeInterval;
 CFAbsoluteTime CFAbsoluteTimeGetCurrent();
 #endif
 
-#define LNR_SCENE_METHOD(T) static CCScene* scene() { \
-cocos2d::CCScene *ret = cocos2d::CCScene::create(); \
+#define LNR_SCENE_METHOD(T) static cocos2d::Scene* scene() { \
+cocos2d::Scene *ret = cocos2d::Scene::create(); \
     T *tm = T::create(); \
     ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor); \
     ret->setAnchorPoint(cocos2d::ccp(0, 0)); \
@@ -78,6 +78,6 @@ void unloadTextureFromeSpriteFrameFile(const char *plist);
 cocos2d::CCSequence *createScaleSequence(float fDuration[], float fScale[], int count);
 cocos2d::CCNode *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, Ref *target);
 void doSceneIntro(cocos2d::CCNode *&mSceneIntro, CCNode *target);
-cocos2d::CCScene* doSceneOutro(cocos2d::CCScene* mNewScene, CCNode *&mSceneIntro, SEL_CallFunc callBack, CCNode *target);
+cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, CCNode *&mSceneIntro, SEL_CallFunc callBack, CCNode *target);
 
 #endif

@@ -16,7 +16,7 @@ class PopOption;
 USING_NS_CC_EXT;
 
 class TitleMenu : 
-  public cocos2d::CCLayer, 
+  public cocos2d::Layer, 
   public cocosbuilder::CCBMemberVariableAssigner,
   public cocosbuilder::CCBSelectorResolver
 {
@@ -58,29 +58,29 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TitleMenu, create);
     
   // intro&outro
   void setSceneIntro();
-  void setSceneOutro(cocos2d::CCScene* newscene);
+  void setSceneOutro(cocos2d::Scene* newscene);
   void doneOutro();
 
 private:
-cocos2d::CCSprite *mStar1;
-cocos2d::CCSprite *mStar2;
-cocos2d::CCSprite *mStar3;
-cocos2d::CCSprite *mStar4;
-cocos2d::CCSprite *mStar5;
-cocos2d::CCSprite *mCloud1;
-cocos2d::CCSprite *mCloud2;
+cocos2d::Sprite *mStar1;
+cocos2d::Sprite *mStar2;
+cocos2d::Sprite *mStar3;
+cocos2d::Sprite *mStar4;
+cocos2d::Sprite *mStar5;
+cocos2d::Sprite *mCloud1;
+cocos2d::Sprite *mCloud2;
 cocos2d::CCMenu *mMainButton;
 cocos2d::CCMenu *mMiniButton;
-cocos2d::CCSprite *mLogo;
+cocos2d::Sprite *mLogo;
 cocos2d::CCNode *mSakuraNode;
 cocos2d::CCNode *mSakuraNode2;
 cocos2d::CCNode *mEnemies;
-cocos2d::CCLayerColor *mMask;
+cocos2d::LayerColor *mMask;
 cocos2d::CCArray *mSakura;
   float mWind;
   float mWindx;
-cocos2d::CCSprite *mNew;
-cocos2d::CCSprite *mCNew;
+cocos2d::Sprite *mNew;
+cocos2d::Sprite *mCNew;
 cocos2d::CCMenuItemImage *mTwitter;
 cocos2d::CCMenuItemImage *mOption;
 
@@ -94,7 +94,7 @@ cocos2d::CCMenuItemImage *mOption;
 
   //intro&outro
 cocos2d::CCNode *mSceneIntro;
-cocos2d::CCScene *mNewScene;
+cocos2d::Scene *mNewScene;
   bool mIntroFlag;
 };
 
@@ -115,7 +115,7 @@ public:
 
   bool Update(float, float);
 cocos2d::CCNode *mParent;
-cocos2d::CCSprite *mSprite;
+cocos2d::Sprite *mSprite;
   //float mFlipX;
   float mWindX;
   float mSpeed;

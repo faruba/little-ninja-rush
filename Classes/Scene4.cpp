@@ -15,14 +15,14 @@
 
 void Scene4::loadScene() 
 {
-cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
     cache->addSpriteFramesWithFile("scene7.plist");
     cache->addSpriteFramesWithFile("scene8.plist");
 }
 
 void Scene4::unloadScene() 
 {
-cocos2d::CCSpriteFrameCache *cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
     cache->removeSpriteFramesFromFile("scene7.plist");
     cache->removeSpriteFramesFromFile("scene8.plist");
     unloadTextureFromeSpriteFrameFile("scene7.plist");
@@ -34,9 +34,9 @@ void Scene4::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     mTiles = tiles;
     mBg = bg;
     mFront = fg;
-cocos2d::CCLayerColor *sbg = cocos2d::CCLayerColor::create(ccc4(201, 239, 251, 255));
+cocos2d::LayerColor *sbg = cocos2d::LayerColor::create(ccc4(201, 239, 251, 255));
     mBg->addChild(sbg);
-cocos2d::CCSprite *sky = cocos2d::CCSprite::createWithSpriteFrameName("cj4_bg.png");
+cocos2d::Sprite *sky = cocos2d::Sprite::createWithSpriteFrameName("cj4_bg.png");
     sky->setAnchorPoint(cocos2d::ccp(0, 1));
     sky->setPosition(cocos2d::ccp(0, SCREEN_HEIGHT));
     mBg->addChild(sky);
@@ -48,7 +48,7 @@ cocos2d::CCSprite *sky = cocos2d::CCSprite::createWithSpriteFrameName("cj4_bg.pn
     //增加前景
     for( int i=0; i<6; ++i)
     {
-        mFronts[i] = cocos2d::CCSprite::createWithSpriteFrameName("cj4_qj.png");
+        mFronts[i] = cocos2d::Sprite::createWithSpriteFrameName("cj4_qj.png");
         mFronts[i]->setAnchorPoint(cocos2d::ccp(0, 0));
         mFronts[i]->setPosition(cocos2d::ccp(mFronts[i]->getContentSize().width*i, 0));
         mFront->addChild(mFronts[i]);
@@ -57,7 +57,7 @@ cocos2d::CCSprite *sky = cocos2d::CCSprite::createWithSpriteFrameName("cj4_bg.pn
     //增加云彩
     for( int i=0; i<2; ++i)
     {
-        mClouds[i] = cocos2d::CCSprite::createWithSpriteFrameName("cj4_cloud.png");
+        mClouds[i] = cocos2d::Sprite::createWithSpriteFrameName("cj4_cloud.png");
         mClouds[i]->setPosition(cocos2d::ccp( 300+200*i, 280+20*i));
         mBg->addChild(mClouds[i]);
     }
@@ -65,7 +65,7 @@ cocos2d::CCSprite *sky = cocos2d::CCSprite::createWithSpriteFrameName("cj4_bg.pn
     //增加背景
     for( int i=0; i<6; ++i)
     {
-        mBgs[i] = cocos2d::CCSprite::createWithSpriteFrameName("cj4_hj.png");
+        mBgs[i] = cocos2d::Sprite::createWithSpriteFrameName("cj4_hj.png");
         mBgs[i]->setAnchorPoint(cocos2d::ccp(0, 1));
         mBgs[i]->setPosition(cocos2d::ccp(mBgs[i]->getContentSize().width*i, SCREEN_HEIGHT - 20));
         mBg->addChild(mBgs[i]);

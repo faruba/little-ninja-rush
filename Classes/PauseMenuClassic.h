@@ -10,7 +10,7 @@ class PauseMenuClassic:
   public cocosbuilder::CCBSelectorResolver
 {
 private:
-cocos2d::CCSprite *mRode;
+cocos2d::Sprite *mRode;
     CEClipedNode *mBoard;
     
     float mTimer;
@@ -34,9 +34,9 @@ cocos2d::CCLabelTTF *mMonthlyObjective;
 cocos2d::CCNode *mDailyCrown;
 cocos2d::CCNode *mWeeklyCrown;
 cocos2d::CCNode *mMonthlyCrown;
-cocos2d::CCSprite *mDailyIcon;
-cocos2d::CCSprite *mWeeklyIcon;
-cocos2d::CCSprite *mMonthlyIcon;
+cocos2d::Sprite *mDailyIcon;
+cocos2d::Sprite *mWeeklyIcon;
+cocos2d::Sprite *mMonthlyIcon;
 cocos2d::CCNode *mClassic;
 cocos2d::CCNode *mArcade;
     
@@ -47,9 +47,9 @@ cocos2d::CCLabelBMFont *mBronzeScore;
 cocos2d::CCLabelBMFont *mGoldPrize;
 cocos2d::CCLabelBMFont *mSilverPrize;
 cocos2d::CCLabelBMFont *mBronzePrize;
-cocos2d::CCSprite *mGoldCoin;
-cocos2d::CCSprite *mSilverCoin;
-cocos2d::CCSprite *mBronzeCoin;
+cocos2d::Sprite *mGoldCoin;
+cocos2d::Sprite *mSilverCoin;
+cocos2d::Sprite *mBronzeCoin;
 
     void updateClassic();
     void updateArcade();

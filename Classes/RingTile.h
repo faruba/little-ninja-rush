@@ -10,7 +10,7 @@ class RingTile:public cocos2d::CCNode
 
     float   mTileSize;//砖块尺寸
     float   mWindowSize;//窗口的尺寸
-    cocos2d::CCSprite **mpWindowTiles;//背景贴图
+    cocos2d::Sprite **mpWindowTiles;//背景贴图
     int     mWindowTileCount;//mpWindowTiles的尺寸
     int     mWindowSpriteIndex;//mpWindowTiles的起始index
     int     mWindowIndex;//Window在Buffer中起始index

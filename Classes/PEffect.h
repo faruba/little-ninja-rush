@@ -25,7 +25,7 @@ cocos2d::CCNode *mParent;
     cocos2d::Point mPos;
     cocos2d::Point mDir;
     cocos2d::Point mAnchor;
-cocos2d::CCSprite *mSprite;
+cocos2d::Sprite *mSprite;
     float mTimer;
 
     GOHandler mTarget;

@@ -148,51 +148,51 @@ cocos2d::CCNode *node = pReader->readNodeGraphFromFile("menu-titleoption.ccbi", 
     //sychornize music & sfx
     if( SimpleAudioEngine::sharedEngine()->getBackgroundMusicVolume() == 0 )
     {
-        mMusic->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mMusic->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mMusic->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
+        mMusic->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
     }
     else {
-        mMusic->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
-        mMusic->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mMusic->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
+        mMusic->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
     }
     if( SimpleAudioEngine::sharedEngine()->getEffectsVolume() == 0 )
     {
-        mSfx->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mSfx->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mSfx->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
+        mSfx->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
     }
     else {
-        mSfx->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
-        mSfx->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mSfx->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
+        mSfx->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
     }
     //sync push notification
     if( GameRecord::sharedGameRecord()->game_notify < 0 )
     {
-        mPushNotification->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mPushNotification->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mPushNotification->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
+        mPushNotification->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
     }
     else {
-        mPushNotification->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
-        mPushNotification->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mPushNotification->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
+        mPushNotification->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
     }
     //sync tutorial
     if( GameRecord::sharedGameRecord()->game_tutorial == 0 )
     {
-        mTutorial->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
-        mTutorial->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mTutorial->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
+        mTutorial->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
     }
     else {
-        mTutorial->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mTutorial->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mTutorial->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
+        mTutorial->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
     }
     //sync icloud
     if( GameRecord::sharedGameRecord()->setting_icloud > 0 )
     {
-        miCloud->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
-        miCloud->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        miCloud->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
+        miCloud->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
     }
     else {
-        miCloud->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
-        miCloud->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        miCloud->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
+        miCloud->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
     }
 }
 
@@ -312,14 +312,14 @@ void PopOption::onToggleSfx()
     if( GameRecord::sharedGameRecord()->setting_sfx )
     {
         GameRecord::sharedGameRecord()->setting_sfx = 0;
-        mSfx->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mSfx->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mSfx->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
+        mSfx->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
         SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
     }
     else{
         GameRecord::sharedGameRecord()->setting_sfx = 1;
-        mSfx->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
-        mSfx->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mSfx->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
+        mSfx->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
         SimpleAudioEngine::sharedEngine()->setEffectsVolume(1);
     }
 }
@@ -330,14 +330,14 @@ void PopOption::onToggleMusic()
     if( GameRecord::sharedGameRecord()->setting_music )
     {
         GameRecord::sharedGameRecord()->setting_music = 0;
-        mMusic->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mMusic->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mMusic->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
+        mMusic->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
         SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0);
     }
     else{
         GameRecord::sharedGameRecord()->setting_music = 1;
-        mMusic->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
-        mMusic->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mMusic->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
+        mMusic->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
         SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(1);
     }
 }
@@ -349,13 +349,13 @@ void PopOption::onTogglePushNotification()
 //    if( GameRecord::sharedGameRecord()->game_notify < 0 )
 //    {
 //        GameRecord::sharedGameRecord()->game_notify = 1;
-//        mPushNotification->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
-//        mPushNotification->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+//        mPushNotification->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
+//        mPushNotification->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
 //    }
 //    else {
 //        GameRecord::sharedGameRecord()->game_notify = -1;
-//        mPushNotification->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
-//        mPushNotification->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+//        mPushNotification->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
+//        mPushNotification->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
 //    }
 //    AppController *delgate = (AppController*)UIApplication->sharedApplication().delegate;
 //    delgate->scheduleLocalNotifuication();
@@ -367,13 +367,13 @@ void PopOption::onToggleTutorial()
     if( GameRecord::sharedGameRecord()->game_tutorial == 0 )
     {
         GameRecord::sharedGameRecord()->game_tutorial = 1;
-        mTutorial->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
-        mTutorial->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+        mTutorial->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
+        mTutorial->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
     }
     else {
         GameRecord::sharedGameRecord()->game_tutorial = 0;
-        mTutorial->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
-        mTutorial->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+        mTutorial->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
+        mTutorial->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
     }
 }
 
@@ -384,13 +384,13 @@ void PopOption::onToggleiCloud()
 //    if( GameRecord::sharedGameRecord()->setting_icloud > 0 )
 //    {
 //        GameRecord::sharedGameRecord()->setting_icloud = 0;
-//        miCloud->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
-//        miCloud->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingoff.png"));
+//        miCloud->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
+//        miCloud->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingoff.png"));
 //    }
 //    else {
 //        GameRecord::sharedGameRecord()->setting_icloud = 1;
-//        miCloud->setNormalImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
-//        miCloud->setSelectedImage(cocos2d::CCSprite::createWithSpriteFrameName("settingon.png"));
+//        miCloud->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
+//        miCloud->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("settingon.png"));
 //    }
 }
 
@@ -420,14 +420,14 @@ cocos2d::CCLabelTTF *mMonthlyObjective;
 cocos2d::CCNode *mDailyCrown;
 cocos2d::CCNode *mWeeklyCrown;
 cocos2d::CCNode *mMonthlyCrown;
-cocos2d::CCSprite *mDailyIcon;
-cocos2d::CCSprite *mWeeklyIcon;
-cocos2d::CCSprite *mMonthlyIcon;
+cocos2d::Sprite *mDailyIcon;
+cocos2d::Sprite *mWeeklyIcon;
+cocos2d::Sprite *mMonthlyIcon;
 cocos2d::CCNode *mClassic;
 cocos2d::CCNode *mArcade;
-cocos2d::CCSprite *mGoldCoin;
-cocos2d::CCSprite *mSilverCoin;
-cocos2d::CCSprite *mBronzeCoin;
+cocos2d::Sprite *mGoldCoin;
+cocos2d::Sprite *mSilverCoin;
+cocos2d::Sprite *mBronzeCoin;
 cocos2d::CCLabelBMFont *mGoldScore;
 cocos2d::CCLabelBMFont *mGoldPrize;
 cocos2d::CCLabelBMFont *mSilverScore;
@@ -460,14 +460,14 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF*, mMonthly
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", CCNode*, mDailyCrown);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", CCNode*, mWeeklyCrown);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", CCNode*, mMonthlyCrown);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", CCSprite*, mDailyIcon);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", CCSprite*, mWeeklyIcon);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", CCSprite*, mMonthlyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", Sprite*, mDailyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", Sprite*, mWeeklyIcon);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", Sprite*, mMonthlyIcon);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", CCNode*, mClassic);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", CCNode*, mArcade);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", CCSprite*, mGoldCoin);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", CCSprite*, mSilverCoin);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", CCSprite*, mBronzeCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", Sprite*, mGoldCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", Sprite*, mSilverCoin);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", Sprite*, mBronzeCoin);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", CCLabelBMFont*, mGoldScore);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", CCLabelBMFont*, mGoldPrize);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", CCLabelBMFont*, mSilverScore);
@@ -513,7 +513,7 @@ void PopObj::displayClassic()
         
         mDailyIcon->setVisible(true);
         Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
-cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mDailyIcon->addChild(icon);
         
@@ -535,7 +535,7 @@ cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon
         
         mWeeklyIcon->setVisible(true);
         Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
-cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mWeeklyIcon->addChild(icon);
         
@@ -557,7 +557,7 @@ cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon
         
         mMonthlyIcon->setVisible(true);
         Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
-cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
         icon->setPosition(cocos2d::ccp(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mMonthlyIcon->addChild(icon);
         
@@ -574,19 +574,19 @@ cocos2d::CCSprite *icon = cocos2d::CCSprite::createWithSpriteFrameName(ach->icon
     //update crown
     for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
     {
-cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mDailyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective->index; ++i)
     {
-cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mWeeklyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective->index; ++i)
     {
-cocos2d::CCSprite *crown = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
         crown->setPosition(cocos2d::ccp(32-16*i, 0));
         mMonthlyCrown->addChild(crown);
     }
@@ -656,7 +656,7 @@ cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d
     mBoard->setPosition(cocos2d::ccp(-301, 58));
     this->addChild(mBoard);
     
-    mRode = cocos2d::CCSprite::createWithSpriteFrameName("index_jz.png");
+    mRode = cocos2d::Sprite::createWithSpriteFrameName("index_jz.png");
     mRode->setPosition(cocos2d::ccp(70, 170));
     this->addChild(mRode);
     mTimer = 0;
@@ -758,7 +758,7 @@ Sakura* Sakura::create(cocos2d::CCNode *parent)
 {
   Sakura *ret = new Sakura;
   ret->init();
-  ret->mSprite = cocos2d::CCSprite::createWithSpriteFrameName("scene-snow.png");
+  ret->mSprite = cocos2d::Sprite::createWithSpriteFrameName("scene-snow.png");
   ret->mSprite->setPosition(cocos2d::ccp((SCREEN_WIDTH+300)*CCRANDOM_0_1(), SCREEN_HEIGHT+50 ));
   ret->mParent = parent;
   //ret->mFlipX = 0.5f + CCRANDOM_0_1();
@@ -804,7 +804,7 @@ bool Sakura::Update(float delta, float wind)
 
 bool TitleMenu::init()
 {
-    if ( !CCLayer::init() )
+    if ( !Layer::init() )
     {
         return false;
     }
@@ -834,8 +834,8 @@ cocos2d::CCNode * node = createUIByCCBI("menu-title", "TitleMenu", TitleMenuLaye
   //select SinaWeibo / Twitter
   if(UniversalFit::shouldUsingSinaWeibo())
   {
-    mTwitter->setNormalSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("contact3.png"));
-    mTwitter->setSelectedSpriteFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("contact3.png"));
+    mTwitter->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("contact3.png"));
+    mTwitter->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("contact3.png"));
   }
   
   for(int i=0; i<RUN; ++i)
@@ -942,7 +942,7 @@ cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sqa);
           gPopFlag = true;
       }
   }
-cocos2d::CCLayer::onEnter();
+cocos2d::Layer::onEnter();
 }
 
 void TitleMenu::showObjs()
@@ -999,7 +999,7 @@ void TitleMenu::hideOpt()
     mOpt = NULL;
 }
 //
-//CCSprite* TitleMenu::int nid()
+//Sprite* TitleMenu::int nid()
 //{
 //    switch (nid) {
 //        case 0:
@@ -1152,7 +1152,7 @@ void TitleMenu::onExit()
 {
     removeAllChildrenWithCleanup(true);
     PublicLoad::menuTitle()->unloadAll();
-cocos2d::CCLayer::onExit();
+cocos2d::Layer::onExit();
 }
 
 void TitleMenu::onPlayClassic()
@@ -1285,7 +1285,7 @@ void TitleMenu::setSceneIntro()
   doSceneIntro(mSceneIntro, this);
 }
 
-void TitleMenu::setSceneOutro(cocos2d::CCScene* newscene)
+void TitleMenu::setSceneOutro(cocos2d::Scene* newscene)
 {
   if( mIntroFlag )
   {
@@ -1329,16 +1329,16 @@ cocos2d::CCLog("Control");
 }
 bool TitleMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud1", CCSprite*, mCloud1)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud2", CCSprite*, mCloud2)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLogo", CCSprite*, mLogo)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar1", CCSprite*, mStar1) 
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar2", CCSprite*, mStar2) 
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar3", CCSprite*, mStar3) 
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar4", CCSprite*, mStar4) 
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar5", CCSprite*, mStar5) 
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCNew", CCSprite*, mCNew) 
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mNew", CCSprite*, mNew) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud1", Sprite*, mCloud1)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud2", Sprite*, mCloud2)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLogo", Sprite*, mLogo)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar1", Sprite*, mStar1) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar2", Sprite*, mStar2) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar3", Sprite*, mStar3) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar4", Sprite*, mStar4) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar5", Sprite*, mStar5) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCNew", Sprite*, mCNew) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mNew", Sprite*, mNew) 
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSakuraNode", CCNode*, mSakuraNode)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSakuraNode2", CCNode*, mSakuraNode2)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEnemies", CCNode*, mEnemies)
@@ -1346,7 +1346,7 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMiniButton", CCMenu*, mMiniButton)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainButton", CCMenu*, mMainButton) 
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mOption", CCMenuItemImage*, mOption) 
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter", CCMenuItemImage*, mTwitter) 
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMask", CCLayerColor*, mMask) 
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMask", LayerColor*, mMask) 
 cocos2d::CCLog(pMemberVariableName);
 
   return false;

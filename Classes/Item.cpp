@@ -190,17 +190,17 @@ void Item::onCreate()
             break;
         case 1:
         {
-            mSprite = cocos2d::CCSprite::createWithSpriteFrameName("scroll.png");
+            mSprite = cocos2d::Sprite::createWithSpriteFrameName("scroll.png");
         }
             break;
         case -1:
         {
-            mSprite = cocos2d::CCSprite::createWithSpriteFrameName("candy.png");
+            mSprite = cocos2d::Sprite::createWithSpriteFrameName("candy.png");
         }
             break;
         default:
         {
-            mSprite = cocos2d::CCSprite::create(cocos2d::CCString::createWithFormat("icon%d.png", ani)->getCString());
+            mSprite = cocos2d::Sprite::create(cocos2d::CCString::createWithFormat("icon%d.png", ani)->getCString());
         }
             break;
     }

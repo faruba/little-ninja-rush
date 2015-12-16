@@ -8,9 +8,9 @@
 
 #define PADDING (6)
 
-cocos2d::CCScene* ExtraMenu::scene(int mode) 
+cocos2d::Scene* ExtraMenu::scene(int mode) 
 {
-cocos2d::CCScene *ret = cocos2d::CCScene::create();
+cocos2d::Scene *ret = cocos2d::Scene::create();
 
   ExtraMenu *tm = ExtraMenu::create();
   tm->mMode = mode;
@@ -51,7 +51,7 @@ cocos2d::CCNode * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLaye
   mClipedList->addChild(mItemList);
   mFly = false;
 
-  mScrollBody = cocos2d::CCSprite::createWithSpriteFrameName("sp_scroll2.png");
+  mScrollBody = cocos2d::Sprite::createWithSpriteFrameName("sp_scroll2.png");
   mScrollBody->setAnchorPoint(cocos2d::ccp(0, 1));
   mClipedList->addChild(mScrollBody);
 
@@ -68,19 +68,19 @@ cocos2d::CCNode * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLaye
   switch (mMode) {
     case 0:
       {
-        mBanner->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb6.png"));
+        mBanner->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb6.png"));
         this->loadAchievements();
       }
       break;
     case 1:
       {
-        mBanner->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb7.png"));
+        mBanner->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb7.png"));
         this->loadStatistics();
       }
       break;
     case 2:
       {
-        mBanner->setDisplayFrame(cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb5.png"));
+        mBanner->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb5.png"));
         this->loadAboutUs();
       }
       break;
@@ -90,7 +90,7 @@ cocos2d::CCNode * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLaye
   this->updateScorll();
 
   this->setSceneIntro();
-cocos2d::CCLayer::onEnter();
+cocos2d::Layer::onEnter();
 }
 
 void ExtraMenu::activate(int cid) 
@@ -151,7 +151,7 @@ void ExtraMenu::activate(int cid)
 void ExtraMenu::onExit() 
 {
     PublicLoad::menuExtra()->unloadAll();
-cocos2d::CCLayer::onExit();
+cocos2d::Layer::onExit();
 }
 
 void ExtraMenu::onBack() 
@@ -302,11 +302,11 @@ cocos2d::CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(
         }
         else {
             //category label
-cocos2d::CCSprite *line = cocos2d::CCSprite::createWithSpriteFrameName("ex-line.png");
+cocos2d::Sprite *line = cocos2d::Sprite::createWithSpriteFrameName("ex-line.png");
             line->setAnchorPoint(cocos2d::ccp(0.5f, 1));
             line->setPosition(cocos2d::ccp(218, mOffset - 10));
             mItemList->addChild(line, 1, mItemList->getChildrenCount());
-cocos2d::CCSprite *label = cocos2d::CCSprite::createWithSpriteFrameName(sta->name->getCString());
+cocos2d::Sprite *label = cocos2d::Sprite::createWithSpriteFrameName(sta->name->getCString());
             label->setAnchorPoint(cocos2d::ccp(0.5f, 1));
             label->setPosition(cocos2d::ccp(line->getContentSize().width/2, 20));
             line->addChild(label, 1, mItemList->getChildrenCount());
@@ -418,7 +418,7 @@ void ExtraMenu::setSceneIntro()
   doSceneIntro(mSceneIntro, this);
 }
 
-void ExtraMenu::setSceneOutro(cocos2d::CCScene* newscene) 
+void ExtraMenu::setSceneOutro(cocos2d::Scene* newscene) 
 {
   if( mIntroFlag )
   {
@@ -454,7 +454,7 @@ bool ExtraMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMe
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *,  mCoins);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", CCNode *, mList);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBanner", CCSprite *, mBanner);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBanner", Sprite *, mBanner);
 
   //CCLog(pMemberVariableName);
 
