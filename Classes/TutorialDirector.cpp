@@ -38,7 +38,7 @@ cocos2d::CCLog("begin tutorial: role id(%d), cacheDartId(%d)", rid, cacheDartId)
   play->state = STATE_TUTORIAL;
   play->count_respawn++;
 
-  mLayer = cocos2d::LayerColor::create(ccc4(0, 0, 0, 128), UniversalFit::sharedUniversalFit()->playSize.width, 75);
+  mLayer = cocos2d::LayerColor::create(Color4B(0, 0, 0, 128), UniversalFit::sharedUniversalFit()->playSize.width, 75);
   mLayer->setPosition(cocos2d::ccp(0, 122.5f));
   play->addChild(mLayer, LAYER_UI);
 

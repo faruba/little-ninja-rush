@@ -27,7 +27,7 @@ void Scene1::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     
     mBg = bg;
     mFront = fg;
-cocos2d::LayerColor *sbg = cocos2d::LayerColor::create(ccc4(16, 23, 39, 255));
+cocos2d::LayerColor *sbg = cocos2d::LayerColor::create(Color4B(16, 23, 39, 255));
     mBg->addChild(sbg, 0);
 cocos2d::Sprite *StaBg = cocos2d::Sprite::createWithSpriteFrameName("s1_sbg.png");
     StaBg->setAnchorPoint(cocos2d::ccp(0, 1));

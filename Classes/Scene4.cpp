@@ -34,7 +34,7 @@ void Scene4::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     mTiles = tiles;
     mBg = bg;
     mFront = fg;
-cocos2d::LayerColor *sbg = cocos2d::LayerColor::create(ccc4(201, 239, 251, 255));
+cocos2d::LayerColor *sbg = cocos2d::LayerColor::create(Color4B(201, 239, 251, 255));
     mBg->addChild(sbg);
 cocos2d::Sprite *sky = cocos2d::Sprite::createWithSpriteFrameName("cj4_bg.png");
     sky->setAnchorPoint(cocos2d::ccp(0, 1));

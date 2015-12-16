@@ -43,7 +43,7 @@ bool LogoSplash::init()
 
 void LogoSplash::onEnter()
 {
-  cocos2d::LayerColor *bg = cocos2d::LayerColor::create(ccc4(255, 255, 255, 255));
+  cocos2d::LayerColor *bg = cocos2d::LayerColor::create(Color4B(255, 255, 255, 255));
 
   addChild(bg);
 

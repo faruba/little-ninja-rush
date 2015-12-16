@@ -27,7 +27,7 @@ void Scene2::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     
     mBg = bg;
     mFront = fg;
-cocos2d::LayerColor *sbg = cocos2d::LayerColor::create(ccc4(135, 206, 233, 255));
+cocos2d::LayerColor *sbg = cocos2d::LayerColor::create(Color4B(135, 206, 233, 255));
     mBg->addChild(sbg, 0);
 cocos2d::Sprite *sun = cocos2d::Sprite::createWithSpriteFrameName("s2_sun.png");
     sun->setPosition(cocos2d::ccp(433, 300));

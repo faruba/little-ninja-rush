@@ -172,18 +172,18 @@ void GamePlay::initGamePlay(int mod)
   footprints = NULL;
   arcadeSpeed = 1;
   
-  mask = cocos2d::LayerColor::create(ccc4(0, 0, 0, 255), UniversalFit::sharedUniversalFit()->screenSize.width + 20, UniversalFit::sharedUniversalFit()->screenSize.height + 20);
+  mask = cocos2d::LayerColor::create(Color4B(0, 0, 0, 255), UniversalFit::sharedUniversalFit()->screenSize.width + 20, UniversalFit::sharedUniversalFit()->screenSize.height + 20);
   mask->setPosition(cocos2d::ccp(-10, -10));
   mask->retain();
   this->addChild(mask, LAYER_MASK);
   
-  mFeverMask = cocos2d::LayerColor::create(ccc4(239, 145, 3, 255));
+  mFeverMask = cocos2d::LayerColor::create(Color4B(239, 145, 3, 255));
   mFeverMask->setVisible(false);
   mFeverMask->setOpacity(0);
   mFeverMask->retain();
   this->addChild(mFeverMask, LAYER_UI-1);
   
-  spellMask = cocos2d::LayerColor::create(ccc4(0, 0, 0, 200), UniversalFit::sharedUniversalFit()->playSize.width+VIBRATE_MOVE*3, SCREEN_HEIGHT+VIBRATE_MOVE*3);
+  spellMask = cocos2d::LayerColor::create(Color4B(0, 0, 0, 200), UniversalFit::sharedUniversalFit()->playSize.width+VIBRATE_MOVE*3, SCREEN_HEIGHT+VIBRATE_MOVE*3);
   spellMask->retain();
   spellMask->setVisible(false);
   this->addChild(spellMask, LAYER_MAINROLE-2);

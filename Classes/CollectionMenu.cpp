@@ -172,7 +172,7 @@ cocos2d::CCRect clip = cocos2d::CCRectMake(mScrollPoint->getPosition().x, mScrol
   this->scheduleUpdate();
   this->setTouchEnabled(true);
 
-  mMask = cocos2d::LayerColor::create(ccc4(0, 0, 0, 128));
+  mMask = cocos2d::LayerColor::create(Color4B(0, 0, 0, 128));
   mMask->setOpacity(128);
   mMask->setVisible(false);
   this->addChild(mMask, 10);

@@ -89,7 +89,7 @@ cocos2d::CCNode * node = createUIByCCBI("menu-coins", "CoinsMenu", CoinsMenuLaye
     this->updateScorll();
     
     //----------------
-    mMask = cocos2d::LayerColor::create(ccc4(0, 0, 0, 128));
+    mMask = cocos2d::LayerColor::create(Color4B(0, 0, 0, 128));
     mMask->setOpacity(128);
     mMask->setVisible(false);
     this->addChild(mMask, 10);
