@@ -39,8 +39,8 @@ void ObjectiveComplete::onCreate()
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(0, 0, 0), 128, 0);
-NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
-CCBReader *pReader = new CCBReader(pNodeLib, this, this);
+    cocosbuilder::NodeLoaderLibrary *pNodeLib = cocosbuilder::NodeLoaderLibrary::getInstance();
+    cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
     mNode = pReader->readNodeGraphFromFile("ui-scroll", this);
     pReader->release();
     mNode->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
@@ -417,18 +417,18 @@ void ObjectiveComplete::onDestroy()
     play->manager->addGameObject(GameOver::gameOver(play));
 }
 
-SEL_MenuHandler ObjectiveComplete::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler ObjectiveComplete::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
     //  CCLog(pSelectorName);
   return NULL;
 }
 
-cocos2d::extension::Control::Handler   ObjectiveComplete::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   ObjectiveComplete::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool ObjectiveComplete::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ObjectiveComplete::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBanner", CCSprite *, mBanner)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mObjType", CCSprite *, mObjType)

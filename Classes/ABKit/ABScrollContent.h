@@ -25,7 +25,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ABScrollContent, create);
 
   CEClipedNode *mClipNode;
 cocos2d::CCNode *contentNode;
-cocos2d::CCObject *clickTarget;
+cocos2d::Ref *clickTarget;
   SEL_CallFunc clickMethod;
   cocos2d::Point clickPoint;
 

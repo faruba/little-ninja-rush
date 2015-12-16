@@ -21,7 +21,7 @@ typedef struct
 }GOHandler;
 
 class GameObject:
-  public CCObject
+  public Ref
 {
   private:
     GOHandler mHandler;

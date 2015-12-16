@@ -3,7 +3,7 @@
 #include "GTLoadList.h"
 
 class PublicLoad:
-  public CCObject
+  public Ref
 {
   public:
     static GTLoadList* commonLoadingList();

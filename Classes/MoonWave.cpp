@@ -52,7 +52,7 @@ cocos2d::CCRect rect;
   rect.origin = mSprite->getPosition();
   rect.size = mSprite->getContentSize();
   bool ref = false;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->darts, node)
   {
     Darts *dr = (Darts*)node;

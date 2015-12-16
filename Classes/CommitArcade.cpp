@@ -241,7 +241,7 @@ cocos2d::CCFadeOut *fo1 = cocos2d::CCFadeOut::create(2);
 }
 
 
-SEL_MenuHandler CommitArcade::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler CommitArcade::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
     //  CCLog(pSelectorName);
   return NULL;
@@ -251,7 +251,7 @@ cocos2d::extension::Control::Handler  CommitArcade::onResolveCCBCCControlSelecto
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool CommitArcade::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool CommitArcade::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRole", CCSprite *, mRole)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLight", CCSprite *, mLight)

@@ -73,7 +73,7 @@ void BombDart::onUpdate(float delta)
         float minx = mSprite->getPosition().x - 75;
         float maxx = mSprite->getPosition().x + 75;
         //进行伤害判断
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;

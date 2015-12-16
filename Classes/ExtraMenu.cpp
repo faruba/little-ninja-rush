@@ -95,59 +95,57 @@ cocos2d::CCLayer::onEnter();
 
 void ExtraMenu::activate(int cid) 
 {
-  FoldItem *newitem = (FoldItem*)(mItemList->getChildByTag(cid));
-  bool unfold = false;
-  if( newitem->isFoldable() )
-  {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/ui-cancel.mp3").c_str());
-    if( cid == mCurrUnFold )
-    {
-      //fold
-      FoldItem *item = (FoldItem*)(mItemList->getChildByTag(cid));
-      item->toggleFold(true);
-      mCurrUnFold = -1;
-    }
-    else {
-      //unfold
-      if( mCurrUnFold >= 0 )
-      {
-        FoldItem *item = (FoldItem*)(mItemList->getChildByTag(mCurrUnFold));
-        item->toggleFold(true);
-        mCurrUnFold = -1;
-      }
-      newitem->toggleFold(false);
-      mCurrUnFold = cid;
-      unfold = true;
-    }
-    //rearrange items
-    mOffset = 0;
-      /*
-cocos2d::CCObject* node = NULL;
-CCARRAY_FOREACH(mItemList->getChildren(), node)
-    {
-      FoldItem *it = (FoldItem*)node;
-      it->setPosition(cocos2d::ccp(0, mOffset));
-      mOffset -= it->getContentSize().height + PADDING;
-    }
-       */
-    if( unfold )
-    {
-      float upbound = -newitem->getPosition().y - mItemList->getPosition().y;
-      if( upbound < 0 )
-      {
-        cocos2d::Point np = mItemList->getPosition();
-        np.y = -newitem->getPosition().y;
-        mItemList->setPosition(np);
-      }
-      float downbound = upbound + newitem->getContentSize().height;
-      if( downbound > 264 )
-      {
-        cocos2d::Point np = mItemList->getPosition();
-        np.y = -newitem->getPosition().y + newitem->getContentSize().height - 264;
-        mItemList->setPosition(np);
-      }
-    }
-  }
+//  FoldItem *newitem = (FoldItem*)(mItemList->getChildByTag(cid));
+//  bool unfold = false;
+//  if( newitem->isFoldable() )
+//  {
+//    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/ui-cancel.mp3").c_str());
+//    if( cid == mCurrUnFold )
+//    {
+//      //fold
+//      FoldItem *item = (FoldItem*)(mItemList->getChildByTag(cid));
+//      item->toggleFold(true);
+//      mCurrUnFold = -1;
+//    }
+//    else {
+//      //unfold
+//      if( mCurrUnFold >= 0 )
+//      {
+//        FoldItem *item = (FoldItem*)(mItemList->getChildByTag(mCurrUnFold));
+//        item->toggleFold(true);
+//        mCurrUnFold = -1;
+//      }
+//      newitem->toggleFold(false);
+//      mCurrUnFold = cid;
+//      unfold = true;
+//    }
+//    //rearrange items
+//    mOffset = 0;
+//cocos2d::Ref* node = NULL;
+//CCARRAY_FOREACH(mItemList->getChildren(), node)
+//    {
+//      FoldItem *it = (FoldItem*)node;
+//      it->setPosition(cocos2d::ccp(0, mOffset));
+//      mOffset -= it->getContentSize().height + PADDING;
+//    }
+//    if( unfold )
+//    {
+//      float upbound = -newitem->getPosition().y - mItemList->getPosition().y;
+//      if( upbound < 0 )
+//      {
+//        cocos2d::Point np = mItemList->getPosition();
+//        np.y = -newitem->getPosition().y;
+//        mItemList->setPosition(np);
+//      }
+//      float downbound = upbound + newitem->getContentSize().height;
+//      if( downbound > 264 )
+//      {
+//        cocos2d::Point np = mItemList->getPosition();
+//        np.y = -newitem->getPosition().y + newitem->getContentSize().height - 264;
+//        mItemList->setPosition(np);
+//      }
+//    }
+//  }
 }
 
 void ExtraMenu::onExit() 
@@ -247,7 +245,7 @@ void ExtraMenu::loadAchievements()
   mCurrState = 0;
   mItemList->removeAllChildrenWithCleanup(true);
   mOffset = 0;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(Tasks::getAchievements(), node)
   {
     Achievement *ach = (Achievement *)node;
@@ -270,7 +268,7 @@ void ExtraMenu::loadStatistics()
     mCurrState = 1;
     mItemList->removeAllChildrenWithCleanup(true);
     mOffset = 0;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(Tasks::getStatistics(), node)
     {
         Statistics *sta = (Statistics *)node;
@@ -365,56 +363,54 @@ cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
 
 void ExtraMenu::onTouchMoved(Touch * touch, Event * event) 
 {
-  LNR_GET_TOUCH_POS;
-    
-    float dy = pos.y - mBeginPressY;
-    float y = mBeginNodeY + dy;
-    cocos2d::Point np = mItemList->getPosition();
-    np.y = y;
-    mItemList->setPosition(np);
-    //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
-    time_t time;
-    /* TODO: uncomment this
-cocos2d::CCTime::gettimeofdayCocos2d(&time, NULL);
-    if( mLastY > -10000 )
-    {
-        float ds = np.y - mLastY;
-        //float dt = time - mLastTime;
-        float dt = cocos2d::CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
-        mFlySpeed = ds/dt;
-    }
-     */
-    mLastY = np.y;
-    mLastTime = time;
-    this->updateScorll();
+//  LNR_GET_TOUCH_POS;
+//    
+//    float dy = pos.y - mBeginPressY;
+//    float y = mBeginNodeY + dy;
+//    cocos2d::Point np = mItemList->getPosition();
+//    np.y = y;
+//    mItemList->setPosition(np);
+//    //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
+//    time_t time;
+//cocos2d::CCTime::gettimeofdayCocos2d(&time, NULL);
+//    if( mLastY > -10000 )
+//    {
+//        float ds = np.y - mLastY;
+//        //float dt = time - mLastTime;
+//        float dt = cocos2d::CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
+//        mFlySpeed = ds/dt;
+//    }
+//    mLastY = np.y;
+//    mLastTime = time;
+//    this->updateScorll();
 }
 
 void ExtraMenu::onTouchEnded(Touch * touch, Event * event) 
 {
-    mFly = true;
-  LNR_GET_TOUCH_POS;
-cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
-    if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
-       rect.containsPoint(pos) && mCurrState == 0 )//only available in achievement state
-    {
-        float dy = mList->getPosition().y - pos.y;
-        float offset = 0;
-        int index = 0;
-cocos2d::CCObject *node;/* TODO: uncomment this
-CCARRAY_FOREACH(mItemList->getChildren(), node)
-        {
-cocos2d::CCNode *item = (cocos2d::CCNode*) node;
-            float upbound = offset - mItemList->getPosition().y;
-            float downbound = upbound + item->getContentSize().height + PADDING;
-            if( dy >= upbound && dy < downbound )
-            {
-                this->activate(index);
-                break;
-            }
-            offset += item->getContentSize().height + PADDING;
-            index++;
-        }*/
-    }
+//    mFly = true;
+//  LNR_GET_TOUCH_POS;
+//cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
+//    if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
+//       rect.containsPoint(pos) && mCurrState == 0 )//only available in achievement state
+//    {
+//        float dy = mList->getPosition().y - pos.y;
+//        float offset = 0;
+//        int index = 0;
+//cocos2d::Ref *node;
+//CCARRAY_FOREACH(mItemList->getChildren(), node)
+//        {
+//cocos2d::CCNode *item = (cocos2d::CCNode*) node;
+//            float upbound = offset - mItemList->getPosition().y;
+//            float downbound = upbound + item->getContentSize().height + PADDING;
+//            if( dy >= upbound && dy < downbound )
+//            {
+//                this->activate(index);
+//                break;
+//            }
+//            offset += item->getContentSize().height + PADDING;
+//            index++;
+//        }
+//    }
 }
 
 void ExtraMenu::setSceneIntro() 
@@ -441,20 +437,20 @@ cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
     mNewScene->release();
 }
 
-SEL_MenuHandler ExtraMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
-{/* TODO: uncomment this
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraMenu::onBack);
+SEL_MenuHandler ExtraMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
+{
+//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraMenu::onBack);
 
- */ //CCLog(pSelectorName);
+  //CCLog(pSelectorName);
     return NULL;
 }
 
-cocos2d::extension::Control::Handler   ExtraMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   ExtraMenu::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool ExtraMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ExtraMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *,  mCoins);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", CCNode *, mList);

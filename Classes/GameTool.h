@@ -76,7 +76,7 @@ void unloadTextureFromeSpriteFrameFile(const char *plist);
 
 //UIImage* makeScreenshot();
 cocos2d::CCSequence *createScaleSequence(float fDuration[], float fScale[], int count);
-cocos2d::CCNode *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, CCObject *target);
+cocos2d::CCNode *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, Ref *target);
 void doSceneIntro(cocos2d::CCNode *&mSceneIntro, CCNode *target);
 cocos2d::CCScene* doSceneOutro(cocos2d::CCScene* mNewScene, CCNode *&mSceneIntro, SEL_CallFunc callBack, CCNode *target);
 

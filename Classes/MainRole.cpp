@@ -112,33 +112,33 @@ void MainRole::onCreate()
 
 void MainRole::setEquipDart(int tid) 
 {
-  Shuriken *sk = (Shuriken*)GameData::fetchShurikens()->objectAtIndex(tid);
-
-  dartCD = sk->reld;
-  dartSpeed = sk->flys;
-  dartShap = sk->shap;
-  dartEffect = sk->efft;
-  //special dart
-  if( sk->uiid == mRoleId + 39 )
-  {
-    dartCD -= dartCD*0.3f;
-  }
+//  Shuriken *sk = (Shuriken*)GameData::fetchShurikens()->objectAtIndex(tid);
+//
+//  dartCD = sk->reld;
+//  dartSpeed = sk->flys;
+//  dartShap = sk->shap;
+//  dartEffect = sk->efft;
+//  //special dart
+//  if( sk->uiid == mRoleId + 39 )
+//  {
+//    dartCD -= dartCD*0.3f;
+//  }
 }
 
 void MainRole::setEquipBlade(int tid) 
 {
-  Katana *ka = (Katana*)GameData::fetchKatanas()->objectAtIndex(tid);
-
-  bladeCD = ka->reld;
-  bladeRange = ka->rang;
-  bladeAnim = ka->anim;
-  bladeEffect = ka->efft;
-  bladeSound = ka->sond;
-  //special power
-  if( ka->uiid == mRoleId + 43 )
-  {
-    mHiddenPower = true;
-  }
+//  Katana *ka = (Katana*)GameData::fetchKatanas()->objectAtIndex(tid);
+//
+//  bladeCD = ka->reld;
+//  bladeRange = ka->rang;
+//  bladeAnim = ka->anim;
+//  bladeEffect = ka->efft;
+//  bladeSound = ka->sond;
+//  //special power
+//  if( ka->uiid == mRoleId + 43 )
+//  {
+//    mHiddenPower = true;
+//  }
 }
 
 void MainRole::setEquipSpell(int tid) 
@@ -374,7 +374,7 @@ void MainRole::commitSlice()
   //弹飞镖
   bool hit = false;
   int hitcount =0;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->darts, node)
   {
     Darts * dr = (Darts*)node;
@@ -463,7 +463,7 @@ void MainRole::commitSpell(Vector2d* dir)
       case SPELL_TRIDARTS:
         {//三发飞镖
           bool t = false;
-cocos2d::CCObject *node = NULL;
+cocos2d::Ref *node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
           {
             Role* em = (Role*)node;
@@ -556,13 +556,13 @@ CCARRAY_FOREACH(play->enemies, node)
           //选择优目标点
           int hs = 0;
           cocos2d::Point pos = ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, RESPAWN_YMIN + RESPAWN_Y/2);
-cocos2d::CCObject *node = NULL;
+cocos2d::Ref *node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
           {
             Role* em = (Role*)node;
             int s = 0;
             float xx = em->position().x;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
             {
               Role * im = (Role*)node;

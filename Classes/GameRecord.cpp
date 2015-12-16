@@ -194,29 +194,29 @@ cocos2d::CCLog("GameRecord::init");
 
 void GameRecord::readLocal() 
 {
-cocos2d::CCLog("GameRecord::readLocal():");
-    
-    string path = cocos2d::CCFileUtils::sharedFileUtils()->getWritablePath();
-    path += GAME_RECORD_FILENAME;
-cocos2d::CCLog("RECORD = %s", path.c_str());
-cocos2d::CCString *data = cocos2d::CCString::createWithContentsOfFile(path.c_str());
-    
-  if( data != NULL )
-  {
-cocos2d::CCDictionary *parsed = (cocos2d::CCDictionary*)JsonWrapper::parseJson(data);
-    if( parsed != NULL )
-    {
-      this->read(parsed);
-    }
-    else
-    {
-cocos2d::CCLog("Fail to parse");
-    }
-  }
-  else {
-cocos2d::CCLog("failed to read");
-  }
-  task->doneReadObjectives();
+//cocos2d::CCLog("GameRecord::readLocal():");
+//    
+//    string path = cocos2d::CCFileUtils::sharedFileUtils()->getWritablePath();
+//    path += GAME_RECORD_FILENAME;
+//cocos2d::CCLog("RECORD = %s", path.c_str());
+//cocos2d::CCString *data = cocos2d::CCString::createWithContentsOfFile(path.c_str());
+//    
+//  if( data != NULL )
+//  {
+//cocos2d::CCDictionary *parsed = (cocos2d::CCDictionary*)JsonWrapper::parseJson(data);
+//    if( parsed != NULL )
+//    {
+//      this->read(parsed);
+//    }
+//    else
+//    {
+//cocos2d::CCLog("Fail to parse");
+//    }
+//  }
+//  else {
+//cocos2d::CCLog("failed to read");
+//  }
+//  task->doneReadObjectives();
 }
 
 void GameRecord::writeLocal() 

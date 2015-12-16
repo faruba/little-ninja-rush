@@ -24,8 +24,8 @@ public:
 
     LNR_SCENE_METHOD(ShopMenu);
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ShopMenu, create);
-    virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
     virtual bool onTouchBegan(Touch * touch, Event * event);

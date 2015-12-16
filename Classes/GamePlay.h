@@ -37,9 +37,9 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GamePlay, create);
     void startLoopFever();
     void stopLoopFever();
 
-    void taskCompleted(cocos2d::CCString * tile, CCString * icon, int type); 
-    void pieceComplete(cocos2d::CCString * title, CCString * icon);
-    void popText(cocos2d::CCString* text);
+    void taskCompleted(std::string tile, std::string icon, int type);
+    void pieceComplete(std::string title, std::string icon);
+    void popText(std::string text);
     void scheduleSpellRelease(cocos2d::CCNode* target, SEL_CallFunc sel);
     bool isPlayingArcade();
     void setGameMode(int mod);
@@ -104,7 +104,7 @@ cocos2d::CCLayer* ui();
     bool completeSomeObjectives();
 
     //0-daily 1-weekly 2-monthly 3-achievement 4-collection 5-text
-    static void pushNotification(cocos2d::CCString* name, CCString* icon, int type);
+    static void pushNotification(std::string name, std::string icon, int type);
 
     void stepDust(cocos2d::Point pos);
     cocos2d::Point mTouchBegin;

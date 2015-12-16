@@ -27,14 +27,14 @@ cocos2d::CCNode *gTaskComplete = NULL;
 int gGameMode = MODE_CLASSIC;
 /* PopQueue */
 class PopQueue : 
-  public CCObject
+  public Ref
 {
   public:
     CREATE_FUNC(PopQueue);
 
     bool init(){return true;};
-cocos2d::CCString *title;
-cocos2d::CCString *icon;
+    std::string title;
+    std::string icon;
     int type;
 };
 
@@ -706,7 +706,7 @@ cocos2d::Point GamePlay::autoAim(cocos2d::Point dir)
   cocos2d::Point mainpos = mainrole->center();
   float mindis = PLAY_AUTOAIM*PLAY_AUTOAIM;
   cocos2d::Point rdir = dir;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(enemies, node)
   {
     Role *en = (Role*)node;
@@ -816,7 +816,7 @@ Role* GamePlay::nearestEnemy(cocos2d::Point dir)
   Role *ret = NULL;
   cocos2d::Point mainpos = mainrole->center();
   float mindis = 9999*9999;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(enemies, node)
   {
     Role *en = (Role*)node;
@@ -1315,7 +1315,7 @@ bool GamePlay::completeSomeObjectives()
     return false;
 }
 
-void GamePlay::taskCompleted(cocos2d::CCString * tile, CCString * icon, int type)
+void GamePlay::taskCompleted(std::string tile, std::string icon, int type)
 {
 cocos2d::CCSprite *board = cocos2d::CCSprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::ccp(0.5f, 0));
@@ -1344,13 +1344,13 @@ cocos2d::CCLabelTTF *label = NULL;
         case 3:
         {
             ibg = cocos2d::CCSprite::createWithSpriteFrameName("ms_bg4.png");
-            label = cocos2d::CCLabelTTF::create(cocos2d::CCString::createWithFormat("%s\n已完成！", tile->getCString())->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
+            label = cocos2d::CCLabelTTF::create(cocos2d::CCString::createWithFormat("%s\n已完成！", tile.c_str())->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
         }
             break;
     }
     ibg->setPosition(cocos2d::ccp(22, 22));
     board->addChild(ibg);
-cocos2d::CCSprite *iconsp = cocos2d::CCSprite::createWithSpriteFrameName(icon->getCString());
+cocos2d::CCSprite *iconsp = cocos2d::CCSprite::createWithSpriteFrameName(icon.c_str());
     iconsp->setPosition(ibg->getPosition());
     if( type == 3 )
     {
@@ -1370,16 +1370,16 @@ cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/objective-complete.mp3").c_str());
 }
 
-void GamePlay::pieceComplete(cocos2d::CCString * title, CCString * icon)
+void GamePlay::pieceComplete(std::string title, std::string icon)
 {
 cocos2d::CCSprite *board = cocos2d::CCSprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::ccp(0.5f, 0));
     gTaskComplete->addChild(board);
-cocos2d::CCSprite *item = cocos2d::CCSprite::create(icon->getCString());
+cocos2d::CCSprite *item = cocos2d::CCSprite::create(icon.c_str());
     item->setPosition(cocos2d::ccp(26, 19));
     item->setScale(0.7f);
     board->addChild(item);
-cocos2d::CCSprite *sname = cocos2d::CCSprite::create(title->getCString());
+cocos2d::CCSprite *sname = cocos2d::CCSprite::create(title.c_str());
     sname->setPosition(cocos2d::ccp(117, 30));
     board->addChild(sname);
 cocos2d::CCSprite *scoll = cocos2d::CCSprite::create("collected.png");
@@ -1395,12 +1395,12 @@ cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/objective-complete.mp3").c_str());
 }
 
-void GamePlay::popText(cocos2d::CCString* text)
+void GamePlay::popText(std::string text)
 {
 cocos2d::CCSprite *board = cocos2d::CCSprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::ccp(0.5f, 0));
     gTaskComplete->addChild(board);
-cocos2d::CCLabelBMFont *label = cocos2d::CCLabelBMFont::create(text->getCString(), "ab34.fnt");
+cocos2d::CCLabelBMFont *label = cocos2d::CCLabelBMFont::create(text.c_str(), "ab34.fnt");
     label->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
     label->setPosition(cocos2d::ccp(90, 20));
     board->addChild(label);
@@ -1414,7 +1414,7 @@ cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/objective-complete.mp3").c_str());
 }
 
-void GamePlay::pushNotification(cocos2d::CCString * name, CCString * icon, int type)
+void GamePlay::pushNotification(std::string name, std::string icon, int type)
 {
     if( gTaskComplete == NULL )
     {

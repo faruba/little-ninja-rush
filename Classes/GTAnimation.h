@@ -16,7 +16,7 @@ typedef struct{
 cocos2d::CCSpriteFrame **frames;
 }GTInternal_AnimationData;
 
-class GTAnimation : public cocos2d::CCObject 
+class GTAnimation : public cocos2d::Ref 
 {
   public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GTAnimation, create);

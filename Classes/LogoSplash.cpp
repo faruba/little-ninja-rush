@@ -152,10 +152,7 @@ cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("
     Tasks::loadObjectivesFromFile();
     Tasks::loadAchievementsFromFile();
     Tasks::loadStatisticsFromFile();
-    GameData::loadShurikens();
-    GameData::loadKatanas();
-    GameData::loadSpecials();
-    GameData::loadTips();
+    GameData::loadData();
     // IAPHelper->sharedIAPHelper()->initIAP(GameRecord::sharedGameRecord());
     PublicLoad::commonLoadingList()->loadAll();
     PublicLoad::menuLoadingList()->loadAll();

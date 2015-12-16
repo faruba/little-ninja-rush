@@ -11,7 +11,7 @@ USING_NS_CC_EXT;
 #define TASK_OBJECTIVEMONTHLY (2)
 #define TASK_ACHIEVEMENT (3)
 #define TASK_STATISTICS (4)
-class Task : public CCObject
+class Task : public Ref
 {
   public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Task, create);
@@ -22,7 +22,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Task, create);
     int taskLink;//任务编号
 };
 
-class Statistics : public CCObject
+class Statistics : public Ref
 {
   public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Statistics, create);
@@ -33,7 +33,7 @@ cocos2d::CCString *psfx;
     int achieveCount;//已完成数量
 };
 
-class Achievement:public CCObject
+class Achievement:public Ref
 {
   public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Achievement, create);
@@ -50,7 +50,7 @@ cocos2d::CCString *gcid;
     int achieveCount;//已完成数量
 };
 
-class Objective:public CCObject
+class Objective:public Ref
 {
   public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Objective, create);
@@ -63,7 +63,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Objective, create);
 };
 
 //arcade refreshes with daily task
-class ArcadePrize:public CCObject
+class ArcadePrize:public Ref
 {
   public:
     CREATE_FUNC(ArcadePrize);
@@ -72,7 +72,7 @@ class ArcadePrize:public CCObject
     int prize;//when prize <0 then the prize is completed
 };
 
-class Tasks:public CCObject
+class Tasks:public Ref
 {
   public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(Tasks, create);

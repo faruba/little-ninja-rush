@@ -211,7 +211,7 @@ void PumpkinCircle::onUpdate(float delta)
             case 1://steel
             {
               bool hit = false;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->darts, node)
               {
                 Darts *dr = (Darts*)node;
@@ -236,7 +236,7 @@ CCARRAY_FOREACH(play->darts, node)
                     bool found = false;
                     cocos2d::Point target;
                     {
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;

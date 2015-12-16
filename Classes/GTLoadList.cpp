@@ -80,32 +80,30 @@ void GTLoadList::reset(float maxInterval)
 
 int GTLoadList::loadSome() 
 {
-    //CFTimeInterval cost = 0;
-    float cost = 0;
-    while ( mLoadIndex < mList->count() && cost < mMaxInterval ) {
-        //CFAbsoluteTime bl = CFAbsoluteTimeGetCurrent();
-        time_t bl;
-        /* TODO: uncomment this
-cocos2d::CCTime::gettimeofdayCocos2d(&bl, NULL);
-        
-        LoadItem *item = (LoadItem*)mList->objectAtIndex(mLoadIndex);
-        item->execute(true);
-        
-        //CFAbsoluteTime al = CFAbsoluteTimeGetCurrent();
-        time_t al;
-cocos2d::CCTime::gettimeofdayCocos2d(&al, NULL);
-        
-        //cost += al-bl;
-        cost += cocos2d::CCTime::timersubCocos2d(&bl, &al)/1000.0;
-         */
-        mLoadIndex++;
-    }
+//    //CFTimeInterval cost = 0;
+//    float cost = 0;
+//    while ( mLoadIndex < mList->count() && cost < mMaxInterval ) {
+//        //CFAbsoluteTime bl = CFAbsoluteTimeGetCurrent();
+//        time_t bl;
+//cocos2d::CCTime::gettimeofdayCocos2d(&bl, NULL);
+//        
+//        LoadItem *item = (LoadItem*)mList->objectAtIndex(mLoadIndex);
+//        item->execute(true);
+//        
+//        //CFAbsoluteTime al = CFAbsoluteTimeGetCurrent();
+//        time_t al;
+//cocos2d::CCTime::gettimeofdayCocos2d(&al, NULL);
+//        
+//        //cost += al-bl;
+//        cost += cocos2d::CCTime::timersubCocos2d(&bl, &al)/1000.0;
+//        mLoadIndex++;
+//    }
     return mList->count() - mLoadIndex;
 }
 
 void GTLoadList::unloadAll() 
 {  
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(mList, node)
   {
     LoadItem *li = (LoadItem*)node;
@@ -115,7 +113,7 @@ CCARRAY_FOREACH(mList, node)
 
 void GTLoadList::loadAll() 
 {
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(mList, node)
   {
     LoadItem *li = (LoadItem*)node;

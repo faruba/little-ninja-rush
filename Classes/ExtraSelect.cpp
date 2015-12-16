@@ -42,7 +42,7 @@ void ExtraSelect::onExit()
 cocos2d::CCLayer::onExit();
 }
 
-void ExtraSelect::onBack(cocos2d::Ref*) 
+void ExtraSelect::onBack() 
 {
     if( !mIntroFlag )
     {
@@ -239,19 +239,19 @@ cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
 }
 
 
-SEL_MenuHandler ExtraSelect::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler ExtraSelect::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraSelect::onBack)
+//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraSelect::onBack)
 cocos2d::CCLog(pSelectorName);
     return NULL;
 }
 
-cocos2d::extension::Control::Handler   ExtraSelect::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   ExtraSelect::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool ExtraSelect::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ExtraSelect::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 //  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMask", CCLayerColor*, mMask) 
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mAchievement", CCSprite*, mAchievement)

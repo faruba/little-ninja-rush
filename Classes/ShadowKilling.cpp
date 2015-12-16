@@ -210,7 +210,7 @@ void ShadowKilling::seekTarget()
 {
   GamePlay *play = GamePlay::sharedGamePlay();
   mTarget = NULL;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;

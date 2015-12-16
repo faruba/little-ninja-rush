@@ -54,20 +54,20 @@ cocos2d::CCNode *mShadeCode;
 
     TitleMenu *master;
 
-    void onCloseOption(cocos2d::Ref*);
-    void onToggleMusic(cocos2d::Ref*);
-    void onToggleSfx(cocos2d::Ref*);
-    void onTogglePushNotification(cocos2d::Ref*);
-    void onToggleTutorial(cocos2d::Ref*);
-    void onRateUs(cocos2d::Ref*);
-    void onToggleiCloud(cocos2d::Ref*);
+    void onCloseOption();
+    void onToggleMusic();
+    void onToggleSfx();
+    void onTogglePushNotification();
+    void onToggleTutorial();
+    void onRateUs();
+    void onToggleiCloud();
 
-    void onAddFriend(cocos2d::Ref*);
+    void onAddFriend();
 
     static PopOption* optionWithType(int typ);//0=set, 1=gainfriend 2=setfriend)
     
     //cocosbuilder support
-    bool onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+    bool onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
     {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", CCMenuItemImage*, mMusic);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", CCMenuItemImage*, mSfx);
@@ -79,8 +79,8 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadeCode", CCNode*, mShadeCode);
         return false;
     }
     
-    SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
-    {
+    SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
+    {/* TODO
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCloseOption", PopOption::onCloseOption);
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleMusic", PopOption::onToggleMusic);
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleSfx", PopOption::onToggleSfx);
@@ -89,10 +89,10 @@ CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleTutorial", PopOption::onTogg
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRateUs", PopOption::onRateUs);
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleiCloud", PopOption::onToggleiCloud);
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onAddFriend", PopOption::onAddFriend);
-        return NULL;
+       */ return NULL;
     }
     
-    cocos2d::extension::Control::Handler   onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+    cocos2d::extension::Control::Handler   onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
     {
         return NULL;
     }
@@ -231,7 +231,7 @@ void PopOption::loadDelivery()
 //  sp->runAction(seq);
 }
 
-void PopOption::onAddFriend(cocos2d::Ref*)
+void PopOption::onAddFriend()
 {
     //feature removed from android
 //    if( ABSystem->isSystemVersionAbove(ABSYSVER_5) )
@@ -301,12 +301,12 @@ void PopOption::onAddFriend(cocos2d::Ref*)
 //    master->hideOpt();
 //}
 
-void PopOption::onCloseOption(cocos2d::Ref*)
+void PopOption::onCloseOption()
 {
     master->hideOpt();
 }
 
-void PopOption::onToggleSfx(cocos2d::Ref*)
+void PopOption::onToggleSfx()
 {
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     if( GameRecord::sharedGameRecord()->setting_sfx )
@@ -324,7 +324,7 @@ void PopOption::onToggleSfx(cocos2d::Ref*)
     }
 }
 
-void PopOption::onToggleMusic(cocos2d::Ref*)
+void PopOption::onToggleMusic()
 {
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     if( GameRecord::sharedGameRecord()->setting_music )
@@ -342,7 +342,7 @@ void PopOption::onToggleMusic(cocos2d::Ref*)
     }
 }
 
-void PopOption::onTogglePushNotification(cocos2d::Ref*)
+void PopOption::onTogglePushNotification()
 {
     //feature removed from android
 //    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
@@ -361,7 +361,7 @@ void PopOption::onTogglePushNotification(cocos2d::Ref*)
 //    delgate->scheduleLocalNotifuication();
 }
 
-void PopOption::onToggleTutorial(cocos2d::Ref*)
+void PopOption::onToggleTutorial()
 {
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
     if( GameRecord::sharedGameRecord()->game_tutorial == 0 )
@@ -377,7 +377,7 @@ void PopOption::onToggleTutorial(cocos2d::Ref*)
     }
 }
 
-void PopOption::onToggleiCloud(cocos2d::Ref*)
+void PopOption::onToggleiCloud()
 {
     //feature removed from android
 //    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
@@ -394,7 +394,7 @@ void PopOption::onToggleiCloud(cocos2d::Ref*)
 //    }
 }
 
-void PopOption::onRateUs(cocos2d::Ref*)
+void PopOption::onRateUs()
 {
     //feature removed from android
 //CCString *str = "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=540290969";
@@ -448,11 +448,11 @@ cocos2d::CCMenuItemImage *mSwitch2;
     void onDoneAnimation();
     
     //callbacks
-    void onChangeDisplay(cocos2d::Ref*);
-    void onClose(cocos2d::Ref*);
+    void onChangeDisplay();
+    void onClose();
     
     //cocosbuilder support
-    bool onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+    bool onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
     {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF*, mDailyObjective);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF*, mWeeklyObjective);
@@ -480,15 +480,15 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSwitch2", CCMenuItemImage*, mSwitch2);
         return false;
     }
     
-    SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+    SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
     {
-        // TODO:
+        /* TODO:
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onClose", PopObj::onClose);
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChangeDisplay", PopObj::onChangeDisplay);
-        return NULL;
+        */return NULL;
     }
     
-    cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+    cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
     {
         return NULL;
     }
@@ -704,7 +704,7 @@ void PopObj::onDestroy()
     this->removeChild(mBoard, true);
 }
 
-void PopObj::onClose(cocos2d::Ref*)
+void PopObj::onClose()
 {
     master->hideObjs();
 }
@@ -725,10 +725,10 @@ void PopObj::onFlip()
     }
 }
                            
-void PopObj::onChangeDisplay(cocos2d::Ref*)
+void PopObj::onChangeDisplay()
 {
     mDisplay = !mDisplay;
-    
+    /*TODO:
     //play animation
     //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
 cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
@@ -737,21 +737,19 @@ cocos2d::CCMoveTo *mt1 = cocos2d::CCMoveTo::create(0.2f, ccp(-301, 58));
 cocos2d::CCCallFunc *cf1 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onFlip)));
 cocos2d::CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.2f, ccp(-301+381, 58));
 cocos2d::CCCallFunc *cf2 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onDoneAnimation)));
-    std::vector<FiniteTimeAction*> *sqa = new std::vector<FiniteTimeAction*>(); //TODO:memory management?
-    sqa->push_back(mt1);
-    sqa->push_back(cf1);
-    sqa->push_back(mt2);
-    sqa->push_back(cf2);
-    /* TODO:uncomment this
+cocos2d::CCArray *sqa = cocos2d::CCArray::create();
+    sqa->addObject(mt1);
+    sqa->addObject(cf1);
+    sqa->addObject(mt2);
+    sqa->addObject(cf2);
 cocos2d::CCSequence *seq = cocos2d::CCSequence::create(sqa);
     //CCSequence *seq = cocos2d::CCSequence::create(mt1, cf1, mt2, cf2);
     
     mBoard->runAction(seq);
-     */
     
     mSwitch->setVisible(false);
     mSwitch2->setVisible(false);
-    
+    */
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
 }
 
@@ -869,7 +867,7 @@ cocos2d::CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(dt2, st2, NU
     SimpleAudioEngine::sharedEngine()->playBackgroundMusic(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu.mp3").c_str(), true);
   }
   
-  // TODO:
+  /* TODO:
   if( !gIntroFlag )
   {
     //AppController *appdel = (AppController*)[UIApplication->sharedApplication() delegate);
@@ -899,11 +897,9 @@ cocos2d::CCArray *sqa = cocos2d::CCArray::create();
       sqa->addObject(sh1);
       sqa->addObject(st1);
       sqa->addObject(st2);
-      /* TODO:uncomment this
 cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sqa);
       
       mNew->runAction(sq);
-       */
   }
 
   //check new collections
@@ -919,16 +915,14 @@ cocos2d::CCArray *sqa = cocos2d::CCArray::create();
       sqa->addObject(sh1);
       sqa->addObject(st1);
       sqa->addObject(st2);
-      /* TODO:uncomment this
 cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sqa);
       mCNew->runAction(sq);
-       */
   }
 
   for(int i=0; i<5; ++i)
   {
       mStarTimers[i] = 0;
-  }
+  }*/
   
 //    //show friends
 //    if( FriendList->sharedFriendList()->canHaveBouns() )
@@ -1310,9 +1304,8 @@ cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
   mNewScene->release();
 }
 
-SEL_MenuHandler TitleMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
-{
-    /* TODO: uncomment this
+SEL_MenuHandler TitleMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
+{/*TODO:
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onLeaderboard", TitleMenu::onLeaderboard)
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onShowObjectives", TitleMenu::onShowObjectives)
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onOption", TitleMenu::onOption)
@@ -1326,8 +1319,7 @@ CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onStore", TitleMenu::onStore)
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onExtra", TitleMenu::onExtra)
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onPlayArcade", TitleMenu::onPlayArcade)
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMoreFun", TitleMenu::onMoreFun)
-    */
-     return NULL;
+    */return NULL;
 }
 
 cocos2d::extension::Control::Handler TitleMenu::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
@@ -1335,7 +1327,7 @@ cocos2d::extension::Control::Handler TitleMenu::onResolveCCBCCControlSelector(co
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool TitleMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool TitleMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud1", CCSprite*, mCloud1)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud2", CCSprite*, mCloud2)

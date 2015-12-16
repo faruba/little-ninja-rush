@@ -26,9 +26,9 @@ public CCBSelectorResolver
     virtual void onUpdate(float delta);
     virtual void onDestroy();
     
-    virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
-    virtual Control::Handler onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
+    virtual Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref *, const char*);
 
     void onUpdateClassic(float delta, GamePlay* play);
     void onUpdateArcade(float delta, GamePlay* play);

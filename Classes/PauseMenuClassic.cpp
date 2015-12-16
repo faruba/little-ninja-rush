@@ -348,7 +348,7 @@ void PauseMenuClassic::change(Ref* ref)
 }
 
 //cocosbuilder support
-bool PauseMenuClassic::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool PauseMenuClassic::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF*, mDailyObjective);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF*, mWeeklyObjective);
@@ -385,7 +385,7 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mChange", CCMenuItemImage*, mChange);
     return false;
 }
 
-SEL_MenuHandler  PauseMenuClassic::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler  PauseMenuClassic::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "toggleSfx", PauseMenuClassic::toggleSfx);
 CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "toggleMusic", PauseMenuClassic::toggleMusic);

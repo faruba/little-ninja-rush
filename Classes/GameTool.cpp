@@ -36,7 +36,7 @@ bool exCollisionWithCircles(cocos2d::Point op, float ox, float oy, float r, coco
 
 int gtReadInt(cocos2d::CCDictionary *dic, const char *key, int def)
 {
-cocos2d::CCObject *obj = dic->objectForKey(key);
+cocos2d::Ref *obj = dic->objectForKey(key);
   if( obj != NULL ) {
     return ((CCNumber*)obj)->getInt();
   }
@@ -47,7 +47,7 @@ cocos2d::CCObject *obj = dic->objectForKey(key);
 
 float gtReadFloat(cocos2d::CCDictionary *dic, const char *key, float def)
 {
-cocos2d::CCObject* obj = dic->objectForKey(key);
+cocos2d::Ref* obj = dic->objectForKey(key);
   if( obj != NULL )
   {
     return ((CCNumber*)obj)->getFloat();
@@ -59,7 +59,7 @@ cocos2d::CCObject* obj = dic->objectForKey(key);
 
 double gtReadDouble(cocos2d::CCDictionary *dic, const char *key, double def)
 {
-cocos2d::CCObject* obj = dic->objectForKey(key);
+cocos2d::Ref* obj = dic->objectForKey(key);
     if( obj != NULL )
     {
         return ((CCNumber*)obj)->getFloat();
@@ -71,7 +71,7 @@ cocos2d::CCObject* obj = dic->objectForKey(key);
 
 cocos2d::CCString* gtReadString(cocos2d::CCDictionary *dic, const char *key, CCString *def)
 {
-cocos2d::CCObject* obj = dic->objectForKey(key);
+cocos2d::Ref* obj = dic->objectForKey(key);
     if( obj != NULL )
     {
         return (cocos2d::CCString*)obj;
@@ -111,23 +111,23 @@ cocos2d::CCArray *pArr = cocos2d::CCArray::create();
     pArr->addObject(cocos2d::CCScaleTo::create(fDuration[i],fScale[i]));
 
   }
-    
-  // TODO:return (cocos2d::CCSequence*)CCSequence::create(pArr);
+  //return (cocos2d::CCSequence*)CCSequence::create(pArr);
     return nullptr;
 }
-cocos2d::CCNode *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, CCObject *target)
+cocos2d::CCNode *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, Ref *target)
 {
   /* Create an autorelease CCNodeLoaderLibrary. */
-cocosbuilder::NodeLoaderLibrary * ccnll = cocosbuilder::NodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
-  ccnll->registerCCNodeLoader(pClassName, pCCNodeLoader);
-  /* Create an autorelease CCBReader. */
-  cocosbuilder::CCBReader * ccbReader = new cocosbuilder::CCBReader(ccnll);
+//cocos2d::CCNodeLoaderLibrary * ccnll = cocos2d::CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
+//  ccnll->registerCCNodeLoader(pClassName, pCCNodeLoader);
+//  /* Create an autorelease CCBReader. */
+//  cocos2d::extension::CCBReader * ccbReader = new cocos2d::extension::CCBReader(ccnll);
 
-  /* Read a ccbi file. */
-cocos2d::CCNode * node = ccbReader->readNodeGraphFromFile(szCCBI, target);
-  ccbReader->release();
+//  /* Read a ccbi file. */
+//cocos2d::CCNode * node = ccbReader->readNodeGraphFromFile(szCCBI, target);
+//  ccbReader->release();
 
-  return node;
+ // return node;
+    return nullptr;
 }
 
 void doSceneIntro(cocos2d::CCNode *&mSceneIntro, CCNode *target)

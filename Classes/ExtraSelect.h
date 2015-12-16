@@ -13,8 +13,8 @@ class ExtraSelect:
 
     LNR_SCENE_METHOD(ExtraSelect);
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ExtraSelect, create);
-    virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
     virtual void onEnter();
@@ -52,7 +52,7 @@ cocos2d::CCScene *mNewScene;
     void setSceneOutro(cocos2d::CCScene* newscene);
     void doneOutro();
 
-    void onBack(cocos2d::Ref*);
+    void onBack();
 
 };
 

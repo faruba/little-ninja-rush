@@ -6,7 +6,7 @@
 #include "GameTool.h"
 
 class Respawn:
-  public CCObject
+  public Ref
 {
   public:
     virtual bool init(){return true;};

@@ -1,0 +1,515 @@
+[
+ {
+	"uiid" : 0 ,
+	"icon" : "ms_icon1.png" ,
+	"desc" : "单次跑动距离达到3000m。\n" ,
+	"code" : 1000 ,
+	"cont" : 3000,
+	"priz" : 0 ,
+	"pcnt" : 100
+ },
+ {
+	"uiid" : 1 ,
+	"icon" : "ms_icon2.png" ,
+	"desc" : "单次击杀敌人数量达到70个。\n" ,
+	"code" : 1001 ,
+	"cont" : 70 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 2 ,
+	"icon" : "ms_icon3.png" ,
+	"desc" : "不击杀敌人跑动到达1000m。\n" ,
+	"code" : 1009 ,
+	"cont" : 1000 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ }, 
+ {
+	"uiid" : 3 ,
+	"icon" : "ms_icon4.png" ,
+	"desc" : "单次获得30金币。\n" ,
+	"code" : 1003 ,
+	"cont" : 30 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 4 ,
+	"icon" : "ms_icon5.png" ,
+	"desc" : "单次获得3个卷轴。\n" ,
+	"code" : 1002 ,
+	"cont" : 3 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 5 ,
+	"icon" : "ms_icon6.png" ,
+	"desc" : "单次释放6次技能。\n" ,
+	"code" : 1004 ,
+	"cont" : 6 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 6 ,
+	"icon" : "ms_icon8.png" ,
+	"desc" : "累计切换6次场景。\n" ,
+	"code" : 11 ,
+	"cont" : 6 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 7 ,
+	"icon" : "ms_icon2.png" ,
+	"desc" : "累计一击杀死上忍10个。\n" ,
+	"code" : 13 ,
+	"cont" : 10 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 8 ,
+	"icon" : "ms_icon2.png" ,
+	"desc" : "累计击杀400个敌人。\n" ,
+	"code" : 15 ,
+	"cont" : 400 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 9 ,
+	"icon" : "ms_icon1.png" ,
+	"desc" : "累计跑动到达10000m。\n" ,
+	"code" : 0 ,
+	"cont" : 10000 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 10 ,
+	"icon" : "ms_icon30.png" ,
+	"desc" : "累计死亡3次。\n" ,
+	"code" : 22 ,
+	"cont" : 3 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 11 ,
+	"icon" : "ms_icon10.png" ,
+	"desc" : "累计开始游戏4次。\n" ,
+	"code" : 7 ,
+	"cont" : 4 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 12 ,
+	"icon" : "ms_icon11.png" ,
+	"desc" : "累计反弹飞镖击杀20个敌人。\n" ,
+	"code" : 37 ,
+	"cont" : 20 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 13 ,
+	"icon" : "ms_icon12.png" ,
+	"desc" : "累计砍断5根冰柱。\n" ,
+	"code" : 39 ,
+	"cont" : 5 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 14 ,
+	"icon" : "ms_icon13.png" ,
+	"desc" : "累计击碎6个冰飞镖。\n" ,
+	"code" : 38 ,
+	"cont" : 6 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 15 ,
+	"icon" : "ms_icon14.png" ,
+	"desc" : "激发一次神秘商人。\n" ,
+	"code" : 5 ,
+	"cont" : 1 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 16 ,
+	"icon" : "ms_icon8.png" ,
+	"desc" : "单次切换场景到达3次。\n" ,
+	"code" : 1000 ,
+	"cont" : 3 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 17 ,
+	"icon" : "ms_icon15.png" ,
+	"desc" : "卖掉3条卷轴给商人。\n" ,
+	"code" : 4 ,
+	"cont" : 3 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 18 ,
+	"icon" : "ms_icon16.png" ,
+	"desc" : "不发飞镖跑动1000m。\n" ,
+	"code" : 1009 ,
+	"cont" : 1000 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 19 ,
+	"icon" : "ms_icon17.png" ,
+	"desc" : "累计砍断2根弓箭。\n" ,
+	"code" : 33 ,
+	"cont" : 2 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 20 ,
+	"icon" : "ms_icon18.png" ,
+	"desc" : "不吃任何东西跑完一个场景。\n" ,
+	"code" : 48 ,
+	"cont" : 1 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 21 ,
+	"icon" : "ms_icon19.png" ,
+	"desc" : "打出15以上的连击。\n" ,
+	"code" : 1012 ,
+	"cont" : 15 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 22 ,
+	"icon" : "ms_icon20.png" ,
+	"desc" : "fever下跑动200m。" ,
+	"code" : 1010 ,
+	"cont" : 200 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 23 ,
+	"icon" : "ms_icon21.png" ,
+	"desc" : "飞镖百发百中的前提下跑完\n一个场景。" ,
+	"code" : 49 ,
+	"cont" : 1 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 24 ,
+	"icon" : "ms_icon4.png" ,
+	"desc" : "累计获得500枚金币。\n" ,
+	"code" : 2 ,
+	"cont" : 500 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 25 ,
+	"icon" : "ms_icon22.png" ,
+	"desc" : "累计被敌人击中10次。\n" ,
+	"code" : 23 ,
+	"cont" : 10 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 26 ,
+	"icon" : "ms_icon23.png" ,
+	"desc" : "死于炸弹下3次。\n" ,
+	"code" : 27 ,
+	"cont" : 3 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 27 ,
+	"icon" : "ms_icon25.png" ,
+	"desc" : "死于武士2次。\n" ,
+	"code" : 25 ,
+	"cont" : 2 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 28 ,
+	"icon" : "ms_icon24.png" ,
+	"desc" : "死于弓箭3次。\n" ,
+	"code" : 26 ,
+	"cont" : 3 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 29 ,
+	"icon" : "ms_icon26.png" ,
+	"desc" : "不使用任何技能跑完4个场\n景。" ,
+	"code" : 36 ,
+	"cont" : 4 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 30 ,
+	"icon" : "ms_icon27.png" ,
+	"desc" : "不挥刀跑到1200m。\n" ,
+	"code" : 1011 ,
+	"cont" : 1200 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 31 ,
+	"icon" : "ms_icon11.png" ,
+	"desc" : "单次反弹敌人飞镖杀敌5个。\n" ,
+	"code" : 1005 ,
+	"cont" : 5 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 32 ,
+	"icon" : "ms_icon2.png" ,
+	"desc" : "单次秒杀5名上忍。\n" ,
+	"code" : 1006 ,
+	"cont" : 5 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 33 ,
+	"icon" : "ms_icon4.png" ,
+	"desc" : "总计消费1500金。\n" ,
+	"code" : 3 ,
+	"cont" : 1500 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 34 ,
+	"icon" : "ms_icon7.png" ,
+	"desc" : "各角色都使用过一次。\n" ,
+	"code" : 57 ,
+	"cont" : 1 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 35 ,
+	"icon" : "ms_icon8.png" ,
+	"desc" : "死于千鸟居场景。\n" ,
+	"code" : 42 ,
+	"cont" : 1 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 36 ,
+	"icon" : "ms_icon29.png" ,
+	"desc" : "使用一次元气丹。\n" ,
+	"code" : 55 ,
+	"cont" : 1 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 37 ,
+	"icon" : "ms_icon29.png" ,
+	"desc" : "使用一次天狗木屐。\n" ,
+	"code" : 56 ,
+	"cont" : 1 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 38 ,
+	"icon" : "ms_icon33.png" ,
+	"desc" : "雇佣武藏一局砍杀4名武士。\n" ,
+	"code" : 1014 ,
+	"cont" : 4 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 39 ,
+	"icon" : "ms_icon33.png" ,
+	"desc" : "雇佣武藏总共砍杀10名武士。\n" ,
+	"code" : 64 ,
+	"cont" : 10 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 40 ,
+	"icon" : "ms_icon32.png" ,
+	"desc" : "雇佣武藏一局跑动达到2000m。" ,
+	"code" : 1015 ,
+	"cont" : 2000 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 41 ,
+	"icon" : "ms_icon32.png" ,
+	"desc" : "雇佣武藏累计跑动5000m。\n" ,
+	"code" : 65 ,
+	"cont" : 5000 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 42 ,
+	"icon" : "ms_icon34.png" ,
+	"desc" : "雇佣马陇一局跑动3000m。\n" ,
+	"code" : 1016 ,
+	"cont" : 3000 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 43 ,
+	"icon" : "ms_icon34.png" ,
+	"desc" : "雇佣马陇累计跑动6000m。\n" ,
+	"code" : 66 ,
+	"cont" : 6000 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 44 ,
+	"icon" : "ms_icon35.png" ,
+	"desc" : "雇佣马陇一局受到4次攻击。\n" ,
+	"code" : 1017 ,
+	"cont" : 4 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 45 ,
+	"icon" : "ms_icon35.png" ,
+	"desc" : "雇佣马陇总计受伤8次。\n" ,
+	"code" : 67 ,
+	"cont" : 8 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 46 ,
+	"icon" : "ms_icon36.png" ,
+	"desc" : "雇佣樱一局跑动2000m。\n" ,
+	"code" : 1018 ,
+	"cont" : 2000 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 47 ,
+	"icon" : "ms_icon36.png" ,
+	"desc" : "雇佣樱总计跑动5000m。\n" ,
+	"code" : 68 ,
+	"cont" : 5000 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 48 ,
+	"icon" : "ms_icon37.png" ,
+	"desc" : "雇佣樱一局施放100枚飞镖。\n" ,
+	"code" : 1019 ,
+	"cont" : 100 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 49 ,
+	"icon" : "ms_icon37.png" ,
+	"desc" : "雇佣樱总计施放300枚飞镖。\n" ,
+	"code" : 69 ,
+	"cont" : 300 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 50 ,
+	"icon" : "ms_icon38.png" ,
+	"desc" : "雇佣樱一局获得金币30枚。\n" ,
+	"code" : 1021 ,
+	"cont" : 30 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+  {
+	"uiid" : 51 ,
+	"icon" : "ms_icon38.png" ,
+	"desc" : "雇佣樱获得金币70枚。\n" ,
+	"code" : 70 ,
+	"cont" : 70 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+   {
+	"uiid" : 52 ,
+	"icon" : "ms_icon39.png" ,
+	"desc" : "遇到圣诞老人并保护离开3次。\n" ,
+	"code" : 71 ,
+	"cont" : 3 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+   {
+	"uiid" : 53 ,
+	"icon" : "ms_icon40.png" ,
+	"desc" : "杀死一个南瓜恶魔。\n" ,
+	"code" : 1023 ,
+	"cont" : 1 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+   {
+	"uiid" : 54 ,
+	"icon" : "ms_icon40.png" ,
+	"desc" : "杀死南瓜恶魔三次。\n" ,
+	"code" : 72 ,
+	"cont" : 3 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+   {
+	"uiid" : 55 ,
+	"icon" : "ms_icon41.png" ,
+	"desc" : "一局游戏中召唤4次南瓜精灵。\n " ,
+	"code" : 1024 ,
+	"cont" : 4 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+   {
+	"uiid" : 56 ,
+	"icon" : "ms_icon41.png" ,
+	"desc" : "召唤12次南瓜精灵。\n " ,
+	"code" : 73 ,
+	"cont" : 12 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ }
+]

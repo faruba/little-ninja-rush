@@ -43,7 +43,7 @@ cocos2d::CCArray *mSakura;
 };
 
 class Snow : 
-  public CCObject
+  public Ref
 {
   public:
     virtual bool init(){return true;};

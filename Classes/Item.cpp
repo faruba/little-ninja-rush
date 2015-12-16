@@ -144,7 +144,7 @@ bool Item::isItemAccept(int item)
         case 10:
         {
             int cnt = 0;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;

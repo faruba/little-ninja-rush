@@ -10,18 +10,21 @@
 #include "json/rapidjson.h"
 #include "json/document.h"
 #include "CCNumber.h"
+
 using namespace std;
 using namespace cocos2d;
 using namespace rapidjson;
 
-cocos2d::CCObject* processNode(const rapidjson::Value& value)
-{
-cocos2d::CCObject *pRet = NULL;
-    if( value.IsArray() )
-    {
-cocos2d::CCArray *pArray = new CCArray();
-        for(SizeType i=0; i<value.Size(); ++i)
-        {
+
+
+
+cocos2d::Ref* processNode(const rapidjson::Value& value) {
+    cocos2d::Ref *pRet = NULL;
+    
+    if ( value.IsArray() ) {
+        cocos2d::CCArray *pArray = new CCArray();
+        
+        for(SizeType i=0; i<value.Size(); ++i) {
             const rapidjson::Value& sub = value[i];
             pArray->addObject(processNode(sub));
         }
@@ -29,7 +32,7 @@ cocos2d::CCArray *pArray = new CCArray();
     }
     else if( value.IsObject() )
     {
-cocos2d::CCDictionary *pDictionary = new CCDictionary();
+        cocos2d::CCDictionary *pDictionary = new CCDictionary();
         for(rapidjson::Value::ConstMemberIterator iter = value.MemberBegin(); iter != value.MemberEnd(); ++iter)
         {
             pDictionary->setObject(processNode(iter->value), string(iter->name.GetString()));
@@ -38,12 +41,12 @@ cocos2d::CCDictionary *pDictionary = new CCDictionary();
     }
     else if( value.IsString() )
     {
-cocos2d::CCString *pString = new CCString(value.GetString());
+        cocos2d::CCString *pString = new CCString(value.GetString());
         pRet = pString;
     }
     else if( value.IsBool() )
     {
-cocos2d::CCBool *pBool = new CCBool(value.GetBool());
+        cocos2d::CCBool *pBool = new CCBool(value.GetBool());
         pRet = pBool;
     }
     else if( value.IsNumber() )
@@ -71,12 +74,12 @@ cocos2d::CCBool *pBool = new CCBool(value.GetBool());
     return pRet;
 }
 
-cocos2d::CCObject* JsonWrapper::parseJson(cocos2d::CCString *pStr)
+cocos2d::Ref* JsonWrapper::parseJson(std::string *pStr)
 {
-cocos2d::CCObject *pRet = NULL;
+    cocos2d::Ref *pRet = NULL;
     
     Document doc;
-    doc.Parse<0>(pStr->getCString());
+    doc.Parse<0>(pStr->c_str());
     if( !doc.HasParseError() )
     {
         pRet = processNode(doc);
@@ -89,7 +92,7 @@ cocos2d::CCObject *pRet = NULL;
     return pRet;
 }
 
-const char* JsonWrapper::dumpJson(cocos2d::CCDictionary *pDic)
+const char* JsonWrapper::dumpJson(cocos2d::ValueMap *pDic)
 {
   char *pRet = NULL;
 

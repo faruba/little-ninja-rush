@@ -1,0 +1,224 @@
+[
+ {
+	"uiid" : 0 ,
+	"name" : "ex-generic.png" ,
+	"psfx" : "",
+	"code" : -1
+ },
+ {
+	"uiid" : 1 ,
+	"name" : "距离" ,
+	"psfx" : "m",
+	"code" : 0
+ },
+ {
+	"uiid" : 2 ,
+	"name" : "手里剑使用数" ,
+	"psfx" : "",
+	"code" : 1
+ },
+ {
+	"uiid" : 3 ,
+	"name" : "金币获得数" ,
+	"psfx" : "",
+	"code" : 2
+ },
+ {
+	"uiid" : 4 ,
+	"name" : "累计消耗金币数" ,
+	"psfx" : "",
+	"code" : 3
+ },
+ {
+	"uiid" : 5 ,
+	"name" : "卷轴卖去数" ,
+	"psfx" : "",
+	"code" : 4
+ },
+ {
+	"uiid" : 6 ,
+	"name" : "遇见神秘商人次数" ,
+	"psfx" : "",
+	"code" : 5
+ },
+ {
+	"uiid" : 7 ,
+	"name" : "获得空卷轴数" ,
+	"psfx" : "",
+	"code" : 6
+ },
+ {
+	"uiid" : 8 ,
+	"name" : "游戏游玩次数" ,
+	"psfx" : "",
+	"code" : 7
+ },
+ {
+	"uiid" : 9 ,
+	"name" : "更换角色次数" ,
+	"psfx" : "",
+	"code" : 8
+ },
+ {
+	"uiid" : 10 ,
+	"name" : "进入商店次数" ,
+	"psfx" : "",
+	"code" : 9
+ },
+ {
+	"uiid" : 11 ,
+	"name" : "更换装备次数" ,
+	"psfx" : "",
+	"code" : 10
+ },
+ {
+	"uiid" : 12 ,
+	"name" : "累计经过场景次数" ,
+	"psfx" : "",
+	"code" : 11
+ },
+ {
+	"uiid" : 13 ,
+	"name" : "使用镰鼬游戏次数" ,
+	"psfx" : "",
+	"code" : 58
+ },
+ {
+	"uiid" : 14 ,
+	"name" : "使用樱游戏次数" ,
+	"psfx" : "",
+	"code" : 59
+ },
+{
+	"uiid" : 15 ,
+	"name" : "使用武藏游戏次数" ,
+	"psfx" : "",
+	"code" : 60
+ },
+ {
+	"uiid" : 16 ,
+	"name" : "使用马陇游戏次数" ,
+	"psfx" : "",
+	"code" : 61
+ },
+ {
+	"uiid" : 17 ,
+	"name" : "ex-killings.png" ,
+	"psfx" : "",
+	"code" : -1
+ },
+ {
+	"uiid" : 18 ,
+	"name" : "使用炸弹击杀中忍次数" ,
+	"psfx" : "",
+	"code" : 12
+ },
+ {
+	"uiid" : 19 ,
+	"name" : "一击击倒上忍数量" ,
+	"psfx" : "",
+	"code" : 13
+ },
+ {
+	"uiid" : 20 ,
+	"name" : "暴击次数" ,
+	"psfx" : "",
+	"code" : 14
+ },
+ {
+	"uiid" : 21 ,
+	"name" : "总计击倒敌人总数" ,
+	"psfx" : "",
+	"code" : 15
+ },
+ {
+	"uiid" : 22 ,
+	"name" : "下忍击杀数" ,
+	"psfx" : "",
+	"code" : 16
+ },
+ {
+	"uiid" : 23 ,
+	"name" : "中忍击杀数" ,
+	"psfx" : "",
+	"code" : 17
+ },
+ {
+	"uiid" : 24 ,
+	"name" : "上忍击杀数" ,
+	"psfx" : "",
+	"code" : 18
+ },
+ {
+	"uiid" : 25 ,
+	"name" : "武士击杀数" ,
+	"psfx" : "",
+	"code" : 19
+ },
+ {
+	"uiid" : 26 ,
+	"name" : "信使击杀数" ,
+	"psfx" : "",
+	"code" : 20
+ },
+ {
+	"uiid" : 27 ,
+	"name" : "机械师击杀数" ,
+	"psfx" : "",
+	"code" : 21
+ },
+ {
+	"uiid" : 28 ,
+	"name" : "最高连击数" ,
+	"psfx" : "",
+	"code" : -2
+ },
+ {
+	"uiid" : 29 ,
+	"name" : "ex-deaths.png" ,
+	"psfx" : "",
+	"code" : -1
+ },
+ {
+	"uiid" : 30 ,
+	"name" : "总计死亡次数" ,
+	"psfx" : "",
+	"code" : 22
+ },
+ {
+	"uiid" : 31 ,
+	"name" : "总计被击中次数" ,
+	"psfx" : "",
+	"code" : 23
+ },
+ {
+	"uiid" : 32 ,
+	"name" : "被手里剑击杀次数" ,
+	"psfx" : "",
+	"code" : 24
+ },
+ {
+	"uiid" : 33 ,
+	"name" : "被武士击杀次数" ,
+	"psfx" : "",
+	"code" : 25
+ },
+ {
+	"uiid" : 34 ,
+	"name" : "被弓箭击杀次数" ,
+	"psfx" : "",
+	"code" : 26
+ },
+ {
+	"uiid" : 35 ,
+	"name" : "被炸弹击杀次数" ,
+	"psfx" : "",
+	"code" : 27
+ },
+ {
+	"uiid" : 36 ,
+	"name" : "被冰柱击杀次数" ,
+	"psfx" : "",
+	"code" : 28
+ }
+]

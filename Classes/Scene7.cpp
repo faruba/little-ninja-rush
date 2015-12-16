@@ -222,7 +222,7 @@ cocos2d::CCSprite *sp = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CC
 }
 
 void Scene7::update(float delta) 
-{
+{/*TODO:
     if( mTiles->freedCount() >= 4 )
     {
         int block[] = {83, 84, 85, 86};
@@ -233,10 +233,10 @@ void Scene7::update(float delta)
     {
         float ds = delta*0.2f;
         mWhiteLen -= ds;
-     
-        for (auto node : mWhiteTrees->getChildren()) {
-
-            cocos2d::CCSprite *sp = (cocos2d::CCSprite *)node;
+cocos2d::Ref* node = NULL;
+CCARRAY_FOREACH(mWhiteTrees->getChildren(), node)
+        {
+cocos2d::CCSprite *sp = (cocos2d::CCSprite *)node;
           cocos2d::Point np = sp->getPosition();
           np.x -= ds;
 
@@ -272,9 +272,9 @@ void Scene7::update(float delta)
     {
         float ds = delta*0.4f;
         mWhiteLen2 -= ds;
-
-        for (auto node : mWhiteTrees2->getChildren()) {
-
+cocos2d::Ref* node = NULL;
+CCARRAY_FOREACH( mWhiteTrees2->getChildren(), node)
+        {
 cocos2d::CCSprite *sp = (cocos2d::CCSprite*)node;
           cocos2d::Point np = sp->getPosition();
           np.x -= ds;
@@ -298,7 +298,9 @@ cocos2d::CCSprite *sp = (cocos2d::CCSprite*)node;
     {
         float ds = delta*0.5f;
         mGreenLen2 -= ds;
-        for (auto node : mGreenTrees2->getChildren()) {
+cocos2d::Ref* node = NULL;
+CCARRAY_FOREACH(mGreenTrees2->getChildren(), node)
+        {
 cocos2d::CCSprite *sp = (cocos2d::CCSprite*)node;
           cocos2d::Point np = sp->getPosition();
           np.x -= ds;
@@ -328,12 +330,12 @@ cocos2d::CCSprite *sp = (cocos2d::CCSprite*)node;
         }
         mHouse->setPosition(np);
     }
-    /* TODO: uncomment this
+    
     //update green trees
     {
         float ds = delta*0.7f;
         mGreenLen -= ds;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(mGreenTrees->getChildren(), node)
         {
 cocos2d::CCSprite *sp = (cocos2d::CCSprite*)node;
@@ -372,7 +374,7 @@ cocos2d::CCSprite *sp = (cocos2d::CCSprite*)node;
     {
         float ds = delta;
         mDecosLen -= ds;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(mDecos->getChildren(), node)
         {
 cocos2d::CCSprite *sp = (cocos2d::CCSprite*)node;
@@ -416,7 +418,7 @@ cocos2d::CCSprite *nsp = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::C
     {
         float ds = delta*1.6f;
         mFrontLen -= ds;
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(mFronts->getChildren(), node)
         {
 cocos2d::CCSprite *sp = (cocos2d::CCSprite*)node;
@@ -441,7 +443,7 @@ cocos2d::CCSprite *nsp = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::C
           sp->setPosition(np);
         }
     }
-    */
+    
     //snow
     {
         float deltatime = GamePlay::sharedGamePlay()->deltaTime;
@@ -461,6 +463,7 @@ cocos2d::CCSprite *nsp = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::C
             }
         }
     }
+  */
 }
 
 

@@ -1,0 +1,191 @@
+[
+ {
+	"uiid" : 0 ,
+	"icon" : "ms_icon2.png" ,
+	"desc" : "累计击杀敌人达到12000人。\n" ,
+	"code" : 15 ,
+	"cont" : 12000 ,
+	"priz" : 0 ,
+	"pcnt" : 1500
+ },
+ {
+	"uiid" : 1 ,
+	"icon" : "ms_icon1.png" ,
+	"desc" : "累计跑动距离达到250000m。\n" ,
+	"code" : 0 ,
+	"cont" : 250000 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 2 ,
+	"icon" : "ms_icon30.png" ,
+	"desc" : "累计死亡80次。\n" ,
+	"code" : 22 ,
+	"cont" : 80 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 3 ,
+	"icon" : "ms_icon10.png" ,
+	"desc" : "累计开始游戏100次 。\n" ,
+	"code" : 7 ,
+	"cont" : 100 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 4 ,
+	"icon" : "ms_icon14.png" ,
+	"desc" : "累计激发神秘商人8次。\n" ,
+	"code" : 5 ,
+	"cont" : 8 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 5 ,
+	"icon" : "ms_icon19.png" ,
+	"desc" : "连击总数到达6000次。\n" ,
+	"code" : 14 ,
+	"cont" : 6000 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 6 ,
+	"icon" : "ms_icon4.png" ,
+	"desc" : "累计获得金币15000个。\n" ,
+	"code" : 2 ,
+	"cont" : 15000 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 7 ,
+	"icon" : "ms_icon22.png" ,
+	"desc" : "累计受到200次攻击。\n" ,
+	"code" : 23 ,
+	"cont" : 200 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 8 ,
+	"icon" : "ms_icon8.png" ,
+	"desc" : "累计切换180次场景。\n" ,
+	"code" : 11 ,
+	"cont" : 180 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 9 ,
+	"icon" : "ms_icon5.png" ,
+	"desc" : "累计获得150个卷轴。\n" ,
+	"code" : 32 ,
+	"cont" : 150 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 10 ,
+	"icon" : "ms_icon17.png" ,
+	"desc" : "累计砍断弓箭20次。\n" ,
+	"code" : 33 ,
+	"cont" : 20 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 11 ,
+	"icon" : "ms_icon6.png" ,
+	"desc" : "累计发动500次技能。\n" ,
+	"code" : 34 ,
+	"cont" : 500 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 12 ,
+	"icon" : "ms_icon20.png" ,
+	"desc" : "fever发动200次。\n" ,
+	"code" : 35 ,
+	"cont" : 200 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 13 ,
+	"icon" : "ms_icon26.png" ,
+	"desc" : "不使用技能跑完35个场景。\n" ,
+	"code" : 36 ,
+	"cont" : 35 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 14 ,
+	"icon" : "ms_icon11.png" ,
+	"desc" : "累计砍飞飞镖击中300名敌\n人。." ,
+	"code" : 37 ,
+	"cont" : 300 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 15 ,
+	"icon" : "ms_icon2.png" ,
+	"desc" : "累计一击杀死上忍350个。\n" ,
+	"code" : 13 ,
+	"cont" : 350 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 16 ,
+	"icon" : "ms_icon13.png" ,
+	"desc" : "累计切冰飞镖240个。\n" ,
+	"code" : 38 ,
+	"cont" : 240 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+ {
+	"uiid" : 17 ,
+	"icon" : "ms_icon12.png" ,
+	"desc" : "累计切冰柱200根。\n" ,
+	"code" : 39 ,
+	"cont" : 200 ,
+	"priz" : 0 ,
+	"pcnt" : 1500 
+ },
+   {
+	"uiid" : 18 ,
+	"icon" : "ms_icon39.png" ,
+	"desc" : "遇见圣诞老人并保护其离开45次。\n" ,
+	"code" : 71 ,
+	"cont" : 45 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+   {
+	"uiid" : 20 ,
+	"icon" : "ms_icon40.png" ,
+	"desc" : "击杀南瓜恶魔35次。\n" ,
+	"code" : 72 ,
+	"cont" : 35 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ },
+   {
+	"uiid" : 21 ,
+	"icon" : "ms_icon41.png" ,
+	"desc" : "召唤100次南瓜精灵。\n" ,
+	"code" : 73 ,
+	"cont" : 100 ,
+	"priz" : 0 ,
+	"pcnt" : 100 
+ }
+]

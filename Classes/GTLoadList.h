@@ -16,7 +16,7 @@ void GTLoadMusic(const char* param, bool isload);
 void GTLoadSfx(const char* param, bool isload);
 
 class LoadItem:
-  public CCObject
+  public Ref
 {
   public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(LoadItem, create);
@@ -28,7 +28,7 @@ cocos2d::CCString* stringparam;
 };
 
 class GTLoadList:
-  public CCObject
+  public Ref
 {
   public:
     virtual bool init();

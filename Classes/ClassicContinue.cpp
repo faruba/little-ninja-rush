@@ -22,8 +22,8 @@ class ControlLayer :
   public:
     CREATE_FUNC(ControlLayer);
 
-    virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
     virtual bool onTouchBegan(Touch * touch, Event * event);
@@ -55,7 +55,7 @@ bool ControlLayer::init()
     if( CCLayer::init() )
     {
 NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
-CCBReader *pReader = new CCBReader(pNodeLib, this, this);
+cocosbuilder::CCBReader *pReader = new CCBReader(pNodeLib, this, this);
 cocos2d::CCNode *node = pReader->readNodeGraphFromFile("ui-continue.ccbi", this);
       pReader->release();
       node->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
@@ -272,18 +272,18 @@ void ControlLayer::onTouchEnded(Touch * touch, Event * event)
     mClicked = -1;
 }
 
-SEL_MenuHandler ControlLayer::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler ControlLayer::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
   //  CCLog(pSelectorName);
   return NULL;
 }
 
-cocos2d::extension::Control::Handler   ControlLayer::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   ControlLayer::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool ControlLayer::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ControlLayer::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mNumber", CCLabelBMFont *, mNumber)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel", CCSprite *, mBtnCancel)

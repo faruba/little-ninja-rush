@@ -8,7 +8,7 @@
 USING_NS_CC_EXT;
 
 class OperationCache:
-  public CCObject
+  public Ref
 {
   public:
     virtual bool init() {return true;};
@@ -25,7 +25,7 @@ class OperationCache:
 };
 
 class GameObjectManager:
-  public CCObject
+  public Ref
 {
   public:
     virtual bool init();

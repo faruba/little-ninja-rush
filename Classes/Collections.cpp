@@ -62,7 +62,7 @@ void Collections::readCollections(cocos2d::CCDictionary* dic)
         pieces[i] = gtReadInt(dic, CCString::createWithFormat("pieces__%d", i)->getCString(), 0);
     }
     //read CCArray
-cocos2d::CCObject* nli = dic->objectForKey("collection_newlist");
+cocos2d::Ref* nli = dic->objectForKey("collection_newlist");
     if( nli != NULL )
     {
         if( newlist != NULL )
@@ -78,28 +78,28 @@ cocos2d::CCObject* nli = dic->objectForKey("collection_newlist");
 }
 
 void Collections::writeCollections(rapidjson::Document &document) 
-{/*TODO:Uncomment this
-    document.AddMember("magic_piece", magic_piece, document.GetAllocator());
-    for( int i=0; i<PIECE_COUNT; ++i)
-    {
-        document.AddMember(cocos2d::CCString::createWithFormat("pieces__%d", i)->getCString(), pieces[i], document.GetAllocator());
-    }
-    //write CCArray
-    {
-        Value lst(kArrayType);
-        if( newlist != NULL )
-        {
-cocos2d::CCObject *pObj = NULL;
-CCARRAY_FOREACH(newlist, pObj)
-            {
-cocos2d::CCInteger *pInt = (cocos2d::CCInteger*)pObj;
-                lst.AddMember("", pInt->getValue(), document.GetAllocator());
-            }
-        }
-        document.AddMember("collection_newlist", lst, document.GetAllocator());
-    }
+{
+//    document.AddMember("magic_piece", magic_piece, document.GetAllocator());
+//    for( int i=0; i<PIECE_COUNT; ++i)
+//    {
+//        document.AddMember(cocos2d::CCString::createWithFormat("pieces__%d", i)->getCString(), pieces[i], document.GetAllocator());
+//    }
+//    //write CCArray
+//    {
+//        Value lst(kArrayType);
+//        if( newlist != NULL )
+//        {
+//cocos2d::Ref *pObj = NULL;
+//CCARRAY_FOREACH(newlist, pObj)
+//            {
+//cocos2d::CCInteger *pInt = (cocos2d::CCInteger*)pObj;
+//                lst.AddMember("", pInt->getValue(), document.GetAllocator());
+//            }
+//        }
+//        document.AddMember("collection_newlist", lst, document.GetAllocator());
+//    }
     //document.AddMember("collection_newlist", newlist, document.GetAllocator());
-    */
+    
     document.AddMember("life_piece", life_piece, document.GetAllocator());
     document.AddMember("dart_piece", dart_piece, document.GetAllocator());
 }

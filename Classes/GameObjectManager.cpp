@@ -181,7 +181,7 @@ int GameObjectManager::objectCount()
 void GameObjectManager::update(float delta) 
 {
   this->cacheOperation();
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(mList, node)
   {
     GameObject* go = (GameObject*)node;

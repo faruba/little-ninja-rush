@@ -100,7 +100,7 @@ void TraceDart::onUpdate(float delta)
     cocos2d::Point np = ccpAdd(ds, mSprite->getPosition());
     mSprite->setPosition(np);
     //伤害判定
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;

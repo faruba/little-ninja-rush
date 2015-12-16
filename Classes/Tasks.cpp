@@ -15,7 +15,7 @@ cocos2d::CCArray *gAchievements = NULL;//成就
 cocos2d::CCArray *gStatistics = NULL;//统计
 bool gLoadFlag = false;
 class UploadAchievement :
-  public CCObject
+  public Ref
 {
   public:
 cocos2d::CCString *gcid;
@@ -163,7 +163,7 @@ cocos2d::CCLog("readObjectives");
       }
     }
     //载入成就记录
-cocos2d::CCObject *obj = NULL;
+cocos2d::Ref *obj = NULL;
 CCARRAY_FOREACH (gAchievements, obj)
     {
       Achievement *ach = (Achievement*)obj;
@@ -204,7 +204,7 @@ cocos2d::CCString *key = cocos2d::CCString::createWithFormat("achievement__%d", 
       }
     }
     //载入统计记录
-cocos2d::CCObject *pObj = NULL;
+cocos2d::Ref *pObj = NULL;
 CCARRAY_FOREACH(gStatistics, pObj)
     {
       Statistics *sta = (Statistics*)pObj;
@@ -276,7 +276,7 @@ cocos2d::CCLog("doneReadObjectives");
       bronzePrize->retain();
     }
     //载入成就记录
-cocos2d::CCObject *pObj = NULL;
+cocos2d::Ref *pObj = NULL;
 CCARRAY_FOREACH(gAchievements, pObj)
     {
       Achievement  *ach = (Achievement *)pObj;
@@ -310,6 +310,7 @@ CCARRAY_FOREACH(gStatistics, pObj)
 
 void Tasks::writeObjectives(rapidjson::Document &document) 
 {
+    /*TODO:
 //    //写入成就上传
 //    {
 //        dic->setObject(uploadedAchievements, "achievement_upload");
@@ -343,9 +344,8 @@ void Tasks::writeObjectives(rapidjson::Document &document)
         document.AddMember("apz_bronze_score", bronzePrize->score, document.GetAllocator());
         document.AddMember("apz_bronze_prize", bronzePrize->prize, document.GetAllocator());
     }
-    /* TODO:uncomment this
     //写入成就记录
-cocos2d::CCObject *obj = NULL;
+cocos2d::Ref *obj = NULL;
 CCARRAY_FOREACH (gAchievements, obj)
     {
       Achievement *ach = (Achievement*)obj;
@@ -353,7 +353,7 @@ cocos2d::CCString *key = cocos2d::CCString::createWithFormat("achievement__%d", 
       document.AddMember(key->getCString(), ach->achieveCount, document.GetAllocator());
     }
     //写入统计记录
-cocos2d::CCObject *pObj = NULL;
+cocos2d::Ref *pObj = NULL;
 CCARRAY_FOREACH(gStatistics, pObj)
     {
       Statistics *sta = (Statistics*)pObj;
@@ -510,7 +510,7 @@ void Tasks::completeAchievement(int tid)
 {
 cocos2d::CCLog("!!! Achievement Completed!");
     Achievement *obj = Tasks::achievementWithUiid(tid);
-    GamePlay::pushNotification(obj->text, obj->icon, 3);
+    //TODO:GamePlay::pushNotification(obj->text, obj->icon, 3);
 }
 
 void Tasks::completeObjectiveDaily(int oid) 
@@ -524,7 +524,7 @@ cocos2d::CCLog("!!! Daily Objective Completed! (Step%d)", dailyObjective->index+
     }
     GameRecord::sharedGameRecord()->task->dispatchTask(ACH_COMPLETEWORKS, 1);
     //GamePlay::taskCompleted(NULL, obj->icon, 0);
-    GamePlay::pushNotification(NULL, obj->icon, 0);
+    //TODO:GamePlay::pushNotification(NULL, obj->icon, 0);
 }
 
 void Tasks::completeObjectiveWeekly(int oid) 
@@ -537,7 +537,7 @@ cocos2d::CCLog("!!! Weekly Objective Completed! (Step%d)", weeklyObjective->inde
     }
     GameRecord::sharedGameRecord()->task->dispatchTask(ACH_COMPLETEWORKS, 1);
     //GamePlay::taskCompleted(NULL, obj->icon, 1);
-    GamePlay::pushNotification(NULL, obj->icon, 1);
+    //TODO:GamePlay::pushNotification(NULL, obj->icon, 1);
 }
 
 void Tasks::completeObjectiveMonthly(int oid) 
@@ -550,7 +550,7 @@ cocos2d::CCLog("!!! Monthly Objective Completed! (Step%d)", monthlyObjective->in
     }
     GameRecord::sharedGameRecord()->task->dispatchTask(ACH_COMPLETEWORKS, 1);
     //GamePlay::taskCompleted(NULL, obj->icon, 2);
-    GamePlay::pushNotification(NULL, obj->icon, 2);
+    //TODO:GamePlay::pushNotification(NULL, obj->icon, 2);
 }
 
 //给参数加了引用，为什么之前没有引用，有一部分也能功能，不科学
@@ -567,10 +567,11 @@ void loadObjectivesFromFile(const char* szJson, CCArray* &pArr)
     }
 cocos2d::CCString *path = cocos2d::CCString::createWithFormat("data/%s", szJson);
 cocos2d::CCString *str = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename(path->getCString()).c_str());
+    /*TODO:
 cocos2d::CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(str);
     if (parsed)
     {
-cocos2d::CCObject *pObj = NULL;
+cocos2d::Ref *pObj = NULL;
 CCARRAY_FOREACH(parsed, pObj)
     {
 cocos2d::CCDictionary *dic = (cocos2d::CCDictionary*)pObj;
@@ -591,6 +592,7 @@ cocos2d::CCDictionary *dic = (cocos2d::CCDictionary*)pObj;
     else {
 cocos2d::CCLog("Error: failed to parse objectives data file %s.", szJson);
     }
+     */
 }
 
 void Tasks::loadObjectivesFromFile() 
@@ -604,7 +606,7 @@ void Tasks::loadObjectivesFromFile()
 }
 
 void Tasks::loadAchievementsFromFile() 
-{
+{/*TODO:
     if( gAchievements == NULL )
     {
         gAchievements = cocos2d::CCArray::create();
@@ -618,7 +620,7 @@ cocos2d::CCString *str = cocos2d::CCString::createWithContentsOfFile(cocos2d::CC
 cocos2d::CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(str);
     if (parsed)
     {
-cocos2d::CCObject *pObj = NULL;
+cocos2d::Ref *pObj = NULL;
 CCARRAY_FOREACH(parsed, pObj)
         {
 cocos2d::CCDictionary *dic = (cocos2d::CCDictionary*)pObj;
@@ -641,7 +643,7 @@ cocos2d::CCDictionary *dic = (cocos2d::CCDictionary*)pObj;
     }
     else {
 cocos2d::CCLog("Error: failed to parse achievements data file %s.");
-    }
+    }*/
 }
 
 void Tasks::loadStatisticsFromFile() 
@@ -655,13 +657,13 @@ void Tasks::loadStatisticsFromFile()
   {
     gStatistics->removeAllObjects();
   }
-
+/*TODO:
   //CCString *str = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathFromRelativeFile("statistics.json", "data"));
 cocos2d::CCString *str = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("data/statistics.json").c_str());
 cocos2d::CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(str);
   if (parsed)
   {
-cocos2d::CCObject *pObj = NULL;
+cocos2d::Ref *pObj = NULL;
 CCARRAY_FOREACH(parsed, pObj)
     {
 cocos2d::CCDictionary *dic = (cocos2d::CCDictionary*)pObj;
@@ -679,13 +681,14 @@ cocos2d::CCDictionary *dic = (cocos2d::CCDictionary*)pObj;
   else {
 cocos2d::CCLog("Error: failed to load statistics file.");
   }
+ */
 }
 
 Achievement* Tasks::dailyObjectiveWithUiid(int uiid) 
 {
     if( uiid >= 0 )
     {
-cocos2d::CCObject *pObj = NULL;
+cocos2d::Ref *pObj = NULL;
 CCARRAY_FOREACH(gDailyObjectives, pObj){
             Achievement *obj = (Achievement*)pObj;
             if( obj->uiid == uiid )
@@ -701,7 +704,7 @@ Achievement* Tasks::weeklyObjectiveWithUiid(int uiid)
 {
     if( uiid >= 0 )
     {
-cocos2d::CCObject *pObj = NULL;
+cocos2d::Ref *pObj = NULL;
 CCARRAY_FOREACH(gWeeklyObjectives, pObj){
             Achievement *obj = (Achievement*)pObj;
             if( obj->uiid == uiid )
@@ -717,7 +720,7 @@ Achievement* Tasks::monthlyObjectiveWithUiid(int uiid)
 {
     if( uiid >= 0 )
     {
-cocos2d::CCObject *pObj = NULL;
+cocos2d::Ref *pObj = NULL;
 CCARRAY_FOREACH(gMonthlyObjectives, pObj){
             Achievement *obj = (Achievement*)pObj;
             if( obj->uiid == uiid )
@@ -733,7 +736,7 @@ Achievement* Tasks::achievementWithUiid(int uiid)
 {
     if( uiid >= 0 )
     {
-cocos2d::CCObject *pObj = NULL;
+cocos2d::Ref *pObj = NULL;
 CCARRAY_FOREACH(gAchievements, pObj){
             Achievement *obj = (Achievement*)pObj;
             if( obj->uiid == uiid )
@@ -749,7 +752,7 @@ Statistics* Tasks::statisticsWithUiid(int uiid)
 {
     if( uiid >= 0 )
     {
-cocos2d::CCObject *pObj = NULL;
+cocos2d::Ref *pObj = NULL;
 CCARRAY_FOREACH(gDailyObjectives, pObj){
             Statistics *obj = (Statistics*)pObj;
             if( obj->uiid == uiid )
@@ -773,8 +776,8 @@ cocos2d::CCArray* Tasks::getAchievements()
 
 //启动
 void Tasks::checkObjectives() 
-{
-CCDate *today = new CCDate();
+{/*TODO:
+cocos2d::CCDate *today = new CCDate();
     //refresh arcade prize
     if( prizeDate == 0 )
     {
@@ -782,8 +785,8 @@ CCDate *today = new CCDate();
         newrefresh = true;
     }
     else {
-CCDate *date = new CCDate(prizeDate);
-CCLOG("ARCADE PRIZE = %d-%d-%d %d:%d", date->year(), date->month(), date->mday(), date->hour(), date->min());
+cocos2d::CCDate *date = new CCDate(prizeDate);
+cocos2d::CCLOG("ARCADE PRIZE = %d-%d-%d %d:%d", date->year(), date->month(), date->mday(), date->hour(), date->min());
         if( today->year() != date->year() || today->month() != date->month()
            || today->mday() != date->mday() )
         {
@@ -798,8 +801,8 @@ CCLOG("ARCADE PRIZE = %d-%d-%d %d:%d", date->year(), date->month(), date->mday()
         newrefresh = true;
     }
     else {
-CCDate *date = new CCDate(dailyObjective->date);
-CCLOG("DAILY PRIZE = %d-%d-%d %d:%d", date->year(), date->month(), date->mday(), date->hour(), date->min());
+cocos2d::CCDate *date = new CCDate(dailyObjective->date);
+cocos2d::CCLOG("DAILY PRIZE = %d-%d-%d %d:%d", date->year(), date->month(), date->mday(), date->hour(), date->min());
         if( today->year() != date->year() || today->month() != date->month()
            || today->mday() != date->mday() )
         {
@@ -828,11 +831,11 @@ CCLOG("DAILY PRIZE = %d-%d-%d %d:%d", date->year(), date->month(), date->mday(),
         newrefresh = true;
     }
     else {
-CCDate *date = new CCDate(weeklyObjective->date);
-CCLOG("WEEKLY PRIZE = %d-%d-%d %d:%d", date->year(), date->month(), date->mday(), date->hour(), date->min());
+cocos2d::CCDate *date = new CCDate(weeklyObjective->date);
+cocos2d::CCLOG("WEEKLY PRIZE = %d-%d-%d %d:%d", date->year(), date->month(), date->mday(), date->hour(), date->min());
         time_t t = date->date();
         t+=60*60*24*7;
-CCDate *after = new CCDate(t);
+cocos2d::CCDate *after = new CCDate(t);
         if( this->isDay(date , after) || today->wday() < date->wday() )
         {
             //remove previous task
@@ -862,8 +865,8 @@ CCDate *after = new CCDate(t);
         newrefresh = true;
     }
     else {
-CCDate *date = new CCDate(monthlyObjective->date);
-CCLOG("MONTHLY PRIZE = %d-%d-%d %d:%d", date->year(), date->month(), date->mday(), date->hour(), date->min());
+cocos2d::CCDate *date = new CCDate(monthlyObjective->date);
+cocos2d::CCLOG("MONTHLY PRIZE = %d-%d-%d %d:%d", date->year(), date->month(), date->mday(), date->hour(), date->min());
         if( today->year() != date->year() || today->month() != date->month() )
         {
             //remove previous task
@@ -886,7 +889,7 @@ CCLOG("MONTHLY PRIZE = %d-%d-%d %d:%d", date->year(), date->month(), date->mday(
     }
     
     delete today;
-    today = NULL;
+    today = NULL;*/
 }
 
 bool Tasks::isDay(CCDate * a, CCDate * b)
@@ -1019,6 +1022,7 @@ void Tasks::dealloc()
     super->dealloc();
 }
 */
+
 cocos2d::CCString* Tasks::stringForObjective(cocos2d::CCString * desc, int achcode, int num, int count)
 {
 cocos2d::CCString *all = desc;

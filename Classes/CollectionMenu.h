@@ -14,8 +14,8 @@ class CollectionMenu :
 {
   public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
-    virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
     static CCScene* scene();
@@ -35,24 +35,24 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
     void updatePowerUpButton();
 
     //-- auto callback --
-    void onBack(cocos2d::Ref*);
-    void onUse(cocos2d::Ref*);
+    void onBack();
+    void onUse();
     void onCharacter(int nRole);
-    void onCharacter1(cocos2d::Ref*){onCharacter(0);};
-    void onCharacter2(cocos2d::Ref*){onCharacter(1);};
-    void onCharacter3(cocos2d::Ref*){onCharacter(2);};
-    void onCharacter4(cocos2d::Ref*){onCharacter(3);};
+    void onCharacter1(){onCharacter(0);};
+    void onCharacter2(){onCharacter(1);};
+    void onCharacter3(){onCharacter(2);};
+    void onCharacter4(){onCharacter(3);};
     void onItem(int nItem);
-    void onShuriken(cocos2d::Ref*){onItem(0);};
-    void onKatana(cocos2d::Ref*){onItem(1);};
-    void onSpecial(cocos2d::Ref*){onItem(2);};
-    void onPowerup(cocos2d::Ref*);
+    void onShuriken(){onItem(0);};
+    void onKatana(){onItem(1);};
+    void onSpecial(){onItem(2);};
+    void onPowerup();
 
-    void onFacebook(cocos2d::Ref*);
-    void onTwitter(cocos2d::Ref*);
+    void onFacebook();
+    void onTwitter();
 
-    void onSelectLife(cocos2d::Ref*);
-    void onSelectDart(cocos2d::Ref*);
+    void onSelectLife();
+    void onSelectDart();
 
     void clickMethod();
 
@@ -114,12 +114,12 @@ cocos2d::CCScene *mNewScene;
     bool mIntroFlag;
 
     bool mModal;
-cocos2d::CCObject *mModalTarget;
+cocos2d::Ref *mModalTarget;
     SEL_CallFunc mModalSel;
 
-    void setModal(const char* title, const char* desc, CCObject* target, SEL_CallFunc sel);
-    void onModalConfirm(cocos2d::Ref *);
-    void onModalCancel(cocos2d::Ref *);
+    void setModal(const char* title, const char* desc, Ref* target, SEL_CallFunc sel);
+    void onModalConfirm();
+    void onModalCancel();
 
 
     // 0-mainmenu 1-selectmenu

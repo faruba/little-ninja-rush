@@ -41,7 +41,7 @@ void Star::onUpdate(float delta)
     mSprite->setPosition(np);
     GamePlay *play = GamePlay::sharedGamePlay();
     //伤害判定
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;

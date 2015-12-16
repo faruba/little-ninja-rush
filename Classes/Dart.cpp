@@ -345,7 +345,7 @@ void Dart::onUpdate(float delta)
   //碰撞检测
   if( mIsEnemy == false )
   {
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
     {
       Role * em = (Role*)node;

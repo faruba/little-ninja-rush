@@ -189,40 +189,40 @@ void GameScript::invokeSpell9()
 //手里剑旋风
 void GameScript::invokeSpell15() 
 {
-  GamePlay *play = GamePlay::sharedGamePlay();
-  int cr = GameRecord::sharedGameRecord()->curr_char;
-  int did = GameRecord::sharedGameRecord()->char_equip_dart[cr];
-
-  Shuriken *sk = (Shuriken*)GameData::fetchShurikens()->objectAtIndex(did);
-cocos2d::CCObject* node = NULL;
-CCARRAY_FOREACH(play->enemies, node)
-  {
-    Role * em = (Role*)node;
-    if( em->supportAimAid() && em->position().x > 0 && em->position().x < UniversalFit::sharedUniversalFit()->playSize.width )
-    {
-      if( play->mainrole->dart > 0 )
-      {
-        cocos2d::Point dir = ccpNormalize(ccpSub(em->center(), play->mainrole->center()));
-        Dart *d = Dart::dart(sk->shap, play->mainrole->center(), dir, sk->efft, play);
-        play->darts->addObject(play->manager->addGameObject(d));
-        play->mainrole->dart--;
-        //achievement fired shurikens
-        GameRecord::sharedGameRecord()->task->dispatchTask(ACH_FIREDSHURIKENS, 1);
-        play->firecount+=1;
-        GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEFIRE, play->firecount);
-        if( play->roleId == 1 )
-        {
-          GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONESAKURAFIRE, play->firecount);
-          GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SAKURAFIRE, 1);
-        }
-      }
-      else {
-        break;
-      }
-    }
-  }
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
-  play->mainrole->customAction(0);
+//  GamePlay *play = GamePlay::sharedGamePlay();
+//  int cr = GameRecord::sharedGameRecord()->curr_char;
+//  int did = GameRecord::sharedGameRecord()->char_equip_dart[cr];
+//
+//  Shuriken *sk = (Shuriken*)GameData::fetchShurikens()->objectAtIndex(did);
+//cocos2d::Ref* node = NULL;
+//CCARRAY_FOREACH(play->enemies, node)
+//  {
+//    Role * em = (Role*)node;
+//    if( em->supportAimAid() && em->position().x > 0 && em->position().x < UniversalFit::sharedUniversalFit()->playSize.width )
+//    {
+//      if( play->mainrole->dart > 0 )
+//      {
+//        cocos2d::Point dir = ccpNormalize(ccpSub(em->center(), play->mainrole->center()));
+//        Dart *d = Dart::dart(sk->shap, play->mainrole->center(), dir, sk->efft, play);
+//        play->darts->addObject(play->manager->addGameObject(d));
+//        play->mainrole->dart--;
+//        //achievement fired shurikens
+//        GameRecord::sharedGameRecord()->task->dispatchTask(ACH_FIREDSHURIKENS, 1);
+//        play->firecount+=1;
+//        GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEFIRE, play->firecount);
+//        if( play->roleId == 1 )
+//        {
+//          GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONESAKURAFIRE, play->firecount);
+//          GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SAKURAFIRE, 1);
+//        }
+//      }
+//      else {
+//        break;
+//      }
+//    }
+//  }
+//  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
+//  play->mainrole->customAction(0);
 }
 
 //元气爆
@@ -232,7 +232,7 @@ void GameScript::invokeSpell16()
   play->manager->addGameObject(FeverBrust::feverbrust(20, false));
   cocos2d::Point mainpos = play->mainrole->position();
   cocos2d::Point maincen = play->mainrole->center();
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->darts, node)
   {
     Darts *dr = (Darts*)node;
@@ -250,7 +250,7 @@ void GameScript::invokeSpell17()
   GamePlay *play = GamePlay::sharedGamePlay();
   play->scheduleMask(ccc3(255, 0, 0), 0.1f, 1);
   SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/blade-clay.mp3").c_str());
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
   {
     Role *em = (Role*)node;

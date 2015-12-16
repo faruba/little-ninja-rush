@@ -1,6 +1,6 @@
 #include "MessageManager.h"
 
-Msg* Msg::msg(cocos2d::CCNode* tar, SEL_CallFuncND sel, CCObject* obj) 
+Msg* Msg::msg(cocos2d::CCNode* tar, SEL_CallFuncND sel, Ref* obj) 
 {
     Msg *m = Msg::create();
     m->target = tar;
@@ -35,7 +35,7 @@ void MessageManager::clearMsg()
     //mLock->unlock();
 }
 
-void MessageManager::pushMsg(cocos2d::CCNode* target, SEL_CallFuncND sel, CCObject* obj) 
+void MessageManager::pushMsg(cocos2d::CCNode* target, SEL_CallFuncND sel, Ref* obj) 
 {
     //mLock->lock();
     if (obj)

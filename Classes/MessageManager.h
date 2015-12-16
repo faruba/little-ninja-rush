@@ -2,15 +2,15 @@
 #define ___CLASSES_MESSAGEMANAGER_H_
 #include "GameTool.h"
 
-class Msg:public CCObject
+class Msg:public Ref
 {
   public:
-    static Msg* msg(cocos2d::CCNode* tar, SEL_CallFuncND sel, CCObject* obj);
+    static Msg* msg(cocos2d::CCNode* tar, SEL_CallFuncND sel, Ref* obj);
     CREATE_FUNC(Msg);
     virtual bool init(){return true;};
 cocos2d::CCNode* target;
     SEL_CallFuncND sel;
-cocos2d::CCObject* obj;
+cocos2d::Ref* obj;
 };
 
 class MessageManager:public GameObject{
@@ -27,7 +27,7 @@ cocos2d::CCArray *mMsg;
 
 
     void clearMsg();
-    void pushMsg(cocos2d::CCNode* target, SEL_CallFuncND sel, CCObject* obj);
+    void pushMsg(cocos2d::CCNode* target, SEL_CallFuncND sel, Ref* obj);
 
 };
 #endif

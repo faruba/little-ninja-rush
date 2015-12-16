@@ -49,7 +49,7 @@ void PumpkinFire::onUpdate(float delta)
     bool removeflag = false;
     
     //碰撞检测
-cocos2d::CCObject* node = NULL;
+cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
   {
     Role * em = (Role*)node;

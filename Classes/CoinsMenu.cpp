@@ -130,15 +130,13 @@ void CoinsMenu::activate(int cid)
         }
         //rearrange items
         mOffset = 0;
-        /*TODO:Uncomment this
-cocos2d::CCObject* node = NULL;
-CCARRAY_FOREACH(mItemList->getChildren(), node)
-        {
-            FoldItem *it = (FoldItem*)node;
-            it->setPosition(cocos2d::ccp(0, mOffset));
-            mOffset -= it->getContentSize().height + PADDING;
-        }
-         */
+cocos2d::Ref* node = NULL;
+//CCARRAY_FOREACH(mItemList->getChildren(), node)
+//        {
+//            FoldItem *it = (FoldItem*)node;
+//            it->setPosition(cocos2d::ccp(0, mOffset));
+//            mOffset -= it->getContentSize().height + PADDING;
+//        }
         if( unfold )
         {
             float upbound = -newitem->getPosition().y - mItemList->getPosition().y;
@@ -156,7 +154,6 @@ CCARRAY_FOREACH(mItemList->getChildren(), node)
                 mItemList->setPosition(np);
             }
         }
-        
     }
 }
 
@@ -295,59 +292,55 @@ cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
 
 void CoinsMenu::onTouchMoved(Touch * touch, Event * event) 
 {
-    LNR_GET_TOUCH_POS;
-
-    float dy = pos.y - mBeginPressY;
-    float y = mBeginNodeY + dy;
-    cocos2d::Point np = mItemList->getPosition();
-    np.y = y;
-    mItemList->setPosition(np);
-    //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
-    time_t time;
-    /*TODO:Uncomment this
-cocos2d::CCTime::gettimeofdayCocos2d(&time, NULL);
-    
-    if( mLastY > -10000 )
-    {
-        float ds = np.y - mLastY;
-        //float dt = time - mLastTime;
-        float dt = cocos2d::CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
-        mFlySpeed = ds/dt;
-    }
-     */
-    mLastY = np.y;
-    mLastTime = time;
+//    LNR_GET_TOUCH_POS;
+//
+//    float dy = pos.y - mBeginPressY;
+//    float y = mBeginNodeY + dy;
+//    cocos2d::Point np = mItemList->getPosition();
+//    np.y = y;
+//    mItemList->setPosition(np);
+//    //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
+//    time_t time;
+//cocos2d::CCTime::gettimeofdayCocos2d(&time, NULL);
+//    
+//    if( mLastY > -10000 )
+//    {
+//        float ds = np.y - mLastY;
+//        //float dt = time - mLastTime;
+//        float dt = cocos2d::CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
+//        mFlySpeed = ds/dt;
+//    }
+//    mLastY = np.y;
+//    mLastTime = time;
     this->updateScorll();
 }
 
 void CoinsMenu::onTouchEnded(Touch * touch, Event * event) 
 {
-    mFly = true;
-    LNR_GET_TOUCH_POS;
-cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
-    if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
-            rect.containsPoint(pos) )
-    {
-        float dy = mList->getPosition().y - pos.y;
-        float offset = 0;
-        int index = 0;/*TODO:Uncomment this
-                       
-cocos2d::CCObject *node;
-CCARRAY_FOREACH(mItemList->getChildren(), node)
-        {
-cocos2d::CCNode *item = (cocos2d::CCNode*) node;
-            float upbound = offset - mItemList->getPosition().y;
-            float downbound = upbound + item->getContentSize().height + PADDING;
-            if( dy >= upbound && dy < downbound )
-            {
-                activate(index);
-                break;
-            }
-            offset += item->getContentSize().height + PADDING;
-            index++;
-        }
-                       */
-    }
+//    mFly = true;
+//    LNR_GET_TOUCH_POS;
+//cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
+//    if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
+//            rect.containsPoint(pos) )
+//    {
+//        float dy = mList->getPosition().y - pos.y;
+//        float offset = 0;
+//        int index = 0;
+//cocos2d::Ref *node;
+//CCARRAY_FOREACH(mItemList->getChildren(), node)
+//        {
+//cocos2d::CCNode *item = (cocos2d::CCNode*) node;
+//            float upbound = offset - mItemList->getPosition().y;
+//            float downbound = upbound + item->getContentSize().height + PADDING;
+//            if( dy >= upbound && dy < downbound )
+//            {
+//                activate(index);
+//                break;
+//            }
+//            offset += item->getContentSize().height + PADDING;
+//            index++;
+//        }
+//    }
 }
 
 void CoinsMenu::setSceneIntro() 
@@ -397,7 +390,7 @@ void CoinsMenu::setModal(int pid)
             mMask->removeAllChildrenWithCleanup(true);
             //disable other operations
             mMenu->setTouchEnabled(false);
-cocos2d::CCObject *node;
+cocos2d::Ref *node;
 CCARRAY_FOREACH(mItemList->getChildren(), node)
             {
                 FoldItem *it = (FoldItem*)node;
@@ -429,14 +422,12 @@ void CoinsMenu::cancelModal()
         mIsModal = false;
         mMask->setVisible(false);
         mMenu->setTouchEnabled(true);
-        /*TODO:Uncomment this
-cocos2d::CCObject *node;
-CCARRAY_FOREACH(mItemList->getChildren(), node)
-        {
-            FoldItem *it = (FoldItem*)node;
-            it->togglePurchaseButton(true);
-        }
-         */
+cocos2d::Ref *node;
+//CCARRAY_FOREACH(mItemList->getChildren(), node)
+//        {
+//            FoldItem *it = (FoldItem*)node;
+//            it->togglePurchaseButton(true);
+//        }
     }
 }
 
@@ -531,21 +522,20 @@ void CoinsMenu::modalOver()
     this->cancelModal();
 }
 
-SEL_MenuHandler CoinsMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler CoinsMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-    /*TODO:Uncomment this
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", CoinsMenu::onBack);
-*/
+//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", CoinsMenu::onBack);
+
     //CCLog(pSelectorName);
     return NULL;
 }
 
-cocos2d::extension::Control::Handler   CoinsMenu::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   CoinsMenu::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool CoinsMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool CoinsMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", CCNode *, mList);

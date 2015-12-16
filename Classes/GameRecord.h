@@ -10,7 +10,7 @@
 
 using namespace cocos2d;
 
-class GameRecord : public CCObject
+class GameRecord : public Ref
 {
   public:
     static GameRecord* sharedGameRecord();

@@ -48,8 +48,8 @@ bool TipsMenu::init()
 void TipsMenu::onEnter()
 {
     PublicLoad::menuExtra()->loadAll();
-cocosbuilder::NodeLoaderLibrary *pNodeLib = cocosbuilder::NodeLoaderLibrary::sharedNodeLoaderLibrary();
-cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
+    cocosbuilder::NodeLoaderLibrary *pNodeLib = cocosbuilder::NodeLoaderLibrary::getInstance();
+    cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
 cocos2d::CCNode *mNode = pReader->readNodeGraphFromFile("menu-tips.ccbi", this);
     pReader->release();
     
@@ -114,7 +114,7 @@ cocos2d::CCSize size = cocos2d::CCSizeMake(300, 100);
     }
 }
 
-void TipsMenu::onBack(cocos2d::Ref*) 
+void TipsMenu::onBack() 
 {
     if( !mIntroFlag )
     {
@@ -125,7 +125,7 @@ void TipsMenu::onBack(cocos2d::Ref*)
     }
 }
 
-void TipsMenu::onLeft(cocos2d::Ref*)
+void TipsMenu::onLeft() 
 {
     if( mIndex > 0 )
     {
@@ -135,7 +135,7 @@ void TipsMenu::onLeft(cocos2d::Ref*)
     }
 }
 
-void TipsMenu::onRight(cocos2d::Ref*) 
+void TipsMenu::onRight() 
 {
     if( mIndex < GameData::fetchTips()->count() - 1 )
     {
@@ -227,22 +227,22 @@ cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
     mNewScene->release();
 }
 
-bool TipsMenu::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool TipsMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeft", CCMenuItemImage*, mLeft);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRight", CCMenuItemImage*, mRight);
     return false;
 }
 
-SEL_MenuHandler TipsMenu::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler TipsMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onLeft", TipsMenu::onLeft);
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRight", TipsMenu::onRight);
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", TipsMenu::onBack);
+//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onLeft", TipsMenu::onLeft);
+//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRight", TipsMenu::onRight);
+//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", TipsMenu::onBack);
     return NULL;
 }
 
-cocos2d::extension::Control::Handler   TipsMenu::onResolveCCBCCControlSelector(cocos2d::CCObject *, const char*)
+cocos2d::extension::Control::Handler   TipsMenu::onResolveCCBCCControlSelector(cocos2d::Ref *, const char*)
 {
     return NULL;
 }

@@ -298,8 +298,8 @@ cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("
     
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(0, 0, 0), 128, 0);
-NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
-cocosbuilder::CCBReader *pReader = new CCBReader(pNodeLib, this, this);
+    cocosbuilder::NodeLoaderLibrary *pNodeLib = cocosbuilder::NodeLoaderLibrary::getInstance();
+    cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
     mNode = pReader->readNodeGraphFromFile("ui-gameover.ccbi", this);
     //mNode = createUIByCCBI("ui-gameover.ccb", "CoinsMenu", GameOverLoader::loader(), this);
     pReader->release();
@@ -590,23 +590,23 @@ void GameOver::doneTwitter(cocos2d::CCInteger* res)
 }
 
 
-SEL_MenuHandler GameOver::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
-{/*TODO: uncomment this
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChange", GameOver::onChange);
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMenu", GameOver::onMenu);
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRestart", GameOver::onRestart);
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onFacebook", GameOver::onFacebook);
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTwitter", GameOver::onTwitter);
- */   
+SEL_MenuHandler GameOver::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
+{
+//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChange", GameOver::onChange);
+//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMenu", GameOver::onMenu);
+//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRestart", GameOver::onRestart);
+//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onFacebook", GameOver::onFacebook);
+//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTwitter", GameOver::onTwitter);
+//    
     return NULL;
 }
 
-cocos2d::extension::Control::Handler   GameOver::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+cocos2d::extension::Control::Handler   GameOver::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool GameOver::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool GameOver::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
   //CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDistance", CCLabelBMFont *, mDistance);

@@ -25,325 +25,319 @@ GameInterface* GameInterface::interface(cocos2d::CCNode * parent)
 
 void GameInterface::onCreate() 
 {
-    GamePlay *play = GamePlay::sharedGamePlay();
-    
-    //*** COMMON Interface ***
-    
-    //interface
-    mUIBg = cocos2d::CCSprite::createWithSpriteFrameName("ui-bg.png");
-    mUIBg->setAnchorPoint(cocos2d::ccp(0, 0));
-    mUIBg->setPosition(cocos2d::ccp(0, 0));
-    mParent->addChild(mUIBg,  LAYER_UI);
-    
-    //SP槽
-    mSpBg = cocos2d::CCSprite::createWithSpriteFrameName("ui-spell-bg.png");
-    mSpBg->setAnchorPoint(cocos2d::ccp(0, 0));
-    mSpBg->setPosition(cocos2d::ccp(31, 4));
-    mSpBg->setScaleX(0);
-    mParent->addChild(mSpBg, LAYER_UI);
-    
-    mSpBgTop = cocos2d::CCSprite::createWithSpriteFrameName("ui-spell-bgtop.png");
-    mSpBgTop->setAnchorPoint(cocos2d::ccp(0, 0));
-    mSpBgTop->setPosition(cocos2d::ccp(31, 4));
-    mParent->addChild(mSpBgTop, LAYER_UI);
-    
-    mSpFgNode = cocos2d::CCNode::create();
-    mSpFgNode->setPosition(cocos2d::ccp(31, 4));
-    mParent->addChild(mSpFgNode, LAYER_UI);
-    mSpFg = cocos2d::CCSprite::createWithSpriteFrameName("ui-spell-fg.png");
-    mSpFg->setAnchorPoint(cocos2d::ccp(0, 0));
-    mSpFg->setPosition(cocos2d::ccp(0, 0));
-    mSpFg->setScaleX(0);
-    mSpFgNode->addChild(mSpFg, LAYER_UI);
-    mSpFgTop = cocos2d::CCSprite::createWithSpriteFrameName("ui-spell-fgtop.png");
-    mSpFgTop->setAnchorPoint(cocos2d::ccp(0, 0));
-    mSpFgTop->setPosition(cocos2d::ccp(mSpFg->getPosition().x, 0));
-    mSpFgTop->setVisible(false);
-    mSpFgNode->addChild(mSpFgTop);
-cocos2d::CCBlink *usaBlink = cocos2d::CCBlink::create(60, 300);
-cocos2d::CCRepeatForever *usaRep = cocos2d::CCRepeatForever::create(usaBlink);
-    mSpFgNode->runAction(usaRep);
-    
-    //动态使用框子
-    int gn = play->mainrole->maxSP/play->mainrole->activeSP;
-    if( gn > 4 || gn < 1 )
-    {
-        gn = 1;
-    }
-    mSpellGrid = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("ui-spell%d.png", gn)->getCString());
-    mSpellGrid->setAnchorPoint(cocos2d::ccp(0, 0));
-    mSpellGrid->setPosition(cocos2d::ccp(23.5f, 2));
-    mParent->addChild(mSpellGrid, LAYER_UI+1);
-    mSpCache = 0;
-    
-    //spell
-    int rid = GameRecord::sharedGameRecord()->curr_char;
-    int spid = GameRecord::sharedGameRecord()->char_equip_spell[rid];
-    Special *spell = (Special*)GameData::fetchSpecials()->objectAtIndex(spid);
-    mSpell = cocos2d::CCSprite::create(spell->icon->getCString());
-    mSpell->setAnchorPoint(cocos2d::ccp(0.5, 0.5));
-    mSpell->setPosition(cocos2d::ccp(14, 14));
-    mParent->addChild(mSpell,  LAYER_UI);
-    mSpellName = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("name%d.png", GameRecord::sharedGameRecord()->curr_char)->getCString());
-    mSpellName->setAnchorPoint(cocos2d::ccp(0, 0));
-    mSpellName->setPosition(cocos2d::ccp(37, 13));
-    mParent->addChild(mSpellName,  LAYER_UI);
-    
-    //combo meter
-    mHitNode = cocos2d::CCNode::create();
-    mHitNode->setPosition(cocos2d::ccp( UniversalFit::sharedUniversalFit()->playSize.width-5, 150));
-    mHitNode->setVisible(false);
-    mParent->addChild(mHitNode, LAYER_UI);
-    mHits = cocos2d::CCSprite::createWithSpriteFrameName("hits.png");
-    mHits->setAnchorPoint(cocos2d::ccp(1, 0.5f));
-    mHits->setPosition(cocos2d::ccp(0, 0));
-    mHitNode->addChild(mHits);
-    mHitCount = cocos2d::CCLabelBMFont::create("0", "ab70.fnt");
-    mHitCount->setAnchorPoint(cocos2d::ccp(1, 0.5f));
-    mHitCount->setPosition(cocos2d::ccp(-(mHits->getContentSize().width + 5), 0));
-    mHitNode->addChild(mHitCount);
-    
-    //dart meter
-    mDartMeter = cocos2d::CCNode::create();
-    mDartMeter->setPosition(cocos2d::ccp(136, 0));
-    mParent->addChild(mDartMeter, LAYER_UI);
-    mDartDis = 50.0f/play->mainrole->dart;
-    if( mDartDis > 12 )
-    {
-        mDartDis = 12;
-    }
-    for(int i=0; i<play->mainrole->dart; ++i)
-    {
-cocos2d::CCSprite *d = cocos2d::CCSprite::createWithSpriteFrameName("ui-dart.png");
-        d->setAnchorPoint(cocos2d::ccp(0, 0));
-        d->setPosition(cocos2d::ccp( mDartDis*i, 0));
-        mDartMeter->addChild(d);
-    }
-    mDartCache = 5;
-    
-    if( play->mode == MODE_CLASSIC )
-    {//*** Classic Mode ***
-        //距离
-        mDistanceNumber = cocos2d::CCLabelBMFont::create("0", "ra50.fnt");
-        mDistanceNumber->setAnchorPoint(cocos2d::ccp(0, 1));
-        mDistanceNumber->setPosition(cocos2d::ccp(5, SCREEN_HEIGHT-5));
-        mParent->addChild(mDistanceNumber, LAYER_UI);
-        mDistanceM = cocos2d::CCLabelBMFont::create("m", "ra50.fnt");
-        mDistanceM->setAnchorPoint(cocos2d::ccp(0, 1));
-        mDistanceM->setPosition(cocos2d::ccp(5+10, SCREEN_HEIGHT-5));
-        mParent->addChild(mDistanceM, LAYER_UI);
-        mDistanceCache = 0;
-        
-        //金币
-        mCoinNumber = cocos2d::CCLabelBMFont::create("0", "ra40.fnt");
-        mCoinNumber->setAnchorPoint(cocos2d::ccp(0, 1));
-        mCoinNumber->setPosition(cocos2d::ccp(5, SCREEN_HEIGHT - mDistanceNumber->getContentSize().height));
-        mParent->addChild(mCoinNumber, LAYER_UI);
-        mCoinMark = cocos2d::CCSprite::createWithSpriteFrameName("go_coin.png");
-        mCoinMark->setAnchorPoint(cocos2d::ccp(0, 0));
-        mCoinMark->setPosition(cocos2d::ccp(8+8, SCREEN_HEIGHT - mDistanceNumber->getContentSize().height - 15));
-        mParent->addChild(mCoinMark, LAYER_UI);
-        
-        //fever coins
-        mFeverCoins = cocos2d::CCNode::create();
-        mFeverCoins->setPosition(cocos2d::ccp( UniversalFit::sharedUniversalFit()->playSize.width-5, 170));
-        mFeverCoins->setVisible(false);
-        mParent->addChild(mFeverCoins, LAYER_UI);
-cocos2d::CCSprite *fevercoin = cocos2d::CCSprite::createWithSpriteFrameName("fevercoins.png");
-        fevercoin->setAnchorPoint(cocos2d::ccp(1, 0.5f));
-        mFeverCoins->addChild(fevercoin);
-        mFeverFont = cocos2d::CCLabelBMFont::create("+0", "ab56.fnt");
-        mFeverFont->setAnchorPoint(cocos2d::ccp(1, 0.5f));
-        mFeverFont->setPosition(cocos2d::ccp(-(fevercoin->getContentSize().width+5), 0));
-        mFeverCoins->addChild(mFeverFont);
-        
-        //hp meter
-        for(int i=0; i<play->mainrole->maxHP; ++i)
-        {
-            mHPMeters[i] = cocos2d::CCSprite::createWithSpriteFrameName("heart.png");
-            float ahw = mHPMeters[i]->getContentSize().width*play->mainrole->maxHP + 1.5f*(play->mainrole->maxHP-1);
-            float off = (UniversalFit::sharedUniversalFit()->playSize.width - ahw)/2;
-            mHPMeters[i]->setAnchorPoint(cocos2d::ccp(0, 1));
-            mHPMeters[i]->setPosition(cocos2d::ccp( off+i*mHPMeters[i]->getContentSize().width + 1.5f*i, SCREEN_HEIGHT-5));
-            mParent->addChild(mHPMeters[i], LAYER_UI);
-        }
-        mHPCache = play->mainrole->maxHP;
-/*TODO:Uncomment this
-        //buttons
-        if( GameRecord::sharedGameRecord()->item_fly > 0 ||
-           GameRecord::sharedGameRecord()->item_sp > 0 )
-        {
-            mMenu = cocos2d::CCMenu::create( NULL);
-            mMenu->setPosition(cocos2d::ccp(0, 0));
-            play->addChild(mMenu, LAYER_UI);
-            if( GameRecord::sharedGameRecord()->item_fly > 0 )
-            {
-                mFly = cocos2d::CCMenuItemSprite::create(cocos2d::CCSprite::create("icon100.png"), CCSprite::create("icon100.png"), this, menu_selector(GameInterface::onFly));
-                mFly->setAnchorPoint(cocos2d::ccp(0, 0));
-                mFly->setPosition(cocos2d::ccp( 340, 10));
-                mMenu->addChild(mFly);
-                
-                mFlyBg = cocos2d::CCSprite::createWithSpriteFrameName("djan.png");
-                mFlyBg->setAnchorPoint(cocos2d::ccp(0, 0));
-                mFlyBg->setPosition(ccpAdd(mFly->getPosition(), ccp(3, 0)));
-                play->addChild(mFlyBg, LAYER_UI-1);
-                mFlyNumber = cocos2d::CCLabelBMFont::create(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_fly)->getCString(), "ra50.fnt");
-                mFlyNumber->setAnchorPoint(cocos2d::ccp(0.5f, 0));
-                mFlyNumber->setPosition(ccpAdd(mFly->getPosition(), ccp(25, -10)));
-                play->addChild(mFlyNumber, LAYER_UI+1);
-            }
-            if( GameRecord::sharedGameRecord()->item_sp > 0 )
-            {
-                mSP = cocos2d::CCMenuItemSprite::create(cocos2d::CCSprite::create("icon102.png"), CCSprite::create("icon102.png"), this, menu_selector(GameInterface::onSP));
-                mSP->setAnchorPoint(cocos2d::ccp(0, 0));
-                mSP->setPosition(cocos2d::ccp( 400, 10));
-                mMenu->addChild(mSP);
-                
-                mSPBg = cocos2d::CCSprite::createWithSpriteFrameName("djan.png");
-                mSPBg->setAnchorPoint(cocos2d::ccp(0, 0));
-                mSPBg->setPosition(ccpAdd(mSP->getPosition(), ccp(3, 0)));
-                play->addChild(mSPBg, LAYER_UI-1);
-                mSPNumber = cocos2d::CCLabelBMFont::create(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_sp)->getCString(), "ra50.fnt");
-                mSPNumber->setAnchorPoint(cocos2d::ccp(0.5f, 0));
-                mSPNumber->setPosition(ccpAdd(mSP->getPosition(), ccp(25, -10)));
-                play->addChild(mSPNumber, LAYER_UI+1);
-            }
-
-        }
-        else {
-            mMenu = NULL;
-        }
-   */
-    }
-    else
-    {//*** Arcade Mode ***
-        //score
-        mScoreNumber = cocos2d::CCLabelBMFont::create("0", "ra50.fnt");
-        mScoreNumber->setAnchorPoint(cocos2d::ccp(0, 1));
-        mScoreNumber->setPosition(cocos2d::ccp(5, SCREEN_HEIGHT-5));
-        mParent->addChild(mScoreNumber, LAYER_UI);
-        mScoreCache = 0;
-        
-        //speed * boost
-NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
-CCBReader *pReader = new CCBReader(pNodeLib, this, this);
-cocos2d::CCNode *mSpeedBoost = pReader->readNodeGraphFromFile("ui-arcade-speed.ccbi", this);
-        pReader->release();
-        
-        mSpeedBoost->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width, 0));
-        mSpeedState = 0;
-        mParent->addChild(mSpeedBoost, LAYER_UI);
-        
-        //timer
-        mTimerLabel = cocos2d::CCLabelBMFont::create("90", "ra50.fnt");
-        mTimerLabel->setAnchorPoint(cocos2d::ccp(0.5f, 1));
-        mTimerLabel->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, UniversalFit::sharedUniversalFit()->playSize.height - 5));
-        mParent->addChild(mTimerLabel, LAYER_UI);
-        mTimerCache = 90;
-        mTimerMark = cocos2d::CCSprite::createWithSpriteFrameName("time.png");
-        mTimerMark->setAnchorPoint(cocos2d::ccp(0.5f, 1));
-        cocos2d::Point postm = mTimerLabel->getPosition();
-        postm.y -= mTimerLabel->getContentSize().height - 5;
-        mTimerMark->setPosition(postm);
-        mParent->addChild(mTimerMark, LAYER_UI);
-        
-        //cup
-        mCupCache = 0;
-        mCup = cocos2d::CCSprite::createWithSpriteFrameName("tp-bronze.png");
-        mCup->setAnchorPoint(cocos2d::ccp(1, 0));
-        mCup->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width - 10, 25));
-        mCup->setVisible(false);
-        mParent->addChild(mCup, LAYER_UI);
-        
-        //arcade x
-        mArcadeX = cocos2d::CCLabelBMFont::create("x0", "ab70.fnt");
-        mArcadeX->setAnchorPoint(cocos2d::ccp(1, 0.5f));
-        mArcadeX->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width - 10, 180));
-        mArcadeX->setVisible(false);
-        mArcadeX->setColor(ccc3(255, 204, 0));
-        mParent->addChild(mArcadeX, LAYER_UI);
-    }
-    
-    mFlyUsed = false;
-    mPotionUsed = false;
-    mUnlimtedDarts = false;
+//    GamePlay *play = GamePlay::sharedGamePlay();
+//    
+//    //*** COMMON Interface ***
+//    
+//    //interface
+//    mUIBg = cocos2d::CCSprite::createWithSpriteFrameName("ui-bg.png");
+//    mUIBg->setAnchorPoint(cocos2d::ccp(0, 0));
+//    mUIBg->setPosition(cocos2d::ccp(0, 0));
+//    mParent->addChild(mUIBg,  LAYER_UI);
+//    
+//    //SP槽
+//    mSpBg = cocos2d::CCSprite::createWithSpriteFrameName("ui-spell-bg.png");
+//    mSpBg->setAnchorPoint(cocos2d::ccp(0, 0));
+//    mSpBg->setPosition(cocos2d::ccp(31, 4));
+//    mSpBg->setScaleX(0);
+//    mParent->addChild(mSpBg, LAYER_UI);
+//    
+//    mSpBgTop = cocos2d::CCSprite::createWithSpriteFrameName("ui-spell-bgtop.png");
+//    mSpBgTop->setAnchorPoint(cocos2d::ccp(0, 0));
+//    mSpBgTop->setPosition(cocos2d::ccp(31, 4));
+//    mParent->addChild(mSpBgTop, LAYER_UI);
+//    
+//    mSpFgNode = cocos2d::CCNode::create();
+//    mSpFgNode->setPosition(cocos2d::ccp(31, 4));
+//    mParent->addChild(mSpFgNode, LAYER_UI);
+//    mSpFg = cocos2d::CCSprite::createWithSpriteFrameName("ui-spell-fg.png");
+//    mSpFg->setAnchorPoint(cocos2d::ccp(0, 0));
+//    mSpFg->setPosition(cocos2d::ccp(0, 0));
+//    mSpFg->setScaleX(0);
+//    mSpFgNode->addChild(mSpFg, LAYER_UI);
+//    mSpFgTop = cocos2d::CCSprite::createWithSpriteFrameName("ui-spell-fgtop.png");
+//    mSpFgTop->setAnchorPoint(cocos2d::ccp(0, 0));
+//    mSpFgTop->setPosition(cocos2d::ccp(mSpFg->getPosition().x, 0));
+//    mSpFgTop->setVisible(false);
+//    mSpFgNode->addChild(mSpFgTop);
+//cocos2d::CCBlink *usaBlink = cocos2d::CCBlink::create(60, 300);
+//cocos2d::CCRepeatForever *usaRep = cocos2d::CCRepeatForever::create(usaBlink);
+//    mSpFgNode->runAction(usaRep);
+//    
+//    //动态使用框子
+//    int gn = play->mainrole->maxSP/play->mainrole->activeSP;
+//    if( gn > 4 || gn < 1 )
+//    {
+//        gn = 1;
+//    }
+//    mSpellGrid = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("ui-spell%d.png", gn)->getCString());
+//    mSpellGrid->setAnchorPoint(cocos2d::ccp(0, 0));
+//    mSpellGrid->setPosition(cocos2d::ccp(23.5f, 2));
+//    mParent->addChild(mSpellGrid, LAYER_UI+1);
+//    mSpCache = 0;
+//    
+//    //spell
+//    int rid = GameRecord::sharedGameRecord()->curr_char;
+//    int spid = GameRecord::sharedGameRecord()->char_equip_spell[rid];
+//    Special *spell = (Special*)GameData::fetchSpecials()->objectAtIndex(spid);
+//    mSpell = cocos2d::CCSprite::create(spell->icon->getCString());
+//    mSpell->setAnchorPoint(cocos2d::ccp(0.5, 0.5));
+//    mSpell->setPosition(cocos2d::ccp(14, 14));
+//    mParent->addChild(mSpell,  LAYER_UI);
+//    mSpellName = cocos2d::CCSprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("name%d.png", GameRecord::sharedGameRecord()->curr_char)->getCString());
+//    mSpellName->setAnchorPoint(cocos2d::ccp(0, 0));
+//    mSpellName->setPosition(cocos2d::ccp(37, 13));
+//    mParent->addChild(mSpellName,  LAYER_UI);
+//    
+//    //combo meter
+//    mHitNode = cocos2d::CCNode::create();
+//    mHitNode->setPosition(cocos2d::ccp( UniversalFit::sharedUniversalFit()->playSize.width-5, 150));
+//    mHitNode->setVisible(false);
+//    mParent->addChild(mHitNode, LAYER_UI);
+//    mHits = cocos2d::CCSprite::createWithSpriteFrameName("hits.png");
+//    mHits->setAnchorPoint(cocos2d::ccp(1, 0.5f));
+//    mHits->setPosition(cocos2d::ccp(0, 0));
+//    mHitNode->addChild(mHits);
+//    mHitCount = cocos2d::CCLabelBMFont::create("0", "ab70.fnt");
+//    mHitCount->setAnchorPoint(cocos2d::ccp(1, 0.5f));
+//    mHitCount->setPosition(cocos2d::ccp(-(mHits->getContentSize().width + 5), 0));
+//    mHitNode->addChild(mHitCount);
+//    
+//    //dart meter
+//    mDartMeter = cocos2d::CCNode::create();
+//    mDartMeter->setPosition(cocos2d::ccp(136, 0));
+//    mParent->addChild(mDartMeter, LAYER_UI);
+//    mDartDis = 50.0f/play->mainrole->dart;
+//    if( mDartDis > 12 )
+//    {
+//        mDartDis = 12;
+//    }
+//    for(int i=0; i<play->mainrole->dart; ++i)
+//    {
+//cocos2d::CCSprite *d = cocos2d::CCSprite::createWithSpriteFrameName("ui-dart.png");
+//        d->setAnchorPoint(cocos2d::ccp(0, 0));
+//        d->setPosition(cocos2d::ccp( mDartDis*i, 0));
+//        mDartMeter->addChild(d);
+//    }
+//    mDartCache = 5;
+//    
+//    if( play->mode == MODE_CLASSIC )
+//    {//*** Classic Mode ***
+//        //距离
+//        mDistanceNumber = cocos2d::CCLabelBMFont::create("0", "ra50.fnt");
+//        mDistanceNumber->setAnchorPoint(cocos2d::ccp(0, 1));
+//        mDistanceNumber->setPosition(cocos2d::ccp(5, SCREEN_HEIGHT-5));
+//        mParent->addChild(mDistanceNumber, LAYER_UI);
+//        mDistanceM = cocos2d::CCLabelBMFont::create("m", "ra50.fnt");
+//        mDistanceM->setAnchorPoint(cocos2d::ccp(0, 1));
+//        mDistanceM->setPosition(cocos2d::ccp(5+10, SCREEN_HEIGHT-5));
+//        mParent->addChild(mDistanceM, LAYER_UI);
+//        mDistanceCache = 0;
+//        
+//        //金币
+//        mCoinNumber = cocos2d::CCLabelBMFont::create("0", "ra40.fnt");
+//        mCoinNumber->setAnchorPoint(cocos2d::ccp(0, 1));
+//        mCoinNumber->setPosition(cocos2d::ccp(5, SCREEN_HEIGHT - mDistanceNumber->getContentSize().height));
+//        mParent->addChild(mCoinNumber, LAYER_UI);
+//        mCoinMark = cocos2d::CCSprite::createWithSpriteFrameName("go_coin.png");
+//        mCoinMark->setAnchorPoint(cocos2d::ccp(0, 0));
+//        mCoinMark->setPosition(cocos2d::ccp(8+8, SCREEN_HEIGHT - mDistanceNumber->getContentSize().height - 15));
+//        mParent->addChild(mCoinMark, LAYER_UI);
+//        
+//        //fever coins
+//        mFeverCoins = cocos2d::CCNode::create();
+//        mFeverCoins->setPosition(cocos2d::ccp( UniversalFit::sharedUniversalFit()->playSize.width-5, 170));
+//        mFeverCoins->setVisible(false);
+//        mParent->addChild(mFeverCoins, LAYER_UI);
+//cocos2d::CCSprite *fevercoin = cocos2d::CCSprite::createWithSpriteFrameName("fevercoins.png");
+//        fevercoin->setAnchorPoint(cocos2d::ccp(1, 0.5f));
+//        mFeverCoins->addChild(fevercoin);
+//        mFeverFont = cocos2d::CCLabelBMFont::create("+0", "ab56.fnt");
+//        mFeverFont->setAnchorPoint(cocos2d::ccp(1, 0.5f));
+//        mFeverFont->setPosition(cocos2d::ccp(-(fevercoin->getContentSize().width+5), 0));
+//        mFeverCoins->addChild(mFeverFont);
+//        
+//        //hp meter
+//        for(int i=0; i<play->mainrole->maxHP; ++i)
+//        {
+//            mHPMeters[i] = cocos2d::CCSprite::createWithSpriteFrameName("heart.png");
+//            float ahw = mHPMeters[i]->getContentSize().width*play->mainrole->maxHP + 1.5f*(play->mainrole->maxHP-1);
+//            float off = (UniversalFit::sharedUniversalFit()->playSize.width - ahw)/2;
+//            mHPMeters[i]->setAnchorPoint(cocos2d::ccp(0, 1));
+//            mHPMeters[i]->setPosition(cocos2d::ccp( off+i*mHPMeters[i]->getContentSize().width + 1.5f*i, SCREEN_HEIGHT-5));
+//            mParent->addChild(mHPMeters[i], LAYER_UI);
+//        }
+//        mHPCache = play->mainrole->maxHP;
+//        
+//        //buttons
+//        if( GameRecord::sharedGameRecord()->item_fly > 0 ||
+//           GameRecord::sharedGameRecord()->item_sp > 0 )
+//        {
+//            mMenu = cocos2d::CCMenu::create( NULL);
+//            mMenu->setPosition(cocos2d::ccp(0, 0));
+//            play->addChild(mMenu, LAYER_UI);
+//            if( GameRecord::sharedGameRecord()->item_fly > 0 )
+//            {
+//                mFly = cocos2d::CCMenuItemSprite::create(cocos2d::CCSprite::create("icon100.png"), CCSprite::create("icon100.png"), this, menu_selector(GameInterface::onFly));
+//                mFly->setAnchorPoint(cocos2d::ccp(0, 0));
+//                mFly->setPosition(cocos2d::ccp( 340, 10));
+//                mMenu->addChild(mFly);
+//                
+//                mFlyBg = cocos2d::CCSprite::createWithSpriteFrameName("djan.png");
+//                mFlyBg->setAnchorPoint(cocos2d::ccp(0, 0));
+//                mFlyBg->setPosition(ccpAdd(mFly->getPosition(), ccp(3, 0)));
+//                play->addChild(mFlyBg, LAYER_UI-1);
+//                mFlyNumber = cocos2d::CCLabelBMFont::create(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_fly)->getCString(), "ra50.fnt");
+//                mFlyNumber->setAnchorPoint(cocos2d::ccp(0.5f, 0));
+//                mFlyNumber->setPosition(ccpAdd(mFly->getPosition(), ccp(25, -10)));
+//                play->addChild(mFlyNumber, LAYER_UI+1);
+//            }
+//            if( GameRecord::sharedGameRecord()->item_sp > 0 )
+//            {
+//                mSP = cocos2d::CCMenuItemSprite::create(cocos2d::CCSprite::create("icon102.png"), CCSprite::create("icon102.png"), this, menu_selector(GameInterface::onSP));
+//                mSP->setAnchorPoint(cocos2d::ccp(0, 0));
+//                mSP->setPosition(cocos2d::ccp( 400, 10));
+//                mMenu->addChild(mSP);
+//                
+//                mSPBg = cocos2d::CCSprite::createWithSpriteFrameName("djan.png");
+//                mSPBg->setAnchorPoint(cocos2d::ccp(0, 0));
+//                mSPBg->setPosition(ccpAdd(mSP->getPosition(), ccp(3, 0)));
+//                play->addChild(mSPBg, LAYER_UI-1);
+//                mSPNumber = cocos2d::CCLabelBMFont::create(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_sp)->getCString(), "ra50.fnt");
+//                mSPNumber->setAnchorPoint(cocos2d::ccp(0.5f, 0));
+//                mSPNumber->setPosition(ccpAdd(mSP->getPosition(), ccp(25, -10)));
+//                play->addChild(mSPNumber, LAYER_UI+1);
+//            }
+//        }
+//        else {
+//            mMenu = NULL;
+//        }
+//    }
+//    else
+//    {//*** Arcade Mode ***
+//        //score
+//        mScoreNumber = cocos2d::CCLabelBMFont::create("0", "ra50.fnt");
+//        mScoreNumber->setAnchorPoint(cocos2d::ccp(0, 1));
+//        mScoreNumber->setPosition(cocos2d::ccp(5, SCREEN_HEIGHT-5));
+//        mParent->addChild(mScoreNumber, LAYER_UI);
+//        mScoreCache = 0;
+//        
+//        //speed * boost
+//        cocosbuilder::NodeLoaderLibrary *pNodeLib = cocosbuilder::NodeLoaderLibrary::getInstance();
+//        cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
+//cocos2d::CCNode *mSpeedBoost = pReader->readNodeGraphFromFile("ui-arcade-speed.ccbi", this);
+//        pReader->release();
+//        
+//        mSpeedBoost->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width, 0));
+//        mSpeedState = 0;
+//        mParent->addChild(mSpeedBoost, LAYER_UI);
+//        
+//        //timer
+//        mTimerLabel = cocos2d::CCLabelBMFont::create("90", "ra50.fnt");
+//        mTimerLabel->setAnchorPoint(cocos2d::ccp(0.5f, 1));
+//        mTimerLabel->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, UniversalFit::sharedUniversalFit()->playSize.height - 5));
+//        mParent->addChild(mTimerLabel, LAYER_UI);
+//        mTimerCache = 90;
+//        mTimerMark = cocos2d::CCSprite::createWithSpriteFrameName("time.png");
+//        mTimerMark->setAnchorPoint(cocos2d::ccp(0.5f, 1));
+//        cocos2d::Point postm = mTimerLabel->getPosition();
+//        postm.y -= mTimerLabel->getContentSize().height - 5;
+//        mTimerMark->setPosition(postm);
+//        mParent->addChild(mTimerMark, LAYER_UI);
+//        
+//        //cup
+//        mCupCache = 0;
+//        mCup = cocos2d::CCSprite::createWithSpriteFrameName("tp-bronze.png");
+//        mCup->setAnchorPoint(cocos2d::ccp(1, 0));
+//        mCup->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width - 10, 25));
+//        mCup->setVisible(false);
+//        mParent->addChild(mCup, LAYER_UI);
+//        
+//        //arcade x
+//        mArcadeX = cocos2d::CCLabelBMFont::create("x0", "ab70.fnt");
+//        mArcadeX->setAnchorPoint(cocos2d::ccp(1, 0.5f));
+//        mArcadeX->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width - 10, 180));
+//        mArcadeX->setVisible(false);
+//        mArcadeX->setColor(ccc3(255, 204, 0));
+//        mParent->addChild(mArcadeX, LAYER_UI);
+//    }
+//    
+//    mFlyUsed = false;
+//    mPotionUsed = false;
+//    mUnlimtedDarts = false;
 }
 
 void GameInterface::onUpdateClassic(float delta, GamePlay* play) 
 {
-  
-    //更新距离
-    int dm = play->distance/PLAY_DISMETER;
-    if( dm != mDistanceCache )
-    {
-        mDistanceNumber->setString(cocos2d::CCString::createWithFormat("%d", dm)->getCString());
-        mDistanceCache = dm;
-        /*TODO:Uncomment this
-         mDistanceM->setPosition(cocos2d::ccp(5+10*strlen(mDistanceNumber->getString()), SCREEN_HEIGHT-5));
-         */
-    }
-    
-    //更新HP
-    if( play->mainrole->HP != mHPCache )
-    {
-cocos2d::CCSpriteFrameCache *framecache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
-        for(int i=0; i<play->mainrole->maxHP; ++i)
-        {
-            if( i<play->mainrole->HP )
-            {
-                mHPMeters[i]->setDisplayFrame(framecache->spriteFrameByName("heart.png"));
-            }
-            else {
-                mHPMeters[i]->setDisplayFrame(framecache->spriteFrameByName("heart2.png"));
-            }
-        }
-        mHPCache = play->mainrole->HP;
-    }
-    
-    //更新coin
-    if( play->coins != mCoinCache )
-    {
-        mCoinCache = play->coins;
-        mCoinNumber->setString(cocos2d::CCString::createWithFormat("%d", mCoinCache)->getCString());
-        /*TODO:Uncomment this
-        mCoinMark->setPosition(cocos2d::ccp(8+8*strlen(mCoinNumber->getString()), SCREEN_HEIGHT - mDistanceNumber->getContentSize().height - 15));
-         */
-    }
-    
-    if( play->state == STATE_TUTORIAL )
-    {
-        this->toggleShowItemButtons(false);
-    }
-    else {
-        this->toggleShowItemButtons(true);
-    }
-    
-    //hide button
-    if( dm > 100 && mMenu != NULL )
-    {
-        play->removeChild(mMenu, true);
-        mMenu = NULL;
-        if( mFlyBg != NULL )
-        {
-            play->removeChild(mFlyBg, true);
-            mFlyBg = NULL;
-        }
-        if( mFlyNumber != NULL )
-        {
-            play->removeChild(mFlyNumber, true);
-            mFlyNumber = NULL;
-        }
-        if( mSPBg != NULL )
-        {
-            play->removeChild(mSPBg, true);
-            mSPBg = NULL;
-        }
-        if( mSPNumber != NULL )
-        {
-            play->removeChild(mSPNumber, true);
-            mSPNumber = NULL;
-        }
-    }
+//  
+//    //更新距离
+//    int dm = play->distance/PLAY_DISMETER;
+//    if( dm != mDistanceCache )
+//    {
+//        mDistanceNumber->setString(cocos2d::CCString::createWithFormat("%d", dm)->getCString());
+//        mDistanceCache = dm;
+//        mDistanceM->setPosition(cocos2d::ccp(5+10*strlen(mDistanceNumber->getString()), SCREEN_HEIGHT-5));
+//    }
+//    
+//    //更新HP
+//    if( play->mainrole->HP != mHPCache )
+//    {
+//cocos2d::CCSpriteFrameCache *framecache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+//        for(int i=0; i<play->mainrole->maxHP; ++i)
+//        {
+//            if( i<play->mainrole->HP )
+//            {
+//                mHPMeters[i]->setDisplayFrame(framecache->spriteFrameByName("heart.png"));
+//            }
+//            else {
+//                mHPMeters[i]->setDisplayFrame(framecache->spriteFrameByName("heart2.png"));
+//            }
+//        }
+//        mHPCache = play->mainrole->HP;
+//    }
+//    
+//    //更新coin
+//    if( play->coins != mCoinCache )
+//    {
+//        mCoinCache = play->coins;
+//        mCoinNumber->setString(cocos2d::CCString::createWithFormat("%d", mCoinCache)->getCString());
+//        mCoinMark->setPosition(cocos2d::ccp(8+8*strlen(mCoinNumber->getString()), SCREEN_HEIGHT - mDistanceNumber->getContentSize().height - 15));
+//    }
+//    
+//    if( play->state == STATE_TUTORIAL )
+//    {
+//        this->toggleShowItemButtons(false);
+//    }
+//    else {
+//        this->toggleShowItemButtons(true);
+//    }
+//    
+//    //hide button
+//    if( dm > 100 && mMenu != NULL )
+//    {
+//        play->removeChild(mMenu, true);
+//        mMenu = NULL;
+//        if( mFlyBg != NULL )
+//        {
+//            play->removeChild(mFlyBg, true);
+//            mFlyBg = NULL;
+//        }
+//        if( mFlyNumber != NULL )
+//        {
+//            play->removeChild(mFlyNumber, true);
+//            mFlyNumber = NULL;
+//        }
+//        if( mSPBg != NULL )
+//        {
+//            play->removeChild(mSPBg, true);
+//            mSPBg = NULL;
+//        }
+//        if( mSPNumber != NULL )
+//        {
+//            play->removeChild(mSPNumber, true);
+//            mSPNumber = NULL;
+//        }
+//    }
     
 }
 
@@ -805,16 +799,16 @@ void GameInterface::toggleUnlimtedDarts(bool flag)
     mUnlimtedDartsTimer = 0;
 }
 
-SEL_MenuHandler GameInterface::onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+SEL_MenuHandler GameInterface::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
     return NULL;
 }
 
-Control::Handler GameInterface::onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName)
+Control::Handler GameInterface::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
     return NULL;
 }
-bool GameInterface::onAssignCCBMemberVariable(cocos2d::CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool GameInterface::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mSpeedBg", CCLayerColor *, mSpeedBg)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mSpeedRed", CCLayerColor *, mSpeedRed)

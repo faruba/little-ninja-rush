@@ -25,8 +25,8 @@ public:
 
   LNR_SCENE_METHOD(TitleMenu);
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TitleMenu, create);
-  virtual bool onAssignCCBMemberVariable(cocos2d::CCObject*, const char*, cocos2d::CCNode*);
-  virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject *, const char*);
+  virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+  virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
   virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
   virtual void onEnter();
@@ -106,7 +106,7 @@ class TitleMenuLayerLoader : public cocosbuilder::NodeLoader {
     CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(TitleMenu);
 };
 
-class Sakura : public CCObject
+class Sakura : public Ref
 {
 public:
   static Sakura* create(cocos2d::CCNode *parent);
