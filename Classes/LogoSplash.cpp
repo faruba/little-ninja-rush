@@ -1,5 +1,4 @@
 #include "LogoSplash.h"
-#include "SimpleAudioEngine.h"
 #include "GameConstants.h"
 #include "TitleMenu.h"
 #include "PublicLoad.h"
@@ -13,58 +12,54 @@
 
 
 using namespace cocos2d;
-using namespace CocosDenshion;
 
-cocos2d::Scene* LogoSplash::scene()
-{
-    // 'scene' is an autorelease object
-cocos2d::Scene *scene = cocos2d::Scene::create();
-    
-    // 'layer' is an autorelease object
-    LogoSplash *layer = LogoSplash::create();
+cocos2d::Scene* LogoSplash::scene() {
+  // 'scene' is an autorelease object
+  cocos2d::Scene *scene = cocos2d::Scene::create();
 
-    // add layer as a child to scene
-    scene->addChild(layer);
-    layer->setAnchorPoint(cocos2d::ccp(0, 0));
+  // 'layer' is an autorelease object
+  LogoSplash *layer = LogoSplash::create();
 
-    // return the scene
-    return scene;
+  // add layer as a child to scene
+  scene->addChild(layer);
+  layer->setAnchorPoint(cocos2d::ccp(0, 0));
+
+  // return the scene
+  return scene;
 }
 
 // on "init" you need to initialize your instance
 bool LogoSplash::init()
 {
-    if ( !Layer::init() )
-    {
-        return false;
-    }
+  if ( !Layer::init() )
+  {
+    return false;
+  }
 
-    scheduleUpdate();
-    
-    return true;
+  scheduleUpdate();
+
+  return true;
 }
 
 void LogoSplash::onEnter()
 {
-cocos2d::LayerColor *bg = cocos2d::LayerColor::create(ccc4(255, 255, 255, 255));
+  cocos2d::LayerColor *bg = cocos2d::LayerColor::create(ccc4(255, 255, 255, 255));
 
   addChild(bg);
 
   mLogo = cocos2d::Sprite::create("logo.png");
   mLogo->setOpacity(0);
-  mLogo->setPosition(UniversalFit::sharedUniversalFit()->centralPoint);
+  auto winSize = Director::getInstance()->getWinSize();
+  mLogo->setPosition(Vec2(winSize.width / 2, winSize.height / 2));
 
   bg->addChild(mLogo);
-  mSoundId = SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/logo.mp3").c_str());
+  mSoundId = GameTool::PlaySound("sound/logo.mp3");
 
   mTimer = 0;
   mLoadFlag = 0;
   mLoadFix = 0;
 
-  // TODO:
-  //trigger check delivery
-  //ABDelivery->sharedDelivery()->triggerCheckDelivery();
-cocos2d::Layer::onEnter();
+  cocos2d::Layer::onEnter();
 }
 
 void LogoSplash::update(float delta)
@@ -105,62 +100,21 @@ void LogoSplash::update(float delta)
   mLogo->setOpacity(255*k);
 }
 
-//static const char* filenames[] =
-//{
-//    "data/achievements.json",
-//    "data/dailyobj.json",
-//    "data/katana.json",
-//    "data/monthlyobj.json",
-//    "data/shuriken.json",
-//    "data/special.json",
-//    "data/statistics.json",
-//    "data/tips.json",
-//    "data/tipschs.json",
-//    "data/weeklyobj.json",
-//};
-
 void LogoSplash::load()
 {
-cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("items.plist");
+  cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("items.plist");
 
-//    //test json reader -->
-//    CCLog("TESTING JSON READER");
-//    for(int i=0; i<10; ++i)
-//    {
-//        const char *filename = filenames[i];
-//        CCString *data = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename(filename).c_str());
-//        if( data != NULL )
-//        {
-//            CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(data);
-//            if( parsed != NULL )
-//            {
-//                CCLog("OK...%s", filename);
-//            }
-//            else
-//            {
-//                CCLog("TEST FAILED: failed to parse file (%s)", filename);
-//            }
-//        }
-//        else
-//        {
-//            CCLog("TEST FAILED: failed reading file (%s)", filename);
-//        }
-//    }
-//    CCLog("END TEST JSON READER");
-//    //test json reader <--
-    
-    Tasks::loadObjectivesFromFile();
-    Tasks::loadAchievementsFromFile();
-    Tasks::loadStatisticsFromFile();
-    GameData::loadData();
-    // IAPHelper->sharedIAPHelper()->initIAP(GameRecord::sharedGameRecord());
-    PublicLoad::commonLoadingList()->loadAll();
-    PublicLoad::menuLoadingList()->loadAll();
+
+  Tasks::loadObjectivesFromFile();
+  Tasks::loadAchievementsFromFile();
+  Tasks::loadStatisticsFromFile();
+  GameData::loadData();
+  // IAPHelper->sharedIAPHelper()->initIAP(GameRecord::sharedGameRecord());
+  PublicLoad::commonLoadingList()->loadAll();
+  PublicLoad::menuLoadingList()->loadAll();
 }
 
-void LogoSplash::done()
-{
-  SimpleAudioEngine::sharedEngine()->stopEffect(mSoundId);
-cocos2d::CCDirector::sharedDirector()->replaceScene(TitleMenu::scene());
+void LogoSplash::done() {
+  GameTool::StopSound(mSoundId);
+  cocos2d::CCDirector::sharedDirector()->replaceScene(TitleMenu::scene());
 } 
-

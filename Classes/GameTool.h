@@ -16,8 +16,26 @@
 #include "cocos-ext.h"
 #include <time.h>
 
+
+class GameTool {
+  public:
+    static int PlaySound(const char* filename) {
+      std::string path = cocos2d::FileUtils::getInstance()->fullPathForFilename(filename);
+      return CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(path.c_str());
+    }
+
+    static void StopSound(const int id) {
+      CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(id);
+    }
+};
+
+
+
+
+
+
+
 USING_NS_CC_EXT;
-;
 using namespace CocosDenshion;
 
 #define MAX2(a,b) ((a)>(b))?(b):(a)
@@ -79,5 +97,6 @@ cocos2d::CCSequence *createScaleSequence(float fDuration[], float fScale[], int 
 cocos2d::CCNode *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, Ref *target);
 void doSceneIntro(cocos2d::CCNode *&mSceneIntro, CCNode *target);
 cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, CCNode *&mSceneIntro, SEL_CallFunc callBack, CCNode *target);
+
 
 #endif
