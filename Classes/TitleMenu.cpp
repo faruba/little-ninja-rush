@@ -855,10 +855,10 @@ void TitleMenu::onEnter()
   mSakura->retain();
   mWind = 0;
 
-  if( !SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying() )
-  {
-    SimpleAudioEngine::sharedEngine()->playBackgroundMusic(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu.mp3").c_str(), true);
-  }
+  
+  
+    GameTool::PlayBackgroundMusic("sound/menu.mp3");
+  
 
      if(mUISwapper.isDone())
      {

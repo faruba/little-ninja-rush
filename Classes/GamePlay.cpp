@@ -517,7 +517,7 @@ CCLOG("canPause = %d", canPause);
 
   mainrole->setAI(2, Vec2(-100, PLAY_PLAYERLINE));
   mainrole->setAI(1, Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
-  SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+  GameTool::StopBackgroundMusic();
 
   //achievement play game
   GameRecord::sharedGameRecord()->task->dispatchTask(ACH_STARTGAME, 1);
@@ -580,7 +580,7 @@ CCLOG("canPause = %d", canPause);
   }
   GameRecord::sharedGameRecord()->task->dispatchTask(ACH_USECHARACTER0+roleId, 1);
 
-    SimpleAudioEngine::sharedEngine()->playBackgroundMusic(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/music-menu.mp3").c_str(), true);
+    GameTool::PlayBackgroundMusic("sound/music-menu.mp3");
 cocos2d::CCLog("GamePlay:done resetGame");
 
 #ifdef DEBUG
@@ -1072,14 +1072,14 @@ void GamePlay::restart()
 void GamePlay::exit()
 {
     this->resume();
-    SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+    GameTool::StopBackgroundMusic();
     mUISwapper.setSceneOutro(Loading::loadTo(GameTool::scene<TitleMenu>(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false), this);
 }
 
 void GamePlay::change()
 {
     this->resume();
-    SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+    GameTool::StopBackgroundMusic();
     mUISwapper.setSceneOutro(Loading::loadTo(SelectMenu::scene(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false), this);
 }
 

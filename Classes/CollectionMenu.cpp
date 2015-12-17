@@ -233,10 +233,7 @@ cocos2d::CCMenuItemImage *btn = character(i);
 
   mUISwapper.setSceneIntro(this);
 
-  if(!SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
-  {
-    SimpleAudioEngine::sharedEngine()->playBackgroundMusic("menu.mp3", true);
-  }
+  GameTool::PlayBackgroundMusic("menu.mp3");
 
   mPostingFacebook = false;
   mPostingTwitter = false;

@@ -117,10 +117,9 @@ cocos2d::CCRepeatForever *rrep = cocos2d::CCRepeatForever::create(rseq);
 
   mUISwapper.setSceneIntro(this);
 
-  if( !SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying() )
-  {
-    SimpleAudioEngine::sharedEngine()->playBackgroundMusic("menu.mp3", true);
-  }
+
+    GameTool::PlayBackgroundMusic("menu.mp3");
+
 cocos2d::Layer::onEnter();
 }
 

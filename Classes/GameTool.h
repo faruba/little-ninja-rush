@@ -19,13 +19,23 @@
 
 class GameTool {
   public:
-    static int PlaySound(const char* filename) {
-      std::string path = cocos2d::FileUtils::getInstance()->fullPathForFilename(filename);
-      return CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(path.c_str());
+    static int PlaySound(const char* path) {
+      return CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(path);
     }
 
     static void StopSound(const int id) {
       CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(id);
+    }
+
+    static void PlayBackgroundMusic(const char* path) {
+      CocosDenshion::SimpleAudioEngine *instance = CocosDenshion::SimpleAudioEngine::getInstance();
+      if ( !instance->isBackgroundMusicPlaying() ) {
+        instance->playBackgroundMusic(path, true);
+      }
+    }
+
+    static void StopBackgroundMusic() {
+      CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
     }
 
     template<typename LayerType>
