@@ -427,7 +427,7 @@ cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile(
 
 void GameOver::onChange() 
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
     GamePlay *play = GamePlay::sharedGamePlay();
     play->change();
 }
@@ -435,19 +435,19 @@ void GameOver::onChange()
 void GameOver::onMenu() 
 {
     
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
     GamePlay *play = GamePlay::sharedGamePlay();
     play->exit();
 }
 
 void GameOver::onRestart() 
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
     if( GameRecord::sharedGameRecord()->coins >= mCost )
     {
         if( mCost > 0 )
         {
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+            GameTool::PlaySound("sound/buy.mp3");
 cocos2d::CCLog("cost=%d", mCost);
         }
         GameRecord::sharedGameRecord()->makeCoins(-mCost);
@@ -455,7 +455,7 @@ cocos2d::CCLog("cost=%d", mCost);
         play->restart();
     }
     else {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+        GameTool::PlaySound("sound/error.mp3");
     }
 }
 

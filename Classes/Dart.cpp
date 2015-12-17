@@ -104,7 +104,7 @@ cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->setScale(1.4f);
         mIsEnemy = true;
         speed = HNINJA_DARTSPEED*play->difficulty/2;
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/freeze_fly.mp3").c_str());
+        GameTool::PlaySound("sound/freeze_fly.mp3");
 cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
 cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
         mSprite->runAction(rf);
@@ -369,14 +369,14 @@ CCARRAY_FOREACH(play->enemies, node)
           switch (type) {
             case 1://fire
               {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit-fire.mp3").c_str());
+                GameTool::PlaySound("sound/hit-fire.mp3");
                 //achievement enemy burnt
                 GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ENEMYBURNT, 1);
               }
               break;
             case 2://thunder
               {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit-thunder.mp3").c_str());
+                GameTool::PlaySound("sound/hit-thunder.mp3");
               }
               break;
             case 6:
@@ -385,7 +385,7 @@ CCARRAY_FOREACH(play->enemies, node)
                 {
                   play->manager->addGameObject(StaticParticle::particleIcePiece(em->center(), direction));
                 }
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/ice-hurt.mp3").c_str());
+                GameTool::PlaySound("sound/ice-hurt.mp3");
               }
               break;
             case 7:
@@ -394,22 +394,22 @@ CCARRAY_FOREACH(play->enemies, node)
                 {
                   play->manager->addGameObject(StaticParticle::particleDart(em->center(), direction, 3));
                 }
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+                GameTool::PlaySound("sound/hit.mp3");
               }
               break;
             case 9://狼牙
               {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/bloodfangs.mp3").c_str());
+                GameTool::PlaySound("sound/bloodfangs.mp3");
               }
               break;
             case 10://黄金
               {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/golden.mp3").c_str());
+                GameTool::PlaySound("sound/golden.mp3");
               }
               break;
             default:
               {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+                GameTool::PlaySound("sound/hit.mp3");
               }
           }
           //achievement reflect to death
@@ -441,7 +441,7 @@ CCARRAY_FOREACH(play->enemies, node)
     }
     if( hit )
     {
-      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+      GameTool::PlaySound("sound/hit.mp3");
       GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
       hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
       hiteff->setPosition(xpos);

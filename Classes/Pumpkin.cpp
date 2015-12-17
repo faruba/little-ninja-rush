@@ -44,7 +44,7 @@ void Pumpkin::onCreate()
     mTargetSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-45)), 100);
     mPumpkinSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-90)), 50);
     
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkinstart.mp3").c_str());
+    GameTool::PlaySound("sound/pumpkinstart.mp3");
     
     mFlySound = 3 + 7*CCRANDOM_0_1();
 }
@@ -118,7 +118,7 @@ void Pumpkin::onUpdate(float delta)
                 mFlySound -= delta;
                 if( mFlySound < 0 )
                 {
-                    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkinfly.mp3").c_str());
+                    GameTool::PlaySound("sound/pumpkinfly.mp3");
                     mFlySound = 3 + 7*CCRANDOM_0_1();
                 }
             }
@@ -232,7 +232,7 @@ bool Pumpkin::deliverHit(int type, cocos2d::Point dir)
             mSprite->playGTAnimation(1, false);
             mHurtTimer = 0;
             mSprite->setColor(ccc3(255, 142, 142));
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkinhurt.mp3").c_str());
+            GameTool::PlaySound("sound/pumpkinhurt.mp3");
             if( mSprite->getScaleX() > 0 )
             {
                 mSprite->setRotation(30);
@@ -247,7 +247,7 @@ bool Pumpkin::deliverHit(int type, cocos2d::Point dir)
             mState = 2;
             // die
             mSprite->playGTAnimation(1, true);
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/pumpkindie.mp3").c_str());
+            GameTool::PlaySound("sound/pumpkindie.mp3");
             mTimer = 0;
             mCoinsCounter = 0;
             

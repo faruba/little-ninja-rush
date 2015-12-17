@@ -84,7 +84,7 @@ cocos2d::CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.4f, 1);
 cocos2d::CCSequence *seq = cocos2d::CCSequence::create(st1, st2, NULL);
     mNumber->runAction(seq);
     
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/feverbgmend.mp3").c_str());
+    GameTool::PlaySound("sound/feverbgmend.mp3");
 }
 
 void ControlLayer::updateButton() 
@@ -387,7 +387,7 @@ void ClassicContinue::onUseCredit()
         play->unscheduleMask();
         
         play->manager->removeGameObject(this);
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
+        GameTool::PlaySound("sound/charge.mp3");
     }
 }
 
@@ -437,7 +437,7 @@ void ClassicContinue::onButton(int bid)
         }
             break;
     }
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
 }
 
 void ClassicContinue::onBuyCredit1() 

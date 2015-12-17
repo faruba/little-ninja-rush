@@ -358,7 +358,7 @@ bool HighNinja::deliverHit(int type, cocos2d::Point dir)
     {
         mSpell = 1;
         //发动替身术
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/smoke.mp3").c_str());
+        GameTool::PlaySound("sound/smoke.mp3");
         GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 5, false);
         eff->setAnchorPoint(mSprite->getAnchorPoint());
         eff->setPosition(mSprite->getPosition());

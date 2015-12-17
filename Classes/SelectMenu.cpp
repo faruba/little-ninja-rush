@@ -356,7 +356,7 @@ cocos2d::Layer::update(delta);
 }
 void SelectMenu::onClickMe()
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+  GameTool::PlaySound("sound/menu-change.mp3");
   ShopMenu::setNavBack(1);
   setSceneOutro(ShopMenu::scene());
 }
@@ -377,14 +377,14 @@ void SelectMenu::onStart()
       GameRecord::sharedGameRecord()->makeCoins(-cost);
       if( cost > 0 )
       {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+        GameTool::PlaySound("sound/buy.mp3");
       }
 
-      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-start.mp3").c_str());
+      GameTool::PlaySound("sound/menu-start.mp3");
       setSceneOutro(Loading::loadTo(GamePlay::sharedGamePlay()->scene(), PublicLoad::gameLoadingList(), PublicLoad::menuSelect(), true));
     }
     else {
-      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+      GameTool::PlaySound("sound/error.mp3");
     }
   }
 }
@@ -393,7 +393,7 @@ void SelectMenu::onChangeDart()
 {
   if( !mIntroFlag )
   {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+    GameTool::PlaySound("sound/menu-change.mp3");
     CollectionMenu::setNavBack(1);
     setSceneOutro(CollectionMenu::scene());
   }
@@ -403,7 +403,7 @@ void SelectMenu::onChangeBlade()
 {
   if( !mIntroFlag )
   {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+    GameTool::PlaySound("sound/menu-change.mp3");
     CollectionMenu::setNavBack(2);
     setSceneOutro(CollectionMenu::scene());
   }
@@ -413,7 +413,7 @@ void SelectMenu::onChangeSpecial()
 {
   if( !mIntroFlag )
   {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+    GameTool::PlaySound("sound/menu-change.mp3");
     CollectionMenu::setNavBack(3);
     setSceneOutro(CollectionMenu::scene());
   }
@@ -423,7 +423,7 @@ void SelectMenu::onBack()
 {
   if( !mIntroFlag )
   {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+    GameTool::PlaySound("sound/menu-change.mp3");
     setSceneOutro(GameTool::scene<TitleMenu>());
   }
 }
@@ -435,7 +435,7 @@ void SelectMenu::onLeftRole()
 
   //achievement select role
   GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SELECTBUTTON, 1);
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
+  GameTool::PlaySound("sound/flip.mp3");
 }
 
 void SelectMenu::onRightRole()
@@ -449,7 +449,7 @@ void SelectMenu::onRightRole()
 
   //achievement select role
   GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SELECTBUTTON, 1);
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
+  GameTool::PlaySound("sound/flip.mp3");
 }
 
 bool SelectMenu::onTouchBegan(Touch * touch, Event * event)
@@ -506,7 +506,7 @@ void SelectMenu::onTouchMoved(Touch * touch, Event * event)
       mSlideTimer = -1;
       //achievement
       GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SELECTBUTTON, 1);
-      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
+      GameTool::PlaySound("sound/flip.mp3");
     }
 
     mSlideAngle = mCurrAngle;

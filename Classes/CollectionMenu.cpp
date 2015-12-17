@@ -84,7 +84,7 @@ void CollectionMenu::onModalConfirm()
   mPowerupMenu->setTouchEnabled(true);
 cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mModalTarget, mModalSel);
   this->runAction(callSelectorAction);
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
+  GameTool::PlaySound("sound/charge.mp3");
 }
 
 void CollectionMenu::onModalCancel()
@@ -782,7 +782,7 @@ void CollectionMenu::onBack()
 {
   if( !mIntroFlag )
   {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+    GameTool::PlaySound("sound/menu-change.mp3");
     if( gNavBack == 0 )
     {
         setSceneOutro(GameTool::scene<TitleMenu>());
@@ -839,7 +839,7 @@ void CollectionMenu::onUse()
           case 0:
             {
               GameRecord::sharedGameRecord()->char_equip_dart[cc] = mEquipedItem;
-              SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/equip.mp3").c_str());
+              GameTool::PlaySound("sound/equip.mp3");
             }
             break;
           case 1:
@@ -850,13 +850,13 @@ void CollectionMenu::onUse()
                 index = GameRecord::sharedGameRecord()->curr_char;
               }
               GameRecord::sharedGameRecord()->char_equip_blade[cc] = index;
-              SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/equip.mp3").c_str());
+              GameTool::PlaySound("sound/equip.mp3");
             }
             break;
           case 2:
             {
               GameRecord::sharedGameRecord()->char_equip_spell[cc] = mEquipedItem;
-              SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/equip.mp3").c_str());
+              GameTool::PlaySound("sound/equip.mp3");
             }
             break;
         }
@@ -879,13 +879,13 @@ void CollectionMenu::onUse()
 cocos2d::Sprite *mask = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(mCurrItem));
           if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
           {
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
+            GameTool::PlaySound("sound/getscroll.mp3");
             mScroll->contentNode->removeChild(mask);
             mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip1.png"));
             mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip2.png"));
           }
           else {
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+            GameTool::PlaySound("sound/getitem.mp3");
             int piece = GameRecord::sharedGameRecord()->collection->itemTotalPiece(uiid) - GameRecord::sharedGameRecord()->collection->itemLostPiece(uiid);
 cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
             mask->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename->getCString()));
@@ -899,7 +899,7 @@ cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png",
           mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", GameRecord::sharedGameRecord()->collection->magic_piece)->getCString());
         }
         else {
-          SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+          GameTool::PlaySound("sound/error.mp3");
         }
       }
     }
@@ -950,11 +950,11 @@ cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png",
     }
     if( enable )
     {
-      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+      GameTool::PlaySound("sound/click.mp3");
       setModal("pu-tc1.png", desc, this, selector);
     }
     else {
-      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+      GameTool::PlaySound("sound/error.mp3");
     }
   }
 }
@@ -999,7 +999,7 @@ void CollectionMenu::onCharacter(int nRole)
   int orole = GameRecord::sharedGameRecord()->curr_char;
   if( orole == nRole )
     return;
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
 cocos2d::CCMenuItemImage *orl = character(orole);
   orl->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", orole, 1)->getCString()));
   orl->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", orole, 0)->getCString()));
@@ -1034,7 +1034,7 @@ void CollectionMenu::onItem(int nItem)
   if( mCurrType == nItem )
     return ;
 
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
   setTypeButton(mCurrType, false);
   setTypeButton(nItem, true);
   mItemDesc->setVisible(true);
@@ -1060,7 +1060,7 @@ void CollectionMenu::onPowerup()
 {
   if( mCurrType != 3 )
   {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
     setTypeButton(mCurrType, false);
     setTypeButton(3, true);
     mItemDesc->setVisible(false);
@@ -1138,7 +1138,7 @@ void CollectionMenu::onItemCallback(int i)
           collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
           if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
           {
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+            GameTool::PlaySound("sound/error.mp3");
             return;
           }
         }
@@ -1154,7 +1154,7 @@ void CollectionMenu::onItemCallback(int i)
           collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
           if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
           {
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+            GameTool::PlaySound("sound/error.mp3");
             return;
           }
         }
@@ -1165,14 +1165,14 @@ void CollectionMenu::onItemCallback(int i)
           collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
           if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
           {
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+            GameTool::PlaySound("sound/error.mp3");
             return;
           }
         }
         break;
     }
   }
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
   markCurrent(i);
   this->updateItemInfo();
 }
@@ -1217,7 +1217,7 @@ void CollectionMenu::onSelectLife()
 {
   if( mCurrItem != 1 )
   {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
     mCurrentMark->setPosition(cocos2d::Vec2(385, 145));
     mCurrentMark->setVisible(true);
     mCurrItem = 1;
@@ -1233,7 +1233,7 @@ void CollectionMenu::onSelectDart()
 {
   if( mCurrItem != 2 )
   {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
     mCurrentMark->setPosition(cocos2d::Vec2(385, 65));
     mCurrentMark->setVisible(true);
     mCurrItem = 2;

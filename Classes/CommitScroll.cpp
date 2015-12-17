@@ -211,7 +211,7 @@ void CommitScroll::onCashIn()
         //achievement cash in
         GameRecord::sharedGameRecord()->task->dispatchTask(ACH_CASHEDIN, play->scrolls);
         
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+        GameTool::PlaySound("sound/buy.mp3");
         play->coins += play->scrolls*PLAY_SCROLLPRICE;
         play->scrolls = 0;
         mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
@@ -240,7 +240,7 @@ void CommitScroll::onScroll()
             mScroll->stopAllActions();
             if( prize < 2 )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/smoke.mp3").c_str());
+                GameTool::PlaySound("sound/smoke.mp3");
                 mEffect->playGTAnimation(5, false);
                 mEffect->setVisible(true);
                 
@@ -259,7 +259,7 @@ cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
                 }
             }
             else {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/openscroll.mp3").c_str());
+                GameTool::PlaySound("sound/openscroll.mp3");
                 mFlash->setVisible(true);
 cocos2d::CCFadeOut *fo1 = cocos2d::CCFadeOut::create(3);
                 mFlash->runAction(fo1);
@@ -417,32 +417,32 @@ void CommitScroll::implementPrize()
         case 1://Gold 10
         {
             play->coins += 10;
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+            GameTool::PlaySound("sound/getcoin.mp3");
         }
             break;
         case 2://Gold 100
         {
             play->coins += 100;
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+            GameTool::PlaySound("sound/getcoin.mp3");
         }
             break;
         case 3://Gold 500
         {
             play->coins += 500;
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+            GameTool::PlaySound("sound/getcoin.mp3");
         }
             break;
         case 4://Revive
         {
             mReviveFlag = true;
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
+            GameTool::PlaySound("sound/charge.mp3");
             play->reviveCount++;
         }
             break;
         case 5://x2 Gold Next Run
         {
             GameRecord::sharedGameRecord()->game_doublecoin++;
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+            GameTool::PlaySound("sound/getcoin.mp3");
         }
             break;
             

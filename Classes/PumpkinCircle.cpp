@@ -223,7 +223,7 @@ CCARRAY_FOREACH(play->darts, node)
               }
               if( hit )
               {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
+                GameTool::PlaySound("sound/reflect.mp3");
               }
             }
                 break;

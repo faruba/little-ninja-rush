@@ -154,7 +154,7 @@ cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME,Vec2(SCREEN_W
 cocos2d::CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(dt2, mb2, NULL);
   right->runAction(sq2);
 
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/open.mp3").c_str());
+  GameTool::PlaySound("sound/open.mp3");
 }
 cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, Node *&mSceneIntro, SEL_CallFunc callBack, Node *target)
 {
@@ -186,7 +186,7 @@ cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEOUTRO_DELAY);
 cocos2d::CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(mb2, dt2, NULL);
   right->runAction(sq2);
 
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/close.mp3").c_str());
+  GameTool::PlaySound("sound/close.mp3");
 
   mNewScene->retain();
   return mNewScene;

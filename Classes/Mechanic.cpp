@@ -94,7 +94,7 @@ void Mechanic::onUpdate(float delta)
                     mTimer -= delta;
                     if( mTimer <= 0 )
                     {
-                        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
+                        GameTool::PlaySound("sound/duofa.mp3");
                     }
                 }
                 if( mTimer <= 0 )
@@ -205,7 +205,7 @@ bool Mechanic::deliverHit(int type, cocos2d::Point dir)
     if( dir.x > 0 && type == HIT_DART )
     {
         //block darts
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
+        GameTool::PlaySound("sound/reflect.mp3");
         
         GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
         hiteff2->setScale(0.5f);

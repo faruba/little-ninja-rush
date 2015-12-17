@@ -65,7 +65,7 @@ void ObjectiveComplete::onUpdate(float delta)
         mSoundTimer += delta;
         if( mSoundTimer > 0.1 )
         {
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+            GameTool::PlaySound("sound/getcoin.mp3");
             mSoundTimer = 0;
         }
         int dst = mTargetBounsCoins - mCurrBounsCoins;
@@ -124,7 +124,7 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCS
                     mCrowns->addChild(crown);
                 }
                 mStateTimer = 0;
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
+                GameTool::PlaySound("sound/flip.mp3");
             }
             else {
                 //Finish of ObjectiveComplete
@@ -158,7 +158,7 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCS
             mStateTimer += delta;
             if( mStateTimer >= 2 )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcrown.mp3").c_str());
+                GameTool::PlaySound("sound/getcrown.mp3");
 cocos2d::CCString *crownname = cocos2d::CCString::createWithFormat("crown%d.png", mCurrObj->index);
 cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname->getCString());
                 crown->setPosition(cocos2d::Vec2(-20*mCurrObj->index, 0));
@@ -286,7 +286,7 @@ cocos2d::Node *newobj = this->genObjectiveInfo(NULL, mCurrIndex);
             if( mStateTimer >= 2 )
             {
                 mState = STATE_OUT;
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
+                GameTool::PlaySound("sound/flip.mp3");
             }
         }
             break;

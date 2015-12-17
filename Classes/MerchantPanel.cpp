@@ -149,7 +149,7 @@ void MerchantPanel::updateBuy3()
 //商人系统
 void MerchantPanel::onMerchantClose() 
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
     GamePlay* play = GamePlay::sharedGamePlay();
     play->state = STATE_NORMAL;
     play->scheduleMask(ccc3(0, 0, 0), 0.2f, 1);
@@ -157,10 +157,10 @@ void MerchantPanel::onMerchantClose()
     
     if( randomInt(2) == 0)
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/laugh1.mp3").c_str());
+        GameTool::PlaySound("sound/laugh1.mp3");
     }
     else {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/laugh2.mp3").c_str());
+        GameTool::PlaySound("sound/laugh2.mp3");
     }
     play->manager->removeGameObject(this);
 }
@@ -243,7 +243,7 @@ void MerchantPanel::onMerchantBuy1()
     int cost = gCost[0];
     if( GameRecord::sharedGameRecord()->coins >= cost )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+        GameTool::PlaySound("sound/buy.mp3");
         this->gainShurikenPiece();
         switch (randomInt(3)) {
             case 0:
@@ -281,7 +281,7 @@ cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(st1, st2, NULL);
         this->updateBuy1();
     }
     else {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+        GameTool::PlaySound("sound/error.mp3");
     }
 }
 
@@ -294,7 +294,7 @@ void MerchantPanel::onMerchantBuy2()
      int cost = gCost[1];
      if( GameRecord::sharedGameRecord()->coins >= cost )
      {
-         SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+         GameTool::PlaySound("sound/buy.mp3");
          this->gainKatanaPiece();
          switch (randomInt(3)) {
              case 0:
@@ -332,7 +332,7 @@ cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(st1, st2, NULL);
          this->updateBuy2();
      }
      else {
-         SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+         GameTool::PlaySound("sound/error.mp3");
      }
 }
 
@@ -345,7 +345,7 @@ void MerchantPanel::onMerchantBuy3()
     int cost = gCost[2];
     if( GameRecord::sharedGameRecord()->coins >= cost )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+        GameTool::PlaySound("sound/buy.mp3");
         this->gainSpecialPiece();
         switch (randomInt(3)) {
             case 0:
@@ -383,7 +383,7 @@ cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(st1, st2, NULL);
         this->updateBuy3();
     }
     else {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+        GameTool::PlaySound("sound/error.mp3");
     }
 }
 
@@ -392,7 +392,7 @@ void MerchantPanel::onMerchantBuy4()
     int cost = gCost[3];
     if( GameRecord::sharedGameRecord()->coins >= cost )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/buy.mp3").c_str());
+        GameTool::PlaySound("sound/buy.mp3");
         GameRecord::sharedGameRecord()->collection->magic_piece++;
         switch (randomInt(3)) {
             case 0:
@@ -426,7 +426,7 @@ cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(st1, st2, NULL);
         mItem4->runAction(sq2);
     }
     else {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/error.mp3").c_str());
+        GameTool::PlaySound("sound/error.mp3");
     }
 }
 

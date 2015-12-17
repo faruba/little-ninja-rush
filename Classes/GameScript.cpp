@@ -54,13 +54,13 @@ void GameScript::invokeSpell0(cocos2d::CCInteger* mid)
         }
         play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), fp, dir, -5, play)));
     }
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
+    GameTool::PlaySound("sound/duofa.mp3");
 }
 
 //分身术
 void GameScript::invokeSpell1_0() 
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/smoke.mp3").c_str());
+    GameTool::PlaySound("sound/smoke.mp3");
     GamePlay *play = GamePlay::sharedGamePlay();
     //制造两个分身
     float mpos = play->mainrole->position().x;
@@ -104,7 +104,7 @@ void GameScript::invokeSpell2(cocos2d::CCInteger*)
 void GameScript::invokeSpell3(cocos2d::CCInteger*) 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/spell.mp3").c_str());
+    GameTool::PlaySound("sound/spell.mp3");
     play->manager->addGameObject(FeverBrust::feverbrust(22, false));
     play->scheduleSpeed(0.1f, 3, 2);
     play->mainrole->timedUnlimitedDarts(3);
@@ -136,7 +136,7 @@ void GameScript::invokeSpell6(cocos2d::CCInteger*)
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     play->scheduleMask(ccc3(255, 255, 255), 0.5f, 1);
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+    GameTool::PlaySound("sound/hit.mp3");
     unsigned int n = 0;
     while( n < play->darts->count() )
     {
@@ -221,7 +221,7 @@ void GameScript::invokeSpell15()
 //      }
 //    }
 //  }
-//  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
+//  GameTool::PlaySound("sound/duofa.mp3");
 //  play->mainrole->customAction(0);
 }
 
@@ -241,7 +241,7 @@ CCARRAY_FOREACH(play->darts, node)
       dr->onHitback(maincen);
     }
   }
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/spell.mp3").c_str());
+  GameTool::PlaySound("sound/spell.mp3");
 }
 
 //妖刀
@@ -249,7 +249,7 @@ void GameScript::invokeSpell17()
 {
   GamePlay *play = GamePlay::sharedGamePlay();
   play->scheduleMask(ccc3(255, 0, 0), 0.1f, 1);
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/blade-clay.mp3").c_str());
+  GameTool::PlaySound("sound/blade-clay.mp3");
 cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
   {
@@ -279,7 +279,7 @@ void GameScript::invokeSpellRelease(cocos2d::CCInteger * sid)
     eff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     eff->setPosition(play->mainrole->center());
     play->addChild(eff, LAYER_MAINROLE+1);
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/spell.mp3").c_str());
+    GameTool::PlaySound("sound/spell.mp3");
     switch (num) {
         case SPELL_TRIDARTS:
         {
@@ -338,7 +338,7 @@ void GameScript::invokeSP()
 void GameScript::invokeMoonBlade() 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/moonblade.mp3").c_str());
+    GameTool::PlaySound("sound/moonblade.mp3");
     play->manager->addGameObject(MoonWave::wave(play->mainrole->position()));
 }
 

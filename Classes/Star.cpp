@@ -31,7 +31,7 @@ void Star::onCreate()
     mSprite->setPosition(mPos);
     play->addChild(mSprite, LAYER_MAINROLE+1);
     
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/starfall.mp3").c_str());
+    GameTool::PlaySound("sound/starfall.mp3");
 }
 
 void Star::onUpdate(float delta) 
@@ -51,7 +51,7 @@ CCARRAY_FOREACH(play->enemies, node)
             play->manager->removeGameObject(this);
             if( hit )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+                GameTool::PlaySound("sound/hit.mp3");
                 GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
                 hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                 hiteff->setPosition(em->center());

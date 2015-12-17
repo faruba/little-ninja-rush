@@ -90,7 +90,7 @@ void CommitArcade::onUpdate(float delta)
             mSoundTimer += delta;
             if( mSoundTimer > 0.1f )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+                GameTool::PlaySound("sound/getcoin.mp3");
                 mSoundTimer = 0;
             }
             int ds = mTargetBouns - mCurrentBouns;
@@ -228,7 +228,7 @@ cocos2d::CCRotateBy *lrt = cocos2d::CCRotateBy::create(6, 1000);
 cocos2d::CCFadeOut *fo1 = cocos2d::CCFadeOut::create(2);
                 mFlash->runAction(fo1);
                 
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/openscroll.mp3").c_str());
+                GameTool::PlaySound("sound/openscroll.mp3");
                 
                 //update trophy count
                 mGoldenTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->golden_trophy)->getCString());

@@ -316,7 +316,7 @@ void PauseMenuClassic::toggleMusic(Ref* ref)
 
 void PauseMenuClassic::quit(Ref* ref)
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
     GamePlay *play = GamePlay::sharedGamePlay();
     play->manager->removeGameObject(this);
     play->exit();
@@ -324,7 +324,7 @@ void PauseMenuClassic::quit(Ref* ref)
 
 void PauseMenuClassic::resume(Ref* ref)
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
     GamePlay *play = GamePlay::sharedGamePlay();
     play->manager->removeGameObject(this);
     play->resume();
@@ -332,7 +332,7 @@ void PauseMenuClassic::resume(Ref* ref)
 
 void PauseMenuClassic::retry(Ref* ref)
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
     GamePlay *play = GamePlay::sharedGamePlay();
     play->manager->removeGameObject(this);
     play->restart();
@@ -341,7 +341,7 @@ void PauseMenuClassic::retry(Ref* ref)
 void PauseMenuClassic::change(Ref* ref)
 {
     /*
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
     GamePlay *play = GamePlay::sharedGamePlay();
     play->change();
      */

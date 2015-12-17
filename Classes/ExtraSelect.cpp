@@ -46,7 +46,7 @@ void ExtraSelect::onBack()
 {
     if( !mIntroFlag )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        GameTool::PlaySound("sound/menu-change.mp3");
         setSceneOutro(GameTool::scene<TitleMenu>());
     }
 }
@@ -55,7 +55,7 @@ void ExtraSelect::onAchievement()
 {
     if( !mIntroFlag )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        GameTool::PlaySound("sound/menu-change.mp3");
         setSceneOutro(ExtraMenu::scene(0));
     }
 }
@@ -64,7 +64,7 @@ void ExtraSelect::onCredits()
 {
     if( !mIntroFlag )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        GameTool::PlaySound("sound/menu-change.mp3");
         setSceneOutro(ExtraMenu::scene(2));
     }
 }
@@ -73,7 +73,7 @@ void ExtraSelect::onStatics()
 {
     if( !mIntroFlag )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        GameTool::PlaySound("sound/menu-change.mp3");
         setSceneOutro(ExtraMenu::scene(1));
     }
 }
@@ -82,7 +82,7 @@ void ExtraSelect::onTips()
 {
     if( !mIntroFlag )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        GameTool::PlaySound("sound/menu-change.mp3");
         setSceneOutro(TipsMenu::scene());
     }
 }

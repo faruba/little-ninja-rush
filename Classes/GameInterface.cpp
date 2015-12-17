@@ -380,21 +380,21 @@ void GameInterface::onUpdateArcade(float delta, GamePlay* play)
             {
                 mCup->setVisible(true);
                 mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-bronze.png"));
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
+                GameTool::PlaySound("sound/getscroll.mp3");
             }
                 break;
             case 2:
             {
                 mCup->setVisible(true);
                 mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-silver.png"));
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
+                GameTool::PlaySound("sound/getscroll.mp3");
             }
                 break;
             case 3:
             {
                 mCup->setVisible(true);
                 mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-gold.png"));
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
+                GameTool::PlaySound("sound/getscroll.mp3");
             }
                 break;
         }
@@ -751,7 +751,7 @@ void GameInterface::onFly()
 
 void GameInterface::onSP() 
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
+    GameTool::PlaySound("sound/charge.mp3");
     //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSP), NULL);
     GameScript::sharedScript()->invokeSP();
     GameRecord::sharedGameRecord()->item_sp--;

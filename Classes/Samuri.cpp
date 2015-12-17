@@ -54,7 +54,7 @@ cocos2d::CCRepeatForever *rp = cocos2d::CCRepeatForever::create(sq);
     mFlag = false;
     
     //play samurai warning
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/samurai_warning.mp3").c_str());
+    GameTool::PlaySound("sound/samurai_warning.mp3");
 }
 
 void Samuri::onUpdate(float delta) 
@@ -70,7 +70,7 @@ void Samuri::onUpdate(float delta)
         {
             if( !mFlag && mSprite->getPosition().x < UniversalFit::sharedUniversalFit()->playSize.width )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/samurai_attack.mp3").c_str());
+                GameTool::PlaySound("sound/samurai_attack.mp3");
                 mFlag = true;
             }
             float rds = play->runspeed*0.5f;
@@ -101,7 +101,7 @@ void Samuri::onUpdate(float delta)
                 }
                 if( hit )
                 {
-                    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit").c_str());
+                    GameTool::PlaySound("sound/hit");
                     play->mainrole->deliverHit(HIT_BLADE, Vec2(0, 0));//武士总是对付第一个人物造成伤害
                     mFlag = true;
                 }
@@ -117,7 +117,7 @@ void Samuri::onUpdate(float delta)
                 {
                     mTimer = 0;
                     mFlag = false;
-                    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/samurai_die.mp3").c_str());
+                    GameTool::PlaySound("sound/samurai_die.mp3");
                 }
             }
         }

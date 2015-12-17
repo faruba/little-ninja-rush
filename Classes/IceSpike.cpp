@@ -32,7 +32,7 @@ void IceSpike::onCreate()
     mState = 0;
     mFlag = false;
     
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/freeze_up.mp3").c_str());
+    GameTool::PlaySound("sound/freeze_up.mp3");
 }
 
 void IceSpike::onUpdate(float delta) 
@@ -87,7 +87,7 @@ bool IceSpike::deliverHit(int type, cocos2d::Point dir)
     {
         mState = 1;
         mSprite->playGTAnimation(3, false);
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/freeze_break.mp3").c_str());
+        GameTool::PlaySound("sound/freeze_break.mp3");
         //achievement ice spike
         if( type == HIT_BLADE )
         {

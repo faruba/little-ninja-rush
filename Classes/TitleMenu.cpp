@@ -307,7 +307,7 @@ void PopOption::onCloseOption()
 
 void PopOption::onToggleSfx()
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
   if( GameRecord::sharedGameRecord()->setting_sfx )
   {
     GameRecord::sharedGameRecord()->setting_sfx = 0;
@@ -325,7 +325,7 @@ void PopOption::onToggleSfx()
 
 void PopOption::onToggleMusic()
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
   if( GameRecord::sharedGameRecord()->setting_music )
   {
     GameRecord::sharedGameRecord()->setting_music = 0;
@@ -362,7 +362,7 @@ void PopOption::onTogglePushNotification()
 
 void PopOption::onToggleTutorial()
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
   if( GameRecord::sharedGameRecord()->game_tutorial == 0 )
   {
     GameRecord::sharedGameRecord()->game_tutorial = 1;
@@ -749,7 +749,7 @@ void PopObj::onChangeDisplay()
   mSwitch->setVisible(false);
   mSwitch2->setVisible(false);
   */
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/flip.mp3").c_str());
+  GameTool::PlaySound("sound/flip.mp3");
 }
 
 #ifdef TITLESTYLE_SPRING
@@ -948,7 +948,7 @@ void TitleMenu::showObjs()
 //
 void TitleMenu::hideObjs()
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
   mMask->setVisible(false);
   mPop->onDestroy();
   mMask->removeAllChildrenWithCleanup(true);
@@ -974,7 +974,7 @@ void TitleMenu::showOpt(int typ)
 
 void TitleMenu::hideOpt()
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
   mMask->setVisible(false);
   mMask->removeAllChildrenWithCleanup(true);
 
@@ -1144,40 +1144,40 @@ void TitleMenu::onPlayClassic(cocos2d::Ref*)
 {
   cocos2d::CCLog("Player");
   GamePlay::sharedGamePlay()->setGameMode(MODE_CLASSIC);
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+  GameTool::PlaySound("sound/menu-change.mp3");
   setSceneOutro(SelectMenu::scene());
 }
 
 void TitleMenu::onPlayArcade(cocos2d::Ref*)
 {
   GamePlay::sharedGamePlay()->setGameMode(MODE_ARCADE);
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+  GameTool::PlaySound("sound/menu-change.mp3");
   setSceneOutro(SelectMenu::scene());
 }
 
 void TitleMenu::onCollections(cocos2d::Ref*)
 {
   CollectionMenu::setNavBack(0);
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+  GameTool::PlaySound("sound/menu-change.mp3");
   setSceneOutro(CollectionMenu::scene());
 }
 
 void TitleMenu::onStore(cocos2d::Ref*)
 {
   ShopMenu::setNavBack(0);
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+  GameTool::PlaySound("sound/menu-change.mp3");
   setSceneOutro(ShopMenu::scene());
 }
 
 void TitleMenu::onFacebook(cocos2d::Ref*)
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+  GameTool::PlaySound("sound/menu-change.mp3");
   //    UIApplication->sharedApplication()->openURL([NSURL, "http://www.facebook.com/pages/Little-Ninja-Rush/397668056947647"));
 }
 
 void TitleMenu::onTwitter(cocos2d::Ref*)
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+  GameTool::PlaySound("sound/menu-change.mp3");
   //    if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() )
   //    {
   //        UIApplication->sharedApplication()->openURL([NSURL, "http://weibo.com/u/2810380794"));
@@ -1190,7 +1190,7 @@ void TitleMenu::onTwitter(cocos2d::Ref*)
 
 void TitleMenu::onLeaderboard(cocos2d::Ref * node)
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
   //    if( GameCenterManager->isGameCenterAvailable() )
   //    {
   //        if( GameCenterManager->isGameCenterLoggedIn() )
@@ -1210,7 +1210,7 @@ void TitleMenu::onLeaderboard(cocos2d::Ref * node)
 
 void TitleMenu::onAchievement(cocos2d::Ref*)
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
   //    if( GameCenterManager->isGameCenterAvailable() )
   //    {
   //        if( GameCenterManager->isGameCenterLoggedIn() )
@@ -1230,19 +1230,19 @@ void TitleMenu::onAchievement(cocos2d::Ref*)
 
 void TitleMenu::onExtra(cocos2d::Ref*)
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+  GameTool::PlaySound("sound/menu-change.mp3");
   setSceneOutro(ExtraSelect::scene());
 }
 
 void TitleMenu::onShowObjectives(cocos2d::Ref *)
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
   this->showObjs();
 }
 
 void TitleMenu::onOption(cocos2d::Ref*)
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
   showOpt(0);
 }
 
@@ -1261,7 +1261,7 @@ void TitleMenu::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 
 void TitleMenu::onShareCode(cocos2d::Ref*)
 {
-  SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+  GameTool::PlaySound("sound/click.mp3");
   showOpt(2);
 }
 

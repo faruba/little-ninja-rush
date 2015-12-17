@@ -39,7 +39,7 @@ cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
     mMid.x = (mPos.x + mDst.x)/2;
     mMid.y = 30 + dsty + CCRANDOM_0_1()*50;
     mTimer = 0;
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/bomb1.mp3").c_str());
+    GameTool::PlaySound("sound/bomb1.mp3");
     
     mPaused = false;
 }
@@ -82,7 +82,7 @@ CCARRAY_FOREACH(play->enemies, node)
                 bool hit = em->deliverHit(HIT_BOMB, mDir);
                 if( hit )
                 {
-                    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+                    GameTool::PlaySound("sound/hit.mp3");
                     GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
                     hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                     hiteff->setPosition(em->center());
@@ -104,7 +104,7 @@ CCARRAY_FOREACH(play->enemies, node)
         effpos.y -= 20;
         eff->setPosition(effpos);
         play->addChild(eff, LAYER_ROLE);
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/bomb2.mp3").c_str());
+        GameTool::PlaySound("sound/bomb2.mp3");
         play->manager->removeGameObject(this);
     }
 }

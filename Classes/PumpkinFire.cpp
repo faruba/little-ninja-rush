@@ -70,7 +70,7 @@ CCARRAY_FOREACH(play->enemies, node)
                 hiteff2->setPosition(em->center());
                 mParent->addChild(hiteff2, LAYER_ROLE);
                 
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit-fire.mp3").c_str());
+                GameTool::PlaySound("sound/hit-fire.mp3");
                 //achievement enemy burnt
                 GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ENEMYBURNT, 1);
             }

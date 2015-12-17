@@ -99,7 +99,7 @@ void ExtraMenu::activate(int cid)
 //  bool unfold = false;
 //  if( newitem->isFoldable() )
 //  {
-//    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/ui-cancel.mp3").c_str());
+//    GameTool::PlaySound("sound/ui-cancel.mp3");
 //    if( cid == mCurrUnFold )
 //    {
 //      //fold
@@ -158,7 +158,7 @@ void ExtraMenu::onBack()
 {
     if( !mIntroFlag )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        GameTool::PlaySound("sound/menu-change.mp3");
         setSceneOutro(ExtraSelect::scene());
     }
 }

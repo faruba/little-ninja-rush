@@ -120,7 +120,7 @@ void TipsMenu::onBack()
     {
         this->removeChild(mTip, true);
         this->removeChild(mCount, true);
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu-change.mp3").c_str());
+        GameTool::PlaySound("sound/menu-change.mp3");
         setSceneOutro(ExtraSelect::scene());
     }
 }
@@ -129,7 +129,7 @@ void TipsMenu::onLeft()
 {
     if( mIndex > 0 )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+        GameTool::PlaySound("sound/click.mp3");
         mIndex--;
         this->updateTip(mIndex);
     }
@@ -139,7 +139,7 @@ void TipsMenu::onRight()
 {
     if( mIndex < GameData::fetchTips()->count() - 1 )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+        GameTool::PlaySound("sound/click.mp3");
         mIndex++;
         this->updateTip(mIndex);
     }
@@ -176,7 +176,7 @@ cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, Vec2(SCREEN_
 cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(dt2, mb2, NULL);
     right->runAction(sq2);
     
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/open.mp3").c_str());
+    GameTool::PlaySound("sound/open.mp3");
 }
 
 void TipsMenu::setSceneOutro(cocos2d::Scene* newscene) 
@@ -217,7 +217,7 @@ cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEOUTRO_DELAY);
 cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(mb2, dt2, NULL);
     right->runAction(sq2);
     
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/close.mp3").c_str());
+    GameTool::PlaySound("sound/close.mp3");
 }
 
 void TipsMenu::doneOutro() 

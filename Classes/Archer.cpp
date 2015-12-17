@@ -41,7 +41,7 @@ void Archer::onCreate()
     mArrow->playGTAnimation(0, false);
     mArrow->setPosition(mTarget);
     mParent->addChild(mArrow, LAYER_ROLE);
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/shoot ready.mp3").c_str());
+    GameTool::PlaySound("sound/shoot ready.mp3");
 }
 
 void Archer::onUpdate(float delta) 
@@ -108,7 +108,7 @@ void Archer::onUpdate(float delta)
                 }
                 mMidPoint = ccpMidpoint(mFrom, mTarget);
                 mMidPoint.y += 75 + CCRANDOM_0_1()*100;
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/lock on.mp3").c_str());
+                GameTool::PlaySound("sound/lock on.mp3");
             }
         }
             break;
@@ -128,7 +128,7 @@ void Archer::onUpdate(float delta)
                 mArrow->setPosition(mFrom);
                 mState = 2;
                 play->darts->addObject(this);
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/shooting.mp3").c_str());
+                GameTool::PlaySound("sound/shooting.mp3");
             }
         }
             break;
@@ -166,7 +166,7 @@ void Archer::onUpdate(float delta)
                     }
                     if( hit )
                     {
-                        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+                        GameTool::PlaySound("sound/hit.mp3");
                         GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
                         hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                         hiteff->setPosition(pos);

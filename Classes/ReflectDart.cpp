@@ -91,7 +91,7 @@ CCARRAY_FOREACH(play->enemies, node)
             bool hit = em->deliverHit(HIT_MAGIC, mDir);
             if( hit )
             {
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
+                GameTool::PlaySound("sound/hit.mp3");
                 GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
                 hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                 hiteff->setPosition(em->center());
@@ -120,7 +120,7 @@ CCARRAY_FOREACH(play->darts, node)
     }
     if( ref )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
+        GameTool::PlaySound("sound/reflect.mp3");
     }
 
     //越界判定

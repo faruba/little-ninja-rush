@@ -209,10 +209,10 @@ void MainRole::commitFire(cocos2d::Node* p, Node* pdata)
     play->darts->addObject(play->manager->addGameObject(d));
     if( dartEffect == 3 )
     {
-      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/shuriken-laser.mp3").c_str());
+      GameTool::PlaySound("sound/shuriken-laser.mp3");
     }
     else {
-      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/throw.mp3").c_str());
+      GameTool::PlaySound("sound/throw.mp3");
     }
     if( dir.x < 0 )
     {
@@ -431,7 +431,7 @@ CCARRAY_FOREACH(play->enemies, node)
 
   if( hit )
   {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/reflect.mp3").c_str());
+    GameTool::PlaySound("sound/reflect.mp3");
     play->scheduleSpeed(0, EXP_HITSLOW, 0);
 
     GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 3, false);
@@ -484,7 +484,7 @@ CCARRAY_FOREACH(play->enemies, node)
       case SPELL_REPLEACE:
         {//替身术
           this->attachEffect("effect", 5, false, true);
-          SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/smoke.mp3").c_str());
+          GameTool::PlaySound("sound/smoke.mp3");
           //-------
           mSprite->setVisible(false);
           play->count_control++;
@@ -522,7 +522,7 @@ CCARRAY_FOREACH(play->enemies, node)
           float angle = 30 + CCRANDOM_0_1()*120;
           cocos2d::Point dir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle));
           play->manager->addGameObject(TraceDart::dart(this->center(), dir));
-          SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
+          GameTool::PlaySound("sound/duofa.mp3");
           spelled = true;
         }
         break;
@@ -532,7 +532,7 @@ CCARRAY_FOREACH(play->enemies, node)
           float angle = 30 + CCRANDOM_0_1()*120;
           cocos2d::Point dir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle));
           play->manager->addGameObject(ReflectDart::dart(this->center(), dir));
-          SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/duofa.mp3").c_str());
+          GameTool::PlaySound("sound/duofa.mp3");
           spelled = true;
         }
         break;
@@ -601,7 +601,7 @@ CCARRAY_FOREACH(play->enemies, node)
             this->timedInvincible(DASH_TIME);
             spelled = true;
 
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/dash.mp3").c_str());
+            GameTool::PlaySound("sound/dash.mp3");
           }
         }
         break;
@@ -748,7 +748,7 @@ void MainRole::onUpdate(float delta)
       GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 8, false);
       eff->setPosition(cocos2d::Vec2( 31, 18));
       mSprite->addChild(eff);
-      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/blade_ready.mp3").c_str());
+      GameTool::PlaySound("sound/blade_ready.mp3");
     }
   }
   //武藏专用
@@ -761,7 +761,7 @@ void MainRole::onUpdate(float delta)
       GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 8, false);
       eff->setPosition(cocos2d::Vec2( 31, 18));
       mSprite->addChild(eff);
-      SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/blade_ready.mp3").c_str());
+      GameTool::PlaySound("sound/blade_ready.mp3");
     }
   }
 

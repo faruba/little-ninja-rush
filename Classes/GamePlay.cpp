@@ -883,7 +883,7 @@ void GamePlay::setFeverLevel(int lv)
         //setup for fever effect
         if( lv > mFeverLevel )
         {
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/fever.mp3").c_str());
+            GameTool::PlaySound("sound/fever.mp3");
             manager->addGameObject(FeverBrust::feverbrust(27, true));
             
             //clean darts
@@ -909,7 +909,7 @@ void GamePlay::setFeverLevel(int lv)
         //play combo close sound
         if( mFeverLevel == 2 )
         {
-            SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/feverbgmend.mp3").c_str());
+            GameTool::PlaySound("sound/feverbgmend.mp3");
         }
         mFeverLevel = lv;
     }
@@ -1038,7 +1038,7 @@ void GamePlay::stopCombo()
 //暂停
 void GamePlay::pause(cocos2d::Ref* ref)
 {
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
+    GameTool::PlaySound("sound/click.mp3");
 CCLOG("canPause = %d paused = %d", canPause, paused);
     if( this->canPause && !this->paused )
     {
@@ -1252,7 +1252,7 @@ cocos2d::CCHide *hd2 = cocos2d::CCHide::create();
 cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(dt2, mb2, hd2, NULL);
     right->runAction(sq2);
     
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/open.mp3").c_str());
+    GameTool::PlaySound("sound/open.mp3");
 }
 
 void GamePlay::doneIntro()
@@ -1367,7 +1367,7 @@ cocos2d::CCHide *a4 = cocos2d::CCHide::create();
 cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
 cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
     board->runAction(sq);
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/objective-complete.mp3").c_str());
+    GameTool::PlaySound("sound/objective-complete.mp3");
 }
 
 void GamePlay::pieceComplete(std::string title, std::string icon)
@@ -1392,7 +1392,7 @@ cocos2d::CCHide *a4 = cocos2d::CCHide::create();
 cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
 cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
     board->runAction(sq);
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/objective-complete.mp3").c_str());
+    GameTool::PlaySound("sound/objective-complete.mp3");
 }
 
 void GamePlay::popText(std::string text)
@@ -1411,7 +1411,7 @@ cocos2d::CCHide *a4 = cocos2d::CCHide::create();
 cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
 cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
     board->runAction(sq);
-    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/objective-complete.mp3").c_str());
+    GameTool::PlaySound("sound/objective-complete.mp3");
 }
 
 void GamePlay::pushNotification(std::string name, std::string icon, int type)

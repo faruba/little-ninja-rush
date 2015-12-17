@@ -300,7 +300,7 @@ void Item::onUpdate(float delta)
             case -1:
             {
                 play->festivalPieces++;
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
+                GameTool::PlaySound("sound/getscroll.mp3");
             }
                 break;
             case 0:
@@ -322,7 +322,7 @@ void Item::onUpdate(float delta)
                 {
                     play->manager->addGameObject(AnimatedParticle::particleCoin(pos, i));
                 }
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3").c_str());
+                GameTool::PlaySound("sound/getcoin.mp3");
             }
                 break;
             case 1:
@@ -334,7 +334,7 @@ void Item::onUpdate(float delta)
                 {
                     play->manager->addGameObject(AnimatedParticle::particleCoin(pos, i));
                 }
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getscroll.mp3").c_str());
+                GameTool::PlaySound("sound/getscroll.mp3");
                 
                 //achievement
                 GameRecord::sharedGameRecord()->task->dispatchTask(ACH_COLLECTSCROLL, 1);
@@ -344,28 +344,28 @@ void Item::onUpdate(float delta)
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell0), CCInteger::create(get));
                 GameScript::sharedScript()->invokeSpell0(cocos2d::CCInteger::create(get));
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
             case 3://隐身术
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell2), NULL);
                 GameScript::sharedScript()->invokeSpell2(NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
             case 4://子弹时间
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell3), NULL);
                 GameScript::sharedScript()->invokeSpell3(NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
             case 5://加血
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell4), NULL);
                 GameScript::sharedScript()->invokeSpell4(NULL, NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
+                GameTool::PlaySound("sound/charge.mp3");
                 for( int i=0; i<5; ++i)
                 {
                     play->manager->addGameObject(StaticParticle::particleAddHP(role->center()));
@@ -376,35 +376,35 @@ void Item::onUpdate(float delta)
             {
 //                MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell5), NULL);
                 GameScript::sharedScript()->invokeSpell5(NULL, NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/charge.mp3").c_str());
+                GameTool::PlaySound("sound/charge.mp3");
             }
                 break;
             case 7://一闪
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell6), NULL);
                 GameScript::sharedScript()->invokeSpell6(NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
             case 8://流星雨
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell7), NULL);
                 GameScript::sharedScript()->invokeSpell7(NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
             case 9://飞镖无限
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell8), NULL);
                 GameScript::sharedScript()->invokeSpell8(NULL);
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
             case 10://全屏分身
             {
                 //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpellRelease), CCInteger::create(SPELL_SHADOWKILL));
                 GameScript::sharedScript()->invokeSpellRelease(cocos2d::CCInteger::create(SPELL_SHADOWKILL));
-                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getitem.mp3").c_str());
+                GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
         }
