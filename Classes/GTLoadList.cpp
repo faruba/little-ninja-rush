@@ -80,25 +80,25 @@ void GTLoadList::reset(float maxInterval)
 
 int GTLoadList::loadSome() 
 {
-//    //CFTimeInterval cost = 0;
-//    float cost = 0;
-//    while ( mLoadIndex < mList->count() && cost < mMaxInterval ) {
-//        //CFAbsoluteTime bl = CFAbsoluteTimeGetCurrent();
-//        time_t bl;
-//cocos2d::CCTime::gettimeofdayCocos2d(&bl, NULL);
-//        
-//        LoadItem *item = (LoadItem*)mList->objectAtIndex(mLoadIndex);
-//        item->execute(true);
-//        
-//        //CFAbsoluteTime al = CFAbsoluteTimeGetCurrent();
-//        time_t al;
-//cocos2d::CCTime::gettimeofdayCocos2d(&al, NULL);
-//        
-//        //cost += al-bl;
-//        cost += cocos2d::CCTime::timersubCocos2d(&bl, &al)/1000.0;
-//        mLoadIndex++;
-//    }
-    return mList->count() - mLoadIndex;
+  //CFTimeInterval cost = 0;
+  float cost = 0;
+  while ( mLoadIndex < mList->count() && cost < mMaxInterval ) {
+    //CFAbsoluteTime bl = CFAbsoluteTimeGetCurrent();
+    timeval bl;
+    gettimeofday(&bl, NULL);
+
+    LoadItem *item = (LoadItem*)mList->objectAtIndex(mLoadIndex);
+    item->execute(true);
+
+    //CFAbsoluteTime al = CFAbsoluteTimeGetCurrent();
+    timeval al;
+    gettimeofday(&al, NULL);
+
+    //cost += al-bl;
+    cost += gettimeofday(&bl, &al)/1000.0;
+    mLoadIndex++;
+  }
+  return mList->count() - mLoadIndex;
 }
 
 void GTLoadList::unloadAll() 

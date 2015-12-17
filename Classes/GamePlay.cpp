@@ -52,25 +52,26 @@ GamePlay::~GamePlay()
 
 cocos2d::Scene* GamePlay::scene()
 {
-cocos2d::Scene *ret = cocos2d::Scene::create();
-    
-    if( gPlay == NULL )
-    {
-        gPlay = GamePlay::create();
-    }
-    
-    //universal
-    ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-    ret->setAnchorPoint(cocos2d::Vec2(0, 0));
-    ret->setPosition(cocos2d::Vec2(0, UniversalFit::sharedUniversalFit()->sceneOffset.y));
-    
-    CEClipedNode *clip = CEClipedNode::create();
-    clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
-    
-    clip->addChild(gPlay);
-    
-    ret->addChild(clip);
-    return ret;
+  cocos2d::Scene *ret = cocos2d::Scene::create();
+
+  if( gPlay == NULL )
+  {
+    gPlay = GamePlay::create();
+  }
+
+  //universal
+  //ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
+  ret->setAnchorPoint(cocos2d::Vec2(0, 0));
+  //ret->setPosition(cocos2d::Vec2(0, UniversalFit::sharedUniversalFit()->sceneOffset.y));
+
+  //CEClipedNode *clip = CEClipedNode::create();
+  //clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
+
+  //clip->addChild(gPlay);
+
+  //ret->addChild(clip);
+  ret->addChild(gPlay);
+  return ret;
 }
 
 GamePlay* GamePlay::sharedGamePlay()
