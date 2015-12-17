@@ -296,7 +296,7 @@ void PopOption::onAddFriend()
 //feature removed from android
 //void TitleMenu::onOpenDelivery()
 //{
-//    UIApplication->sharedApplication()->openURL([NSURL, ABDelivery->sharedDelivery()->deliveryURL()));
+//  Application::getInstance()->openURL(ABDelivery->sharedDelivery()->deliveryURL());
 //    master->hideOpt();
 //}
 
@@ -396,8 +396,8 @@ void PopOption::onToggleiCloud()
 void PopOption::onRateUs()
 {
   //feature removed from android
-  //CCString *str = "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=540290969";
-  //    UIApplication->sharedApplication()->openURL([NSURL, str));
+  std::string str = "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=540290969";
+  Application::getInstance()->openURL(str);
   //    
   //    GameRecord::sharedGameRecord()->rate_pop = -1;
 }
@@ -1162,30 +1162,24 @@ void TitleMenu::onCollections(cocos2d::Ref*)
   setSceneOutro(CollectionMenu::scene());
 }
 
-void TitleMenu::onStore(cocos2d::Ref*)
-{
+void TitleMenu::onStore(cocos2d::Ref*) {
   ShopMenu::setNavBack(0);
   GameTool::PlaySound("sound/menu-change.mp3");
   setSceneOutro(ShopMenu::scene());
 }
 
-void TitleMenu::onFacebook(cocos2d::Ref*)
-{
+void TitleMenu::onFacebook(cocos2d::Ref*) {
   GameTool::PlaySound("sound/menu-change.mp3");
-  //    UIApplication->sharedApplication()->openURL([NSURL, "http://www.facebook.com/pages/Little-Ninja-Rush/397668056947647"));
+  Application::getInstance()->openURL(std::string("http://www.facebook.com/pages/Little-Ninja-Rush/397668056947647"));
 }
 
-void TitleMenu::onTwitter(cocos2d::Ref*)
-{
+void TitleMenu::onTwitter(cocos2d::Ref*) {
   GameTool::PlaySound("sound/menu-change.mp3");
-  //    if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() )
-  //    {
-  //        UIApplication->sharedApplication()->openURL([NSURL, "http://weibo.com/u/2810380794"));
-  //    }
-  //    else
-  //    {
-  //        UIApplication->sharedApplication()->openURL([NSURL, "https://twitter.com/TrinGame"));
-  //    }
+  if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() ) {
+    Application::getInstance()->openURL(std::string("http://weibo.com/u/2810380794"));
+  } else {
+    Application::getInstance()->openURL(std::string("https://twitter.com/TrinGame"));
+  }
 }
 
 void TitleMenu::onLeaderboard(cocos2d::Ref * node)
