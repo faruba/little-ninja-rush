@@ -50,6 +50,7 @@ bool CoinsMenu::init()
 
 void CoinsMenu::onEnter() 
 {
+  mUISwapper.onEnter();
 cocos2d::Node * node = createUIByCCBI("menu-coins", "CoinsMenu", CoinsMenuLayerLoader::loader(), this);
     if(node != NULL) {
       this->addChild(node);
@@ -65,11 +66,6 @@ cocos2d::Node * node = createUIByCCBI("menu-coins", "CoinsMenu", CoinsMenuLayerL
     mScrollBody = cocos2d::Sprite::createWithSpriteFrameName("sp_scroll2.png");
     mScrollBody->setAnchorPoint(cocos2d::Vec2(0, 1));
     mClipedList->addChild(mScrollBody);
-    
-    mSceneIntro = NULL;
-    mIntroFlag = false;
-    
-    //--------------
     
     mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
     mOffset = 0;
@@ -98,7 +94,7 @@ cocos2d::Node * node = createUIByCCBI("menu-coins", "CoinsMenu", CoinsMenuLayerL
     mModalPurchase = -1;
     mModalTimer = -1;
     
-    this->setSceneIntro();
+    mUISwapper.setSceneIntro(this);
 cocos2d::Layer::onEnter();
 }
 
@@ -183,7 +179,7 @@ cocos2d::Layer::onExit();
 void CoinsMenu::onBack() 
 {
     GameTool::PlaySound("sound/menu-change.mp3");
-    setSceneOutro(ShopMenu::scene());
+    mUISwapper.setSceneOutro(ShopMenu::scene(), this);
 }
 
 void CoinsMenu::update(float delta) 
@@ -343,29 +339,6 @@ void CoinsMenu::onTouchEnded(Touch * touch, Event * event)
 //    }
 }
 
-void CoinsMenu::setSceneIntro() 
-{
-  doSceneIntro(mSceneIntro, this);
-}
-
-void CoinsMenu::setSceneOutro(cocos2d::Scene* newscene) 
-{
-  if( mIntroFlag )
-  {
-    return;
-  }
-
-  mIntroFlag = true;
-
-  mNewScene = doSceneOutro(newscene, mSceneIntro, (SEL_CallFunc)(&CoinsMenu::doneOutro), this);
-}
-
-void CoinsMenu::doneOutro() 
-{
-    mIntroFlag = false;
-cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
-    mNewScene->release();
-}
 /*
 void CoinsMenu::dealloc() 
 {

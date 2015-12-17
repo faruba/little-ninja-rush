@@ -118,7 +118,6 @@ bool GamePlay::init()
     //            GamePlay::fixGravity(-1);
     //        }
 
-    mSceneIntro = NULL;
     return true;
   }
   return false;
@@ -126,16 +125,18 @@ bool GamePlay::init()
 
 void GamePlay::onEnter()
 {
+  mUISwapper.onEnter();
+
   setAccelerometerEnabled(true);
-cocos2d::Node *taskcomplete = cocos2d::Node::create();
+  cocos2d::Node *taskcomplete = cocos2d::Node::create();
   taskcomplete->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, LAYER_MASK+10);
   setTaskCompleteNode(taskcomplete);
 
   this->initGamePlay(gGameMode);
 
-  this->setSceneIntro();
-cocos2d::Layer::onEnter();
+  mUISwapper.setSceneIntro(this);
+  cocos2d::Layer::onEnter();
 }
 
 void GamePlay::onExit()
@@ -1072,14 +1073,14 @@ void GamePlay::exit()
 {
     this->resume();
     SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
-    this->setSceneOutro(Loading::loadTo(GameTool::scene<TitleMenu>(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false));
+    mUISwapper.setSceneOutro(Loading::loadTo(GameTool::scene<TitleMenu>(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false), this);
 }
 
 void GamePlay::change()
 {
     this->resume();
     SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
-    this->setSceneOutro(Loading::loadTo(SelectMenu::scene(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false));
+    mUISwapper.setSceneOutro(Loading::loadTo(SelectMenu::scene(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false), this);
 }
 
 void GamePlay::clearFootPrints()
@@ -1217,67 +1218,6 @@ void GamePlay::operate()
         }
         operation = -1;
     }
-}
-
-void GamePlay::setSceneIntro()
-{
-  //doSceneIntro(mSceneIntro, this);
-    if( mSceneIntro == NULL )
-    {
-        mSceneIntro = cocos2d::Node::create();
-        this->addChild(mSceneIntro, LAYER_MASK+99);
-cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
-        left->setAnchorPoint(cocos2d::Vec2(1, 0));
-        mSceneIntro->addChild(left, 0, 0);
-cocos2d::Sprite *right = cocos2d::Sprite::create("door.png");
-        right->setScaleX(-1);
-        right->setAnchorPoint(cocos2d::Vec2(1, 0));
-        mSceneIntro->addChild(right, 0, 1);
-    }
-cocos2d::Sprite *left = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(0));
-    left->setVisible(true);
-    left->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
-cocos2d::Sprite *right = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(1));
-    right->setVisible(true);
-    right->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
-cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, Vec2(-UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
-cocos2d::CCHide *hd1 = cocos2d::CCHide::create();
-cocos2d::CCCallFunc *fn1 = cocos2d::CCCallFunc::create(this, (SEL_CallFunc)(&GamePlay::doneIntro));
-cocos2d::CCSequence *sq1 = cocos2d::CCSequence::create(dt1, mb1, hd1, fn1, NULL);
-    left->runAction(sq1);
-cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
-cocos2d::CCHide *hd2 = cocos2d::CCHide::create();
-cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(dt2, mb2, hd2, NULL);
-    right->runAction(sq2);
-    
-    GameTool::PlaySound("sound/open.mp3");
-}
-
-void GamePlay::doneIntro()
-{
-    this->removeChild(mSceneIntro, true);
-cocos2d::CCTextureCache::sharedTextureCache()->removeTextureForKey("door.png");
-    mSceneIntro = NULL;
-}
-
-void GamePlay::setSceneOutro(cocos2d::Scene* newscene)
-{
-  if( mIntroFlag )
-  {
-    return;
-  }
-
-  mIntroFlag = true;
-
-  mNewScene = doSceneOutro(newscene, mSceneIntro, (SEL_CallFunc)(&GamePlay::doneOutro), this);
-}
-
-void GamePlay::doneOutro()
-{
-cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
-    mNewScene->release();
 }
 
 void GamePlay::setTaskCompleteNode(cocos2d::Node * node)

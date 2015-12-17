@@ -51,10 +51,6 @@ cocos2d::CCLabelBMFont *mCoins;
 cocos2d::Node *mList;
 cocos2d::Sprite *mBanner;
 
-    //intro&outro
-cocos2d::Node *mSceneIntro;
-cocos2d::Scene *mNewScene;
-    bool mIntroFlag;
 
     void activate(int cid);
 
@@ -73,12 +69,10 @@ cocos2d::Scene *mNewScene;
     //-- auto callback
     void onBack();
 
-    //intro&outro
-    void setSceneIntro();
-    void setSceneOutro(cocos2d::Scene* newscene);
-    void doneOutro();
 
     virtual void purchase(int cid) {};
+  private:
+    UISwapper mUISwapper;
 };
 
 class ExtraMenuLayerLoader : public cocosbuilder::NodeLoader {

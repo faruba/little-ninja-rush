@@ -135,9 +135,8 @@ void CollectionMenu::onUseDart()
 
 void CollectionMenu::onEnter()
 {
+  mUISwapper.onEnter();
   PublicLoad::menuCollection()->loadAll();
-  mSceneIntro = NULL;
-  mIntroFlag = false;
   mModal = false;
 
   //do some initialization
@@ -232,7 +231,7 @@ cocos2d::CCMenuItemImage *btn = character(i);
   mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
   mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
 
-  this->setSceneIntro();
+  mUISwapper.setSceneIntro(this);
 
   if(!SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
   {
@@ -780,15 +779,15 @@ void CollectionMenu::update(float delta)
 }
 void CollectionMenu::onBack()
 {
-  if( !mIntroFlag )
+  if(mUISwapper.isDone())
   {
     GameTool::PlaySound("sound/menu-change.mp3");
     if( gNavBack == 0 )
     {
-        setSceneOutro(GameTool::scene<TitleMenu>());
+        mUISwapper.setSceneOutro(GameTool::scene<TitleMenu>(), this);
     }
     else {
-      setSceneOutro(SelectMenu::scene());
+      mUISwapper.setSceneOutro(SelectMenu::scene(), this);
     }
   }
 }
@@ -1257,11 +1256,6 @@ void CollectionMenu::clickMethod()
   }
 }
 
-void CollectionMenu::setSceneIntro()
-{
-  doSceneIntro(mSceneIntro, this);
-}
-
 void CollectionMenu::toggleShare(bool flag)
 {
   /*
@@ -1499,25 +1493,6 @@ void CollectionMenu::doneTwitter(cocos2d::CCInteger* res)
     mTwitterAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("go_twitter2.png"));
   }
   */
-}
-
-void CollectionMenu::setSceneOutro(cocos2d::Scene* newscene)
-{
-  if( mIntroFlag )
-  {
-    return;
-  }
-
-  mIntroFlag = true;
-
-  mNewScene = doSceneOutro(newscene, mSceneIntro, (SEL_CallFunc)(&CollectionMenu::doneOutro), this);
-}
-
-void CollectionMenu::doneOutro()
-{
-  mIntroFlag = false;
-cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
-  mNewScene->release();
 }
 
 bool CollectionMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)

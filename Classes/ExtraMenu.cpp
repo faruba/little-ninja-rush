@@ -38,6 +38,7 @@ bool ExtraMenu::init()
 
 void ExtraMenu::onEnter() 
 {
+  mUISwapper.onEnter();
     PublicLoad::menuExtra()->loadAll();
 cocos2d::Node * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLayerLoader::loader(), this);
   if(node != NULL) {
@@ -54,9 +55,6 @@ cocos2d::Node * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLayerL
   mScrollBody = cocos2d::Sprite::createWithSpriteFrameName("sp_scroll2.png");
   mScrollBody->setAnchorPoint(cocos2d::Vec2(0, 1));
   mClipedList->addChild(mScrollBody);
-
-  mSceneIntro = NULL;
-  mIntroFlag = false;
 
   //--------------
   mOffset = 0;
@@ -89,7 +87,7 @@ cocos2d::Node * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLayerL
   //update scroll
   this->updateScorll();
 
-  this->setSceneIntro();
+  mUISwapper.setSceneIntro(this);
 cocos2d::Layer::onEnter();
 }
 
@@ -156,10 +154,10 @@ cocos2d::Layer::onExit();
 
 void ExtraMenu::onBack() 
 {
-    if( !mIntroFlag )
+    if(mUISwapper.isDone())
     {
         GameTool::PlaySound("sound/menu-change.mp3");
-        setSceneOutro(ExtraSelect::scene());
+        mUISwapper.setSceneOutro(ExtraSelect::scene(), this);
     }
 }
 
@@ -411,30 +409,6 @@ void ExtraMenu::onTouchEnded(Touch * touch, Event * event)
 //            index++;
 //        }
 //    }
-}
-
-void ExtraMenu::setSceneIntro() 
-{
-  doSceneIntro(mSceneIntro, this);
-}
-
-void ExtraMenu::setSceneOutro(cocos2d::Scene* newscene) 
-{
-  if( mIntroFlag )
-  {
-    return;
-  }
-
-  mIntroFlag = true;
-
-  mNewScene = doSceneOutro(newscene, mSceneIntro, (SEL_CallFunc)(&ExtraMenu::doneOutro), this);
-}
-
-void ExtraMenu::doneOutro() 
-{
-    mIntroFlag = false;
-cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
-    mNewScene->release();
 }
 
 SEL_MenuHandler ExtraMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)

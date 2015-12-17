@@ -43,17 +43,11 @@ cocos2d::Sprite *mCredits;
 //    Sprite *mTwitter;
 //    Sprite *mTwitterBanner;
 
-    //intro&outro
-cocos2d::Node *mSceneIntro;
-cocos2d::Scene *mNewScene;
-    bool mIntroFlag;
-    // intro&outro
-    void setSceneIntro();
-    void setSceneOutro(cocos2d::Scene* newscene);
-    void doneOutro();
 
-    void onBack();
+    void onBack(cocos2d::Ref* );
 
+  private:
+    UISwapper mUISwapper;
 };
 
 class ExtraSelectLayerLoader : public cocosbuilder::NodeLoader {

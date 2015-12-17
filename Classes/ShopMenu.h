@@ -53,10 +53,6 @@ cocos2d::CCLabelBMFont *mCoins;
 cocos2d::Node *mList;
 cocos2d::CCMenu *mMenu;
 
-    //intro&outro
-cocos2d::Node *mSceneIntro;
-cocos2d::Scene *mNewScene;
-    bool mIntroFlag;
 
     //---modal---
     bool mIsModal;
@@ -85,14 +81,12 @@ cocos2d::Scene *mNewScene;
     void updateScorll();
 
     //-- auto callback
-    void onBack();
-    void onMoreCoins();
+    void onBack(cocos2d::Ref*);
+    void onMoreCoins(cocos2d::Ref*);
 
-    //intro&outro
-    void setSceneIntro();
-    void setSceneOutro(cocos2d::Scene* newscene);
-    void doneOutro();
 
+private:
+    UISwapper mUISwapper;
 };
 
 class ShopMenuLayerLoader : public cocosbuilder::NodeLoader {

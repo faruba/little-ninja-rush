@@ -47,6 +47,7 @@ bool TipsMenu::init()
 
 void TipsMenu::onEnter()
 {
+  mUISwapper.onEnter();
     PublicLoad::menuExtra()->loadAll();
     cocosbuilder::NodeLoaderLibrary *pNodeLib = cocosbuilder::NodeLoaderLibrary::getInstance();
     cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
@@ -61,7 +62,7 @@ cocos2d::Node *mNode = pReader->readNodeGraphFromFile("menu-tips.ccbi", this);
     mIndex = 0;
     this->updateTip(mIndex);
     
-    this->setSceneIntro();
+    mUISwapper.setSceneIntro(this);
 cocos2d::Layer::onEnter();
 }
 
@@ -116,12 +117,12 @@ cocos2d::CCSize size = cocos2d::CCSizeMake(300, 100);
 
 void TipsMenu::onBack() 
 {
-    if( !mIntroFlag )
+    if(mUISwapper.isDone())
     {
         this->removeChild(mTip, true);
         this->removeChild(mCount, true);
         GameTool::PlaySound("sound/menu-change.mp3");
-        setSceneOutro(ExtraSelect::scene());
+        mUISwapper.setSceneOutro(ExtraSelect::scene(), this);
     }
 }
 
@@ -143,88 +144,6 @@ void TipsMenu::onRight()
         mIndex++;
         this->updateTip(mIndex);
     }
-}
-
-void TipsMenu::setSceneIntro() 
-{
-    if( mSceneIntro == NULL )
-    {
-        mSceneIntro = cocos2d::Node::create();
-        this->addChild(mSceneIntro);
-cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
-        left->setAnchorPoint(cocos2d::Vec2(1, 0));
-        mSceneIntro->addChild(left, 0, 0);
-cocos2d::Sprite *right = cocos2d::Sprite::create("door.png");
-        right->setScaleX(-1);
-        right->setAnchorPoint(cocos2d::Vec2(1, 0));
-        mSceneIntro->addChild(right, 0, 1);
-    }
-cocos2d::Sprite *left = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(0));
-    left->setVisible(true);
-    left->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
-cocos2d::Sprite *right = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(1));
-    right->setVisible(true);
-    right->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
-cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, Vec2(-SCREEN_WIDTH/2, 0));
-    //CCHide *hd1 = cocos2d::CCHide->action();
-cocos2d::CCSequence *sq1 = cocos2d::CCSequence::create(dt1, mb1, NULL);
-    left->runAction(sq1);
-cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, Vec2(SCREEN_WIDTH/2, 0));
-    //CCHide *hd2 = cocos2d::CCHide->action();
-cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(dt2, mb2, NULL);
-    right->runAction(sq2);
-    
-    GameTool::PlaySound("sound/open.mp3");
-}
-
-void TipsMenu::setSceneOutro(cocos2d::Scene* newscene) 
-{
-    if( mIntroFlag )
-    {
-        return;
-    }
-    mIntroFlag = true;
-    
-    mNewScene = newscene;
-    mNewScene->retain();
-    if( mSceneIntro == NULL )
-    {
-        mSceneIntro = cocos2d::Node::create();
-        this->addChild(mSceneIntro);
-cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
-        left->setAnchorPoint(cocos2d::Vec2(1, 0));
-        mSceneIntro->addChild(left, 0, 0);
-cocos2d::Sprite *right = cocos2d::Sprite::create("door.png");
-        right->setScaleX(-1);
-        right->setAnchorPoint(cocos2d::Vec2(1, 0));
-        mSceneIntro->addChild(right, 0, 1);
-    }
-cocos2d::Sprite *left = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(0));
-    left->setVisible(true);
-    left->setPosition(cocos2d::Vec2(0, 0));
-cocos2d::Sprite *right = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(1));
-    right->setVisible(true);
-    right->setPosition(cocos2d::Vec2(SCREEN_WIDTH, 0));
-cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, Vec2(SCREEN_WIDTH/2, 0));
-cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEOUTRO_DELAY);
-cocos2d::CCCallFunc *ca1 = cocos2d::CCCallFunc::create(this, callfunc_selector(TipsMenu::doneOutro));
-cocos2d::CCSequence *sq1 = cocos2d::CCSequence::create(mb1, dt1, ca1, NULL);
-    left->runAction(sq1);
-cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, Vec2(-SCREEN_WIDTH/2, 0));
-cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEOUTRO_DELAY);
-cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(mb2, dt2, NULL);
-    right->runAction(sq2);
-    
-    GameTool::PlaySound("sound/close.mp3");
-}
-
-void TipsMenu::doneOutro() 
-{
-    mIntroFlag = false;
-cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
-    mNewScene->release();
 }
 
 bool TipsMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)

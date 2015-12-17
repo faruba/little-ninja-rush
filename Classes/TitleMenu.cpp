@@ -26,7 +26,6 @@
 
 USING_NS_CC_EXT;
 using namespace CocosDenshion;
-bool gIntroFlag = false;
 bool gPopFlag = false;
 
 //Title Style
@@ -821,9 +820,7 @@ void TitleMenu::onEnter()
   PublicLoad::menuTitle()->loadAll();
   GameRecord::sharedGameRecord()->task->checkObjectives();
 
-  mIntroFlag = false;
-  mSceneIntro = NULL;
-
+  mUISwapper.onEnter();
   //enable keypad for back button
   this->setKeypadEnabled(true);
   cocos2d::Node * node = createUIByCCBI("menu-title", "TitleMenu", TitleMenuLayerLoader::loader(), this);
@@ -863,7 +860,7 @@ void TitleMenu::onEnter()
     SimpleAudioEngine::sharedEngine()->playBackgroundMusic(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/menu.mp3").c_str(), true);
   }
 
-     if( !gIntroFlag )
+     if(mUISwapper.isDone())
      {
   //AppController *appdel = (AppController*)[UIApplication->sharedApplication() delegate);
   //appdel->scheduleLocalNotifuication();
@@ -875,8 +872,7 @@ void TitleMenu::onEnter()
   //
   //set sceneintro sprites
   }
-  setSceneIntro();
-  gIntroFlag = true;
+  mUISwapper.setSceneIntro(this);
 
   //TODO    [GameCenterController->sharedGameCenterController() loadFriendsLeaderboard);
   mNew->setVisible(false);
@@ -1128,27 +1124,27 @@ void TitleMenu::onPlayClassic(cocos2d::Ref*)
   cocos2d::CCLog("Player");
   GamePlay::sharedGamePlay()->setGameMode(MODE_CLASSIC);
   GameTool::PlaySound("sound/menu-change.mp3");
-  setSceneOutro(SelectMenu::scene());
+  mUISwapper.setSceneOutro(SelectMenu::scene(), this);
 }
 
 void TitleMenu::onPlayArcade(cocos2d::Ref*)
 {
   GamePlay::sharedGamePlay()->setGameMode(MODE_ARCADE);
   GameTool::PlaySound("sound/menu-change.mp3");
-  setSceneOutro(SelectMenu::scene());
+  mUISwapper.setSceneOutro(SelectMenu::scene(), this);
 }
 
 void TitleMenu::onCollections(cocos2d::Ref*)
 {
   CollectionMenu::setNavBack(0);
   GameTool::PlaySound("sound/menu-change.mp3");
-  setSceneOutro(CollectionMenu::scene());
+  mUISwapper.setSceneOutro(CollectionMenu::scene(), this);
 }
 
 void TitleMenu::onStore(cocos2d::Ref*) {
   ShopMenu::setNavBack(0);
   GameTool::PlaySound("sound/menu-change.mp3");
-  setSceneOutro(ShopMenu::scene());
+  mUISwapper.setSceneOutro(ShopMenu::scene(), this);
 }
 
 void TitleMenu::onFacebook(cocos2d::Ref*) {
@@ -1208,7 +1204,7 @@ void TitleMenu::onAchievement(cocos2d::Ref*)
 void TitleMenu::onExtra(cocos2d::Ref*)
 {
   GameTool::PlaySound("sound/menu-change.mp3");
-  setSceneOutro(ExtraSelect::scene());
+  mUISwapper.setSceneOutro(ExtraSelect::scene(), this);
 }
 
 void TitleMenu::onShowObjectives(cocos2d::Ref *)
@@ -1240,30 +1236,6 @@ void TitleMenu::onShareCode(cocos2d::Ref*)
 {
   GameTool::PlaySound("sound/click.mp3");
   showOpt(2);
-}
-
-void TitleMenu::setSceneIntro()
-{
-  doSceneIntro(mSceneIntro, this);
-}
-
-void TitleMenu::setSceneOutro(cocos2d::Scene* newscene)
-{
-  if( mIntroFlag )
-  {
-    return;
-  }
-
-  mIntroFlag = true;
-
-  mNewScene = doSceneOutro(newscene, mSceneIntro, (SEL_CallFunc)(&TitleMenu::doneOutro), this);
-}
-
-void TitleMenu::doneOutro()
-{
-  mIntroFlag = false;
-  cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
-  mNewScene->release();
 }
 
 SEL_MenuHandler TitleMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)

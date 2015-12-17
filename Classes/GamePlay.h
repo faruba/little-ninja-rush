@@ -94,10 +94,6 @@ cocos2d::Layer* ui();
 
     void setFeverLevel(int lv);
 
-    //intro&outro
-    void setSceneIntro();
-    void setSceneOutro(cocos2d::Scene* newscene);
-    void doneOutro();
     void doneIntro();
 
     static void setTaskCompleteNode(cocos2d::Node* node);
@@ -136,10 +132,6 @@ cocos2d::Node*      mScheduleReleaseTarget;
     float mVibrateTimer;
     cocos2d::Point mVibrateDir;
 
-    //intro&outro
-cocos2d::Node *mSceneIntro;
-cocos2d::Scene *mNewScene;
-    bool mIntroFlag;
 
     //CDSoundSource *mFeverLoop;
 
@@ -220,6 +212,8 @@ cocos2d::SpriteBatchNode *footprints;
     int count_attack;//是否攻击玩家
     int count_respawn;//是否刷怪
     int count_runscene;//是否滚动场景
+  private:
+    UISwapper mUISwapper;
 };
 
 #endif

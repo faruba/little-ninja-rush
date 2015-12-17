@@ -56,11 +56,6 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
 
     void clickMethod();
 
-    //intro&outro
-    void setSceneIntro();
-    void setSceneOutro(cocos2d::Scene* newscene);
-    void doneOutro();
-
 
     cocos2d::Point mShadowDir;
     int mCurrType;
@@ -108,11 +103,6 @@ cocos2d::Sprite *mFacebookAction;
 cocos2d::Sprite *mTwitterAction;
 cocos2d::Node *mScrollPoint;
 
-    //intro&outro
-cocos2d::Node *mSceneIntro;
-cocos2d::Scene *mNewScene;
-    bool mIntroFlag;
-
     bool mModal;
 cocos2d::Ref *mModalTarget;
     SEL_CallFunc mModalSel;
@@ -137,6 +127,9 @@ cocos2d::CCMenuItemImage* character(int rid);
 
     void toggleShare(bool flag);
     void onItemCallback(int i);
+
+  private:
+    UISwapper mUISwapper;
 
 };
 class CollectionMenuLayerLoader : public cocosbuilder::NodeLoader {

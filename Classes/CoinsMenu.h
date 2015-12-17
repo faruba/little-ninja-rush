@@ -54,10 +54,6 @@ cocos2d::CCLabelBMFont *mCoins;
 cocos2d::Node *mList;
 cocos2d::CCMenu *mMenu;
 
-    //intro&outro
-cocos2d::Node *mSceneIntro;
-cocos2d::Scene *mNewScene;
-    bool mIntroFlag; 
 cocos2d::LayerColor *mMask;
     //---modal---
     bool mIsModal;
@@ -82,10 +78,8 @@ cocos2d::LayerColor *mMask;
     //-- auto callback
     void onBack();
 
-    //intro&outro
-    void setSceneIntro();
-    void setSceneOutro(cocos2d::Scene* newscene);
-    void doneOutro();
+  private:
+    UISwapper mUISwapper;
 
 };
 class CoinsMenuLayerLoader : public cocosbuilder::NodeLoader {

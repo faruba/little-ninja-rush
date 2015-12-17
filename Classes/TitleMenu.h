@@ -55,12 +55,8 @@ public:
     //android back key support
     virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
     
-  // intro&outro
-  void setSceneIntro();
-  void setSceneOutro(cocos2d::Scene* newscene);
-  void doneOutro();
-
 private:
+    UISwapper mUISwapper;
 cocos2d::Sprite *mStar1;
 cocos2d::Sprite *mStar2;
 cocos2d::Sprite *mStar3;
@@ -90,11 +86,6 @@ cocos2d::CCMenuItemImage *mOption;
 
   PopObj *mPop;
   PopOption *mOpt;
-
-  //intro&outro
-cocos2d::Node *mSceneIntro;
-cocos2d::Scene *mNewScene;
-  bool mIntroFlag;
 };
 
 class TitleMenuLayerLoader : public cocosbuilder::NodeLoader {

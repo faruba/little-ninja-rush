@@ -23,9 +23,6 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TipsMenu, create);
 
 private:
     void updateTip(int index);
-    void setSceneIntro();
-    void setSceneOutro(cocos2d::Scene* newscene);
-    void doneOutro();
 cocos2d::Node *mNode;
 cocos2d::CCLabelTTF *mCount;
 cocos2d::CCLabelTTF *mTip;
@@ -33,15 +30,13 @@ cocos2d::CCLabelTTF *mTip;
 cocos2d::CCMenuItemImage *mLeft;
 cocos2d::CCMenuItemImage *mRight;
 
-    //intro&outro
-cocos2d::Node *mSceneIntro;
-cocos2d::Scene *mNewScene;
-    bool mIntroFlag;
 
 
     void onBack();
     void onLeft();
     void onRight();
 
+private:
+    UISwapper mUISwapper;
 };
 #endif

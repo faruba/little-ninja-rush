@@ -23,6 +23,7 @@ bool ExtraSelect::init()
 
 void ExtraSelect::onEnter() 
 {
+  mUISwapper.onEnter();
 cocos2d::Node * node = createUIByCCBI("menu-extramenu", "ExtraMenu", ExtraSelectLayerLoader::loader(), this);
   if(node != NULL) {
     this->addChild(node);
@@ -33,7 +34,7 @@ cocos2d::Node * node = createUIByCCBI("menu-extramenu", "ExtraMenu", ExtraSelect
 //        mTwitterBanner->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb10.png"));
 //    }
     
-    this->setSceneIntro();
+    mUISwapper.setSceneIntro(this);
 cocos2d::Layer::onEnter();
 }
 
@@ -42,48 +43,48 @@ void ExtraSelect::onExit()
 cocos2d::Layer::onExit();
 }
 
-void ExtraSelect::onBack() 
+void ExtraSelect::onBack(cocos2d::Ref* )
 {
-    if( !mIntroFlag )
+    if(mUISwapper.isDone())
     {
         GameTool::PlaySound("sound/menu-change.mp3");
-        setSceneOutro(GameTool::scene<TitleMenu>());
+        mUISwapper.setSceneOutro(GameTool::scene<TitleMenu>(), this);
     }
 }
 
 void ExtraSelect::onAchievement() 
 {
-    if( !mIntroFlag )
+    if(mUISwapper.isDone())
     {
         GameTool::PlaySound("sound/menu-change.mp3");
-        setSceneOutro(ExtraMenu::scene(0));
+        mUISwapper.setSceneOutro(ExtraMenu::scene(0), this);
     }
 }
 
 void ExtraSelect::onCredits() 
 {
-    if( !mIntroFlag )
+    if(mUISwapper.isDone())
     {
         GameTool::PlaySound("sound/menu-change.mp3");
-        setSceneOutro(ExtraMenu::scene(2));
+        mUISwapper.setSceneOutro(ExtraMenu::scene(2), this);
     }
 }
 
 void ExtraSelect::onStatics() 
 {
-    if( !mIntroFlag )
+    if(mUISwapper.isDone())
     {
         GameTool::PlaySound("sound/menu-change.mp3");
-        setSceneOutro(ExtraMenu::scene(1));
+        mUISwapper.setSceneOutro(ExtraMenu::scene(1), this);
     }
 }
 
 void ExtraSelect::onTips() 
 {
-    if( !mIntroFlag )
+    if(mUISwapper.isDone())
     {
         GameTool::PlaySound("sound/menu-change.mp3");
-        setSceneOutro(TipsMenu::scene());
+        mUISwapper.setSceneOutro(TipsMenu::scene(), this);
     }
 }
 
@@ -214,55 +215,23 @@ void ExtraSelect::onTouchEnded(Touch * touch, Event * event)
     }
 }
 
-void ExtraSelect::setSceneIntro() 
-{
-  doSceneIntro(mSceneIntro, this);
-}
-
-void ExtraSelect::setSceneOutro(cocos2d::Scene* newscene) 
-{
-  if( mIntroFlag )
-  {
-    return;
-  }
-
-  mIntroFlag = true;
-
-  mNewScene = doSceneOutro(newscene, mSceneIntro, (SEL_CallFunc)(&ExtraSelect::doneOutro), this);
-}
-
-void ExtraSelect::doneOutro() 
-{
-    mIntroFlag = false;
-cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
-    mNewScene->release();
-}
-
-
-SEL_MenuHandler ExtraSelect::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
-{
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraSelect::onBack)
-cocos2d::CCLog(pSelectorName);
-    return NULL;
-}
-
-cocos2d::extension::Control::Handler   ExtraSelect::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
-{
-cocos2d::CCLog("Control");
+SEL_MenuHandler ExtraSelect::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName) {
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraSelect::onBack)
   return NULL;
 }
-bool ExtraSelect::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
-{
+
+cocos2d::extension::Control::Handler   ExtraSelect::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName) {
+  return NULL;
+}
+
+bool ExtraSelect::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode) {
 //  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMask", LayerColor*, mMask) 
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mAchievement", Sprite*, mAchievement)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStatistics", Sprite*, mStatistics)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTips", Sprite*, mTips)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCredits", Sprite*, mCredits)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mAchievement", Sprite*, mAchievement)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStatistics", Sprite*, mStatistics)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTips", Sprite*, mTips)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCredits", Sprite*, mCredits)
 //  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook", Sprite*, mFacebook)
 //  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterBanner", Sprite*, mTwitterBanner)
 //  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter", Sprite*, mTwitter)
-
- // CCLog(pMemberVariableName);
-
   return false;
 }

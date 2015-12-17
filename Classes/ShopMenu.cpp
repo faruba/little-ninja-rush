@@ -88,6 +88,7 @@ bool ShopMenu::init()
 
 void ShopMenu::onEnter() 
 {
+  mUISwapper.onEnter();
     PublicLoad::menuShop()->loadAll();
 cocos2d::Node *taskcomplete = cocos2d::Node::create();
     taskcomplete->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT));
@@ -107,11 +108,6 @@ cocos2d::Node * node = createUIByCCBI("menu-shop", "ShopMenu", ShopMenuLayerLoad
     mScrollBody = cocos2d::Sprite::createWithSpriteFrameName("sp_scroll2.png");
     mScrollBody->setAnchorPoint(cocos2d::Vec2(0, 1));
     mClipedList->addChild(mScrollBody);
-    
-    mSceneIntro = NULL;
-    mIntroFlag = false;
-    
-    //--------------
     
     mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
     mOffset = 0;
@@ -153,7 +149,7 @@ cocos2d::Node * node = createUIByCCBI("menu-shop", "ShopMenu", ShopMenuLayerLoad
     mModalPurchase = -1;
     mModalTimer = -1;
     
-    this->setSceneIntro();
+    mUISwapper.setSceneIntro(this);
 cocos2d::Layer::onEnter();
 }
 
@@ -393,28 +389,26 @@ cocos2d::CCLog("PID = %d", cid);
     GameRecord::sharedGameRecord()->checkPoint();
 }
 
-void ShopMenu::onBack()
+void ShopMenu::onBack(cocos2d::Ref*)
 {
-    if( mIntroFlag )
-        return ;
-
-    GameTool::PlaySound("sound/menu-change.mp3");
-    if( gNavBack == 0 )
-    {
-        setSceneOutro(GameTool::scene<TitleMenu>());
-    }
-    else {
-        setSceneOutro(SelectMenu::scene());
+    if(mUISwapper.isDone()) {
+      GameTool::PlaySound("sound/menu-change.mp3");
+      if( gNavBack == 0 )
+      {
+          mUISwapper.setSceneOutro(GameTool::scene<TitleMenu>(), this);
+      }
+      else {
+          mUISwapper.setSceneOutro(SelectMenu::scene(), this);
+      }
     }
 }
 
-void ShopMenu::onMoreCoins() 
+void ShopMenu::onMoreCoins(cocos2d::Ref* )
 {
-    if( mIntroFlag )
-        return ;
-
-    GameTool::PlaySound("sound/menu-change.mp3");
-    setSceneOutro(CoinsMenu::scene());
+    if(mUISwapper.isDone()) {
+      GameTool::PlaySound("sound/menu-change.mp3");
+      mUISwapper.setSceneOutro(CoinsMenu::scene(), this);
+    }
 }
 
 void ShopMenu::update(float delta) 
@@ -584,29 +578,6 @@ cocos2d::Ref *node;
     }
 }
 
-void ShopMenu::setSceneIntro() 
-{
-  doSceneIntro(mSceneIntro, this);
-}
-
-void ShopMenu::setSceneOutro(cocos2d::Scene* newscene) 
-{
-  if( mIntroFlag )
-  {
-    return;
-  }
-
-  mIntroFlag = true;
-
-  mNewScene = doSceneOutro(newscene, mSceneIntro, (SEL_CallFunc)(&ShopMenu::doneOutro), this);
-}
-
-void ShopMenu::doneOutro() 
-{
-    mIntroFlag = false;
-cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
-    mNewScene->release();
-}
 /*
 void ShopMenu::dealloc() 
 {
@@ -740,25 +711,20 @@ void ShopMenu::modalOver()
 
 SEL_MenuHandler ShopMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ShopMenu::onBack);
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMoreCoins", ShopMenu::onMoreCoins);
-
-    //CCLog(pSelectorName);
-    return NULL;
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ShopMenu::onBack);
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMoreCoins", ShopMenu::onMoreCoins);
+  return NULL;
 }
 
 cocos2d::extension::Control::Handler   ShopMenu::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-cocos2d::CCLog("Control");
   return NULL;
 }
+
 bool ShopMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", Node *, mList);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu *, mMenu);
-
-  //CCLog(pMemberVariableName);
-
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", Node *, mList);
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu *, mMenu);
   return false;
 }

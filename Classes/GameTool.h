@@ -49,7 +49,7 @@ class UISwapper {
   public:
     void onEnter() {
       mIntroFlag = false;
-      mSceneIntro = NULL;
+      mDoornode = NULL;
     }
 
     bool isDone() {
@@ -79,20 +79,18 @@ class UISwapper {
     }
 
   private:
-    cocos2d::Node *mSceneIntro;
+    cocos2d::Node *mDoornode;
     cocos2d::Scene *mNewScene;
     cocos2d::Sprite *mLeftDoor;
     cocos2d::Sprite *mRightDoor;
 
     bool mIntroFlag;
 
-    void initiateDoors();
+    void initiateDoors(cocos2d::Node* target);
     void doSceneOutro(cocos2d::Node *target);
     void doSceneIntro(cocos2d::Node *target);
 };
 
-void doSceneIntro(cocos2d::Node *&mSceneIntro, Node *target);
-cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, Node *&mSceneIntro, SEL_CallFunc callBack, Node *target);
 
 
 
