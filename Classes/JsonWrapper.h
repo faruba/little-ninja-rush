@@ -64,13 +64,13 @@ class JsonWrapper
 {
 public:
     template <typename T>
-    static void parseJsonFileForVector(const char filename[], std::vector<T*> &vector);
+    static void parseJsonFileForVector(const char filename[], std::vector<T> &vector);
     static cocos2d::Ref* parseJson(std::string *pStr);
     static const char* dumpJson(cocos2d::ValueMap *pDic);
 };
 
 template <typename T>
-void JsonWrapper::parseJsonFileForVector(const char filename[], std::vector<T*> &vector) {
+void JsonWrapper::parseJsonFileForVector(const char filename[], std::vector<T> &vector) {
   std::string path = cocos2d::FileUtils::getInstance()->fullPathForFilename(filename);
   FILE* pFile = fopen(path.c_str(), "rb");
   char buffer[65535];
@@ -88,8 +88,8 @@ void JsonWrapper::parseJsonFileForVector(const char filename[], std::vector<T*> 
 
   for(rapidjson::SizeType i=0; i<doc.Size(); ++i) {
       ValueWrapper vw(doc[i]);
-      T* item = new T();
-      vw.applyToItem(*item);
+      T item;
+      vw.applyToItem(item);
       vector.push_back(item);
   }
 }

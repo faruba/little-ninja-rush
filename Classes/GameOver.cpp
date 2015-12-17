@@ -43,15 +43,15 @@ cocos2d::CCLog("%d coins earned.", play->coins);
     //get festival pieces
     if( play->festivalPieces > 0 )
     {
-        while (play->festivalPieces > 0) {
-            GameRecord::sharedGameRecord()->collection->gainItemPiece(38);
-            play->festivalPieces--;
-        }
-        if( GameRecord::sharedGameRecord()->collection->isItemCompleted(38) )
-        {
-            Special *sh = GameData::querySpecial(38);
-            GamePlay::pushNotification(sh->name, sh->icon, 4);
-        }
+//        while (play->festivalPieces > 0) {
+//            GameRecord::sharedGameRecord()->collection->gainItemPiece(38);
+//            play->festivalPieces--;
+//        }
+//        if( GameRecord::sharedGameRecord()->collection->isItemCompleted(38) )
+//        {
+//            Special *sh = GameData::querySpecial(38);
+//            GamePlay::pushNotification(sh->name, sh->icon, 4);
+//        }
     }
     
     //save high score

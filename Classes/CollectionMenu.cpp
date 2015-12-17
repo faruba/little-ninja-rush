@@ -571,76 +571,76 @@ cocos2d::Sprite *item = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(i
 
 void CollectionMenu::markCurrent(int i)
 {
-  if( mCurrItem < 0 )
-  {
-    mCurrentMark->setVisible(true);
-  }
-  if( i >= 0 )
-  {
-cocos2d::Sprite *item = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(i));
-    mCurrentMark->setPosition(item->getPosition());
-  }
-  else {
-    mCurrentMark->setVisible(false);
-  }
-  mCurrItem = i;
-  //获取当前道具的信息
-  if( mCurrType < 3 && mCurrItem >= 0 )
-  {
-    bool collected = false;
-    switch (mCurrType) {
-      case 0:
-        {
-          Shuriken *sh = (Shuriken*)(GameData::fetchShurikens()->objectAtIndex(mCurrItem));
-          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-        }
-        break;
-      case 1:
-        {
-          int index = mCurrItem + GAME_CHARCOUNT - 1;
-          if( mCurrItem == 0 )
-          {
-            index = GameRecord::sharedGameRecord()->curr_char;
-          }
-          Katana *sh = (Katana*)(GameData::fetchKatanas()->objectAtIndex(index));
-          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-        }
-        break;
-      case 2:
-        {
-          Special *sh = (Special*)(GameData::fetchSpecials()->objectAtIndex(mCurrItem));
-          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-        }
-        break;
-    }
-    if( i != mEquipedItem )
-    {
-      if( !collected )
-      {
-        if( GameRecord::sharedGameRecord()->collection->magic_piece > 0 )
-        {
-          mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock1.png"));
-          mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-        }
-        else
-        {
-          mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-          mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-        }
-        toggleShare(false);
-      }
-      else {
-        mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip1.png"));
-        mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip2.png"));
-        toggleShare(false);
-      }
-    }
-    else {
-      mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
-      mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
-      toggleShare(false);
-    }
-  }
+//  if( mCurrItem < 0 )
+//  {
+//    mCurrentMark->setVisible(true);
+//  }
+//  if( i >= 0 )
+//  {
+//cocos2d::Sprite *item = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(i));
+//    mCurrentMark->setPosition(item->getPosition());
+//  }
+//  else {
+//    mCurrentMark->setVisible(false);
+//  }
+//  mCurrItem = i;
+//  //获取当前道具的信息
+//  if( mCurrType < 3 && mCurrItem >= 0 )
+//  {
+//    bool collected = false;
+//    switch (mCurrType) {
+//      case 0:
+//        {
+//          Shuriken *sh = (Shuriken*)(GameData::fetchShurikens()->objectAtIndex(mCurrItem));
+//          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
+//        }
+//        break;
+//      case 1:
+//        {
+//          int index = mCurrItem + GAME_CHARCOUNT - 1;
+//          if( mCurrItem == 0 )
+//          {
+//            index = GameRecord::sharedGameRecord()->curr_char;
+//          }
+//          Katana *sh = (Katana*)(GameData::fetchKatanas()->objectAtIndex(index));
+//          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
+//        }
+//        break;
+//      case 2:
+//        {
+//          Special *sh = (Special*)(GameData::fetchSpecials()->objectAtIndex(mCurrItem));
+//          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
+//        }
+//        break;
+//    }
+//    if( i != mEquipedItem )
+//    {
+//      if( !collected )
+//      {
+//        if( GameRecord::sharedGameRecord()->collection->magic_piece > 0 )
+//        {
+//          mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock1.png"));
+//          mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
+//        }
+//        else
+//        {
+//          mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
+//          mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
+//        }
+//        toggleShare(false);
+//      }
+//      else {
+//        mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip1.png"));
+//        mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip2.png"));
+//        toggleShare(false);
+//      }
+//    }
+//    else {
+//      mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
+//      mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
+//      toggleShare(false);
+//    }
+//  }
 }
 cocos2d::CCMenuItemImage* CollectionMenu::character(int rid)
 {
@@ -795,168 +795,168 @@ void CollectionMenu::onBack()
 
 void CollectionMenu::onUse()
 {
-  if( mCurrType < 3 )
-  {
-    if( mCurrItem != mEquipedItem && mCurrItem>=0 )
-    {
-      bool collected = false;
-      int uiid = -1;
-      switch (mCurrType) {
-        case 0:
-          {
-            Shuriken *sh = (Shuriken*)(GameData::fetchShurikens()->objectAtIndex(mCurrItem));
-            uiid = sh->uiid;
-            collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-          }
-          break;
-        case 1:
-          {
-            int index = mCurrItem + GAME_CHARCOUNT - 1;
-            if( mCurrItem == 0 )
-            {
-              index = GameRecord::sharedGameRecord()->curr_char;
-            }
-            Katana *sh = (Katana*)GameData::fetchKatanas()->objectAtIndex(index);
-            uiid = sh->uiid;
-            collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-          }
-          break;
-        case 2:
-          {
-            Special *sh = (Special*)GameData::fetchSpecials()->objectAtIndex(mCurrItem);
-            uiid = sh->uiid;
-            collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-          }
-          break;
-      }
-
-      if( collected )
-      {
-        markUsing(mCurrItem);
-        //保存数据
-        int cc = GameRecord::sharedGameRecord()->curr_char;
-        switch (mCurrType) {
-          case 0:
-            {
-              GameRecord::sharedGameRecord()->char_equip_dart[cc] = mEquipedItem;
-              GameTool::PlaySound("sound/equip.mp3");
-            }
-            break;
-          case 1:
-            {
-              int index = mEquipedItem + GAME_CHARCOUNT - 1;
-              if( mEquipedItem == 0 )
-              {
-                index = GameRecord::sharedGameRecord()->curr_char;
-              }
-              GameRecord::sharedGameRecord()->char_equip_blade[cc] = index;
-              GameTool::PlaySound("sound/equip.mp3");
-            }
-            break;
-          case 2:
-            {
-              GameRecord::sharedGameRecord()->char_equip_spell[cc] = mEquipedItem;
-              GameTool::PlaySound("sound/equip.mp3");
-            }
-            break;
-        }
-        mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
-        mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
-
-        //achievement change equipment
-        if( mCurrType < 3 )
-        {
-          GameRecord::sharedGameRecord()->task->dispatchTask(ACH_CHANGEEQUIPMENT, 1);
-        }
-      }
-      else {
-        //如果没有解锁就使用万能卷轴
-        if( GameRecord::sharedGameRecord()->collection->magic_piece > 0 )
-        {
-          GameRecord::sharedGameRecord()->collection->magic_piece--;
-          GameRecord::sharedGameRecord()->collection->gainItemPiece(uiid);
-          //update info
-cocos2d::Sprite *mask = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(mCurrItem));
-          if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
-          {
-            GameTool::PlaySound("sound/getscroll.mp3");
-            mScroll->contentNode->removeChild(mask);
-            mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip1.png"));
-            mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip2.png"));
-          }
-          else {
-            GameTool::PlaySound("sound/getitem.mp3");
-            int piece = GameRecord::sharedGameRecord()->collection->itemTotalPiece(uiid) - GameRecord::sharedGameRecord()->collection->itemLostPiece(uiid);
-cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
-            mask->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename->getCString()));
-            //bugfix
-            if( GameRecord::sharedGameRecord()->collection->magic_piece <= 0 )
-            {
-              mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-              mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-            }
-          }
-          mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", GameRecord::sharedGameRecord()->collection->magic_piece)->getCString());
-        }
-        else {
-          GameTool::PlaySound("sound/error.mp3");
-        }
-      }
-    }
-  }
-  else {
-    int roleid = GameRecord::sharedGameRecord()->curr_char;
-    bool enable = true;
-    SEL_CallFunc selector = NULL;
-    if( mCurrItem == 1 )
-    {
-
-      selector = callfunc_selector(CollectionMenu::onUseLife);
-      if( GameData::roleCurrHP(roleid) >= GameData::roleMaxHP(roleid) || GameRecord::sharedGameRecord()->collection->life_piece < 9 )
-      {
-        enable = false;
-      }
-    }
-    else {
-      selector = callfunc_selector(CollectionMenu::onUseDart);
-      if( GameData::roleCurrDart(roleid) >= GameData::roleMaxDart(roleid) || GameRecord::sharedGameRecord()->collection->dart_piece < 9 )
-      {
-        enable = false;
-      }
-    }
-    const char *desc = NULL;
-
-    switch (roleid) {
-      case 0:
-        {
-          desc = "xr_kt.png";
-        }
-        break;
-      case 1:
-        {
-          desc = "xr_sr.png";
-        }
-        break;
-      case 2:
-        {
-          desc = "xr_ms.png";
-        }
-        break;
-      case 3:
-        {
-          desc = "xr_mr.png";
-        }
-        break;
-    }
-    if( enable )
-    {
-      GameTool::PlaySound("sound/click.mp3");
-      setModal("pu-tc1.png", desc, this, selector);
-    }
-    else {
-      GameTool::PlaySound("sound/error.mp3");
-    }
-  }
+//  if( mCurrType < 3 )
+//  {
+//    if( mCurrItem != mEquipedItem && mCurrItem>=0 )
+//    {
+//      bool collected = false;
+//      int uiid = -1;
+//      switch (mCurrType) {
+//        case 0:
+//          {
+//            Shuriken *sh = (Shuriken*)(GameData::fetchShurikens()->objectAtIndex(mCurrItem));
+//            uiid = sh->uiid;
+//            collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
+//          }
+//          break;
+//        case 1:
+//          {
+//            int index = mCurrItem + GAME_CHARCOUNT - 1;
+//            if( mCurrItem == 0 )
+//            {
+//              index = GameRecord::sharedGameRecord()->curr_char;
+//            }
+//            Katana *sh = (Katana*)GameData::fetchKatanas()->objectAtIndex(index);
+//            uiid = sh->uiid;
+//            collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
+//          }
+//          break;
+//        case 2:
+//          {
+//            Special *sh = (Special*)GameData::fetchSpecials()->objectAtIndex(mCurrItem);
+//            uiid = sh->uiid;
+//            collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
+//          }
+//          break;
+//      }
+//
+//      if( collected )
+//      {
+//        markUsing(mCurrItem);
+//        //保存数据
+//        int cc = GameRecord::sharedGameRecord()->curr_char;
+//        switch (mCurrType) {
+//          case 0:
+//            {
+//              GameRecord::sharedGameRecord()->char_equip_dart[cc] = mEquipedItem;
+//              GameTool::PlaySound("sound/equip.mp3");
+//            }
+//            break;
+//          case 1:
+//            {
+//              int index = mEquipedItem + GAME_CHARCOUNT - 1;
+//              if( mEquipedItem == 0 )
+//              {
+//                index = GameRecord::sharedGameRecord()->curr_char;
+//              }
+//              GameRecord::sharedGameRecord()->char_equip_blade[cc] = index;
+//              GameTool::PlaySound("sound/equip.mp3");
+//            }
+//            break;
+//          case 2:
+//            {
+//              GameRecord::sharedGameRecord()->char_equip_spell[cc] = mEquipedItem;
+//              GameTool::PlaySound("sound/equip.mp3");
+//            }
+//            break;
+//        }
+//        mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
+//        mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
+//
+//        //achievement change equipment
+//        if( mCurrType < 3 )
+//        {
+//          GameRecord::sharedGameRecord()->task->dispatchTask(ACH_CHANGEEQUIPMENT, 1);
+//        }
+//      }
+//      else {
+//        //如果没有解锁就使用万能卷轴
+//        if( GameRecord::sharedGameRecord()->collection->magic_piece > 0 )
+//        {
+//          GameRecord::sharedGameRecord()->collection->magic_piece--;
+//          GameRecord::sharedGameRecord()->collection->gainItemPiece(uiid);
+//          //update info
+//cocos2d::Sprite *mask = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(mCurrItem));
+//          if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
+//          {
+//            GameTool::PlaySound("sound/getscroll.mp3");
+//            mScroll->contentNode->removeChild(mask);
+//            mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip1.png"));
+//            mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip2.png"));
+//          }
+//          else {
+//            GameTool::PlaySound("sound/getitem.mp3");
+//            int piece = GameRecord::sharedGameRecord()->collection->itemTotalPiece(uiid) - GameRecord::sharedGameRecord()->collection->itemLostPiece(uiid);
+//cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
+//            mask->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename->getCString()));
+//            //bugfix
+//            if( GameRecord::sharedGameRecord()->collection->magic_piece <= 0 )
+//            {
+//              mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
+//              mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
+//            }
+//          }
+//          mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", GameRecord::sharedGameRecord()->collection->magic_piece)->getCString());
+//        }
+//        else {
+//          GameTool::PlaySound("sound/error.mp3");
+//        }
+//      }
+//    }
+//  }
+//  else {
+//    int roleid = GameRecord::sharedGameRecord()->curr_char;
+//    bool enable = true;
+//    SEL_CallFunc selector = NULL;
+//    if( mCurrItem == 1 )
+//    {
+//
+//      selector = callfunc_selector(CollectionMenu::onUseLife);
+//      if( GameData::roleCurrHP(roleid) >= GameData::roleMaxHP(roleid) || GameRecord::sharedGameRecord()->collection->life_piece < 9 )
+//      {
+//        enable = false;
+//      }
+//    }
+//    else {
+//      selector = callfunc_selector(CollectionMenu::onUseDart);
+//      if( GameData::roleCurrDart(roleid) >= GameData::roleMaxDart(roleid) || GameRecord::sharedGameRecord()->collection->dart_piece < 9 )
+//      {
+//        enable = false;
+//      }
+//    }
+//    const char *desc = NULL;
+//
+//    switch (roleid) {
+//      case 0:
+//        {
+//          desc = "xr_kt.png";
+//        }
+//        break;
+//      case 1:
+//        {
+//          desc = "xr_sr.png";
+//        }
+//        break;
+//      case 2:
+//        {
+//          desc = "xr_ms.png";
+//        }
+//        break;
+//      case 3:
+//        {
+//          desc = "xr_mr.png";
+//        }
+//        break;
+//    }
+//    if( enable )
+//    {
+//      GameTool::PlaySound("sound/click.mp3");
+//      setModal("pu-tc1.png", desc, this, selector);
+//    }
+//    else {
+//      GameTool::PlaySound("sound/error.mp3");
+//    }
+//  }
 }
 
 void CollectionMenu::updateUsing()
@@ -1127,54 +1127,54 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName("pushuriken2.pn
 
 void CollectionMenu::onItemCallback(int i)
 {
-  //获取当前道具的信息
-  if( mCurrType < 3 )
-  {
-    bool collected = false;
-    switch (mCurrType) {
-      case 0:
-        {
-          Shuriken *sh = (Shuriken*)(GameData::fetchShurikens()->objectAtIndex(i));
-          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-          if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
-          {
-            GameTool::PlaySound("sound/error.mp3");
-            return;
-          }
-        }
-        break;
-      case 1:
-        {
-          int index = i + GAME_CHARCOUNT - 1;
-          if( i == 0 )
-          {
-            index = GameRecord::sharedGameRecord()->curr_char;
-          }
-          Katana *sh = (Katana*)GameData::fetchKatanas()->objectAtIndex(index);
-          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-          if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
-          {
-            GameTool::PlaySound("sound/error.mp3");
-            return;
-          }
-        }
-        break;
-      case 2:
-        {
-          Special *sh = (Special*)GameData::fetchSpecials()->objectAtIndex(i);
-          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-          if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
-          {
-            GameTool::PlaySound("sound/error.mp3");
-            return;
-          }
-        }
-        break;
-    }
-  }
-  GameTool::PlaySound("sound/click.mp3");
-  markCurrent(i);
-  this->updateItemInfo();
+//  //获取当前道具的信息
+//  if( mCurrType < 3 )
+//  {
+//    bool collected = false;
+//    switch (mCurrType) {
+//      case 0:
+//        {
+//          Shuriken *sh = (Shuriken*)(GameData::fetchShurikens()->objectAtIndex(i));
+//          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
+//          if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
+//          {
+//            GameTool::PlaySound("sound/error.mp3");
+//            return;
+//          }
+//        }
+//        break;
+//      case 1:
+//        {
+//          int index = i + GAME_CHARCOUNT - 1;
+//          if( i == 0 )
+//          {
+//            index = GameRecord::sharedGameRecord()->curr_char;
+//          }
+//          Katana *sh = (Katana*)GameData::fetchKatanas()->objectAtIndex(index);
+//          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
+//          if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
+//          {
+//            GameTool::PlaySound("sound/error.mp3");
+//            return;
+//          }
+//        }
+//        break;
+//      case 2:
+//        {
+//          Special *sh = (Special*)GameData::fetchSpecials()->objectAtIndex(i);
+//          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
+//          if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
+//          {
+//            GameTool::PlaySound("sound/error.mp3");
+//            return;
+//          }
+//        }
+//        break;
+//    }
+//  }
+//  GameTool::PlaySound("sound/click.mp3");
+//  markCurrent(i);
+//  this->updateItemInfo();
 }
 
 void CollectionMenu::updatePowerUpButton()

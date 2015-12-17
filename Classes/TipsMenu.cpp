@@ -74,27 +74,27 @@ void TipsMenu::updateTip(int index)
 {
     if( mCount == NULL )
     {
-        mCount = cocos2d::CCLabelTTF::create(cocos2d::CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips()->count())->getCString(), GFONT_NAME, GFONT_SIZE_LARGE);
-        //mCount = [CCLabelTTF, CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips)->count()()
+        mCount = cocos2d::CCLabelTTF::create(cocos2d::CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips().size())->getCString(), GFONT_NAME, GFONT_SIZE_LARGE);
+        //mCount = [CCLabelTTF, CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips)->size()()
         //                            fontName:TIP_FONTNAME fontSize:24];
         mCount->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
         mCount->setPosition(cocos2d::Vec2(240, 50));
         this->addChild(mCount);
     }
     else {
-        //mCount->setString(cocos2d::CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips)->count())();
-        mCount->setString(cocos2d::CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips()->count())->getCString());
+        //mCount->setString(cocos2d::CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips)->size())();
+        mCount->setString(cocos2d::CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips().size())->getCString());
     }
     if( mTip != NULL )
     {
         this->removeChild(mTip, true);
     }
-cocos2d::CCString *tip = (cocos2d::CCString*) GameData::fetchTips()->objectAtIndex(index);
+    std::string tip =  GameData::fetchTips()[index];
 cocos2d::CCSize size = cocos2d::CCSizeMake(300, 100);
     //CGSize actualSize = tip->sizeWithFont([UIFont, TIP_FONTNAME, 24)
     //                    constrainedToSize:size
     //                        lineBreakMode:UILineBreakModeWordWrap];
-    mTip = cocos2d::CCLabelTTF::create(tip->getCString(), GFONT_NAME, GFONT_SIZE_LARGE, size, kCCTextAlignmentCenter);
+    mTip = cocos2d::CCLabelTTF::create(tip.c_str(), GFONT_NAME, GFONT_SIZE_LARGE, size, kCCTextAlignmentCenter);
     mTip->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     mTip->setPosition(cocos2d::Vec2(240, 160));
     this->addChild(mTip);
@@ -105,7 +105,7 @@ cocos2d::CCSize size = cocos2d::CCSizeMake(300, 100);
     else {
         mLeft->setOpacity(255);
     }
-    if( index == GameData::fetchTips()->count()-1 )
+    if( index == GameData::fetchTips().size()-1 )
     {
         mRight->setOpacity(128);
     }
@@ -137,7 +137,7 @@ void TipsMenu::onLeft()
 
 void TipsMenu::onRight() 
 {
-    if( mIndex < GameData::fetchTips()->count() - 1 )
+    if( mIndex < GameData::fetchTips().size() - 1 )
     {
         GameTool::PlaySound("sound/click.mp3");
         mIndex++;

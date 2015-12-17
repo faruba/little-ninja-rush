@@ -166,7 +166,7 @@ void MerchantPanel::onMerchantClose()
 }
 
 void MerchantPanel::gainShurikenPiece() 
-{
+{/*
     int poss[ITEM_SHURIKENEND - ITEM_SHURIKENSTART];
     int count = 0;
     for( int i=ITEM_SHURIKENSTART; i<ITEM_SHURIKENEND; ++i)
@@ -185,11 +185,11 @@ void MerchantPanel::gainShurikenPiece()
     {
         Shuriken* sh = GameData::queryShuriken(poss[res]);
         GamePlay::pushNotification(sh->name, sh->icon, 4);
-    }
+    }*/
 }
 
 void MerchantPanel::gainKatanaPiece() 
-{
+{/*
     int poss[ITEM_KATANAEND - ITEM_KATANASTART];
     int count = 0;
     for( int i=ITEM_KATANASTART; i<ITEM_KATANAEND; ++i)
@@ -208,11 +208,11 @@ void MerchantPanel::gainKatanaPiece()
     {
         Katana* sh = GameData::queryKatana(poss[res]);
         GamePlay::pushNotification(sh->name, sh->icon, 4);
-    }
+    }*/
 }
 
 void MerchantPanel::gainSpecialPiece() 
-{
+{/*
     int poss[ITEM_SPECIALEND - ITEM_SPECIALSTART];
     int count = 0;
     for( int i=ITEM_SPECIALSTART; i<ITEM_SPECIALEND; ++i)
@@ -231,7 +231,7 @@ void MerchantPanel::gainSpecialPiece()
     {
         Special* sh = GameData::querySpecial(poss[res]);
         GamePlay::pushNotification(sh->name, sh->icon, 4);
-    }
+    }*/
 }
 
 void MerchantPanel::onMerchantBuy1() 

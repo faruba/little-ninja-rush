@@ -77,7 +77,7 @@ cocos2d::Sprite *mEquipSpecial;
 cocos2d::Node *mStartPos;
 cocos2d::Sprite *mLeftMark;
 cocos2d::Sprite *mRightMark;
-cocos2d::CCLabelBMFont *mMoney;
+cocos2d::Label *mMoney;
 cocos2d::Sprite *mCoinMark;
 cocos2d::CCMenuItemImage *mClickMe;
 cocos2d::Sprite *mHeroDesc;

@@ -35,10 +35,10 @@ int gUpgradeCost[GAME_UPGRADECOUNT*3] =
 };
 
 //数据
-std::vector<Shuriken*> gShurikens;
-std::vector<Katana*> gKatanas;
-std::vector<Special*> gSpecials;
-std::vector<std::string*> gTips;
+std::vector<Shuriken> gShurikens;
+std::vector<Katana> gKatanas;
+std::vector<Special> gSpecials;
+std::vector<std::string> gTips;
 
 //--- character ---
 
@@ -101,68 +101,47 @@ void GameData::releaseData() {
   // TODO:Release memories
 }
 
-cocos2d::CCArray* GameData::fetchTips()
-{
-  return nullptr;
-    //return gTips;
+std::vector<std::string> &GameData::fetchTips() {
+  return gTips;
 }
 
-cocos2d::CCString* GameData::randomTip()
-{
-    //srand(time(NULL));
-    //int n = rand()%gTips.size();
-    //return (cocos2d::CCString*)gTips[n];
-    return nullptr;
+std::string &GameData::randomTip() {
+  srand(time(NULL));
+  int n = rand()%gTips.size();
+  return gTips[n];
 }
 
-cocos2d::CCArray* GameData::fetchShurikens()
-{
-    return nullptr;
-    //TODO:return gShurikens;
+std::vector<Shuriken> &GameData::fetchShurikens() {
+  return gShurikens;
 }
 
-cocos2d::CCArray* GameData::fetchKatanas()
-{
-   // return gKatanas;
-  return nullptr;
+std::vector<Katana> &GameData::fetchKatanas() {
+  return gKatanas;
 }
 
-cocos2d::CCArray* GameData::fetchSpecials()
-{
- //   return gSpecials;
-  return nullptr;
+std::vector<Special> &GameData::fetchSpecials() {
+  return gSpecials;
 }
 
-Shuriken* GameData::queryShuriken(int uiid)
-{
-    return NULL;
+template <typename ItemType>
+ItemType &queryByID(std::vector<ItemType>& vector, int uiid) {
+  typename std::vector<ItemType>::iterator it;
+  it = std::find (vector.begin(), vector.end(), uiid);
+  if (it == vector.end()) {
+    throw "Item Not Found"; //TODO:
+  } else {
+    return *it;
+  }
 }
 
-Katana* GameData::queryKatana(int uiid)
-{
-//cocos2d::Ref *pObj = NULL;
-//CCARRAY_FOREACH(gKatanas, pObj)
-//    {
-//        Katana *sh = (Katana*)pObj;
-//        if( sh->uiid == uiid )
-//        {
-//            return sh;
-//        }
-//    }
-    return NULL;
+Shuriken &GameData::queryShuriken(int uiid) {
+  return queryByID(gShurikens, uiid);
 }
 
-Special* GameData::querySpecial(int uiid)
-{
-//cocos2d::Ref *pObj = NULL;
-//CCARRAY_FOREACH(gSpecials, pObj)
-//    {
-//        Special *sh = (Special*)pObj;
-//        if( sh->uiid == uiid )
-//        {
-//            return sh;
-//        }
-//    }
-    return NULL;
+Katana &GameData::queryKatana(int uiid) {
+  return queryByID(gKatanas, uiid);
 }
 
+Special &GameData::querySpecial(int uiid) {
+  return queryByID(gSpecials, uiid);
+}

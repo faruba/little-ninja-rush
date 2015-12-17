@@ -85,10 +85,10 @@ void unloadTextureFromeSpriteFrameFile(const char *plist)
 {
     const char *path = cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename(plist).c_str();
   //const char *path = cocos2d::CCFileUtils::sharedFileUtils()->fullPathFromRelativePath(plist);
-cocos2d::CCDictionary *dict = cocos2d::CCDictionary::createWithContentsOfFile(path);
-cocos2d::CCDictionary *meta = (cocos2d::CCDictionary*)dict->objectForKey("metadata");
-cocos2d::CCString *texname = (cocos2d::CCString*)meta->objectForKey("textureFileName");
-cocos2d::CCTextureCache::sharedTextureCache()->removeTextureForKey(texname->getCString());
+//cocos2d::CCDictionary *dict = cocos2d::CCDictionary::createWithContentsOfFile(path);
+//cocos2d::CCDictionary *meta = (cocos2d::CCDictionary*)dict->objectForKey("metadata");
+//cocos2d::CCString *texname = (cocos2d::CCString*)meta->objectForKey("textureFileName");
+//cocos2d::CCTextureCache::sharedTextureCache()->removeTextureForKey(texname->getCString());
 }
 
 //UIImage* makeScreenshot()

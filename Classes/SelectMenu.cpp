@@ -165,9 +165,9 @@ void SelectMenu::updateCharacterInfo(int rid)
 //  Katana *ka = (Katana*)GameData::fetchKatanas()->objectAtIndex(blid);
 //  Special *sp = (Special*)GameData::fetchSpecials()->objectAtIndex(spid);
 //
-//  mEquipDart->setDisplayFrame(cocos2d::Sprite::create(sh->icon->getCString())->displayFrame());
-//  mEquipBlade->setDisplayFrame(cocos2d::Sprite::create(ka->icon->getCString())->displayFrame());
-//  mEquipSpecial->setDisplayFrame(cocos2d::Sprite::create(sp->icon->getCString())->displayFrame());
+//  mEquipDart->setDisplayFrame(cocos2d::Sprite::create(sh->icon.c_str())->displayFrame());
+//  mEquipBlade->setDisplayFrame(cocos2d::Sprite::create(ka->icon.c_str())->displayFrame());
+//  mEquipSpecial->setDisplayFrame(cocos2d::Sprite::create(sp->icon.c_str())->displayFrame());
 //
 //  //更新人物显示
 //  switch (rid) {
@@ -588,7 +588,7 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnDart", CCMenuItemImage*,  mBtnDart)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnBlade", CCMenuItemImage*,  mBtnBlade)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnSpecial", CCMenuItemImage*,  mBtnSpecial)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClickMe", CCMenuItemImage*,  mClickMe)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMoney", CCLabelBMFont*,  mMoney)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMoney", cocos2d::Label*,  mMoney)
   //  CCLog(pMemberVariableName);
 
   return false;

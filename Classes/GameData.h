@@ -13,6 +13,18 @@ class GameItemBase : public cocos2d::Ref {
     std::string icon;
     float wght; // TODO: change to weight
 
+    GameItemBase() {
+    }
+
+    GameItemBase(const GameItemBase &item) {
+      uiid = item.uiid;
+      titl = item.titl;
+      name = item.name;
+      desc = item.desc;
+      icon = item.icon;
+      wght = item.wght;
+    }
+
   public:
     virtual void handleJsonValue(const ValueWrapper& value) {
       uiid = value.getInteger("uiid");
@@ -24,12 +36,25 @@ class GameItemBase : public cocos2d::Ref {
     }
 };
 
+inline bool operator==(const GameItemBase& lhs, const int uiid) {
+  return lhs.uiid == uiid;
+}
+
 class Shuriken: public GameItemBase {
   public:
     float flys;
     float reld;
     int efft;   // TODO: change to effect
     std::string shap; // TODO: change to shape
+
+    Shuriken() { }
+
+    Shuriken(const Shuriken& item) : GameItemBase(item) {
+      flys = item.wght;
+      reld = item.wght;
+      efft = item.uiid;
+      shap = item.shap;
+    }
 
     virtual void handleJsonValue(const ValueWrapper& value) {
       GameItemBase::handleJsonValue(value);
@@ -47,6 +72,16 @@ class Katana:public GameItemBase {
     float rang;
     int efft;
     float reld;
+
+    Katana() { }
+
+    Katana(const Katana& item) : GameItemBase(item) {
+      anim = item.anim;
+      sond = item.sond;
+      rang = item.rang;
+      efft = item.efft;
+      reld = item.reld;
+    }
 
     virtual void handleJsonValue(const ValueWrapper& value) {
       GameItemBase::handleJsonValue(value);
@@ -66,6 +101,15 @@ class Special:public GameItemBase
     int spac;
     int skid;
     std::string shap; // TODO: change to shape
+
+    Special() { }
+
+    Special(const Special& item) : GameItemBase(item) {
+      spmx = item.spmx; 
+      spac = item.spac; 
+      skid = item.skid; 
+      shap = item.shap; 
+    }
 
     virtual void handleJsonValue(const ValueWrapper& value) {
       GameItemBase::handleJsonValue(value);
@@ -93,19 +137,19 @@ class GameData : public cocos2d::Ref
     static void loadData();
     static void releaseData();
 
-    static cocos2d::CCArray* fetchShurikens();
-    static cocos2d::CCArray* fetchKatanas();
-    static cocos2d::CCArray* fetchSpecials();
-    static cocos2d::CCArray* fetchTips();
+    static std::vector<Shuriken>& fetchShurikens();
+    static std::vector<Katana>& fetchKatanas();
+    static std::vector<Special>& fetchSpecials();
+    static std::vector<std::string>& fetchTips();
     
-    static Shuriken* queryShuriken(int uiid);
-    static Katana* queryKatana(int uiid);
-    static Special* querySpecial(int uiid);
-    static cocos2d::CCString* randomTip();
+    static Shuriken& queryShuriken(int uiid);
+    static Katana& queryKatana(int uiid);
+    static Special& querySpecial(int uiid);
+    static std::string& randomTip();
 };
 
 template <typename T>
-void loadVectorFromJsonFile(const char *filename, std::vector<T*> &vector) {
+void loadVectorFromJsonFile(const char *filename, std::vector<T> &vector) {
   CCLOG("Loading %s...", filename);
   try {
     JsonWrapper::parseJsonFileForVector(filename, vector);

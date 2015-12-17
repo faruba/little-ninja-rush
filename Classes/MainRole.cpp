@@ -142,13 +142,13 @@ void MainRole::setEquipBlade(int tid)
 }
 
 void MainRole::setEquipSpell(int tid) 
-{
+{/*
   Special *sp = (Special*)GameData::fetchSpecials()->objectAtIndex(tid);
 
   spellType = sp->skid;
   SP = 0;
   maxSP = sp->spmx;
-  activeSP = sp->spac;
+  activeSP = sp->spac;*/
 }
 
 void MainRole::setAI(int ai, cocos2d::Point pos) 

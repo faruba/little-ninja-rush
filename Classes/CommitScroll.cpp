@@ -411,6 +411,7 @@ cocos2d::CCFadeIn *fo = cocos2d::CCFadeIn::create(2);
 
 void CommitScroll::implementPrize() 
 {
+    /*
     GamePlay *play = GamePlay::sharedGamePlay();
     //implement prize
     switch (mPrize) {
@@ -617,6 +618,7 @@ void CommitScroll::implementPrize()
         }
             break;
     }
+    */
 }
 
 bool CommitScroll::isPrizeAvailable(int pid) 
