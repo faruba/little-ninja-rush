@@ -3,7 +3,145 @@
 #include "SimpleAudioEngine.h"
 #include "CCNumber.h"
 
-;
+// ----------
+// UISwapper
+// ----------
+void UISwapper::initiateDoors() {
+    mDoornode = cocos2d::Node::create();
+    target->addChild(mDoornode, 99);
+    mLeftDoor = cocos2d::Sprite::create("door.png");
+    mLeftDoor->setAnchorPoint(cocos2d::Vec2(1, 0));
+    mDoornode->addChild(mLeftDoor, 0, 0);
+
+    mRightDoor = cocos2d::Sprite::create("door.png");
+    mRightDoor->setScaleX(-1);
+    mRightDoor->setAnchorPoint(cocos2d::Vec2(1, 0));
+    mDoornode->addChild(mRightDoor, 0, 1);
+}
+
+void UISwapper::doSceneOutro(cocos2d::Node* target) {
+  if ( mDoornode == NULL ) {
+    initiateDoors();
+  }
+
+  mLeftDoor->setVisible(true);
+  mLeftDoor->setPosition(cocos2d::Vec2(0, 0));
+  mRightDoor->setVisible(true);
+  mRightDoor->setPosition(cocos2d::Vec2(SCREEN_WIDTH, 0));
+
+  mLeftDoor->runAction(cocos2d::Sequence::create(
+        cocos2d::MoveBy::create(SCENEOUTRO_TIME, Vec2(SCREEN_WIDTH/2, 0)),
+        cocos2d::DelayTime::create(SCENEOUTRO_DELAY),
+        cocos2d::CallFunc::create([this]() { this->doneOutro(); }),
+        nullptr
+        ));
+
+  mRightDoor->runAction(cocos2d::Sequence::create(
+        cocos2d::MoveBy::create(SCENEOUTRO_TIME, Vec2(-SCREEN_WIDTH/2, 0)),
+        cocos2d::DelayTime::create(SCENEOUTRO_DELAY),
+        nullptr
+        ));
+
+  GameTool::PlaySound("sound/close.mp3");
+}
+
+void UISwapper::doSceneIntro(cocos2d::Node* target) {
+  if( mSceneIntro == NULL ) {
+    initiateDoors();
+  }
+
+  mLeftDoor->setVisible(true);
+  mLeftDoor->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
+  mRightDoor->setVisible(true);
+  mRightDoor->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
+
+  mLeftDoor->runAction(cocos2d::Sequence::create(
+        cocos2d::DelayTime::create(SCENEINTRO_DELAY),
+        cocos2d::MoveBy::create(SCENEINTRO_TIME,Vec2(-SCREEN_WIDTH/2, 0)),
+        nullptr
+        ));
+
+  mRightDoor->runAction(cocos2d::Sequence::create(
+        cocos2d::DelayTime::create(SCENEINTRO_DELAY),
+        cocos2d::MoveBy::create(SCENEINTRO_TIME,Vec2(SCREEN_WIDTH/2, 0)),
+        nullptr
+        ));
+
+  GameTool::PlaySound("sound/open.mp3");
+}
+
+void doSceneIntro(cocos2d::Node *&mSceneIntro, Node *target)
+{
+cocos2d::Sprite *left, *right; 
+  if( mSceneIntro == NULL )
+  {
+    mSceneIntro = cocos2d::Node::create();
+    target->addChild(mSceneIntro, 99);
+    left = cocos2d::Sprite::create("door.png");
+    left->setAnchorPoint(cocos2d::Vec2(1, 0));
+    left->setPosition(cocos2d::Vec2(0, 0));
+    mSceneIntro->addChild(left, 0, 0);
+    right = cocos2d::Sprite::create("door.png");
+    right->setScaleX(-1);
+    right->setAnchorPoint(cocos2d::Vec2(1, 0));
+    right->setPosition(cocos2d::Vec2(SCREEN_WIDTH, 0));
+    mSceneIntro->addChild(right, 0, 1);
+  }
+  else
+  {
+    left = (cocos2d::Sprite*)mSceneIntro->getChildByTag(0);
+    right = (cocos2d::Sprite*)mSceneIntro->getChildByTag(1);
+  }
+  left->setVisible(true);
+  left->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
+  right->setVisible(true);
+  right->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
+cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
+cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME,Vec2(-SCREEN_WIDTH/2, 0));
+cocos2d::CCSequence *sq1 = (cocos2d::CCSequence*)CCSequence::create(dt1, mb1, NULL);
+  left->runAction(sq1);
+cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
+cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME,Vec2(SCREEN_WIDTH/2, 0));
+cocos2d::CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(dt2, mb2, NULL);
+  right->runAction(sq2);
+
+  GameTool::PlaySound("sound/open.mp3");
+}
+cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, Node *&mSceneIntro, SEL_CallFunc callBack, Node *target)
+{
+  if( mSceneIntro == NULL )
+  {
+    mSceneIntro = cocos2d::Node::create();
+    target->addChild(mSceneIntro, 99);
+cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
+    left->setAnchorPoint(cocos2d::Vec2(1, 0));
+    mSceneIntro->addChild(left, 0, 0);
+cocos2d::Sprite *right = cocos2d::Sprite::create("door.png");
+    right->setScaleX(-1);
+    right->setAnchorPoint(cocos2d::Vec2(1, 0));
+    mSceneIntro->addChild(right, 0, 1);
+  }
+cocos2d::Sprite *left = (cocos2d::Sprite*)mSceneIntro->getChildByTag(0);
+  left->setVisible(true);
+  left->setPosition(cocos2d::Vec2(0, 0));
+cocos2d::Sprite *right = (cocos2d::Sprite*)mSceneIntro->getChildByTag(1);
+  right->setVisible(true);
+  right->setPosition(cocos2d::Vec2(SCREEN_WIDTH, 0));
+cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, Vec2(SCREEN_WIDTH/2, 0));
+cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEOUTRO_DELAY);
+cocos2d::CCCallFunc *ca1 = cocos2d::CCCallFunc::create(target, callBack);
+cocos2d::CCSequence *sq1 = (cocos2d::CCSequence*)CCSequence::create(mb1, dt1, ca1, NULL);
+  left->runAction(sq1);
+cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, Vec2(-SCREEN_WIDTH/2, 0));
+cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEOUTRO_DELAY);
+cocos2d::CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(mb2, dt2, NULL);
+  right->runAction(sq2);
+
+  GameTool::PlaySound("sound/close.mp3");
+
+  mNewScene->retain();
+  return mNewScene;
+}
 
 using namespace CocosDenshion;
 
@@ -119,78 +257,6 @@ cocos2d::Node *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosb
   return node;
 }
 
-void doSceneIntro(cocos2d::Node *&mSceneIntro, Node *target)
-{
-cocos2d::Sprite *left, *right; 
-  if( mSceneIntro == NULL )
-  {
-    mSceneIntro = cocos2d::Node::create();
-    target->addChild(mSceneIntro, 99);
-    left = cocos2d::Sprite::create("door.png");
-    left->setAnchorPoint(cocos2d::Vec2(1, 0));
-    left->setPosition(cocos2d::Vec2(0, 0));
-    mSceneIntro->addChild(left, 0, 0);
-    right = cocos2d::Sprite::create("door.png");
-    right->setScaleX(-1);
-    right->setAnchorPoint(cocos2d::Vec2(1, 0));
-    right->setPosition(cocos2d::Vec2(SCREEN_WIDTH, 0));
-    mSceneIntro->addChild(right, 0, 1);
-  }
-  else
-  {
-    left = (cocos2d::Sprite*)mSceneIntro->getChildByTag(0);
-    right = (cocos2d::Sprite*)mSceneIntro->getChildByTag(1);
-  }
-  left->setVisible(true);
-  left->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
-  right->setVisible(true);
-  right->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
-cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME,Vec2(-SCREEN_WIDTH/2, 0));
-cocos2d::CCSequence *sq1 = (cocos2d::CCSequence*)CCSequence::create(dt1, mb1, NULL);
-  left->runAction(sq1);
-cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME,Vec2(SCREEN_WIDTH/2, 0));
-cocos2d::CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(dt2, mb2, NULL);
-  right->runAction(sq2);
-
-  GameTool::PlaySound("sound/open.mp3");
-}
-cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, Node *&mSceneIntro, SEL_CallFunc callBack, Node *target)
-{
-  if( mSceneIntro == NULL )
-  {
-    mSceneIntro = cocos2d::Node::create();
-    target->addChild(mSceneIntro, 99);
-cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
-    left->setAnchorPoint(cocos2d::Vec2(1, 0));
-    mSceneIntro->addChild(left, 0, 0);
-cocos2d::Sprite *right = cocos2d::Sprite::create("door.png");
-    right->setScaleX(-1);
-    right->setAnchorPoint(cocos2d::Vec2(1, 0));
-    mSceneIntro->addChild(right, 0, 1);
-  }
-cocos2d::Sprite *left = (cocos2d::Sprite*)mSceneIntro->getChildByTag(0);
-  left->setVisible(true);
-  left->setPosition(cocos2d::Vec2(0, 0));
-cocos2d::Sprite *right = (cocos2d::Sprite*)mSceneIntro->getChildByTag(1);
-  right->setVisible(true);
-  right->setPosition(cocos2d::Vec2(SCREEN_WIDTH, 0));
-cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, Vec2(SCREEN_WIDTH/2, 0));
-cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEOUTRO_DELAY);
-cocos2d::CCCallFunc *ca1 = cocos2d::CCCallFunc::create(target, callBack);
-cocos2d::CCSequence *sq1 = (cocos2d::CCSequence*)CCSequence::create(mb1, dt1, ca1, NULL);
-  left->runAction(sq1);
-cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, Vec2(-SCREEN_WIDTH/2, 0));
-cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEOUTRO_DELAY);
-cocos2d::CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(mb2, dt2, NULL);
-  right->runAction(sq2);
-
-  GameTool::PlaySound("sound/close.mp3");
-
-  mNewScene->retain();
-  return mNewScene;
-}
 #ifdef LINUX
 
 //CFAbsoluteTime CFAbsoluteTimeGetCurrent()

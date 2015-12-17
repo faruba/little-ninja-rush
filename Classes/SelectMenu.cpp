@@ -61,8 +61,7 @@ cocos2d::Node *taskcomplete = cocos2d::Node::create();
 void SelectMenu::onEnter()
 {
   PublicLoad::menuSelect()->loadAll();
-  mSceneIntro = NULL;
-  mIntroFlag = false;
+  mUISwapper.onEnter();
 cocos2d::Node *ui = createUIByCCBI("menu-select", "SelectMenu", SelectMenuLayerLoader::loader(), this);
   this->addChild(ui);
   mStart = NULL;
@@ -116,7 +115,7 @@ cocos2d::CCRepeatForever *rrep = cocos2d::CCRepeatForever::create(rseq);
   mCurrAngle = mCurrRole*90;
   this->updateAngle();
 
-  this->setSceneIntro();
+  mUISwapper.setSceneIntro(this);
 
   if( !SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying() )
   {
@@ -353,14 +352,12 @@ void SelectMenu::onClickMe(cocos2d::Ref*)
 {
   GameTool::PlaySound("sound/menu-change.mp3");
   ShopMenu::setNavBack(1);
-  setSceneOutro(ShopMenu::scene());
+  mUISwapper.setSceneOutro(ShopMenu::scene(), this);
 }
 
 void SelectMenu::onStart(cocos2d::Ref*)
 {
     {
-  {
-    }
     int cost = 0;
     int rid = GameRecord::sharedGameRecord()->curr_char;
     if( GameRecord::sharedGameRecord()->char_contract[rid] == 0 )
@@ -376,7 +373,7 @@ void SelectMenu::onStart(cocos2d::Ref*)
       }
 
       GameTool::PlaySound("sound/menu-start.mp3");
-      setSceneOutro(Loading::loadTo(GamePlay::sharedGamePlay()->scene(), PublicLoad::gameLoadingList(), PublicLoad::menuSelect(), true));
+      mUISwapper.setSceneOutro(Loading::loadTo(GamePlay::sharedGamePlay()->scene(), PublicLoad::gameLoadingList(), PublicLoad::menuSelect(), true), this);
     }
     else {
       GameTool::PlaySound("sound/error.mp3");
@@ -386,40 +383,40 @@ void SelectMenu::onStart(cocos2d::Ref*)
 
 void SelectMenu::onChangeDart(cocos2d::Ref*)
 {
-  if( !mIntroFlag )
+  if( mUISwapper.isDone() )
   {
     GameTool::PlaySound("sound/menu-change.mp3");
     CollectionMenu::setNavBack(1);
-    setSceneOutro(CollectionMenu::scene());
+    mUISwapper.setSceneOutro(CollectionMenu::scene(), this);
   }
 }
 
 void SelectMenu::onChangeBlade(cocos2d::Ref*)
 {
-  if( !mIntroFlag )
+  if( mUISwapper.isDone() )
   {
     GameTool::PlaySound("sound/menu-change.mp3");
     CollectionMenu::setNavBack(2);
-    setSceneOutro(CollectionMenu::scene());
+    mUISwapper.setSceneOutro(CollectionMenu::scene(), this);
   }
 }
 
 void SelectMenu::onChangeSpecial(cocos2d::Ref*)
 {
-  if( !mIntroFlag )
+  if( mUISwapper.isDone() )
   {
     GameTool::PlaySound("sound/menu-change.mp3");
     CollectionMenu::setNavBack(3);
-    setSceneOutro(CollectionMenu::scene());
+    mUISwapper.setSceneOutro(CollectionMenu::scene(), this);
   }
 }
 
 void SelectMenu::onBack(cocos2d::Ref*)
 {
-  if( !mIntroFlag )
+  if(mUISwapper.isDone())
   {
     GameTool::PlaySound("sound/menu-change.mp3");
-    setSceneOutro(GameTool::scene<TitleMenu>());
+    mUISwapper.setSceneOutro(GameTool::scene<TitleMenu>(), this);
   }
 }
 
@@ -516,29 +513,6 @@ void SelectMenu::onTouchEnded(Touch * touch, Event * event)
   {
     mTargetRole = mCurrRole;
   }
-}
-
-void SelectMenu::setSceneIntro()
-{
-  doSceneIntro(mSceneIntro, this);
-}
-
-void SelectMenu::setSceneOutro(cocos2d::Scene* newscene)
-{
-  if( mIntroFlag )
-  {
-    return;
-  }
-
-  mIntroFlag = true;
-
-  mNewScene = doSceneOutro(newscene, mSceneIntro, (SEL_CallFunc)(&SelectMenu::doneOutro), this);
-}
-void SelectMenu::doneOutro()
-{
-  mIntroFlag = false;
-cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
-  mNewScene->release();
 }
 
 SEL_MenuHandler SelectMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)

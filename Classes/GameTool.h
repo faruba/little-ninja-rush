@@ -45,9 +45,54 @@ class GameTool {
       }
 };
 
+class UISwapper {
+  public:
+    void onEnter() {
+      mIntroFlag = false;
+      mSceneIntro = NULL;
+    }
 
+    bool isDone() {
+      return !mIntroFlag;
+    }
 
+    void setSceneIntro(cocos2d::Node* target) {
+      doSceneIntro(target);
+    }
 
+    void setSceneOutro(cocos2d::Scene* newscene, cocos2d::Node* target) {
+      if (mIntroFlag) {
+        return;
+      }
+
+      mIntroFlag = true;
+
+      mNewScene = newscene;
+      mNewScene->retain();
+      doSceneOutro(target);
+    }
+
+    void doneOutro() {
+      mIntroFlag = false;
+      cocos2d::Director::getInstance()->replaceScene(mNewScene);
+      mNewScene->release();
+    }
+
+  private:
+    cocos2d::Node *mSceneIntro;
+    cocos2d::Scene *mNewScene;
+    cocos2d::Sprite *mLeftDoor;
+    cocos2d::Sprite *mRightDoor;
+
+    bool mIntroFlag;
+
+    void initiateDoors();
+    void doSceneOutro(cocos2d::Node *target);
+    void doSceneIntro(cocos2d::Node *target);
+};
+
+void doSceneIntro(cocos2d::Node *&mSceneIntro, Node *target);
+cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, Node *&mSceneIntro, SEL_CallFunc callBack, Node *target);
 
 
 
@@ -106,8 +151,6 @@ void unloadTextureFromeSpriteFrameFile(const char *plist);
 //UIImage* makeScreenshot();
 cocos2d::CCSequence *createScaleSequence(float fDuration[], float fScale[], int count);
 cocos2d::Node *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pNodeLoader, Ref *target);
-void doSceneIntro(cocos2d::Node *&mSceneIntro, Node *target);
-cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, Node *&mSceneIntro, SEL_CallFunc callBack, Node *target);
 
 
 #endif
