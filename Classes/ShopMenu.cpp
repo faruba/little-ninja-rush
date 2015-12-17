@@ -393,12 +393,10 @@ void ShopMenu::onBack(cocos2d::Ref*)
 {
     if(mUISwapper.isDone()) {
       GameTool::PlaySound("sound/menu-change.mp3");
-      if( gNavBack == 0 )
-      {
+      if( gNavBack == 0 ) {
           mUISwapper.setSceneOutro(GameTool::scene<TitleMenu>(), this);
-      }
-      else {
-          mUISwapper.setSceneOutro(SelectMenu::scene(), this);
+      } else {
+          mUISwapper.setSceneOutro(GameTool::scene<SelectMenu>(), this);
       }
     }
 }
@@ -407,7 +405,7 @@ void ShopMenu::onMoreCoins(cocos2d::Ref* )
 {
     if(mUISwapper.isDone()) {
       GameTool::PlaySound("sound/menu-change.mp3");
-      mUISwapper.setSceneOutro(CoinsMenu::scene(), this);
+      mUISwapper.setSceneOutro(GameTool::scene<CoinsMenu>(), this);
     }
 }
 

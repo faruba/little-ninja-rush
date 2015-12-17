@@ -22,7 +22,6 @@ class CoinsMenu:
     virtual void update(float);
     virtual void onExit();
 
-    LNR_SCENE_METHOD(CoinsMenu);
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CoinsMenu, create);
     virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);

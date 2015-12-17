@@ -116,14 +116,6 @@ typedef float CFTimeInterval;
 CFAbsoluteTime CFAbsoluteTimeGetCurrent();
 #endif
 
-#define LNR_SCENE_METHOD(T) static cocos2d::Scene* scene() { \
-cocos2d::Scene *ret = cocos2d::Scene::create(); \
-T *tm = T::create(); \
-ret->setAnchorPoint(cocos2d::Vec2(0, 0)); \
-ret->addChild(tm); \
-return ret; \
-}
-
 #define LNR_GET_TOUCH_POS \
     cocos2d::Point pos = touch->getLocationInView(); \
     pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos); \

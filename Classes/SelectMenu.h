@@ -24,7 +24,6 @@ class SelectMenu :
     virtual void onTouchMoved(Touch * touch, Event * event);
     virtual void onTouchEnded(Touch * touch, Event * event);
 
-    LNR_SCENE_METHOD(SelectMenu);
     virtual bool init();
     virtual void onEnter();
     virtual void update(float delta);

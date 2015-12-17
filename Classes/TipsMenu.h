@@ -8,9 +8,8 @@ class TipsMenu:
   public cocosbuilder::CCBSelectorResolver
 {
   public:
-    virtual bool init();  
-
-    LNR_SCENE_METHOD(TipsMenu);
+    virtual bool init();
+    
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TipsMenu, create);
     
     bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);

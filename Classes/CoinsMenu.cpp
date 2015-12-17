@@ -179,7 +179,7 @@ cocos2d::Layer::onExit();
 void CoinsMenu::onBack() 
 {
     GameTool::PlaySound("sound/menu-change.mp3");
-    mUISwapper.setSceneOutro(ShopMenu::scene(), this);
+    mUISwapper.setSceneOutro(GameTool::scene<ShopMenu>(), this);
 }
 
 void CoinsMenu::update(float delta) 

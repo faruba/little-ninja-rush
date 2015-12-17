@@ -10,22 +10,23 @@
 
 cocos2d::Scene* ExtraMenu::scene(int mode) 
 {
-cocos2d::Scene *ret = cocos2d::Scene::create();
+  cocos2d::Scene *ret = cocos2d::Scene::create();
 
   ExtraMenu *tm = ExtraMenu::create();
   tm->mMode = mode;
 
   //universal
-  ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
+  //ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
   ret->setAnchorPoint(cocos2d::Vec2(0, 0));
-  ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
+  //ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
 
-  CEClipedNode *clip = CEClipedNode::create();
-  clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
+  //CEClipedNode *clip = CEClipedNode::create();
+  //clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
 
-  clip->addChild(tm);
+  //clip->addChild(tm);
 
-  ret->addChild(clip);
+  //ret->addChild(clip);
+  ret->addChild(tm);
   return ret;
 }
 
@@ -157,7 +158,7 @@ void ExtraMenu::onBack()
     if(mUISwapper.isDone())
     {
         GameTool::PlaySound("sound/menu-change.mp3");
-        mUISwapper.setSceneOutro(ExtraSelect::scene(), this);
+        mUISwapper.setSceneOutro(GameTool::scene<ExtraSelect>(), this);
     }
 }
 

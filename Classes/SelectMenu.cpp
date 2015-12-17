@@ -351,7 +351,7 @@ void SelectMenu::onClickMe(cocos2d::Ref*)
 {
   GameTool::PlaySound("sound/menu-change.mp3");
   ShopMenu::setNavBack(1);
-  mUISwapper.setSceneOutro(ShopMenu::scene(), this);
+  mUISwapper.setSceneOutro(GameTool::scene<ShopMenu>(), this);
 }
 
 void SelectMenu::onStart(cocos2d::Ref*)
@@ -386,7 +386,7 @@ void SelectMenu::onChangeDart(cocos2d::Ref*)
   {
     GameTool::PlaySound("sound/menu-change.mp3");
     CollectionMenu::setNavBack(1);
-    mUISwapper.setSceneOutro(CollectionMenu::scene(), this);
+    mUISwapper.setSceneOutro(GameTool::scene<CollectionMenu>(), this);
   }
 }
 
@@ -396,7 +396,7 @@ void SelectMenu::onChangeBlade(cocos2d::Ref*)
   {
     GameTool::PlaySound("sound/menu-change.mp3");
     CollectionMenu::setNavBack(2);
-    mUISwapper.setSceneOutro(CollectionMenu::scene(), this);
+    mUISwapper.setSceneOutro(GameTool::scene<CollectionMenu>(), this);
   }
 }
 
@@ -406,7 +406,7 @@ void SelectMenu::onChangeSpecial(cocos2d::Ref*)
   {
     GameTool::PlaySound("sound/menu-change.mp3");
     CollectionMenu::setNavBack(3);
-    mUISwapper.setSceneOutro(CollectionMenu::scene(), this);
+    mUISwapper.setSceneOutro(GameTool::scene<CollectionMenu>(), this);
   }
 }
 

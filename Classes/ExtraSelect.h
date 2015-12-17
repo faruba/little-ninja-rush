@@ -11,7 +11,6 @@ class ExtraSelect:
   public:
     virtual bool init();  
 
-    LNR_SCENE_METHOD(ExtraSelect);
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ExtraSelect, create);
     virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);

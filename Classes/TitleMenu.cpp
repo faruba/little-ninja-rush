@@ -52,15 +52,15 @@ class PopOption :
 
     TitleMenu *master;
 
-    void onCloseOption();
-    void onToggleMusic();
-    void onToggleSfx();
-    void onTogglePushNotification();
-    void onToggleTutorial();
-    void onRateUs();
-    void onToggleiCloud();
+    void onCloseOption(cocos2d::Ref*);
+    void onToggleMusic(cocos2d::Ref*);
+    void onToggleSfx(cocos2d::Ref*);
+    void onTogglePushNotification(cocos2d::Ref*);
+    void onToggleTutorial(cocos2d::Ref*);
+    void onRateUs(cocos2d::Ref*);
+    void onToggleiCloud(cocos2d::Ref*);
 
-    void onAddFriend();
+    void onAddFriend(cocos2d::Ref*);
 
     static PopOption* optionWithType(int typ);//0=set, 1=gainfriend 2=setfriend)
 
@@ -78,7 +78,7 @@ class PopOption :
     }
 
     SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
-    {/* TODO
+    {
         CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCloseOption", PopOption::onCloseOption);
         CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleMusic", PopOption::onToggleMusic);
         CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleSfx", PopOption::onToggleSfx);
@@ -87,7 +87,7 @@ class PopOption :
         CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRateUs", PopOption::onRateUs);
         CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onToggleiCloud", PopOption::onToggleiCloud);
         CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onAddFriend", PopOption::onAddFriend);
-        */ return NULL;
+        return NULL;
     }
 
     cocos2d::extension::Control::Handler   onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
@@ -229,7 +229,7 @@ void PopOption::loadDelivery()
   //  sp->runAction(seq);
 }
 
-void PopOption::onAddFriend()
+void PopOption::onAddFriend(cocos2d::Ref*)
 {
   //feature removed from android
   //    if( ABSystem->isSystemVersionAbove(ABSYSVER_5) )
@@ -299,12 +299,12 @@ void PopOption::onAddFriend()
 //    master->hideOpt();
 //}
 
-void PopOption::onCloseOption()
+void PopOption::onCloseOption(cocos2d::Ref*)
 {
   master->hideOpt();
 }
 
-void PopOption::onToggleSfx()
+void PopOption::onToggleSfx(cocos2d::Ref*)
 {
   GameTool::PlaySound("sound/click.mp3");
   if( GameRecord::sharedGameRecord()->setting_sfx )
@@ -322,7 +322,7 @@ void PopOption::onToggleSfx()
   }
 }
 
-void PopOption::onToggleMusic()
+void PopOption::onToggleMusic(cocos2d::Ref*)
 {
   GameTool::PlaySound("sound/click.mp3");
   if( GameRecord::sharedGameRecord()->setting_music )
@@ -340,7 +340,7 @@ void PopOption::onToggleMusic()
   }
 }
 
-void PopOption::onTogglePushNotification()
+void PopOption::onTogglePushNotification(cocos2d::Ref*)
 {
   //feature removed from android
   //    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
@@ -359,7 +359,7 @@ void PopOption::onTogglePushNotification()
   //    delgate->scheduleLocalNotifuication();
 }
 
-void PopOption::onToggleTutorial()
+void PopOption::onToggleTutorial(cocos2d::Ref*)
 {
   GameTool::PlaySound("sound/click.mp3");
   if( GameRecord::sharedGameRecord()->game_tutorial == 0 )
@@ -375,7 +375,7 @@ void PopOption::onToggleTutorial()
   }
 }
 
-void PopOption::onToggleiCloud()
+void PopOption::onToggleiCloud(cocos2d::Ref*)
 {
   //feature removed from android
   //    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
@@ -392,7 +392,7 @@ void PopOption::onToggleiCloud()
   //    }
 }
 
-void PopOption::onRateUs()
+void PopOption::onRateUs(cocos2d::Ref*)
 {
   //feature removed from android
   std::string str = "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=540290969";
@@ -1124,27 +1124,27 @@ void TitleMenu::onPlayClassic(cocos2d::Ref*)
   cocos2d::CCLog("Player");
   GamePlay::sharedGamePlay()->setGameMode(MODE_CLASSIC);
   GameTool::PlaySound("sound/menu-change.mp3");
-  mUISwapper.setSceneOutro(SelectMenu::scene(), this);
+  mUISwapper.setSceneOutro(GameTool::scene<SelectMenu>(), this);
 }
 
 void TitleMenu::onPlayArcade(cocos2d::Ref*)
 {
   GamePlay::sharedGamePlay()->setGameMode(MODE_ARCADE);
   GameTool::PlaySound("sound/menu-change.mp3");
-  mUISwapper.setSceneOutro(SelectMenu::scene(), this);
+  mUISwapper.setSceneOutro(GameTool::scene<SelectMenu>(), this);
 }
 
 void TitleMenu::onCollections(cocos2d::Ref*)
 {
   CollectionMenu::setNavBack(0);
   GameTool::PlaySound("sound/menu-change.mp3");
-  mUISwapper.setSceneOutro(CollectionMenu::scene(), this);
+  mUISwapper.setSceneOutro(GameTool::scene<CollectionMenu>(), this);
 }
 
 void TitleMenu::onStore(cocos2d::Ref*) {
   ShopMenu::setNavBack(0);
   GameTool::PlaySound("sound/menu-change.mp3");
-  mUISwapper.setSceneOutro(ShopMenu::scene(), this);
+  mUISwapper.setSceneOutro(GameTool::scene<ShopMenu>(), this);
 }
 
 void TitleMenu::onFacebook(cocos2d::Ref*) {
@@ -1204,7 +1204,7 @@ void TitleMenu::onAchievement(cocos2d::Ref*)
 void TitleMenu::onExtra(cocos2d::Ref*)
 {
   GameTool::PlaySound("sound/menu-change.mp3");
-  mUISwapper.setSceneOutro(ExtraSelect::scene(), this);
+  mUISwapper.setSceneOutro(GameTool::scene<ExtraSelect>(), this);
 }
 
 void TitleMenu::onShowObjectives(cocos2d::Ref *)

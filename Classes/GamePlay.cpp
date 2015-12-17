@@ -1081,7 +1081,7 @@ void GamePlay::change()
 {
     this->resume();
     GameTool::StopBackgroundMusic();
-    mUISwapper.setSceneOutro(Loading::loadTo(SelectMenu::scene(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false), this);
+    mUISwapper.setSceneOutro(Loading::loadTo(GameTool::scene<SelectMenu>(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false), this);
 }
 
 void GamePlay::clearFootPrints()

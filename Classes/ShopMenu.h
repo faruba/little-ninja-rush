@@ -22,7 +22,6 @@ public:
     virtual void update(float);
     virtual void onExit();
 
-    LNR_SCENE_METHOD(ShopMenu);
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ShopMenu, create);
     virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);

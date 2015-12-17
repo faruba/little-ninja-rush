@@ -15,25 +15,6 @@
 
 using namespace CocosDenshion;
 static int gNavBack = 0;
-cocos2d::Scene* CollectionMenu::scene()
-{
-cocos2d::Scene *ret = cocos2d::Scene::create();
-
-  CollectionMenu *tm = CollectionMenu::create();
-
-  //universal
-  ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-  ret->setAnchorPoint(cocos2d::Vec2(0, 0));
-  ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
-
-  CEClipedNode *clip = CEClipedNode::create();
-  clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
-
-  clip->addChild(tm);
-
-  ret->addChild(clip);
-  return ret;
-}
 
 void CollectionMenu::setNavBack(int nid)
 {
@@ -779,12 +760,10 @@ void CollectionMenu::onBack()
   if(mUISwapper.isDone())
   {
     GameTool::PlaySound("sound/menu-change.mp3");
-    if( gNavBack == 0 )
-    {
-        mUISwapper.setSceneOutro(GameTool::scene<TitleMenu>(), this);
-    }
-    else {
-      mUISwapper.setSceneOutro(SelectMenu::scene(), this);
+    if( gNavBack == 0 ) {
+      mUISwapper.setSceneOutro(GameTool::scene<TitleMenu>(), this);
+    } else {
+      mUISwapper.setSceneOutro(GameTool::scene<SelectMenu>(), this);
     }
   }
 }
@@ -1494,62 +1473,57 @@ void CollectionMenu::doneTwitter(cocos2d::CCInteger* res)
 
 bool CollectionMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadow",         Sprite*       , mShadow)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScrollCount",    CCLabelBMFont*  , mScrollCount)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mItemDesc",       CCLabelTTF*  , mItemDesc)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerUp",        Node*         , mPowerUp)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeGuage",      Node*         , mLifeGuage)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartGuage",      Node*         , mDartGuage)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeMask",       Sprite*       , mLifeMask)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartMask",       Sprite*       , mDartMask)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerupMenu",    CCMenu*         , mPowerupMenu)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeCount",      CCLabelBMFont*  , mLifeCount)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartCount",      CCLabelBMFont*  , mDartCount)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mItemTitle",      Sprite*       , mItemTitle)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShare",          Sprite*       , mShare)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu",           CCMenu*         , mMenu)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter1",     CCMenuItemImage*, mCharacter1)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter2",     CCMenuItemImage*, mCharacter2)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter3",     CCMenuItemImage*, mCharacter3)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter4",     CCMenuItemImage*, mCharacter4)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShuriken",       CCMenuItemImage*, mShuriken)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mKatana",         CCMenuItemImage*, mKatana)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSpecial",        CCMenuItemImage*, mSpecial)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerup",        CCMenuItemImage*, mPowerup)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mUse",            CCMenuItemImage*, mUse)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook",       CCMenuItemImage*, mFacebook)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter",        CCMenuItemImage*, mTwitter)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterAction",  Sprite*       , mTwitterAction)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebookAction", Sprite*       , mFacebookAction)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScrollPoint",    Node*         , mScrollPoint)
-cocos2d::CCLog(pMemberVariableName);
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadow",         Sprite*       , mShadow)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScrollCount",    Label*  , mScrollCount)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mItemDesc",       Label*  , mItemDesc)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerUp",        Node*         , mPowerUp)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeGuage",      Node*         , mLifeGuage)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartGuage",      Node*         , mDartGuage)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeMask",       Sprite*       , mLifeMask)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartMask",       Sprite*       , mDartMask)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerupMenu",    CCMenu*         , mPowerupMenu)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeCount",      Label*  , mLifeCount)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartCount",      Label*  , mDartCount)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mItemTitle",      Sprite*       , mItemTitle)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShare",          Sprite*       , mShare)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu",           CCMenu*         , mMenu)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter1",     CCMenuItemImage*, mCharacter1)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter2",     CCMenuItemImage*, mCharacter2)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter3",     CCMenuItemImage*, mCharacter3)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter4",     CCMenuItemImage*, mCharacter4)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShuriken",       CCMenuItemImage*, mShuriken)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mKatana",         CCMenuItemImage*, mKatana)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSpecial",        CCMenuItemImage*, mSpecial)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerup",        CCMenuItemImage*, mPowerup)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mUse",            CCMenuItemImage*, mUse)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook",       CCMenuItemImage*, mFacebook)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter",        CCMenuItemImage*, mTwitter)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterAction",  Sprite*       , mTwitterAction)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebookAction", Sprite*       , mFacebookAction)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScrollPoint",    Node*         , mScrollPoint)
 
   return false;
 }
-SEL_MenuHandler CollectionMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
-{/*TODO:
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onSelectLife", CollectionMenu::onSelectLife)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onSelectDart", CollectionMenu::onSelectDart)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", CollectionMenu::onBack)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter1", CollectionMenu::onCharacter1)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter2", CollectionMenu::onCharacter2)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter3", CollectionMenu::onCharacter3)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter4", CollectionMenu::onCharacter4)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onShuriken", CollectionMenu::onShuriken)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onKatana", CollectionMenu::onKatana)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onSpecial", CollectionMenu::onSpecial)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onPowerup", CollectionMenu::onPowerup)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onUse", CollectionMenu::onUse)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onFacebook", CollectionMenu::onFacebook)
-CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTwitter", CollectionMenu::onTwitter)
-cocos2d::CCLog(pSelectorName);
-  */
-  return NULL;
-}
-cocos2d::extension::Control::Handler   CollectionMenu::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
-{
-  //CCB_SELECTORRESOLVER_CCCONTROL_GLUE
-cocos2d::CCLog(pSelectorName);
+
+SEL_MenuHandler CollectionMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName) {
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onSelectLife", CollectionMenu::onSelectLife)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onSelectDart", CollectionMenu::onSelectDart)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", CollectionMenu::onBack)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter1", CollectionMenu::onCharacter1)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter2", CollectionMenu::onCharacter2)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter3", CollectionMenu::onCharacter3)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCharacter4", CollectionMenu::onCharacter4)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onShuriken", CollectionMenu::onShuriken)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onKatana", CollectionMenu::onKatana)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onSpecial", CollectionMenu::onSpecial)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onPowerup", CollectionMenu::onPowerup)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onUse", CollectionMenu::onUse)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onFacebook", CollectionMenu::onFacebook)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTwitter", CollectionMenu::onTwitter)
   return NULL;
 }
 
+cocos2d::extension::Control::Handler   CollectionMenu::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
+{
+  return NULL;
+}

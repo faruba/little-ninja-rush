@@ -13,28 +13,7 @@
 #include "GameConstants.h"
 #include "UniversalFit.h"
 
-;
 USING_NS_CC_EXT;
-
-//Scene* TipsMenu::scene() 
-//{
-//    Scene *ret = cocos2d::Scene::create();
-//    
-//    TipsMenu *tm = TipsMenu::create();
-//    
-//    //universal
-//    ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-//    ret->setAnchorPoint(cocos2d::Vec2(0, 0));
-//    ret->setPosition(
-//    
-//    CEClipedNode *clip = CEClipedNode::create();
-//    clip->setClipRect(UniversalFit::sharedUniversalFit()->clipRect);
-//    
-//    clip->addChild(tm);
-//    
-//    ret->addChild(clip);
-//    return ret;
-//}
 
 bool TipsMenu::init()
 {
@@ -122,7 +101,7 @@ void TipsMenu::onBack()
         this->removeChild(mTip, true);
         this->removeChild(mCount, true);
         GameTool::PlaySound("sound/menu-change.mp3");
-        mUISwapper.setSceneOutro(ExtraSelect::scene(), this);
+        mUISwapper.setSceneOutro(GameTool::scene<ExtraSelect>(), this);
     }
 }
 

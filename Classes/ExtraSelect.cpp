@@ -84,7 +84,7 @@ void ExtraSelect::onTips()
     if(mUISwapper.isDone())
     {
         GameTool::PlaySound("sound/menu-change.mp3");
-        mUISwapper.setSceneOutro(TipsMenu::scene(), this);
+        mUISwapper.setSceneOutro(GameTool::scene<TipsMenu>(), this);
     }
 }
 

@@ -16,7 +16,6 @@ class ExtraMenu:
     virtual void update(float);
     virtual void onExit();
 
-    LNR_SCENE_METHOD(ExtraMenu);
     static cocos2d::Scene* scene(int mode);
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ExtraMenu, create);
     virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
