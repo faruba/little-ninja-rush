@@ -21,7 +21,7 @@ cocos2d::Scene *Loading::loadTo(cocos2d::Scene* dst, GTLoadList* lst, GTLoadList
   }
 
   ll->mScene->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-  ll->mScene->setAnchorPoint(cocos2d::ccp(0, 0));
+  ll->mScene->setAnchorPoint(cocos2d::Vec2(0, 0));
   ll->mScene->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
 
   CEClipedNode *clip = CEClipedNode::create();
@@ -84,7 +84,7 @@ void Loading::update(float delta)
         removeChild(mLoading, true);
         mLoading = NULL;
         mLoading = cocos2d::Sprite::create("tts.png");
-        mLoading->setPosition(cocos2d::ccp( 370, 30 ));
+        mLoading->setPosition(cocos2d::Vec2( 370, 30 ));
 cocos2d::CCBlink *bk = cocos2d::CCBlink::create(5, 5);
 cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(bk);
         mLoading->runAction(rf);
@@ -99,17 +99,17 @@ void Loading::onEnter()
 cocos2d::CCNode *sceneintro = cocos2d::CCNode::create();
   this->addChild(sceneintro);
 cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
-  left->setAnchorPoint(cocos2d::ccp(1, 0));
-  left->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, 0));
+  left->setAnchorPoint(cocos2d::Vec2(1, 0));
+  left->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
   sceneintro->addChild(left, 0, 0);
 cocos2d::Sprite *right = cocos2d::Sprite::create("door.png");
   right->setScaleX(-1);
-  right->setAnchorPoint(cocos2d::ccp(1, 0));
-  right->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, 0));
+  right->setAnchorPoint(cocos2d::Vec2(1, 0));
+  right->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
   sceneintro->addChild(right, 0, 1);
 
   mLoading = cocos2d::Sprite::create("loading.png");
-  mLoading->setPosition(cocos2d::ccp( 400, 30 ));
+  mLoading->setPosition(cocos2d::Vec2( 400, 30 ));
   this->addChild(mLoading);
 
   if( mTip )
@@ -119,10 +119,10 @@ cocos2d::CCString *tip = GameData::randomTip();
 cocos2d::CCSize size = cocos2d::CCSizeMake(335, 50);
 cocos2d::CCSize actualSize = tip->sizeWithFont(UIFont->fontWithName(TIP_FONTNAME, 18), size, UILineBreakModeWordWrap);
 cocos2d::CCLabelTTF *tips = cocos2d::CCLabelTTF::create(tip->getCString(), TIP_FONTNAME, 18, actualSize, kCCTextAlignmentCenter);
-    tips->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-    tips->setPosition(cocos2d::ccp(90, 38));
+    tips->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+    tips->setPosition(cocos2d::Vec2(90, 38));
 cocos2d::Sprite *bound = cocos2d::Sprite::create("tipsbg.png");
-    bound->setPosition(cocos2d::ccp(240, 265));
+    bound->setPosition(cocos2d::Vec2(240, 265));
 
     addChild(bound);
     bound->addChild(tips);

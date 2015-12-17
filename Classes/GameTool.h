@@ -33,7 +33,7 @@ class GameTool {
         cocos2d::Scene *ret = cocos2d::Scene::create();
         LayerType *tm = LayerType::create();
         //ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-        ret->setAnchorPoint(cocos2d::ccp(0, 0));
+        ret->setAnchorPoint(cocos2d::Vec2(0, 0));
         //ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
         //CEClipedNode *clip = CEClipedNode::create();
         //clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
@@ -66,7 +66,7 @@ CFAbsoluteTime CFAbsoluteTimeGetCurrent();
 #define LNR_SCENE_METHOD(T) static cocos2d::Scene* scene() { \
 cocos2d::Scene *ret = cocos2d::Scene::create(); \
 T *tm = T::create(); \
-ret->setAnchorPoint(cocos2d::ccp(0, 0)); \
+ret->setAnchorPoint(cocos2d::Vec2(0, 0)); \
 ret->addChild(tm); \
 return ret; \
 }

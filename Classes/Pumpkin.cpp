@@ -31,7 +31,7 @@ void Pumpkin::onCreate()
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("pumpkin"));
     mSprite->playGTAnimation(0, true);
-    mSprite->setPosition(cocos2d::ccp( -100, SCREEN_HEIGHT ));
+    mSprite->setPosition(cocos2d::Vec2( -100, SCREEN_HEIGHT ));
     mParent->addChild(mSprite, LAYER_MAINROLE);
     
     mState = 0;
@@ -40,7 +40,7 @@ void Pumpkin::onCreate()
     mHurtTimer = -1;
     
     //init parameters
-    mTargetPos = ccp(50, 210);
+    mTargetPos = Vec2(50, 210);
     mTargetSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-45)), 100);
     mPumpkinSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-90)), 50);
     
@@ -126,7 +126,7 @@ void Pumpkin::onUpdate(float delta)
             break;
         case 1://escape
         {
-            mTargetPos = ccp(UniversalFit::sharedUniversalFit()->playSize.width + 100, SCREEN_HEIGHT/2);
+            mTargetPos = Vec2(UniversalFit::sharedUniversalFit()->playSize.width + 100, SCREEN_HEIGHT/2);
             if( ccpDistance(mSprite->getPosition(), mTargetPos) < NEAR )
             {
                 removeflag = true;
@@ -165,7 +165,7 @@ void Pumpkin::onUpdate(float delta)
             mTargetPos.x += -5 + CCRANDOM_0_1()*10;
             mTargetPos.y += -5 + CCRANDOM_0_1()*10;
             mSprite->setPosition(mTargetPos);
-            mPumpkinSpeed = ccp(0, 0);
+            mPumpkinSpeed = Vec2(0, 0);
         }
             break;
     }

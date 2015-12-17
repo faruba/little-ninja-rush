@@ -43,12 +43,12 @@ void ObjectiveComplete::onCreate()
     cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
     mNode = pReader->readNodeGraphFromFile("ui-scroll", this);
     pReader->release();
-    mNode->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
+    mNode->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->baseLeft, 0));
     play->addChild(mNode, LAYER_MASK+1);
 cocos2d::CCRect clip = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(0, 142, UniversalFit::sharedUniversalFit()->playSize.width, 36));
     mObjRect = CEClipedNode::create();
     mObjRect->setClipRect(&clip);
-    mObjRect->setPosition(cocos2d::ccp(12, 12));
+    mObjRect->setPosition(cocos2d::Vec2(12, 12));
     mBanner->addChild(mObjRect);
     
     mState = 0;
@@ -109,9 +109,9 @@ void ObjectiveComplete::onUpdate(float delta)
                 //add objective detail
 cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
                 mObjType->setDisplayFrame(cache->spriteFrameByName(cocos2d::CCString::createWithFormat("objc-%d.png", mCurrIndex)->getCString()));
-                mObjRect->setPosition(cocos2d::ccp(12, 12));
+                mObjRect->setPosition(cocos2d::Vec2(12, 12));
 cocos2d::CCNode *currobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
-                currobj->setPosition(cocos2d::ccp(18, 18));
+                currobj->setPosition(cocos2d::Vec2(18, 18));
                 mObjRect->addChild(currobj);
                 cocos2d::Point np = mBanner->getPosition();
                 np.x = -240;
@@ -120,7 +120,7 @@ cocos2d::CCNode *currobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
                 for(int i=0; i<mCurrObj->index; ++i)
                 {
 cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-                    crown->setPosition(cocos2d::ccp(-20*i, 0));
+                    crown->setPosition(cocos2d::Vec2(-20*i, 0));
                     mCrowns->addChild(crown);
                 }
                 mStateTimer = 0;
@@ -161,7 +161,7 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCS
                 SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcrown.mp3").c_str());
 cocos2d::CCString *crownname = cocos2d::CCString::createWithFormat("crown%d.png", mCurrObj->index);
 cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname->getCString());
-                crown->setPosition(cocos2d::ccp(-20*mCurrObj->index, 0));
+                crown->setPosition(cocos2d::Vec2(-20*mCurrObj->index, 0));
                 mCrowns->addChild(crown);
                 for(int i=0; i<10; ++i)
                 {
@@ -227,13 +227,13 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname->g
                             break;
                     }
 cocos2d::CCNode *newobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
-                    newobj->setPosition(cocos2d::ccp(18, 54));
+                    newobj->setPosition(cocos2d::Vec2(18, 54));
                     mObjRect->addChild(newobj);
                 }
                 else {
                     mCurrAch = NULL;
 cocos2d::CCNode *newobj = this->genObjectiveInfo(NULL, mCurrIndex);
-                    newobj->setPosition(cocos2d::ccp(18, 54));
+                    newobj->setPosition(cocos2d::Vec2(18, 54));
                     mObjRect->addChild(newobj);
                     //mark completed
                     switch (mCurrIndex) {
@@ -351,8 +351,8 @@ cocos2d::CCNode *sp = cocos2d::CCNode::create();
             {
 cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("日常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL );
                 desc->setColor(ccc3(128, 128, 128));
-                desc->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-                desc->setPosition(cocos2d::ccp(54, 0));
+                desc->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+                desc->setPosition(cocos2d::Vec2(54, 0));
                 sp->addChild(desc);
             }
                 break;
@@ -360,8 +360,8 @@ cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("日常任务\n已全部
             {
 cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("周常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
                 desc->setColor(ccc3(128, 128, 128));
-                desc->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-                desc->setPosition(cocos2d::ccp(54, 0));
+                desc->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+                desc->setPosition(cocos2d::Vec2(54, 0));
                 sp->addChild(desc);
             }
                 break;
@@ -369,8 +369,8 @@ cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("周常任务\n已全部
             {
 cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("月常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
                 desc->setColor(ccc3(128, 128, 128));
-                desc->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-                desc->setPosition(cocos2d::ccp(54, 0));
+                desc->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+                desc->setPosition(cocos2d::Vec2(54, 0));
                 sp->addChild(desc);
             }
                 break;
@@ -397,11 +397,11 @@ cocos2d::Sprite *spbg = NULL;
                 break;
         }
 cocos2d::Sprite *spicon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-        spicon->setPosition(cocos2d::ccp(spbg->getContentSize().width/2, spbg->getContentSize().height/2));
+        spicon->setPosition(cocos2d::Vec2(spbg->getContentSize().width/2, spbg->getContentSize().height/2));
         spbg->addChild(spicon, 0, 0);
 cocos2d::CCLabelBMFont *desc = cocos2d::CCLabelBMFont::create(ach->desc->getCString(), "ab34.fnt");
-        desc->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-        desc->setPosition(cocos2d::ccp(54, 12));
+        desc->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+        desc->setPosition(cocos2d::Vec2(54, 12));
         spbg->addChild(desc, 0, 1);
         
         return spbg;

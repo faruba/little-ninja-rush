@@ -10,7 +10,7 @@ cocos2d::CCLog("ABScrollContent::init");
   mClipNode->setClipRect(new CCRect(0, 0, 1024, 768));
   addChild(mClipNode);
   contentNode = cocos2d::CCNode::create();
-  contentNode->setPosition(cocos2d::ccp(0, clipRect.size.height));
+  contentNode->setPosition(cocos2d::Vec2(0, clipRect.size.height));
   mClipNode->addChild(contentNode);
 
   auto listener = EventListenerTouchOneByOne::create();
@@ -27,7 +27,7 @@ cocos2d::CCLog("ABScrollContent::init");
 
 void ABScrollContent::resetContentPosition() 
 {
-  contentNode->setPosition(cocos2d::ccp(0, clipRect.size.height));
+  contentNode->setPosition(cocos2d::Vec2(0, clipRect.size.height));
 }
 
 void ABScrollContent::addContent(cocos2d::CCNode * content) 
@@ -50,7 +50,7 @@ void ABScrollContent::setClipRect(cocos2d::CCRect rect)
   clipRect = rect;
   mClipNode->setClipRect(new CCRect(UniversalFit::sharedUniversalFit()->transformRect(clipRect)));
 
-  contentNode->setPosition(cocos2d::ccp(0, clipRect.size.height));
+  contentNode->setPosition(cocos2d::Vec2(0, clipRect.size.height));
 }
 
 void ABScrollContent::update(float delta) 
@@ -181,7 +181,7 @@ void ABScrollContent::onTouchEnded(Touch * touch, Event * event)
   if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
       clipRect.containsPoint(pos) )//only available in achievement state
   {
-    cocos2d::Point offset = contentNode->convertToWorldSpaceAR(cocos2d::ccp(0, 0));
+    cocos2d::Point offset = contentNode->convertToWorldSpaceAR(cocos2d::Vec2(0, 0));
     offset = UniversalFit::sharedUniversalFit()->restorePoint(offset);
     cocos2d::Point fixed = ccpSub(pos, offset);
     fixed.y *= -1;//reverse the y coordinate

@@ -30,34 +30,34 @@ void Scene1::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
 cocos2d::LayerColor *sbg = cocos2d::LayerColor::create(Color4B(16, 23, 39, 255));
     mBg->addChild(sbg, 0);
 cocos2d::Sprite *StaBg = cocos2d::Sprite::createWithSpriteFrameName("s1_sbg.png");
-    StaBg->setAnchorPoint(cocos2d::ccp(0, 1));
-    StaBg->setPosition(cocos2d::ccp(0, SCREEN_HEIGHT));
+    StaBg->setAnchorPoint(cocos2d::Vec2(0, 1));
+    StaBg->setPosition(cocos2d::Vec2(0, SCREEN_HEIGHT));
     mBg->addChild(StaBg, 0);
 cocos2d::Sprite *DynBg0 = cocos2d::Sprite::createWithSpriteFrameName("s1_dbg.png");
-    DynBg0->setAnchorPoint(cocos2d::ccp(0, 0));
-    DynBg0->setPosition(cocos2d::ccp(0, 80));
+    DynBg0->setAnchorPoint(cocos2d::Vec2(0, 0));
+    DynBg0->setPosition(cocos2d::Vec2(0, 80));
     mBg->addChild(DynBg0, 1, 0);
 cocos2d::Sprite *DynBg1 = cocos2d::Sprite::createWithSpriteFrameName("s1_dbg.png");
-    DynBg1->setAnchorPoint(cocos2d::ccp(0, 0));
-    DynBg1->setPosition(cocos2d::ccp(DynBg0->getContentSize().width, 80));
+    DynBg1->setAnchorPoint(cocos2d::Vec2(0, 0));
+    DynBg1->setPosition(cocos2d::Vec2(DynBg0->getContentSize().width, 80));
     mBg->addChild(DynBg1, 1, 1);
 cocos2d::Sprite *DynBg2 = cocos2d::Sprite::createWithSpriteFrameName("s1_dbg.png");
-    DynBg2->setAnchorPoint(cocos2d::ccp(0, 0));
-    DynBg2->setPosition(cocos2d::ccp(DynBg0->getContentSize().width*2, 80));
+    DynBg2->setAnchorPoint(cocos2d::Vec2(0, 0));
+    DynBg2->setPosition(cocos2d::Vec2(DynBg0->getContentSize().width*2, 80));
     mBg->addChild(DynBg2, 1, 2);
     //----------
     int btiles[] = {2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3};
     mTiles->initTiles(btiles, 24);
     mTileState = 0;
     mTileCount = 8;
-    mTiles->setPosition(cocos2d::ccp(0, 0));
+    mTiles->setPosition(cocos2d::Vec2(0, 0));
     
     //增加前景
     for( int i=0; i<S1_FONTCOUNT; ++i)
     {
         mFronts[i] = cocos2d::Sprite::createWithSpriteFrameName("cj1_qj.png");
-        mFronts[i]->setAnchorPoint(cocos2d::ccp(0, 0));
-        mFronts[i]->setPosition(cocos2d::ccp(mFronts[i]->getContentSize().width*i*2, -10));
+        mFronts[i]->setAnchorPoint(cocos2d::Vec2(0, 0));
+        mFronts[i]->setPosition(cocos2d::Vec2(mFronts[i]->getContentSize().width*i*2, -10));
         mFront->addChild(mFronts[i]);
     }
 }
@@ -72,9 +72,9 @@ cocos2d::CCNode *DynBg2 = (mBg->getChildByTag(2));
         int woff = mTiles->offset()/2;
         int dr = DynBg0->getContentSize().width;
         int doff = woff%dr;
-        DynBg0->setPosition(cocos2d::ccp(-doff, 80));
-        DynBg1->setPosition(cocos2d::ccp(-doff+DynBg0->getContentSize().width, 80));
-        DynBg2->setPosition(cocos2d::ccp(-doff+DynBg0->getContentSize().width*2, 80));
+        DynBg0->setPosition(cocos2d::Vec2(-doff, 80));
+        DynBg1->setPosition(cocos2d::Vec2(-doff+DynBg0->getContentSize().width, 80));
+        DynBg2->setPosition(cocos2d::Vec2(-doff+DynBg0->getContentSize().width*2, 80));
     }
     //滚动前景
     {

@@ -26,8 +26,8 @@ Merchant* Merchant::role(cocos2d::CCNode * parent)
 void Merchant::onCreate() 
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("merchant"));
-    mSprite->setAnchorPoint(cocos2d::ccp(0.5f , 0));
-    mSprite->setPosition(cocos2d::ccp(-50, PLAY_PLAYERLINE+5));
+    mSprite->setAnchorPoint(cocos2d::Vec2(0.5f , 0));
+    mSprite->setPosition(cocos2d::Vec2(-50, PLAY_PLAYERLINE+5));
     mSprite->playGTAnimation(0, true);
     mParent->addChild(mSprite, LAYER_MAINROLE-1);
     
@@ -95,7 +95,7 @@ cocos2d::Point Merchant::position()
 
 cocos2d::Point Merchant::center() 
 {
-    return ccpAdd(mSprite->getPosition(), ccp(42.5f, 26.0f));
+    return ccpAdd(mSprite->getPosition(), Vec2(42.5f, 26.0f));
 }
 
 bool Merchant::supportAimAid() 

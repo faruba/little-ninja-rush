@@ -96,11 +96,11 @@ void ClassicMode::onUpdate(float delta)
                     {
                         play->substate = 1;//running away
                         play->count_control++;
-                        play->mainrole->setAI(1, ccp( 600, 0));
+                        play->mainrole->setAI(1, Vec2( 600, 0));
                         //分身术
                         if( play->mainrole2 != NULL )
                         {
-                            play->mainrole2->setAI(1, ccp( 600, 0));
+                            play->mainrole2->setAI(1, Vec2( 600, 0));
                         }
                         play->stateTimer = 0;
                         play->scheduleMask(ccc3(0, 0, 0), GAME_SCENEFADE, 2);
@@ -128,14 +128,14 @@ void ClassicMode::onUpdate(float delta)
                         
                         if( play->mainrole2 != NULL )
                         {//分身术
-                            play->mainrole->setAI(2, ccp(-150+SPECIAL_FENSHEN, PLAY_PLAYERLINE));
-                            play->mainrole->setAI(1, ccp(UniversalFit::sharedUniversalFit()->playSize.width/2+SPECIAL_FENSHEN/2, 0));
-                            play->mainrole2->setAI(2, ccp(-150, PLAY_PLAYERLINE));
-                            play->mainrole2->setAI(1, ccp(UniversalFit::sharedUniversalFit()->playSize.width/2-SPECIAL_FENSHEN/2, 0));
+                            play->mainrole->setAI(2, Vec2(-150+SPECIAL_FENSHEN, PLAY_PLAYERLINE));
+                            play->mainrole->setAI(1, Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2+SPECIAL_FENSHEN/2, 0));
+                            play->mainrole2->setAI(2, Vec2(-150, PLAY_PLAYERLINE));
+                            play->mainrole2->setAI(1, Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2-SPECIAL_FENSHEN/2, 0));
                         }
                         else {
-                            play->mainrole->setAI(2, ccp(-100, PLAY_PLAYERLINE));
-                            play->mainrole->setAI(1, ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
+                            play->mainrole->setAI(2, Vec2(-100, PLAY_PLAYERLINE));
+                            play->mainrole->setAI(1, Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
                         }
                         play->substate = 2;
                         play->stateTimer = 0;

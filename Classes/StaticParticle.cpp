@@ -125,7 +125,7 @@ StaticParticle* StaticParticle::particleDash(cocos2d::Point pos)
     StaticParticle *pat = StaticParticle::create();
     pat->mSprite = cocos2d::Sprite::createWithSpriteFrameName("dashline.png");
     pat->mSprite->retain();
-    pat->mDir = ccp(0, 0);
+    pat->mDir = Vec2(0, 0);
     cocos2d::Point npos = pos;
     npos.y += -20 + 40*CCRANDOM_0_1();
     pat->mSprite->setPosition(npos);
@@ -243,7 +243,7 @@ StaticParticle* StaticParticle::particleDart(cocos2d::Point pos, cocos2d::Point 
             pat->mSprite = cocos2d::Sprite::createWithSpriteFrameName("fbbf_tail.png");
             pat->mSprite->setPosition(pos);
             pat->mSprite->retain();
-            pat->mDir = ccp(0, 0);
+            pat->mDir = Vec2(0, 0);
             pat->mSpeed = 0;
             pat->mLife = 0.5f;
             pat->mRotate = 200;
@@ -264,7 +264,7 @@ StaticParticle* StaticParticle::particleAddHP(cocos2d::Point pos)
     StaticParticle *pat = StaticParticle::create();
     pat->mSprite = cocos2d::Sprite::createWithSpriteFrameName("bxtx.png");
     //position diter
-    cocos2d::Point diter = ccp( -20 + 40*CCRANDOM_0_1(), -20 + 40*CCRANDOM_0_1() );
+    cocos2d::Point diter = Vec2( -20 + 40*CCRANDOM_0_1(), -20 + 40*CCRANDOM_0_1() );
     pat->mSprite->setPosition(ccpAdd(pos, diter));
     pat->mSprite->retain();
     pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(90));
@@ -283,7 +283,7 @@ StaticParticle* StaticParticle::particleStepDust(cocos2d::Point pos)
 {
     StaticParticle *pat = StaticParticle::create();
     pat->mSprite = cocos2d::Sprite::createWithSpriteFrameName("stepdust.png");
-    cocos2d::Point diter = ccp( -20+20*CCRANDOM_0_1(), 6*CCRANDOM_0_1() );
+    cocos2d::Point diter = Vec2( -20+20*CCRANDOM_0_1(), 6*CCRANDOM_0_1() );
     pat->mSprite->setPosition(ccpAdd(pos, diter));
     pat->mSprite->retain();
     pat->mDir = ccpForAngle(CC_DEGREES_TO_RADIANS(100 + 60*CCRANDOM_0_1()));

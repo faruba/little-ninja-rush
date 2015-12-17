@@ -11,22 +11,22 @@ FoldItem* FoldItem::foldItem(const char* title, const char* icon, const char* de
         ret->mController = controller;
         
         ret->mBgButton = cocos2d::Sprite::createWithSpriteFrameName("shoplist.png");
-        ret->mBgButton->setAnchorPoint(cocos2d::ccp(0, 0));
+        ret->mBgButton->setAnchorPoint(cocos2d::Vec2(0, 0));
         ret->addChild(ret->mBgButton);
         ret->setContentSize(ret->mBgButton->getContentSize());
-        ret->setAnchorPoint(cocos2d::ccp(0, 1));
+        ret->setAnchorPoint(cocos2d::Vec2(0, 1));
         
         //draw content
         if( counter < achieve )
         {
             ret->mIcon = cocos2d::Sprite::createWithSpriteFrameName("cj_unlocked.png");
-            ret->mIcon->setPosition(cocos2d::ccp(43, ret->getContentSize().height - 28 ));
+            ret->mIcon->setPosition(cocos2d::Vec2(43, ret->getContentSize().height - 28 ));
         }
         else {
             ret->mIcon = cocos2d::Sprite::createWithSpriteFrameName("cj-bg.png");
-            ret->mIcon->setPosition(cocos2d::ccp(43, ret->getContentSize().height - 28 ));
+            ret->mIcon->setPosition(cocos2d::Vec2(43, ret->getContentSize().height - 28 ));
             cocos2d::Sprite *real = cocos2d::Sprite::createWithSpriteFrameName(icon);
-            real->setPosition(cocos2d::ccp( ret->mIcon->getContentSize().width/2, ret->mIcon->getContentSize().height/2));
+            real->setPosition(cocos2d::Vec2( ret->mIcon->getContentSize().width/2, ret->mIcon->getContentSize().height/2));
             ret->mIcon->addChild(real);
         }
         ret->addChild(ret->mIcon);
@@ -38,16 +38,16 @@ FoldItem* FoldItem::foldItem(const char* title, const char* icon, const char* de
             {
                 cocos2d::CCString *progress = cocos2d::CCString::createWithFormat("%d / %d", counter, achieve);
                 cocos2d::CCLabelBMFont *font = cocos2d::CCLabelBMFont::create(progress->getCString(), "ra40.fnt");
-                font->setAnchorPoint(cocos2d::ccp(0.5f , 0.6f));
-                font->setPosition(cocos2d::ccp( ret->getContentSize().width - 60, ret->getContentSize().height - 26));
+                font->setAnchorPoint(cocos2d::Vec2(0.5f , 0.6f));
+                font->setPosition(cocos2d::Vec2( ret->getContentSize().width - 60, ret->getContentSize().height - 26));
                 ret->mCost = font;
                 ret->addChild(font);
             }
         }
         else {
             cocos2d::Sprite *mark = cocos2d::Sprite::createWithSpriteFrameName("sp_completed.png");
-            mark->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-            mark->setPosition(cocos2d::ccp( ret->getContentSize().width - 60, ret->getContentSize().height - 26));
+            mark->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+            mark->setPosition(cocos2d::Vec2( ret->getContentSize().width - 60, ret->getContentSize().height - 26));
             ret->mCost = mark;
             ret->addChild(mark);
         }
@@ -55,8 +55,8 @@ FoldItem* FoldItem::foldItem(const char* title, const char* icon, const char* de
         //draw title
         {
             ret->mTitleSp = cocos2d::Sprite::create(title);
-            ret->mTitleSp->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-            ret->mTitleSp->setPosition(cocos2d::ccp(100, ret->getContentSize().height - 26));
+            ret->mTitleSp->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+            ret->mTitleSp->setPosition(cocos2d::Vec2(100, ret->getContentSize().height - 26));
             ret->addChild(ret->mTitleSp);
         }
         
@@ -65,8 +65,8 @@ FoldItem* FoldItem::foldItem(const char* title, const char* icon, const char* de
         {
             //ret->mDetailSp = cocos2d::CCLabelBMFont::create(detail, "ab34.fnt");
             ret->mDetailSp = cocos2d::CCLabelTTF::create(detail, GFONT_NAME, GFONT_SIZE_NORMAL);
-            ret->mDetailSp->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-            ret->mDetailSp->setPosition(cocos2d::ccp(80, 25));
+            ret->mDetailSp->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+            ret->mDetailSp->setPosition(cocos2d::Vec2(80, 25));
             ret->mDetailSp->setVisible(false);
             ret->addChild(ret->mDetailSp);
         }
@@ -90,7 +90,7 @@ FoldItem* FoldItem::foldItem(int title, int cost, bool iap, int icon, const char
   {
     cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sp_category%d.png", icon);
     cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(filename->getCString());
-    sp->setAnchorPoint(cocos2d::ccp(0, 1));
+    sp->setAnchorPoint(cocos2d::Vec2(0, 1));
     ret->addChild(sp);
     ret->setContentSize(sp->getContentSize());
   }
@@ -99,7 +99,7 @@ FoldItem* FoldItem::foldItem(int title, int cost, bool iap, int icon, const char
     ret->mDetail = cocos2d::CCString::create(detail);
     ret->mDetail->retain();
     ret->mBgButton = cocos2d::Sprite::createWithSpriteFrameName("shoplist.png");
-    ret->mBgButton->setAnchorPoint(cocos2d::ccp(0, 0));
+    ret->mBgButton->setAnchorPoint(cocos2d::Vec2(0, 0));
     ret->addChild(ret->mBgButton);
 
     if( btntyp == 1 )
@@ -118,10 +118,10 @@ FoldItem* FoldItem::foldItem(int title, int cost, bool iap, int icon, const char
 
     ret->mPurchase->setVisible(false);
     ret->mMenu = cocos2d::CCMenu::create(ret->mPurchase, NULL);
-    ret->mMenu->setPosition(cocos2d::ccp(0, 0));
+    ret->mMenu->setPosition(cocos2d::Vec2(0, 0));
     ret->addChild(ret->mMenu);
     ret->setContentSize(ret->mBgButton->getContentSize());
-    ret->setAnchorPoint(cocos2d::ccp(0, 1));
+    ret->setAnchorPoint(cocos2d::Vec2(0, 1));
 
     //draw content
     if( icon < 0 )
@@ -143,12 +143,12 @@ FoldItem* FoldItem::foldItem(int title, int cost, bool iap, int icon, const char
           }
           break;
       }
-      ret->mIcon->setPosition(cocos2d::ccp(43, ret->getContentSize().height - 28 ));
+      ret->mIcon->setPosition(cocos2d::Vec2(43, ret->getContentSize().height - 28 ));
     }
     else {
       cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("icon%d.png", icon);
       ret->mIcon = cocos2d::Sprite::create(filename->getCString());
-      ret->mIcon->setPosition(cocos2d::ccp(33, ret->getContentSize().height - 28 ));
+      ret->mIcon->setPosition(cocos2d::Vec2(33, ret->getContentSize().height - 28 ));
     }
     ret->addChild(ret->mIcon);
 
@@ -158,17 +158,17 @@ FoldItem* FoldItem::foldItem(int title, int cost, bool iap, int icon, const char
       if( iap )
       {
         cocos2d::CCLabelBMFont *font = cocos2d::CCLabelBMFont::create(gIAPCost[ret->mCostNumber], "ra40.fnt");
-        font->setAnchorPoint(cocos2d::ccp(0, 0.6f));
-        font->setPosition(cocos2d::ccp( ret->getContentSize().width - 60, ret->getContentSize().height - 26));
+        font->setAnchorPoint(cocos2d::Vec2(0, 0.6f));
+        font->setPosition(cocos2d::Vec2( ret->getContentSize().width - 60, ret->getContentSize().height - 26));
         ret->mCost = font;
         ret->addChild(font);
       }
       else {
         cocos2d::Sprite *coin = cocos2d::Sprite::createWithSpriteFrameName("go_coin.png");
-        coin->setPosition(cocos2d::ccp( ret->getContentSize().width - 60, ret->getContentSize().height - 26));
+        coin->setPosition(cocos2d::Vec2( ret->getContentSize().width - 60, ret->getContentSize().height - 26));
         cocos2d::CCLabelBMFont *font = cocos2d::CCLabelBMFont::create(cocos2d::CCString::createWithFormat("%d", cost)->getCString(), "ra40.fnt");
-        font->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-        font->setPosition(cocos2d::ccp(20, 5));
+        font->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+        font->setPosition(cocos2d::Vec2(20, 5));
         coin->addChild(font);
         ret->mCost = coin;
         ret->addChild(coin);
@@ -176,8 +176,8 @@ FoldItem* FoldItem::foldItem(int title, int cost, bool iap, int icon, const char
     }
     else {
 cocos2d::Sprite *mark = cocos2d::Sprite::createWithSpriteFrameName("sp_completed.png");
-      mark->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-      mark->setPosition(cocos2d::ccp( ret->getContentSize().width - 60, ret->getContentSize().height - 26));
+      mark->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+      mark->setPosition(cocos2d::Vec2( ret->getContentSize().width - 60, ret->getContentSize().height - 26));
       ret->mCost = mark;
       ret->addChild(mark);
     }
@@ -186,8 +186,8 @@ cocos2d::Sprite *mark = cocos2d::Sprite::createWithSpriteFrameName("sp_completed
     {
 cocos2d::CCString *name = cocos2d::CCString::createWithFormat("shop%d.png", ret->mTitle);
       ret->mTitleSp = cocos2d::Sprite::createWithSpriteFrameName(name->getCString());
-      ret->mTitleSp->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-      ret->mTitleSp->setPosition(cocos2d::ccp(100, ret->getContentSize().height - 26));
+      ret->mTitleSp->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+      ret->mTitleSp->setPosition(cocos2d::Vec2(100, ret->getContentSize().height - 26));
       ret->addChild(ret->mTitleSp);
     }
 
@@ -196,8 +196,8 @@ cocos2d::CCString *name = cocos2d::CCString::createWithFormat("shop%d.png", ret-
     {
       //ret->mDetailSp = cocos2d::CCLabelBMFont::create(detail, "ab34.fnt");
         ret->mDetailSp = cocos2d::CCLabelTTF::create(detail, GFONT_NAME, GFONT_SIZE_NORMAL);
-      ret->mDetailSp->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-      ret->mDetailSp->setPosition(cocos2d::ccp(80, 25));
+      ret->mDetailSp->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+      ret->mDetailSp->setPosition(cocos2d::Vec2(80, 25));
       ret->mDetailSp->setVisible(false);
       ret->addChild(ret->mDetailSp);
     }
@@ -226,14 +226,14 @@ cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameC
         setContentSize(mBgButton->getContentSize());
         
         //update components
-        mIcon->setPosition(cocos2d::ccp(mIcon->getPosition().x, getContentSize().height - 28 ));
-        mTitleSp->setPosition(cocos2d::ccp(100, getContentSize().height - 26));
+        mIcon->setPosition(cocos2d::Vec2(mIcon->getPosition().x, getContentSize().height - 28 ));
+        mTitleSp->setPosition(cocos2d::Vec2(100, getContentSize().height - 26));
         mDetailSp->setVisible(false);
         
         if( !mIsAchievement )
         {
             mPurchase->setVisible(false);
-            mCost->setPosition(cocos2d::ccp( getContentSize().width - 60, getContentSize().height - 26));
+            mCost->setPosition(cocos2d::Vec2( getContentSize().width - 60, getContentSize().height - 26));
         }
     }
     else {
@@ -243,15 +243,15 @@ cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameC
         setContentSize(mBgButton->getContentSize());
         
         //update components
-        mIcon->setPosition(cocos2d::ccp(mIcon->getPosition().x, getContentSize().height - 28 ));
-        mTitleSp->setPosition(cocos2d::ccp(100, getContentSize().height - 26));
+        mIcon->setPosition(cocos2d::Vec2(mIcon->getPosition().x, getContentSize().height - 28 ));
+        mTitleSp->setPosition(cocos2d::Vec2(100, getContentSize().height - 26));
         mDetailSp->setVisible(true);
         
         if( !mIsAchievement )
         {
-            mPurchase->setPosition(cocos2d::ccp(getContentSize().width - 48, 25));
+            mPurchase->setPosition(cocos2d::Vec2(getContentSize().width - 48, 25));
             mPurchase->setVisible(true);
-            mCost->setPosition(cocos2d::ccp( getContentSize().width - 60, getContentSize().height - 26));
+            mCost->setPosition(cocos2d::Vec2( getContentSize().width - 60, getContentSize().height - 26));
             
             if(mCostNumber<= 0 )
             {
@@ -306,10 +306,10 @@ cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("icon%d.png", 
             //update cost
             removeChild(mCost, false);
 cocos2d::Sprite *coin = cocos2d::Sprite::createWithSpriteFrameName("go_coin.png");
-            coin->setPosition(cocos2d::ccp( getContentSize().width - 60, getContentSize().height - 26));
+            coin->setPosition(cocos2d::Vec2( getContentSize().width - 60, getContentSize().height - 26));
 cocos2d::CCLabelBMFont *font = cocos2d::CCLabelBMFont::create(cocos2d::CCString::createWithFormat("%d", cost)->getCString(), "ra40.fnt");
-            font->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-            font->setPosition(cocos2d::ccp(20, 5));
+            font->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+            font->setPosition(cocos2d::Vec2(20, 5));
             coin->addChild(font);
             mCost = coin;
             this->addChild(coin);
@@ -318,8 +318,8 @@ cocos2d::CCLabelBMFont *font = cocos2d::CCLabelBMFont::create(cocos2d::CCString:
     else {
         removeChild(mCost, false);
 cocos2d::Sprite *mark = cocos2d::Sprite::createWithSpriteFrameName("sp_completed.png");
-        mark->setAnchorPoint(cocos2d::ccp(0, 0.5f));
-        mark->setPosition(cocos2d::ccp( getContentSize().width - 60, getContentSize().height - 26));
+        mark->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
+        mark->setPosition(cocos2d::Vec2( getContentSize().width - 60, getContentSize().height - 26));
         mCost = mark;
         this->addChild(mark);
         

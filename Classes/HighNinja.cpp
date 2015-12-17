@@ -28,9 +28,9 @@ HighNinja* HighNinja::role(cocos2d::CCNode * parent)
 void HighNinja::onCreate() 
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("hninja"));
-    mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
+    mSprite->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
     int y = CCRANDOM_0_1()*RESPAWN_Y;
-    mSprite->setPosition(cocos2d::ccp(20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1(), RESPAWN_YMIN+y));
+    mSprite->setPosition(cocos2d::Vec2(20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1(), RESPAWN_YMIN+y));
     mSprite->playGTAnimation(0, true);
     mSprite->setVisible(false);
     mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
@@ -119,7 +119,7 @@ void HighNinja::onUpdate(float delta)
                                 mSprite->playGTAnimation(6, true);
                                 //play effect
                                 GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
-                                eff->setPosition(cocos2d::ccp(47, 19));
+                                eff->setPosition(cocos2d::Vec2(47, 19));
                                 mSprite->addChild(eff);
                             }
                         }
@@ -447,7 +447,7 @@ void HighNinja::setPosition(cocos2d::Point pos)
 
 cocos2d::Point HighNinja::center() 
 {
-    return ccpAdd(mSprite->getPosition(), ccp(9, 20));
+    return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
 }
 
 bool HighNinja::supportAimAid() 

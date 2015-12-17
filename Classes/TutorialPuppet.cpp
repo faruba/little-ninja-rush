@@ -23,7 +23,7 @@ void TutorialPuppet::reset()
 {
   if( mSprite != NULL )
   {
-    mSprite->setPosition(cocos2d::ccp(-100, RESPAWN_YMIN+RESPAWN_Y/2));
+    mSprite->setPosition(cocos2d::Vec2(-100, RESPAWN_YMIN+RESPAWN_Y/2));
     mSprite->playGTAnimation(0, true);
   }
   mState = 0;
@@ -56,7 +56,7 @@ void TutorialPuppet::fireAt(cocos2d::Point pos, GameObject* tar, SEL_CallFunc se
   mSprite->playGTAnimation(6, true);
   //play effect
   GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
-  eff->setPosition(cocos2d::ccp(47, 19));
+  eff->setPosition(cocos2d::Vec2(47, 19));
   mSprite->addChild(eff);
 }
 
@@ -77,7 +77,7 @@ void TutorialPuppet::onCreate()
 {
   GamePlay *play = GamePlay::sharedGamePlay();
   mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("enemy"));
-  mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
+  mSprite->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
   play->addChild(mSprite, LAYER_ROLE+RESPAWN_Y/2);
 
   this->reset();
@@ -209,7 +209,7 @@ bool TutorialPuppet::collisionWithCircle(cocos2d::Point cc, float rad)
 
 cocos2d::Point TutorialPuppet::center() 
 {
-  return ccpAdd(mSprite->getPosition(), ccp(9, 20));
+  return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
 }
 
 cocos2d::Point TutorialPuppet::position() 

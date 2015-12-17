@@ -30,7 +30,7 @@ void Bomb::onCreate()
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("bullets"));
     mSprite->playGTAnimation(1, true);
-    mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+    mSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     mSprite->setPosition(mPosition);
     mParent->addChild(mSprite, LAYER_MAINROLE+1);
 cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(1, 720);
@@ -68,7 +68,7 @@ void Bomb::onUpdate(float delta)
         float dx = play->mainrole->position().x - np.x;
         if( BOMB_RANGE*BOMB_RANGE >= dx*dx )
         {
-            play->mainrole->deliverHit(HIT_BOMB, ccp(0, 0));
+            play->mainrole->deliverHit(HIT_BOMB, Vec2(0, 0));
         }
         //分身术
         if( play->mainrole2 != NULL )
@@ -76,12 +76,12 @@ void Bomb::onUpdate(float delta)
             float dx2 = play->mainrole2->position().x - np.x;
             if( BOMB_RANGE*BOMB_RANGE >= dx2*dx2 )
             {
-                play->mainrole2->deliverHit(HIT_BOMB, ccp(0, 0));
+                play->mainrole2->deliverHit(HIT_BOMB, Vec2(0, 0));
             }
         }
         
         GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("bullets"), 0, false);
-        eff->setAnchorPoint(cocos2d::ccp(0.5f, 0));
+        eff->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
         eff->setPosition(np);
         mParent->addChild(eff, LAYER_ROLE);
         SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/bomb2.mp3").c_str());

@@ -22,9 +22,9 @@ void Mechanic::onCreate()
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("mechanic"));
-    mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
+    mSprite->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
     int y = CCRANDOM_0_1()*RESPAWN_Y;
-    mSprite->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
+    mSprite->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
     mSprite->playGTAnimation(0, true);
     play->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
     
@@ -209,7 +209,7 @@ bool Mechanic::deliverHit(int type, cocos2d::Point dir)
         
         GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
         hiteff2->setScale(0.5f);
-        hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+        hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
         hiteff2->setPosition(ccpAdd(center(), ccpMult(dir, -17)));
         play->addChild(hiteff2, LAYER_MAINROLE+1);
         
@@ -274,7 +274,7 @@ void Mechanic::setPosition(cocos2d::Point pos)
 
 cocos2d::Point Mechanic::center() 
 {
-    return ccpAdd(mSprite->getPosition(), ccp(9, 20));
+    return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
 }
 
 bool Mechanic::supportAimAid() 

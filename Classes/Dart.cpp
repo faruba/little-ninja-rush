@@ -28,7 +28,7 @@ void Dart::addTail()
   {
 cocos2d::CCString *tailstr = cocos2d::CCString::createWithFormat("%s_tail.png", mShap->_string.substr(0, mShap->_string.length()-4).c_str());
     mTail = cocos2d::Sprite::createWithSpriteFrameName(tailstr->getCString());
-    mTail->setAnchorPoint(cocos2d::ccp(0.5f, 0.95f));
+    mTail->setAnchorPoint(cocos2d::Vec2(0.5f, 0.95f));
     mTail->setPosition(mSprite->getPosition());
     mTail->setOpacity(0);
     mParent->addChild( mTail, LAYER_ROLE);
@@ -44,7 +44,7 @@ void Dart::addSTail(cocos2d::CCString * ani, int aid)
   {
     mSTail = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(ani->getCString()));
     mSTail->playGTAnimation(aid, true);
-    mSTail->setAnchorPoint(cocos2d::ccp(0.5f, 0.95f));
+    mSTail->setAnchorPoint(cocos2d::Vec2(0.5f, 0.95f));
     mSTail->setPosition(mSprite->getPosition());
     mSTail->setOpacity(0);
     mParent->addChild( mSTail, LAYER_ROLE);
@@ -58,7 +58,7 @@ void Dart::onCreate()
 {
   blocked = false;
   mSprite = cocos2d::Sprite::createWithSpriteFrameName(mShap->getCString());
-  mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+  mSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
   mSprite->setPosition(pos);
   mParent->addChild(mSprite, LAYER_MAINROLE+1);
 
@@ -356,13 +356,13 @@ CCARRAY_FOREACH(play->enemies, node)
         if( hit )
         {
           GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), mHitEffect2, false);
-          hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+          hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
           hiteff->setPosition(em->center());
           hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(direction) ) + 60*CCRANDOM_0_1());
           mParent->addChild(hiteff, LAYER_MAINROLE+1);
 
           GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), mHitEffect, false);
-          hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+          hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
           hiteff2->setPosition(em->center());
           mParent->addChild(hiteff2, LAYER_ROLE);
 
@@ -443,13 +443,13 @@ CCARRAY_FOREACH(play->enemies, node)
     {
       SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
       GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
-      hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+      hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
       hiteff->setPosition(xpos);
       hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(direction) ) + 60*CCRANDOM_0_1());
       mParent->addChild(hiteff, LAYER_MAINROLE+1);
 
       GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), mHitEffect, false);
-      hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+      hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
       hiteff2->setPosition(xpos);
       mParent->addChild(hiteff2, LAYER_ROLE);
     }

@@ -33,57 +33,57 @@ void Scene3::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     int btiles[] = {27, 28, 27, 28, 29, 30, 33, 34, 35, 36, 27, 28, 27, 28, 27, 28, 29, 30, 33, 34, 35, 36, 27, 28};
     mTiles->initTiles(btiles, 24);
     mTileCount = 0;
-    mTiles->setPosition(cocos2d::ccp(0, 0));
+    mTiles->setPosition(cocos2d::Vec2(0, 0));
     
     //增加背景
 cocos2d::Sprite *sbg = cocos2d::Sprite::createWithSpriteFrameName("s3_bg.png");
-    sbg->setAnchorPoint(cocos2d::ccp(0, 1));
-    sbg->setPosition(cocos2d::ccp(0, SCREEN_HEIGHT));
+    sbg->setAnchorPoint(cocos2d::Vec2(0, 1));
+    sbg->setPosition(cocos2d::Vec2(0, SCREEN_HEIGHT));
     bg->addChild(sbg);
     //extra bg
 cocos2d::Sprite *exsbg = cocos2d::Sprite::createWithSpriteFrameName("cj3_bg2.png");
-    exsbg->setAnchorPoint(cocos2d::ccp(0, 1));
-    exsbg->setPosition(cocos2d::ccp(sbg->getContentSize().width, SCREEN_HEIGHT));
+    exsbg->setAnchorPoint(cocos2d::Vec2(0, 1));
+    exsbg->setPosition(cocos2d::Vec2(sbg->getContentSize().width, SCREEN_HEIGHT));
     //calc scale
     exsbg->setScaleX((UniversalFit::sharedUniversalFit()->screenSize.width - SCREEN_WIDTH)/10);
     bg->addChild(exsbg);
     
     mFarHouse[0] = cocos2d::Sprite::createWithSpriteFrameName("cj3_hj2a.png");
-    mFarHouse[0]->setAnchorPoint(cocos2d::ccp(0, 0));
-    mFarHouse[0]->setPosition(cocos2d::ccp(0, 152));
+    mFarHouse[0]->setAnchorPoint(cocos2d::Vec2(0, 0));
+    mFarHouse[0]->setPosition(cocos2d::Vec2(0, 152));
     mBg->addChild(mFarHouse[0]);
     mFarHouse[1] = cocos2d::Sprite::createWithSpriteFrameName("cj3_hj2b.png");
-    mFarHouse[1]->setAnchorPoint(cocos2d::ccp(0, 0));
-    mFarHouse[1]->setPosition(cocos2d::ccp(mFarHouse[0]->getContentSize().width, 152));
+    mFarHouse[1]->setAnchorPoint(cocos2d::Vec2(0, 0));
+    mFarHouse[1]->setPosition(cocos2d::Vec2(mFarHouse[0]->getContentSize().width, 152));
     mBg->addChild(mFarHouse[1]);
     mFarHouse[2] = cocos2d::Sprite::createWithSpriteFrameName("cj3_hj2a.png");
-    mFarHouse[2]->setAnchorPoint(cocos2d::ccp(0, 0));
-    mFarHouse[2]->setPosition(cocos2d::ccp(mFarHouse[0]->getContentSize().width*2, 152));
+    mFarHouse[2]->setAnchorPoint(cocos2d::Vec2(0, 0));
+    mFarHouse[2]->setPosition(cocos2d::Vec2(mFarHouse[0]->getContentSize().width*2, 152));
     mBg->addChild(mFarHouse[2]);
     mFarHouse[3] = cocos2d::Sprite::createWithSpriteFrameName("cj3_hj2b.png");
-    mFarHouse[3]->setAnchorPoint(cocos2d::ccp(0, 0));
-    mFarHouse[3]->setPosition(cocos2d::ccp(mFarHouse[0]->getContentSize().width*3, 152));
+    mFarHouse[3]->setAnchorPoint(cocos2d::Vec2(0, 0));
+    mFarHouse[3]->setPosition(cocos2d::Vec2(mFarHouse[0]->getContentSize().width*3, 152));
     mBg->addChild(mFarHouse[3]);
     mFarHouse[4] = cocos2d::Sprite::createWithSpriteFrameName("cj3_hj2a.png");
-    mFarHouse[4]->setAnchorPoint(cocos2d::ccp(0, 0));
-    mFarHouse[4]->setPosition(cocos2d::ccp(mFarHouse[0]->getContentSize().width*4, 152));
+    mFarHouse[4]->setAnchorPoint(cocos2d::Vec2(0, 0));
+    mFarHouse[4]->setPosition(cocos2d::Vec2(mFarHouse[0]->getContentSize().width*4, 152));
     mBg->addChild(mFarHouse[4]);
     mFarHouse[5] = cocos2d::Sprite::createWithSpriteFrameName("cj3_hj2b.png");
-    mFarHouse[5]->setAnchorPoint(cocos2d::ccp(0, 0));
-    mFarHouse[5]->setPosition(cocos2d::ccp(mFarHouse[0]->getContentSize().width*5, 152));
+    mFarHouse[5]->setAnchorPoint(cocos2d::Vec2(0, 0));
+    mFarHouse[5]->setPosition(cocos2d::Vec2(mFarHouse[0]->getContentSize().width*5, 152));
     mBg->addChild(mFarHouse[5]);
     
     mFarHouse[6] = cocos2d::Sprite::createWithSpriteFrameName("cj3_hj1.png");
-    mFarHouse[6]->setAnchorPoint(cocos2d::ccp(0, 0));
-    mFarHouse[6]->setPosition(cocos2d::ccp(0, 152));
+    mFarHouse[6]->setAnchorPoint(cocos2d::Vec2(0, 0));
+    mFarHouse[6]->setPosition(cocos2d::Vec2(0, 152));
     mBg->addChild(mFarHouse[6]);
     mFarHouse[7] = cocos2d::Sprite::createWithSpriteFrameName("cj3_hj1.png");
-    mFarHouse[7]->setAnchorPoint(cocos2d::ccp(0, 0));
-    mFarHouse[7]->setPosition(cocos2d::ccp(mFarHouse[6]->getContentSize().width, 152));
+    mFarHouse[7]->setAnchorPoint(cocos2d::Vec2(0, 0));
+    mFarHouse[7]->setPosition(cocos2d::Vec2(mFarHouse[6]->getContentSize().width, 152));
     mBg->addChild(mFarHouse[7]);
     mFarHouse[8] = cocos2d::Sprite::createWithSpriteFrameName("cj3_hj1.png");
-    mFarHouse[8]->setAnchorPoint(cocos2d::ccp(0, 0));
-    mFarHouse[8]->setPosition(cocos2d::ccp(mFarHouse[6]->getContentSize().width*2, 152));
+    mFarHouse[8]->setAnchorPoint(cocos2d::Vec2(0, 0));
+    mFarHouse[8]->setPosition(cocos2d::Vec2(mFarHouse[6]->getContentSize().width*2, 152));
     mBg->addChild(mFarHouse[8]);
     
     //增加远山
@@ -91,8 +91,8 @@ cocos2d::Sprite *exsbg = cocos2d::Sprite::createWithSpriteFrameName("cj3_bg2.png
     {
 cocos2d::CCString *sp = cocos2d::CCString::createWithFormat("cj3_mountain%d.png", i+1);
         mHills[i] = cocos2d::Sprite::createWithSpriteFrameName(sp->getCString());
-        mHills[i]->setAnchorPoint(cocos2d::ccp(0, 0));
-        mHills[i]->setPosition(cocos2d::ccp( 100 + 225*i, 262));
+        mHills[i]->setAnchorPoint(cocos2d::Vec2(0, 0));
+        mHills[i]->setPosition(cocos2d::Vec2( 100 + 225*i, 262));
         mBg->addChild(mHills[i]);
     }
     
@@ -100,8 +100,8 @@ cocos2d::CCString *sp = cocos2d::CCString::createWithFormat("cj3_mountain%d.png"
     for( int i=0; i<8; ++i)
     {
         mFronts[i] = cocos2d::Sprite::createWithSpriteFrameName("s3_front.png");
-        mFronts[i]->setAnchorPoint(cocos2d::ccp(0, 0));
-        mFronts[i]->setPosition(cocos2d::ccp(mFronts[i]->getContentSize().width*i, 0));
+        mFronts[i]->setAnchorPoint(cocos2d::Vec2(0, 0));
+        mFronts[i]->setPosition(cocos2d::Vec2(mFronts[i]->getContentSize().width*i, 0));
         mFront->addChild(mFronts[i]);
     }
     
@@ -109,7 +109,7 @@ cocos2d::CCString *sp = cocos2d::CCString::createWithFormat("cj3_mountain%d.png"
     for( int i=0; i<2; ++i)
     {
         mClouds[i] = cocos2d::Sprite::createWithSpriteFrameName("s3_cloud.png");
-        mClouds[i]->setPosition(cocos2d::ccp( 300+200*i, 280+20*i));
+        mClouds[i]->setPosition(cocos2d::Vec2( 300+200*i, 280+20*i));
         mBg->addChild(mClouds[i]);
     }
 }
@@ -122,7 +122,7 @@ void Scene3::update(float delta)
     int doff = woff%dr;
     for( int i=0; i<8; ++i)
     {
-        mFronts[i]->setPosition(cocos2d::ccp(-doff+dr*i, 0));
+        mFronts[i]->setPosition(cocos2d::Vec2(-doff+dr*i, 0));
     }
     //滚动远处的房屋
     for( int i=0; i<9; ++i)

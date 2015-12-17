@@ -32,7 +32,7 @@ void MiddleNinja::onCreate()
     cocos2d::Point rjp = ccpForAngle(PI*3.0f/5.0f);
     
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("mninja"));
-    mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
+    mSprite->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
     mSprite->setPosition(ccpAdd(mTargetPos, ccpMult(rjp, 100)));
     mSprite->playGTAnimation(7, true);
     mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
@@ -131,7 +131,7 @@ void MiddleNinja::onUpdate(float delta)
                                 mSprite->playGTAnimation(6, true);
                                 //play effect
                                 GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
-                                eff->setPosition(cocos2d::ccp(47, 19));
+                                eff->setPosition(cocos2d::Vec2(47, 19));
                                 mSprite->addChild(eff);
                             }
                             else {
@@ -415,7 +415,7 @@ void MiddleNinja::setPosition(cocos2d::Point pos)
 
 cocos2d::Point MiddleNinja::center() 
 {
-    return ccpAdd(mSprite->getPosition(), ccp(9, 20));
+    return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
 }
 
 bool MiddleNinja::supportAimAid() 

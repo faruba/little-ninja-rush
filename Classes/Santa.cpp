@@ -28,14 +28,14 @@ void Santa::onCreate()
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("santa"));
-    mSprite->setAnchorPoint(cocos2d::ccp(0.5438f, 0.0625f));
+    mSprite->setAnchorPoint(cocos2d::Vec2(0.5438f, 0.0625f));
     int y = CCRANDOM_0_1()*RESPAWN_Y;
     if( play->state == STATE_RUSH )
     {
-        mSprite->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
+        mSprite->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
     }
     else {
-        mSprite->setPosition(cocos2d::ccp(-100, RESPAWN_YMIN+y));
+        mSprite->setPosition(cocos2d::Vec2(-100, RESPAWN_YMIN+y));
     }
     mSprite->playGTAnimation(0, true);
     mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
@@ -288,7 +288,7 @@ void Santa::setPosition(cocos2d::Point pos)
 
 cocos2d::Point Santa::center() 
 {
-    return ccpAdd(mSprite->getPosition(), ccp(0, 21));
+    return ccpAdd(mSprite->getPosition(), Vec2(0, 21));
 }
 
 bool Santa::supportAimAid() 

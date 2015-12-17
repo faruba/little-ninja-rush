@@ -17,7 +17,7 @@ cocos2d::Scene *ret = cocos2d::Scene::create();
 
   //universal
   ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-  ret->setAnchorPoint(cocos2d::ccp(0, 0));
+  ret->setAnchorPoint(cocos2d::Vec2(0, 0));
   ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
 
   CEClipedNode *clip = CEClipedNode::create();
@@ -52,7 +52,7 @@ cocos2d::CCNode * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLaye
   mFly = false;
 
   mScrollBody = cocos2d::Sprite::createWithSpriteFrameName("sp_scroll2.png");
-  mScrollBody->setAnchorPoint(cocos2d::ccp(0, 1));
+  mScrollBody->setAnchorPoint(cocos2d::Vec2(0, 1));
   mClipedList->addChild(mScrollBody);
 
   mSceneIntro = NULL;
@@ -125,7 +125,7 @@ void ExtraMenu::activate(int cid)
 //CCARRAY_FOREACH(mItemList->getChildren(), node)
 //    {
 //      FoldItem *it = (FoldItem*)node;
-//      it->setPosition(cocos2d::ccp(0, mOffset));
+//      it->setPosition(cocos2d::Vec2(0, mOffset));
 //      mOffset -= it->getContentSize().height + PADDING;
 //    }
 //    if( unfold )
@@ -237,7 +237,7 @@ void ExtraMenu::updateScorll()
     float length = 264.0f*(264.0f/-mOffset)/100;
     float begin = -264.0f*(mItemList->getPosition().y/-mOffset);
     mScrollBody->setScaleY(length);
-    mScrollBody->setPosition(cocos2d::ccp(441, begin));
+    mScrollBody->setPosition(cocos2d::Vec2(441, begin));
 }
 
 void ExtraMenu::loadAchievements() 
@@ -257,7 +257,7 @@ cocos2d::CCLog("*(%d) - %s", ach->achieveCode, ach->text->getCString());
       achnum = 1;
     }
     FoldItem *fi = FoldItem::foldItem(ach->name->getCString(), ach->icon->getCString(), ach->desc->getCString(), achnum, ach->achieveCount, this);
-    fi->setPosition(cocos2d::ccp(0, mOffset));
+    fi->setPosition(cocos2d::Vec2(0, mOffset));
     mItemList->addChild(fi, 1, mItemList->getChildrenCount());
     mOffset -= fi->getContentSize().height + PADDING;
   }
@@ -278,23 +278,23 @@ CCARRAY_FOREACH(Tasks::getStatistics(), node)
         {//normal statistics
             //CCLabelBMFont *title = cocos2d::CCLabelBMFont::create(sta->name->getCString(), "ab34.fnt");
 cocos2d::CCLabelTTF *title = cocos2d::CCLabelTTF::create(sta->name->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
-            title->setAnchorPoint(cocos2d::ccp(0, 1));
-            title->setPosition(cocos2d::ccp(10, mOffset));
+            title->setAnchorPoint(cocos2d::Vec2(0, 1));
+            title->setPosition(cocos2d::Vec2(10, mOffset));
             mItemList->addChild(title, 1, mItemList->getChildrenCount());
             if( sta->achieveCode >= 0 )
             {
 cocos2d::CCString *val = cocos2d::CCString::createWithFormat("%d%", sta->achieveCount, sta->psfx);
 cocos2d::CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(), "ab34.fnt");
-                result->setAnchorPoint(cocos2d::ccp(1, 1));
-                result->setPosition(cocos2d::ccp(426, mOffset));
+                result->setAnchorPoint(cocos2d::Vec2(1, 1));
+                result->setPosition(cocos2d::Vec2(426, mOffset));
                 mItemList->addChild(result, 1, mItemList->getChildrenCount());
             }
             else if( sta->achieveCode == -2 )
             {
 cocos2d::CCString *val = cocos2d::CCString::createWithFormat("%d%", GameRecord::sharedGameRecord()->combo_high, sta->psfx);
 cocos2d::CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(), "ab34.fnt");
-                result->setAnchorPoint(cocos2d::ccp(1, 1));
-                result->setPosition(cocos2d::ccp(426, mOffset));
+                result->setAnchorPoint(cocos2d::Vec2(1, 1));
+                result->setPosition(cocos2d::Vec2(426, mOffset));
                 mItemList->addChild(result, 1, mItemList->getChildrenCount());
             }
             
@@ -303,12 +303,12 @@ cocos2d::CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(
         else {
             //category label
 cocos2d::Sprite *line = cocos2d::Sprite::createWithSpriteFrameName("ex-line.png");
-            line->setAnchorPoint(cocos2d::ccp(0.5f, 1));
-            line->setPosition(cocos2d::ccp(218, mOffset - 10));
+            line->setAnchorPoint(cocos2d::Vec2(0.5f, 1));
+            line->setPosition(cocos2d::Vec2(218, mOffset - 10));
             mItemList->addChild(line, 1, mItemList->getChildrenCount());
 cocos2d::Sprite *label = cocos2d::Sprite::createWithSpriteFrameName(sta->name->getCString());
-            label->setAnchorPoint(cocos2d::ccp(0.5f, 1));
-            label->setPosition(cocos2d::ccp(line->getContentSize().width/2, 20));
+            label->setAnchorPoint(cocos2d::Vec2(0.5f, 1));
+            label->setPosition(cocos2d::Vec2(line->getContentSize().width/2, 20));
             line->addChild(label, 1, mItemList->getChildrenCount());
             
             mOffset -= line->getContentSize().height + PADDING + 20;

@@ -61,8 +61,8 @@ cocos2d::Scene *ret = cocos2d::Scene::create();
     
     //universal
     ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-    ret->setAnchorPoint(cocos2d::ccp(0, 0));
-    ret->setPosition(cocos2d::ccp(0, UniversalFit::sharedUniversalFit()->sceneOffset.y));
+    ret->setAnchorPoint(cocos2d::Vec2(0, 0));
+    ret->setPosition(cocos2d::Vec2(0, UniversalFit::sharedUniversalFit()->sceneOffset.y));
     
     CEClipedNode *clip = CEClipedNode::create();
     clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
@@ -128,7 +128,7 @@ void GamePlay::onEnter()
 {
   setAccelerometerEnabled(true);
 cocos2d::CCNode *taskcomplete = cocos2d::CCNode::create();
-  taskcomplete->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, SCREEN_HEIGHT));
+  taskcomplete->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, LAYER_MASK+10);
   setTaskCompleteNode(taskcomplete);
 
@@ -173,7 +173,7 @@ void GamePlay::initGamePlay(int mod)
   arcadeSpeed = 1;
   
   mask = cocos2d::LayerColor::create(Color4B(0, 0, 0, 255), UniversalFit::sharedUniversalFit()->screenSize.width + 20, UniversalFit::sharedUniversalFit()->screenSize.height + 20);
-  mask->setPosition(cocos2d::ccp(-10, -10));
+  mask->setPosition(cocos2d::Vec2(-10, -10));
   mask->retain();
   this->addChild(mask, LAYER_MASK);
   
@@ -213,11 +213,11 @@ cocos2d::CCMenuItemImage *xpause = cocos2d::CCMenuItemImage::create();
   xpause->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
   xpause->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
   xpause->setTarget(this, menu_selector(GamePlay::pause));
-  xpause->setAnchorPoint(cocos2d::ccp(1, 1));
-  xpause->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width, SCREEN_HEIGHT));
+  xpause->setAnchorPoint(cocos2d::Vec2(1, 1));
+  xpause->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width, SCREEN_HEIGHT));
   this->mMenu = cocos2d::CCMenu::create();
   this->mMenu->addChild(xpause);
-  mMenu->setPosition(cocos2d::ccp(-7, -7));
+  mMenu->setPosition(cocos2d::Vec2(-7, -7));
   mUI->addChild(mMenu, LAYER_UI);
   
   this->resetGame();
@@ -335,7 +335,7 @@ cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mScheduleR
     {
       //clean up
       this->setScale(1);
-      this->setPosition(cocos2d::ccp(0, 0));
+      this->setPosition(cocos2d::Vec2(0, 0));
     }
   }
   //scheduled slow
@@ -514,8 +514,8 @@ CCLOG("canPause = %d", canPause);
 
   this->scheduleMask(ccc3(0, 0, 0), 2, 1);
 
-  mainrole->setAI(2, ccp(-100, PLAY_PLAYERLINE));
-  mainrole->setAI(1, ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
+  mainrole->setAI(2, Vec2(-100, PLAY_PLAYERLINE));
+  mainrole->setAI(1, Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
   SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
 
   //achievement play game
@@ -676,7 +676,7 @@ void GamePlay::slide(cocos2d::Point dir)
     else {
         mw = mpx;
     }
-    cocos2d::Point lp = ccpNormalize(cocos2d::ccp(mw, PLAY_MINSHOOT));
+    cocos2d::Point lp = ccpNormalize(cocos2d::Vec2(mw, PLAY_MINSHOOT));
     float slidedart = PLAY_SLIDEDART > lp.y ? PLAY_SLIDEDART : lp.y;
     //slidedart 暂时还没有考虑到分身术
     if( dir.y >= slidedart )
@@ -894,7 +894,7 @@ void GamePlay::setFeverLevel(int lv)
                 if( d->isEnemy() )
                 {
                     GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
-                    hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+                    hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                     hiteff2->setScale(1.5f);
                     hiteff2->setPosition(d->position());
                     this->addChild(hiteff2, LAYER_ROLE);
@@ -1227,27 +1227,27 @@ void GamePlay::setSceneIntro()
         mSceneIntro = cocos2d::CCNode::create();
         this->addChild(mSceneIntro, LAYER_MASK+99);
 cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
-        left->setAnchorPoint(cocos2d::ccp(1, 0));
+        left->setAnchorPoint(cocos2d::Vec2(1, 0));
         mSceneIntro->addChild(left, 0, 0);
 cocos2d::Sprite *right = cocos2d::Sprite::create("door.png");
         right->setScaleX(-1);
-        right->setAnchorPoint(cocos2d::ccp(1, 0));
+        right->setAnchorPoint(cocos2d::Vec2(1, 0));
         mSceneIntro->addChild(right, 0, 1);
     }
 cocos2d::Sprite *left = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(0));
     left->setVisible(true);
-    left->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
+    left->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
 cocos2d::Sprite *right = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(1));
     right->setVisible(true);
-    right->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
+    right->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
 cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, ccp(-UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
+cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, Vec2(-UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
 cocos2d::CCHide *hd1 = cocos2d::CCHide::create();
 cocos2d::CCCallFunc *fn1 = cocos2d::CCCallFunc::create(this, (SEL_CallFunc)(&GamePlay::doneIntro));
 cocos2d::CCSequence *sq1 = cocos2d::CCSequence::create(dt1, mb1, hd1, fn1, NULL);
     left->runAction(sq1);
 cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
+cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
 cocos2d::CCHide *hd2 = cocos2d::CCHide::create();
 cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(dt2, mb2, hd2, NULL);
     right->runAction(sq2);
@@ -1318,7 +1318,7 @@ bool GamePlay::completeSomeObjectives()
 void GamePlay::taskCompleted(std::string tile, std::string icon, int type)
 {
 cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
-    board->setAnchorPoint(cocos2d::ccp(0.5f, 0));
+    board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
     gTaskComplete->addChild(board);
 cocos2d::Sprite *ibg = NULL;
 cocos2d::CCLabelTTF *label = NULL;
@@ -1348,7 +1348,7 @@ cocos2d::CCLabelTTF *label = NULL;
         }
             break;
     }
-    ibg->setPosition(cocos2d::ccp(22, 22));
+    ibg->setPosition(cocos2d::Vec2(22, 22));
     board->addChild(ibg);
 cocos2d::Sprite *iconsp = cocos2d::Sprite::createWithSpriteFrameName(icon.c_str());
     iconsp->setPosition(ibg->getPosition());
@@ -1357,12 +1357,12 @@ cocos2d::Sprite *iconsp = cocos2d::Sprite::createWithSpriteFrameName(icon.c_str(
         iconsp->setScale(0.625f);
     }
     board->addChild(iconsp);
-    label->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
-    label->setPosition(cocos2d::ccp(100, 20));
+    label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+    label->setPosition(cocos2d::Vec2(100, 20));
     board->addChild(label);
-cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, ccp(0, -board->getContentSize().height));
+cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, -board->getContentSize().height));
 cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
-cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, ccp(0, board->getContentSize().height));
+cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, board->getContentSize().height));
 cocos2d::CCHide *a4 = cocos2d::CCHide::create();
 cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
 cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
@@ -1373,21 +1373,21 @@ cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
 void GamePlay::pieceComplete(std::string title, std::string icon)
 {
 cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
-    board->setAnchorPoint(cocos2d::ccp(0.5f, 0));
+    board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
     gTaskComplete->addChild(board);
 cocos2d::Sprite *item = cocos2d::Sprite::create(icon.c_str());
-    item->setPosition(cocos2d::ccp(26, 19));
+    item->setPosition(cocos2d::Vec2(26, 19));
     item->setScale(0.7f);
     board->addChild(item);
 cocos2d::Sprite *sname = cocos2d::Sprite::create(title.c_str());
-    sname->setPosition(cocos2d::ccp(117, 30));
+    sname->setPosition(cocos2d::Vec2(117, 30));
     board->addChild(sname);
 cocos2d::Sprite *scoll = cocos2d::Sprite::create("collected.png");
-    scoll->setPosition(cocos2d::ccp(117, 13));
+    scoll->setPosition(cocos2d::Vec2(117, 13));
     board->addChild(scoll);
-cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, ccp(0, -board->getContentSize().height));
+cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, -board->getContentSize().height));
 cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
-cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, ccp(0, board->getContentSize().height));
+cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, board->getContentSize().height));
 cocos2d::CCHide *a4 = cocos2d::CCHide::create();
 cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
 cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
@@ -1398,15 +1398,15 @@ cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
 void GamePlay::popText(std::string text)
 {
 cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
-    board->setAnchorPoint(cocos2d::ccp(0.5f, 0));
+    board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
     gTaskComplete->addChild(board);
 cocos2d::CCLabelBMFont *label = cocos2d::CCLabelBMFont::create(text.c_str(), "ab34.fnt");
-    label->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
-    label->setPosition(cocos2d::ccp(90, 20));
+    label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+    label->setPosition(cocos2d::Vec2(90, 20));
     board->addChild(label);
-cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, ccp(0, -board->getContentSize().height));
+cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, -board->getContentSize().height));
 cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
-cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, ccp(0, board->getContentSize().height));
+cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, board->getContentSize().height));
 cocos2d::CCHide *a4 = cocos2d::CCHide::create();
 cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
 cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);

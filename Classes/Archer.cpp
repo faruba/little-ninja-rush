@@ -31,7 +31,7 @@ Archer* Archer::role(cocos2d::CCNode * parent)
 
 void Archer::onCreate() 
 {
-    mTarget = ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, PLAY_PLAYERLINE);
+    mTarget = Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, PLAY_PLAYERLINE);
     mTimer = 0;
     mState = 0;
     mLockTimer = 0;
@@ -101,10 +101,10 @@ void Archer::onUpdate(float delta)
                 mTimer = 0;
                 if( mTarget.x < UniversalFit::sharedUniversalFit()->playSize.width/2 )
                 {
-                    mFrom = ccp(UniversalFit::sharedUniversalFit()->playSize.width, ARROW_HEIGHT);
+                    mFrom = Vec2(UniversalFit::sharedUniversalFit()->playSize.width, ARROW_HEIGHT);
                 }
                 else {
-                    mFrom = ccp(0, ARROW_HEIGHT);
+                    mFrom = Vec2(0, ARROW_HEIGHT);
                 }
                 mMidPoint = ccpMidpoint(mFrom, mTarget);
                 mMidPoint.y += 75 + CCRANDOM_0_1()*100;
@@ -124,7 +124,7 @@ void Archer::onUpdate(float delta)
             {
                 mTimer = 0;
                 mArrow->playGTAnimation(4, true);
-                mArrow->setAnchorPoint(cocos2d::ccp( 0.5f, 1));
+                mArrow->setAnchorPoint(cocos2d::Vec2( 0.5f, 1));
                 mArrow->setPosition(mFrom);
                 mState = 2;
                 play->darts->addObject(this);
@@ -168,13 +168,13 @@ void Archer::onUpdate(float delta)
                     {
                         SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
                         GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
-                        hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+                        hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                         hiteff->setPosition(pos);
                         hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(dir) ) + 60*CCRANDOM_0_1());
                         mParent->addChild(hiteff, LAYER_MAINROLE+1);
                         
                         GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
-                        hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+                        hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                         hiteff2->setPosition(pos);
                         mParent->addChild(hiteff2, LAYER_ROLE);
                     }
@@ -184,7 +184,7 @@ void Archer::onUpdate(float delta)
                 mState = 3;
                 mArrow->setPosition(mTarget);
                 mArrow->playGTAnimation(5, true);
-                mArrow->setAnchorPoint(cocos2d::ccp(0.5f, 1));
+                mArrow->setAnchorPoint(cocos2d::Vec2(0.5f, 1));
             }
         }
             break;

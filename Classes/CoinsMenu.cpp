@@ -63,7 +63,7 @@ cocos2d::CCNode * node = createUIByCCBI("menu-coins", "CoinsMenu", CoinsMenuLaye
     mFly = false;
     
     mScrollBody = cocos2d::Sprite::createWithSpriteFrameName("sp_scroll2.png");
-    mScrollBody->setAnchorPoint(cocos2d::ccp(0, 1));
+    mScrollBody->setAnchorPoint(cocos2d::Vec2(0, 1));
     mClipedList->addChild(mScrollBody);
     
     mSceneIntro = NULL;
@@ -134,7 +134,7 @@ cocos2d::Ref* node = NULL;
 //CCARRAY_FOREACH(mItemList->getChildren(), node)
 //        {
 //            FoldItem *it = (FoldItem*)node;
-//            it->setPosition(cocos2d::ccp(0, mOffset));
+//            it->setPosition(cocos2d::Vec2(0, mOffset));
 //            mOffset -= it->getContentSize().height + PADDING;
 //        }
         if( unfold )
@@ -165,7 +165,7 @@ void CoinsMenu::addItem(int iid)
         cost = -1;
     }
     CFoldItem *fi = CFoldItem::foldItem(iid, cost, true, iid, gSDetails[iid-1], 1, this);
-    fi->setPosition(cocos2d::ccp(0, mOffset));
+    fi->setPosition(cocos2d::Vec2(0, mOffset));
     mItemList->addChild(fi, 1, mItemList->getChildrenCount());
     mOffset -= fi->getContentSize().height + PADDING;
 }
@@ -269,7 +269,7 @@ void CoinsMenu::updateScorll()
     float length = 264.0f*(264.0f/-mOffset)/100;
     float begin = -264.0f*(mItemList->getPosition().y/-mOffset);
     mScrollBody->setScaleY(length);
-    mScrollBody->setPosition(cocos2d::ccp(441, begin));
+    mScrollBody->setPosition(cocos2d::Vec2(441, begin));
 }
 
 
@@ -397,13 +397,13 @@ CCARRAY_FOREACH(mItemList->getChildren(), node)
                 it->togglePurchaseButton(false);
             }
 cocos2d::Sprite *spbg = cocos2d::Sprite::createWithSpriteFrameName("sp-tc.png");
-            spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)));
+            spbg->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)));
             mMask->addChild(spbg);
 cocos2d::Sprite *titlesp = cocos2d::Sprite::createWithSpriteFrameName("sp-tc3.png");
-            titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 105));
+            titlesp->setPosition(cocos2d::Vec2( spbg->getContentSize().width/2, 105));
             spbg->addChild(titlesp);
 cocos2d::Sprite *descsp = cocos2d::Sprite::createWithSpriteFrameName("sp-tc2.png");
-            descsp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 55));
+            descsp->setPosition(cocos2d::Vec2( spbg->getContentSize().width/2, 55));
             spbg->addChild(descsp);
 cocos2d::CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 720);
 cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
@@ -484,10 +484,10 @@ void CoinsMenu::purchaseFailed(int pid)
         //tell user purchase failed.
         mMask->removeAllChildrenWithCleanup(true);
 cocos2d::Sprite *spbg = cocos2d::Sprite::createWithSpriteFrameName("sp-tc.png");
-        spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
+        spbg->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
         mMask->addChild(spbg);
 cocos2d::Sprite *titlesp = cocos2d::Sprite::createWithSpriteFrameName("sp-tc5.png");
-        titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 65));
+        titlesp->setPosition(cocos2d::Vec2( spbg->getContentSize().width/2, 65));
         spbg->addChild(titlesp);
         
         mModalTimer = 3;
@@ -504,10 +504,10 @@ void CoinsMenu::purchaseCancelled(int pid)
         //just cancel the modal
         mMask->removeAllChildrenWithCleanup(true);
 cocos2d::Sprite *spbg = cocos2d::Sprite::createWithSpriteFrameName("sp-tc.png");
-        spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
+        spbg->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
         mMask->addChild(spbg);
 cocos2d::Sprite *titlesp = cocos2d::Sprite::createWithSpriteFrameName("sp-tc4.png");
-        titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 65));
+        titlesp->setPosition(cocos2d::Vec2( spbg->getContentSize().width/2, 65));
         spbg->addChild(titlesp);
         
         mModalTimer = 3;

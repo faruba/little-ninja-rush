@@ -25,8 +25,8 @@ cocos2d::CCLog("UniversalFit::UniversalFit() NULL == pDirector");
   else
   {
 cocos2d::CCSize size = pDirector->getWinSize();
-    centralPoint = ccp(size.width/2.0, size.height/2.0);
-    sceneOffset = ccp(0, 0);
+    centralPoint = Vec2(size.width/2.0, size.height/2.0);
+    sceneOffset = Vec2(0, 0);
     fakeScale = false;
     scaleFactor = 1.0f;
   }
@@ -94,7 +94,7 @@ void UniversalFit::setAutofit(cocos2d::CCSize size)
   screenSize = size;
   scaleFactor = size.width/SCREEN_WIDTH < size.height/SCREEN_HEIGHT ? size.width/SCREEN_WIDTH : size.height/SCREEN_HEIGHT;//以宽度为基准 (maximum extend)
 cocos2d::CCSize scaleSize = cocos2d::CCSizeMake(SCREEN_WIDTH*scaleFactor, SCREEN_HEIGHT*scaleFactor);
-    sceneOffset = ccp(0, 0);//ccp((size.width - SCREEN_WIDTH*scaleFactor)/2, (size.height - SCREEN_HEIGHT*scaleFactor)/2);
+    sceneOffset = Vec2(0, 0);//Vec2((size.width - SCREEN_WIDTH*scaleFactor)/2, (size.height - SCREEN_HEIGHT*scaleFactor)/2);
   //clipRect.setRect(0, (size.height - scaleSize.height)/2, size.width, scaleSize.height);
     clipRect.setRect(0, 0, SCREEN_WIDTH*4, SCREEN_HEIGHT*4);//hammer android titlemenu clip test
     baseHeight =0;//clipRect.origin.y;

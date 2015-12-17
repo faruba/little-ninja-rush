@@ -24,7 +24,7 @@ void PauseMenuClassic::updateClassic()
         mDailyIcon->setVisible(true);
         Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
 cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-        icon->setPosition(cocos2d::ccp(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+        icon->setPosition(cocos2d::Vec2(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mDailyIcon->addChild(icon);
         
         //判断是否完成
@@ -46,7 +46,7 @@ cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->ge
         mWeeklyIcon->setVisible(true);
         Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
 cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-        icon->setPosition(cocos2d::ccp(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+        icon->setPosition(cocos2d::Vec2(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mWeeklyIcon->addChild(icon);
         
         //判断是否完成
@@ -68,7 +68,7 @@ cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->ge
         mMonthlyIcon->setVisible(true);
         Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
 cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-        icon->setPosition(cocos2d::ccp(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+        icon->setPosition(cocos2d::Vec2(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
         mMonthlyIcon->addChild(icon);
         
         //判断是否完成
@@ -85,19 +85,19 @@ cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->ge
     for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
     {
 cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-        crown->setPosition(cocos2d::ccp(32-16*i, 0));
+        crown->setPosition(cocos2d::Vec2(32-16*i, 0));
         mDailyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective->index; ++i)
     {
 cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-        crown->setPosition(cocos2d::ccp(32-16*i, 0));
+        crown->setPosition(cocos2d::Vec2(32-16*i, 0));
         mWeeklyCrown->addChild(crown);
     }
     for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective->index; ++i)
     {
 cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-        crown->setPosition(cocos2d::ccp(32-16*i, 0));
+        crown->setPosition(cocos2d::Vec2(32-16*i, 0));
         mMonthlyCrown->addChild(crown);
     }
     
@@ -177,11 +177,11 @@ cocos2d::CCNode *node = pReader->readNodeGraphFromFile("pause_classic.ccbi", thi
 cocos2d::CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
     //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH*4, SCREEN_HEIGHT*4);
     mBoard->setClipRect(new CCRect(UniversalFit::sharedUniversalFit()->transformRect(rect)));
-    mBoard->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft-301, 68));
+    mBoard->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->baseLeft-301, 68));
     play->ui()->addChild(mBoard);
     
     mRode = cocos2d::Sprite::createWithSpriteFrameName("zt_jz.png");
-    mRode->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft + 60, 180));
+    mRode->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->baseLeft + 60, 180));
     play->ui()->addChild(mRode);
     mTimer = 0;
     mFlag = false;
@@ -254,12 +254,12 @@ void PauseMenuClassic::onUpdate(float delta)
     mTimer += play->deltaTime;
     if( mTimer <= 0.2f )
     {
-        mBoard->setPosition(cocos2d::ccp( UniversalFit::sharedUniversalFit()->baseLeft-301 + 371*mTimer/0.2f, 68));
+        mBoard->setPosition(cocos2d::Vec2( UniversalFit::sharedUniversalFit()->baseLeft-301 + 371*mTimer/0.2f, 68));
     }
     if ( mTimer > 0.2f && !mFlag ) 
     {
         mFlag = true;
-        mBoard->setPosition(cocos2d::ccp( UniversalFit::sharedUniversalFit()->baseLeft-301 + 371, 68));
+        mBoard->setPosition(cocos2d::Vec2( UniversalFit::sharedUniversalFit()->baseLeft-301 + 371, 68));
         mQuit->setVisible(true);
         mResume->setVisible(true);
         mRetry->setVisible(true);

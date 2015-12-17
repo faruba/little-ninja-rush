@@ -23,7 +23,7 @@ cocos2d::Scene *ret = cocos2d::Scene::create();
 
   //universal
   ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-  ret->setAnchorPoint(cocos2d::ccp(0, 0));
+  ret->setAnchorPoint(cocos2d::Vec2(0, 0));
   ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
 
   CEClipedNode *clip = CEClipedNode::create();
@@ -54,22 +54,22 @@ void CollectionMenu::setModal(const char * title, const char * desc, Ref* target
   mMenu->setTouchEnabled(false);
   mPowerupMenu->setTouchEnabled(false);
 cocos2d::Sprite *spbg = cocos2d::Sprite::createWithSpriteFrameName("sp-tc.png");
-  spbg->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
+  spbg->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
   mMask->addChild(spbg);
 cocos2d::Sprite *titlesp = cocos2d::Sprite::createWithSpriteFrameName(title);
-  titlesp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 105));
+  titlesp->setPosition(cocos2d::Vec2( spbg->getContentSize().width/2, 105));
   spbg->addChild(titlesp);
 cocos2d::Sprite *descsp = cocos2d::Sprite::createWithSpriteFrameName(desc);
-  descsp->setPosition(cocos2d::ccp( spbg->getContentSize().width/2, 75));
+  descsp->setPosition(cocos2d::Vec2( spbg->getContentSize().width/2, 75));
   spbg->addChild(descsp);
     /* TODO:fix this
 cocos2d::CCMenuItemImage *menuConfirm = cocos2d::CCMenuItemImage::create("pu-confirm1.png", "pu-confirm2.png", this, menu_selector(CollectionMenu::onModalConfirm));
-  menuConfirm->setPosition(cocos2d::ccp(75, 35));
+  menuConfirm->setPosition(cocos2d::Vec2(75, 35));
 cocos2d::CCMenuItemImage *menuCancel = cocos2d::CCMenuItemImage::create("pu-cancel1.png", "pu-cancel2.png", this, menu_selector(CollectionMenu::onModalCancel));
      
-  menuCancel->setPosition(cocos2d::ccp(200, 35));
+  menuCancel->setPosition(cocos2d::Vec2(200, 35));
 cocos2d::CCMenu *menu = cocos2d::CCMenu::create(menuConfirm, menuCancel, NULL);
-  menu->setPosition(cocos2d::ccp(0, 0));
+  menu->setPosition(cocos2d::Vec2(0, 0));
   spbg->addChild(menu);
      */
 }
@@ -142,7 +142,7 @@ void CollectionMenu::onEnter()
 
   //do some initialization
 cocos2d::CCNode *taskcomplete = cocos2d::CCNode::create();
-  taskcomplete->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT));
+  taskcomplete->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, 5);
   GamePlay::setTaskCompleteNode(taskcomplete);
   //----------
@@ -168,7 +168,7 @@ cocos2d::CCRect clip = cocos2d::CCRectMake(mScrollPoint->getPosition().x, mScrol
   mScrollPoint->addChild(mScroll, -1);
 
 
-  mShadowDir = ccpNormalize(cocos2d::ccp(-12, 17));
+  mShadowDir = ccpNormalize(cocos2d::Vec2(-12, 17));
   this->scheduleUpdate();
   this->setTouchEnabled(true);
 
@@ -283,7 +283,7 @@ CCARRAY_FOREACH (shurikens, obj)
 cocos2d::Sprite *item = cocos2d::Sprite::createWithSpriteFrameName("sc_fbbg2.png");
     int x = count%4;
     int y = count/4;
-    item->setPosition(cocos2d::ccp(42 + 79*x, -29.5 - 59*y));
+    item->setPosition(cocos2d::Vec2(42 + 79*x, -29.5 - 59*y));
     mScroll->contentNode->addChild(item, 1, count);
     //extend contentSize
     {
@@ -321,7 +321,7 @@ cocos2d::Sprite *mask = cocos2d::Sprite::createWithSpriteFrameName(filename->get
     if( GameRecord::sharedGameRecord()->collection->isContainedInNewList(sh->uiid) )
     {
 cocos2d::Sprite *newsp = cocos2d::Sprite::createWithSpriteFrameName("sc_new.png");
-      newsp->setPosition(ccpAdd(item->getPosition(), ccp(33, 24)));
+      newsp->setPosition(ccpAdd(item->getPosition(), Vec2(33, 24)));
       mScroll->contentNode->addChild(newsp, 6, 100+count);
     }
     count++;
@@ -376,7 +376,7 @@ CCARRAY_FOREACH (katanas, obj)
 cocos2d::Sprite *item = cocos2d::Sprite::createWithSpriteFrameName("sc_fbbg2.png");
     int x = count%4;
     int y = count/4;
-    item->setPosition(cocos2d::ccp( 42 + 79*x, -29.5 - 59*y ));
+    item->setPosition(cocos2d::Vec2( 42 + 79*x, -29.5 - 59*y ));
     mScroll->contentNode->addChild(item, 1, count);
     //extend contentSize
     {
@@ -414,7 +414,7 @@ cocos2d::Sprite *mask = cocos2d::Sprite::createWithSpriteFrameName(filename->get
     if( GameRecord::sharedGameRecord()->collection->isContainedInNewList(sh->uiid) )
     {
 cocos2d::Sprite *newsp = cocos2d::Sprite::createWithSpriteFrameName("sc_new.png");
-      newsp->setPosition(ccpAdd(item->getPosition(), ccp(33, 24)));
+      newsp->setPosition(ccpAdd(item->getPosition(), Vec2(33, 24)));
       mScroll->contentNode->addChild(newsp, 6, 100+count);
     }
     count++;
@@ -466,7 +466,7 @@ CCARRAY_FOREACH (specials, obj)
 cocos2d::Sprite *item = cocos2d::Sprite::createWithSpriteFrameName("sc_fbbg2.png");
     int x = count%4;
     int y = count/4;
-    item->setPosition(cocos2d::ccp( 42 + 79*x, -29.5 - 59*y ));
+    item->setPosition(cocos2d::Vec2( 42 + 79*x, -29.5 - 59*y ));
 
     mScroll->contentNode->addChild(item, 1, count);
 
@@ -507,7 +507,7 @@ cocos2d::Sprite *mask = cocos2d::Sprite::createWithSpriteFrameName(filename->get
     if( GameRecord::sharedGameRecord()->collection->isContainedInNewList(sh->uiid) )
     {
 cocos2d::Sprite *newsp = cocos2d::Sprite::createWithSpriteFrameName("sc_new.png");
-      newsp->setPosition(ccpAdd(item->getPosition(), ccp(33, 24)));
+      newsp->setPosition(ccpAdd(item->getPosition(), Vec2(33, 24)));
       mScroll->contentNode->addChild(newsp, 6, 100+count);
     }
     count++;
@@ -1082,19 +1082,19 @@ void CollectionMenu::updateCharacterInfo(int rid, int bid)
      if( i<GameData::roleCurrHP(rid) )
      {
 cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName("heart.png");
-       sp->setPosition(cocos2d::ccp(i*18, 0));
+       sp->setPosition(cocos2d::Vec2(i*18, 0));
        mLifeGuage->addChild(sp, 0, i);
      }
      else {
        if( bid == 1 && i == GameData::roleCurrHP(rid) )
        {
          GTAnimatedEffect *sp = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("ui"), 0, true);
-         sp->setPosition(cocos2d::ccp(i*18, 0));
+         sp->setPosition(cocos2d::Vec2(i*18, 0));
          mLifeGuage->addChild(sp);
        }
        else {
 cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName("pulife2.png");
-         sp->setPosition(cocos2d::ccp(i*18, 0));
+         sp->setPosition(cocos2d::Vec2(i*18, 0));
          mLifeGuage->addChild(sp);
        }
      }
@@ -1106,19 +1106,19 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName("pulife2.png");
      if( i<GameData::roleCurrDart(rid) )
      {
 cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName("ui-dart.png");
-       sp->setPosition(cocos2d::ccp(i*12, 0));
+       sp->setPosition(cocos2d::Vec2(i*12, 0));
        mDartGuage->addChild(sp);
      }
      else {
        if( bid == 2 && i == GameData::roleCurrDart(rid) )
        {
          GTAnimatedEffect *sp = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("ui"), 1, true);
-         sp->setPosition(cocos2d::ccp(i*12, 0));
+         sp->setPosition(cocos2d::Vec2(i*12, 0));
          mDartGuage->addChild(sp);
        }
        else {
 cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName("pushuriken2.png");
-         sp->setPosition(cocos2d::ccp(i*12, 0));
+         sp->setPosition(cocos2d::Vec2(i*12, 0));
          mDartGuage->addChild(sp);
        }
      }
@@ -1218,7 +1218,7 @@ void CollectionMenu::onSelectLife()
   if( mCurrItem != 1 )
   {
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
-    mCurrentMark->setPosition(cocos2d::ccp(385, 145));
+    mCurrentMark->setPosition(cocos2d::Vec2(385, 145));
     mCurrentMark->setVisible(true);
     mCurrItem = 1;
     updateCharacterInfo(GameRecord::sharedGameRecord()->curr_char, mCurrItem);
@@ -1234,7 +1234,7 @@ void CollectionMenu::onSelectDart()
   if( mCurrItem != 2 )
   {
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3").c_str());
-    mCurrentMark->setPosition(cocos2d::ccp(385, 65));
+    mCurrentMark->setPosition(cocos2d::Vec2(385, 65));
     mCurrentMark->setVisible(true);
     mCurrItem = 2;
     updateCharacterInfo(GameRecord::sharedGameRecord()->curr_char, mCurrItem);

@@ -31,7 +31,7 @@ PumpkinFire* PumpkinFire::dart(cocos2d::Point pos, cocos2d::Point dir, CCNode* p
 void PumpkinFire::onCreate() 
 {
     mSprite = cocos2d::Sprite::createWithSpriteFrameName("fbh_tail.png");
-    mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.95f));
+    mSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.95f));
     mSprite->setPosition(pos);
     mSprite->setRotation(90-CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
     mParent->addChild(mSprite, LAYER_MAINROLE+1);
@@ -60,13 +60,13 @@ CCARRAY_FOREACH(play->enemies, node)
             if( hit )
             {
                 GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), PUMPKINHIT_EFF2, false);
-                hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+                hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                 hiteff->setPosition(em->center());
                 hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(direction) ) + 60*CCRANDOM_0_1());
                 mParent->addChild(hiteff, LAYER_MAINROLE+1);
                 
                 GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), PUMPKINHIT_EFF1, false);
-                hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+                hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                 hiteff2->setPosition(em->center());
                 mParent->addChild(hiteff2, LAYER_ROLE);
                 

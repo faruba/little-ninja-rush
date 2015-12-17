@@ -58,7 +58,7 @@ NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
 cocosbuilder::CCBReader *pReader = new CCBReader(pNodeLib, this, this);
 cocos2d::CCNode *node = pReader->readNodeGraphFromFile("ui-continue.ccbi", this);
       pReader->release();
-      node->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
+      node->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->baseLeft, 0));
       this->addChild(node);
 
       auto listener = EventListenerTouchOneByOne::create();

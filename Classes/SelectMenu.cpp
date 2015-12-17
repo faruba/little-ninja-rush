@@ -48,7 +48,7 @@ bool SelectMenu::init()
   this->scheduleUpdate();
   this->setTouchEnabled(true);
 cocos2d::CCNode *taskcomplete = cocos2d::CCNode::create();
-  taskcomplete->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, SCREEN_HEIGHT));
+  taskcomplete->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, 5);
 
   GamePlay::sharedGamePlay()->setTaskCompleteNode(taskcomplete);
@@ -79,19 +79,19 @@ cocos2d::CCNode *ui = createUIByCCBI("menu-select", "SelectMenu", SelectMenuLaye
   }
 
   mProtraits[0] = cocos2d::Sprite::createWithSpriteFrameName("xr_main.png");
-  mProtraits[0]->setAnchorPoint(cocos2d::ccp(0.5f, 0));
+  mProtraits[0]->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
   mProtraits[0]->setVisible(false);
   mHero->addChild(mProtraits[0]);
   mProtraits[1] = cocos2d::Sprite::createWithSpriteFrameName("xr_girl.png");
-  mProtraits[1]->setAnchorPoint(cocos2d::ccp(0.5f, 0));
+  mProtraits[1]->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
   mProtraits[1]->setVisible(false);
   mHero->addChild(mProtraits[1]);
   mProtraits[2] = cocos2d::Sprite::createWithSpriteFrameName("xr_musashi.png");
-  mProtraits[2]->setAnchorPoint(cocos2d::ccp(0.5f, 0));
+  mProtraits[2]->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
   mProtraits[2]->setVisible(false);
   mHero->addChild(mProtraits[2]);
   mProtraits[3] = cocos2d::Sprite::createWithSpriteFrameName("xr_cat.png");
-  mProtraits[3]->setAnchorPoint(cocos2d::ccp(0.5f, 0));
+  mProtraits[3]->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
   mProtraits[3]->setVisible(false);
   mHero->addChild(mProtraits[3]);
 
@@ -99,19 +99,19 @@ cocos2d::CCNode *ui = createUIByCCBI("menu-select", "SelectMenu", SelectMenuLaye
   mSlideTimer = -1;
   mTargetRole = -1;
   //添加动画
-cocos2d::CCMoveBy *lmb1 = cocos2d::CCMoveBy::create(0.2f, ccp(-10, 0));
-cocos2d::CCMoveBy *lmb2 = cocos2d::CCMoveBy::create(0.2f, ccp(10, 0));
+cocos2d::CCMoveBy *lmb1 = cocos2d::CCMoveBy::create(0.2f, Vec2(-10, 0));
+cocos2d::CCMoveBy *lmb2 = cocos2d::CCMoveBy::create(0.2f, Vec2(10, 0));
 cocos2d::CCSequence *lseq = (cocos2d::CCSequence*)CCSequence::create(lmb1, lmb2, NULL);
 cocos2d::CCRepeatForever *lrep = cocos2d::CCRepeatForever::create(lseq);
   mLeftMark->runAction(lrep);
-cocos2d::CCMoveBy *rmb1 = cocos2d::CCMoveBy::create(0.2f, ccp(10, 0));
-cocos2d::CCMoveBy *rmb2 = cocos2d::CCMoveBy::create(0.2f, ccp(-10, 0));
+cocos2d::CCMoveBy *rmb1 = cocos2d::CCMoveBy::create(0.2f, Vec2(10, 0));
+cocos2d::CCMoveBy *rmb2 = cocos2d::CCMoveBy::create(0.2f, Vec2(-10, 0));
 cocos2d::CCSequence *rseq = (cocos2d::CCSequence*)CCSequence::create(rmb1, rmb2, NULL);
 cocos2d::CCRepeatForever *rrep = cocos2d::CCRepeatForever::create(rseq);
   mRightMark->runAction(rrep);
   mCurrRole = GameRecord::sharedGameRecord()->curr_char;
   this->updateCharacterInfo(mCurrRole);
-  mShadowDir = ccpNormalize(cocos2d::ccp(-12, 17));
+  mShadowDir = ccpNormalize(cocos2d::Vec2(-12, 17));
   //创建角色肖像
   mCurrAngle = mCurrRole*90;
   this->updateAngle();
@@ -133,7 +133,7 @@ void SelectMenu::updateCharacterInfo(int rid)
 //    for(int i=0; i<GameData::roleCurrHP(rid); ++i)
 //    {
 //cocos2d::Sprite *heart = cocos2d::Sprite::createWithSpriteFrameName("heart.png");
-//      heart->setPosition(cocos2d::ccp(i*(1+heart->getContentSize().width), 0));
+//      heart->setPosition(cocos2d::Vec2(i*(1+heart->getContentSize().width), 0));
 //      mHearts->addChild(heart);
 //    }
 //    mBouns->setVisible(false);
@@ -153,7 +153,7 @@ void SelectMenu::updateCharacterInfo(int rid)
 //  for(int i=0; i<GameData::roleCurrDart(rid); ++i)
 //  {
 //cocos2d::Sprite *dart = cocos2d::Sprite::createWithSpriteFrameName("ui-dart.png");
-//    dart->setPosition(cocos2d::ccp(i*dartoff, 0));
+//    dart->setPosition(cocos2d::Vec2(i*dartoff, 0));
 //    mDarts->addChild(dart);
 //  }
 //  //更新飞镖 更新特技 更新刀刃
@@ -201,8 +201,8 @@ void SelectMenu::updateCharacterInfo(int rid)
 //    mStartPos->removeChild(mPreview, true);
 //  }
 //  mPreview = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(GameData::roleAnimation(rid)->getCString()));
-//  mPreview->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
-//  mPreview->setPosition(cocos2d::ccp( -10, 10));
+//  mPreview->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
+//  mPreview->setPosition(cocos2d::Vec2( -10, 10));
 //  mPreview->playGTAnimation(0, true);
 //  mStartPos->addChild(mPreview);
 //  if( GameRecord::sharedGameRecord()->char_contract[rid] == 0 )
@@ -247,7 +247,7 @@ void SelectMenu::updateAngle()
       mProtraits[i]->setOpacity(255*m);
       mProtraits[i]->setScale(scale);
       mProtraits[i]->setColor(col);
-      mProtraits[i]->setPosition(cocos2d::ccp(pos, 0));
+      mProtraits[i]->setPosition(cocos2d::Vec2(pos, 0));
       mProtraits[i]->setVisible(true);
     }
   }

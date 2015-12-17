@@ -102,8 +102,8 @@ cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameC
         this->addChild(mpWindowTiles[i]);
       }
       mpWindowTiles[i]->getTexture()->setAliasTexParameters();//v1.0.4
-      mpWindowTiles[i]->setPosition(cocos2d::ccp( mTileSize*i, 0));
-      mpWindowTiles[i]->setAnchorPoint(cocos2d::ccp(0, 0));
+      mpWindowTiles[i]->setPosition(cocos2d::Vec2( mTileSize*i, 0));
+      mpWindowTiles[i]->setAnchorPoint(cocos2d::Vec2(0, 0));
 
     }
     int left = Count - mWindowTileCount;
@@ -181,6 +181,6 @@ cocos2d::CCLog("GameWarning: RingTile::runTiles > Not enough pending tiles.");
     {
         int si = (mWindowSpriteIndex + i) % mWindowTileCount;
         int off = mAccmulator;
-        mpWindowTiles[si]->setPosition(cocos2d::ccp( mTileSize*i - off, 0));
+        mpWindowTiles[si]->setPosition(cocos2d::Vec2( mTileSize*i - off, 0));
     }
 }

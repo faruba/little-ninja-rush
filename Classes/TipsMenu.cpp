@@ -24,7 +24,7 @@ USING_NS_CC_EXT;
 //    
 //    //universal
 //    ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-//    ret->setAnchorPoint(cocos2d::ccp(0, 0));
+//    ret->setAnchorPoint(cocos2d::Vec2(0, 0));
 //    ret->setPosition(
 //    
 //    CEClipedNode *clip = CEClipedNode::create();
@@ -77,8 +77,8 @@ void TipsMenu::updateTip(int index)
         mCount = cocos2d::CCLabelTTF::create(cocos2d::CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips()->count())->getCString(), GFONT_NAME, GFONT_SIZE_LARGE);
         //mCount = [CCLabelTTF, CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips)->count()()
         //                            fontName:TIP_FONTNAME fontSize:24];
-        mCount->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
-        mCount->setPosition(cocos2d::ccp(240, 50));
+        mCount->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+        mCount->setPosition(cocos2d::Vec2(240, 50));
         this->addChild(mCount);
     }
     else {
@@ -95,8 +95,8 @@ cocos2d::CCSize size = cocos2d::CCSizeMake(300, 100);
     //                    constrainedToSize:size
     //                        lineBreakMode:UILineBreakModeWordWrap];
     mTip = cocos2d::CCLabelTTF::create(tip->getCString(), GFONT_NAME, GFONT_SIZE_LARGE, size, kCCTextAlignmentCenter);
-    mTip->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
-    mTip->setPosition(cocos2d::ccp(240, 160));
+    mTip->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+    mTip->setPosition(cocos2d::Vec2(240, 160));
     this->addChild(mTip);
     if( index == 0 )
     {
@@ -152,26 +152,26 @@ void TipsMenu::setSceneIntro()
         mSceneIntro = cocos2d::CCNode::create();
         this->addChild(mSceneIntro);
 cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
-        left->setAnchorPoint(cocos2d::ccp(1, 0));
+        left->setAnchorPoint(cocos2d::Vec2(1, 0));
         mSceneIntro->addChild(left, 0, 0);
 cocos2d::Sprite *right = cocos2d::Sprite::create("door.png");
         right->setScaleX(-1);
-        right->setAnchorPoint(cocos2d::ccp(1, 0));
+        right->setAnchorPoint(cocos2d::Vec2(1, 0));
         mSceneIntro->addChild(right, 0, 1);
     }
 cocos2d::Sprite *left = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(0));
     left->setVisible(true);
-    left->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, 0));
+    left->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
 cocos2d::Sprite *right = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(1));
     right->setVisible(true);
-    right->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, 0));
+    right->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
 cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, ccp(-SCREEN_WIDTH/2, 0));
+cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, Vec2(-SCREEN_WIDTH/2, 0));
     //CCHide *hd1 = cocos2d::CCHide->action();
 cocos2d::CCSequence *sq1 = cocos2d::CCSequence::create(dt1, mb1, NULL);
     left->runAction(sq1);
 cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, ccp(SCREEN_WIDTH/2, 0));
+cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME, Vec2(SCREEN_WIDTH/2, 0));
     //CCHide *hd2 = cocos2d::CCHide->action();
 cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(dt2, mb2, NULL);
     right->runAction(sq2);
@@ -194,25 +194,25 @@ void TipsMenu::setSceneOutro(cocos2d::Scene* newscene)
         mSceneIntro = cocos2d::CCNode::create();
         this->addChild(mSceneIntro);
 cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
-        left->setAnchorPoint(cocos2d::ccp(1, 0));
+        left->setAnchorPoint(cocos2d::Vec2(1, 0));
         mSceneIntro->addChild(left, 0, 0);
 cocos2d::Sprite *right = cocos2d::Sprite::create("door.png");
         right->setScaleX(-1);
-        right->setAnchorPoint(cocos2d::ccp(1, 0));
+        right->setAnchorPoint(cocos2d::Vec2(1, 0));
         mSceneIntro->addChild(right, 0, 1);
     }
 cocos2d::Sprite *left = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(0));
     left->setVisible(true);
-    left->setPosition(cocos2d::ccp(0, 0));
+    left->setPosition(cocos2d::Vec2(0, 0));
 cocos2d::Sprite *right = (cocos2d::Sprite*)(mSceneIntro->getChildByTag(1));
     right->setVisible(true);
-    right->setPosition(cocos2d::ccp(SCREEN_WIDTH, 0));
-cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, ccp(SCREEN_WIDTH/2, 0));
+    right->setPosition(cocos2d::Vec2(SCREEN_WIDTH, 0));
+cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, Vec2(SCREEN_WIDTH/2, 0));
 cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEOUTRO_DELAY);
 cocos2d::CCCallFunc *ca1 = cocos2d::CCCallFunc::create(this, callfunc_selector(TipsMenu::doneOutro));
 cocos2d::CCSequence *sq1 = cocos2d::CCSequence::create(mb1, dt1, ca1, NULL);
     left->runAction(sq1);
-cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, ccp(-SCREEN_WIDTH/2, 0));
+cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, Vec2(-SCREEN_WIDTH/2, 0));
 cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEOUTRO_DELAY);
 cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(mb2, dt2, NULL);
     right->runAction(sq2);

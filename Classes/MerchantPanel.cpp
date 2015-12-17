@@ -43,11 +43,11 @@ CCBReader *pReader = new CCBReader(pNodeLib);
 cocos2d::CCNode *node = pReader->readNodeGraphFromFile("merchant", this);
     pReader->release();
     mMerchantbox = node;
-    mMerchantbox->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->baseLeft, -SCREEN_HEIGHT));
+    mMerchantbox->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->baseLeft, -SCREEN_HEIGHT));
     play->addChild(mMerchantbox, LAYER_MASK+1);
     
     //animation set
-cocos2d::CCMoveTo *mt1 = cocos2d::CCMoveTo::create(0.5f, ccp(UniversalFit::sharedUniversalFit()->baseLeft, 0));
+cocos2d::CCMoveTo *mt1 = cocos2d::CCMoveTo::create(0.5f, Vec2(UniversalFit::sharedUniversalFit()->baseLeft, 0));
     mMerchantbox->runAction(mt1);
 cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(0.5f);
 cocos2d::CCFadeIn *fi2 = cocos2d::CCFadeIn::create(0.5f);

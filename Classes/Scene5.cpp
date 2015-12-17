@@ -36,14 +36,14 @@ void Scene5::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     
     int btiles[] = {63, 64, 65, 66, 67, 68, 69, 70, 63, 64, 65, 66, 63, 64, 65, 66, 67, 68, 69, 70, 63, 64, 65, 66};
     mTiles->initTiles(btiles, 24);
-    mTiles->setPosition(cocos2d::ccp(0, 0));
+    mTiles->setPosition(cocos2d::Vec2(0, 0));
     
     //增加前景
     for( int i=0; i<4; ++i)
     {
         mFronts[i] = cocos2d::Sprite::createWithSpriteFrameName("cj5_qj.png");
-        mFronts[i]->setAnchorPoint(cocos2d::ccp(0, 0));
-        mFronts[i]->setPosition(cocos2d::ccp(mFronts[i]->getContentSize().width*i, 0));
+        mFronts[i]->setAnchorPoint(cocos2d::Vec2(0, 0));
+        mFronts[i]->setPosition(cocos2d::Vec2(mFronts[i]->getContentSize().width*i, 0));
         mFront->addChild(mFronts[i]);
     }
     
@@ -51,8 +51,8 @@ void Scene5::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     for( int i=0; i<3; ++i)
     {
         mBgs3[i] = cocos2d::Sprite::createWithSpriteFrameName("cj5_hj3.png");
-        mBgs3[i]->setAnchorPoint(cocos2d::ccp(0, 1));
-        mBgs3[i]->setPosition(cocos2d::ccp(mBgs3[i]->getContentSize().width*i, SCREEN_HEIGHT));
+        mBgs3[i]->setAnchorPoint(cocos2d::Vec2(0, 1));
+        mBgs3[i]->setPosition(cocos2d::Vec2(mBgs3[i]->getContentSize().width*i, SCREEN_HEIGHT));
         mBg->addChild(mBgs3[i]);
     }
     
@@ -60,8 +60,8 @@ void Scene5::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     for( int i=0; i<2; ++i)
     {
         mBgs1[i] = cocos2d::Sprite::createWithSpriteFrameName("cj5_hj2.png");
-        mBgs1[i]->setAnchorPoint(cocos2d::ccp(0, 1));
-        mBgs1[i]->setPosition(cocos2d::ccp(mBgs1[i]->getContentSize().width*i, SCREEN_HEIGHT));
+        mBgs1[i]->setAnchorPoint(cocos2d::Vec2(0, 1));
+        mBgs1[i]->setPosition(cocos2d::Vec2(mBgs1[i]->getContentSize().width*i, SCREEN_HEIGHT));
         mBg->addChild(mBgs1[i]);
     }
     
@@ -69,8 +69,8 @@ void Scene5::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     for( int i=0; i<3; ++i)
     {
         mBgs2[i] = cocos2d::Sprite::createWithSpriteFrameName("cj5_hj1.png");
-        mBgs2[i]->setAnchorPoint(cocos2d::ccp(0, 1));
-        mBgs2[i]->setPosition(cocos2d::ccp(mBgs2[i]->getContentSize().width*i, SCREEN_HEIGHT));
+        mBgs2[i]->setAnchorPoint(cocos2d::Vec2(0, 1));
+        mBgs2[i]->setPosition(cocos2d::Vec2(mBgs2[i]->getContentSize().width*i, SCREEN_HEIGHT));
         mBg->addChild(mBgs2[i]);
     }
 }
@@ -84,7 +84,7 @@ void Scene5::update(float delta)
         int doff = woff%dr;
         for( int i=0; i<4; ++i)
         {
-            mFronts[i]->setPosition(cocos2d::ccp(-doff+dr*i, 0));
+            mFronts[i]->setPosition(cocos2d::Vec2(-doff+dr*i, 0));
         }
     }
     //滚动背景0
@@ -94,7 +94,7 @@ void Scene5::update(float delta)
         int doff = woff%dr;
         for( int i=0; i<3; ++i)
         {
-            mBgs3[i]->setPosition(cocos2d::ccp(-doff+dr*i, SCREEN_HEIGHT));
+            mBgs3[i]->setPosition(cocos2d::Vec2(-doff+dr*i, SCREEN_HEIGHT));
         }
     }
     //滚动背景1
@@ -104,7 +104,7 @@ void Scene5::update(float delta)
         int doff = woff%dr;
         for( int i=0; i<2; ++i)
         {
-            mBgs1[i]->setPosition(cocos2d::ccp(-doff+dr*i, SCREEN_HEIGHT));
+            mBgs1[i]->setPosition(cocos2d::Vec2(-doff+dr*i, SCREEN_HEIGHT));
         }
     }
     //滚动背景2
@@ -114,7 +114,7 @@ void Scene5::update(float delta)
         int doff = woff%dr;
         for( int i=0; i<3; ++i)
         {
-            mBgs2[i]->setPosition(cocos2d::ccp(-doff+dr*i, SCREEN_HEIGHT));
+            mBgs2[i]->setPosition(cocos2d::Vec2(-doff+dr*i, SCREEN_HEIGHT));
         }
     }
 

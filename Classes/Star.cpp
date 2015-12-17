@@ -27,7 +27,7 @@ void Star::onCreate()
     GamePlay *play = GamePlay::sharedGamePlay();
     mSprite = cocos2d::Sprite::createWithSpriteFrameName("lxy.png");
     mSprite->setRotation(-90 - CC_RADIANS_TO_DEGREES(ccpToAngle(mDir)));
-    mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+    mSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     mSprite->setPosition(mPos);
     play->addChild(mSprite, LAYER_MAINROLE+1);
     
@@ -53,13 +53,13 @@ CCARRAY_FOREACH(play->enemies, node)
             {
                 SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
                 GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
-                hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+                hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                 hiteff->setPosition(em->center());
                 hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(mDir) ) + 60*CCRANDOM_0_1());
                 play->addChild(hiteff, LAYER_MAINROLE+1);
                 
                 GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 11, false);
-                hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+                hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                 hiteff2->setPosition(em->center());
                 play->addChild(hiteff2, LAYER_ROLE);
                 

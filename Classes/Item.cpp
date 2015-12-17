@@ -414,7 +414,7 @@ void Item::onUpdate(float delta)
             int level = GameRecord::sharedGameRecord()->item_upgrade[index];
             int effect = gEffectLevel[level];
             GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), effect, false);
-            hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+            hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
             hiteff2->setScale(1.5f);
             hiteff2->setPosition(role->center());
             mParent->addChild(hiteff2, LAYER_ROLE);

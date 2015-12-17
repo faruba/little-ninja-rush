@@ -17,7 +17,7 @@ Snow* Snow::snow(cocos2d::CCNode* parent)
     Snow *ret = Snow::create();
     ret->mSprite = cocos2d::Sprite::createWithSpriteFrameName("scene-snow.png");
     ret->mSprite->setOpacity(200);
-    ret->mSprite->setPosition(cocos2d::ccp((SCREEN_WIDTH+300)*CCRANDOM_0_1(), SCREEN_HEIGHT+50 ));
+    ret->mSprite->setPosition(cocos2d::Vec2((SCREEN_WIDTH+300)*CCRANDOM_0_1(), SCREEN_HEIGHT+50 ));
     ret->mParent = parent;
     ret->mWindX = CCRANDOM_0_1();
     ret->mSpeed = CCRANDOM_0_1()*50 - 80;
@@ -78,12 +78,12 @@ void Scene7::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
     
     int btiles[] = {83, 84, 85, 86, 83, 84, 85, 86, 83, 84, 85, 86, 83, 84, 85, 86, 83, 84, 85, 86, 83, 84, 85, 86};
     mTiles->initTiles(btiles, 24);
-    mTiles->setPosition(cocos2d::ccp(0, 0));
+    mTiles->setPosition(cocos2d::Vec2(0, 0));
     
     //sky
 cocos2d::Sprite *bgm = cocos2d::Sprite::createWithSpriteFrameName("mc-bg.png");
-    bgm->setAnchorPoint(cocos2d::ccp(0, 1));
-    bgm->setPosition(cocos2d::ccp(0, SCREEN_HEIGHT));
+    bgm->setAnchorPoint(cocos2d::Vec2(0, 1));
+    bgm->setPosition(cocos2d::Vec2(0, SCREEN_HEIGHT));
     bgm->setScaleX(UniversalFit::sharedUniversalFit()->screenSize.width/10);
     mBg->addChild(bgm);
     
@@ -96,8 +96,8 @@ cocos2d::Sprite *bgm = cocos2d::Sprite::createWithSpriteFrameName("mc-bg.png");
         mWhiteLen += 10 + 60*CCRANDOM_0_1();
         int tr = 1 + randomInt(4);
 cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-tree2-%d.png", tr)->getCString());
-        sp->setAnchorPoint(cocos2d::ccp(0, 0));
-        sp->setPosition(cocos2d::ccp(mWhiteLen, 55));
+        sp->setAnchorPoint(cocos2d::Vec2(0, 0));
+        sp->setPosition(cocos2d::Vec2(mWhiteLen, 55));
         mWhiteTrees->addChild(sp);
         mWhiteLen += sp->getContentSize().width;
     }
@@ -106,8 +106,8 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
     for( int i=0; i<3; ++i)
     {
         mSnowSlopes[i] = cocos2d::Sprite::createWithSpriteFrameName("mc-hj2.png");
-        mSnowSlopes[i]->setAnchorPoint(cocos2d::ccp(0, 0));
-        mSnowSlopes[i]->setPosition(cocos2d::ccp(mSnowSlopes[i]->getContentSize().width*i, 37));
+        mSnowSlopes[i]->setAnchorPoint(cocos2d::Vec2(0, 0));
+        mSnowSlopes[i]->setPosition(cocos2d::Vec2(mSnowSlopes[i]->getContentSize().width*i, 37));
         mBg->addChild(mSnowSlopes[i]);
     }
     
@@ -120,8 +120,8 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
         mWhiteLen2 += 10 + 60*CCRANDOM_0_1();
         int tr = 1 + randomInt(4);
 cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-tree2-%d.png", tr)->getCString());
-        sp->setAnchorPoint(cocos2d::ccp(0, 0));
-        sp->setPosition(cocos2d::ccp(mWhiteLen2, 60));
+        sp->setAnchorPoint(cocos2d::Vec2(0, 0));
+        sp->setPosition(cocos2d::Vec2(mWhiteLen2, 60));
         mWhiteTrees2->addChild(sp);
         mWhiteLen2 += sp->getContentSize().width;
     }
@@ -135,16 +135,16 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
         mGreenLen2 += 10 + 60*CCRANDOM_0_1();
         int tr = 1 + randomInt(4);
 cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-tree-%d.png", tr)->getCString());
-        sp->setAnchorPoint(cocos2d::ccp(0, 0));
-        sp->setPosition(cocos2d::ccp(mGreenLen2, 41));
+        sp->setAnchorPoint(cocos2d::Vec2(0, 0));
+        sp->setPosition(cocos2d::Vec2(mGreenLen2, 41));
         mGreenTrees2->addChild(sp);
         mGreenLen2 += sp->getContentSize().width;
     }
     
     //house
     mHouse = cocos2d::Sprite::createWithSpriteFrameName("mc-hj-house.png");
-    mHouse->setAnchorPoint(cocos2d::ccp(0, 0));
-    mHouse->setPosition(cocos2d::ccp(2000*CCRANDOM_0_1(), 47));
+    mHouse->setAnchorPoint(cocos2d::Vec2(0, 0));
+    mHouse->setPosition(cocos2d::Vec2(2000*CCRANDOM_0_1(), 47));
     mBg->addChild(mHouse);
     
     //green trees
@@ -156,8 +156,8 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
         mGreenLen += 10 + 60*CCRANDOM_0_1();
         int tr = 1 + randomInt(4);
 cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-tree-%d.png", tr)->getCString());
-        sp->setAnchorPoint(cocos2d::ccp(0, 0));
-        sp->setPosition(cocos2d::ccp(mGreenLen, 51));
+        sp->setAnchorPoint(cocos2d::Vec2(0, 0));
+        sp->setPosition(cocos2d::Vec2(mGreenLen, 51));
         mGreenTrees->addChild(sp);
         mGreenLen += sp->getContentSize().width;
     }
@@ -166,8 +166,8 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
     for( int i=0; i<8; ++i)
     {
         mGrass[i] = cocos2d::Sprite::createWithSpriteFrameName("mc-hj1.png");
-        mGrass[i]->setAnchorPoint(cocos2d::ccp(0, 0));
-        mGrass[i]->setPosition(cocos2d::ccp(mSnowSlopes[i]->getContentSize().width*i, 51));
+        mGrass[i]->setAnchorPoint(cocos2d::Vec2(0, 0));
+        mGrass[i]->setPosition(cocos2d::Vec2(mSnowSlopes[i]->getContentSize().width*i, 51));
         mBg->addChild(mGrass[i]);
     }
     
@@ -181,8 +181,8 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
         {
             int sc = 1+randomInt(2);
 cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-stocking%d.png", sc)->getCString());
-            sp->setAnchorPoint(cocos2d::ccp(0, 1));
-            sp->setPosition(cocos2d::ccp(mDecosLen, 198));
+            sp->setAnchorPoint(cocos2d::Vec2(0, 1));
+            sp->setPosition(cocos2d::Vec2(mDecosLen, 198));
             
             mDecos->addChild(sp);
             mDecosLen += sp->getContentSize().width;
@@ -191,8 +191,8 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
         {
             int sc = 1+randomInt(6);
 cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-top%d.png", sc)->getCString());
-            sp->setAnchorPoint(cocos2d::ccp(0, 0));
-            sp->setPosition(cocos2d::ccp(mDecosLen, 248));
+            sp->setAnchorPoint(cocos2d::Vec2(0, 0));
+            sp->setPosition(cocos2d::Vec2(mDecosLen, 248));
             
             mDecos->addChild(sp);
             mDecosLen += sp->getContentSize().width;
@@ -207,15 +207,15 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
         mFrontLen += 10 + 30*CCRANDOM_0_1();
         int tr = 1 + randomInt(3);
 cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-qj%d.png", tr)->getCString());
-        sp->setAnchorPoint(cocos2d::ccp(0, 0));
-        sp->setPosition(cocos2d::ccp(mFrontLen, 0));
+        sp->setAnchorPoint(cocos2d::Vec2(0, 0));
+        sp->setPosition(cocos2d::Vec2(mFrontLen, 0));
         mFronts->addChild(sp);
         mFrontLen += sp->getContentSize().width;
     }
     
     //snow
     mSakuraNode = cocos2d::CCNode::create();
-    mSakuraNode->setPosition(cocos2d::ccp(0, 0));
+    mSakuraNode->setPosition(cocos2d::Vec2(0, 0));
     mFront->addChild(mSakuraNode);
     mSakura = cocos2d::CCArray::create();
     mWind = 0;
@@ -388,7 +388,7 @@ cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
               int sc = 1+randomInt(2);
 cocos2d::Sprite *nsp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-stocking%d.png", sc)->getCString());
               sp->setDisplayFrame(nsp->displayFrame());
-              sp->setAnchorPoint(cocos2d::ccp(0, 1));
+              sp->setAnchorPoint(cocos2d::Vec2(0, 1));
               np.y = 198;
             }
             else
@@ -396,7 +396,7 @@ cocos2d::Sprite *nsp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStr
               int sc = 1+randomInt(6);
 cocos2d::Sprite *nsp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-top%d.png", sc)->getCString());
               sp->setDisplayFrame(nsp->displayFrame());
-              sp->setAnchorPoint(cocos2d::ccp(0, 0));
+              sp->setAnchorPoint(cocos2d::Vec2(0, 0));
               np.y = 248;
             }
 

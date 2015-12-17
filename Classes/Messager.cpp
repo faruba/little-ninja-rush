@@ -34,9 +34,9 @@ Messager* Messager::role(cocos2d::CCNode * parent)
 void Messager::onCreate() 
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("messager"));
-    mSprite->setAnchorPoint(cocos2d::ccp(0.5438f, 0.0625f));
+    mSprite->setAnchorPoint(cocos2d::Vec2(0.5438f, 0.0625f));
     int y = CCRANDOM_0_1()*RESPAWN_Y;
-    mSprite->setPosition(cocos2d::ccp(-80, RESPAWN_YMIN+y));
+    mSprite->setPosition(cocos2d::Vec2(-80, RESPAWN_YMIN+y));
     mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
     
     //预设模式
@@ -44,13 +44,13 @@ void Messager::onCreate()
     if( mode == 0 )//chase mode
     {
         mSprite->playGTAnimation(1, true);
-        mSprite->setPosition(cocos2d::ccp( -80, RESPAWN_YMIN+y));
+        mSprite->setPosition(cocos2d::Vec2( -80, RESPAWN_YMIN+y));
         mSpeed = CHASE_SPEED;
         mState = 0;
     }
     else {//drop out mode
         mSprite->playGTAnimation(0, true);
-        mSprite->setPosition(cocos2d::ccp( 80+UniversalFit::sharedUniversalFit()->playSize.width, RESPAWN_YMIN+y));
+        mSprite->setPosition(cocos2d::Vec2( 80+UniversalFit::sharedUniversalFit()->playSize.width, RESPAWN_YMIN+y));
         mState = 1;
         mSpeed = DROPOUT_SPEED;
         mAwake = 0.4f*UniversalFit::sharedUniversalFit()->playSize.width + 0.3f*CCRANDOM_0_1()*UniversalFit::sharedUniversalFit()->playSize.width;
@@ -105,7 +105,7 @@ void Messager::onUpdate(float delta)
                 {
                     GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
                     hiteff2->setScale(0.5f);
-                    hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+                    hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                     hiteff2->setPosition(position());
                     play->addChild(hiteff2, LAYER_MAINROLE+1);
                     mState = 2;
@@ -271,7 +271,7 @@ void Messager::setPosition(cocos2d::Point pos)
 
 cocos2d::Point Messager::center() 
 {
-    return ccpAdd(mSprite->getPosition(), ccp(0, 21));
+    return ccpAdd(mSprite->getPosition(), Vec2(0, 21));
 }
 
 bool Messager::supportAimAid() 

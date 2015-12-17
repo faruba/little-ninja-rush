@@ -25,7 +25,7 @@ IceSpike* IceSpike::spike(cocos2d::Point pos, CCNode* parent)
 void IceSpike::onCreate() 
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("bullets"));
-    mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.085f));
+    mSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.085f));
     mSprite->setPosition(mPos);
     mSprite->playGTAnimation(2, false);
     mParent->addChild(mSprite, LAYER_ROLE);
@@ -43,15 +43,15 @@ void IceSpike::onUpdate(float delta)
     {
         if( !mFlag )
         {
-            if( play->mainrole->collisionWithCircle(ccpAdd(mSprite->getPosition(), ccp(0, 17)), 13) )
+            if( play->mainrole->collisionWithCircle(ccpAdd(mSprite->getPosition(), Vec2(0, 17)), 13) )
             {
-                play->mainrole->deliverHit(HIT_ICESPIKE, ccp(0, 0));
+                play->mainrole->deliverHit(HIT_ICESPIKE, Vec2(0, 0));
                 mFlag = true;
             }
             //分身术
-            if( play->mainrole2 != NULL && play->mainrole2->collisionWithCircle(ccpAdd(mSprite->getPosition(), ccp(0, 17)), 13) )
+            if( play->mainrole2 != NULL && play->mainrole2->collisionWithCircle(ccpAdd(mSprite->getPosition(), Vec2(0, 17)), 13) )
             {
-                play->mainrole2->deliverHit(HIT_ICESPIKE, ccp(0, 0));
+                play->mainrole2->deliverHit(HIT_ICESPIKE, Vec2(0, 0));
                 mFlag = true;
             }
         }
@@ -126,7 +126,7 @@ void IceSpike::setPosition(cocos2d::Point pos)
 
 cocos2d::Point IceSpike::center() 
 {
-    return ccpAdd(mSprite->getPosition(), ccp(0, 20));
+    return ccpAdd(mSprite->getPosition(), Vec2(0, 20));
 }
 
 bool IceSpike::supportAimAid() 

@@ -24,25 +24,25 @@ void Samuri::onCreate()
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("samurai"));
-    mSprite->setAnchorPoint(cocos2d::ccp(0.694f, 0.08125f));
-    mSprite->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width+play->runspeed*SAMURAI_WARNING, PLAY_PLAYERLINE));
+    mSprite->setAnchorPoint(cocos2d::Vec2(0.694f, 0.08125f));
+    mSprite->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+play->runspeed*SAMURAI_WARNING, PLAY_PLAYERLINE));
     mSprite->playGTAnimation(0, true);
     mParent->addChild(mSprite, LAYER_ROLE);
     
     //add smark
     //mMark = cocos2d::Sprite::createWithSpriteFrameName("smark.png");
-    //mMark->setAnchorPoint(cocos2d::ccp( 0.5f, 0.5f));
-    //mMark->setPosition(cocos2d::ccp( SCREEN_WIDTH/2, SCREEN_HEIGHT/2 ));
+    //mMark->setAnchorPoint(cocos2d::Vec2( 0.5f, 0.5f));
+    //mMark->setPosition(cocos2d::Vec2( SCREEN_WIDTH/2, SCREEN_HEIGHT/2 ));
     //mParent->addChild(mMark, LAYER_UI);
     //CCBlink *blink = cocos2d::CCBlink::create(SAMURAI_WARNING, SAMURAI_WARNING*5);
     //mMark->runAction(blink);
     mHint = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("misc"));
     mHint->playGTAnimation(1, true);
-    mHint->setAnchorPoint(cocos2d::ccp(1, 0.5f));
-    mHint->setPosition(cocos2d::ccp(UniversalFit::sharedUniversalFit()->playSize.width, PLAY_PLAYERLINE+20));
+    mHint->setAnchorPoint(cocos2d::Vec2(1, 0.5f));
+    mHint->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width, PLAY_PLAYERLINE+20));
     mParent->addChild(mHint, LAYER_ROLE);
-cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(0.2f, ccp(-20, 0));
-cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(0.2f, ccp(20, 0));
+cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(0.2f, Vec2(-20, 0));
+cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(0.2f, Vec2(20, 0));
 cocos2d::CCSequence *sq = cocos2d::CCSequence::create(mb1,mb2, NULL);
 cocos2d::CCRepeatForever *rp = cocos2d::CCRepeatForever::create(sq);
     mHint->runAction(rp);
@@ -102,7 +102,7 @@ void Samuri::onUpdate(float delta)
                 if( hit )
                 {
                     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit").c_str());
-                    play->mainrole->deliverHit(HIT_BLADE, ccp(0, 0));//武士总是对付第一个人物造成伤害
+                    play->mainrole->deliverHit(HIT_BLADE, Vec2(0, 0));//武士总是对付第一个人物造成伤害
                     mFlag = true;
                 }
             }
@@ -238,7 +238,7 @@ void Samuri::setPosition(cocos2d::Point pos)
 
 cocos2d::Point Samuri::center() 
 {
-    return ccpAdd(mSprite->getPosition(), ccp(9, 20));
+    return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
 }
 
 bool Samuri::supportAimAid() 

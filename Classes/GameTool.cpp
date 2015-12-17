@@ -24,7 +24,7 @@ int randomInt(int max)
 
 bool exCollisionWithCircles(cocos2d::Point op, float ox, float oy, float r, cocos2d::Point p, float pr)
 {
-  cocos2d::Point cc = ccp(op.x+ox, op.y+oy);
+  cocos2d::Point cc = Vec2(op.x+ox, op.y+oy);
   float disq = ccpLengthSQ(ccpSub(p, cc));
   if( disq < (r+pr)*(r+pr) ) {
     return true;
@@ -127,13 +127,13 @@ cocos2d::Sprite *left, *right;
     mSceneIntro = cocos2d::CCNode::create();
     target->addChild(mSceneIntro, 99);
     left = cocos2d::Sprite::create("door.png");
-    left->setAnchorPoint(cocos2d::ccp(1, 0));
-    left->setPosition(cocos2d::ccp(0, 0));
+    left->setAnchorPoint(cocos2d::Vec2(1, 0));
+    left->setPosition(cocos2d::Vec2(0, 0));
     mSceneIntro->addChild(left, 0, 0);
     right = cocos2d::Sprite::create("door.png");
     right->setScaleX(-1);
-    right->setAnchorPoint(cocos2d::ccp(1, 0));
-    right->setPosition(cocos2d::ccp(SCREEN_WIDTH, 0));
+    right->setAnchorPoint(cocos2d::Vec2(1, 0));
+    right->setPosition(cocos2d::Vec2(SCREEN_WIDTH, 0));
     mSceneIntro->addChild(right, 0, 1);
   }
   else
@@ -142,15 +142,15 @@ cocos2d::Sprite *left, *right;
     right = (cocos2d::Sprite*)mSceneIntro->getChildByTag(1);
   }
   left->setVisible(true);
-  left->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, 0));
+  left->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
   right->setVisible(true);
-  right->setPosition(cocos2d::ccp(SCREEN_WIDTH/2, 0));
+  right->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, 0));
 cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME,ccp(-SCREEN_WIDTH/2, 0));
+cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME,Vec2(-SCREEN_WIDTH/2, 0));
 cocos2d::CCSequence *sq1 = (cocos2d::CCSequence*)CCSequence::create(dt1, mb1, NULL);
   left->runAction(sq1);
 cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEINTRO_DELAY);
-cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME,ccp(SCREEN_WIDTH/2, 0));
+cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEINTRO_TIME,Vec2(SCREEN_WIDTH/2, 0));
 cocos2d::CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(dt2, mb2, NULL);
   right->runAction(sq2);
 
@@ -163,25 +163,25 @@ cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, CCNode *&mSceneIntro, SE
     mSceneIntro = cocos2d::CCNode::create();
     target->addChild(mSceneIntro, 99);
 cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
-    left->setAnchorPoint(cocos2d::ccp(1, 0));
+    left->setAnchorPoint(cocos2d::Vec2(1, 0));
     mSceneIntro->addChild(left, 0, 0);
 cocos2d::Sprite *right = cocos2d::Sprite::create("door.png");
     right->setScaleX(-1);
-    right->setAnchorPoint(cocos2d::ccp(1, 0));
+    right->setAnchorPoint(cocos2d::Vec2(1, 0));
     mSceneIntro->addChild(right, 0, 1);
   }
 cocos2d::Sprite *left = (cocos2d::Sprite*)mSceneIntro->getChildByTag(0);
   left->setVisible(true);
-  left->setPosition(cocos2d::ccp(0, 0));
+  left->setPosition(cocos2d::Vec2(0, 0));
 cocos2d::Sprite *right = (cocos2d::Sprite*)mSceneIntro->getChildByTag(1);
   right->setVisible(true);
-  right->setPosition(cocos2d::ccp(SCREEN_WIDTH, 0));
-cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, ccp(SCREEN_WIDTH/2, 0));
+  right->setPosition(cocos2d::Vec2(SCREEN_WIDTH, 0));
+cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, Vec2(SCREEN_WIDTH/2, 0));
 cocos2d::CCDelayTime *dt1 = cocos2d::CCDelayTime::create(SCENEOUTRO_DELAY);
 cocos2d::CCCallFunc *ca1 = cocos2d::CCCallFunc::create(target, callBack);
 cocos2d::CCSequence *sq1 = (cocos2d::CCSequence*)CCSequence::create(mb1, dt1, ca1, NULL);
   left->runAction(sq1);
-cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, ccp(-SCREEN_WIDTH/2, 0));
+cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(SCENEOUTRO_TIME, Vec2(-SCREEN_WIDTH/2, 0));
 cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(SCENEOUTRO_DELAY);
 cocos2d::CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(mb2, dt2, NULL);
   right->runAction(sq2);

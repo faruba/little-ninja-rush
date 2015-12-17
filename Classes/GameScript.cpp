@@ -144,7 +144,7 @@ void GameScript::invokeSpell6(cocos2d::CCInteger*)
         if( d->isEnemy() )
         {
             GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
-            hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+            hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
             hiteff2->setScale(1.5f);
             hiteff2->setPosition(d->position());
             play->addChild(hiteff2, LAYER_ROLE);
@@ -255,13 +255,13 @@ CCARRAY_FOREACH(play->enemies, node)
   {
     Role *em = (Role*)node;
     GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
-    hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+    hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     hiteff->setPosition(em->center());
     hiteff->setRotation(360*CCRANDOM_0_1());
     play->addChild(hiteff, LAYER_MAINROLE+1);
 
     GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 13, false);
-    hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+    hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     hiteff2->setPosition(em->center());
     play->addChild(hiteff2, LAYER_ROLE);
 
@@ -276,7 +276,7 @@ void GameScript::invokeSpellRelease(cocos2d::CCInteger * sid)
     GamePlay *play = GamePlay::sharedGamePlay();
     int num = sid->getValue();
     GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 6, false);
-    eff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+    eff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     eff->setPosition(play->mainrole->center());
     play->addChild(eff, LAYER_MAINROLE+1);
     SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/spell.mp3").c_str());

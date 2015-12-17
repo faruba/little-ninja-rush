@@ -37,20 +37,20 @@ void Scene4::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTi
 cocos2d::LayerColor *sbg = cocos2d::LayerColor::create(Color4B(201, 239, 251, 255));
     mBg->addChild(sbg);
 cocos2d::Sprite *sky = cocos2d::Sprite::createWithSpriteFrameName("cj4_bg.png");
-    sky->setAnchorPoint(cocos2d::ccp(0, 1));
-    sky->setPosition(cocos2d::ccp(0, SCREEN_HEIGHT));
+    sky->setAnchorPoint(cocos2d::Vec2(0, 1));
+    sky->setPosition(cocos2d::Vec2(0, SCREEN_HEIGHT));
     mBg->addChild(sky);
     
     int btiles[] = {47, 48, 49, 50, 47, 48, 49, 50, 47, 48, 49, 50, 47, 48, 49, 50, 47, 48, 49, 50, 47, 48, 49, 50};
     mTiles->initTiles(btiles, 24);
-    mTiles->setPosition(cocos2d::ccp(0, 0));
+    mTiles->setPosition(cocos2d::Vec2(0, 0));
     
     //增加前景
     for( int i=0; i<6; ++i)
     {
         mFronts[i] = cocos2d::Sprite::createWithSpriteFrameName("cj4_qj.png");
-        mFronts[i]->setAnchorPoint(cocos2d::ccp(0, 0));
-        mFronts[i]->setPosition(cocos2d::ccp(mFronts[i]->getContentSize().width*i, 0));
+        mFronts[i]->setAnchorPoint(cocos2d::Vec2(0, 0));
+        mFronts[i]->setPosition(cocos2d::Vec2(mFronts[i]->getContentSize().width*i, 0));
         mFront->addChild(mFronts[i]);
     }
     
@@ -58,7 +58,7 @@ cocos2d::Sprite *sky = cocos2d::Sprite::createWithSpriteFrameName("cj4_bg.png");
     for( int i=0; i<2; ++i)
     {
         mClouds[i] = cocos2d::Sprite::createWithSpriteFrameName("cj4_cloud.png");
-        mClouds[i]->setPosition(cocos2d::ccp( 300+200*i, 280+20*i));
+        mClouds[i]->setPosition(cocos2d::Vec2( 300+200*i, 280+20*i));
         mBg->addChild(mClouds[i]);
     }
     
@@ -66,8 +66,8 @@ cocos2d::Sprite *sky = cocos2d::Sprite::createWithSpriteFrameName("cj4_bg.png");
     for( int i=0; i<6; ++i)
     {
         mBgs[i] = cocos2d::Sprite::createWithSpriteFrameName("cj4_hj.png");
-        mBgs[i]->setAnchorPoint(cocos2d::ccp(0, 1));
-        mBgs[i]->setPosition(cocos2d::ccp(mBgs[i]->getContentSize().width*i, SCREEN_HEIGHT - 20));
+        mBgs[i]->setAnchorPoint(cocos2d::Vec2(0, 1));
+        mBgs[i]->setPosition(cocos2d::Vec2(mBgs[i]->getContentSize().width*i, SCREEN_HEIGHT - 20));
         mBg->addChild(mBgs[i]);
     }
     
@@ -84,7 +84,7 @@ void Scene4::update(float delta)
         int doff = woff%dr;
         for( int i=0; i<6; ++i)
         {
-            mFronts[i]->setPosition(cocos2d::ccp(-doff+dr*i, 0));
+            mFronts[i]->setPosition(cocos2d::Vec2(-doff+dr*i, 0));
         }
     }
     //滚动背景
@@ -94,7 +94,7 @@ void Scene4::update(float delta)
         int doff = woff%dr;
         for( int i=0; i<6; ++i)
         {
-            mBgs[i]->setPosition(cocos2d::ccp(-doff+dr*i, SCREEN_HEIGHT - 20));
+            mBgs[i]->setPosition(cocos2d::Vec2(-doff+dr*i, SCREEN_HEIGHT - 20));
         }
     }
     

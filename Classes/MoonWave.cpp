@@ -24,7 +24,7 @@ void MoonWave::onCreate()
     GamePlay *play = GamePlay::sharedGamePlay();
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("effect"));
     mSprite->playGTAnimation(26, true);
-    mSprite->setAnchorPoint(cocos2d::ccp(0, 0));
+    mSprite->setAnchorPoint(cocos2d::Vec2(0, 0));
     mSprite->setPosition(mPos);
     play->addChild(mSprite, LAYER_MAINROLE+1);
     
@@ -68,18 +68,18 @@ CCARRAY_FOREACH(play->enemies, node)
     Role * em = (Role*)node;
     if( rect.containsPoint(em->center()) )//杀伤半径
     {
-      bool hit = em->deliverHit(HIT_MAGIC, ccp(1, 0));
+      bool hit = em->deliverHit(HIT_MAGIC, Vec2(1, 0));
       if( hit )
       {
         SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/hit.mp3").c_str());
         GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
-        hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+        hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
         hiteff->setPosition(em->center());
-        hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(cocos2d::ccp(1, 0)) ) + 60*CCRANDOM_0_1());
+        hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(cocos2d::Vec2(1, 0)) ) + 60*CCRANDOM_0_1());
         play->addChild(hiteff, LAYER_MAINROLE+1);
 
         GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
-        hiteff2->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+        hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
         hiteff2->setPosition(em->center());
         play->addChild(hiteff2, LAYER_ROLE);
       }

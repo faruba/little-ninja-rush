@@ -23,7 +23,7 @@ MainRole* MainRole::role(cocos2d::CCNode* parent)
   MainRole *mr = MainRole::create();
   mr->mRoleId = GameRecord::sharedGameRecord()->curr_char;
   mr->mParent = parent;
-  mr->mAIPos = ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, PLAY_PLAYERLINE);
+  mr->mAIPos = Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, PLAY_PLAYERLINE);
   return mr;
 }
 
@@ -64,7 +64,7 @@ void MainRole::onCreate()
     bladeCD *= 0.5f;
   }
 
-  mSprite->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
+  mSprite->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
   mSprite->setPosition(mAIPos);
 
   if( mRoleId == 3 && mShadowCounter > 0 )
@@ -314,8 +314,8 @@ void MainRole::commitSlice()
   if( mBlade == NULL )
   {
     mBlade = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("blade"));
-    mBlade->setAnchorPoint(cocos2d::ccp( 0.5f, 0.5f));
-    mBlade->setPosition(cocos2d::ccp( 35, 40 ));
+    mBlade->setAnchorPoint(cocos2d::Vec2( 0.5f, 0.5f));
+    mBlade->setPosition(cocos2d::Vec2( 35, 40 ));
     mSprite->addChild(mBlade, LAYER_MAINROLE+1);
   }
   mBlade->playGTAnimation(bladeAnim, false);
@@ -414,7 +414,7 @@ CCARRAY_FOREACH(play->enemies, node)
       hit = true;
 
       GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 28, false);
-      hiteff->setAnchorPoint(cocos2d::ccp(0.5f, 0.5f));
+      hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
       hiteff->setPosition(em->center());
       hiteff->setRotation(90);
       play->addChild(hiteff, LAYER_MAINROLE+1);
@@ -435,7 +435,7 @@ CCARRAY_FOREACH(play->enemies, node)
     play->scheduleSpeed(0, EXP_HITSLOW, 0);
 
     GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 3, false);
-    eff->setAnchorPoint(cocos2d::ccp( 0.5f, 0));
+    eff->setAnchorPoint(cocos2d::Vec2( 0.5f, 0));
     eff->setPosition(center());
     mParent->addChild(eff, LAYER_MAINROLE+1);
   }
@@ -555,7 +555,7 @@ CCARRAY_FOREACH(play->enemies, node)
           SP -= activeSP;
           //选择优目标点
           int hs = 0;
-          cocos2d::Point pos = ccp(UniversalFit::sharedUniversalFit()->playSize.width/2, RESPAWN_YMIN + RESPAWN_Y/2);
+          cocos2d::Point pos = Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, RESPAWN_YMIN + RESPAWN_Y/2);
 cocos2d::Ref *node = NULL;
 CCARRAY_FOREACH(play->enemies, node)
           {
@@ -746,7 +746,7 @@ void MainRole::onUpdate(float delta)
     {
       //play effect
       GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 8, false);
-      eff->setPosition(cocos2d::ccp( 31, 18));
+      eff->setPosition(cocos2d::Vec2( 31, 18));
       mSprite->addChild(eff);
       SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/blade_ready.mp3").c_str());
     }
@@ -759,7 +759,7 @@ void MainRole::onUpdate(float delta)
     {
       //play effect
       GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 8, false);
-      eff->setPosition(cocos2d::ccp( 31, 18));
+      eff->setPosition(cocos2d::Vec2( 31, 18));
       mSprite->addChild(eff);
       SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/blade_ready.mp3").c_str());
     }
@@ -1210,10 +1210,10 @@ cocos2d::Point MainRole::center()
 {
   if( mRoleId == 2 )
   {
-    return ccpAdd(mSprite->getPosition(), ccp(12, 21));
+    return ccpAdd(mSprite->getPosition(), Vec2(12, 21));
   }
   else {
-    return ccpAdd(mSprite->getPosition(), ccp(9, 20));
+    return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
   }
 }
 
@@ -1232,12 +1232,12 @@ void MainRole::attachEffect(const char * aniset, int aniid, bool loop, bool toro
   GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet(aniset), aniid, loop);
   if( toroot )
   {
-    eff->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
+    eff->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
     eff->setPosition(position());
     mParent->addChild(eff, LAYER_MAINROLE+1);
   }
   else {
-    eff->setPosition(cocos2d::ccp( 9, 20));
+    eff->setPosition(cocos2d::Vec2( 9, 20));
     mSprite->addChild(eff);
   }
 }

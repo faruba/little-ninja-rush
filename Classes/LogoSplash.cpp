@@ -22,7 +22,7 @@ cocos2d::Scene* LogoSplash::scene() {
 
   // add layer as a child to scene
   scene->addChild(layer);
-  layer->setAnchorPoint(cocos2d::ccp(0, 0));
+  layer->setAnchorPoint(cocos2d::Vec2(0, 0));
 
   // return the scene
   return scene;

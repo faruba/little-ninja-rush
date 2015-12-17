@@ -30,7 +30,7 @@ AnimatedParticle* AnimatedParticle::particleCoinUI(cocos2d::Point pos, int di, C
     ret->mSprite->retain();
     ret->mSprite->playGTAnimation(0,false);
     //位置抖动
-    cocos2d::Point diter = ccp( -10 + 20*CCRANDOM_0_1(), -10 + 20*CCRANDOM_0_1() );
+    cocos2d::Point diter = Vec2( -10 + 20*CCRANDOM_0_1(), -10 + 20*CCRANDOM_0_1() );
     ret->mSprite->setPosition(ccpAdd(pos, diter));
     ret->mStickScene = false;
     ret->mLayer = LAYER_MAINROLE+1;
@@ -53,7 +53,7 @@ AnimatedParticle* AnimatedParticle::particleCoin(cocos2d::Point pos, int di)
     ret->mSprite->retain();
     ret->mSprite->playGTAnimation(0, false);
     //位置抖动
-    cocos2d::Point diter = ccp( -10 + 20*CCRANDOM_0_1(), -10 + 20*CCRANDOM_0_1() );
+    cocos2d::Point diter = Vec2( -10 + 20*CCRANDOM_0_1(), -10 + 20*CCRANDOM_0_1() );
     ret->mSprite->setPosition(ccpAdd(pos, diter));
     ret->mStickScene = false;
     ret->mLayer = LAYER_MAINROLE+1;
@@ -161,11 +161,11 @@ AnimatedParticle* AnimatedParticle::particleStepWater(cocos2d::Point pos)
 {
     AnimatedParticle *pat = AnimatedParticle::create();
     pat->mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("misc"));
-    pat->mSprite->setAnchorPoint(cocos2d::ccp(0.5f, 0.25f));
+    pat->mSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.25f));
     pat->mSprite->playGTAnimation(6 ,false);
     pat->mSprite->setPosition(pos);
     pat->mSprite->retain();
-    pat->mDir = ccp(0, 0);
+    pat->mDir = Vec2(0, 0);
     pat->mSpeed = 0;
     pat->mLife = 0.35f;
     pat->mRotate = 0;

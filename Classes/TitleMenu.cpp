@@ -212,7 +212,7 @@ void PopOption::loadFriendAdd()
   //    CCString* coin = cocos2d::CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount());
   //    mCoin->setString(coin);
   //    CCLabelTTF *label = [CCLabelTTF, ABSystem->queryUserCode(), "Helvetica", 24);
-  //    label->setAnchorPoint(cocos2d::ccp(0, 0.5f));
+  //    label->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
   //    mShadeCode->addChild(label);
 }
 
@@ -513,7 +513,7 @@ void PopObj::displayClassic()
     mDailyIcon->setVisible(true);
     Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
     cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-    icon->setPosition(cocos2d::ccp(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+    icon->setPosition(cocos2d::Vec2(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
     mDailyIcon->addChild(icon);
 
     //判断是否完成
@@ -535,7 +535,7 @@ void PopObj::displayClassic()
     mWeeklyIcon->setVisible(true);
     Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
     cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-    icon->setPosition(cocos2d::ccp(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+    icon->setPosition(cocos2d::Vec2(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
     mWeeklyIcon->addChild(icon);
 
     //判断是否完成
@@ -557,7 +557,7 @@ void PopObj::displayClassic()
     mMonthlyIcon->setVisible(true);
     Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
     cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-    icon->setPosition(cocos2d::ccp(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
+    icon->setPosition(cocos2d::Vec2(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
     mMonthlyIcon->addChild(icon);
 
     //判断是否完成
@@ -574,19 +574,19 @@ void PopObj::displayClassic()
   for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
   {
     cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-    crown->setPosition(cocos2d::ccp(32-16*i, 0));
+    crown->setPosition(cocos2d::Vec2(32-16*i, 0));
     mDailyCrown->addChild(crown);
   }
   for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective->index; ++i)
   {
     cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-    crown->setPosition(cocos2d::ccp(32-16*i, 0));
+    crown->setPosition(cocos2d::Vec2(32-16*i, 0));
     mWeeklyCrown->addChild(crown);
   }
   for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective->index; ++i)
   {
     cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-    crown->setPosition(cocos2d::ccp(32-16*i, 0));
+    crown->setPosition(cocos2d::Vec2(32-16*i, 0));
     mMonthlyCrown->addChild(crown);
   }
 }
@@ -652,11 +652,11 @@ void PopObj::onCreate()
   mBoard->setClipRect(&rect);
   //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
   //mBoard->setClipRect(&rect);
-  mBoard->setPosition(cocos2d::ccp(-301, 58));
+  mBoard->setPosition(cocos2d::Vec2(-301, 58));
   this->addChild(mBoard);
 
   mRode = cocos2d::Sprite::createWithSpriteFrameName("index_jz.png");
-  mRode->setPosition(cocos2d::ccp(70, 170));
+  mRode->setPosition(cocos2d::Vec2(70, 170));
   this->addChild(mRode);
   mTimer = 0;
   mFlag = false;
@@ -677,7 +677,7 @@ void PopObj::onCreate()
   }
 
   //run animation
-  cocos2d::CCMoveTo *mt = cocos2d::CCMoveTo::create(0.2f, ccp(-301+381, 58));
+  cocos2d::CCMoveTo *mt = cocos2d::CCMoveTo::create(0.2f, Vec2(-301+381, 58));
   cocos2d::CCCallFunc *cf = cocos2d::CCCallFunc::create(this, callfunc_selector(PopObj::onDoneAnimation));
   cocos2d::CCSequence *seq = cocos2d::CCSequence::createWithTwoActions(mt, cf);
 
@@ -688,7 +688,7 @@ void PopObj::onCreate()
 
 void PopObj::onDoneAnimation()
 {
-  mBoard->setPosition(cocos2d::ccp( -301 + 381, 58));
+  mBoard->setPosition(cocos2d::Vec2( -301 + 381, 58));
   mMenu->setVisible(true);
   //CCRect rect = cocos2d::CCRectMake(0, 0, UniversalFit::sharedUniversalFit()->screenSize.width, UniversalFit::sharedUniversalFit()->screenSize.height);
   //CCRect rect = cocos2d::CCRectMake(0, 0, 10000, 10000);
@@ -732,9 +732,9 @@ void PopObj::onChangeDisplay()
   //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
   cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
   mBoard->setClipRect(&rect);
-  cocos2d::CCMoveTo *mt1 = cocos2d::CCMoveTo::create(0.2f, ccp(-301, 58));
+  cocos2d::CCMoveTo *mt1 = cocos2d::CCMoveTo::create(0.2f, Vec2(-301, 58));
   cocos2d::CCCallFunc *cf1 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onFlip)));
-  cocos2d::CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.2f, ccp(-301+381, 58));
+  cocos2d::CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.2f, Vec2(-301+381, 58));
   cocos2d::CCCallFunc *cf2 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onDoneAnimation)));
   cocos2d::CCArray *sqa = cocos2d::CCArray::create();
   sqa->addObject(mt1);
@@ -758,7 +758,7 @@ Sakura* Sakura::create(cocos2d::CCNode *parent)
   Sakura *ret = new Sakura;
   ret->init();
   ret->mSprite = cocos2d::Sprite::createWithSpriteFrameName("scene-snow.png");
-  ret->mSprite->setPosition(cocos2d::ccp((SCREEN_WIDTH+300)*CCRANDOM_0_1(), SCREEN_HEIGHT+50 ));
+  ret->mSprite->setPosition(cocos2d::Vec2((SCREEN_WIDTH+300)*CCRANDOM_0_1(), SCREEN_HEIGHT+50 ));
   ret->mParent = parent;
   //ret->mFlipX = 0.5f + CCRANDOM_0_1();
   ret->mWindX = CCRANDOM_0_1();
@@ -1093,9 +1093,9 @@ void TitleMenu::update(float delta)
 //            break;
 //        }
 //        mAni[i] = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(enm->getCString()));
-//        mAni[i]->setAnchorPoint(cocos2d::ccp(0.4f, 0.0625f));
+//        mAni[i]->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
 //        mAni[i]->playGTAnimation(0, true);
-//        mAni[i]->setPosition(cocos2d::ccp(-50, 64 + CCRANDOM_0_1()*36));
+//        mAni[i]->setPosition(cocos2d::Vec2(-50, 64 + CCRANDOM_0_1()*36));
 //        mEnemies->addChild(mAni[i], 5);
 //        mSpeed[i] = 200 + CCRANDOM_0_1()*100;
 //      }
@@ -1311,6 +1311,7 @@ cocos2d::extension::Control::Handler TitleMenu::onResolveCCBCCControlSelector(co
 {
   return NULL;
 }
+
 bool TitleMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
 {
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud1", Sprite*, mCloud1)
