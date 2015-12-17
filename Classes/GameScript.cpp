@@ -52,7 +52,7 @@ void GameScript::invokeSpell0(cocos2d::CCInteger* mid)
         else {
             play->mainrole->customAction(0);
         }
-        play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), fp, dir, -5, play)));
+//        play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), fp, dir, -5, play)));
     }
     GameTool::PlaySound("sound/duofa.mp3");
 }

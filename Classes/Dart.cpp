@@ -7,7 +7,7 @@
 #include "GameRecord.h"
 #include "UniversalFit.h"
 
-Dart* Dart::dart(cocos2d::CCString* shap, cocos2d::Point pos, cocos2d::Point dir, int typ, Node* parent) 
+Dart* Dart::dart(std::string& shap, cocos2d::Point pos, cocos2d::Point dir, int typ, Node* parent)
 {
   Dart* ret = Dart::create();
   ret->mParent = parent;
@@ -18,24 +18,23 @@ Dart* Dart::dart(cocos2d::CCString* shap, cocos2d::Point pos, cocos2d::Point dir
   ret->mTrace.index = -1;
   ret->mTrace.uid = -1;
   ret->mShap = shap;
-  ret->mShap->retain();
   return ret;
 }
 
 void Dart::addTail() 
 {
-  if( mTail == NULL )
-  {
-cocos2d::CCString *tailstr = cocos2d::CCString::createWithFormat("%s_tail.png", mShap->_string.substr(0, mShap->_string.length()-4).c_str());
-    mTail = cocos2d::Sprite::createWithSpriteFrameName(tailstr->getCString());
-    mTail->setAnchorPoint(cocos2d::Vec2(0.5f, 0.95f));
-    mTail->setPosition(mSprite->getPosition());
-    mTail->setOpacity(0);
-    mParent->addChild( mTail, LAYER_ROLE);
-    mTail->setRotation(90-CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
-cocos2d::CCFadeIn *fi = cocos2d::CCFadeIn::create(0.5f);
-    mTail->runAction(fi);
-  }
+//  if( mTail == NULL )
+//  {
+//cocos2d::CCString *tailstr = cocos2d::CCString::createWithFormat("%s_tail.png", mShap->_string.substr(0, mShap->_string.length()-4).c_str());
+//    mTail = cocos2d::Sprite::createWithSpriteFrameName(tailstr->getCString());
+//    mTail->setAnchorPoint(cocos2d::Vec2(0.5f, 0.95f));
+//    mTail->setPosition(mSprite->getPosition());
+//    mTail->setOpacity(0);
+//    mParent->addChild( mTail, LAYER_ROLE);
+//    mTail->setRotation(90-CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
+//cocos2d::CCFadeIn *fi = cocos2d::CCFadeIn::create(0.5f);
+//    mTail->runAction(fi);
+//  }
 }
 
 void Dart::addSTail(cocos2d::CCString * ani, int aid) 
@@ -56,274 +55,274 @@ cocos2d::CCFadeIn *fi = cocos2d::CCFadeIn::create(0.5f);
 
 void Dart::onCreate() 
 {
-  blocked = false;
-  mSprite = cocos2d::Sprite::createWithSpriteFrameName(mShap->getCString());
-  mSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-  mSprite->setPosition(pos);
-  mParent->addChild(mSprite, LAYER_MAINROLE+1);
-
-  mHitEffect = 2;
-  mHitEffect2 = 1;
-  mParticle = 0;
-  GamePlay *play = GamePlay::sharedGamePlay();
-  //CCLog("type %d", type);
-  switch(type)
-  {
-    case -1:
-      {//下忍的飞镖
-        mSprite->setScale(1.4f);
-        mIsEnemy = true;
-        speed = NNINJA_DARTSPEED*play->difficulty;
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-      }
-      break;
-    case -2:
-      {//中忍的飞镖
-        mSprite->setScale(1.4f);
-        mIsEnemy = true;
-        speed = MNINJA_DARTSPEED*play->difficulty;
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-      }
-      break;
-    case -3:
-      {//上忍的飞镖
-        mSprite->setScale(1.4f);
-        mIsEnemy = true;
-        speed = HNINJA_DARTSPEED*play->difficulty;
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-      }
-      break;
-    case -4:
-      {//冰冻飞镖
-        mSprite->setScale(1.4f);
-        mIsEnemy = true;
-        speed = HNINJA_DARTSPEED*play->difficulty/2;
-        GameTool::PlaySound("sound/freeze_fly.mp3");
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-
-        mParticle = 2;
-        mParticleInterval = 0.05f;
-      }
-      break;
-    case -5:
-      {//八方手里剑
-        mSprite->setScale(1.4f);
-        this->addTail();
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-        speed = 700;
-      }
-      break;
-    case -6:
-      {//神工
-        mSprite->setScale(1.4f);
-        mIsEnemy = true;
-        speed = HNINJA_DARTSPEED*play->difficulty*2;
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-      }
-      break;
-    case 0:
-      {//主角的普通飞镖
-        mSprite->setScale(1.4f);
-        this->addTail();
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-      }
-      break;
-    case 1://火飞镖
-      {
-        this->addTail();
-        mHitEffect = 11;
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-
-        mParticle = 1;
-        mParticleInterval = 0.05f;
-      }
-      break;
-    case 2://雷飞镖
-      {
-        this->addSTail(cocos2d::CCString::create("misc"), 0);
-        mHitEffect = 12;
-        //旋转代码
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-      }
-      break;
-    case 3://激光标
-      {
-        mSprite->setRotation(-90 - CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
-        mHitEffect = 20;
-        mHitEffect2 = 21;
-      }
-      break;
-    case 4://暗影镖
-      {
-        mSprite->setScale(1.4f);
-        this->addTail();
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-        mHitEffect = 14;
-
-        mParticle = 5;
-        mParticleInterval = 0.02f;
-      }
-      break;
-    case 5://蝴蝶镖
-      {
-        mSprite->setRotation(-90 - CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
-        this->addTail();
-        mHitEffect = 22;
-        mHitEffect2 = 23;
-
-        mParticle = -2;
-        mParticleInterval = 0.1f;
-      }
-      break;
-    case 6://冰飞镖
-      {
-        mSprite->setScale(1.4f);
-        this->addTail();
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-        mHitEffect = 20;
-        mHitEffect2 = 21;
-
-        mParticle = 2;
-        mParticleInterval = 0.05f;
-      }
-      break;
-    case 7://樱花镖
-      {
-        mSprite->setScale(1.4f);
-        this->addTail();
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-        mHitEffect = 15;
-        mHitEffect2 = 16;
-
-        mParticle = 3;
-        mParticleInterval = 0.05f;
-      }
-      break;
-    case 8://真空镖
-      {
-        mSprite->setScale(1.4f);
-        this->addTail();
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-        mHitEffect = 18;
-        mHitEffect2 = 19;
-
-        mParticle = 4;
-        mParticleInterval = 0.05f;
-      }
-      break;
-    case 9://追踪镖
-      {
-        mSprite->setScale(1.4f);
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-        GameObject *atar = (GameObject*)play->nearestEnemy(direction);
-        if( atar != NULL )
-        {
-          this->traceRole(atar->handler());
-        }
-
-        mHitEffect = 17;
-
-        mParticle = 6;
-        mParticleInterval = 0.016f;
-      }
-      break;
-    case 10://黄金镖
-      {
-        mSprite->setScale(1.4f);
-        this->addTail();
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-
-        mParticle = -1;
-        mParticleInterval = 0.05f;
-      }
-      break;
-    case 11:
-      {//彩虹镖
-        mSprite->setScale(1.4f);
-        this->addTail();
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-
-        mHitEffect = 24;
-        mHitEffect2 = 25;
-      }
-      break;
-    case 12:
-      {
-        mSprite->setScale(1.4f);
-        this->addTail();
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-      }
-      break;
-    case 13:
-      {
-        mSprite->setScale(1.4f);
-        this->addTail();
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-      }
-      break;
-    case 14:
-      {
-        mSprite->setScale(1.4f);
-        this->addTail();
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-      }
-      break;
-    case 15:
-      {
-        mSprite->setScale(1.4f);
-        this->addTail();
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
-        mSprite->runAction(rf);
-      }
-      break;
-  }
-  if( type >= 0 )
-  {
-    mIsEnemy = false;
-    speed = play->mainrole->dartSpeed;
-  }
-
-  mPaused = false;
-  mRemoved = false;
+//  blocked = false;
+//  mSprite = cocos2d::Sprite::createWithSpriteFrameName(mShap->getCString());
+//  mSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+//  mSprite->setPosition(pos);
+//  mParent->addChild(mSprite, LAYER_MAINROLE+1);
+//
+//  mHitEffect = 2;
+//  mHitEffect2 = 1;
+//  mParticle = 0;
+//  GamePlay *play = GamePlay::sharedGamePlay();
+//  //CCLog("type %d", type);
+//  switch(type)
+//  {
+//    case -1:
+//      {//下忍的飞镖
+//        mSprite->setScale(1.4f);
+//        mIsEnemy = true;
+//        speed = NNINJA_DARTSPEED*play->difficulty;
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//      }
+//      break;
+//    case -2:
+//      {//中忍的飞镖
+//        mSprite->setScale(1.4f);
+//        mIsEnemy = true;
+//        speed = MNINJA_DARTSPEED*play->difficulty;
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//      }
+//      break;
+//    case -3:
+//      {//上忍的飞镖
+//        mSprite->setScale(1.4f);
+//        mIsEnemy = true;
+//        speed = HNINJA_DARTSPEED*play->difficulty;
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//      }
+//      break;
+//    case -4:
+//      {//冰冻飞镖
+//        mSprite->setScale(1.4f);
+//        mIsEnemy = true;
+//        speed = HNINJA_DARTSPEED*play->difficulty/2;
+//        GameTool::PlaySound("sound/freeze_fly.mp3");
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//
+//        mParticle = 2;
+//        mParticleInterval = 0.05f;
+//      }
+//      break;
+//    case -5:
+//      {//八方手里剑
+//        mSprite->setScale(1.4f);
+//        this->addTail();
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//        speed = 700;
+//      }
+//      break;
+//    case -6:
+//      {//神工
+//        mSprite->setScale(1.4f);
+//        mIsEnemy = true;
+//        speed = HNINJA_DARTSPEED*play->difficulty*2;
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//      }
+//      break;
+//    case 0:
+//      {//主角的普通飞镖
+//        mSprite->setScale(1.4f);
+//        this->addTail();
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//      }
+//      break;
+//    case 1://火飞镖
+//      {
+//        this->addTail();
+//        mHitEffect = 11;
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//
+//        mParticle = 1;
+//        mParticleInterval = 0.05f;
+//      }
+//      break;
+//    case 2://雷飞镖
+//      {
+//        this->addSTail(cocos2d::CCString::create("misc"), 0);
+//        mHitEffect = 12;
+//        //旋转代码
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//      }
+//      break;
+//    case 3://激光标
+//      {
+//        mSprite->setRotation(-90 - CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
+//        mHitEffect = 20;
+//        mHitEffect2 = 21;
+//      }
+//      break;
+//    case 4://暗影镖
+//      {
+//        mSprite->setScale(1.4f);
+//        this->addTail();
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//        mHitEffect = 14;
+//
+//        mParticle = 5;
+//        mParticleInterval = 0.02f;
+//      }
+//      break;
+//    case 5://蝴蝶镖
+//      {
+//        mSprite->setRotation(-90 - CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
+//        this->addTail();
+//        mHitEffect = 22;
+//        mHitEffect2 = 23;
+//
+//        mParticle = -2;
+//        mParticleInterval = 0.1f;
+//      }
+//      break;
+//    case 6://冰飞镖
+//      {
+//        mSprite->setScale(1.4f);
+//        this->addTail();
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//        mHitEffect = 20;
+//        mHitEffect2 = 21;
+//
+//        mParticle = 2;
+//        mParticleInterval = 0.05f;
+//      }
+//      break;
+//    case 7://樱花镖
+//      {
+//        mSprite->setScale(1.4f);
+//        this->addTail();
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//        mHitEffect = 15;
+//        mHitEffect2 = 16;
+//
+//        mParticle = 3;
+//        mParticleInterval = 0.05f;
+//      }
+//      break;
+//    case 8://真空镖
+//      {
+//        mSprite->setScale(1.4f);
+//        this->addTail();
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//        mHitEffect = 18;
+//        mHitEffect2 = 19;
+//
+//        mParticle = 4;
+//        mParticleInterval = 0.05f;
+//      }
+//      break;
+//    case 9://追踪镖
+//      {
+//        mSprite->setScale(1.4f);
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//        GameObject *atar = (GameObject*)play->nearestEnemy(direction);
+//        if( atar != NULL )
+//        {
+//          this->traceRole(atar->handler());
+//        }
+//
+//        mHitEffect = 17;
+//
+//        mParticle = 6;
+//        mParticleInterval = 0.016f;
+//      }
+//      break;
+//    case 10://黄金镖
+//      {
+//        mSprite->setScale(1.4f);
+//        this->addTail();
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//
+//        mParticle = -1;
+//        mParticleInterval = 0.05f;
+//      }
+//      break;
+//    case 11:
+//      {//彩虹镖
+//        mSprite->setScale(1.4f);
+//        this->addTail();
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//
+//        mHitEffect = 24;
+//        mHitEffect2 = 25;
+//      }
+//      break;
+//    case 12:
+//      {
+//        mSprite->setScale(1.4f);
+//        this->addTail();
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//      }
+//      break;
+//    case 13:
+//      {
+//        mSprite->setScale(1.4f);
+//        this->addTail();
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//      }
+//      break;
+//    case 14:
+//      {
+//        mSprite->setScale(1.4f);
+//        this->addTail();
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//      }
+//      break;
+//    case 15:
+//      {
+//        mSprite->setScale(1.4f);
+//        this->addTail();
+//cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
+//cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+//        mSprite->runAction(rf);
+//      }
+//      break;
+//  }
+//  if( type >= 0 )
+//  {
+//    mIsEnemy = false;
+//    speed = play->mainrole->dartSpeed;
+//  }
+//
+//  mPaused = false;
+//  mRemoved = false;
 }
 
 void Dart::onUpdate(float delta) 
@@ -607,5 +606,4 @@ void Dart::onDestroy()
     mParent->removeChild(mSTail, true);
   }
   play->darts->removeObject(this);
-  mShap->release();
 }

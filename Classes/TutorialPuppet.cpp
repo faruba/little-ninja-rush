@@ -120,7 +120,7 @@ cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(calltarget
           {
             mTimer = 0;
             mSprite->playGTAnimation(5, false);
-            play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), mTarget, -1, play)));
+//            play->darts->addObjec,bet(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), mTarget, -1, play)));
             mState = 0;
             if( mCallback != NULL )
             {

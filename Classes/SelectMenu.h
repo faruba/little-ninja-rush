@@ -29,14 +29,14 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(SelectMenu, create);
   virtual void onEnter();
   virtual void update(float delta);
 
-  void onStart();
-  void onChangeDart();
-  void onChangeBlade();
-  void onChangeSpecial();
-  void onBack();
-  void onLeftRole();
-  void onRightRole();
-  void onClickMe();
+  void onStart(cocos2d::Ref*);
+  void onChangeDart(cocos2d::Ref*);
+  void onChangeBlade(cocos2d::Ref*);
+  void onChangeSpecial(cocos2d::Ref*);
+  void onBack(cocos2d::Ref*);
+  void onLeftRole(cocos2d::Ref*);
+  void onRightRole(cocos2d::Ref*);
+  void onClickMe(cocos2d::Ref*);
 
   void updateAngle();
   void updateCharacterInfo(int rid);

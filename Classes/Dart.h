@@ -8,7 +8,7 @@ class Dart:
 {
   public:
     CREATE_FUNC(Dart);
-    static Dart* dart(cocos2d::CCString* shap, cocos2d::Point pos, cocos2d::Point dir, int typ, Node* parent);
+    static Dart* dart(std::string& shap, cocos2d::Point pos, cocos2d::Point dir, int typ, Node* parent);
 
     virtual bool isEnemy();
     virtual cocos2d::Point position();
@@ -20,7 +20,7 @@ cocos2d::Node* mParent;
 cocos2d::Sprite* mSprite;
 cocos2d::Sprite* mTail;
     GTAnimatedSprite *mSTail;
-cocos2d::CCString *mShap;
+    std::string mShap;
     bool mPaused;
     bool mIsEnemy;
     int mHitEffect;

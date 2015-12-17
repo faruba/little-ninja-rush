@@ -102,8 +102,8 @@ void Mechanic::onUpdate(float delta)
                     if( mCount < MECHANIC_LAUNCH )
                     {
                         //launch dart
-                        cocos2d::Point dir = ccpForAngle(CC_DEGREES_TO_RADIANS(-90-MECHANIC_ANGLE+CCRANDOM_0_1()*MECHANIC_ANGLE*2));
-                        play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), dir, -6, play)));
+//                        cocos2d::Point dir = ccpForAngle(CC_DEGREES_TO_RADIANS(-90-MECHANIC_ANGLE+CCRANDOM_0_1()*MECHANIC_ANGLE*2));
+//                        play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), dir, -6, play)));
                         mTimer = MECHANIC_LAUNCHCD;
                         mCount++;
                     }

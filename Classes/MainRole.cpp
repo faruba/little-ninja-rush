@@ -112,17 +112,17 @@ void MainRole::onCreate()
 
 void MainRole::setEquipDart(int tid) 
 {
-//  Shuriken *sk = (Shuriken*)GameData::fetchShurikens()->objectAtIndex(tid);
-//
-//  dartCD = sk->reld;
-//  dartSpeed = sk->flys;
-//  dartShap = sk->shap;
-//  dartEffect = sk->efft;
-//  //special dart
-//  if( sk->uiid == mRoleId + 39 )
-//  {
-//    dartCD -= dartCD*0.3f;
-//  }
+  Shuriken sk = GameData::fetchShurikens()[tid];
+
+  dartCD = sk.reld;
+  dartSpeed = sk.flys;
+  dartShap = sk.shap;
+  dartEffect = sk.efft;
+  //special dart
+  if( sk.uiid == mRoleId + 39 )
+  {
+    dartCD -= dartCD*0.3f;
+  }
 }
 
 void MainRole::setEquipBlade(int tid) 
@@ -427,7 +427,7 @@ CCARRAY_FOREACH(play->enemies, node)
     }
   }
 
-  SimpleAudioEngine::sharedEngine()->playEffect(bladeSound->getCString());
+//  SimpleAudioEngine::sharedEngine()->playEffect(bladeSound->getCString());
 
   if( hit )
   {

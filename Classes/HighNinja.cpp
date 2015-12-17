@@ -184,14 +184,14 @@ void HighNinja::onUpdate(float delta)
                         dst.y = play->mainrole->position().y;
                         cocos2d::Point dir = ccpNormalize(ccpSub(dst, this->center()));
                         
-                        play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("bfbdr.png"), this->center(), dir, -4, mParent)));
+//                        play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("bfbdr.png"), this->center(), dir, -4, mParent)));
                     }
                     else {
                         cocos2d::Point dir = ccpNormalize(ccpSub(target, this->center()));
                         float angle = ccpToAngle(dir);
                         angle += CC_DEGREES_TO_RADIANS(-HNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*HNINJA_ACCURATE)*CCRANDOM_0_1();
                         dir = ccpForAngle(angle);
-                        play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), dir, -3, mParent)));
+//                        play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), dir, -3, mParent)));
                     }
                     
                     mSprite->playGTAnimation(5, false);
