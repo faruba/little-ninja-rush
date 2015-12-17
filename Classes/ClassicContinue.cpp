@@ -22,7 +22,7 @@ class ControlLayer :
   public:
     CREATE_FUNC(ControlLayer);
 
-    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
@@ -56,7 +56,7 @@ bool ControlLayer::init()
     {
 NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
 cocosbuilder::CCBReader *pReader = new CCBReader(pNodeLib, this, this);
-cocos2d::CCNode *node = pReader->readNodeGraphFromFile("ui-continue.ccbi", this);
+cocos2d::Node *node = pReader->readNodeGraphFromFile("ui-continue.ccbi", this);
       pReader->release();
       node->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->baseLeft, 0));
       this->addChild(node);
@@ -283,7 +283,7 @@ cocos2d::extension::Control::Handler   ControlLayer::onResolveCCBCCControlSelect
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool ControlLayer::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ControlLayer::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mNumber", CCLabelBMFont *, mNumber)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel", Sprite *, mBtnCancel)

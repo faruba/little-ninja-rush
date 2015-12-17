@@ -40,7 +40,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GamePlay, create);
     void taskCompleted(std::string tile, std::string icon, int type);
     void pieceComplete(std::string title, std::string icon);
     void popText(std::string text);
-    void scheduleSpellRelease(cocos2d::CCNode* target, SEL_CallFunc sel);
+    void scheduleSpellRelease(cocos2d::Node* target, SEL_CallFunc sel);
     bool isPlayingArcade();
     void setGameMode(int mod);
     int getGameMode();
@@ -100,7 +100,7 @@ cocos2d::Layer* ui();
     void doneOutro();
     void doneIntro();
 
-    static void setTaskCompleteNode(cocos2d::CCNode* node);
+    static void setTaskCompleteNode(cocos2d::Node* node);
     bool completeSomeObjectives();
 
     //0-daily 1-weekly 2-monthly 3-achievement 4-collection 5-text
@@ -125,7 +125,7 @@ cocos2d::LayerColor *mFeverMask;
     int   mScheduleSpeedCounter;
 
     float mScheduleSpellRelease;
-cocos2d::CCNode*      mScheduleReleaseTarget;
+cocos2d::Node*      mScheduleReleaseTarget;
     SEL_CallFunc mScheduleReleaseSelector;
 
     float mScheduleMaskTime;
@@ -137,7 +137,7 @@ cocos2d::CCNode*      mScheduleReleaseTarget;
     cocos2d::Point mVibrateDir;
 
     //intro&outro
-cocos2d::CCNode *mSceneIntro;
+cocos2d::Node *mSceneIntro;
 cocos2d::Scene *mNewScene;
     bool mIntroFlag;
 

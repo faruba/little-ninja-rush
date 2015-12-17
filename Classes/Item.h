@@ -14,13 +14,13 @@ class Item:public GameObject{
   public:
     CREATE_FUNC(Item);
     virtual bool init(){return true;};
-    static Item* item(int tid, cocos2d::Point pos, CCNode* parent, bool rock);
+    static Item* item(int tid, cocos2d::Point pos, Node* parent, bool rock);
     static void triggerItem(int degree, cocos2d::Point pos);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-cocos2d::CCNode* mParent;
+cocos2d::Node* mParent;
 cocos2d::Sprite* mSprite;
     cocos2d::Point mPos;
     int     mTid;

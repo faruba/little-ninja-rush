@@ -19,7 +19,7 @@ class ExtraMenu:
     LNR_SCENE_METHOD(ExtraMenu);
     static cocos2d::Scene* scene(int mode);
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ExtraMenu, create);
-    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
@@ -28,9 +28,9 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ExtraMenu, create);
     virtual void onTouchEnded(Touch * touch, Event * event);
 
     int mMode;//0-achievement 1-statistics 2-about
-cocos2d::CCNode *mNode;
+cocos2d::Node *mNode;
     CEClipedNode *mClipedList;
-cocos2d::CCNode *mItemList;
+cocos2d::Node *mItemList;
     float mOffset;
     int mCurrUnFold;
     cocos2d::Point mTouchBegin;
@@ -48,11 +48,11 @@ cocos2d::Sprite *mScrollBody;
     time_t mLastTime;
     //-- auto assign --
 cocos2d::CCLabelBMFont *mCoins;
-cocos2d::CCNode *mList;
+cocos2d::Node *mList;
 cocos2d::Sprite *mBanner;
 
     //intro&outro
-cocos2d::CCNode *mSceneIntro;
+cocos2d::Node *mSceneIntro;
 cocos2d::Scene *mNewScene;
     bool mIntroFlag;
 

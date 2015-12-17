@@ -47,7 +47,7 @@ bool SelectMenu::init()
 
   this->scheduleUpdate();
   this->setTouchEnabled(true);
-cocos2d::CCNode *taskcomplete = cocos2d::CCNode::create();
+cocos2d::Node *taskcomplete = cocos2d::Node::create();
   taskcomplete->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, 5);
 
@@ -63,7 +63,7 @@ void SelectMenu::onEnter()
   PublicLoad::menuSelect()->loadAll();
   mSceneIntro = NULL;
   mIntroFlag = false;
-cocos2d::CCNode *ui = createUIByCCBI("menu-select", "SelectMenu", SelectMenuLayerLoader::loader(), this);
+cocos2d::Node *ui = createUIByCCBI("menu-select", "SelectMenu", SelectMenuLayerLoader::loader(), this);
   this->addChild(ui);
   mStart = NULL;
 
@@ -565,7 +565,7 @@ cocos2d::extension::Control::Handler   SelectMenu::onResolveCCBCCControlSelector
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool SelectMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool SelectMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadow", Sprite*,  mShadow)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDesc", Sprite*,  mDesc)
@@ -579,10 +579,10 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHeroDesc", Sprite*,  mHeroDesc)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTitle", Sprite*,  mTitle)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mParam", Sprite*,  mParam)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBouns", Sprite*,  mBouns)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHero", CCNode*,  mHero)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHearts", CCNode*,  mHearts)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDarts", CCNode*,  mDarts)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStartPos", CCNode*,  mStartPos)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHero", Node*,  mHero)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHearts", Node*,  mHearts)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDarts", Node*,  mDarts)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStartPos", Node*,  mStartPos)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnStart", CCMenuItemImage*,  mBtnStart)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnDart", CCMenuItemImage*,  mBtnDart)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnBlade", CCMenuItemImage*,  mBtnBlade)

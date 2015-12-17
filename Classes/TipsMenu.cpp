@@ -50,7 +50,7 @@ void TipsMenu::onEnter()
     PublicLoad::menuExtra()->loadAll();
     cocosbuilder::NodeLoaderLibrary *pNodeLib = cocosbuilder::NodeLoaderLibrary::getInstance();
     cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
-cocos2d::CCNode *mNode = pReader->readNodeGraphFromFile("menu-tips.ccbi", this);
+cocos2d::Node *mNode = pReader->readNodeGraphFromFile("menu-tips.ccbi", this);
     pReader->release();
     
     this->addChild(mNode);
@@ -149,7 +149,7 @@ void TipsMenu::setSceneIntro()
 {
     if( mSceneIntro == NULL )
     {
-        mSceneIntro = cocos2d::CCNode::create();
+        mSceneIntro = cocos2d::Node::create();
         this->addChild(mSceneIntro);
 cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
         left->setAnchorPoint(cocos2d::Vec2(1, 0));
@@ -191,7 +191,7 @@ void TipsMenu::setSceneOutro(cocos2d::Scene* newscene)
     mNewScene->retain();
     if( mSceneIntro == NULL )
     {
-        mSceneIntro = cocos2d::CCNode::create();
+        mSceneIntro = cocos2d::Node::create();
         this->addChild(mSceneIntro);
 cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
         left->setAnchorPoint(cocos2d::Vec2(1, 0));
@@ -227,7 +227,7 @@ cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
     mNewScene->release();
 }
 
-bool TipsMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool TipsMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeft", CCMenuItemImage*, mLeft);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRight", CCMenuItemImage*, mRight);

@@ -36,7 +36,7 @@ int gEffectLevel[] = {13, 18, 20, 24};
 
 
 
-Item* Item::item(int tid, cocos2d::Point pos, CCNode * parent, bool rock) 
+Item* Item::item(int tid, cocos2d::Point pos, Node * parent, bool rock) 
 {
     Item *ret = Item::create();
     ret->mParent = parent;

@@ -13,7 +13,7 @@ class TipsMenu:
     LNR_SCENE_METHOD(TipsMenu);
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TipsMenu, create);
     
-    bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
@@ -26,7 +26,7 @@ private:
     void setSceneIntro();
     void setSceneOutro(cocos2d::Scene* newscene);
     void doneOutro();
-cocos2d::CCNode *mNode;
+cocos2d::Node *mNode;
 cocos2d::CCLabelTTF *mCount;
 cocos2d::CCLabelTTF *mTip;
     int mIndex;
@@ -34,7 +34,7 @@ cocos2d::CCMenuItemImage *mLeft;
 cocos2d::CCMenuItemImage *mRight;
 
     //intro&outro
-cocos2d::CCNode *mSceneIntro;
+cocos2d::Node *mSceneIntro;
 cocos2d::Scene *mNewScene;
     bool mIntroFlag;
 

@@ -13,7 +13,7 @@
 #include "GameRecord.h"
 #include "UniversalFit.h"
 
-Samuri* Samuri::role(cocos2d::CCNode * parent) 
+Samuri* Samuri::role(cocos2d::Node * parent) 
 {
     Samuri *em = Samuri::create();
     em->mParent = parent;

@@ -7,7 +7,7 @@ class Archer:
   public Darts
 {
   public:
-    static Archer* role(cocos2d::CCNode* parent);
+    static Archer* role(cocos2d::Node* parent);
     CREATE_FUNC(Archer);
 
     virtual void onCreate();
@@ -18,7 +18,7 @@ class Archer:
     virtual void onHitback(cocos2d::Point origin);
     virtual void setPosition(cocos2d::Point pos);
     void toggleVisible(bool flag);
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
     cocos2d::Point mTarget;
     GTAnimatedSprite *mArrow;
     int mState;

@@ -12,7 +12,7 @@
 #include "GamePlay.h"
 
 //--------
-Snow* Snow::snow(cocos2d::CCNode* parent) 
+Snow* Snow::snow(cocos2d::Node* parent) 
 {
     Snow *ret = Snow::create();
     ret->mSprite = cocos2d::Sprite::createWithSpriteFrameName("scene-snow.png");
@@ -69,7 +69,7 @@ cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameC
     mSakura = NULL;
 }
 
-void Scene7::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTile * tiles) 
+void Scene7::createScene(cocos2d::Node * bg, Node * fbg, Node * fg, RingTile * tiles) 
 {
     mTiles = tiles;
     mFBg = fbg;
@@ -88,7 +88,7 @@ cocos2d::Sprite *bgm = cocos2d::Sprite::createWithSpriteFrameName("mc-bg.png");
     mBg->addChild(bgm);
     
     //white trees
-    mWhiteTrees = cocos2d::CCNode::create();
+    mWhiteTrees = cocos2d::Node::create();
     mBg->addChild(mWhiteTrees);
     mWhiteLen = 0;
     for(int i=0; i<6; ++i)
@@ -112,7 +112,7 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
     }
     
     //white trees
-    mWhiteTrees2 = cocos2d::CCNode::create();
+    mWhiteTrees2 = cocos2d::Node::create();
     mBg->addChild(mWhiteTrees2);
     mWhiteLen2 = 0;
     for(int i=0; i<6; ++i)
@@ -127,7 +127,7 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
     }
     
     //green trees
-    mGreenTrees2 = cocos2d::CCNode::create();
+    mGreenTrees2 = cocos2d::Node::create();
     mBg->addChild(mGreenTrees2);
     mGreenLen2 = 0;
     for(int i=0; i<6; ++i)
@@ -148,7 +148,7 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
     mBg->addChild(mHouse);
     
     //green trees
-    mGreenTrees = cocos2d::CCNode::create();
+    mGreenTrees = cocos2d::Node::create();
     mBg->addChild(mGreenTrees);
     mGreenLen = 0;
     for(int i=0; i<6; ++i)
@@ -172,7 +172,7 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
     }
     
     //decorator
-    mDecos = cocos2d::CCNode::create();
+    mDecos = cocos2d::Node::create();
     mFBg->addChild(mDecos);
     for(int i=0; i<5; ++i)
     {
@@ -200,7 +200,7 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
     }
     
     //front
-    mFronts = cocos2d::CCNode::create();
+    mFronts = cocos2d::Node::create();
     mFront->addChild(mFronts);
     for(int i=0; i<5; ++i)
     {
@@ -214,7 +214,7 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
     }
     
     //snow
-    mSakuraNode = cocos2d::CCNode::create();
+    mSakuraNode = cocos2d::Node::create();
     mSakuraNode->setPosition(cocos2d::Vec2(0, 0));
     mFront->addChild(mSakuraNode);
     mSakura = cocos2d::CCArray::create();

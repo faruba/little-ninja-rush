@@ -18,7 +18,7 @@
 
 
 
-HighNinja* HighNinja::role(cocos2d::CCNode * parent) 
+HighNinja* HighNinja::role(cocos2d::Node * parent) 
 {
     HighNinja *em = HighNinja::create();
     em->mParent = parent;

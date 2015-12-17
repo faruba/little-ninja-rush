@@ -21,12 +21,12 @@ public CCBSelectorResolver
   public:
     bool init(){return true;};
     CREATE_FUNC(GameInterface);
-    static GameInterface* interface(cocos2d::CCNode* parent);
+    static GameInterface* interface(cocos2d::Node* parent);
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
     
-    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref *, const char*);
 
@@ -34,12 +34,12 @@ public CCBSelectorResolver
     void onUpdateArcade(float delta, GamePlay* play);
     void toggleShowItemButtons(bool flag);
     void rebuildDarts(bool unlimit);
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
     //-------- new ui ------------
 cocos2d::Sprite *mUIBg;
 cocos2d::Sprite *mSpell;
 cocos2d::Sprite *mSpellName;
-cocos2d::CCNode *mSpFgNode;
+cocos2d::Node *mSpFgNode;
 cocos2d::Sprite *mSpBg;
 cocos2d::Sprite *mSpBgTop;
 cocos2d::Sprite *mSpellGrid;
@@ -60,13 +60,13 @@ cocos2d::Sprite *mCoinMark;
 cocos2d::Sprite *mHPMeters[MAXHPMETER];
 
     //darts
-cocos2d::CCNode *mDartMeter;
+cocos2d::Node *mDartMeter;
     int mDartCache;
     float mDartDis;
     bool mUnlimtedDarts;
     float mUnlimtedDartsTimer;
-cocos2d::CCNode *mHitNode;
-cocos2d::CCNode *mFeverCoins;
+cocos2d::Node *mHitNode;
+cocos2d::Node *mFeverCoins;
 cocos2d::CCLabelBMFont *mFeverFont;
 
     //score * arcade
@@ -74,7 +74,7 @@ cocos2d::CCLabelBMFont *mScoreNumber;
     int mScoreCache;
 
     //speed * boost
-cocos2d::CCNode *mSpeedBoost;
+cocos2d::Node *mSpeedBoost;
 cocos2d::Sprite *mSpeedMask;
 cocos2d::LayerColor *mSpeedBg;
 cocos2d::LayerColor *mSpeedRed;

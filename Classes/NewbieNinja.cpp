@@ -8,7 +8,7 @@
 
 
 
-NewbieNinja* NewbieNinja::role(cocos2d::CCNode * parent) 
+NewbieNinja* NewbieNinja::role(cocos2d::Node * parent) 
 {
     NewbieNinja *em = NewbieNinja::create();
     em->mParent = parent;

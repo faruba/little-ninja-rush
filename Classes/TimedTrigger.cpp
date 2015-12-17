@@ -11,7 +11,7 @@
 
 
 
-TimedTrigger* TimedTrigger::triggerWithDelay(cocos2d::CCNode*target, SEL_CallFunc selector, float delay) 
+TimedTrigger* TimedTrigger::triggerWithDelay(cocos2d::Node*target, SEL_CallFunc selector, float delay) 
 {
     TimedTrigger *ret = TimedTrigger::create();
     ret->mTarget = target;
@@ -21,7 +21,7 @@ TimedTrigger* TimedTrigger::triggerWithDelay(cocos2d::CCNode*target, SEL_CallFun
     return ret;
 }
 
-TimedTrigger* TimedTrigger::triggerWithCycle(cocos2d::CCNode*target, SEL_CallFunc selector, float cycle, int times) 
+TimedTrigger* TimedTrigger::triggerWithCycle(cocos2d::Node*target, SEL_CallFunc selector, float cycle, int times) 
 {
     TimedTrigger *ret = TimedTrigger::create();
     ret->mTarget = target;

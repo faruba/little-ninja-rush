@@ -5,7 +5,7 @@
 
 ;
 
-class GTGhostShadow:public cocos2d::CCNode
+class GTGhostShadow:public cocos2d::Node
 {
   public:
     virtual bool init();

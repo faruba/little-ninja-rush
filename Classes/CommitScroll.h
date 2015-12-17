@@ -20,7 +20,7 @@ class CommitScroll:
     CREATE_FUNC(CommitScroll);
     static CommitScroll* commitScorll();
 
-    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
@@ -30,7 +30,7 @@ class CommitScroll:
 
     bool mOver;
     float mOverTimer;
-cocos2d::CCNode *mNode;
+cocos2d::Node *mNode;
     GTAnimatedSprite *mEffect;
     int mState;//0-waitting 1-bloom 2-fade
     float mTimer;
@@ -42,10 +42,10 @@ cocos2d::Sprite *mArrow;
 cocos2d::Sprite *mScroll;
 cocos2d::Sprite *mTitle;
 cocos2d::CCLabelBMFont *mScrollCount;
-cocos2d::CCNode *mRotateNode;
+cocos2d::Node *mRotateNode;
 cocos2d::Sprite *mLightBack;
-cocos2d::CCNode *mRotateACW;
-cocos2d::CCNode *mRotateCW;
+cocos2d::Node *mRotateACW;
+cocos2d::Node *mRotateCW;
 cocos2d::LayerColor *mFlash;
 cocos2d::CCLabelTTF *mItemName;
 

@@ -35,7 +35,7 @@ bool gPopFlag = false;
 
 
 class PopOption :
-  public CCNode/*<UIAlertViewDelegate>*/,
+  public Node/*<UIAlertViewDelegate>*/,
   public CCBMemberVariableAssigner,
   public CCBSelectorResolver
 {
@@ -49,7 +49,7 @@ class PopOption :
 
     //---- friends
     cocos2d::CCLabelBMFont *mCoin;
-    cocos2d::CCNode *mShadeCode;
+    cocos2d::Node *mShadeCode;
 
     TitleMenu *master;
 
@@ -66,7 +66,7 @@ class PopOption :
     static PopOption* optionWithType(int typ);//0=set, 1=gainfriend 2=setfriend)
 
     //cocosbuilder support
-    bool onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+    bool onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
     {
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", CCMenuItemImage*, mMusic);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", CCMenuItemImage*, mSfx);
@@ -74,7 +74,7 @@ class PopOption :
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTutorial", CCMenuItemImage*, mTutorial);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "miCloud", CCMenuItemImage*, miCloud);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoin", CCLabelBMFont*, mCoin);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadeCode", CCNode*, mShadeCode);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadeCode", Node*, mShadeCode);
       return false;
     }
 
@@ -138,7 +138,7 @@ void PopOption::loadSetting()
 {
   NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
   CCBReader *pReader = new CCBReader(pNodeLib, this, this);
-  cocos2d::CCNode *node = pReader->readNodeGraphFromFile("menu-titleoption.ccbi", this);
+  cocos2d::Node *node = pReader->readNodeGraphFromFile("menu-titleoption.ccbi", this);
   pReader->release();
 
   this->addChild(node);
@@ -198,7 +198,7 @@ void PopOption::loadSetting()
 void PopOption::loadFriendGain()
 {
   //feature removed from android
-  //    CCNode *node = [CCBReader nodeGraphFromFile:"menu-titlefriendgain.ccb" owner:this);
+  //    Node *node = [CCBReader nodeGraphFromFile:"menu-titlefriendgain.ccb" owner:this);
   //    this->addChild(node);
   //    CCString* coin = cocos2d::CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount());
   //    mCoin->setString(coin);
@@ -207,7 +207,7 @@ void PopOption::loadFriendGain()
 void PopOption::loadFriendAdd()
 {
   //feature removed from android
-  //    CCNode *node = [CCBReader nodeGraphFromFile:"menu-titlefriendset.ccb" owner:this);
+  //    Node *node = [CCBReader nodeGraphFromFile:"menu-titlefriendset.ccb" owner:this);
   //    this->addChild(node);
   //    CCString* coin = cocos2d::CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount());
   //    mCoin->setString(coin);
@@ -219,7 +219,7 @@ void PopOption::loadFriendAdd()
 void PopOption::loadDelivery()
 {
   //feature removed from android
-  //    CCNode *sp = [ABDelivery->sharedDelivery(), this, @selector(onOpenDelivery), @selector(onCloseOption));
+  //    Node *sp = [ABDelivery->sharedDelivery(), this, @selector(onOpenDelivery), @selector(onCloseOption));
   //    sp->setPosition(
   //    this->addChild(sp);
 
@@ -403,27 +403,27 @@ void PopOption::onRateUs()
 }
 
 class PopObj :
-  public CCNode,
+  public Node,
   public CCBMemberVariableAssigner,
   public CCBSelectorResolver
 {
   public:
     CEClipedNode *mBoard;
-    cocos2d::CCNode *mRode;
+    cocos2d::Node *mRode;
     float mTimer;
     bool mFlag;
     //-- auto assign --
     cocos2d::CCLabelTTF *mDailyObjective;
     cocos2d::CCLabelTTF *mWeeklyObjective;
     cocos2d::CCLabelTTF *mMonthlyObjective;
-    cocos2d::CCNode *mDailyCrown;
-    cocos2d::CCNode *mWeeklyCrown;
-    cocos2d::CCNode *mMonthlyCrown;
+    cocos2d::Node *mDailyCrown;
+    cocos2d::Node *mWeeklyCrown;
+    cocos2d::Node *mMonthlyCrown;
     cocos2d::Sprite *mDailyIcon;
     cocos2d::Sprite *mWeeklyIcon;
     cocos2d::Sprite *mMonthlyIcon;
-    cocos2d::CCNode *mClassic;
-    cocos2d::CCNode *mArcade;
+    cocos2d::Node *mClassic;
+    cocos2d::Node *mArcade;
     cocos2d::Sprite *mGoldCoin;
     cocos2d::Sprite *mSilverCoin;
     cocos2d::Sprite *mBronzeCoin;
@@ -451,19 +451,19 @@ class PopObj :
     void onClose();
 
     //cocosbuilder support
-    bool onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+    bool onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
     {
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF*, mDailyObjective);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF*, mWeeklyObjective);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF*, mMonthlyObjective);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", CCNode*, mDailyCrown);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", CCNode*, mWeeklyCrown);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", CCNode*, mMonthlyCrown);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", Node*, mDailyCrown);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", Node*, mWeeklyCrown);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", Node*, mMonthlyCrown);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", Sprite*, mDailyIcon);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", Sprite*, mWeeklyIcon);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", Sprite*, mMonthlyIcon);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", CCNode*, mClassic);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", CCNode*, mArcade);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", Node*, mClassic);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", Node*, mArcade);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", Sprite*, mGoldCoin);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", Sprite*, mSilverCoin);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", Sprite*, mBronzeCoin);
@@ -644,7 +644,7 @@ void PopObj::displayArcade()
 
 void PopObj::onCreate()
 {
-  cocos2d::CCNode * node = createUIByCCBI("menu-titlepop", "TitleMenu", TitleMenuLayerLoader::loader(), this);
+  cocos2d::Node * node = createUIByCCBI("menu-titlepop", "TitleMenu", TitleMenuLayerLoader::loader(), this);
   mBoard = CEClipedNode::create();
   mBoard->addChild(node);
   cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
@@ -753,7 +753,7 @@ void PopObj::onChangeDisplay()
 }
 
 #ifdef TITLESTYLE_SPRING
-Sakura* Sakura::create(cocos2d::CCNode *parent)
+Sakura* Sakura::create(cocos2d::Node *parent)
 {
   Sakura *ret = new Sakura;
   ret->init();
@@ -826,7 +826,7 @@ void TitleMenu::onEnter()
 
   //enable keypad for back button
   this->setKeypadEnabled(true);
-  cocos2d::CCNode * node = createUIByCCBI("menu-title", "TitleMenu", TitleMenuLayerLoader::loader(), this);
+  cocos2d::Node * node = createUIByCCBI("menu-title", "TitleMenu", TitleMenuLayerLoader::loader(), this);
   if(node != NULL) {
     this->addChild(node);
   }
@@ -920,7 +920,7 @@ void TitleMenu::onEnter()
 
   //mPopTimer = 0;
 
-  if( !gPopFlag )
+if( !gPopFlag )
   {
     if( CCRANDOM_0_1() < 0.6f )
     {
@@ -1312,7 +1312,7 @@ cocos2d::extension::Control::Handler TitleMenu::onResolveCCBCCControlSelector(co
   return NULL;
 }
 
-bool TitleMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool TitleMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud1", Sprite*, mCloud1)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCloud2", Sprite*, mCloud2)
@@ -1324,9 +1324,9 @@ bool TitleMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMe
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStar5", Sprite*, mStar5) 
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCNew", Sprite*, mCNew) 
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mNew", Sprite*, mNew) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSakuraNode", CCNode*, mSakuraNode)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSakuraNode2", CCNode*, mSakuraNode2)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEnemies", CCNode*, mEnemies)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSakuraNode", Node*, mSakuraNode)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSakuraNode2", Node*, mSakuraNode2)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEnemies", Node*, mEnemies)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMiniButton", CCMenu*, mMiniButton) 
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainButton", CCMenu*, mMainButton) 
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mOption", CCMenuItemImage*, mOption) 

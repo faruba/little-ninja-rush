@@ -23,7 +23,7 @@ bool ExtraSelect::init()
 
 void ExtraSelect::onEnter() 
 {
-cocos2d::CCNode * node = createUIByCCBI("menu-extramenu", "ExtraMenu", ExtraSelectLayerLoader::loader(), this);
+cocos2d::Node * node = createUIByCCBI("menu-extramenu", "ExtraMenu", ExtraSelectLayerLoader::loader(), this);
   if(node != NULL) {
     this->addChild(node);
   }
@@ -251,7 +251,7 @@ cocos2d::extension::Control::Handler   ExtraSelect::onResolveCCBCCControlSelecto
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool ExtraSelect::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ExtraSelect::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
 //  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMask", LayerColor*, mMask) 
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mAchievement", Sprite*, mAchievement)

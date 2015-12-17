@@ -14,14 +14,14 @@ class Wood:
   public GameObject
 {
   public:
-    static Wood* wood(cocos2d::Point pos, cocos2d::Point dir, CCNode* parent, GOHandler target, cocos2d::Point anchor);
+    static Wood* wood(cocos2d::Point pos, cocos2d::Point dir, Node* parent, GOHandler target, cocos2d::Point anchor);
 
     CREATE_FUNC(Wood);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
     cocos2d::Point mPos;
     cocos2d::Point mDir;
     cocos2d::Point mAnchor;

@@ -19,7 +19,7 @@
 
 
 
-ShadowKilling* ShadowKilling::shadowKilling(cocos2d::CCNode* parent) 
+ShadowKilling* ShadowKilling::shadowKilling(cocos2d::Node* parent) 
 {
     ShadowKilling *ret = ShadowKilling::create();
     ret->mParent = parent;

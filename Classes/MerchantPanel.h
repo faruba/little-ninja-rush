@@ -29,7 +29,7 @@ class MerchantPanel:
     void gainShurikenPiece();
     void gainKatanaPiece();
     void gainSpecialPiece();
-cocos2d::CCNode *mMerchantbox;
+cocos2d::Node *mMerchantbox;
 
     int mIC1;
     int mIC2;

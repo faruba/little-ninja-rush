@@ -17,7 +17,7 @@ public:
     virtual void loadScene() = 0;
     virtual void unloadScene() = 0;
 
-    virtual void createScene(cocos2d::CCNode* bg, CCNode* fbg, CCNode* fg, RingTile* tiles) = 0;
+    virtual void createScene(cocos2d::Node* bg, Node* fbg, Node* fg, RingTile* tiles) = 0;
     virtual void update(float delta) = 0;
 };
 #endif

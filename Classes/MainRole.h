@@ -3,7 +3,7 @@
 #include "GameTool.h"
 #include "Role.h"
 
-class Vector2d:public CCNode
+class Vector2d:public Node
 {
   public:
     virtual bool init() {return true;};
@@ -24,7 +24,7 @@ class MainRole:
     void onHitClassic(int type);
     void onHitArcade(int type);
 cocos2d::Sprite* sprite();
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
     GTAnimatedSprite *mSprite;
     int     mRoleId;
     int     mMoveFlag;
@@ -88,7 +88,7 @@ cocos2d::CCString *bladeSound;
     bool flag_spell;
     bool flag_move;
 
-    static MainRole* role(cocos2d::CCNode* parent);
+    static MainRole* role(cocos2d::Node* parent);
 
     void setEquipDart(int tid);
     void setEquipBlade(int tid);
@@ -99,7 +99,7 @@ cocos2d::CCString *bladeSound;
     //发射飞镖
     void fire(cocos2d::Point dir);
     //结算飞镖
-    void commitFire(cocos2d::CCNode* param, CCNode* pdata);
+    void commitFire(cocos2d::Node* param, Node* pdata);
     //拔刀
     void slice();
     //结算拔刀

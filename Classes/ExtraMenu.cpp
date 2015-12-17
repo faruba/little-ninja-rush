@@ -39,7 +39,7 @@ bool ExtraMenu::init()
 void ExtraMenu::onEnter() 
 {
     PublicLoad::menuExtra()->loadAll();
-cocos2d::CCNode * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLayerLoader::loader(), this);
+cocos2d::Node * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLayerLoader::loader(), this);
   if(node != NULL) {
     this->addChild(node);
   }
@@ -47,7 +47,7 @@ cocos2d::CCNode * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLaye
   mClipedList = CEClipedNode::create();
   mClipedList->setClipRect(new CCRect((UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(12, 12, 455, 264)))));
   mList->addChild(mClipedList);
-  mItemList = cocos2d::CCNode::create();
+  mItemList = cocos2d::Node::create();
   mClipedList->addChild(mItemList);
   mFly = false;
 
@@ -320,7 +320,7 @@ void ExtraMenu::loadAboutUs()
 {
     mCurrState = 2;
     mItemList->removeAllChildrenWithCleanup(true);
-cocos2d::CCNode * node = createUIByCCBI("about", "ExtraMenu", ExtraMenuLayerLoader::loader(), this);
+cocos2d::Node * node = createUIByCCBI("about", "ExtraMenu", ExtraMenuLayerLoader::loader(), this);
     if(node != NULL) {
       mItemList->addChild(node);
     }
@@ -399,7 +399,7 @@ void ExtraMenu::onTouchEnded(Touch * touch, Event * event)
 //cocos2d::Ref *node;
 //CCARRAY_FOREACH(mItemList->getChildren(), node)
 //        {
-//cocos2d::CCNode *item = (cocos2d::CCNode*) node;
+//cocos2d::Node *item = (cocos2d::Node*) node;
 //            float upbound = offset - mItemList->getPosition().y;
 //            float downbound = upbound + item->getContentSize().height + PADDING;
 //            if( dy >= upbound && dy < downbound )
@@ -450,10 +450,10 @@ cocos2d::extension::Control::Handler   ExtraMenu::onResolveCCBCCControlSelector(
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool ExtraMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ExtraMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *,  mCoins);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", CCNode *, mList);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", Node *, mList);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBanner", Sprite *, mBanner);
 
   //CCLog(pMemberVariableName);

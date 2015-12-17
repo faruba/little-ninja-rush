@@ -9,7 +9,7 @@ cocos2d::CCLog("ABScrollContent::init");
   //by default don't clip anything
   mClipNode->setClipRect(new CCRect(0, 0, 1024, 768));
   addChild(mClipNode);
-  contentNode = cocos2d::CCNode::create();
+  contentNode = cocos2d::Node::create();
   contentNode->setPosition(cocos2d::Vec2(0, clipRect.size.height));
   mClipNode->addChild(contentNode);
 
@@ -30,12 +30,12 @@ void ABScrollContent::resetContentPosition()
   contentNode->setPosition(cocos2d::Vec2(0, clipRect.size.height));
 }
 
-void ABScrollContent::addContent(cocos2d::CCNode * content) 
+void ABScrollContent::addContent(cocos2d::Node * content) 
 {
   contentNode->addChild(content);
 }
 
-void ABScrollContent::removeContent(cocos2d::CCNode * content) 
+void ABScrollContent::removeContent(cocos2d::Node * content) 
 {
   contentNode->removeChild(content);
 }

@@ -16,7 +16,7 @@ bool gFirstScene = true;
 bool gHalloween = false;
 bool gChristmas = false;
 
-GameScene* GameScene::scene(cocos2d::CCNode * parent) 
+GameScene* GameScene::scene(cocos2d::Node * parent) 
 {
     GameScene* gs = GameScene::create();
     gs->mParent = parent;
@@ -93,9 +93,9 @@ void GameScene::nextScene()
 void GameScene::onCreate() 
 {
     mScene = NULL;
-    mSceneBgNode = cocos2d::CCNode::create();
-    mSceneFbNode = cocos2d::CCNode::create();
-    mSceneFgNode = cocos2d::CCNode::create();
+    mSceneBgNode = cocos2d::Node::create();
+    mSceneFbNode = cocos2d::Node::create();
+    mSceneFgNode = cocos2d::Node::create();
     mParent->addChild(mSceneBgNode, LAYER_SCENEBG);
     //add tiles
     mTiles = RingTile::tile(60, UniversalFit::sharedUniversalFit()->playSize.width, 50);

@@ -5,10 +5,10 @@
 class Msg:public Ref
 {
   public:
-    static Msg* msg(cocos2d::CCNode* tar, SEL_CallFuncND sel, Ref* obj);
+    static Msg* msg(cocos2d::Node* tar, SEL_CallFuncND sel, Ref* obj);
     CREATE_FUNC(Msg);
     virtual bool init(){return true;};
-cocos2d::CCNode* target;
+cocos2d::Node* target;
     SEL_CallFuncND sel;
 cocos2d::Ref* obj;
 };
@@ -27,7 +27,7 @@ cocos2d::CCArray *mMsg;
 
 
     void clearMsg();
-    void pushMsg(cocos2d::CCNode* target, SEL_CallFuncND sel, Ref* obj);
+    void pushMsg(cocos2d::Node* target, SEL_CallFuncND sel, Ref* obj);
 
 };
 #endif

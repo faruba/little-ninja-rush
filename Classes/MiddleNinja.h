@@ -8,7 +8,7 @@ class MiddleNinja:
 {
   public:
     CREATE_FUNC(MiddleNinja);
-    static MiddleNinja* role(cocos2d::CCNode* parent);
+    static MiddleNinja* role(cocos2d::Node* parent);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
@@ -21,7 +21,7 @@ class MiddleNinja:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
     GTAnimatedSprite *mSprite;
     int    mState;
     float  mTimer;

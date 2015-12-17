@@ -104,11 +104,11 @@ cocos2d::CCTextureCache::sharedTextureCache()->removeTextureForKey(texname->getC
 //    return renderer->getUIImage();//iphone 5
 //}
 
-cocos2d::Node *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, Ref *target)
+cocos2d::Node *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pNodeLoader, Ref *target)
 {
-  /* Create an autorelease CCNodeLoaderLibrary. */
+  /* Create an autorelease NodeLoaderLibrary. */
   cocosbuilder::NodeLoaderLibrary * ccnll = cocosbuilder::NodeLoaderLibrary::newDefaultNodeLoaderLibrary();
-  ccnll->registerNodeLoader(pClassName, pCCNodeLoader);
+  ccnll->registerNodeLoader(pClassName, pNodeLoader);
   /* Create an autorelease CCBReader. */
   cocosbuilder::CCBReader * ccbReader = new cocosbuilder::CCBReader(ccnll);
 
@@ -119,12 +119,12 @@ cocos2d::Node *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosb
   return node;
 }
 
-void doSceneIntro(cocos2d::CCNode *&mSceneIntro, CCNode *target)
+void doSceneIntro(cocos2d::Node *&mSceneIntro, Node *target)
 {
 cocos2d::Sprite *left, *right; 
   if( mSceneIntro == NULL )
   {
-    mSceneIntro = cocos2d::CCNode::create();
+    mSceneIntro = cocos2d::Node::create();
     target->addChild(mSceneIntro, 99);
     left = cocos2d::Sprite::create("door.png");
     left->setAnchorPoint(cocos2d::Vec2(1, 0));
@@ -156,11 +156,11 @@ cocos2d::CCSequence *sq2 = (cocos2d::CCSequence*)CCSequence::create(dt2, mb2, NU
 
   SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/open.mp3").c_str());
 }
-cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, CCNode *&mSceneIntro, SEL_CallFunc callBack, CCNode *target)
+cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, Node *&mSceneIntro, SEL_CallFunc callBack, Node *target)
 {
   if( mSceneIntro == NULL )
   {
-    mSceneIntro = cocos2d::CCNode::create();
+    mSceneIntro = cocos2d::Node::create();
     target->addChild(mSceneIntro, 99);
 cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
     left->setAnchorPoint(cocos2d::Vec2(1, 0));

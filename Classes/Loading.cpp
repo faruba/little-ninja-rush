@@ -96,7 +96,7 @@ cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(bk);
 
 void Loading::onEnter() 
 {
-cocos2d::CCNode *sceneintro = cocos2d::CCNode::create();
+cocos2d::Node *sceneintro = cocos2d::Node::create();
   this->addChild(sceneintro);
 cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
   left->setAnchorPoint(cocos2d::Vec2(1, 0));

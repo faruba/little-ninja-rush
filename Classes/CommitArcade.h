@@ -19,7 +19,7 @@ class CommitArcade:
     CREATE_FUNC(CommitArcade);
     static CommitArcade* commit();
 
-    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref *, const char*);
 
@@ -35,7 +35,7 @@ class CommitArcade:
     int mTargetScore;
     int mCurrentScore;
     int mCurrentBouns;
-cocos2d::CCNode *mNode;
+cocos2d::Node *mNode;
     // --- auto assign ---
 cocos2d::Sprite *mRole;
 cocos2d::Sprite *mLight;

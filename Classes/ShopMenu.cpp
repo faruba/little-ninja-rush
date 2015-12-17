@@ -89,18 +89,18 @@ bool ShopMenu::init()
 void ShopMenu::onEnter() 
 {
     PublicLoad::menuShop()->loadAll();
-cocos2d::CCNode *taskcomplete = cocos2d::CCNode::create();
+cocos2d::Node *taskcomplete = cocos2d::Node::create();
     taskcomplete->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT));
     this->addChild(taskcomplete);
     GamePlay::setTaskCompleteNode(taskcomplete);
-cocos2d::CCNode * node = createUIByCCBI("menu-shop", "ShopMenu", ShopMenuLayerLoader::loader(), this);
+cocos2d::Node * node = createUIByCCBI("menu-shop", "ShopMenu", ShopMenuLayerLoader::loader(), this);
     if(node != NULL) {
       this->addChild(node);
     }
     mClipedList = CEClipedNode::create();
     mClipedList->setClipRect(new CCRect((UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(12, 12, 455, 264)))));
     mList->addChild(mClipedList);
-    mItemList = cocos2d::CCNode::create();
+    mItemList = cocos2d::Node::create();
     mClipedList->addChild(mItemList);
     mFly = false;
     
@@ -752,10 +752,10 @@ cocos2d::extension::Control::Handler   ShopMenu::onResolveCCBCCControlSelector(c
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool ShopMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ShopMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", CCNode *, mList);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", Node *, mList);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu *, mMenu);
 
   //CCLog(pMemberVariableName);

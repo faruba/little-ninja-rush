@@ -169,7 +169,7 @@ cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui
     
     NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
 CCBReader *pReader = new CCBReader(pNodeLib, this, this);
-cocos2d::CCNode *node = pReader->readNodeGraphFromFile("pause_classic.ccbi", this);
+cocos2d::Node *node = pReader->readNodeGraphFromFile("pause_classic.ccbi", this);
     pReader->release();
     
     mBoard = CEClipedNode::create();
@@ -348,19 +348,19 @@ void PauseMenuClassic::change(Ref* ref)
 }
 
 //cocosbuilder support
-bool PauseMenuClassic::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool PauseMenuClassic::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF*, mDailyObjective);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF*, mWeeklyObjective);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF*, mMonthlyObjective);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", CCNode*, mDailyCrown);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", CCNode*, mWeeklyCrown);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", CCNode*, mMonthlyCrown);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", Node*, mDailyCrown);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", Node*, mWeeklyCrown);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", Node*, mMonthlyCrown);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyIcon", Sprite*, mDailyIcon);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyIcon", Sprite*, mWeeklyIcon);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", Sprite*, mMonthlyIcon);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", CCNode*, mClassic);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", CCNode*, mArcade);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", Node*, mClassic);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", Node*, mArcade);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", Sprite*, mGoldCoin);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", Sprite*, mSilverCoin);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", Sprite*, mBronzeCoin);
@@ -371,9 +371,9 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverPrize", CCLabelBMFont*, mSilverPri
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", CCLabelBMFont*, mBronzeScore);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", CCLabelBMFont*, mBronzePrize);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu*, mMenu);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjDaily", CCNode*, mObjDaily);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjWeekly", CCNode*, mObjWeekly);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjMonthly", CCNode*, mObjMonthly);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjDaily", Node*, mObjDaily);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjWeekly", Node*, mObjWeekly);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjMonthly", Node*, mObjMonthly);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBest", CCLabelTTF*, mBest);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", CCMenuItemImage*, mSfx);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", CCMenuItemImage*, mMusic);

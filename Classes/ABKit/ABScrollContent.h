@@ -19,12 +19,12 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ABScrollContent, create);
   void setClipRect(cocos2d::CCRect clipRect);
 
   void resetContentPosition();
-  void addContent(cocos2d::CCNode* content);
-  void removeContent(cocos2d::CCNode* content);
+  void addContent(cocos2d::Node* content);
+  void removeContent(cocos2d::Node* content);
   void removeAllContent();
 
   CEClipedNode *mClipNode;
-cocos2d::CCNode *contentNode;
+cocos2d::Node *contentNode;
 cocos2d::Ref *clickTarget;
   SEL_CallFunc clickMethod;
   cocos2d::Point clickPoint;

@@ -22,7 +22,7 @@ cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameC
     unloadTextureFromeSpriteFrameFile("scene6.plist");
 }
 
-void Scene3::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTile * tiles) 
+void Scene3::createScene(cocos2d::Node * bg, Node * fbg, Node * fg, RingTile * tiles) 
 {
     mTiles = tiles;
     mBg = bg;

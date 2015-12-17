@@ -22,7 +22,7 @@ GamePlay* gPlay = NULL;
 float gGravityFix = 1;
 bool gArcadePlaying = false;
 
-cocos2d::CCNode *gTaskComplete = NULL;
+cocos2d::Node *gTaskComplete = NULL;
 
 int gGameMode = MODE_CLASSIC;
 /* PopQueue */
@@ -127,7 +127,7 @@ bool GamePlay::init()
 void GamePlay::onEnter()
 {
   setAccelerometerEnabled(true);
-cocos2d::CCNode *taskcomplete = cocos2d::CCNode::create();
+cocos2d::Node *taskcomplete = cocos2d::Node::create();
   taskcomplete->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, LAYER_MASK+10);
   setTaskCompleteNode(taskcomplete);
@@ -1177,7 +1177,7 @@ void GamePlay::unscheduleMask()
     }
 }
 
-void GamePlay::scheduleSpellRelease(cocos2d::CCNode* target, SEL_CallFunc sel)
+void GamePlay::scheduleSpellRelease(cocos2d::Node* target, SEL_CallFunc sel)
 {
     mScheduleSpellRelease = 0.4f;
     spellMask->setVisible(true);
@@ -1224,7 +1224,7 @@ void GamePlay::setSceneIntro()
   //doSceneIntro(mSceneIntro, this);
     if( mSceneIntro == NULL )
     {
-        mSceneIntro = cocos2d::CCNode::create();
+        mSceneIntro = cocos2d::Node::create();
         this->addChild(mSceneIntro, LAYER_MASK+99);
 cocos2d::Sprite *left = cocos2d::Sprite::create("door.png");
         left->setAnchorPoint(cocos2d::Vec2(1, 0));
@@ -1280,7 +1280,7 @@ cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
     mNewScene->release();
 }
 
-void GamePlay::setTaskCompleteNode(cocos2d::CCNode * node)
+void GamePlay::setTaskCompleteNode(cocos2d::Node * node)
 {
     gTaskComplete = node;
 }

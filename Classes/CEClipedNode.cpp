@@ -21,7 +21,7 @@ void CEClipedNode::visit(Renderer *renderer, const Mat4& parentTransform, uint32
   glScissor(clipRectInPixel.origin.x, clipRectInPixel.origin.y,
       clipRectInPixel.size.width, clipRectInPixel.size.height);
     /* TODO: uncomment this
-cocos2d::CCNode::visit(Renderer *renderer, const Mat4& parentTransform, uint32_t parentFlags);
+cocos2d::Node::visit(Renderer *renderer, const Mat4& parentTransform, uint32_t parentFlags);
 */
   glDisable(GL_SCISSOR_TEST);
 }

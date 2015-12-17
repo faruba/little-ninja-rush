@@ -13,7 +13,7 @@ public:
     virtual void purchase(int cid) = 0;
 };
 
-class FoldItem : public cocos2d::CCNode
+class FoldItem : public cocos2d::Node
 {
   public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(FoldItem, create);
@@ -40,7 +40,7 @@ cocos2d::Sprite *mIcon;
 cocos2d::CCMenu *mMenu;
 cocos2d::Sprite *mBgButton;
 cocos2d::CCMenuItemImage *mPurchase;
-cocos2d::CCNode *mCost;
+cocos2d::Node *mCost;
 cocos2d::Sprite *mTitleSp;
 cocos2d::CCLabelTTF *mDetailSp;
 

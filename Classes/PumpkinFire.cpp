@@ -19,7 +19,7 @@
 
 
 
-PumpkinFire* PumpkinFire::dart(cocos2d::Point pos, cocos2d::Point dir, CCNode* parent) 
+PumpkinFire* PumpkinFire::dart(cocos2d::Point pos, cocos2d::Point dir, Node* parent) 
 {
     PumpkinFire* ret = PumpkinFire::create();
     ret->mParent = parent;

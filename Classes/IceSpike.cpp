@@ -13,7 +13,7 @@
 
 
 
-IceSpike* IceSpike::spike(cocos2d::Point pos, CCNode* parent) 
+IceSpike* IceSpike::spike(cocos2d::Point pos, Node* parent) 
 {
     IceSpike *ret = IceSpike::create();
     ret->mPos = pos;

@@ -82,7 +82,7 @@ class Scene
    virtual void loadScene() = 0;
    virtual void unloadScene() = 0;
 
-   virtual void createScene(cocos2d::CCNode* bg, CCNode* fbg, CCNode* fg, RingTile* tiles) = 0;
+   virtual void createScene(cocos2d::Node* bg, Node* fbg, Node* fg, RingTile* tiles) = 0;
    virtual void update(float delta) = 0;
    virtual void release() = 0;
 };
@@ -105,9 +105,9 @@ void unloadTextureFromeSpriteFrameFile(const char *plist);
 
 //UIImage* makeScreenshot();
 cocos2d::CCSequence *createScaleSequence(float fDuration[], float fScale[], int count);
-cocos2d::CCNode *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pCCNodeLoader, Ref *target);
-void doSceneIntro(cocos2d::CCNode *&mSceneIntro, CCNode *target);
-cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, CCNode *&mSceneIntro, SEL_CallFunc callBack, CCNode *target);
+cocos2d::Node *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pNodeLoader, Ref *target);
+void doSceneIntro(cocos2d::Node *&mSceneIntro, Node *target);
+cocos2d::Scene* doSceneOutro(cocos2d::Scene* mNewScene, Node *&mSceneIntro, SEL_CallFunc callBack, Node *target);
 
 
 #endif

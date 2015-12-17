@@ -7,7 +7,7 @@ class Santa:
   public Role
 {
   public:
-    static Santa* role(cocos2d::CCNode* parent);
+    static Santa* role(cocos2d::Node* parent);
 
     CREATE_FUNC(Santa);
 
@@ -22,7 +22,7 @@ class Santa:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
     GTAnimatedSprite *mSprite;
     int    mState;
     float  mTimer;

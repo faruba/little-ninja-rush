@@ -42,7 +42,7 @@ cocos2d::CCLog("begin tutorial: role id(%d), cacheDartId(%d)", rid, cacheDartId)
   mLayer->setPosition(cocos2d::Vec2(0, 122.5f));
   play->addChild(mLayer, LAYER_UI);
 
-  mAnimateNode = cocos2d::CCNode::create();
+  mAnimateNode = cocos2d::Node::create();
   mAnimateNode->setPosition(cocos2d::Vec2( 80, 160 ));
   play->addChild(mAnimateNode, LAYER_UI);
   mAnimateSprite = NULL;

@@ -17,7 +17,7 @@ class Bomb:
 {
   public:
     CREATE_FUNC(Bomb);
-    static Bomb* bomb(cocos2d::Point pos, cocos2d::Point dir, CCNode* parent);
+    static Bomb* bomb(cocos2d::Point pos, cocos2d::Point dir, Node* parent);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
@@ -25,7 +25,7 @@ class Bomb:
     virtual bool isEnemy();
     virtual cocos2d::Point position();
     virtual void onHitback(cocos2d::Point origin);
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
 
     GTAnimatedSprite *mSprite;
     cocos2d::Point mPosition;

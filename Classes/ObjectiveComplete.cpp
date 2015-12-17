@@ -110,7 +110,7 @@ void ObjectiveComplete::onUpdate(float delta)
 cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
                 mObjType->setDisplayFrame(cache->spriteFrameByName(cocos2d::CCString::createWithFormat("objc-%d.png", mCurrIndex)->getCString()));
                 mObjRect->setPosition(cocos2d::Vec2(12, 12));
-cocos2d::CCNode *currobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
+cocos2d::Node *currobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
                 currobj->setPosition(cocos2d::Vec2(18, 18));
                 mObjRect->addChild(currobj);
                 cocos2d::Point np = mBanner->getPosition();
@@ -226,13 +226,13 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname->g
                         }
                             break;
                     }
-cocos2d::CCNode *newobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
+cocos2d::Node *newobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
                     newobj->setPosition(cocos2d::Vec2(18, 54));
                     mObjRect->addChild(newobj);
                 }
                 else {
                     mCurrAch = NULL;
-cocos2d::CCNode *newobj = this->genObjectiveInfo(NULL, mCurrIndex);
+cocos2d::Node *newobj = this->genObjectiveInfo(NULL, mCurrIndex);
                     newobj->setPosition(cocos2d::Vec2(18, 54));
                     mObjRect->addChild(newobj);
                     //mark completed
@@ -341,11 +341,11 @@ void ObjectiveComplete::retriveObjectiveInfo(int index, Objective ** obj, Achiev
     }
 }
 
-cocos2d::CCNode* ObjectiveComplete::genObjectiveInfo(Achievement * ach, int typ) 
+cocos2d::Node* ObjectiveComplete::genObjectiveInfo(Achievement * ach, int typ) 
 {
     if( ach == NULL )
     {
-cocos2d::CCNode *sp = cocos2d::CCNode::create();
+cocos2d::Node *sp = cocos2d::Node::create();
         switch (typ) {
             case 0:
             {
@@ -428,11 +428,11 @@ cocos2d::extension::Control::Handler   ObjectiveComplete::onResolveCCBCCControlS
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool ObjectiveComplete::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool ObjectiveComplete::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBanner", Sprite *, mBanner)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mObjType", Sprite *, mObjType)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mCrowns", CCNode *, mCrowns)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mCrowns", Node *, mCrowns)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBounsCoins", CCLabelBMFont *, mBounsCoins)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScroll", Sprite *, mScroll)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBounsScroll", CCLabelBMFont *, mBounsScroll)

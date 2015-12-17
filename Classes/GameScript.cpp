@@ -115,7 +115,7 @@ void GameScript::invokeSpell3(cocos2d::CCInteger*)
 }
 
 //加血
-void GameScript::invokeSpell4(cocos2d::CCNode*,void*) 
+void GameScript::invokeSpell4(cocos2d::Node*,void*) 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     if( play->mainrole->HP < play->mainrole->maxHP )
@@ -125,7 +125,7 @@ void GameScript::invokeSpell4(cocos2d::CCNode*,void*)
 }
 
 //加气
-void GameScript::invokeSpell5(cocos2d::CCNode*,void*)
+void GameScript::invokeSpell5(cocos2d::Node*,void*)
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     play->mainrole->SP = play->mainrole->maxSP;

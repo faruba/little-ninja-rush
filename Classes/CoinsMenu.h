@@ -24,16 +24,16 @@ class CoinsMenu:
 
     LNR_SCENE_METHOD(CoinsMenu);
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CoinsMenu, create);
-    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
     virtual bool onTouchBegan(Touch * touch, Event * event);
     virtual void onTouchMoved(Touch * touch, Event * event);
     virtual void onTouchEnded(Touch * touch, Event * event);
-cocos2d::CCNode *mNode;
+cocos2d::Node *mNode;
     CEClipedNode *mClipedList;
-cocos2d::CCNode *mItemList;
+cocos2d::Node *mItemList;
     float mOffset;
     int mCurrUnFold;
     cocos2d::Point mTouchBegin;
@@ -51,11 +51,11 @@ cocos2d::Sprite *mScrollFoot;
     time_t mLastTime;
     //-- auto assign --
 cocos2d::CCLabelBMFont *mCoins;
-cocos2d::CCNode *mList;
+cocos2d::Node *mList;
 cocos2d::CCMenu *mMenu;
 
     //intro&outro
-cocos2d::CCNode *mSceneIntro;
+cocos2d::Node *mSceneIntro;
 cocos2d::Scene *mNewScene;
     bool mIntroFlag; 
 cocos2d::LayerColor *mMask;

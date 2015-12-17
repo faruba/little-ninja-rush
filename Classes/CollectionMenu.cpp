@@ -141,12 +141,12 @@ void CollectionMenu::onEnter()
   mModal = false;
 
   //do some initialization
-cocos2d::CCNode *taskcomplete = cocos2d::CCNode::create();
+cocos2d::Node *taskcomplete = cocos2d::Node::create();
   taskcomplete->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, 5);
   GamePlay::setTaskCompleteNode(taskcomplete);
   //----------
-cocos2d::CCNode * node = createUIByCCBI("menu-collection", "CollectionMenu", CollectionMenuLayerLoader::loader(), this);
+cocos2d::Node * node = createUIByCCBI("menu-collection", "CollectionMenu", CollectionMenuLayerLoader::loader(), this);
   if(node != NULL) {
     this->addChild(node, 5);
   }
@@ -1520,14 +1520,14 @@ cocos2d::CCDirector::sharedDirector()->replaceScene(mNewScene);
   mNewScene->release();
 }
 
-bool CollectionMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool CollectionMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadow",         Sprite*       , mShadow)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScrollCount",    CCLabelBMFont*  , mScrollCount)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mItemDesc",       CCLabelTTF*  , mItemDesc)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerUp",        CCNode*         , mPowerUp)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeGuage",      CCNode*         , mLifeGuage)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartGuage",      CCNode*         , mDartGuage)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerUp",        Node*         , mPowerUp)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeGuage",      Node*         , mLifeGuage)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartGuage",      Node*         , mDartGuage)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeMask",       Sprite*       , mLifeMask)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartMask",       Sprite*       , mDartMask)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerupMenu",    CCMenu*         , mPowerupMenu)
@@ -1549,7 +1549,7 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook",       CCMenuItemImage*, mFace
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter",        CCMenuItemImage*, mTwitter)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterAction",  Sprite*       , mTwitterAction)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebookAction", Sprite*       , mFacebookAction)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScrollPoint",    CCNode*         , mScrollPoint)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScrollPoint",    Node*         , mScrollPoint)
 cocos2d::CCLog(pMemberVariableName);
 
   return false;

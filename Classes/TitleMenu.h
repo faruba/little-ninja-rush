@@ -24,7 +24,7 @@ public:
   virtual bool init();  
 
   CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TitleMenu, create);
-  virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+  virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
   virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
   virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
@@ -71,9 +71,9 @@ cocos2d::Sprite *mCloud2;
 cocos2d::CCMenu *mMainButton;
 cocos2d::CCMenu *mMiniButton;
 cocos2d::Sprite *mLogo;
-cocos2d::CCNode *mSakuraNode;
-cocos2d::CCNode *mSakuraNode2;
-cocos2d::CCNode *mEnemies;
+cocos2d::Node *mSakuraNode;
+cocos2d::Node *mSakuraNode2;
+cocos2d::Node *mEnemies;
 cocos2d::LayerColor *mMask;
 cocos2d::CCArray *mSakura;
   float mWind;
@@ -92,7 +92,7 @@ cocos2d::CCMenuItemImage *mOption;
   PopOption *mOpt;
 
   //intro&outro
-cocos2d::CCNode *mSceneIntro;
+cocos2d::Node *mSceneIntro;
 cocos2d::Scene *mNewScene;
   bool mIntroFlag;
 };
@@ -108,12 +108,12 @@ class TitleMenuLayerLoader : public cocosbuilder::NodeLoader {
 class Sakura : public Ref
 {
 public:
-  static Sakura* create(cocos2d::CCNode *parent);
+  static Sakura* create(cocos2d::Node *parent);
 
   virtual bool init();  
 
   bool Update(float, float);
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
 cocos2d::Sprite *mSprite;
   //float mFlipX;
   float mWindX;

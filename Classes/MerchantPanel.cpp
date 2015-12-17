@@ -40,7 +40,7 @@ cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui
     play->paused = true;
     NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
 CCBReader *pReader = new CCBReader(pNodeLib);
-cocos2d::CCNode *node = pReader->readNodeGraphFromFile("merchant", this);
+cocos2d::Node *node = pReader->readNodeGraphFromFile("merchant", this);
     pReader->release();
     mMerchantbox = node;
     mMerchantbox->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->baseLeft, -SCREEN_HEIGHT));

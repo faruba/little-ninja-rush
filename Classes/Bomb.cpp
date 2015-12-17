@@ -17,7 +17,7 @@
 #define BOMB_FLY (1.18f)
 #define BOMB_RANGE (30)
 
-Bomb* Bomb::bomb(cocos2d::Point pos, cocos2d::Point dir, CCNode * parent) 
+Bomb* Bomb::bomb(cocos2d::Point pos, cocos2d::Point dir, Node * parent) 
 {
     Bomb* ret = Bomb::create();
     ret->mParent = parent;

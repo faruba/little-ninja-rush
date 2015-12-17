@@ -2,7 +2,7 @@
 #define ___CLASSES_RINGTILE_H_
 #include "cocos2d.h"
 
-class RingTile:public cocos2d::CCNode
+class RingTile:public cocos2d::Node
 {
   public:
     virtual bool init();

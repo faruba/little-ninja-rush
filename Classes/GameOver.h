@@ -10,11 +10,11 @@ class GameOver:
   public cocosbuilder::CCBSelectorResolver
 {
   public:
-    static GameOver* gameOver(cocos2d::CCNode* parent);
+    static GameOver* gameOver(cocos2d::Node* parent);
     virtual bool init(){return true;};
     CREATE_FUNC(GameOver);
 
-    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref *, const char*);
 
@@ -26,8 +26,8 @@ class GameOver:
 
     bool haveFacebookCoins();
     bool haveTwitterCoins();
-cocos2d::CCNode *mParent;
-cocos2d::CCNode *mNode;
+cocos2d::Node *mParent;
+cocos2d::Node *mNode;
     int mCost;
     int mScore;
     bool mPostingFacebook;
@@ -40,9 +40,9 @@ cocos2d::CCMenuItemImage *mChange;
 cocos2d::CCLabelTTF *mDailyObjective;
 cocos2d::CCLabelTTF *mWeeklyObjective;
 cocos2d::CCLabelTTF *mMonthlyObjective;
-cocos2d::CCNode *mDailyCrown;
-cocos2d::CCNode *mWeeklyCrown;
-cocos2d::CCNode *mMonthlyCrown;
+cocos2d::Node *mDailyCrown;
+cocos2d::Node *mWeeklyCrown;
+cocos2d::Node *mMonthlyCrown;
 cocos2d::Sprite *mDailyIcon;
 cocos2d::Sprite *mWeeklyIcon;
 cocos2d::Sprite *mMonthlyIcon;
@@ -59,8 +59,8 @@ cocos2d::Sprite *mFacebookAction;
 cocos2d::Sprite *mTwitterAction;
 cocos2d::Sprite *mFacebookCoins;
 cocos2d::Sprite *mTwitterCoins;
-cocos2d::CCNode *mClassic;
-cocos2d::CCNode *mArcade;
+cocos2d::Node *mClassic;
+cocos2d::Node *mArcade;
 
     // -- Arcade --
 cocos2d::CCLabelBMFont *mArcadeScore;

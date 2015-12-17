@@ -8,7 +8,7 @@ class Pumpkin:
   public Role
 {
   public:
-    static Pumpkin* role(cocos2d::CCNode* parent);
+    static Pumpkin* role(cocos2d::Node* parent);
 
     CREATE_FUNC(Pumpkin);
 
@@ -23,7 +23,7 @@ class Pumpkin:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
     GTAnimatedSprite *mSprite;
     int mState;//0-floating 1-escape 2-dying
     float mTimer;

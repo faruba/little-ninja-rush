@@ -251,7 +251,7 @@ cocos2d::extension::Control::Handler  CommitArcade::onResolveCCBCCControlSelecto
 cocos2d::CCLog("Control");
   return NULL;
 }
-bool CommitArcade::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool CommitArcade::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRole", Sprite *, mRole)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLight", Sprite *, mLight)

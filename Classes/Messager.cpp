@@ -24,7 +24,7 @@
 #define ACCELER_SPEED (250.0f)
 
 
-Messager* Messager::role(cocos2d::CCNode * parent) 
+Messager* Messager::role(cocos2d::Node * parent) 
 {
     Messager *ret = Messager::create();
     ret->mParent = parent;

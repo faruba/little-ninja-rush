@@ -14,7 +14,7 @@ class CollectionMenu :
 {
   public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
-    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
@@ -69,7 +69,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
     int mItemCount;
 cocos2d::Sprite *mEquipedMark;
 cocos2d::Sprite *mCurrentMark;
-    //CCNode *mItemIcons;
+    //Node *mItemIcons;
     ABScrollContent *mScroll;
 
     bool mTouchEnabled;
@@ -92,9 +92,9 @@ cocos2d::CCMenuItemImage *mPowerup;
 cocos2d::CCMenuItemImage *mUse;
 cocos2d::CCMenu *mMenu;
     //CCMenu *mItems;
-cocos2d::CCNode *mPowerUp;
-cocos2d::CCNode *mLifeGuage;
-cocos2d::CCNode *mDartGuage;
+cocos2d::Node *mPowerUp;
+cocos2d::Node *mLifeGuage;
+cocos2d::Node *mDartGuage;
 cocos2d::Sprite *mLifeMask;
 cocos2d::Sprite *mDartMask;
 cocos2d::CCLabelBMFont *mLifeCount;
@@ -106,10 +106,10 @@ cocos2d::CCMenuItemImage *mTwitter;
 cocos2d::Sprite *mShare;
 cocos2d::Sprite *mFacebookAction;
 cocos2d::Sprite *mTwitterAction;
-cocos2d::CCNode *mScrollPoint;
+cocos2d::Node *mScrollPoint;
 
     //intro&outro
-cocos2d::CCNode *mSceneIntro;
+cocos2d::Node *mSceneIntro;
 cocos2d::Scene *mNewScene;
     bool mIntroFlag;
 

@@ -7,7 +7,7 @@ class Merchant:
   public Role
 {
   public:
-    static Merchant* role(cocos2d::CCNode* parent);
+    static Merchant* role(cocos2d::Node* parent);
 
     CREATE_FUNC(Merchant);
 
@@ -22,7 +22,7 @@ class Merchant:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
     GTAnimatedSprite *mSprite;
     bool mFlag;
 

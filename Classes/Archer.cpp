@@ -22,7 +22,7 @@
 #define ARROW_HEIGHT (SCREEN_HEIGHT+60) //箭矢高度
 #define ARROW_TIME (0.5f) //箭矢飞行的时间
 
-Archer* Archer::role(cocos2d::CCNode * parent) 
+Archer* Archer::role(cocos2d::Node * parent) 
 {
     Archer *ret = Archer::create();
     ret->mParent = parent;

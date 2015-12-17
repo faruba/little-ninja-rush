@@ -18,7 +18,7 @@
 #include "BombDart.h"
 
 #include "PumpkinCircle.h"
-MainRole* MainRole::role(cocos2d::CCNode* parent) 
+MainRole* MainRole::role(cocos2d::Node* parent) 
 {
   MainRole *mr = MainRole::create();
   mr->mRoleId = GameRecord::sharedGameRecord()->curr_char;
@@ -173,7 +173,7 @@ void MainRole::fire(cocos2d::Point dir)
   }
 }
 
-void MainRole::commitFire(cocos2d::CCNode* p, CCNode* pdata) 
+void MainRole::commitFire(cocos2d::Node* p, Node* pdata) 
 {
   Vector2d* param = (Vector2d*)pdata;
   cocos2d::Point dir = param->value;

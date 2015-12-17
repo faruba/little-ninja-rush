@@ -16,7 +16,7 @@
 
 
 
-Merchant* Merchant::role(cocos2d::CCNode * parent) 
+Merchant* Merchant::role(cocos2d::Node * parent) 
 {
     Merchant *ret = Merchant::create();
     ret->mParent = parent;

@@ -42,7 +42,7 @@ cocos2d::CCLabelTTF *mTeachText;
     int cacheBladeId;
     int cacheSpellId;
 cocos2d::LayerColor *mLayer;
-cocos2d::CCNode *mAnimateNode;
+cocos2d::Node *mAnimateNode;
     GTAnimatedSprite *mAnimateSprite;
 cocos2d::CCMenu *mMenu;
 

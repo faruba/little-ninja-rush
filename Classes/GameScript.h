@@ -2,7 +2,7 @@
 #define ___CLASSES_GAMESCRIPT_H_
 #include "GamePlay.h"
 
-class GameScript:public CCNode
+class GameScript:public Node
 {
   public:
 
@@ -23,10 +23,10 @@ class GameScript:public CCNode
     void invokeSpell3(cocos2d::CCInteger*);
 
     //加血
-    void invokeSpell4(cocos2d::CCNode*,void*);
+    void invokeSpell4(cocos2d::Node*,void*);
 
     //加气
-    void invokeSpell5(cocos2d::CCNode*,void*);
+    void invokeSpell5(cocos2d::Node*,void*);
 
     //一闪
     void invokeSpell6(cocos2d::CCInteger*);

@@ -15,7 +15,7 @@ class IceSpike:
   public Role
 {
   public:
-    static IceSpike* spike(cocos2d::Point pos, CCNode* parent);
+    static IceSpike* spike(cocos2d::Point pos, Node* parent);
     CREATE_FUNC(IceSpike);
 
     virtual void onCreate();
@@ -29,7 +29,7 @@ class IceSpike:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
 
     GTAnimatedSprite *mSprite;
     cocos2d::Point mPos;

@@ -11,7 +11,7 @@
 ;
 USING_NS_CC_EXT;
 
-GameInterface* GameInterface::interface(cocos2d::CCNode * parent) 
+GameInterface* GameInterface::interface(cocos2d::Node * parent) 
 {
     GameInterface* ret = GameInterface::create();
     ret->mParent = parent;
@@ -47,7 +47,7 @@ void GameInterface::onCreate()
 //    mSpBgTop->setPosition(cocos2d::Vec2(31, 4));
 //    mParent->addChild(mSpBgTop, LAYER_UI);
 //    
-//    mSpFgNode = cocos2d::CCNode::create();
+//    mSpFgNode = cocos2d::Node::create();
 //    mSpFgNode->setPosition(cocos2d::Vec2(31, 4));
 //    mParent->addChild(mSpFgNode, LAYER_UI);
 //    mSpFg = cocos2d::Sprite::createWithSpriteFrameName("ui-spell-fg.png");
@@ -90,7 +90,7 @@ void GameInterface::onCreate()
 //    mParent->addChild(mSpellName,  LAYER_UI);
 //    
 //    //combo meter
-//    mHitNode = cocos2d::CCNode::create();
+//    mHitNode = cocos2d::Node::create();
 //    mHitNode->setPosition(cocos2d::Vec2( UniversalFit::sharedUniversalFit()->playSize.width-5, 150));
 //    mHitNode->setVisible(false);
 //    mParent->addChild(mHitNode, LAYER_UI);
@@ -104,7 +104,7 @@ void GameInterface::onCreate()
 //    mHitNode->addChild(mHitCount);
 //    
 //    //dart meter
-//    mDartMeter = cocos2d::CCNode::create();
+//    mDartMeter = cocos2d::Node::create();
 //    mDartMeter->setPosition(cocos2d::Vec2(136, 0));
 //    mParent->addChild(mDartMeter, LAYER_UI);
 //    mDartDis = 50.0f/play->mainrole->dart;
@@ -145,7 +145,7 @@ void GameInterface::onCreate()
 //        mParent->addChild(mCoinMark, LAYER_UI);
 //        
 //        //fever coins
-//        mFeverCoins = cocos2d::CCNode::create();
+//        mFeverCoins = cocos2d::Node::create();
 //        mFeverCoins->setPosition(cocos2d::Vec2( UniversalFit::sharedUniversalFit()->playSize.width-5, 170));
 //        mFeverCoins->setVisible(false);
 //        mParent->addChild(mFeverCoins, LAYER_UI);
@@ -225,7 +225,7 @@ void GameInterface::onCreate()
 //        //speed * boost
 //        cocosbuilder::NodeLoaderLibrary *pNodeLib = cocosbuilder::NodeLoaderLibrary::getInstance();
 //        cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
-//cocos2d::CCNode *mSpeedBoost = pReader->readNodeGraphFromFile("ui-arcade-speed.ccbi", this);
+//cocos2d::Node *mSpeedBoost = pReader->readNodeGraphFromFile("ui-arcade-speed.ccbi", this);
 //        pReader->release();
 //        
 //        mSpeedBoost->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width, 0));
@@ -808,7 +808,7 @@ Control::Handler GameInterface::onResolveCCBCCControlSelector(cocos2d::Ref * pTa
 {
     return NULL;
 }
-bool GameInterface::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, CCNode* pNode)
+bool GameInterface::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mSpeedBg", LayerColor *, mSpeedBg)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mSpeedRed", LayerColor *, mSpeedRed)

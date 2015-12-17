@@ -18,7 +18,7 @@ using namespace cocos2d;
 class AnimatedParticle:public GameObject
 {
   private:
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
     GTAnimatedSprite *mSprite;
     cocos2d::Point mDir;
     cocos2d::Point mPos;
@@ -38,7 +38,7 @@ cocos2d::CCNode *mParent;
 
   public:
 
-    static AnimatedParticle* particleCoinUI(cocos2d::Point pos, int di, CCNode* parent);
+    static AnimatedParticle* particleCoinUI(cocos2d::Point pos, int di, Node* parent);
     static AnimatedParticle* particleCoin(cocos2d::Point pos, int di);
     static AnimatedParticle* particleDeadSlide(cocos2d::Point pos);
     static AnimatedParticle* particleButterfly(cocos2d::Point pos);

@@ -17,9 +17,9 @@ cocos2d::Sprite *mRode;
     bool mFlag;
     
     //loaded variable
-cocos2d::CCNode *mObjDaily;
-cocos2d::CCNode *mObjWeekly;
-cocos2d::CCNode *mObjMonthly;
+cocos2d::Node *mObjDaily;
+cocos2d::Node *mObjWeekly;
+cocos2d::Node *mObjMonthly;
 cocos2d::CCMenu *mMenu;
 cocos2d::CCLabelTTF *mBest;
 cocos2d::CCMenuItemImage *mSfx;
@@ -31,14 +31,14 @@ cocos2d::CCMenuItemImage *mChange;
 cocos2d::CCLabelTTF *mDailyObjective;
 cocos2d::CCLabelTTF *mWeeklyObjective;
 cocos2d::CCLabelTTF *mMonthlyObjective;
-cocos2d::CCNode *mDailyCrown;
-cocos2d::CCNode *mWeeklyCrown;
-cocos2d::CCNode *mMonthlyCrown;
+cocos2d::Node *mDailyCrown;
+cocos2d::Node *mWeeklyCrown;
+cocos2d::Node *mMonthlyCrown;
 cocos2d::Sprite *mDailyIcon;
 cocos2d::Sprite *mWeeklyIcon;
 cocos2d::Sprite *mMonthlyIcon;
-cocos2d::CCNode *mClassic;
-cocos2d::CCNode *mArcade;
+cocos2d::Node *mClassic;
+cocos2d::Node *mArcade;
     
     //-- Arcade --
 cocos2d::CCLabelBMFont *mGoldScore;
@@ -71,7 +71,7 @@ public:
     CREATE_FUNC(PauseMenuClassic);
     bool init(){return true;};
 
-    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref *, const char*);
 };

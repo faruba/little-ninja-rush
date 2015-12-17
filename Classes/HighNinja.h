@@ -10,7 +10,7 @@ class HighNinja:
 {
   public:
     CREATE_FUNC(HighNinja);
-    static HighNinja* role(cocos2d::CCNode* parent);
+    static HighNinja* role(cocos2d::Node* parent);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
@@ -23,7 +23,7 @@ class HighNinja:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
-cocos2d::CCNode *mParent;
+cocos2d::Node *mParent;
     GTAnimatedSprite *mSprite;
     int    mState;
     float  mTimer;

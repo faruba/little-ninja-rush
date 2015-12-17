@@ -13,7 +13,7 @@ class ExtraSelect:
 
     LNR_SCENE_METHOD(ExtraSelect);
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ExtraSelect, create);
-    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+    virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
@@ -32,7 +32,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ExtraSelect, create);
     void onTwitter();
     void resetButtons();
 cocos2d::Sprite* checkButton(cocos2d::Point pos);
-cocos2d::CCNode *mNode;
+cocos2d::Node *mNode;
 cocos2d::Sprite *mSelect;
     //--autoassign--
 cocos2d::Sprite *mAchievement;
@@ -44,7 +44,7 @@ cocos2d::Sprite *mCredits;
 //    Sprite *mTwitterBanner;
 
     //intro&outro
-cocos2d::CCNode *mSceneIntro;
+cocos2d::Node *mSceneIntro;
 cocos2d::Scene *mNewScene;
     bool mIntroFlag;
     // intro&outro

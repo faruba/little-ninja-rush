@@ -17,7 +17,7 @@
 
 
 
-Santa* Santa::role(cocos2d::CCNode * parent) 
+Santa* Santa::role(cocos2d::Node * parent) 
 {
     Santa *em = Santa::create();
     em->mParent = parent;

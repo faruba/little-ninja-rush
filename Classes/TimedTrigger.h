@@ -15,13 +15,13 @@ class TimedTrigger:
 {
   public:
     CREATE_FUNC(TimedTrigger);
-    static TimedTrigger* triggerWithDelay(cocos2d::CCNode* target, SEL_CallFunc selector, float delay);
-    static TimedTrigger* triggerWithCycle(cocos2d::CCNode* target, SEL_CallFunc selector, float cycle, int times);
+    static TimedTrigger* triggerWithDelay(cocos2d::Node* target, SEL_CallFunc selector, float delay);
+    static TimedTrigger* triggerWithCycle(cocos2d::Node* target, SEL_CallFunc selector, float cycle, int times);
 
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-cocos2d::CCNode* mTarget;
+cocos2d::Node* mTarget;
     SEL_CallFunc mSelector;
     int mMode;
     float mTime;

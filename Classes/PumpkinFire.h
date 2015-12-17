@@ -10,7 +10,7 @@ class PumpkinFire:
 {
   public:
     CREATE_FUNC(PumpkinFire);
-    static PumpkinFire* dart(cocos2d::Point pos, cocos2d::Point dir, CCNode* parent);
+    static PumpkinFire* dart(cocos2d::Point pos, cocos2d::Point dir, Node* parent);
 
     virtual bool isEnemy();
     virtual cocos2d::Point position();
@@ -19,7 +19,7 @@ class PumpkinFire:
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-cocos2d::CCNode* mParent;
+cocos2d::Node* mParent;
 cocos2d::Sprite* mSprite;
     bool mIsEnemy;
 

@@ -21,7 +21,7 @@ cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameC
     unloadTextureFromeSpriteFrameFile("scene2.plist");
 }
 
-void Scene1::createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTile * tiles) 
+void Scene1::createScene(cocos2d::Node * bg, Node * fbg, Node * fg, RingTile * tiles) 
 {
     mTiles = tiles;
     
@@ -66,9 +66,9 @@ void Scene1::update(float delta)
 {
     //run scene
     {
-cocos2d::CCNode *DynBg0 = (mBg->getChildByTag(0));
-cocos2d::CCNode *DynBg1 = (mBg->getChildByTag(1));
-cocos2d::CCNode *DynBg2 = (mBg->getChildByTag(2));
+cocos2d::Node *DynBg0 = (mBg->getChildByTag(0));
+cocos2d::Node *DynBg1 = (mBg->getChildByTag(1));
+cocos2d::Node *DynBg2 = (mBg->getChildByTag(2));
         int woff = mTiles->offset()/2;
         int dr = DynBg0->getContentSize().width;
         int doff = woff%dr;

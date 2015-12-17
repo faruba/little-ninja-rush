@@ -12,13 +12,13 @@ class Scene1: public SceneInterface
     CREATE_FUNC(Scene1);
     virtual void loadScene();
     virtual void unloadScene();
-    virtual void createScene(cocos2d::CCNode * bg, CCNode * fbg, CCNode * fg, RingTile * tiles); 
+    virtual void createScene(cocos2d::Node * bg, Node * fbg, Node * fg, RingTile * tiles); 
     virtual void update(float delta);
     virtual void release(){};
 
     RingTile *mTiles;
-cocos2d::CCNode *mFront;
-cocos2d::CCNode *mBg;
+cocos2d::Node *mFront;
+cocos2d::Node *mBg;
     int mTileState;
     int mTileCount;
 cocos2d::Sprite *mFronts[S1_FONTCOUNT];

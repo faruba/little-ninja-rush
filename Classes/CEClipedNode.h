@@ -9,7 +9,7 @@
 
 ;
 
-class CEClipedNode : public CCNode
+class CEClipedNode : public Node
 {
 public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(CEClipedNode, create);

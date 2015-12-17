@@ -16,7 +16,7 @@ class SelectMenu :
 {
 public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(SelectMenu, create);
-  virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::CCNode*);
+  virtual bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
   virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
   virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
 
@@ -63,10 +63,10 @@ cocos2d::Sprite *mProtraits[GAME_CHARCOUNT];
 
   //--- auto assign ---
 cocos2d::Sprite *mShadow;
-cocos2d::CCNode *mHero;
+cocos2d::Node *mHero;
 cocos2d::Sprite *mDesc;
-cocos2d::CCNode *mHearts;
-cocos2d::CCNode *mDarts;
+cocos2d::Node *mHearts;
+cocos2d::Node *mDarts;
 cocos2d::CCMenuItemImage *mBtnStart;
 cocos2d::CCMenuItemImage *mBtnDart;
 cocos2d::CCMenuItemImage *mBtnBlade;
@@ -74,7 +74,7 @@ cocos2d::CCMenuItemImage *mBtnSpecial;
 cocos2d::Sprite *mEquipDart;
 cocos2d::Sprite *mEquipBlade;
 cocos2d::Sprite *mEquipSpecial;
-cocos2d::CCNode *mStartPos;
+cocos2d::Node *mStartPos;
 cocos2d::Sprite *mLeftMark;
 cocos2d::Sprite *mRightMark;
 cocos2d::CCLabelBMFont *mMoney;
@@ -86,7 +86,7 @@ cocos2d::Sprite *mParam;
 cocos2d::Sprite *mBouns;
 
   //intro&outro
-cocos2d::CCNode *mSceneIntro;
+cocos2d::Node *mSceneIntro;
 cocos2d::Scene *mNewScene;
   bool mIntroFlag;
 

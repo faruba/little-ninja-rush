@@ -16,7 +16,7 @@
 
 
 
-Wood* Wood::wood(cocos2d::Point pos, cocos2d::Point dir, CCNode * parent, GOHandler target, cocos2d::Point anchor) 
+Wood* Wood::wood(cocos2d::Point pos, cocos2d::Point dir, Node * parent, GOHandler target, cocos2d::Point anchor) 
 {
     Wood *ret = Wood::create();
     ret->mParent = parent;

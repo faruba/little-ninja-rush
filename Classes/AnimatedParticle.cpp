@@ -20,7 +20,7 @@ bool AnimatedParticle::init()
     return true;
 }
 
-AnimatedParticle* AnimatedParticle::particleCoinUI(cocos2d::Point pos, int di, CCNode* parent)
+AnimatedParticle* AnimatedParticle::particleCoinUI(cocos2d::Point pos, int di, Node* parent)
 {
     AnimatedParticle *ret = AnimatedParticle::create();
     ret->mDir = ccpForAngle(0.628318f*di);
