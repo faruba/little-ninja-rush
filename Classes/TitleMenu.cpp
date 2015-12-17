@@ -1068,69 +1068,52 @@ void TitleMenu::update(float delta)
   //    }
   //#endif
   //run enemy
-//  for(int i=0; i<RUN; ++i)
-//  {
-//    if( mAni[i] == NULL )
-//    {
-//      if( CCRANDOM_0_1() < 0.0005f )
-//      {
-//        cocos2d::CCString *enm = NULL;
-//        switch (randomInt(3)) {
-//          case 0:
-//            {
-//              enm = cocos2d::CCString::create("enemy");
-//            }
-//            break;
-//          case 1:
-//            {
-//              enm = cocos2d::CCString::create("mninja");
-//            }
-//            break;
-//          case 2:
-//            {
-//              enm = cocos2d::CCString::create("hninja");
-//            }
-//            break;
-//        }
-//        mAni[i] = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(enm->getCString()));
-//        mAni[i]->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
-//        mAni[i]->playGTAnimation(0, true);
-//        mAni[i]->setPosition(cocos2d::Vec2(-50, 64 + CCRANDOM_0_1()*36));
-//        mEnemies->addChild(mAni[i], 5);
-//        mSpeed[i] = 200 + CCRANDOM_0_1()*100;
-//      }
-//    }
-//    else {
-//      mAni[i]->updateGTAnimation(delta);
-//      cocos2d::Point np = mAni[i]->getPosition();
-//      np.x += delta*mSpeed[i];
-//      mAni[i]->setPosition(np);
-//      if( np.x > SCREEN_WIDTH + 50 )
-//      {
-//        this->removeChild(mAni[i], true);
-//        mAni[i] = NULL;
-//      }
-//    }
-//  }
+  for(int i=0; i<RUN; ++i) {
+    if( mAni[i] == NULL ) {
+      if( CCRANDOM_0_1() < 0.0005f ) {
+        const char *enm = NULL;
+        switch (randomInt(3)) {
+          case 0: enm = "enemy"; break;
+          case 1: enm = "mninja"; break;
+          case 2: enm = "hninja"; break;
+        }
+        mAni[i] = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(enm));
+        mAni[i]->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
+        mAni[i]->playGTAnimation(0, true);
+        mAni[i]->setPosition(cocos2d::Vec2(-50, 64 + CCRANDOM_0_1()*36));
+        mEnemies->addChild(mAni[i], 5);
+        mSpeed[i] = 200 + CCRANDOM_0_1()*100;
+      }
+    } else {
+      mAni[i]->updateGTAnimation(delta);
+      cocos2d::Point np = mAni[i]->getPosition();
+      np.x += delta*mSpeed[i];
+      mAni[i]->setPosition(np);
+      if( np.x > SCREEN_WIDTH + 50 ) {
+        this->removeChild(mAni[i], true);
+        mAni[i] = NULL;
+      }
+    }
+  }
 
-  //    if( mPop == NULL && mOpt == NULL )
-  //    {
-  //        if( !gPopFlag && ABDelivery->sharedDelivery()->isReadyForDelivery() )
-  //        {
-  ////            mPopTimer += delta;
-  ////            if( mPopTimer > 2 )
-  ////            {
-  ////                mPopTimer = 0;
-  ////                if( randomInt(10) == 0 )
-  ////                {
-  ////                    [this showOpt:3);
-  ////                    gPopFlag = true;
-  ////                }
-  ////            }
+  //  if( mPop == NULL && mOpt == NULL )
+  //  {
+  //      if( !gPopFlag && ABDelivery->sharedDelivery()->isReadyForDelivery() )
+  //      {
+  //            mPopTimer += delta;
+  //            if( mPopTimer > 2 )
+  //            {
+  //                mPopTimer = 0;
+  //                if( randomInt(10) == 0 )
+  //                {
+  //                    [this showOpt:3);
+  //                    gPopFlag = true;
+  //                }
+  //            }
   //            [this showOpt:3);
-  //            gPopFlag = true;
-  //        }
-  //    }
+  //          gPopFlag = true;
+  //      }
+  //  }
 }
 
 void TitleMenu::onExit()
