@@ -7,6 +7,12 @@
 #include "GameData.h"
 
 USING_NS_CC_EXT;
+enum ButtonEnum {
+  TypeShuriken,
+  TypeKatana,
+  TypeSpecial,
+  TypePowerUp
+};
 
 class CollectionMenu : 
   public Layer, 
@@ -42,10 +48,10 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
     void onCharacter2(cocos2d::Ref*){onCharacter(1);};
     void onCharacter3(cocos2d::Ref*){onCharacter(2);};
     void onCharacter4(cocos2d::Ref*){onCharacter(3);};
-    void onItem(int nItem);
-    void onShuriken(cocos2d::Ref*){onItem(0);};
-    void onKatana(cocos2d::Ref*){onItem(1);};
-    void onSpecial(cocos2d::Ref*){onItem(2);};
+    void onItem(ButtonEnum nItem);
+    void onShuriken(cocos2d::Ref*){onItem(TypeShuriken);};
+    void onKatana(cocos2d::Ref*){onItem(TypeKatana);};
+    void onSpecial(cocos2d::Ref*){onItem(TypeSpecial);};
     void onPowerup(cocos2d::Ref*);
 
     void onFacebook(cocos2d::Ref*);
@@ -58,7 +64,6 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(CollectionMenu, create);
 
 
     cocos2d::Point mShadowDir;
-    int mCurrType;
     int mEquipedItem;
     int mCurrItem;
     int mItemCount;
@@ -117,7 +122,6 @@ cocos2d::Ref *mModalTarget;
     void markUsing(int i);
     void markCurrent(int i);
 cocos2d::CCMenuItemImage* character(int rid);
-    void setTypeButton(int typ, bool mod);
 
     //bid = 0 :no blink 1:blink hp 2:blink dart
     void updateCharacterInfo(int rid, int bid);
@@ -130,6 +134,9 @@ cocos2d::CCMenuItemImage* character(int rid);
 
   private:
     UISwapper mUISwapper;
+    ButtonEnum mCurrentType; //TODO:Refactor this
+
+    void setTypeButton(ButtonEnum type, bool isDisabled);
 
     template<typename ItemType>
     void updateList(std::vector<ItemType> &vector) {

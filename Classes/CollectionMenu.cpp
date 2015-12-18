@@ -74,6 +74,7 @@ void CollectionMenu::onModalCancel(cocos2d::Ref*Hjj)
   mPowerupMenu->setTouchEnabled(true);
 }
 
+// TODO:Refactor this two: onUseLife(), onUseDart
 void CollectionMenu::onUseLife()
 {
   int role = GameRecord::sharedGameRecord()->curr_char;
@@ -161,36 +162,25 @@ void CollectionMenu::onEnter()
   }
   //初始化分类按钮
   // TODO:Refactor this
+  setTypeButton(TypeShuriken, false);
+  setTypeButton(TypeKatana, false);
+  setTypeButton(TypeSpecial, false);
+  setTypeButton(TypePowerUp, false);
   switch (gNavBack) {
     case 2:
-      {
-        mCurrType = 1;
-        setTypeButton(0, false);
-        setTypeButton(1, true);
-        setTypeButton(2, false);
-        setTypeButton(3, false);
-        this->updateKatanas();
-      }
+      setTypeButton(TypeKatana, true);
+      mCurrentType = TypeKatana;
+      this->updateKatanas();
       break;
     case 3:
-      {
-        mCurrType = 2;
-        setTypeButton(0, false);
-        setTypeButton(1, false);
-        setTypeButton(2, true);
-        setTypeButton(3, false);
-        this->updateSpecials();
-      }
+      mCurrentType = TypeSpecial;
+      setTypeButton(TypeSpecial, true);
+      this->updateSpecials();
       break;
     default:
-      {
-        mCurrType = 0;
-        setTypeButton(0, true);
-        setTypeButton(1, false);
-        setTypeButton(2, false);
-        setTypeButton(3, false);
-        this->updateShurikens();
-      }
+      mCurrentType = TypeShuriken;
+      setTypeButton(TypeShuriken, true);
+      this->updateShurikens();
       break;
   }
 
@@ -234,16 +224,17 @@ void CollectionMenu::updatePowerups()
   mUse->setVisible(false);
 
   //update mask
-cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
+  //TODO:Refactor this
+  cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
   int lm = GameRecord::sharedGameRecord()->collection->life_piece%9;
   int lc = GameRecord::sharedGameRecord()->collection->life_piece/9;
-cocos2d::CCString *lfn = cocos2d::CCString::createWithFormat("sc_sp%d.png", lm);
+  cocos2d::CCString *lfn = cocos2d::CCString::createWithFormat("sc_sp%d.png", lm);
   mLifeMask->setDisplayFrame(cache->spriteFrameByName(lfn->getCString()));
   mLifeCount->setString(cocos2d::CCString::createWithFormat("%d", lc)->getCString());
 
   int dm = GameRecord::sharedGameRecord()->collection->dart_piece%9;
   int dc = GameRecord::sharedGameRecord()->collection->dart_piece/9;
-cocos2d::CCString *dfn = cocos2d::CCString::createWithFormat("sc_sp%d.png", dm);
+  cocos2d::CCString *dfn = cocos2d::CCString::createWithFormat("sc_sp%d.png", dm);
   mDartMask->setDisplayFrame(cache->spriteFrameByName(dfn->getCString()));
   mDartCount->setString(cocos2d::CCString::createWithFormat("%d", dc)->getCString());
   mCurrItem = 0;
@@ -259,7 +250,7 @@ void CollectionMenu::markUsing(int i)
   }
   if( i >= 0 )
   {
-cocos2d::Sprite *item = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(i));
+    cocos2d::Sprite *item = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(i));
     mEquipedMark->setPosition(item->getPosition());
   }
   else {
@@ -270,77 +261,69 @@ cocos2d::Sprite *item = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(i
 
 void CollectionMenu::markCurrent(int i)
 {
-//  if( mCurrItem < 0 )
-//  {
-//    mCurrentMark->setVisible(true);
-//  }
-//  if( i >= 0 )
-//  {
-//cocos2d::Sprite *item = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(i));
-//    mCurrentMark->setPosition(item->getPosition());
-//  }
-//  else {
-//    mCurrentMark->setVisible(false);
-//  }
-//  mCurrItem = i;
-//  //获取当前道具的信息
-//  if( mCurrType < 3 && mCurrItem >= 0 )
-//  {
-//    bool collected = false;
-//    switch (mCurrType) {
-//      case 0:
-//        {
-//          Shuriken *sh = (Shuriken*)(GameData::fetchShurikens()->objectAtIndex(mCurrItem));
-//          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-//        }
-//        break;
-//      case 1:
-//        {
-//          int index = mCurrItem + GAME_CHARCOUNT - 1;
-//          if( mCurrItem == 0 )
-//          {
-//            index = GameRecord::sharedGameRecord()->curr_char;
-//          }
-//          Katana *sh = (Katana*)(GameData::fetchKatanas()->objectAtIndex(index));
-//          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-//        }
-//        break;
-//      case 2:
-//        {
-//          Special *sh = (Special*)(GameData::fetchSpecials()->objectAtIndex(mCurrItem));
-//          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-//        }
-//        break;
-//    }
-//    if( i != mEquipedItem )
-//    {
-//      if( !collected )
-//      {
-//        if( GameRecord::sharedGameRecord()->collection->magic_piece > 0 )
-//        {
-//          mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock1.png"));
-//          mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-//        }
-//        else
-//        {
-//          mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-//          mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-//        }
-//        toggleShare(false);
-//      }
-//      else {
-//        mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip1.png"));
-//        mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip2.png"));
-//        toggleShare(false);
-//      }
-//    }
-//    else {
-//      mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
-//      mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
-//      toggleShare(false);
-//    }
-//  }
+  if( mCurrItem < 0 ) {
+    mCurrentMark->setVisible(true);
+  }
+
+  if ( i >= 0 ) {
+    cocos2d::Sprite *item = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(i));
+    mCurrentMark->setPosition(item->getPosition());
+  } else {
+    mCurrentMark->setVisible(false);
+  }
+
+  mCurrItem = i;
+  //获取当前道具的信息
+  if( mCurrentType < 3 && mCurrItem >= 0 ) {
+    bool collected = false;
+    switch (mCurrentType) {
+      case 0:
+        {
+          Shuriken sh = GameData::fetchShurikens()[mCurrItem];
+          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh.uiid);
+        }
+        break;
+      case 1:
+        {
+          int index = mCurrItem + GAME_CHARCOUNT - 1;
+          if( mCurrItem == 0 ) {
+            index = GameRecord::sharedGameRecord()->curr_char;
+          }
+          Katana sh = GameData::fetchKatanas()[mCurrItem];
+          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh.uiid);
+        }
+        break;
+      case 2:
+        {
+          Special sh = GameData::fetchSpecials()[mCurrItem];
+          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh.uiid);
+        }
+        break;
+    }
+
+    if( i != mEquipedItem ) {
+      if ( !collected ) {
+        if ( GameRecord::sharedGameRecord()->collection->magic_piece > 0 ) {
+          mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock1.png"));
+          mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
+        } else {
+          mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
+          mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
+        }
+        toggleShare(false);
+      } else {
+        mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip1.png"));
+        mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip2.png"));
+        toggleShare(false);
+      }
+    } else {
+      mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
+      mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
+      toggleShare(false);
+    }
+  }
 }
+
 cocos2d::CCMenuItemImage* CollectionMenu::character(int rid)
 {
   switch (rid) {
@@ -356,62 +339,31 @@ cocos2d::CCMenuItemImage* CollectionMenu::character(int rid)
   return NULL;
 }
 
-void CollectionMenu::setTypeButton(int typ, bool mod)
-{
-  switch (typ) {
-    case 0://shuriken
-      {
-        if( mod )
-        {
-          mShuriken->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_shuriken1.png"));
-          mShuriken->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_shuriken2.png"));
-        }
-        else {
-          mShuriken->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_shuriken2.png"));
-          mShuriken->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_shuriken1.png"));
-        }
-      }
+void CollectionMenu::setTypeButton(ButtonEnum type, bool isDisabled) {
+  cocos2d::MenuItemImage *pItem = nullptr;
+  std::string filename = "";
+
+  switch (type) {
+    case TypeShuriken:
+      pItem = mShuriken;
+      filename = "sc_shuriken";
       break;
-    case 1://katana
-      {
-        if( mod )
-        {
-          mKatana->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_katana1.png"));
-          mKatana->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_katana2.png"));
-        }
-        else {
-          mKatana->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_katana2.png"));
-          mKatana->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_katana1.png"));
-        }
-      }
+    case TypeKatana:
+      pItem = mKatana;
+      filename = "sc_katana";
       break;
-    case 2://special
-      {
-        if( mod )
-        {
-          mSpecial->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_special1.png"));
-          mSpecial->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_special2.png"));
-        }
-        else {
-          mSpecial->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_special2.png"));
-          mSpecial->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_special1.png"));
-        }
-      }
+    case TypeSpecial:
+      pItem = mSpecial;
+      filename = "sc_special";
       break;
-    case 3://powerup
-      {
-        if( mod )
-        {
-          mPowerup->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_powerup1.png"));
-          mPowerup->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_powerup2.png"));
-        }
-        else {
-          mPowerup->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_powerup2.png"));
-          mPowerup->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_powerup1.png"));
-        }
-      }
+    case TypePowerUp:
+      pItem = mPowerup;
+      filename = "sc_powerup";
       break;
   }
+
+  pItem->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(filename + (isDisabled?"1.png":"2.png")));
+  pItem->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(filename + (isDisabled?"2.png":"1.png")));
 }
 
 void CollectionMenu::updateItemInfo()
@@ -421,7 +373,7 @@ void CollectionMenu::updateItemInfo()
   {
     uid = mEquipedItem;
   }
-  switch (mCurrType) {
+  switch (mCurrentType) {
     case 0:
       {
         Shuriken &sh = (Shuriken*)(GameData::fetchShurikens()->objectAtIndex(uid));
@@ -492,13 +444,13 @@ void CollectionMenu::onBack(cocos2d::Ref*)
 
 void CollectionMenu::onUse(cocos2d::Ref*)
 {
-//  if( mCurrType < 3 )
+//  if( mCurrentType < 3 )
 //  {
 //    if( mCurrItem != mEquipedItem && mCurrItem>=0 )
 //    {
 //      bool collected = false;
 //      int uiid = -1;
-//      switch (mCurrType) {
+//      switch (mCurrentType) {
 //        case 0:
 //          {
 //            Shuriken *sh = (Shuriken*)(GameData::fetchShurikens()->objectAtIndex(mCurrItem));
@@ -532,7 +484,7 @@ void CollectionMenu::onUse(cocos2d::Ref*)
 //        markUsing(mCurrItem);
 //        //保存数据
 //        int cc = GameRecord::sharedGameRecord()->curr_char;
-//        switch (mCurrType) {
+//        switch (mCurrentType) {
 //          case 0:
 //            {
 //              GameRecord::sharedGameRecord()->char_equip_dart[cc] = mEquipedItem;
@@ -561,7 +513,7 @@ void CollectionMenu::onUse(cocos2d::Ref*)
 //        mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
 //
 //        //achievement change equipment
-//        if( mCurrType < 3 )
+//        if( mCurrentType < 3 )
 //        {
 //          GameRecord::sharedGameRecord()->task->dispatchTask(ACH_CHANGEEQUIPMENT, 1);
 //        }
@@ -659,7 +611,7 @@ void CollectionMenu::onUse(cocos2d::Ref*)
 void CollectionMenu::updateUsing()
 {
   int nrole = GameRecord::sharedGameRecord()->curr_char;
-  switch (mCurrType) {
+  switch (mCurrentType) {
     case 0:
       {
         markUsing(GameRecord::sharedGameRecord()->char_equip_dart[nrole]);
@@ -707,7 +659,7 @@ cocos2d::CCMenuItemImage *nr = character(nrole);
   nr->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", nrole, 1)->getCString()));
   GameRecord::sharedGameRecord()->curr_char = nrole;
 
-  if( mCurrType != 3 )
+  if( mCurrentType != 3 )
   {
     markCurrent(-1);
     this->updateUsing();
@@ -718,7 +670,7 @@ cocos2d::CCMenuItemImage *nr = character(nrole);
     updatePowerUpButton();
   }
 
-  if( mCurrType == 1 )
+  if( mCurrentType == 1 )
   {
     this->updateKatanas();
   }
@@ -726,21 +678,21 @@ cocos2d::CCMenuItemImage *nr = character(nrole);
 
 
 
-void CollectionMenu::onItem(int nItem)
+void CollectionMenu::onItem(ButtonEnum type)
 {
-  if( mCurrType == nItem )
+  if( mCurrentType == type )
     return ;
 
   GameTool::PlaySound("sound/click.mp3");
-  setTypeButton(mCurrType, false);
-  setTypeButton(nItem, true);
+  setTypeButton(mCurrentType, false);
+  setTypeButton(type, true);
   mItemDesc->setVisible(true);
-  mCurrType = nItem;
-  if (nItem == 0)
+  mCurrentType = type;
+  if (type == TypeShuriken)
     this->updateShurikens();
-  else if (nItem == 1)
+  else if (type == TypeKatana)
     this->updateKatanas();
-  else if (nItem == 2)
+  else if (type == TypeSpecial)
     this->updateSpecials();
   this->updateItemInfo();
   mPowerUp->setVisible(false);
@@ -755,20 +707,20 @@ cocos2d::CCLog("CollectionMenu::onItem");
 
 void CollectionMenu::onPowerup(cocos2d::Ref*)
 {
-  if( mCurrType != 3 )
-  {
-    GameTool::PlaySound("sound/click.mp3");
-    setTypeButton(mCurrType, false);
-    setTypeButton(3, true);
-    mItemDesc->setVisible(false);
-    mCurrType = 3;
-    this->updatePowerups();
-    mPowerUp->setVisible(true);
+  if ( mCurrentType != TypePowerUp )
+    return ;
 
-    this->onSelectLife(nullptr);
+  GameTool::PlaySound("sound/click.mp3");
+  setTypeButton(mCurrentType, false);
+  setTypeButton(TypePowerUp, true);
+  mItemDesc->setVisible(false);
+  mCurrentType = TypePowerUp;
+  this->updatePowerups();
+  mPowerUp->setVisible(true);
 
-    toggleShare(false);
-  }
+  this->onSelectLife(nullptr);
+
+  toggleShare(false);
 }
 
 void CollectionMenu::updateCharacterInfo(int rid, int bid)
@@ -825,10 +777,10 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName("pushuriken2.pn
 void CollectionMenu::onItemCallback(int i)
 {
 //  //获取当前道具的信息
-//  if( mCurrType < 3 )
+//  if( mCurrentType < 3 )
 //  {
 //    bool collected = false;
-//    switch (mCurrType) {
+//    switch (mCurrentType) {
 //      case 0:
 //        {
 //          Shuriken *sh = (Shuriken*)(GameData::fetchShurikens()->objectAtIndex(i));
@@ -996,11 +948,11 @@ id CollectionMenu::getCurrentCollectedItem()
   {
     idx = mEquipedItem;
   }
-  if( mCurrType < 3 )
+  if( mCurrentType < 3 )
   {
     bool collected = false;
     id ret = NULL;
-    switch (mCurrType) {
+    switch (mCurrentType) {
       case 0:
         {
           Shuriken *sh = (Shuriken*)GameData::fetchShurikens()->objectAtIndex(idx);
@@ -1048,7 +1000,7 @@ void CollectionMenu::onFacebook(cocos2d::Ref*)
   if( !mPostingFacebook )
   {
     ABSocial *social = ABSocial->feedOnSinaWeibo();
-    switch (mCurrType) {
+    switch (mCurrentType) {
       case 0:
         {
           Shuriken *sh = this->getCurrentCollectedItem();
@@ -1114,7 +1066,7 @@ void CollectionMenu::onTwitter(cocos2d::Ref*)
     {
       social = ABSocial->feedOnTwitter();
     }
-    switch (mCurrType) {
+    switch (mCurrentType) {
       case 0:
         {
           Shuriken *sh = this->getCurrentCollectedItem();
