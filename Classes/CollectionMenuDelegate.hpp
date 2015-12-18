@@ -16,78 +16,21 @@ class CollectionMenuDelegate {
 public:
     cocos2d::MenuItemImage *mMenuButtonRef = nullptr;
     static ABScrollContent *mScroll;
+    static cocos2d::MenuItemImage *mUse;
     static cocos2d::Sprite *mItemTitle;
     static cocos2d::Label *mItemDescription;
     static cocos2d::Label *mScrollCount;
     
     virtual const GameItemBase& fetchData(int index) { throw "Nothing to get"; }
+    virtual void updateUsing() { markUsing(-1); }
+    virtual void equipItem() { }
+    virtual void  onUse () ;
+    virtual void updateItemInfo() ;
+    virtual void updateScroll() = 0;
 
-    virtual void updateUsing() {
-        markUsing(-1);
-    }
-
-    virtual void equipItem() {
-    }
-
-    virtual void  onUse () {
-      if( mCurrItem != mEquipedItem && mCurrItem>=0 ) {
-        int uiid = fetchData(mCurrItem).uiid;
-        bool collected = isCollected(mCurrItem);
-
-        if ( collected ) {
-          markUsing(mCurrItem);
-          //保存数据
-          int cc = GameRecord::sharedGameRecord()->curr_char;
-          equipItem();
-          GameTool::PlaySound("sound/equip.mp3");
-
-          mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
-          mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
-
-          GameRecord::sharedGameRecord()->task->dispatchTask(ACH_CHANGEEQUIPMENT, 1);
-        } else {
-          //如果没有解锁就使用万能卷轴
-          if ( GameRecord::sharedGameRecord()->collection->magic_piece > 0 ) {
-            GameRecord::sharedGameRecord()->collection->magic_piece--;
-            GameRecord::sharedGameRecord()->collection->gainItemPiece(uiid);
-            //update info
-            cocos2d::Sprite *mask = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(mCurrItem));
-
-            if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) ) {
-              GameTool::PlaySound("sound/getscroll.mp3");
-              mScroll->contentNode->removeChild(mask);
-              mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip1.png"));
-              mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip2.png"));
-            } else {
-              GameTool::PlaySound("sound/getitem.mp3");
-              int piece = GameRecord::sharedGameRecord()->collection->itemTotalPiece(uiid) - GameRecord::sharedGameRecord()->collection->itemLostPiece(uiid);
-              cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
-              mask->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename->getCString()));
-              //bugfix
-              if( GameRecord::sharedGameRecord()->collection->magic_piece <= 0 )
-              {
-                mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-                mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-              }
-            }
-            mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", GameRecord::sharedGameRecord()->collection->magic_piece)->getCString());
-          } else {
-            GameTool::PlaySound("sound/error.mp3");
-          }
-        }
-      }
-
-    }
-
-    virtual void updateItemInfo() {
-      int uid = mCurrItem;
-      if ( mCurrItem < 0 ) {
-        uid = mEquipedItem;
-      }
-      const GameItemBase &item = fetchData(uid);
-      mItemTitle->setDisplayFrame(cocos2d::Sprite::create(item.name.c_str())->displayFrame());
-      mItemDescription->setString(item.desc.c_str());
-    }
+    void updateButtonImage(bool isDisabled) ;
+    void activate(bool flag) ;
+    void markCurrent(int i) ;
     
 protected:
     std::string mImageFilename;
@@ -96,82 +39,17 @@ protected:
     
     static cocos2d::Sprite *mEquipedMark;
     static cocos2d::Sprite *mCurrentMark;
-    cocos2d::MenuItemImage *mUse;
     int mItemCount;
     int mEquipedItem;
     int mCurrItem;
     
     void toggleShare(bool flag) { }
-    void markUsing(int i) {
-        if( mEquipedItem < 0 )
-        {
-            mEquipedMark->setVisible(true);
-        }
-        if( i >= 0 )
-        {
-            cocos2d::Sprite *item = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(i));
-            mEquipedMark->setPosition(item->getPosition());
-        }
-        else {
-            mEquipedMark->setVisible(false);
-        }
-        mEquipedItem = i;
-    }
-    
+    void markUsing(int i) ;
     
     virtual bool isCollected(int id) { return false; }
-    
-    virtual void updateUseButtonInfo(int i) {
-        //bool equiped =  (i == mEquipedItem);
-        //bool collected = isCollected(mCurrItem);
-        //if(!equiped) {
-        //  if ( !collected ) {
-        //    if ( GameRecord::sharedGameRecord()->collection->magic_piece > 0 ) {
-        //      mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock1.png"));
-        //      mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-        //    } else {
-        //      mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-        //      mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
-        //    }
-        //    toggleShare(false);
-        //  } else {
-        //    mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip1.png"));
-        //    mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip2.png"));
-        //    toggleShare(false);
-        //  }
-        //} else {
-        //  mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
-        //  mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
-        //  toggleShare(false);
-        //}
-    }
+    virtual void updateUseButtonInfo(int i) ;
     
 public:
-    virtual void updateScroll() = 0;
-    
-    void updateButtonImage(bool isDisabled) {
-        mMenuButtonRef->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(mImageFilename + (isDisabled?"1.png":"2.png")));
-        mMenuButtonRef->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(mImageFilename + (isDisabled?"2.png":"1.png")));
-    }
-    
-    void markCurrent(int i)
-    {
-        if( mCurrItem < 0 ) {
-            mCurrentMark->setVisible(true);
-        }
-        
-        if ( i >= 0 ) {
-            cocos2d::Sprite *item = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(i));
-            mCurrentMark->setPosition(item->getPosition());
-        } else {
-            mCurrentMark->setVisible(false);
-        }
-        
-        mCurrItem = i;
-        //获取当前道具的信息
-        updateUseButtonInfo(i);
-    }
-    
     template<typename ItemType>
     void updateList(std::vector<ItemType> &vector) {
         //clean nodes
@@ -277,15 +155,15 @@ public:
     }
 };
 
-
 class ShurikenCollectionDelegate: public CollectionMenuDelegate {
   public:
     void init() {
       mImageFilename = "sc_shuriken";
+      updateButtonImage(false);
     }
 
     bool isCollected(int id) {
-      Shuriken sh = GameData::fetchShurikens()[id];
+      Shuriken &sh = GameData::fetchShurikens()[id];
       return GameRecord::sharedGameRecord()->collection->isItemCompleted(sh.uiid);
     }
 
@@ -303,10 +181,12 @@ class ShurikenCollectionDelegate: public CollectionMenuDelegate {
       GameRecord::sharedGameRecord()->char_equip_dart[cc] = mEquipedItem;
     }
 };
+
 class KatanaCollectionDelegate: public CollectionMenuDelegate {
   public:
     void init() {
       mImageFilename = "sc_katana";
+      updateButtonImage(false);
     }
     void updateScroll() { this->updateList(GameData::fetchKatanas()); }
 
@@ -315,7 +195,7 @@ class KatanaCollectionDelegate: public CollectionMenuDelegate {
       if( id == 0 ) {
         index = GameRecord::sharedGameRecord()->curr_char;
       }
-      Katana sh = GameData::fetchKatanas()[id];
+      Katana &sh = GameData::fetchKatanas()[id];
       return GameRecord::sharedGameRecord()->collection->isItemCompleted(sh.uiid);
     }
 
@@ -349,11 +229,12 @@ class SpecialCollectionDelegate: public CollectionMenuDelegate {
   public:
     void init() {
       mImageFilename = "sc_special";
+      updateButtonImage(false);
     }
 
     bool isCollected(int id)
     {
-      Special sh = GameData::fetchSpecials()[id];
+      Special &sh = GameData::fetchSpecials()[id];
       return GameRecord::sharedGameRecord()->collection->isItemCompleted(sh.uiid);
     }
 
@@ -381,6 +262,7 @@ class PowerUpCollectionDelegate: public CollectionMenuDelegate {
   public:
     void init() {
       mImageFilename = "sc_powerup";
+      updateButtonImage(false);
     }
     void updateScroll() {
       mScroll->contentNode->removeAllChildren();

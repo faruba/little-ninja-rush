@@ -21,10 +21,6 @@ class CollectionMenu :
 
     virtual bool init(){
       mCurrentDelegate = nullptr;
-      mShurikenDelegate.init();
-      mKatanaDelegate.init();
-      mSpecialDelegate.init();
-      mPowerUpDelegate.init();
       return true;
     }
     virtual void onEnter();

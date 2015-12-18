@@ -64,7 +64,7 @@ void CollectionMenu::onModalConfirm(cocos2d::Ref*)
   GameTool::PlaySound("sound/charge.mp3");
 }
 
-void CollectionMenu::onModalCancel(cocos2d::Ref*Hjj)
+void CollectionMenu::onModalCancel(cocos2d::Ref*)
 {
   mModal = false;
   mMask->setVisible(false);
@@ -74,18 +74,17 @@ void CollectionMenu::onModalCancel(cocos2d::Ref*Hjj)
   mPowerupMenu->setTouchEnabled(true);
 }
 
-void CollectionMenu::onEnter()
-{
+void CollectionMenu::onEnter() {
   mUISwapper.onEnter();
+
   PublicLoad::menuCollection()->loadAll();
   mModal = false;
 
-  //do some initialization
   cocos2d::Node *taskcomplete = cocos2d::Node::create();
   taskcomplete->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, 5);
   GamePlay::setTaskCompleteNode(taskcomplete);
-  //----------
+
   cocos2d::Node * node = createUIByCCBI("menu-collection", "CollectionMenu", CollectionMenuLayerLoader::loader(), this);
   if(node != NULL) {
     this->addChild(node, 5);
@@ -107,10 +106,10 @@ void CollectionMenu::onEnter()
   mScroll->setClipRect(clip);
   mScrollPoint->addChild(mScroll, -1);
 
-
   CollectionMenuDelegate::mScroll = mScroll;
   CollectionMenuDelegate::mItemTitle = mItemTitle;
   CollectionMenuDelegate::mItemDescription = mItemDesc;
+  CollectionMenuDelegate::mUse = mUse;
 
   mShadowDir = ccpNormalize(cocos2d::Vec2(-12, 17));
   this->scheduleUpdate();
@@ -128,29 +127,21 @@ void CollectionMenu::onEnter()
     btn->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", i, i==currRole?0:1)->getCString()));
     btn->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", i, i==currRole?1:0)->getCString()));
   }
-  //初始化分类按钮
-  // TODO:Refactor this
-  mShurikenDelegate.updateButtonImage(false);
-  mKatanaDelegate.updateButtonImage(false);
-  mSpecialDelegate.updateButtonImage(false);
-  mPowerUpDelegate.updateButtonImage(false);
+
+  mShurikenDelegate.init();
+  mKatanaDelegate.init();
+  mSpecialDelegate.init();
+  mPowerUpDelegate.init();
+
   switch (gNavBack) {
-    case 2:
-      mCurrentDelegate = &mKatanaDelegate;
-      break;
-    case 3:
-      mCurrentDelegate = &mSpecialDelegate;
-      break;
-    default:
-      mCurrentDelegate = &mShurikenDelegate;
-      break;
+    case 2:  mCurrentDelegate = &mKatanaDelegate;   break;
+    case 3:  mCurrentDelegate = &mSpecialDelegate;  break;
+    default: mCurrentDelegate = &mShurikenDelegate; break;
   }
-  mCurrentDelegate->updateButtonImage(true);
-  mCurrentDelegate->updateScroll();
+  mCurrentDelegate->activate(true);
 
   mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", GameRecord::sharedGameRecord()->collection->magic_piece)->getCString());
 
-  mCurrentDelegate->updateItemInfo();
   mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
   mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
 
@@ -273,14 +264,11 @@ void CollectionMenu::onItem(CollectionMenuDelegate *newDelegate)
     return ;
 
   GameTool::PlaySound("sound/click.mp3");
-  mCurrentDelegate->updateButtonImage(false);
-  newDelegate->updateButtonImage(true);
+  mCurrentDelegate->activate(false);
+  newDelegate->activate(true);
   mCurrentDelegate = newDelegate;
 
   mItemDesc->setVisible(true);
-
-  mCurrentDelegate->updateScroll();
-  mCurrentDelegate->updateItemInfo();
 
   mPowerUp->setVisible(false);
   mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
@@ -494,242 +482,15 @@ void CollectionMenu::clickMethod()
   }
 }
 
-void CollectionMenu::toggleShare(bool flag)
-{
-  /*
-  if( flag )
-  {
-    if( ABSocial->isAvailable() )
-    {
-      mShare->setVisible(true);
-      mFacebook->setVisible(true);
-      mTwitter->setVisible(true);
-      mFacebookAction->setVisible(true);
-      mTwitterAction->setVisible(true);
-      mTwitter.isEnabled = true;
-    }
-    else
-    {
-      mTwitter->setColor(ccc3(128, 128, 128));
-      mTwitterAction->setColor(ccc3(128, 128, 128));
-      mTwitter.isEnabled = false;
-      mFacebook->setColor(ccc3(128, 128, 128));
-      mFacebookAction->setColor(ccc3(128, 128, 128));
-      mFacebook.isEnabled = false;
-    }
-  }
-  else
-  {
-    mShare->setVisible(false);
-    mFacebook->setVisible(false);
-    mTwitter->setVisible(false);
-    mFacebookAction->setVisible(false);
-    mTwitterAction->setVisible(false);
-  }
-  */
-}
-/*
-id CollectionMenu::getCurrentCollectedItem()
-{
-  int idx = mCurrItem;
-  if( idx < 0 )
-  {
-    idx = mEquipedItem;
-  }
-  if( mCurrentType < 3 )
-  {
-    bool collected = false;
-    id ret = NULL;
-    switch (mCurrentType) {
-      case 0:
-        {
-          Shuriken *sh = (Shuriken*)GameData::fetchShurikens()->objectAtIndex(idx);
-          collected = [GameRecord::sharedGameRecord()->collection->isItemCompleted:sh->uiid];
-          ret = sh;
-        }
-        break;
-      case 1:
-        {
-          int index = idx + GAME_CHARCOUNT - 1;
-          if( idx == 0 )
-          {
-            index = GameRecord::sharedGameRecord()->curr_char;
-          }
-          Katana *sh = (Katana*)GameData::fetchKatanas()->objectAtIndex(index);
-          collected = [GameRecord::sharedGameRecord()->collection->isItemCompleted:sh->uiid];
-          ret = sh;
-        }
-        break;
-      case 2:
-        {
-          Special *sh = (Special*)GameData::fetchSpecials()->objectAtIndex(idx);
-          collected = [GameRecord::sharedGameRecord()->collection->isItemCompleted:sh->uiid];
-          ret = sh;
-        }
-        break;
-    }
-    if( collected && ret != NULL )
-    {
-      return ret;
-    }
-    else
-    {
-      return NULL;
-    }
-  }
-  else
-  {
-    return NULL;
-  }
-}
-*/
-void CollectionMenu::onFacebook(cocos2d::Ref*)
-{/*
-  if( !mPostingFacebook )
-  {
-    ABSocial *social = ABSocial->feedOnSinaWeibo();
-    switch (mCurrentType) {
-      case 0:
-        {
-          Shuriken *sh = this->getCurrentCollectedItem();
-          social.text = cocos2d::CCString::createWithFormat("I have just collected %@ in Little Ninja Rush!", sh->titl);
-          social.image = UIImage->imageWithContentsOfFile(cocos2d::CCFileUtils->sharedFileUtils()->fullPathFromRelativePath( sh->icon));
-        }
-        break;
-      case 1:
-        {
-          Katana *sh = this->getCurrentCollectedItem();
-          social.text = cocos2d::CCString::createWithFormat("I have just collected %@ in Little Ninja Rush!", sh->titl);
-          social.image = UIImage->imageWithContentsOfFile(cocos2d::CCFileUtils->sharedFileUtils()->fullPathFromRelativePath( sh->icon));
-        }
-        break;
-      case 2:
-        {
-          Special *sh = this->getCurrentCollectedItem();
-          social.text = cocos2d::CCString::createWithFormat("I have just collected %@ in Little Ninja Rush!", sh->titl);
-          social.image = UIImage->imageWithContentsOfFile(cocos2d::CCFileUtils->sharedFileUtils()->fullPathFromRelativePath( sh->icon));
-        }
-        break;
-    }
-    social.callbackObject = MidBridge->sharedMidbridge();
-    social.callbackSelector =, );
-    AppController *del = (AppController*)UIApplication->sharedApplication().delegate;
-    social->present(del.navController);
+void CollectionMenu::toggleShare(bool flag) { }
 
-    mFacebookAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("ftloading.png"));
-    mFacebookAction->stopAllActions();
-cocos2d::CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 360);
-cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
-    mFacebookAction->runAction(rf);
+void CollectionMenu::onFacebook(cocos2d::Ref*) { }
 
-    mPostingFacebook = true;
-  }
-  */
-}
+void CollectionMenu::doneFacebook(cocos2d::CCInteger* res) { }
 
-void CollectionMenu::doneFacebook(cocos2d::CCInteger* res)
-{
-  /*
-  mPostingFacebook = false;
+void CollectionMenu::onTwitter(cocos2d::Ref*) { }
 
-  mFacebookAction->stopAllActions();
-  mFacebookAction->setRotation(0);
-  mFacebookAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("go_facebook2.png"));
-  */
-}
-
-void CollectionMenu::onTwitter(cocos2d::Ref*)
-{/*
-  if( !mPostingTwitter )
-  {
-    mPostingTwitter = true;
-    AppController *del = (AppController*)UIApplication->sharedApplication().delegate;
-    ABSocial *social = NULL;
-    bool flagSINA = UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo();
-    if( flagSINA )
-    {
-      social = ABSocial->feedOnSinaWeibo();
-    }
-    else
-    {
-      social = ABSocial->feedOnTwitter();
-    }
-    switch (mCurrentType) {
-      case 0:
-        {
-          Shuriken *sh = this->getCurrentCollectedItem();
-          if( flagSINA )
-          {
-            social.text = cocos2d::CCString::createWithFormat("刚刚在#LittleNinjaRush#里收集到了%@，一起来玩吧!", sh->titl);
-          }
-          else
-          {
-            social.text = cocos2d::CCString::createWithFormat("I have just collected %@ in #LittleNinjaRush!", sh->titl);
-          }
-          social.url = NSURL->URLWithString(TWITTER_URL);
-          social.image = UIImage->imageWithContentsOfFile(cocos2d::CCFileUtils->sharedFileUtils()->fullPathFromRelativePath( sh->icon));
-        }
-        break;
-      case 1:
-        {
-          Katana *sh = this->getCurrentCollectedItem();
-          if( flagSINA )
-          {
-            social.text = cocos2d::CCString::createWithFormat("刚刚在#LittleNinjaRush#里收集到了%@，一起来玩吧!", sh->titl);
-          }
-          else
-          {
-            social.text = cocos2d::CCString::createWithFormat("I have just collected %@ in #LittleNinjaRush!", sh->titl);
-          }
-          social.url = NSURL->URLWithString(TWITTER_URL);
-          social.image = UIImage->imageWithContentsOfFile(cocos2d::CCFileUtils->sharedFileUtils()->fullPathFromRelativePath( sh->icon));
-        }
-        break;
-      case 2:
-        {
-          Special *sh = this->getCurrentCollectedItem();
-          if( flagSINA )
-          {
-            social.text = cocos2d::CCString::createWithFormat("刚刚在#LittleNinjaRush#里收集到了%@，一起来玩吧!", sh->titl);
-          }
-          else
-          {
-            social.text = cocos2d::CCString::createWithFormat("I have just collected %@ in #LittleNinjaRush!", sh->titl);
-          }
-          social.url = NSURL->URLWithString(TWITTER_URL);
-          social.image = UIImage->imageWithContentsOfFile(cocos2d::CCFileUtils->sharedFileUtils()->fullPathFromRelativePath( sh->icon));
-        }
-        break;
-    }
-    social.callbackObject = MidBridge->sharedMidbridge();
-    social.callbackSelector =, );
-    social->present(del.navController);
-
-    mTwitterAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("ftloading.png"));
-    mTwitterAction->stopAllActions();
-cocos2d::CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 360);
-cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
-    mTwitterAction->runAction(rf);
-  }
-*/
-}
-
-void CollectionMenu::doneTwitter(cocos2d::CCInteger* res)
-{
-  mPostingTwitter = false;
-
-  mTwitterAction->stopAllActions();
-  mTwitterAction->setRotation(0);
-
-  if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() )
-  {
-    mTwitterAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("go_weibo2.png"));
-  }
-  else
-  {
-    mTwitterAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("go_twitter2.png"));
-  }
-}
+void CollectionMenu::doneTwitter(cocos2d::CCInteger* res) { }
 
 bool CollectionMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
@@ -751,10 +512,10 @@ bool CollectionMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter2",     CCMenuItemImage*, mCharacter2)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter3",     CCMenuItemImage*, mCharacter3)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter4",     CCMenuItemImage*, mCharacter4)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShuriken",       CCMenuItemImage*, mShurikenDelegate.mMenuButtonRef)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mKatana",         CCMenuItemImage*, mKatanaDelegate.mMenuButtonRef)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSpecial",        CCMenuItemImage*, mSpecialDelegate.mMenuButtonRef)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerup",        CCMenuItemImage*, mPowerUpDelegate.mMenuButtonRef)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShuriken",       MenuItemImage*, mShurikenDelegate.mMenuButtonRef)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mKatana",         MenuItemImage*, mKatanaDelegate.mMenuButtonRef)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSpecial",        MenuItemImage*, mSpecialDelegate.mMenuButtonRef)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerup",        MenuItemImage*, mPowerUpDelegate.mMenuButtonRef)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mUse",            CCMenuItemImage*, mUse)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook",       CCMenuItemImage*, mFacebook)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter",        CCMenuItemImage*, mTwitter)
