@@ -54,6 +54,7 @@
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		BE01EA041C21466C009CAF14 /* data in Resources */ = {isa = PBXBuildFile; fileRef = BE01EA031C21466C009CAF14 /* data */; };
 		BE01EA061C214851009CAF14 /* sound in Resources */ = {isa = PBXBuildFile; fileRef = BE01EA051C214851009CAF14 /* sound */; };
+		BE01EA0B1C23E032009CAF14 /* CollectionMenuDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE01EA091C23E032009CAF14 /* CollectionMenuDelegate.cpp */; };
 		BE08E4301C1ED60A0068D10F /* LogoSplash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE38EB301C1EB75D0087D38E /* LogoSplash.cpp */; };
 		BE38EBAF1C1EB75D0087D38E /* ABScrollContent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE38EAE41C1EB75C0087D38E /* ABScrollContent.cpp */; };
 		BE38EBB01C1EB75D0087D38E /* AnimatedParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE38EAE61C1EB75C0087D38E /* AnimatedParticle.cpp */; };
@@ -604,6 +605,8 @@
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BE01EA031C21466C009CAF14 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		BE01EA051C214851009CAF14 /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
+		BE01EA091C23E032009CAF14 /* CollectionMenuDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollectionMenuDelegate.cpp; sourceTree = "<group>"; };
+		BE01EA0A1C23E032009CAF14 /* CollectionMenuDelegate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollectionMenuDelegate.hpp; sourceTree = "<group>"; };
 		BE38EAE41C1EB75C0087D38E /* ABScrollContent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ABScrollContent.cpp; sourceTree = "<group>"; };
 		BE38EAE51C1EB75C0087D38E /* ABScrollContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABScrollContent.h; sourceTree = "<group>"; };
 		BE38EAE61C1EB75C0087D38E /* AnimatedParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimatedParticle.cpp; sourceTree = "<group>"; };
@@ -1689,8 +1692,7 @@
 				BE38EAF61C1EB75C0087D38E /* ClassicMode.h */,
 				BE38EAF71C1EB75C0087D38E /* CoinsMenu.cpp */,
 				BE38EAF81C1EB75C0087D38E /* CoinsMenu.h */,
-				BE38EAF91C1EB75C0087D38E /* CollectionMenu.cpp */,
-				BE38EAFA1C1EB75C0087D38E /* CollectionMenu.h */,
+				BE01EA081C23DFD3009CAF14 /* UI */,
 				BE38EAFB1C1EB75C0087D38E /* Collections.cpp */,
 				BE38EAFC1C1EB75C0087D38E /* Collections.h */,
 				BE38EAFD1C1EB75C0087D38E /* CommitArcade.cpp */,
@@ -1897,6 +1899,17 @@
 			name = Icons;
 			path = ios;
 			sourceTree = SOURCE_ROOT;
+		};
+		BE01EA081C23DFD3009CAF14 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				BE38EAF91C1EB75C0087D38E /* CollectionMenu.cpp */,
+				BE38EAFA1C1EB75C0087D38E /* CollectionMenu.h */,
+				BE01EA091C23E032009CAF14 /* CollectionMenuDelegate.cpp */,
+				BE01EA0A1C23E032009CAF14 /* CollectionMenuDelegate.hpp */,
+			);
+			name = UI;
+			sourceTree = "<group>";
 		};
 		BE38EAE31C1EB75C0087D38E /* ABKit */ = {
 			isa = PBXGroup;
@@ -2472,6 +2485,7 @@
 				BE38EBEB1C1EB75D0087D38E /* Respawn.cpp in Sources */,
 				BE38EC041C1EB75D0087D38E /* UniversalFit.cpp in Sources */,
 				BE38EBF91C1EB75D0087D38E /* SpeedLine.cpp in Sources */,
+				BE01EA0B1C23E032009CAF14 /* CollectionMenuDelegate.cpp in Sources */,
 				BE38EC011C1EB75D0087D38E /* TraceDart.cpp in Sources */,
 				BE38EBBD1C1EB75D0087D38E /* CommitScroll.cpp in Sources */,
 				BE38EBF81C1EB75D0087D38E /* ShopMenu.cpp in Sources */,
