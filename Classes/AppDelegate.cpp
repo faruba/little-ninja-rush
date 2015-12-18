@@ -60,15 +60,16 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     // turn on display FPS
-    director->setDisplayStats(true);
+    //director->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
     // Set the design resolution
-    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
+    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::EXACT_FIT);
     Size frameSize = glview->getFrameSize();
     // if the frame's height is larger than the height of medium size.
+    /*
     if (frameSize.height > mediumResolutionSize.height)
     {        
         director->setContentScaleFactor(MIN(largeResolutionSize.height/designResolutionSize.height, largeResolutionSize.width/designResolutionSize.width));
@@ -83,6 +84,20 @@ bool AppDelegate::applicationDidFinishLaunching() {
     {        
         director->setContentScaleFactor(MIN(smallResolutionSize.height/designResolutionSize.height, smallResolutionSize.width/designResolutionSize.width));
     }
+    */
+    //director->setContentScaleFactor(MAX(frameSize.height/designResolutionSize.height, frameSize.width/designResolutionSize.width));
+    director->setContentScaleFactor(2);
+
+    UniversalFit::sharedUniversalFit()->init();
+    //configure for autofit
+    Size screensize = director->getWinSize();
+    //landscape transform
+    if( screensize.height > screensize.width ) {
+      float t = screensize.width;
+      screensize.width = screensize.height;
+      screensize.height = t;
+    }
+    UniversalFit::sharedUniversalFit()->setAutofit(screensize);
 
     register_all_packages();
 

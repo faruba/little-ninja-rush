@@ -1,27 +1,24 @@
 #include "CEClipedNode.h"
 #include "UniversalFit.h"
 
-void CEClipedNode::setClipRect(cocos2d::CCRect *rect)
+void CEClipedNode::setClipRect(cocos2d::Rect *rect)
 {
   if (NULL == rect) return;
-    return;
-  float factor = cocos2d::CCDirector::sharedDirector()->getContentScaleFactor();
+
+  float factor = cocos2d::Director::getInstance()->getContentScaleFactor();
   clipRectInPixel = *rect;
   clipRectInPixel.origin.x *= factor;
   clipRectInPixel.origin.y *= factor;
   clipRectInPixel.size.width *= factor;
   clipRectInPixel.size.height *= factor;
-cocos2d::CCLog("setClip(%f, %f, %f, %f)",clipRectInPixel.origin.x, clipRectInPixel.origin.y, clipRectInPixel.size.width, clipRectInPixel.size.height);
 }
 
-void CEClipedNode::visit(Renderer *renderer, const Mat4& parentTransform, uint32_t parentFlags)
+void CEClipedNode::visit(cocos2d::Renderer *renderer, const  cocos2d::Mat4& parentTransform, uint32_t parentFlags)
 {
+    
   glEnable(GL_SCISSOR_TEST);
 
-  glScissor(clipRectInPixel.origin.x, clipRectInPixel.origin.y,
-      clipRectInPixel.size.width, clipRectInPixel.size.height);
-    /* TODO: uncomment this
-cocos2d::Node::visit(Renderer *renderer, const Mat4& parentTransform, uint32_t parentFlags);
-*/
+  glScissor(clipRectInPixel.origin.x, clipRectInPixel.origin.y,clipRectInPixel.size.width, clipRectInPixel.size.height);
+    Node::visit(renderer, parentTransform, parentFlags);
   glDisable(GL_SCISSOR_TEST);
 }

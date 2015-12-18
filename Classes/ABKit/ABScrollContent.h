@@ -6,14 +6,14 @@
 
 USING_NS_CC_EXT;
 
-class ABScrollContent : public Layer{
+class ABScrollContent : public cocos2d::Layer{
 public:
   virtual bool init();
   virtual void update(float);
 
-  virtual bool onTouchBegan(Touch * touch, Event * event);
-  virtual void onTouchMoved(Touch * touch, Event * event);
-  virtual void onTouchEnded(Touch * touch, Event * event);
+  virtual bool onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * event);
+  virtual void onTouchMoved(cocos2d::Touch * touch, cocos2d::Event * event);
+  virtual void onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event);
 
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ABScrollContent, create);
   void setClipRect(cocos2d::CCRect clipRect);
@@ -26,7 +26,7 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(ABScrollContent, create);
   CEClipedNode *mClipNode;
 cocos2d::Node *contentNode;
 cocos2d::Ref *clickTarget;
-  SEL_CallFunc clickMethod;
+  cocos2d::SEL_CallFunc clickMethod;
   cocos2d::Point clickPoint;
 
 private:

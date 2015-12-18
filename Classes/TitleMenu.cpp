@@ -650,7 +650,7 @@ void PopObj::onCreate()
   //CCLog("CLIP = %fx%f %fx%f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
   mBoard->setClipRect(&rect);
   //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
-  //mBoard->setClipRect(&rect);
+  mBoard->setClipRect(&rect);
   mBoard->setPosition(cocos2d::Vec2(-301, 58));
   this->addChild(mBoard);
 

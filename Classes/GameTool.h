@@ -1,5 +1,7 @@
 #ifndef ___CLASSES_GAMETOOL_H_
 #define ___CLASSES_GAMETOOL_H_
+#include "CEClipedNode.h"
+
 #include "RingTile.h"
 #include "GTAnimatedSprite.h"
 #include "GTGhostShadow.h"
@@ -9,7 +11,7 @@
 #include "GameObjectManager.h"
 
 #include "UniversalFit.h"
-#include "CEClipedNode.h"
+
 #include "SimpleAudioEngine.h"
 #include <time.h>
 #include <cocos2d.h>
@@ -42,14 +44,14 @@ class GameTool {
       static cocos2d::Scene* scene() { 
         cocos2d::Scene *ret = cocos2d::Scene::create();
         LayerType *tm = LayerType::create();
-        //ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
+        ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
         ret->setAnchorPoint(cocos2d::Vec2(0, 0));
-        //ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
-        //CEClipedNode *clip = CEClipedNode::create();
-        //clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
-        //clip->addChild(tm);
-        //ret->addChild(clip);
-        ret->addChild(tm);
+        ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
+        CEClipedNode *clip = CEClipedNode::create();
+        clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
+        clip->addChild(tm);
+        ret->addChild(clip);
+        //ret->addChild(tm);
         return ret;
 
       }

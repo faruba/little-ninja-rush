@@ -49,8 +49,7 @@ void LogoSplash::onEnter()
 
   mLogo = cocos2d::Sprite::create("logo.png");
   mLogo->setOpacity(0);
-  auto winSize = Director::getInstance()->getWinSize();
-  mLogo->setPosition(Vec2(winSize.width / 2, winSize.height / 2));
+  mLogo->setPosition(UniversalFit::sharedUniversalFit()->centralPoint);
 
   bg->addChild(mLogo);
   mSoundId = GameTool::PlaySound("sound/logo.mp3");
