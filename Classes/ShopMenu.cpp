@@ -28,7 +28,7 @@ const char *gIAPCost[] =
     "$ 4.99",
     "$ 5.99",
 };
-char *gDetails[] =
+char const *gDetails[] =
 {
     "在游戏开始的时候送你800米的距离。",//0
     "促销优惠包，买四送一！",//1

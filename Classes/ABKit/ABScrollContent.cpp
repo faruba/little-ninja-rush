@@ -5,13 +5,14 @@ bool ABScrollContent::init()
 {
 cocos2d::CCLog("ABScrollContent::init");
   mFlySpeed = 0.0f;
-  mClipNode = CEClipedNode::create();
+  //mClipNode = CEClipedNode::create();
   //by default don't clip anything
-  mClipNode->setClipRect(new CCRect(0, 0, 1024, 768));
-  addChild(mClipNode);
+  //mClipNode->setClipRect(new CCRect(0, 0, 1024, 768));
+  //addChild(mClipNode);
   contentNode = cocos2d::Node::create();
   contentNode->setPosition(cocos2d::Vec2(0, clipRect.size.height));
-  mClipNode->addChild(contentNode);
+  //mClipNode->addChild(contentNode);
+  addChild(contentNode);
 
   auto listener = EventListenerTouchOneByOne::create();
   listener->onTouchBegan = CC_CALLBACK_2(ABScrollContent::onTouchBegan, this);
@@ -48,7 +49,7 @@ void ABScrollContent::removeAllContent()
 void ABScrollContent::setClipRect(cocos2d::CCRect rect) 
 {
   clipRect = rect;
-  mClipNode->setClipRect(new CCRect(UniversalFit::sharedUniversalFit()->transformRect(clipRect)));
+  //mClipNode->setClipRect(new CCRect(UniversalFit::sharedUniversalFit()->transformRect(clipRect)));
 
   contentNode->setPosition(cocos2d::Vec2(0, clipRect.size.height));
 }
