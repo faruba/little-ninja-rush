@@ -41,7 +41,7 @@ cocos2d::Node *mNode;
 cocos2d::Sprite *mArrow;
 cocos2d::Sprite *mScroll;
 cocos2d::Sprite *mTitle;
-cocos2d::CCLabelBMFont *mScrollCount;
+cocos2d::Label *mScrollCount;
 cocos2d::Node *mRotateNode;
 cocos2d::Sprite *mLightBack;
 cocos2d::Node *mRotateACW;

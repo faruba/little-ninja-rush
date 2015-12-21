@@ -54,7 +54,7 @@ cocos2d::CCLog("begin tutorial: role id(%d), cacheDartId(%d)", rid, cacheDartId)
     mDummies[i] = TutorialPuppet::puppet();
     play->enemies->addObject(play->manager->addGameObject(mDummies[i]));
   }
-  //mTeachText = cocos2d::CCLabelBMFont::create("", "ab40.fnt");
+  //mTeachText = cocos2d::Label::create("", "ab40.fnt");
     mTeachText = cocos2d::Label::create("", GFONT_NAME, GFONT_SIZE_NORMAL);
     
   mTeachText->setAnchorPoint(cocos2d::Vec2( 0, 0.5f));

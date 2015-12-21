@@ -399,7 +399,7 @@ cocos2d::Sprite *spbg = NULL;
 cocos2d::Sprite *spicon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
         spicon->setPosition(cocos2d::Vec2(spbg->getContentSize().width/2, spbg->getContentSize().height/2));
         spbg->addChild(spicon, 0, 0);
-cocos2d::CCLabelBMFont *desc = cocos2d::CCLabelBMFont::create(ach->desc->getCString(), "ab34.fnt");
+cocos2d::Label *desc = cocos2d::Label::createWithBMFont("ab34.fnt", ach->desc->getCString());
         desc->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
         desc->setPosition(cocos2d::Vec2(54, 12));
         spbg->addChild(desc, 0, 1);
@@ -433,9 +433,9 @@ bool ObjectiveComplete::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const c
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBanner", Sprite *, mBanner)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mObjType", Sprite *, mObjType)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mCrowns", Node *, mCrowns)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBounsCoins", CCLabelBMFont *, mBounsCoins)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBounsCoins", Label *, mBounsCoins)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScroll", Sprite *, mScroll)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBounsScroll", CCLabelBMFont *, mBounsScroll)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBounsScroll", Label *, mBounsScroll)
   //  CCLog(pMemberVariableName);
 
   return false;

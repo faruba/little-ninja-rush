@@ -14,12 +14,12 @@ PopKill* PopKill::popKill(bool steak, int num, cocos2d::Point pos)
     PopKill *pk = PopKill::create();
     if( steak )
     {
-        pk->label = cocos2d::CCLabelBMFont::create(cocos2d::CCString::createWithFormat("%dSTK!", num)->getCString(), "popkill.fnt");
+        pk->label = cocos2d::Label::createWithBMFont("popkill.fnt", cocos2d::CCString::createWithFormat("%dSTK!", num)->getCString());
         pk->label->setColor(ccc3(250, 41, 41));
     }
     else
     {
-        pk->label = cocos2d::CCLabelBMFont::create(cocos2d::CCString::createWithFormat("+%d", num)->getCString(), "popkill.fnt");
+        pk->label = cocos2d::Label::createWithBMFont("popkill.fnt", cocos2d::CCString::createWithFormat("+%d", num)->getCString());
         pk->label->setColor(ccc3(255, 204, 0));
     }
     pk->label->setPosition(pos);

@@ -98,7 +98,7 @@ cocos2d::CCRepeatForever *usaRep = cocos2d::CCRepeatForever::create(usaBlink);
     mHits->setAnchorPoint(cocos2d::Vec2(1, 0.5f));
     mHits->setPosition(cocos2d::Vec2(0, 0));
     mHitNode->addChild(mHits);
-    mHitCount = cocos2d::CCLabelBMFont::create("0", "ab70.fnt");
+    mHitCount = cocos2d::Label::createWithBMFont("ab70.fnt", "0");
     mHitCount->setAnchorPoint(cocos2d::Vec2(1, 0.5f));
     mHitCount->setPosition(cocos2d::Vec2(-(mHits->getContentSize().width + 5), 0));
     mHitNode->addChild(mHitCount);
@@ -124,18 +124,18 @@ cocos2d::Sprite *d = cocos2d::Sprite::createWithSpriteFrameName("ui-dart.png");
     if( play->mode == MODE_CLASSIC )
     {//*** Classic Mode ***
         //距离
-        mDistanceNumber = cocos2d::CCLabelBMFont::create("0", "ra50.fnt");
+        mDistanceNumber = cocos2d::Label::createWithBMFont("ra50.fnt", "0");
         mDistanceNumber->setAnchorPoint(cocos2d::Vec2(0, 1));
         mDistanceNumber->setPosition(cocos2d::Vec2(5, SCREEN_HEIGHT-5));
         mParent->addChild(mDistanceNumber, LAYER_UI);
-        mDistanceM = cocos2d::CCLabelBMFont::create("m", "ra50.fnt");
+        mDistanceM = cocos2d::Label::createWithBMFont("ra50.fnt", "m");
         mDistanceM->setAnchorPoint(cocos2d::Vec2(0, 1));
         mDistanceM->setPosition(cocos2d::Vec2(5+10, SCREEN_HEIGHT-5));
         mParent->addChild(mDistanceM, LAYER_UI);
         mDistanceCache = 0;
         
         //金币
-        mCoinNumber = cocos2d::CCLabelBMFont::create("0", "ra40.fnt");
+        mCoinNumber = cocos2d::Label::createWithBMFont("ra40.fnt", "0");
         mCoinNumber->setAnchorPoint(cocos2d::Vec2(0, 1));
         mCoinNumber->setPosition(cocos2d::Vec2(5, SCREEN_HEIGHT - mDistanceNumber->getContentSize().height));
         mParent->addChild(mCoinNumber, LAYER_UI);
@@ -152,7 +152,7 @@ cocos2d::Sprite *d = cocos2d::Sprite::createWithSpriteFrameName("ui-dart.png");
 cocos2d::Sprite *fevercoin = cocos2d::Sprite::createWithSpriteFrameName("fevercoins.png");
         fevercoin->setAnchorPoint(cocos2d::Vec2(1, 0.5f));
         mFeverCoins->addChild(fevercoin);
-        mFeverFont = cocos2d::CCLabelBMFont::create("+0", "ab56.fnt");
+        mFeverFont = cocos2d::Label::createWithBMFont("ab56.fnt", "+0");
         mFeverFont->setAnchorPoint(cocos2d::Vec2(1, 0.5f));
         mFeverFont->setPosition(cocos2d::Vec2(-(fevercoin->getContentSize().width+5), 0));
         mFeverCoins->addChild(mFeverFont);
@@ -187,7 +187,7 @@ cocos2d::Sprite *fevercoin = cocos2d::Sprite::createWithSpriteFrameName("feverco
                 mFlyBg->setAnchorPoint(cocos2d::Vec2(0, 0));
                 mFlyBg->setPosition(ccpAdd(mFly->getPosition(), Vec2(3, 0)));
                 play->addChild(mFlyBg, LAYER_UI-1);
-                mFlyNumber = cocos2d::CCLabelBMFont::create(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_fly)->getCString(), "ra50.fnt");
+                mFlyNumber = cocos2d::Label::createWithBMFont( "ra50.fnt", cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_fly)->getCString());
                 mFlyNumber->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
                 mFlyNumber->setPosition(ccpAdd(mFly->getPosition(), Vec2(25, -10)));
                 play->addChild(mFlyNumber, LAYER_UI+1);
@@ -203,7 +203,7 @@ cocos2d::Sprite *fevercoin = cocos2d::Sprite::createWithSpriteFrameName("feverco
                 mSPBg->setAnchorPoint(cocos2d::Vec2(0, 0));
                 mSPBg->setPosition(ccpAdd(mSP->getPosition(), Vec2(3, 0)));
                 play->addChild(mSPBg, LAYER_UI-1);
-                mSPNumber = cocos2d::CCLabelBMFont::create(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_sp)->getCString(), "ra50.fnt");
+                mSPNumber = cocos2d::Label::createWithBMFont( "ra50.fnt", cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_sp)->getCString());
                 mSPNumber->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
                 mSPNumber->setPosition(ccpAdd(mSP->getPosition(), Vec2(25, -10)));
                 play->addChild(mSPNumber, LAYER_UI+1);
@@ -216,7 +216,7 @@ cocos2d::Sprite *fevercoin = cocos2d::Sprite::createWithSpriteFrameName("feverco
     else
     {//*** Arcade Mode ***
         //score
-        mScoreNumber = cocos2d::CCLabelBMFont::create("0", "ra50.fnt");
+        mScoreNumber = cocos2d::Label::createWithBMFont("ra50.fnt", "0");
         mScoreNumber->setAnchorPoint(cocos2d::Vec2(0, 1));
         mScoreNumber->setPosition(cocos2d::Vec2(5, SCREEN_HEIGHT-5));
         mParent->addChild(mScoreNumber, LAYER_UI);
@@ -233,7 +233,7 @@ cocos2d::Node *mSpeedBoost = pReader->readNodeGraphFromFile("ui-arcade-speed.ccb
         mParent->addChild(mSpeedBoost, LAYER_UI);
         
         //timer
-        mTimerLabel = cocos2d::CCLabelBMFont::create("90", "ra50.fnt");
+        mTimerLabel = cocos2d::Label::createWithBMFont("ra50.fnt", "90");
         mTimerLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 1));
         mTimerLabel->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, UniversalFit::sharedUniversalFit()->playSize.height - 5));
         mParent->addChild(mTimerLabel, LAYER_UI);
@@ -254,7 +254,7 @@ cocos2d::Node *mSpeedBoost = pReader->readNodeGraphFromFile("ui-arcade-speed.ccb
         mParent->addChild(mCup, LAYER_UI);
         
         //arcade x
-        mArcadeX = cocos2d::CCLabelBMFont::create("x0", "ab70.fnt");
+        mArcadeX = cocos2d::Label::createWithBMFont("ab70.fnt", "x0");
         mArcadeX->setAnchorPoint(cocos2d::Vec2(1, 0.5f));
         mArcadeX->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width - 10, 180));
         mArcadeX->setVisible(false);
@@ -409,7 +409,7 @@ void GameInterface::onUpdateArcade(float delta, GamePlay* play)
             mSpeedBg->setColor(ccc3(116, 10, 10));
             mSpeedNormal->setVisible(false);
             mSpeedFever->setVisible(false);
-cocos2d::CCSize redsize = mSpeedRed->getContentSize();
+cocos2d::Size redsize = mSpeedRed->getContentSize();
             redsize.width = (arcade->speed - ARCADE_MINSPEED)/(ARCADE_INITSPEED-ARCADE_MINSPEED)*12.5f;
             mSpeedRed->setContentSize(redsize);
             targetstate = 1;
@@ -418,11 +418,11 @@ cocos2d::CCSize redsize = mSpeedRed->getContentSize();
         {//normal
             mSpeedBg->setColor(ccc3(117, 89, 6));
             mSpeedRed->setVisible(true);
-cocos2d::CCSize redsize = mSpeedRed->getContentSize();
+cocos2d::Size redsize = mSpeedRed->getContentSize();
             redsize.width = 12.5f;
             mSpeedRed->setContentSize(redsize);
             mSpeedNormal->setVisible(true);
-cocos2d::CCSize normalsize = mSpeedNormal->getContentSize();
+cocos2d::Size normalsize = mSpeedNormal->getContentSize();
             normalsize.width = (arcade->speed - ARCADE_INITSPEED)/(ARCADE_FEVER1 - ARCADE_INITSPEED)*37.5f;
             mSpeedNormal->setContentSize(normalsize);
             mSpeedFever->setVisible(false);
@@ -432,15 +432,15 @@ cocos2d::CCSize normalsize = mSpeedNormal->getContentSize();
         {//yellow flash
             mSpeedBg->setColor(ccc3(117, 89, 6));
             mSpeedRed->setVisible(true);
-cocos2d::CCSize redsize = mSpeedRed->getContentSize();
+cocos2d::Size redsize = mSpeedRed->getContentSize();
             redsize.width = 12.5f;
             mSpeedRed->setContentSize(redsize);
             mSpeedNormal->setVisible(true);
-cocos2d::CCSize normalsize = mSpeedNormal->getContentSize();
+cocos2d::Size normalsize = mSpeedNormal->getContentSize();
             normalsize.width = 37.5f;
             mSpeedNormal->setContentSize(normalsize);
             mSpeedFever->setVisible(true);
-cocos2d::CCSize feversize = mSpeedFever->getContentSize();
+cocos2d::Size feversize = mSpeedFever->getContentSize();
             feversize.width = (arcade->speed - ARCADE_FEVER1)/(ARCADE_FEVER2 - ARCADE_FEVER1)*25;
             mSpeedFever->setContentSize(feversize);
             targetstate = 2;
@@ -449,15 +449,15 @@ cocos2d::CCSize feversize = mSpeedFever->getContentSize();
         {//yellow flash 2
             mSpeedBg->setColor(ccc3(117, 89, 6));
             mSpeedRed->setVisible(true);
-cocos2d::CCSize redsize = mSpeedRed->getContentSize();
+cocos2d::Size redsize = mSpeedRed->getContentSize();
             redsize.width = 12.5f;
             mSpeedRed->setContentSize(redsize);
             mSpeedNormal->setVisible(true);
-cocos2d::CCSize normalsize = mSpeedNormal->getContentSize();
+cocos2d::Size normalsize = mSpeedNormal->getContentSize();
             normalsize.width = 37.5f;
             mSpeedNormal->setContentSize(normalsize);
             mSpeedFever->setVisible(true);
-cocos2d::CCSize feversize = mSpeedFever->getContentSize();
+cocos2d::Size feversize = mSpeedFever->getContentSize();
             feversize.width = 25 + (arcade->speed - ARCADE_FEVER2)/(ARCADE_MAXSPEED - ARCADE_FEVER2)*25;
             mSpeedFever->setContentSize(feversize);
             targetstate = 2;

@@ -256,12 +256,12 @@ bool CommitArcade::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* 
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRole", Sprite *, mRole)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLight", Sprite *, mLight)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCup", Sprite *, mCup)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScore", CCLabelBMFont *, mScore)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBouns", CCLabelBMFont *, mBouns)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldenTrophy", CCLabelBMFont *, mGoldenTrophy)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverTrophy", CCLabelBMFont *, mSilverTrophy)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeTrophy", CCLabelBMFont *, mBronzeTrophy)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScore", Label *, mScore)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBouns", Label *, mBouns)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldenTrophy", Label *, mGoldenTrophy)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverTrophy", Label *, mSilverTrophy)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeTrophy", Label *, mBronzeTrophy)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", Label *, mCoins)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFlash", LayerColor *, mFlash)
 
   //  CCLog(pMemberVariableName);

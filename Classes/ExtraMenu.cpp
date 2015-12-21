@@ -275,15 +275,15 @@ CCARRAY_FOREACH(Tasks::getStatistics(), node)
         
         if( sta->achieveCode != -1 )
         {//normal statistics
-            //CCLabelBMFont *title = cocos2d::CCLabelBMFont::create(sta->name->getCString(), "ab34.fnt");
-cocos2d::Label *title = cocos2d::Label::create(sta->name->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
+            //Label *title = cocos2d::Label::create(sta->name->getCString(), "ab34.fnt");
+cocos2d::Label *title = cocos2d::Label::createWithTTF(sta->name->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
             title->setAnchorPoint(cocos2d::Vec2(0, 1));
             title->setPosition(cocos2d::Vec2(10, mOffset));
             mItemList->addChild(title, 1, mItemList->getChildrenCount());
             if( sta->achieveCode >= 0 )
             {
 cocos2d::CCString *val = cocos2d::CCString::createWithFormat("%d%", sta->achieveCount, sta->psfx);
-cocos2d::CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(), "ab34.fnt");
+cocos2d::Label *result = cocos2d::Label::createWithBMFont("ab34.fnt", val->getCString());
                 result->setAnchorPoint(cocos2d::Vec2(1, 1));
                 result->setPosition(cocos2d::Vec2(426, mOffset));
                 mItemList->addChild(result, 1, mItemList->getChildrenCount());
@@ -291,7 +291,7 @@ cocos2d::CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(
             else if( sta->achieveCode == -2 )
             {
 cocos2d::CCString *val = cocos2d::CCString::createWithFormat("%d%", GameRecord::sharedGameRecord()->combo_high, sta->psfx);
-cocos2d::CCLabelBMFont *result = cocos2d::CCLabelBMFont::create(val->getCString(), "ab34.fnt");
+cocos2d::Label *result = cocos2d::Label::createWithBMFont("ab34.fnt", val->getCString());
                 result->setAnchorPoint(cocos2d::Vec2(1, 1));
                 result->setPosition(cocos2d::Vec2(426, mOffset));
                 mItemList->addChild(result, 1, mItemList->getChildrenCount());
@@ -427,7 +427,7 @@ cocos2d::CCLog("Control");
 }
 bool ExtraMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *,  mCoins);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", Label *,  mCoins);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", Node *, mList);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBanner", Sprite *, mBanner);
 

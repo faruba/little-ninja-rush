@@ -40,12 +40,12 @@ cocos2d::Node *mNode;
 cocos2d::Sprite *mRole;
 cocos2d::Sprite *mLight;
 cocos2d::Sprite *mCup;
-cocos2d::CCLabelBMFont *mScore;
-cocos2d::CCLabelBMFont *mBouns;
-cocos2d::CCLabelBMFont *mGoldenTrophy;
-cocos2d::CCLabelBMFont *mSilverTrophy;
-cocos2d::CCLabelBMFont *mBronzeTrophy;
-cocos2d::CCLabelBMFont *mCoins;
+cocos2d::Label *mScore;
+cocos2d::Label *mBouns;
+cocos2d::Label *mGoldenTrophy;
+cocos2d::Label *mSilverTrophy;
+cocos2d::Label *mBronzeTrophy;
+cocos2d::Label *mCoins;
 cocos2d::LayerColor *mFlash;
 
 

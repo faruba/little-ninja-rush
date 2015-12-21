@@ -50,9 +50,9 @@ cocos2d::Node *mNode;
 cocos2d::Sprite *mBanner;
 cocos2d::Sprite *mObjType;
 cocos2d::Node *mCrowns;
-cocos2d::CCLabelBMFont *mBounsCoins;
+cocos2d::Label *mBounsCoins;
 cocos2d::Sprite *mScroll;
-cocos2d::CCLabelBMFont *mBounsScroll;
+cocos2d::Label *mBounsScroll;
 
 
     void retriveObjectiveInfo(int index, Objective** obj, Achievement** ach);

@@ -33,12 +33,12 @@ class ControlLayer :
     virtual bool init();
     void updateButton();
     void tickNumber(int n);
-cocos2d::CCLabelBMFont *mNumber;
+cocos2d::Label *mNumber;
 cocos2d::Sprite *mBtnCancel;
 cocos2d::Sprite *mBtnCancel2;
 cocos2d::Sprite *mBtnRevive;
 cocos2d::Sprite *mBtnRevive2;
-cocos2d::CCLabelBMFont *mCoins;
+cocos2d::Label *mCoins;
 cocos2d::Sprite *mBtnBuyBasic;
 cocos2d::Sprite *mBtnBuyBasic2;
 cocos2d::Sprite *mBtnBuyStandard;
@@ -285,12 +285,12 @@ cocos2d::CCLog("Control");
 }
 bool ControlLayer::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mNumber", CCLabelBMFont *, mNumber)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mNumber", Label *, mNumber)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel", Sprite *, mBtnCancel)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnCancel2", Sprite *, mBtnCancel2)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnRevive", Sprite *, mBtnRevive)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnRevive2", Sprite *, mBtnRevive2)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mCoins", CCLabelBMFont *, mCoins)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mCoins", Label *, mCoins)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyBasic", Sprite *, mBtnBuyBasic)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyBasic2", Sprite *, mBtnBuyBasic2)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mBtnBuyStandard", Sprite *, mBtnBuyStandard)

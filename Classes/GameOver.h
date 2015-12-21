@@ -34,8 +34,8 @@ cocos2d::Node *mNode;
     bool mPostingTwitter;
 
     //-- auto assign --
-cocos2d::CCLabelBMFont *mDistance;
-cocos2d::CCLabelBMFont *mCoins;
+cocos2d::Label *mDistance;
+cocos2d::Label *mCoins;
 cocos2d::CCMenuItemImage *mChange;
 cocos2d::Label *mDailyObjective;
 cocos2d::Label *mWeeklyObjective;
@@ -49,9 +49,9 @@ cocos2d::Sprite *mMonthlyIcon;
 cocos2d::Sprite *mLeadSp0;
 cocos2d::Sprite *mLeadSp1;
 cocos2d::Sprite *mLeadSp2;
-cocos2d::CCLabelBMFont *mLeadLb0;
-cocos2d::CCLabelBMFont *mLeadLb1;
-cocos2d::CCLabelBMFont *mLeadLb2;
+cocos2d::Label *mLeadLb0;
+cocos2d::Label *mLeadLb1;
+cocos2d::Label *mLeadLb2;
 cocos2d::CCMenuItemImage *mPlayAgain;
 cocos2d::CCMenuItemImage *mTwitter;
 cocos2d::CCMenuItemImage *mFacebook;
@@ -63,16 +63,16 @@ cocos2d::Node *mClassic;
 cocos2d::Node *mArcade;
 
     // -- Arcade --
-cocos2d::CCLabelBMFont *mArcadeScore;
+cocos2d::Label *mArcadeScore;
 cocos2d::Sprite *mGoldCoin;
 cocos2d::Sprite *mSilverCoin;
 cocos2d::Sprite *mBronzeCoin;
-cocos2d::CCLabelBMFont *mGoldScore;
-cocos2d::CCLabelBMFont *mSilverScore;
-cocos2d::CCLabelBMFont *mBronzeScore;
-cocos2d::CCLabelBMFont *mGoldPrize;
-cocos2d::CCLabelBMFont *mSilverPrize;
-cocos2d::CCLabelBMFont *mBronzePrize;
+cocos2d::Label *mGoldScore;
+cocos2d::Label *mSilverScore;
+cocos2d::Label *mBronzeScore;
+cocos2d::Label *mGoldPrize;
+cocos2d::Label *mSilverPrize;
+cocos2d::Label *mBronzePrize;
 cocos2d::Sprite *mCup;
 
 

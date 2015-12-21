@@ -735,7 +735,7 @@ bool CommitScroll::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* 
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mArrow", Sprite *, mArrow)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScroll", Sprite *, mScroll)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mTitle", Sprite *, mTitle)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScrollCount", CCLabelBMFont *, mScrollCount)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScrollCount", Label *, mScrollCount)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateNode", Node *, mRotateNode)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mLightBack", Sprite *, mLightBack)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateACW", Node *, mRotateACW)

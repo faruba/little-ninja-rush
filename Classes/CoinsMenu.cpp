@@ -510,7 +510,7 @@ cocos2d::CCLog("Control");
 }
 bool CoinsMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", Label *, mCoins);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", Node *, mList);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu *, mMenu);
 

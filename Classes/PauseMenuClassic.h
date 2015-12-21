@@ -41,12 +41,12 @@ cocos2d::Node *mClassic;
 cocos2d::Node *mArcade;
     
     //-- Arcade --
-cocos2d::CCLabelBMFont *mGoldScore;
-cocos2d::CCLabelBMFont *mSilverScore;
-cocos2d::CCLabelBMFont *mBronzeScore;
-cocos2d::CCLabelBMFont *mGoldPrize;
-cocos2d::CCLabelBMFont *mSilverPrize;
-cocos2d::CCLabelBMFont *mBronzePrize;
+cocos2d::Label *mGoldScore;
+cocos2d::Label *mSilverScore;
+cocos2d::Label *mBronzeScore;
+cocos2d::Label *mGoldPrize;
+cocos2d::Label *mSilverPrize;
+cocos2d::Label *mBronzePrize;
 cocos2d::Sprite *mGoldCoin;
 cocos2d::Sprite *mSilverCoin;
 cocos2d::Sprite *mBronzeCoin;

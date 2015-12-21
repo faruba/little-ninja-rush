@@ -1352,7 +1352,7 @@ void GamePlay::popText(std::string text)
 cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
     gTaskComplete->addChild(board);
-cocos2d::CCLabelBMFont *label = cocos2d::CCLabelBMFont::create(text.c_str(), "ab34.fnt");
+cocos2d::Label *label = cocos2d::Label::createWithBMFont("ab34.fnt", text.c_str());
     label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     label->setPosition(cocos2d::Vec2(90, 20));
     board->addChild(label);

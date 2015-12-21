@@ -46,7 +46,7 @@ cocos2d::Sprite *mScrollBody;
     //CFAbsoluteTime mLastTime;
     time_t mLastTime;
     //-- auto assign --
-cocos2d::CCLabelBMFont *mCoins;
+cocos2d::Label *mCoins;
 cocos2d::Node *mList;
 cocos2d::Sprite *mBanner;
 

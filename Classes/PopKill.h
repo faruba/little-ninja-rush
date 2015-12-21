@@ -19,7 +19,7 @@ class PopKill:public GameObject
     virtual void onCreate();
     virtual void onUpdate(float delta);
     virtual void onDestroy();
-cocos2d::CCLabelBMFont *label;
+cocos2d::Label *label;
 
     void onCompleteAction();
 };

@@ -47,7 +47,7 @@ class PopOption :
     cocos2d::CCMenuItemImage *miCloud;
 
     //---- friends
-    cocos2d::CCLabelBMFont *mCoin;
+    cocos2d::Label *mCoin;
     cocos2d::Node *mShadeCode;
 
     TitleMenu *master;
@@ -72,7 +72,7 @@ class PopOption :
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPushNotification", CCMenuItemImage*, mPushNotification);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTutorial", CCMenuItemImage*, mTutorial);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "miCloud", CCMenuItemImage*, miCloud);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoin", CCLabelBMFont*, mCoin);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoin", Label*, mCoin);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadeCode", Node*, mShadeCode);
       return false;
     }
@@ -426,12 +426,12 @@ class PopObj :
     cocos2d::Sprite *mGoldCoin;
     cocos2d::Sprite *mSilverCoin;
     cocos2d::Sprite *mBronzeCoin;
-    cocos2d::CCLabelBMFont *mGoldScore;
-    cocos2d::CCLabelBMFont *mGoldPrize;
-    cocos2d::CCLabelBMFont *mSilverScore;
-    cocos2d::CCLabelBMFont *mSilverPrize;
-    cocos2d::CCLabelBMFont *mBronzeScore;
-    cocos2d::CCLabelBMFont *mBronzePrize;
+    cocos2d::Label *mGoldScore;
+    cocos2d::Label *mGoldPrize;
+    cocos2d::Label *mSilverScore;
+    cocos2d::Label *mSilverPrize;
+    cocos2d::Label *mBronzeScore;
+    cocos2d::Label *mBronzePrize;
     cocos2d::CCMenu *mMenu;
     cocos2d::CCMenuItemImage *mSwitch;
     cocos2d::CCMenuItemImage *mSwitch2;
@@ -466,12 +466,12 @@ class PopObj :
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", Sprite*, mGoldCoin);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", Sprite*, mSilverCoin);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", Sprite*, mBronzeCoin);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", CCLabelBMFont*, mGoldScore);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", CCLabelBMFont*, mGoldPrize);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", CCLabelBMFont*, mSilverScore);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverPrize", CCLabelBMFont*, mSilverPrize);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", CCLabelBMFont*, mBronzeScore);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", CCLabelBMFont*, mBronzePrize);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", Label*, mGoldScore);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", Label*, mGoldPrize);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", Label*, mSilverScore);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverPrize", Label*, mSilverPrize);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", Label*, mBronzeScore);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", Label*, mBronzePrize);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu*, mMenu);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSwitch", CCMenuItemImage*, mSwitch);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSwitch2", CCMenuItemImage*, mSwitch2);

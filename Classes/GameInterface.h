@@ -46,12 +46,12 @@ cocos2d::Sprite *mSpellGrid;
     int       mSpCache;
 
     //distance
-cocos2d::CCLabelBMFont *mDistanceNumber;
-cocos2d::CCLabelBMFont *mDistanceM;
+cocos2d::Label *mDistanceNumber;
+cocos2d::Label *mDistanceM;
     int       mDistanceCache;
 
     //coins
-cocos2d::CCLabelBMFont *mCoinNumber;
+cocos2d::Label *mCoinNumber;
 cocos2d::Sprite *mCoinMark;
     int       mCoinCache;
 
@@ -67,10 +67,10 @@ cocos2d::Node *mDartMeter;
     float mUnlimtedDartsTimer;
 cocos2d::Node *mHitNode;
 cocos2d::Node *mFeverCoins;
-cocos2d::CCLabelBMFont *mFeverFont;
+cocos2d::Label *mFeverFont;
 
     //score * arcade
-cocos2d::CCLabelBMFont *mScoreNumber;
+cocos2d::Label *mScoreNumber;
     int mScoreCache;
 
     //speed * boost
@@ -85,7 +85,7 @@ cocos2d::CCAction *mSpeedAction;
 
     //arcade * timer
     int mTimerCache;
-cocos2d::CCLabelBMFont *mTimerLabel;
+cocos2d::Label *mTimerLabel;
 cocos2d::Sprite *mTimerMark;
 
     //arcade * cup
@@ -93,17 +93,17 @@ cocos2d::Sprite *mTimerMark;
 cocos2d::Sprite *mCup;
 
     //arcade x
-cocos2d::CCLabelBMFont *mArcadeX;
+cocos2d::Label *mArcadeX;
 cocos2d::CCMenu *mMenu;
 cocos2d::CCMenuItemSprite *mFly;
 cocos2d::CCMenuItemSprite *mSP;
 cocos2d::Sprite *mFlyBg;
 cocos2d::Sprite *mSPBg;
-cocos2d::CCLabelBMFont *mFlyNumber;
-cocos2d::CCLabelBMFont *mSPNumber;
+cocos2d::Label *mFlyNumber;
+cocos2d::Label *mSPNumber;
     //----- sub node ---------
 cocos2d::Sprite *mHits;
-cocos2d::CCLabelBMFont *mHitCount;
+cocos2d::Label *mHitCount;
 cocos2d::Sprite *mSpFg;
 cocos2d::Sprite *mSpFgTop;
 

@@ -70,7 +70,7 @@ void TipsMenu::updateTip(int index)
         this->removeChild(mTip, true);
     }
     std::string tip =  GameData::fetchTips()[index];
-cocos2d::CCSize size = cocos2d::CCSizeMake(300, 100);
+cocos2d::Size size = cocos2d::CCSizeMake(300, 100);
     //CGSize actualSize = tip->sizeWithFont([UIFont, TIP_FONTNAME, 24)
     //                    constrainedToSize:size
     //                        lineBreakMode:UILineBreakModeWordWrap];

@@ -608,9 +608,9 @@ cocos2d::CCLog("Control");
 }
 bool GameOver::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
-  //CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDistance", CCLabelBMFont *, mDistance);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
+  //CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", Label *, mCoins);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDistance", Label *, mDistance);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", Label *, mCoins);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mChange", CCMenuItemImage *, mChange);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", Label *, mDailyObjective);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", Label *, mWeeklyObjective);
@@ -624,9 +624,9 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyIcon", Sprite *, mMonthlyIcon);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadSp0", Sprite *, mLeadSp0);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadSp1", Sprite *, mLeadSp1);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadSp2", Sprite *, mLeadSp2);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadLb0", CCLabelBMFont *, mLeadLb0);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadLb1", CCLabelBMFont *, mLeadLb1);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadLb2", CCLabelBMFont *, mLeadLb2);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadLb0", Label *, mLeadLb0);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadLb1", Label *, mLeadLb1);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeadLb2", Label *, mLeadLb2);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPlayAgain", CCMenuItemImage *, mPlayAgain);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter", CCMenuItemImage *, mTwitter);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook", CCMenuItemImage *, mFacebook);
@@ -636,16 +636,16 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebookCoins", Sprite *, mFacebookCoins
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterCoins", Sprite *, mTwitterCoins);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClassic", Node *, mClassic);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcade", Node *, mArcade);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcadeScore", CCLabelBMFont *, mArcadeScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mArcadeScore", Label *, mArcadeScore);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldCoin", Sprite *, mGoldCoin);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverCoin", Sprite *, mSilverCoin);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeCoin", Sprite *, mBronzeCoin);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", CCLabelBMFont *, mGoldScore);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", CCLabelBMFont *, mSilverScore);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", CCLabelBMFont *, mBronzeScore);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", CCLabelBMFont *, mGoldPrize);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverPrize", CCLabelBMFont *, mSilverPrize);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", CCLabelBMFont *, mBronzePrize);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldScore", Label *, mGoldScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverScore", Label *, mSilverScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", Label *, mBronzeScore);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoldPrize", Label *, mGoldPrize);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSilverPrize", Label *, mSilverPrize);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", Label *, mBronzePrize);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCup", Sprite *, mCup);
 
   return false;

@@ -721,7 +721,7 @@ cocos2d::extension::Control::Handler   ShopMenu::onResolveCCBCCControlSelector(c
 
 bool ShopMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", Label *, mCoins);
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", Node *, mList);
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu *, mMenu);
   return false;
