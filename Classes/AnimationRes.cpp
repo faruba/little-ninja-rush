@@ -1,82 +1,32 @@
 #include "AnimationRes.h"
 #include "GTAnimation.h"
 
+void addAnimation(GTAnimation* ani, const char name[], int count, int initialPos, bool reverse = false) {
+  float durationPerFrame = 0.05f;
+  const std::string head = std::string(name);
+  ani->startAnimation(count, durationPerFrame*count);
+  for (int i = 0; i < count; i++) {
+    int id = initialPos + (reverse? -i : i);
+    ani->addFrame((head+std::to_string(id)+".png").c_str());
+  }
+  ani->endAnimation();
+}
+
 void assetMainRole(const char* param, bool isload)
 {
     if( isload )
     {
         GTAnimation *ani = GTAnimation::startAnimationSet(10);
-        ani->startAnimation(3, 0.15f);
-        ani->addFrame("main_run1.png");
-        ani->addFrame("main_run2.png");
-        ani->addFrame("main_run3.png");
-        ani->endAnimation();
-        ani->startAnimation(5, 0.25f);
-        ani->addFrame("main_attack1.png");
-        ani->addFrame("main_attack2.png");
-        ani->addFrame("main_attack3.png");
-        ani->addFrame("main_attack4.png");
-        ani->addFrame("main_attack5.png");
-        ani->endAnimation();
-        ani->startAnimation(5, 0.25f);
-        ani->addFrame("main_attack6.png");
-        ani->addFrame("main_attack7.png");
-        ani->addFrame("main_attack8.png");
-        ani->addFrame("main_attack9.png");
-        ani->addFrame("main_attack10.png");
-        ani->endAnimation();
-        ani->startAnimation(7, 0.35f);
-        ani->addFrame("main_attack11.png");
-        ani->addFrame("main_attack12.png");
-        ani->addFrame("main_attack13.png");
-        ani->addFrame("main_attack14.png");
-        ani->addFrame("main_attack15.png");
-        ani->addFrame("main_attack16.png");
-        ani->addFrame("main_attack17.png");
-        ani->endAnimation();
-        ani->startAnimation(7, 0.35f);
-        ani->addFrame("main_fall1.png");
-        ani->addFrame("main_fall2.png");
-        ani->addFrame("main_fall3.png");
-        ani->addFrame("main_fall4.png");
-        ani->addFrame("main_fall5.png");
-        ani->addFrame("main_fall6.png");
-        ani->addFrame("main_fall7.png");
-        ani->endAnimation();
-        ani->startAnimation(7, 0.35f);
-        ani->addFrame("main_fall8.png");
-        ani->addFrame("main_fall9.png");
-        ani->addFrame("main_fall10.png");
-        ani->addFrame("main_fall11.png");
-        ani->addFrame("main_fall12.png");
-        ani->addFrame("main_fall13.png");
-        ani->addFrame("main_fall14.png");
-        ani->endAnimation();
-        ani->startAnimation(6, 0.3f);
-        ani->addFrame("main_die1.png");
-        ani->addFrame("main_die2.png");
-        ani->addFrame("main_die3.png");
-        ani->addFrame("main_die4.png");
-        ani->addFrame("main_die5.png");
-        ani->addFrame("main_die6.png");
-        ani->endAnimation();
-        ani->startAnimation(2, 0.1f);
-        ani->addFrame("main_die7.png");
-        ani->addFrame("main_die8.png");
-        ani->endAnimation();
-        ani->startAnimation(1, 0.05f);
-        ani->addFrame("main_attack11.png");
-        ani->endAnimation();
-        ani->startAnimation(8, 0.5f);
-        ani->addFrame("main_die8.png");
-        ani->addFrame("main_die7.png");
-        ani->addFrame("main_die6.png");
-        ani->addFrame("main_die5.png");
-        ani->addFrame("main_die4.png");
-        ani->addFrame("main_die3.png");
-        ani->addFrame("main_die2.png");
-        ani->addFrame("main_die1.png");
-        ani->endAnimation();
+        addAnimation(ani, "main_run", 3, 1);
+        addAnimation(ani, "main_attack", 5, 1);
+        addAnimation(ani, "main_attack", 5, 6);
+        addAnimation(ani, "main_attack", 7, 11);
+        addAnimation(ani, "main_fall", 7, 1);
+        addAnimation(ani, "main_fall", 7, 8);
+        addAnimation(ani, "main_die", 6, 1);
+        addAnimation(ani, "main_die", 2, 7);
+        addAnimation(ani, "main_attack", 1, 11);
+        addAnimation(ani, "main_die", 8, 8, true);
         ani->endAnimationSet();
         GTAnimation::loadAnimationSet(ani, "main");
     }
