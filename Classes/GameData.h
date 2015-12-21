@@ -11,7 +11,7 @@ class GameItemBase : public cocos2d::Ref {
     std::string name;
     std::string desc; // TODO: change to description
     std::string icon;
-    float wght; // TODO: change to weight
+    int wght; // TODO: change to weight
 
     GameItemBase() {
     }
@@ -32,7 +32,7 @@ class GameItemBase : public cocos2d::Ref {
       name = value.getString("name");
       desc = value.getString("desc");
       icon = value.getString("icon");
-      wght = value.getDouble("wght");
+      wght = value.getInteger("wght");
     }
 };
 
@@ -42,7 +42,7 @@ inline bool operator==(const GameItemBase& lhs, const int uiid) {
 
 class Shuriken: public GameItemBase {
   public:
-    float flys;
+    int flys;
     float reld;
     int efft;   // TODO: change to effect
     std::string shap; // TODO: change to shape
@@ -50,17 +50,17 @@ class Shuriken: public GameItemBase {
     Shuriken() { }
 
     Shuriken(const Shuriken& item) : GameItemBase(item) {
-      flys = item.wght;
-      reld = item.wght;
-      efft = item.uiid;
+      flys = item.flys;
+      reld = item.reld;
+      efft = item.efft;
       shap = item.shap;
     }
 
     virtual void handleJsonValue(const ValueWrapper& value) {
       GameItemBase::handleJsonValue(value);
-      flys = value.getDouble("wght");
-      reld = value.getDouble("wght");
-      efft = value.getInteger("uiid");
+      flys = value.getInteger("flys");
+      reld = value.getDouble("reld");
+      efft = value.getInteger("efft");
       shap = value.getString("shap");
     }
 };

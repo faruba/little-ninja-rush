@@ -21,7 +21,7 @@ class TutorialDirector:
     virtual void onUpdate(float delta);
     virtual void onDestroy();
 
-    void onSkip();
+    void onSkip(cocos2d::Ref*);
     void playSlideUp();
     void stopSlide();
     void playSlideForward();

@@ -111,9 +111,9 @@ cocos2d::Sprite *mSpFgTop;
     bool mPotionUsed;
 
 
-    void onFly();
+    void onFly(cocos2d::Ref*);
 
-    void onSP();
+    void onSP(cocos2d::Ref*);
 
     void popFeverCoins(int coins);
 

@@ -128,30 +128,31 @@ void NewbieNinja::onUpdate(float delta)
             break;
         case 3:// shoot
         {
-//            cocos2d::Point target = play->mainrole->center();
-//            if( play->mainrole2 != NULL )
-//            {
-//                if( randomInt(2) == 0 )
-//                {
-//                    target = play->mainrole2->center();
-//                }
-//            }
-//            cocos2d::Point dir = ccpNormalize(ccpSub(target, this->center()));
-//            float angle = ccpToAngle(dir);
-//            angle += CC_DEGREES_TO_RADIANS(-NNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*NNINJA_ACCURATE)*CCRANDOM_0_1();
-//            dir = ccpForAngle(angle);
-//            play->darts->addObject(play->manager->addGameObject(Dart::dart(cocos2d::CCString::create("dart.png"), this->center(), dir, -1, mParent)));
-//            mSprite->playGTAnimation(5, false);
-//            
-//            if( randomInt(2) == 0 )
-//            {
-//                mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
-//                mState = 0;
-//                mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
-//            }
-//            else {
-//                mState = 1;
-//            }
+            cocos2d::Point target = play->mainrole->center();
+            if( play->mainrole2 != NULL )
+            {
+                if( randomInt(2) == 0 )
+                {
+                    target = play->mainrole2->center();
+                }
+            }
+            cocos2d::Point dir = ccpNormalize(ccpSub(target, this->center()));
+            float angle = ccpToAngle(dir);
+            angle += CC_DEGREES_TO_RADIANS(-NNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*NNINJA_ACCURATE)*CCRANDOM_0_1();
+            dir = ccpForAngle(angle);
+            std::string shape = "dart.png";
+            play->darts->addObject(play->manager->addGameObject(Dart::dart(shape, this->center(), dir, -1, mParent)));
+            mSprite->playGTAnimation(5, false);
+            
+            if( randomInt(2) == 0 )
+            {
+                mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
+                mState = 0;
+                mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
+            }
+            else {
+                mState = 1;
+            }
         }
             break;
         case 4:// escape

@@ -112,7 +112,7 @@ void MainRole::onCreate()
 
 void MainRole::setEquipDart(int tid) 
 {
-  Shuriken sk = GameData::fetchShurikens()[tid];
+  Shuriken &sk = GameData::fetchShurikens()[tid];
 
   dartCD = sk.reld;
   dartSpeed = sk.flys;
@@ -127,28 +127,28 @@ void MainRole::setEquipDart(int tid)
 
 void MainRole::setEquipBlade(int tid) 
 {
-//  Katana *ka = (Katana*)GameData::fetchKatanas()->objectAtIndex(tid);
-//
-//  bladeCD = ka->reld;
-//  bladeRange = ka->rang;
-//  bladeAnim = ka->anim;
-//  bladeEffect = ka->efft;
-//  bladeSound = ka->sond;
-//  //special power
-//  if( ka->uiid == mRoleId + 43 )
-//  {
-//    mHiddenPower = true;
-//  }
+  Katana &ka = GameData::fetchKatanas()[tid];
+
+  bladeCD = ka.reld;
+  bladeRange = ka.rang;
+  bladeAnim = ka.anim;
+  bladeEffect = ka.efft;
+  bladeSound = ka.sond;
+  //special power
+  if( ka.uiid == mRoleId + 43 )
+  {
+    mHiddenPower = true;
+  }
 }
 
 void MainRole::setEquipSpell(int tid) 
-{/*
-  Special *sp = (Special*)GameData::fetchSpecials()->objectAtIndex(tid);
+{
+  Special &sp = GameData::fetchSpecials()[tid];
 
-  spellType = sp->skid;
+  spellType = sp.skid;
   SP = 0;
-  maxSP = sp->spmx;
-  activeSP = sp->spac;*/
+  maxSP = sp.spmx;
+  activeSP = sp.spac;
 }
 
 void MainRole::setAI(int ai, cocos2d::Point pos) 

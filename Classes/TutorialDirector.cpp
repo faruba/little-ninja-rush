@@ -63,9 +63,7 @@ cocos2d::CCLog("begin tutorial: role id(%d), cacheDartId(%d)", rid, cacheDartId)
 cocos2d::CCMenuItemImage * skip = cocos2d::CCMenuItemImage::create();
   skip->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("jcskip.png"));
   skip->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_jcskip.png"));
-  /*TODO:Uncomment this 
    skip->setTarget(this, menu_selector(TutorialDirector::onSkip));
-   */
   skip->setAnchorPoint(cocos2d::Vec2(1, 0));
   skip->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width-5, 200));
   mMenu = cocos2d::CCMenu::create(skip, NULL);
@@ -75,7 +73,7 @@ cocos2d::CCMenuItemImage * skip = cocos2d::CCMenuItemImage::create();
   this->begin();
 }
 
-void TutorialDirector::onSkip() 
+void TutorialDirector::onSkip(cocos2d::Ref*)
 {
     this->skip();
 }

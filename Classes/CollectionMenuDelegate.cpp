@@ -33,7 +33,6 @@ void  CollectionMenuDelegate::onUse () {
     if ( collected ) {
       markUsing(mCurrItem);
       //保存数据
-      int cc = GameRecord::sharedGameRecord()->curr_char;
       equipItem();
       GameTool::PlaySound("sound/equip.mp3");
 

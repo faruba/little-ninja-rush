@@ -20,17 +20,15 @@ cocos2d::Scene *Loading::loadTo(cocos2d::Scene* dst, GTLoadList* lst, GTLoadList
     ll->mUnloadlist->retain();
   }
 
-  //ll->mScene->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
+  ll->mScene->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
   ll->mScene->setAnchorPoint(cocos2d::Vec2(0, 0));
-  //ll->mScene->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
+  ll->mScene->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
 
-  //CEClipedNode *clip = CEClipedNode::create();
-  //clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
-  //ll->mScene->addChild(clip);
-  //clip->addChild(ll);
-  ll->mScene->addChild(ll);
+  CEClipedNode *clip = CEClipedNode::create();
+  clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
+  ll->mScene->addChild(clip);
+  clip->addChild(ll);
 
-  //ll->mScene->addChild(ll);
   ll->prepareLoading();
   return ll->mScene;
 }

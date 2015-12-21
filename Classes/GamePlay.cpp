@@ -103,10 +103,10 @@ bool GamePlay::init()
 {
   if(cocos2d::Layer::init())
   {
-    this->scheduleUpdate();
-    this->setTouchEnabled(true);
+
     this->setAccelerometerEnabled(true);
     state = -1;
+
 
     //初始化方向 TODO:
     //        UIInterfaceOrientation orientation = UIApplication->sharedApplication()->statusBarOrientation();
@@ -128,7 +128,7 @@ void GamePlay::onEnter()
 {
   mUISwapper.onEnter();
 
-  this->scheduleUpdate();
+
   setAccelerometerEnabled(true);
   cocos2d::Node *taskcomplete = cocos2d::Node::create();
   taskcomplete->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, SCREEN_HEIGHT));
@@ -139,6 +139,16 @@ void GamePlay::onEnter()
 
   mUISwapper.setSceneIntro(this);
   cocos2d::Layer::onEnter();
+    
+    scheduleUpdate();
+    
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->onTouchBegan = CC_CALLBACK_2(GamePlay::onTouchBegan, this);
+    listener->onTouchEnded = CC_CALLBACK_2(GamePlay::onTouchEnded, this);
+    listener->onTouchMoved = CC_CALLBACK_2(GamePlay::onTouchMoved, this);
+    listener->onTouchCancelled = CC_CALLBACK_2(GamePlay::onTouchCancelled, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
 }
 
 void GamePlay::onExit()
@@ -444,12 +454,12 @@ void GamePlay::resetGame()
   mainrole = (MainRole*)manager->addGameObject(MainRole::role(this));//创建主角
   //addChild(mainrole);
 
-//  if( GameRecord::sharedGameRecord()->game_tutorial == 0 && mode == MODE_CLASSIC )
-//  {
-//    tutorial = true;
-//    manager->addGameObject(TutorialDirector::create());//压入教程模式
-//    GameRecord::sharedGameRecord()->char_equip_spell[roleId] = 0;//强行使用第一个技能
-//  }
+  if( GameRecord::sharedGameRecord()->game_tutorial == 0 && mode == MODE_CLASSIC )
+  {
+    tutorial = true;
+    manager->addGameObject(TutorialDirector::create());//压入教程模式
+    GameRecord::sharedGameRecord()->char_equip_spell[roleId] = 0;//强行使用第一个技能
+  }
 
   mainrole2 = NULL;
   if( tutorial )
