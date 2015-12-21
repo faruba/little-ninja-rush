@@ -741,7 +741,7 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mLightBack", Sprite *, mLightBack)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateACW", Node *, mRotateACW)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateCW", Node *, mRotateCW)
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mFlash", LayerColor *, mFlash)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mItemName", CCLabelTTF *, mItemName)
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mItemName", Label *, mItemName)
 
   //  CCLog(pMemberVariableName);
 

@@ -68,7 +68,6 @@ public:
         int count = 0;
         int i = 0;
         cocos2d::CCSize contentSize;//update contentSize
-        cocos2d::Ref *obj;
         
         for(typename std::vector<ItemType>::iterator itr = vector.begin(); itr != vector.end(); itr++) {
             ItemType item = *itr;

@@ -350,9 +350,9 @@ void PauseMenuClassic::change(Ref* ref)
 //cocosbuilder support
 bool PauseMenuClassic::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF*, mDailyObjective);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF*, mWeeklyObjective);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF*, mMonthlyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", Label*, mDailyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", Label*, mWeeklyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", Label*, mMonthlyObjective);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", Node*, mDailyCrown);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", Node*, mWeeklyCrown);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", Node*, mMonthlyCrown);
@@ -374,7 +374,7 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu*, mMenu);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjDaily", Node*, mObjDaily);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjWeekly", Node*, mObjWeekly);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjMonthly", Node*, mObjMonthly);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBest", CCLabelTTF*, mBest);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBest", Label*, mBest);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", CCMenuItemImage*, mSfx);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", CCMenuItemImage*, mMusic);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mQuit", CCMenuItemImage*, mQuit);

@@ -349,7 +349,7 @@ cocos2d::Node *sp = cocos2d::Node::create();
         switch (typ) {
             case 0:
             {
-cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("日常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL );
+cocos2d::Label *desc = cocos2d::Label::create("日常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL );
                 desc->setColor(ccc3(128, 128, 128));
                 desc->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
                 desc->setPosition(cocos2d::Vec2(54, 0));
@@ -358,7 +358,7 @@ cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("日常任务\n已全部
                 break;
             case 1:
             {
-cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("周常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
+cocos2d::Label *desc = cocos2d::Label::create("周常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
                 desc->setColor(ccc3(128, 128, 128));
                 desc->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
                 desc->setPosition(cocos2d::Vec2(54, 0));
@@ -367,7 +367,7 @@ cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("周常任务\n已全部
                 break;
             case 2:
             {
-cocos2d::CCLabelTTF *desc = cocos2d::CCLabelTTF::create("月常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
+cocos2d::Label *desc = cocos2d::Label::create("月常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
                 desc->setColor(ccc3(128, 128, 128));
                 desc->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
                 desc->setPosition(cocos2d::Vec2(54, 0));

@@ -210,7 +210,7 @@ void PopOption::loadFriendAdd()
   //    this->addChild(node);
   //    CCString* coin = cocos2d::CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount());
   //    mCoin->setString(coin);
-  //    CCLabelTTF *label = [CCLabelTTF, ABSystem->queryUserCode(), "Helvetica", 24);
+  //    Label *label = [Label, ABSystem->queryUserCode(), "Helvetica", 24);
   //    label->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
   //    mShadeCode->addChild(label);
 }
@@ -412,9 +412,9 @@ class PopObj :
     float mTimer;
     bool mFlag;
     //-- auto assign --
-    cocos2d::CCLabelTTF *mDailyObjective;
-    cocos2d::CCLabelTTF *mWeeklyObjective;
-    cocos2d::CCLabelTTF *mMonthlyObjective;
+    cocos2d::Label *mDailyObjective;
+    cocos2d::Label *mWeeklyObjective;
+    cocos2d::Label *mMonthlyObjective;
     cocos2d::Node *mDailyCrown;
     cocos2d::Node *mWeeklyCrown;
     cocos2d::Node *mMonthlyCrown;
@@ -452,9 +452,9 @@ class PopObj :
     //cocosbuilder support
     bool onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
     {
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF*, mDailyObjective);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF*, mWeeklyObjective);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF*, mMonthlyObjective);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", Label*, mDailyObjective);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", Label*, mWeeklyObjective);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", Label*, mMonthlyObjective);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", Node*, mDailyCrown);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", Node*, mWeeklyCrown);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", Node*, mMonthlyCrown);

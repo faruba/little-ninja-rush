@@ -42,7 +42,7 @@ cocos2d::Sprite *mBgButton;
 cocos2d::CCMenuItemImage *mPurchase;
 cocos2d::Node *mCost;
 cocos2d::Sprite *mTitleSp;
-cocos2d::CCLabelTTF *mDetailSp;
+cocos2d::Label *mDetailSp;
 
     FoldItemController *mController;
     bool mIsAchievement;

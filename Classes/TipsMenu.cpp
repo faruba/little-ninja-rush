@@ -54,8 +54,8 @@ void TipsMenu::updateTip(int index)
 {
     if( mCount == NULL )
     {
-        mCount = cocos2d::CCLabelTTF::create(cocos2d::CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips().size())->getCString(), GFONT_NAME, GFONT_SIZE_LARGE);
-        //mCount = [CCLabelTTF, CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips)->size()()
+        mCount = cocos2d::Label::create(cocos2d::CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips().size())->getCString(), GFONT_NAME, GFONT_SIZE_LARGE);
+        //mCount = [Label, CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips)->size()()
         //                            fontName:TIP_FONTNAME fontSize:24];
         mCount->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
         mCount->setPosition(cocos2d::Vec2(240, 50));
@@ -74,7 +74,7 @@ cocos2d::CCSize size = cocos2d::CCSizeMake(300, 100);
     //CGSize actualSize = tip->sizeWithFont([UIFont, TIP_FONTNAME, 24)
     //                    constrainedToSize:size
     //                        lineBreakMode:UILineBreakModeWordWrap];
-    mTip = cocos2d::CCLabelTTF::create(tip.c_str(), GFONT_NAME, GFONT_SIZE_LARGE, size, kCCTextAlignmentCenter);
+    mTip = cocos2d::Label::create(tip.c_str(), GFONT_NAME, GFONT_SIZE_LARGE, size, kCCTextAlignmentCenter);
     mTip->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     mTip->setPosition(cocos2d::Vec2(240, 160));
     this->addChild(mTip);

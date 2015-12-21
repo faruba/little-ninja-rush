@@ -47,7 +47,7 @@ cocos2d::Sprite *mLightBack;
 cocos2d::Node *mRotateACW;
 cocos2d::Node *mRotateCW;
 cocos2d::LayerColor *mFlash;
-cocos2d::CCLabelTTF *mItemName;
+cocos2d::Label *mItemName;
 
 
     void onCashIn();

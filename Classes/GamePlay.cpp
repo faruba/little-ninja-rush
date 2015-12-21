@@ -60,17 +60,17 @@ cocos2d::Scene* GamePlay::scene()
   }
 
   //universal
-  //ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
+  ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
   ret->setAnchorPoint(cocos2d::Vec2(0, 0));
-  //ret->setPosition(cocos2d::Vec2(0, UniversalFit::sharedUniversalFit()->sceneOffset.y));
+  ret->setPosition(cocos2d::Vec2(0, UniversalFit::sharedUniversalFit()->sceneOffset.y));
 
-  //CEClipedNode *clip = CEClipedNode::create();
-  //clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
+  CEClipedNode *clip = CEClipedNode::create();
+  clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
 
-  //clip->addChild(gPlay);
+  clip->addChild(gPlay);
 
-  //ret->addChild(clip);
-  ret->addChild(gPlay);
+  ret->addChild(clip);
+
   return ret;
 }
 
@@ -128,6 +128,7 @@ void GamePlay::onEnter()
 {
   mUISwapper.onEnter();
 
+  this->scheduleUpdate();
   setAccelerometerEnabled(true);
   cocos2d::Node *taskcomplete = cocos2d::Node::create();
   taskcomplete->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, SCREEN_HEIGHT));
@@ -443,12 +444,12 @@ void GamePlay::resetGame()
   mainrole = (MainRole*)manager->addGameObject(MainRole::role(this));//创建主角
   //addChild(mainrole);
 
-  if( GameRecord::sharedGameRecord()->game_tutorial == 0 && mode == MODE_CLASSIC )
-  {
-    tutorial = true;
-    manager->addGameObject(TutorialDirector::create());//压入教程模式
-    GameRecord::sharedGameRecord()->char_equip_spell[roleId] = 0;//强行使用第一个技能
-  }
+//  if( GameRecord::sharedGameRecord()->game_tutorial == 0 && mode == MODE_CLASSIC )
+//  {
+//    tutorial = true;
+//    manager->addGameObject(TutorialDirector::create());//压入教程模式
+//    GameRecord::sharedGameRecord()->char_equip_spell[roleId] = 0;//强行使用第一个技能
+//  }
 
   mainrole2 = NULL;
   if( tutorial )
@@ -1262,30 +1263,30 @@ cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-comple
     board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
     gTaskComplete->addChild(board);
 cocos2d::Sprite *ibg = NULL;
-cocos2d::CCLabelTTF *label = NULL;
+cocos2d::Label *label = NULL;
     switch (type) {
         case 0:
         {
             ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg1.png");
-            label = cocos2d::CCLabelTTF::create("日常任务\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
+            label = cocos2d::Label::create("日常任务\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
         }
             break;
         case 1:
         {
             ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg3.png");
-            label = cocos2d::CCLabelTTF::create("周常\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
+            label = cocos2d::Label::create("周常\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
         }
             break;
         case 2:
         {
             ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg2.png");
-            label = cocos2d::CCLabelTTF::create("月常\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
+            label = cocos2d::Label::create("月常\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
         }
             break;
         case 3:
         {
             ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg4.png");
-            label = cocos2d::CCLabelTTF::create(cocos2d::CCString::createWithFormat("%s\n已完成！", tile.c_str())->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
+            label = cocos2d::Label::create(cocos2d::CCString::createWithFormat("%s\n已完成！", tile.c_str())->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
         }
             break;
     }

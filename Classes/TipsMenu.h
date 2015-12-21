@@ -23,8 +23,8 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TipsMenu, create);
 private:
     void updateTip(int index);
 cocos2d::Node *mNode;
-cocos2d::CCLabelTTF *mCount;
-cocos2d::CCLabelTTF *mTip;
+cocos2d::Label *mCount;
+cocos2d::Label *mTip;
     int mIndex;
 cocos2d::CCMenuItemImage *mLeft;
 cocos2d::CCMenuItemImage *mRight;

@@ -276,7 +276,7 @@ CCARRAY_FOREACH(Tasks::getStatistics(), node)
         if( sta->achieveCode != -1 )
         {//normal statistics
             //CCLabelBMFont *title = cocos2d::CCLabelBMFont::create(sta->name->getCString(), "ab34.fnt");
-cocos2d::CCLabelTTF *title = cocos2d::CCLabelTTF::create(sta->name->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
+cocos2d::Label *title = cocos2d::Label::create(sta->name->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
             title->setAnchorPoint(cocos2d::Vec2(0, 1));
             title->setPosition(cocos2d::Vec2(10, mOffset));
             mItemList->addChild(title, 1, mItemList->getChildrenCount());

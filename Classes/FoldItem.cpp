@@ -64,7 +64,7 @@ FoldItem* FoldItem::foldItem(const char* title, const char* icon, const char* de
         if( detail != NULL )
         {
             //ret->mDetailSp = cocos2d::CCLabelBMFont::create(detail, "ab34.fnt");
-            ret->mDetailSp = cocos2d::CCLabelTTF::create(detail, GFONT_NAME, GFONT_SIZE_NORMAL);
+            ret->mDetailSp = cocos2d::Label::create(detail, GFONT_NAME, GFONT_SIZE_NORMAL);
             ret->mDetailSp->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
             ret->mDetailSp->setPosition(cocos2d::Vec2(80, 25));
             ret->mDetailSp->setVisible(false);
@@ -195,7 +195,7 @@ cocos2d::CCString *name = cocos2d::CCString::createWithFormat("shop%d.png", ret-
     if( detail != NULL )
     {
       //ret->mDetailSp = cocos2d::CCLabelBMFont::create(detail, "ab34.fnt");
-        ret->mDetailSp = cocos2d::CCLabelTTF::create(detail, GFONT_NAME, GFONT_SIZE_NORMAL);
+        ret->mDetailSp = cocos2d::Label::create(detail, GFONT_NAME, GFONT_SIZE_NORMAL);
       ret->mDetailSp->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
       ret->mDetailSp->setPosition(cocos2d::Vec2(80, 25));
       ret->mDetailSp->setVisible(false);

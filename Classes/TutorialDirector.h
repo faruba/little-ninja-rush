@@ -36,7 +36,7 @@ class TutorialDirector:
     float mPosx;
     int mCount;
     TutorialPuppet *mDummies[3];
-cocos2d::CCLabelTTF *mTeachText;
+cocos2d::Label *mTeachText;
 
     int cacheDartId;
     int cacheBladeId;

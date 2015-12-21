@@ -612,9 +612,9 @@ bool GameOver::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMem
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDistance", CCLabelBMFont *, mDistance);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", CCLabelBMFont *, mCoins);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mChange", CCMenuItemImage *, mChange);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", CCLabelTTF *, mDailyObjective);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", CCLabelTTF *, mWeeklyObjective);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", CCLabelTTF *, mMonthlyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyObjective", Label *, mDailyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyObjective", Label *, mWeeklyObjective);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyObjective", Label *, mMonthlyObjective);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDailyCrown", Node *, mDailyCrown);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mWeeklyCrown", Node *, mWeeklyCrown);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMonthlyCrown", Node *, mMonthlyCrown);
