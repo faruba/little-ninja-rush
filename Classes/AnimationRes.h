@@ -2,6 +2,9 @@
 #define ___CLASSES_ANIMATIONRES_H_
 
 #include "GameTool.h"
+namespace AnimationSets {
+  void loadAnimationSets ();
+}
 
 void assetMainRole(const char* param, bool isload);
 

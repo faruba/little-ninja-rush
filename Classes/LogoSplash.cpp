@@ -8,7 +8,7 @@
 #include "UniversalFit.h"
 //#include "ABDelivery.h"
 
-#include "JsonWrapper.h"
+#include "AnimationRes.h"
 
 
 using namespace cocos2d;
@@ -107,6 +107,8 @@ void LogoSplash::load()
   Tasks::loadAchievementsFromFile();
   Tasks::loadStatisticsFromFile();
   GameData::loadData();
+  AnimationSets::loadAnimationSets ();
+
   // IAPHelper->sharedIAPHelper()->initIAP(GameRecord::sharedGameRecord());
   PublicLoad::commonLoadingList()->loadAll();
   PublicLoad::menuLoadingList()->loadAll();

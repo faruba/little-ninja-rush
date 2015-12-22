@@ -69,8 +69,8 @@ public:
         int i = 0;
         cocos2d::CCSize contentSize;//update contentSize
         
-        for(typename std::vector<ItemType>::iterator itr = vector.begin(); itr != vector.end(); itr++) {
-            ItemType item = *itr;
+        for(typename std::vector<ItemType>::iterator iterator = vector.begin(); iterator != vector.end(); iterator++) {
+            ItemType &item = *iterator;
             //获取对应飞镖玩家的收集数据
             int piece = GameRecord::sharedGameRecord()->collection->pieces[item.uiid];
             bool completed = GameRecord::sharedGameRecord()->collection->isItemCompleted(item.uiid);

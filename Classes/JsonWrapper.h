@@ -11,7 +11,7 @@ typedef bool Predicate (const rapidjson::Value &arg);
 class ValueWrapper {
   public:
     ValueWrapper(rapidjson::Value &arg) {
-      value = arg;
+        value = arg;
     }
 
     void applyToItem(std::string &item) {
@@ -38,6 +38,9 @@ class ValueWrapper {
       return v.GetDouble();
     }
 
+    template <typename Type>
+      void getVector(const char* key, std::vector<Type>& vector);
+
   private:
     rapidjson::Value value;
 
@@ -60,6 +63,30 @@ class ValueWrapper {
     }
 };
 
+template <typename T>
+void parseValueForVector(rapidjson::Value& value, std::vector<T> &vector)  {
+    if (!value.IsArray() ) {
+        throw "Type miss match"; // TODO:
+    }
+    
+    for(rapidjson::SizeType i=0; i<value.Size(); ++i) {
+        ValueWrapper vw(value[i]);
+        T item;
+        vw.applyToItem(item);
+        vector.push_back(item);
+    }
+}
+template <typename Type>
+  void ValueWrapper::getVector(const char* key, std::vector<Type>& vector) {
+      rapidjson::Value::MemberIterator itr;
+ 
+          itr = value.FindMember(key);
+          if (itr == value.MemberEnd()) {
+              throw "Field '`key`' missing."; // TODO: Good Exception
+          }
+    parseValueForVector(itr->value, vector);
+  }
+
 class JsonWrapper
 {
 public:
@@ -68,6 +95,7 @@ public:
     static cocos2d::Ref* parseJson(std::string *pStr);
     static const char* dumpJson(cocos2d::ValueMap *pDic);
 };
+
 
 template <typename T>
 void JsonWrapper::parseJsonFileForVector(const char filename[], std::vector<T> &vector) {
@@ -82,16 +110,7 @@ void JsonWrapper::parseJsonFileForVector(const char filename[], std::vector<T> &
     throw "JsonWrapper: parse failed."; // TODO: Better exception handling
   }
 
-  if (!doc.IsArray() ) {
-    throw "Type miss match"; // TODO:
-  }
-
-  for(rapidjson::SizeType i=0; i<doc.Size(); ++i) {
-      ValueWrapper vw(doc[i]);
-      T item;
-      vw.applyToItem(item);
-      vector.push_back(item);
-  }
+  parseValueForVector(doc, vector);
 }
 
 #endif /* defined(__LittleNinjaRushAP__JsonWrapper__) */
