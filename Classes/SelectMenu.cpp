@@ -230,7 +230,7 @@ void SelectMenu::updateAngle()
       float k = sinf(CC_DEGREES_TO_RADIANS(disangle));
       float m = 1-k*k;
       float pos = k*100;
-      ccColor3B col = ccc3(255*m, 255*m, 255*m);
+      ccColor3B col = Color3B(255*m, 255*m, 255*m);
       float scale = 0.5f+0.5f*m;
       if( angle < mCurrAngle )
       {
@@ -550,11 +550,11 @@ bool SelectMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pM
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mHearts", Node*,  mHearts)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDarts", Node*,  mDarts)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mStartPos", Node*,  mStartPos)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnStart", CCMenuItemImage*,  mBtnStart)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnDart", CCMenuItemImage*,  mBtnDart)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnBlade", CCMenuItemImage*,  mBtnBlade)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnSpecial", CCMenuItemImage*,  mBtnSpecial)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClickMe", CCMenuItemImage*,  mClickMe)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnStart", MenuItemImage*,  mBtnStart)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnDart", MenuItemImage*,  mBtnDart)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnBlade", MenuItemImage*,  mBtnBlade)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBtnSpecial", MenuItemImage*,  mBtnSpecial)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mClickMe", MenuItemImage*,  mClickMe)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMoney", cocos2d::Label*,  mMoney)
 
   return false;

@@ -39,7 +39,7 @@ cocos2d::CCString *mDetail;
 cocos2d::Sprite *mIcon;
 cocos2d::CCMenu *mMenu;
 cocos2d::Sprite *mBgButton;
-cocos2d::CCMenuItemImage *mPurchase;
+cocos2d::MenuItemImage *mPurchase;
 cocos2d::Node *mCost;
 cocos2d::Sprite *mTitleSp;
 cocos2d::Label *mDetailSp;

@@ -38,7 +38,7 @@ ObjectiveComplete* ObjectiveComplete::commitObjective()
 void ObjectiveComplete::onCreate() 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
-    play->scheduleMask(ccc3(0, 0, 0), 128, 0);
+    play->scheduleMask(Color3B(0, 0, 0), 128, 0);
     cocosbuilder::NodeLoaderLibrary *pNodeLib = cocosbuilder::NodeLoaderLibrary::getInstance();
     cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
     mNode = pReader->readNodeGraphFromFile("ui-scroll", this);
@@ -350,7 +350,7 @@ cocos2d::Node *sp = cocos2d::Node::create();
             case 0:
             {
 cocos2d::Label *desc = cocos2d::Label::create("日常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL );
-                desc->setColor(ccc3(128, 128, 128));
+                desc->setColor(Color3B(128, 128, 128));
                 desc->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
                 desc->setPosition(cocos2d::Vec2(54, 0));
                 sp->addChild(desc);
@@ -359,7 +359,7 @@ cocos2d::Label *desc = cocos2d::Label::create("日常任务\n已全部完成！"
             case 1:
             {
 cocos2d::Label *desc = cocos2d::Label::create("周常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
-                desc->setColor(ccc3(128, 128, 128));
+                desc->setColor(Color3B(128, 128, 128));
                 desc->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
                 desc->setPosition(cocos2d::Vec2(54, 0));
                 sp->addChild(desc);
@@ -368,7 +368,7 @@ cocos2d::Label *desc = cocos2d::Label::create("周常任务\n已全部完成！"
             case 2:
             {
 cocos2d::Label *desc = cocos2d::Label::create("月常任务\n已全部完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
-                desc->setColor(ccc3(128, 128, 128));
+                desc->setColor(Color3B(128, 128, 128));
                 desc->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
                 desc->setPosition(cocos2d::Vec2(54, 0));
                 sp->addChild(desc);

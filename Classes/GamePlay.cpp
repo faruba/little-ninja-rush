@@ -42,7 +42,7 @@ cocos2d::CCArray *gPopQueues = NULL;
 
 GamePlay::~GamePlay()
 {
-    gPlay = NULL;
+  gPlay = NULL;
 }
 
 cocos2d::Scene* GamePlay::scene()
@@ -71,22 +71,22 @@ cocos2d::Scene* GamePlay::scene()
 
 GamePlay* GamePlay::sharedGamePlay()
 {
-    if( gPlay == NULL )
-    {
-        gPlay = GamePlay::create();
-        gPlay->retain();
-    }
-    return gPlay;
+  if( gPlay == NULL )
+  {
+    gPlay = GamePlay::create();
+    gPlay->retain();
+  }
+  return gPlay;
 }
 
 void GamePlay::setGameMode(int mod)
 {
-    mGameMode = mod;
+  mGameMode = mod;
 }
 
 int GamePlay::getGameMode()
 {
-    return mGameMode;
+  return mGameMode;
 }
 
 bool GamePlay::init()
@@ -126,16 +126,15 @@ void GamePlay::onEnter()
 
   mUISwapper.setSceneIntro(this);
   cocos2d::Layer::onEnter();
-    
-    scheduleUpdate();
-    
-    auto listener = EventListenerTouchOneByOne::create();
-    listener->onTouchBegan = CC_CALLBACK_2(GamePlay::onTouchBegan, this);
-    listener->onTouchEnded = CC_CALLBACK_2(GamePlay::onTouchEnded, this);
-    listener->onTouchMoved = CC_CALLBACK_2(GamePlay::onTouchMoved, this);
-    listener->onTouchCancelled = CC_CALLBACK_2(GamePlay::onTouchCancelled, this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+  scheduleUpdate();
+
+  auto listener = EventListenerTouchOneByOne::create();
+  listener->onTouchBegan = CC_CALLBACK_2(GamePlay::onTouchBegan, this);
+  listener->onTouchEnded = CC_CALLBACK_2(GamePlay::onTouchEnded, this);
+  listener->onTouchMoved = CC_CALLBACK_2(GamePlay::onTouchEnded, this);
+  listener->onTouchCancelled = CC_CALLBACK_2(GamePlay::onTouchEnded, this);
+  _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
 void GamePlay::onExit()
@@ -143,10 +142,8 @@ void GamePlay::onExit()
   isPlayingArcade = false;
   setTaskCompleteNode(NULL);
 
-  //demo -->
   gPlay->release();
-  //demo <--
-cocos2d::Layer::onExit();
+  cocos2d::Layer::onExit();
 }
 
 //初始化游戏
@@ -164,57 +161,56 @@ void GamePlay::initGamePlay(int mod)
   darts->retain();
   footprints = NULL;
   arcadeSpeed = 1;
-  
+
   mask = cocos2d::LayerColor::create(Color4B(0, 0, 0, 255), UniversalFit::sharedUniversalFit()->screenSize.width + 20, UniversalFit::sharedUniversalFit()->screenSize.height + 20);
   mask->setPosition(cocos2d::Vec2(-10, -10));
   mask->retain();
   this->addChild(mask, LAYER_MASK);
-  
+
   mFeverMask = cocos2d::LayerColor::create(Color4B(239, 145, 3, 255));
   mFeverMask->setVisible(false);
   mFeverMask->setOpacity(0);
   mFeverMask->retain();
   this->addChild(mFeverMask, LAYER_UI-1);
-  
+
   spellMask = cocos2d::LayerColor::create(Color4B(0, 0, 0, 200), UniversalFit::sharedUniversalFit()->playSize.width+VIBRATE_MOVE*3, SCREEN_HEIGHT+VIBRATE_MOVE*3);
   spellMask->retain();
   spellMask->setVisible(false);
   this->addChild(spellMask, LAYER_MAINROLE-2);
-  
+
   paused = false;
   mUI = cocos2d::Layer::create();
-  mUI->setTouchEnabled(true);
   this->addChild(mUI, LAYER_MASK+1);
   mode = mod;
-  
+
   mScheduleSpeedOrigin = 1;
   mScheduleSpeedTarget = 1;
   mScheduleSpeedMode = -1;
   mScheduleSpeedTime = 0;
   mScheduleSpeedTimer = 0;
-  
+
   mScheduleSpellRelease = -1;
-  
+
   mScheduleMaskMode = -1;
   mScheduleMaskTime = 0;
   mScheduleMaskTimer = 0;
-  
+
   mScheduleVibrate = -1;
-  
+
   //增加菜单
-cocos2d::CCMenuItemImage *xpause = cocos2d::CCMenuItemImage::create();
+  cocos2d::MenuItemImage *xpause = cocos2d::MenuItemImage::create();
   xpause->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
   xpause->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
   xpause->setTarget(this, menu_selector(GamePlay::pause));
   xpause->setAnchorPoint(cocos2d::Vec2(1, 1));
   xpause->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width, SCREEN_HEIGHT));
-  this->mMenu = cocos2d::CCMenu::create();
+  this->mMenu = cocos2d::Menu::create();
   this->mMenu->addChild(xpause);
   mMenu->setPosition(cocos2d::Vec2(-7, -7));
   mUI->addChild(mMenu, LAYER_UI);
-  
+
   this->resetGame();
-  
+
   operation = -1;
 }
 
@@ -237,7 +233,7 @@ void GamePlay::update(float delta)
       spellMask->setVisible(false);
       if( mScheduleReleaseTarget != NULL )
       {
-cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mScheduleReleaseTarget, mScheduleReleaseSelector);
+        cocos2d::CCCallFunc *callSelectorAction = cocos2d::CallFunc::create(mScheduleReleaseTarget, mScheduleReleaseSelector);
         runAction(callSelectorAction);
         mScheduleReleaseTarget = NULL;
       }
@@ -301,7 +297,7 @@ cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mScheduleR
     //do roll
     float st = deltaTime*VIBRATE_MS;
     cocos2d::Point np = this->getPosition();
-    np = ccpAdd(np, ccpMult(mVibrateDir, st));
+    np = np + (mVibrateDir * st);
     if( np.x < -VIBRATE_MOVE )
     {
       np.x = -VIBRATE_MOVE;
@@ -399,7 +395,7 @@ cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mScheduleR
 
 void GamePlay::fixGravity(float val)
 {
-    mGravityFix = val;
+  mGravityFix = val;
 }
 
 void GamePlay::resetGame()
@@ -474,7 +470,7 @@ void GamePlay::resetGame()
   scrolls = 0;
   gameOverTimer = -1;
   canPause = true;
-CCLOG("canPause = %d", canPause);
+  CCLOG("canPause = %d", canPause);
   doubleCoin = false;
   doubleCoinIAP = false;
   mFeverMaskTimer = -1;
@@ -505,7 +501,7 @@ CCLOG("canPause = %d", canPause);
   //计算切换场景的阈值
   changeflag = scenecount*PLAY_SCENELEN*PLAY_DISMETER;
 
-  this->scheduleMask(ccc3(0, 0, 0), 2, 1);
+  this->scheduleMask(Color3B(0, 0, 0), 2, 1);
 
   mainrole->setAI(2, Vec2(-100, PLAY_PLAYERLINE));
   mainrole->setAI(1, Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, 0));
@@ -572,126 +568,126 @@ CCLOG("canPause = %d", canPause);
   }
   GameRecord::sharedGameRecord()->task->dispatchTask(ACH_USECHARACTER0+roleId, 1);
 
-    GameTool::PlayBackgroundMusic("sound/music-menu.mp3");
-cocos2d::CCLog("GamePlay:done resetGame");
+  GameTool::PlayBackgroundMusic("sound/music-menu.mp3");
+  cocos2d::CCLog("GamePlay:done resetGame");
 
 #ifdef DEBUG
-cocos2d::CCTextureCache::sharedTextureCache()->dumpCachedTextureInfo();
+  cocos2d::CCTextureCache::sharedTextureCache()->dumpCachedTextureInfo();
 #endif
 }
 
 void GamePlay::triggerDeath()
 {
-    //achievement one
-    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEKILLING, killingCount);
-    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONESCROLL, totalScorll);
-    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEREFLECTKILL, reflectKill);
-    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEKILLJONINCRI, killJoninCri);
-    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_RUNWITHOUTKILL, runwithoutkill);
-    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_RUNWITHOUTFIRE, runwithoutfire);
-    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_RUNWIHTOUTBLADE, runwithoutblade);
-    
-    if( mode == MODE_CLASSIC )
+  //achievement one
+  GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEKILLING, killingCount);
+  GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONESCROLL, totalScorll);
+  GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEREFLECTKILL, reflectKill);
+  GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEKILLJONINCRI, killJoninCri);
+  GameRecord::sharedGameRecord()->task->dispatchTask(ACH_RUNWITHOUTKILL, runwithoutkill);
+  GameRecord::sharedGameRecord()->task->dispatchTask(ACH_RUNWITHOUTFIRE, runwithoutfire);
+  GameRecord::sharedGameRecord()->task->dispatchTask(ACH_RUNWIHTOUTBLADE, runwithoutblade);
+
+  if( mode == MODE_CLASSIC )
+  {
+    //save high score
+    int score = distance/PLAY_DISMETER;
+
+    if( runwithoutkill == 0 )
     {
-        //save high score
-        int score = distance/PLAY_DISMETER;
-        
-        if( runwithoutkill == 0 )
-        {
-            runwithoutkill = score;
-        }
-        if( runwithoutfire == 0 )
-        {
-            runwithoutfire = score;
-        }
-        if( runwithoutblade == 0 )
-        {
-            runwithoutblade = score;
-        }
-        
-        //achievement distance
-        GameRecord::sharedGameRecord()->task->dispatchTask(ACH_DISTANCE, score);
-        
-        GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONECOINS, coins);
-        GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEDISTANCE, score);
-        
-        if( roleId == 1 )
-        {
-            GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONESAKURADISTANCE, score);
-            GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SAKURADISTANCE, score);
-            GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONESAKURACOINS, coins);
-            GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SAKURACOINS, coins);
-        }
-        if( roleId == 2 )
-        {
-            GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEMUSASHIDISTANCE, score);
-            GameRecord::sharedGameRecord()->task->dispatchTask(ACH_MUSASHIDISTANCE, score);
-        }
-        if( roleId == 3 )
-        {
-            GameRecord::sharedGameRecord()->task->dispatchTask(ACH_MAROONDISTANCE, score);
-            GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEMAROONDISTANCE, score);
-        }
+      runwithoutkill = score;
     }
-    else
-    {//ARCADE
-        if( wounded == 0 )
-        {
-            GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ARCADEfalseHIT, 1);
-        }
+    if( runwithoutfire == 0 )
+    {
+      runwithoutfire = score;
     }
+    if( runwithoutblade == 0 )
+    {
+      runwithoutblade = score;
+    }
+
+    //achievement distance
+    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_DISTANCE, score);
+
+    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONECOINS, coins);
+    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEDISTANCE, score);
+
+    if( roleId == 1 )
+    {
+      GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONESAKURADISTANCE, score);
+      GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SAKURADISTANCE, score);
+      GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONESAKURACOINS, coins);
+      GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SAKURACOINS, coins);
+    }
+    if( roleId == 2 )
+    {
+      GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEMUSASHIDISTANCE, score);
+      GameRecord::sharedGameRecord()->task->dispatchTask(ACH_MUSASHIDISTANCE, score);
+    }
+    if( roleId == 3 )
+    {
+      GameRecord::sharedGameRecord()->task->dispatchTask(ACH_MAROONDISTANCE, score);
+      GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEMAROONDISTANCE, score);
+    }
+  }
+  else
+  {//ARCADE
+    if( wounded == 0 )
+    {
+      GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ARCADEfalseHIT, 1);
+    }
+  }
 }
 
 cocos2d::Layer* GamePlay::ui()
 {
-    return mUI;
+  return mUI;
 }
 
 //划屏幕
 void GamePlay::slide(cocos2d::Point dir)
 {
-    //#bugfix: dead stand
-    if( mainrole->HP <= 0 )
-    {
-        return;
-    }
-    
-    float mpx = mainrole->position().x;//为修正分身术的发射飞镖的方向极限
+  //#bugfix: dead stand
+  if( mainrole->HP <= 0 )
+  {
+    return;
+  }
+
+  float mpx = mainrole->position().x;//为修正分身术的发射飞镖的方向极限
+  if( mainrole2 != NULL )
+  {
+    mpx = (mainrole->position().x + mainrole2->position().x)/2;
+  }
+  float mw;
+  if( dir.x > 0 )
+  {
+    mw = /*UniversalFit::sharedUniversalFit()->playSize.width*/SCREEN_WIDTH - mpx;
+  }
+  else {
+    mw = mpx;
+  }
+  cocos2d::Point lp = cocos2d::Vec2(mw, PLAY_MINSHOOT).getNormalized();
+  float slidedart = PLAY_SLIDEDART > lp.y ? PLAY_SLIDEDART : lp.y;
+  //slidedart 暂时还没有考虑到分身术
+  if( dir.y >= slidedart )
+  {//丢飞镖
+    mainrole->fire(dir);
+    return;
+  }
+  if( dir.y >= PLAY_SLIDERELOAD )
+  {
+    mainrole->slice();
     if( mainrole2 != NULL )
     {
-        mpx = (mainrole->position().x + mainrole2->position().x)/2;
+      mainrole2->slice();
     }
-    float mw;
-    if( dir.x > 0 )
-    {
-        mw = /*UniversalFit::sharedUniversalFit()->playSize.width*/SCREEN_WIDTH - mpx;
-    }
-    else {
-        mw = mpx;
-    }
-    cocos2d::Point lp = ccpNormalize(cocos2d::Vec2(mw, PLAY_MINSHOOT));
-    float slidedart = PLAY_SLIDEDART > lp.y ? PLAY_SLIDEDART : lp.y;
-    //slidedart 暂时还没有考虑到分身术
-    if( dir.y >= slidedart )
-    {//丢飞镖
-        mainrole->fire(dir);
-        return;
-    }
-    if( dir.y >= PLAY_SLIDERELOAD )
-    {
-        mainrole->slice();
-        if( mainrole2 != NULL )
-        {
-            mainrole2->slice();
-        }
-        return;
-    }
-    //发动技能
-    if( mainrole->spellType != SPELL_REPLEACE
-       && mainrole->spellType != SPELL_GODHAND)
-    {
-        mainrole->spell(cocos2d::CCPointZero);
-    }
+    return;
+  }
+  //发动技能
+  if( mainrole->spellType != SPELL_REPLEACE
+      && mainrole->spellType != SPELL_GODHAND)
+  {
+    mainrole->spell(cocos2d::CCPointZero);
+  }
 }
 
 cocos2d::Point GamePlay::autoAim(cocos2d::Point dir)
@@ -699,21 +695,21 @@ cocos2d::Point GamePlay::autoAim(cocos2d::Point dir)
   cocos2d::Point mainpos = mainrole->center();
   float mindis = PLAY_AUTOAIM*PLAY_AUTOAIM;
   cocos2d::Point rdir = dir;
-cocos2d::Ref* node = NULL;
-CCARRAY_FOREACH(enemies, node)
+  cocos2d::Ref* node = NULL;
+  CCARRAY_FOREACH(enemies, node)
   {
     Role *en = (Role*)node;
     if( en->supportAimAid() )
     {
       cocos2d::Point pen = en->center();
-      pen = ccpSub(pen, mainpos);
-      float len1 = ccpDot(pen, dir);
-      float len2SQ = ccpLengthSQ(pen);
+      pen = pen - mainpos;
+      float len1 = pen.dot(dir);
+      float len2SQ = pen.getLengthSq();
       float len = len2SQ - len1*len1;
       if( len < mindis )
       {
         mindis = len;
-        rdir = ccpNormalize(pen);
+        rdir = pen.getNormalized();
       }
     }
   }
@@ -744,7 +740,7 @@ void GamePlay::onTouchMoved(Touch * touch, Event * event)
     {
       LNR_GET_TOUCH_POS;
 
-      cocos2d::Point dir = ccpSub(pos, mTouchBegin);
+      cocos2d::Point dir = pos - mTouchBegin;
       float len = ccpLength(dir);
       if( len > CONTROL_MAXSLIDE )
       {
@@ -758,50 +754,24 @@ void GamePlay::onTouchMoved(Touch * touch, Event * event)
   }
 }
 
-void GamePlay::onTouchEnded(Touch * touch, Event * event)
+void GamePlay::onAcceleration(Acceleration* pAccelerationValue, Event*)
 {
+  pAccelerationValue->y = pAccelerationValue->x;
   if( count_control <= 0 )
   {
-    if( mTouchProcessed == false )
+    mainrole->setTilt(pAccelerationValue->y*mGravityFix);
+    if( mainrole2 != NULL )
     {
-      LNR_GET_TOUCH_POS;
-
-      cocos2d::Point dir = ccpSub(pos, mTouchBegin);
-      float len = ccpLength(dir);
-      if( len > CONTROL_MINSLIDE )
-      {
-        this->slide(ccpNormalize(dir));
-      }
+      mainrole2->setTilt(pAccelerationValue->y*mGravityFix);
     }
   }
   else {
-    mTouchProcessed = true;
-  }
-  
-}
-
-void GamePlay::onTouchCancelled(Touch * touch, Event *unused)
-{//同TouchEnded
-    this->onTouchEnded(touch, unused);
-}
-void GamePlay::onAcceleration(Acceleration* pAccelerationValue, Event*)
-{
-    pAccelerationValue->y = pAccelerationValue->x;
-    if( count_control <= 0 )
+    mainrole->setTilt(0);
+    if( mainrole2 != NULL )
     {
-        mainrole->setTilt(pAccelerationValue->y*mGravityFix);
-        if( mainrole2 != NULL )
-        {
-            mainrole2->setTilt(pAccelerationValue->y*mGravityFix);
-        }
+      mainrole2->setTilt(0);
     }
-    else {
-        mainrole->setTilt(0);
-        if( mainrole2 != NULL )
-        {
-            mainrole2->setTilt(0);
-        }
-    }
+  }
 }
 
 Role* GamePlay::nearestEnemy(cocos2d::Point dir)
@@ -809,8 +779,8 @@ Role* GamePlay::nearestEnemy(cocos2d::Point dir)
   Role *ret = NULL;
   cocos2d::Point mainpos = mainrole->center();
   float mindis = 9999*9999;
-cocos2d::Ref* node = NULL;
-CCARRAY_FOREACH(enemies, node)
+  cocos2d::Ref* node = NULL;
+  CCARRAY_FOREACH(enemies, node)
   {
     Role *en = (Role*)node;
     if( en->supportAimAid() )
@@ -833,604 +803,604 @@ CCARRAY_FOREACH(enemies, node)
 //set fever effect
 void GamePlay::setFeverLevel(int lv)
 {
-    if( lv != mFeverLevel )
+  if( lv != mFeverLevel )
+  {
+    if( lv == 2 )
     {
-        if( lv == 2 )
-        {
-            //enable shadow
-            mainrole->toggleShadow(true);
-            if( mainrole2 != NULL )
-            {
-                mainrole2->toggleShadow(true);
-            }
-            
-            //enable sound
-            this->startLoopFever();
-            
-            //enable mask
-            //fever mask
-            mFeverMaskTimer = 0;
-            mFeverMask->setVisible(true);
-            mFeverMask->setOpacity(0);
-        }
-        else
-        {
-            if( mFeverLevel == 2 )
-            {
-                //disable shadow
-                mainrole->toggleShadow(false);
-                if( mainrole2 != NULL )
-                {
-                    mainrole2->toggleShadow(false);
-                }
-            }
-            
-            //disable sound
-            this->stopLoopFever();
-            
-            //disable mask
-            mFeverMaskTimer = -1;
-            mFeverMask->setVisible(false);
-        }
-        
-        //setup for fever effect
-        if( lv > mFeverLevel )
-        {
-            GameTool::PlaySound("sound/fever.mp3");
-            manager->addGameObject(FeverBrust::feverbrust(27, true));
-            
-            //clean darts
-            unsigned int n = 0;
-            while( n < darts->count() )
-            {
-                Darts* d = (Darts*)darts->objectAtIndex(n);
-                if( d->isEnemy() )
-                {
-                    GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
-                    hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-                    hiteff2->setScale(1.5f);
-                    hiteff2->setPosition(d->position());
-                    this->addChild(hiteff2, LAYER_ROLE);
-                    manager->removeGameObject(d);
-                    darts->removeObjectAtIndex(n);
-                }
-                else {
-                    n++;
-                }
-            }
-        }
-        //play combo close sound
-        if( mFeverLevel == 2 )
-        {
-            GameTool::PlaySound("sound/feverbgmend.mp3");
-        }
-        mFeverLevel = lv;
+      //enable shadow
+      mainrole->toggleShadow(true);
+      if( mainrole2 != NULL )
+      {
+        mainrole2->toggleShadow(true);
+      }
+
+      //enable sound
+      this->startLoopFever();
+
+      //enable mask
+      //fever mask
+      mFeverMaskTimer = 0;
+      mFeverMask->setVisible(true);
+      mFeverMask->setOpacity(0);
     }
+    else
+    {
+      if( mFeverLevel == 2 )
+      {
+        //disable shadow
+        mainrole->toggleShadow(false);
+        if( mainrole2 != NULL )
+        {
+          mainrole2->toggleShadow(false);
+        }
+      }
+
+      //disable sound
+      this->stopLoopFever();
+
+      //disable mask
+      mFeverMaskTimer = -1;
+      mFeverMask->setVisible(false);
+    }
+
+    //setup for fever effect
+    if( lv > mFeverLevel )
+    {
+      GameTool::PlaySound("sound/fever.mp3");
+      manager->addGameObject(FeverBrust::feverbrust(27, true));
+
+      //clean darts
+      unsigned int n = 0;
+      while( n < darts->count() )
+      {
+        Darts* d = (Darts*)darts->objectAtIndex(n);
+        if( d->isEnemy() )
+        {
+          GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
+          hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+          hiteff2->setScale(1.5f);
+          hiteff2->setPosition(d->position());
+          this->addChild(hiteff2, LAYER_ROLE);
+          manager->removeGameObject(d);
+          darts->removeObjectAtIndex(n);
+        }
+        else {
+          n++;
+        }
+      }
+    }
+    //play combo close sound
+    if( mFeverLevel == 2 )
+    {
+      GameTool::PlaySound("sound/feverbgmend.mp3");
+    }
+    mFeverLevel = lv;
+  }
 }
 
 void GamePlay::makeCombo()
 {
-    combo++;
-    //refresh combo high
-    if(combo > GameRecord::sharedGameRecord()->combo_high )
+  combo++;
+  //refresh combo high
+  if(combo > GameRecord::sharedGameRecord()->combo_high )
+  {
+    GameRecord::sharedGameRecord()->combo_high = combo;
+  }
+
+  comboTimer = PLAY_COMBOTIME;
+
+  //play music
+  {//combo sfx
+    int cn = 1;
+    if( combo < PLAY_FEVERCOMBO )
     {
-        GameRecord::sharedGameRecord()->combo_high = combo;
+      cn = ((combo-1)/3)+1;
     }
-    
-    comboTimer = PLAY_COMBOTIME;
-    
-    //play music
-    {//combo sfx
-        int cn = 1;
-        if( combo < PLAY_FEVERCOMBO )
+    else {
+      cn = ((combo-PLAY_FEVERCOMBO)/5)+4;
+      if( cn > 9 )
+      {
+        cn = 9;
+      }
+    }
+    cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("combo%d.mp3", cn);
+    SimpleAudioEngine::sharedEngine()->playEffect(filename->getCString());
+  }
+
+  if( mode == MODE_CLASSIC )
+  {
+    //fever check
+    if( combo >= PLAY_FEVERCOMBO )
+    {//fever
+      int lev = (combo-PLAY_FEVERCOMBO)/5;
+      float add = 0.15f + 0.05f*lev;
+      if( add > 0.35f )
+      {
+        add = 0.35f;//fever 最高涨50%
+      }
+      gamespeed -= mFeverAdd;
+      gamespeed += add;
+      mFeverAdd = add;
+    }
+
+    {//fever sfx
+      if( combo >= PLAY_FEVERCOMBO && combo%5==0 )
+      {
+        int fn = (combo-PLAY_FEVERCOMBO)/5+1;
+        int earn = (fn-1)*5;
+        coins += earn;
+        if( earn > 0 )
         {
-            cn = ((combo-1)/3)+1;
+          interface->popFeverCoins(earn);
         }
-        else {
-            cn = ((combo-PLAY_FEVERCOMBO)/5)+4;
-            if( cn > 9 )
-            {
-                cn = 9;
-            }
+        if( fn > 5 )
+        {
+          fn = 5;
         }
-cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("combo%d.mp3", cn);
+        cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("fever%d.mp3", fn);
         SimpleAudioEngine::sharedEngine()->playEffect(filename->getCString());
+      }
     }
-    
-    if( mode == MODE_CLASSIC )
+    if( combo == PLAY_FEVERCOMBO )
     {
-        //fever check
-        if( combo >= PLAY_FEVERCOMBO )
-        {//fever
-            int lev = (combo-PLAY_FEVERCOMBO)/5;
-            float add = 0.15f + 0.05f*lev;
-            if( add > 0.35f )
-            {
-                add = 0.35f;//fever 最高涨50%
-            }
-            gamespeed -= mFeverAdd;
-            gamespeed += add;
-            mFeverAdd = add;
-        }
-        
-        {//fever sfx
-            if( combo >= PLAY_FEVERCOMBO && combo%5==0 )
-            {
-                int fn = (combo-PLAY_FEVERCOMBO)/5+1;
-                int earn = (fn-1)*5;
-                coins += earn;
-                if( earn > 0 )
-                {
-                    interface->popFeverCoins(earn);
-                }
-                if( fn > 5 )
-                {
-                    fn = 5;
-                }
-cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("fever%d.mp3", fn);
-                SimpleAudioEngine::sharedEngine()->playEffect(filename->getCString());
-            }
-        }
-        if( combo == PLAY_FEVERCOMBO )
-        {
-            this->increaseScheduleCounter();//increase for speed up
-            
-            //1.2.0 fever change
-            this->setFeverLevel(2);
-    
-            //achievement fever
-            GameRecord::sharedGameRecord()->task->dispatchTask(ACH_FEVERCOUNT, 1);
-            mFeverBegin = distance/PLAY_DISMETER;
-        }
+      this->increaseScheduleCounter();//increase for speed up
+
+      //1.2.0 fever change
+      this->setFeverLevel(2);
+
+      //achievement fever
+      GameRecord::sharedGameRecord()->task->dispatchTask(ACH_FEVERCOUNT, 1);
+      mFeverBegin = distance/PLAY_DISMETER;
     }
-    
-    if( combo > 1 )
-    {
-        interface->popHits(combo);
-    }
-    
-    //achievement critical
-    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_CRITICAL, 1);
-    //achievement reach combo
-    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_REACHCOMBO, combo);
+  }
+
+  if( combo > 1 )
+  {
+    interface->popHits(combo);
+  }
+
+  //achievement critical
+  GameRecord::sharedGameRecord()->task->dispatchTask(ACH_CRITICAL, 1);
+  //achievement reach combo
+  GameRecord::sharedGameRecord()->task->dispatchTask(ACH_REACHCOMBO, combo);
 }
 
 void GamePlay::refreshCombo()
 {
-    comboTimer = PLAY_COMBOTIME;
+  comboTimer = PLAY_COMBOTIME;
 }
 
 void GamePlay::stopCombo()
 {
-    if( combo >= PLAY_FEVERCOMBO )
+  if( combo >= PLAY_FEVERCOMBO )
+  {
+    //1.2.0 fever change
+    this->setFeverLevel(0);
+    if( mode == MODE_CLASSIC )
     {
-        //1.2.0 fever change
-        this->setFeverLevel(0);
-        if( mode == MODE_CLASSIC )
-        {
-            gamespeed -= mFeverAdd;
-            mFeverAdd = 0;
-            this->decreaseScheduleCounter();
-        }
+      gamespeed -= mFeverAdd;
+      mFeverAdd = 0;
+      this->decreaseScheduleCounter();
     }
-    comboTimer = 0;
-    combo = 0;
-    interface->fadeHits();
-    if( mFeverBegin >= 0 )
+  }
+  comboTimer = 0;
+  combo = 0;
+  interface->fadeHits();
+  if( mFeverBegin >= 0 )
+  {
+    int feverdis = distance/PLAY_DISMETER - mFeverBegin;
+    if( feverdis > maxfever )
     {
-        int feverdis = distance/PLAY_DISMETER - mFeverBegin;
-        if( feverdis > maxfever )
-        {
-            maxfever = feverdis;
-            GameRecord::sharedGameRecord()->task->dispatchTask(ACH_MAXFEVER, maxfever);
-        }
+      maxfever = feverdis;
+      GameRecord::sharedGameRecord()->task->dispatchTask(ACH_MAXFEVER, maxfever);
     }
-    mFeverBegin = -1;
+  }
+  mFeverBegin = -1;
 }
 
 //暂停
 void GamePlay::pause(cocos2d::Ref* ref)
 {
-    GameTool::PlaySound("sound/click.mp3");
-CCLOG("canPause = %d paused = %d", canPause, paused);
-    if( this->canPause && !this->paused )
-    {
-        this->paused = true;
-        this->mMenu->setVisible(false);
-        this->mask->setOpacity(128);
-        //添加菜单
-        this->manager->addGameObject(PauseMenuClassic::create());
-    }
+  GameTool::PlaySound("sound/click.mp3");
+  CCLOG("canPause = %d paused = %d", canPause, paused);
+  if( this->canPause && !this->paused )
+  {
+    this->paused = true;
+    this->mMenu->setVisible(false);
+    this->mask->setOpacity(128);
+    //添加菜单
+    this->manager->addGameObject(PauseMenuClassic::create());
+  }
 }
 
 //恢复
 void GamePlay::resume()
 {
-CCLOG("canPause = %d", canPause);
-    if( canPause && paused )
-    {
-        paused = false;
-        mMenu->setVisible(true);
-        mask->setOpacity(0);
-    }
+  CCLOG("canPause = %d", canPause);
+  if( canPause && paused )
+  {
+    paused = false;
+    mMenu->setVisible(true);
+    mask->setOpacity(0);
+  }
 }
 
 void GamePlay::restart()
 {
-    this->resume();
-    this->resetGame();
+  this->resume();
+  this->resetGame();
 }
 
 void GamePlay::exit()
 {
-    this->resume();
-    GameTool::StopBackgroundMusic();
-    mUISwapper.setSceneOutro(Loading::loadTo(GameTool::scene<TitleMenu>(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false), this);
+  this->resume();
+  GameTool::StopBackgroundMusic();
+  mUISwapper.setSceneOutro(Loading::loadTo(GameTool::scene<TitleMenu>(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false), this);
 }
 
 void GamePlay::change()
 {
-    this->resume();
-    GameTool::StopBackgroundMusic();
-    mUISwapper.setSceneOutro(Loading::loadTo(GameTool::scene<SelectMenu>(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false), this);
+  this->resume();
+  GameTool::StopBackgroundMusic();
+  mUISwapper.setSceneOutro(Loading::loadTo(GameTool::scene<SelectMenu>(), PublicLoad::menuLoadingList(), PublicLoad::gameLoadingList(), false), this);
 }
 
 void GamePlay::clearFootPrints()
 {
-    this->removeChild(footprints);
-    footprints = NULL;
+  this->removeChild(footprints);
+  footprints = NULL;
 }
 
 void GamePlay::togglePauseButton(bool flag)
 {
-    if( flag )
-    {
-        mMenu->setVisible(true);
-    }
-    else {
-        mMenu->setVisible(false);
-    }
+  if( flag )
+  {
+    mMenu->setVisible(true);
+  }
+  else {
+    mMenu->setVisible(false);
+  }
 }
 
 void GamePlay::scheduleSpeed(float target, float time, int slowmode)
 {
-    this->unscheduleSpeed();
-    mScheduleSpeedOrigin = gamespeed;
-    mScheduleSpeedMode = slowmode;
-    mScheduleSpeedTarget = target;
-    mScheduleSpeedTime = time;
-    mScheduleSpeedTimer = 0;
-    if( mScheduleSpeedMode == 1 )
-    {
-        gamespeed = mScheduleSpeedTarget;
-    }
-    this->increaseScheduleCounter();
+  this->unscheduleSpeed();
+  mScheduleSpeedOrigin = gamespeed;
+  mScheduleSpeedMode = slowmode;
+  mScheduleSpeedTarget = target;
+  mScheduleSpeedTime = time;
+  mScheduleSpeedTimer = 0;
+  if( mScheduleSpeedMode == 1 )
+  {
+    gamespeed = mScheduleSpeedTarget;
+  }
+  this->increaseScheduleCounter();
 }
 
 void GamePlay::unscheduleSpeed()
 {
-    if( mScheduleSpeedMode >= 0 )
-    {
-        gamespeed = mScheduleSpeedOrigin;
-        mScheduleSpeedMode = -1;
-        
-        this->decreaseScheduleCounter();
-    }
+  if( mScheduleSpeedMode >= 0 )
+  {
+    gamespeed = mScheduleSpeedOrigin;
+    mScheduleSpeedMode = -1;
+
+    this->decreaseScheduleCounter();
+  }
 }
 
 void GamePlay::increaseScheduleCounter()
 {
-    mScheduleSpeedCounter++;
+  mScheduleSpeedCounter++;
 }
 
 void GamePlay::decreaseScheduleCounter()
 {
-    mScheduleSpeedCounter--;
-    if( mScheduleSpeedCounter <= 0 )
-    {
-        mScheduleSpeedCounter = 0;
-        gamespeed = fixedgamespeed;
-    }
+  mScheduleSpeedCounter--;
+  if( mScheduleSpeedCounter <= 0 )
+  {
+    mScheduleSpeedCounter = 0;
+    gamespeed = fixedgamespeed;
+  }
 }
 
-void GamePlay::scheduleMask(ccColor3B target, float time, int maskmode)
+void GamePlay::scheduleMask(Color3B target, float time, int maskmode)
 {
-    this->unscheduleMask();
-    mScheduleMaskMode = maskmode;
-    mask->setColor(target);
-    mask->setVisible(true);
-    mScheduleMaskTime = time;
-    mScheduleMaskTimer = 0;
-    switch (mScheduleMaskMode) {
-        case 0:
-        {
-            mask->setOpacity((int)time);
-        }
-            break;
-        case 1:
-        {
-            mask->setOpacity(255);
-        }
-            break;
-        case 2:
-        {
-            mask->setOpacity(0);
-        }
-            break;
-    }
+  this->unscheduleMask();
+  mScheduleMaskMode = maskmode;
+  mask->setColor(target);
+  mask->setVisible(true);
+  mScheduleMaskTime = time;
+  mScheduleMaskTimer = 0;
+  switch (mScheduleMaskMode) {
+    case 0:
+      {
+        mask->setOpacity((int)time);
+      }
+      break;
+    case 1:
+      {
+        mask->setOpacity(255);
+      }
+      break;
+    case 2:
+      {
+        mask->setOpacity(0);
+      }
+      break;
+  }
 }
 
 void GamePlay::unscheduleMask()
 {
-    if( mScheduleMaskMode >= 0 )
-    {
-        mask->setVisible(false);
-        mask->setColor(ccc3(0, 0, 0));
-        mScheduleMaskMode = -1;
-    }
+  if( mScheduleMaskMode >= 0 )
+  {
+    mask->setVisible(false);
+    mask->setColor(Color3B(0, 0, 0));
+    mScheduleMaskMode = -1;
+  }
 }
 
 void GamePlay::scheduleSpellRelease(cocos2d::Node* target, SEL_CallFunc sel)
 {
-    mScheduleSpellRelease = 0.4f;
-    spellMask->setVisible(true);
-    spelling = true;
+  mScheduleSpellRelease = 0.4f;
+  spellMask->setVisible(true);
+  spelling = true;
 
-    this->scheduleVibrate(0.2f);
-    
-    if( target != NULL )
-    {
-        mScheduleReleaseTarget = target;
-        mScheduleReleaseSelector = sel;
-    }
-    else {
-        mScheduleReleaseTarget = NULL;
-        mScheduleReleaseSelector = NULL;
-    }
+  this->scheduleVibrate(0.2f);
+
+  if( target != NULL )
+  {
+    mScheduleReleaseTarget = target;
+    mScheduleReleaseSelector = sel;
+  }
+  else {
+    mScheduleReleaseTarget = NULL;
+    mScheduleReleaseSelector = NULL;
+  }
 }
 
 void GamePlay::scheduleVibrate(float dur)
 {
-    mScheduleVibrate = dur;
-    mVibrateTimer = 0;
-    mVibrateDir = ccpForAngle(CC_DEGREES_TO_RADIANS(360.0f*CCRANDOM_0_1()));
+  mScheduleVibrate = dur;
+  mVibrateTimer = 0;
+  mVibrateDir = ccpForAngle(CC_DEGREES_TO_RADIANS(360.0f*CCRANDOM_0_1()));
 }
 
 
 void GamePlay::operate()
 {
-    if( operation >= 0 )
-    {
-        switch (operation) {
-            case OP_RESET:
-            {
-                this->resetGame();
-            }
-                break;
+  if( operation >= 0 )
+  {
+    switch (operation) {
+      case OP_RESET:
+        {
+          this->resetGame();
         }
-        operation = -1;
+        break;
     }
+    operation = -1;
+  }
 }
 
 void GamePlay::setTaskCompleteNode(cocos2d::Node * node)
 {
-    mTaskComplete = node;
+  mTaskComplete = node;
 }
 
 bool GamePlay::completeSomeObjectives()
 {
+  {
+    Objective *obj = GameRecord::sharedGameRecord()->task->dailyObjective;
+    Achievement *ach = Tasks::dailyObjectiveWithUiid(obj->uiid);
+    if( ach != NULL && obj->count >= ach->achieveNumber )
     {
-        Objective *obj = GameRecord::sharedGameRecord()->task->dailyObjective;
-        Achievement *ach = Tasks::dailyObjectiveWithUiid(obj->uiid);
-        if( ach != NULL && obj->count >= ach->achieveNumber )
-        {
-            return true;
-        }
+      return true;
     }
+  }
+  {
+    Objective *obj = GameRecord::sharedGameRecord()->task->weeklyObjective;
+    Achievement *ach = Tasks::weeklyObjectiveWithUiid(obj->uiid);
+    if( ach != NULL && obj->count >= ach->achieveNumber )
     {
-        Objective *obj = GameRecord::sharedGameRecord()->task->weeklyObjective;
-        Achievement *ach = Tasks::weeklyObjectiveWithUiid(obj->uiid);
-        if( ach != NULL && obj->count >= ach->achieveNumber )
-        {
-            return true;
-        }
+      return true;
     }
+  }
+  {
+    Objective *obj = GameRecord::sharedGameRecord()->task->monthlyObjective;
+    Achievement *ach = Tasks::monthlyObjectiveWithUiid(obj->uiid);
+    if( ach != NULL && obj->count >= ach->achieveNumber )
     {
-        Objective *obj = GameRecord::sharedGameRecord()->task->monthlyObjective;
-        Achievement *ach = Tasks::monthlyObjectiveWithUiid(obj->uiid);
-        if( ach != NULL && obj->count >= ach->achieveNumber )
-        {
-            return true;
-        }
+      return true;
     }
+  }
 
-    return false;
+  return false;
 }
 
 void GamePlay::taskCompleted(std::string tile, std::string icon, int type)
 {
-cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
-    board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
-    mTaskComplete->addChild(board);
-cocos2d::Sprite *ibg = NULL;
-cocos2d::Label *label = NULL;
-    switch (type) {
-        case 0:
-        {
-            ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg1.png");
-            label = cocos2d::Label::create("日常任务\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
-        }
-            break;
-        case 1:
-        {
-            ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg3.png");
-            label = cocos2d::Label::create("周常\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
-        }
-            break;
-        case 2:
-        {
-            ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg2.png");
-            label = cocos2d::Label::create("月常\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
-        }
-            break;
-        case 3:
-        {
-            ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg4.png");
-            label = cocos2d::Label::create(cocos2d::CCString::createWithFormat("%s\n已完成！", tile.c_str())->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
-        }
-            break;
-    }
-    ibg->setPosition(cocos2d::Vec2(22, 22));
-    board->addChild(ibg);
-cocos2d::Sprite *iconsp = cocos2d::Sprite::createWithSpriteFrameName(icon.c_str());
-    iconsp->setPosition(ibg->getPosition());
-    if( type == 3 )
-    {
-        iconsp->setScale(0.625f);
-    }
-    board->addChild(iconsp);
-    label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-    label->setPosition(cocos2d::Vec2(100, 20));
-    board->addChild(label);
-cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, -board->getContentSize().height));
-cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
-cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, board->getContentSize().height));
-cocos2d::CCHide *a4 = cocos2d::CCHide::create();
-cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
-    board->runAction(sq);
-    GameTool::PlaySound("sound/objective-complete.mp3");
+  cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
+  board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
+  mTaskComplete->addChild(board);
+  cocos2d::Sprite *ibg = NULL;
+  cocos2d::Label *label = NULL;
+  switch (type) {
+    case 0:
+      {
+        ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg1.png");
+        label = cocos2d::Label::create("日常任务\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
+      }
+      break;
+    case 1:
+      {
+        ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg3.png");
+        label = cocos2d::Label::create("周常\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
+      }
+      break;
+    case 2:
+      {
+        ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg2.png");
+        label = cocos2d::Label::create("月常\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
+      }
+      break;
+    case 3:
+      {
+        ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg4.png");
+        label = cocos2d::Label::create(cocos2d::CCString::createWithFormat("%s\n已完成！", tile.c_str())->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
+      }
+      break;
+  }
+  ibg->setPosition(cocos2d::Vec2(22, 22));
+  board->addChild(ibg);
+  cocos2d::Sprite *iconsp = cocos2d::Sprite::createWithSpriteFrameName(icon.c_str());
+  iconsp->setPosition(ibg->getPosition());
+  if( type == 3 )
+  {
+    iconsp->setScale(0.625f);
+  }
+  board->addChild(iconsp);
+  label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+  label->setPosition(cocos2d::Vec2(100, 20));
+  board->addChild(label);
+  cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, -board->getContentSize().height));
+  cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
+  cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, board->getContentSize().height));
+  cocos2d::CCHide *a4 = cocos2d::CCHide::create();
+  cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
+  cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
+  board->runAction(sq);
+  GameTool::PlaySound("sound/objective-complete.mp3");
 }
 
 void GamePlay::pieceComplete(std::string title, std::string icon)
 {
-cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
-    board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
-    mTaskComplete->addChild(board);
-cocos2d::Sprite *item = cocos2d::Sprite::create(icon.c_str());
-    item->setPosition(cocos2d::Vec2(26, 19));
-    item->setScale(0.7f);
-    board->addChild(item);
-cocos2d::Sprite *sname = cocos2d::Sprite::create(title.c_str());
-    sname->setPosition(cocos2d::Vec2(117, 30));
-    board->addChild(sname);
-cocos2d::Sprite *scoll = cocos2d::Sprite::create("collected.png");
-    scoll->setPosition(cocos2d::Vec2(117, 13));
-    board->addChild(scoll);
-cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, -board->getContentSize().height));
-cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
-cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, board->getContentSize().height));
-cocos2d::CCHide *a4 = cocos2d::CCHide::create();
-cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
-    board->runAction(sq);
-    GameTool::PlaySound("sound/objective-complete.mp3");
+  cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
+  board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
+  mTaskComplete->addChild(board);
+  cocos2d::Sprite *item = cocos2d::Sprite::create(icon.c_str());
+  item->setPosition(cocos2d::Vec2(26, 19));
+  item->setScale(0.7f);
+  board->addChild(item);
+  cocos2d::Sprite *sname = cocos2d::Sprite::create(title.c_str());
+  sname->setPosition(cocos2d::Vec2(117, 30));
+  board->addChild(sname);
+  cocos2d::Sprite *scoll = cocos2d::Sprite::create("collected.png");
+  scoll->setPosition(cocos2d::Vec2(117, 13));
+  board->addChild(scoll);
+  cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, -board->getContentSize().height));
+  cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
+  cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, board->getContentSize().height));
+  cocos2d::CCHide *a4 = cocos2d::CCHide::create();
+  cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
+  cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
+  board->runAction(sq);
+  GameTool::PlaySound("sound/objective-complete.mp3");
 }
 
 void GamePlay::popText(std::string text)
 {
-cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
-    board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
-    mTaskComplete->addChild(board);
-cocos2d::Label *label = cocos2d::Label::createWithBMFont("ab34.fnt", text.c_str());
-    label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-    label->setPosition(cocos2d::Vec2(90, 20));
-    board->addChild(label);
-cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, -board->getContentSize().height));
-cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
-cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, board->getContentSize().height));
-cocos2d::CCHide *a4 = cocos2d::CCHide::create();
-cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
-    board->runAction(sq);
-    GameTool::PlaySound("sound/objective-complete.mp3");
+  cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
+  board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
+  mTaskComplete->addChild(board);
+  cocos2d::Label *label = cocos2d::Label::createWithBMFont("ab34.fnt", text.c_str());
+  label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+  label->setPosition(cocos2d::Vec2(90, 20));
+  board->addChild(label);
+  cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, -board->getContentSize().height));
+  cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
+  cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, board->getContentSize().height));
+  cocos2d::CCHide *a4 = cocos2d::CCHide::create();
+  cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
+  cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
+  board->runAction(sq);
+  GameTool::PlaySound("sound/objective-complete.mp3");
 }
 
 void GamePlay::pushNotification(std::string name, std::string icon, int type)
 {
-    if( mTaskComplete == NULL )
-    {
-        return;
-    }
-    
-    if( gPopQueues == NULL )
-    {
-        gPopQueues = cocos2d::CCArray::create();
-        gPopQueues->retain();
-    }
-    PopQueue *pop = PopQueue::create();
-    pop->title = name;
-    pop->icon = icon;
-    pop->type = type;
-    gPopQueues->addObject(pop);
-    
-    if( mTaskComplete->getChildrenCount() <= 0 )
-    {
-        GamePlay::sharedGamePlay()->processNotificationQueue();
-    }
+  if( mTaskComplete == NULL )
+  {
+    return;
+  }
+
+  if( gPopQueues == NULL )
+  {
+    gPopQueues = cocos2d::CCArray::create();
+    gPopQueues->retain();
+  }
+  PopQueue *pop = PopQueue::create();
+  pop->title = name;
+  pop->icon = icon;
+  pop->type = type;
+  gPopQueues->addObject(pop);
+
+  if( mTaskComplete->getChildrenCount() <= 0 )
+  {
+    GamePlay::sharedGamePlay()->processNotificationQueue();
+  }
 }
 
 void GamePlay::processNotificationQueue()
 {
-    mTaskComplete->removeAllChildrenWithCleanup(true);
-    if( gPopQueues != NULL && gPopQueues->count() > 0)
-    {
-        PopQueue *pop = (PopQueue*)gPopQueues->objectAtIndex(0);
-        switch (pop->type) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            {
-                GamePlay::taskCompleted(pop->title, pop->icon, pop->type);
-            }
-                break;
-            case 4:
-            {
-                GamePlay::pieceComplete(pop->title, pop->icon);
-            }
-                break;
-            case 5:
-            {
-                GamePlay::popText(pop->title);
-            }
-                break;
+  mTaskComplete->removeAllChildrenWithCleanup(true);
+  if( gPopQueues != NULL && gPopQueues->count() > 0)
+  {
+    PopQueue *pop = (PopQueue*)gPopQueues->objectAtIndex(0);
+    switch (pop->type) {
+      case 0:
+      case 1:
+      case 2:
+      case 3:
+        {
+          GamePlay::taskCompleted(pop->title, pop->icon, pop->type);
         }
-        gPopQueues->removeObjectAtIndex(0);
+        break;
+      case 4:
+        {
+          GamePlay::pieceComplete(pop->title, pop->icon);
+        }
+        break;
+      case 5:
+        {
+          GamePlay::popText(pop->title);
+        }
+        break;
     }
+    gPopQueues->removeObjectAtIndex(0);
+  }
 }
 
 void GamePlay::stepDust(cocos2d::Point pos)
 {
-    if( tiles->currentScene() == 4 )
-    {
-        manager->addGameObject(AnimatedParticle::particleStepWater(pos));
-    }
-    else if( tiles->currentScene() != 0 && tiles->currentScene() != 6 )
-    {
-        manager->addGameObject(StaticParticle::particleStepDust(pos));
-    }
+  if( tiles->currentScene() == 4 )
+  {
+    manager->addGameObject(AnimatedParticle::particleStepWater(pos));
+  }
+  else if( tiles->currentScene() != 0 && tiles->currentScene() != 6 )
+  {
+    manager->addGameObject(StaticParticle::particleStepDust(pos));
+  }
 }
 
 void GamePlay::startLoopFever()
 {
   /*
-    this->stopLoopFever();
-    mFeverLoop = SimpleAudioEngine::sharedEngine()->soundSourceForFile("feverbgm.mp3");
-    mFeverLoop->retain();
-    mFeverLoop.looping = true;
-    mFeverLoop->play();
-    */
+     this->stopLoopFever();
+     mFeverLoop = SimpleAudioEngine::sharedEngine()->soundSourceForFile("feverbgm.mp3");
+     mFeverLoop->retain();
+     mFeverLoop.looping = true;
+     mFeverLoop->play();
+     */
 }
 
 void GamePlay::stopLoopFever()
 {
   /*
-    if( mFeverLoop != NULL )
-    {
-        mFeverLoop->stop();
-        mFeverLoop->release();
-        mFeverLoop = NULL;
-    }
-    */
+     if( mFeverLoop != NULL )
+     {
+     mFeverLoop->stop();
+     mFeverLoop->release();
+     mFeverLoop = NULL;
+     }
+     */
 }

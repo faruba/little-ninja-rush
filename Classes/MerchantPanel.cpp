@@ -36,7 +36,7 @@ void MerchantPanel::onCreate()
 cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-merchant.plist");
     
     GamePlay *play = GamePlay::sharedGamePlay();
-    play->scheduleMask(ccc3(0, 0, 0), 128, 0);
+    play->scheduleMask(Color3B(0, 0, 0), 128, 0);
     play->paused = true;
     NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
 CCBReader *pReader = new CCBReader(pNodeLib);
@@ -152,7 +152,7 @@ void MerchantPanel::onMerchantClose()
     GameTool::PlaySound("sound/click.mp3");
     GamePlay* play = GamePlay::sharedGamePlay();
     play->state = STATE_NORMAL;
-    play->scheduleMask(ccc3(0, 0, 0), 0.2f, 1);
+    play->scheduleMask(Color3B(0, 0, 0), 0.2f, 1);
     play->paused = false;
     
     if( randomInt(2) == 0)

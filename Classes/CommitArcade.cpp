@@ -29,7 +29,7 @@ void CommitArcade::onCreate()
 cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-scroll.plist");
     
     GamePlay *play = GamePlay::sharedGamePlay();
-    play->scheduleMask(ccc3(0, 0, 0), 128, 0);
+    play->scheduleMask(Color3B(0, 0, 0), 128, 0);
     NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
 CCBReader *pReader = new CCBReader(pNodeLib, this, this);
     mNode = pReader->readNodeGraphFromFile("ui-arcadeover", this);

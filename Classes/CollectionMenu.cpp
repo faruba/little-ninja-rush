@@ -42,9 +42,9 @@ void CollectionMenu::setModal(const char * title, const char * desc, Ref* target
   cocos2d::Sprite *descsp = cocos2d::Sprite::createWithSpriteFrameName(desc);
   descsp->setPosition(cocos2d::Vec2( spbg->getContentSize().width/2, 75));
   spbg->addChild(descsp);
-  cocos2d::CCMenuItemImage *menuConfirm = cocos2d::CCMenuItemImage::create("pu-confirm1.png", "pu-confirm2.png", this, menu_selector(CollectionMenu::onModalConfirm));
+  cocos2d::MenuItemImage *menuConfirm = cocos2d::MenuItemImage::create("pu-confirm1.png", "pu-confirm2.png", this, menu_selector(CollectionMenu::onModalConfirm));
   menuConfirm->setPosition(cocos2d::Vec2(75, 35));
-  cocos2d::CCMenuItemImage *menuCancel = cocos2d::CCMenuItemImage::create("pu-cancel1.png", "pu-cancel2.png", this, menu_selector(CollectionMenu::onModalCancel));
+  cocos2d::MenuItemImage *menuCancel = cocos2d::MenuItemImage::create("pu-cancel1.png", "pu-cancel2.png", this, menu_selector(CollectionMenu::onModalCancel));
 
   menuCancel->setPosition(cocos2d::Vec2(200, 35));
   cocos2d::CCMenu *menu = cocos2d::CCMenu::create(menuConfirm, menuCancel, NULL);
@@ -123,7 +123,7 @@ void CollectionMenu::onEnter() {
   //初始化人物按钮
   int currRole = GameRecord::sharedGameRecord()->curr_char;
   for(int i=0; i<GAME_CHARCOUNT; ++i) {
-    cocos2d::CCMenuItemImage *btn = character(i);
+    cocos2d::MenuItemImage *btn = character(i);
     btn->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", i, i==currRole?0:1)->getCString()));
     btn->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", i, i==currRole?1:0)->getCString()));
   }
@@ -169,7 +169,7 @@ void CollectionMenu::onExit()
   cocos2d::Layer::onExit();
 }
 
-cocos2d::CCMenuItemImage* CollectionMenu::character(int rid)
+cocos2d::MenuItemImage* CollectionMenu::character(int rid)
 {
   switch (rid) {
     case 0:
@@ -233,12 +233,12 @@ void CollectionMenu::onCharacter(int nRole)
   if( orole == nRole )
     return;
   GameTool::PlaySound("sound/click.mp3");
-cocos2d::CCMenuItemImage *orl = character(orole);
+cocos2d::MenuItemImage *orl = character(orole);
   orl->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", orole, 1)->getCString()));
   orl->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", orole, 0)->getCString()));
 
   int nrole = nRole;
-cocos2d::CCMenuItemImage *nr = character(nrole);
+cocos2d::MenuItemImage *nr = character(nrole);
   nr->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", nrole, 0)->getCString()));
   nr->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", nrole, 1)->getCString()));
   GameRecord::sharedGameRecord()->curr_char = nrole;
@@ -508,17 +508,17 @@ bool CollectionMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mItemTitle",      Sprite*       , mItemTitle)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShare",          Sprite*       , mShare)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu",           CCMenu*         , mMenu)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter1",     CCMenuItemImage*, mCharacter1)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter2",     CCMenuItemImage*, mCharacter2)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter3",     CCMenuItemImage*, mCharacter3)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter4",     CCMenuItemImage*, mCharacter4)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter1",     MenuItemImage*, mCharacter1)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter2",     MenuItemImage*, mCharacter2)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter3",     MenuItemImage*, mCharacter3)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCharacter4",     MenuItemImage*, mCharacter4)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShuriken",       MenuItemImage*, mShurikenDelegate.mMenuButtonRef)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mKatana",         MenuItemImage*, mKatanaDelegate.mMenuButtonRef)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSpecial",        MenuItemImage*, mSpecialDelegate.mMenuButtonRef)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerup",        MenuItemImage*, mPowerUpDelegate.mMenuButtonRef)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mUse",            CCMenuItemImage*, mUse)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook",       CCMenuItemImage*, mFacebook)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter",        CCMenuItemImage*, mTwitter)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mUse",            MenuItemImage*, mUse)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebook",       MenuItemImage*, mFacebook)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter",        MenuItemImage*, mTwitter)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitterAction",  Sprite*       , mTwitterAction)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mFacebookAction", Sprite*       , mFacebookAction)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mScrollPoint",    Node*         , mScrollPoint)

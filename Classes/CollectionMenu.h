@@ -68,11 +68,11 @@ cocos2d::Sprite *mShadow;
 cocos2d::Sprite *mItemTitle;
 cocos2d::Label *mItemDesc;
 cocos2d::Label *mScrollCount;
-cocos2d::CCMenuItemImage *mCharacter1;
-cocos2d::CCMenuItemImage *mCharacter2;
-cocos2d::CCMenuItemImage *mCharacter3;
-cocos2d::CCMenuItemImage *mCharacter4;
-cocos2d::CCMenuItemImage *mUse;
+cocos2d::MenuItemImage *mCharacter1;
+cocos2d::MenuItemImage *mCharacter2;
+cocos2d::MenuItemImage *mCharacter3;
+cocos2d::MenuItemImage *mCharacter4;
+cocos2d::MenuItemImage *mUse;
 cocos2d::CCMenu *mMenu;
     //CCMenu *mItems;
 cocos2d::Node *mPowerUp;
@@ -84,8 +84,8 @@ cocos2d::Label *mLifeCount;
 cocos2d::Label *mDartCount;
 cocos2d::LayerColor *mMask;
 cocos2d::CCMenu *mPowerupMenu;
-cocos2d::CCMenuItemImage *mFacebook;
-cocos2d::CCMenuItemImage *mTwitter;
+cocos2d::MenuItemImage *mFacebook;
+cocos2d::MenuItemImage *mTwitter;
 cocos2d::Sprite *mShare;
 cocos2d::Sprite *mFacebookAction;
 cocos2d::Sprite *mTwitterAction;
@@ -102,7 +102,7 @@ cocos2d::Ref *mModalTarget;
 
     // 0-mainmenu 1-selectmenu
     static void setNavBack(int nid);
-cocos2d::CCMenuItemImage* character(int rid);
+cocos2d::MenuItemImage* character(int rid);
 
     //bid = 0 :no blink 1:blink hp 2:blink dart
     void updateCharacterInfo(int rid, int bid);

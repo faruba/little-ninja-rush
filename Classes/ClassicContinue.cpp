@@ -314,7 +314,7 @@ ClassicContinue* ClassicContinue::classicContinue()
 void ClassicContinue::onCreate() 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
-    play->scheduleMask(ccc3(0, 0, 0), 128, 0);
+    play->scheduleMask(Color3B(0, 0, 0), 128, 0);
     
     mLayer = ControlLayer::create();
     mLayer->master = this;

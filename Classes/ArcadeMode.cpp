@@ -281,7 +281,7 @@ void ArcadeMode::onMainHit()
   //中断combo
   play->stopCombo();
 
-  play->scheduleMask(ccc3(255, 0, 0), 0.5f, 1);
+  play->scheduleMask(Color3B(255, 0, 0), 0.5f, 1);
 }
 
 void ArcadeMode::killScore(int sc, int comb, cocos2d::Point pos) 

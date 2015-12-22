@@ -40,11 +40,11 @@ class PopOption :
 {
   public:
     //-- auto assign --
-    cocos2d::CCMenuItemImage *mMusic;
-    cocos2d::CCMenuItemImage *mSfx;
-    cocos2d::CCMenuItemImage *mPushNotification;
-    cocos2d::CCMenuItemImage *mTutorial;
-    cocos2d::CCMenuItemImage *miCloud;
+    cocos2d::MenuItemImage *mMusic;
+    cocos2d::MenuItemImage *mSfx;
+    cocos2d::MenuItemImage *mPushNotification;
+    cocos2d::MenuItemImage *mTutorial;
+    cocos2d::MenuItemImage *miCloud;
 
     //---- friends
     cocos2d::Label *mCoin;
@@ -67,11 +67,11 @@ class PopOption :
     //cocosbuilder support
     bool onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
     {
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", CCMenuItemImage*, mMusic);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", CCMenuItemImage*, mSfx);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPushNotification", CCMenuItemImage*, mPushNotification);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTutorial", CCMenuItemImage*, mTutorial);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "miCloud", CCMenuItemImage*, miCloud);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", MenuItemImage*, mMusic);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", MenuItemImage*, mSfx);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPushNotification", MenuItemImage*, mPushNotification);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTutorial", MenuItemImage*, mTutorial);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "miCloud", MenuItemImage*, miCloud);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoin", Label*, mCoin);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShadeCode", Node*, mShadeCode);
       return false;
@@ -433,8 +433,8 @@ class PopObj :
     cocos2d::Label *mBronzeScore;
     cocos2d::Label *mBronzePrize;
     cocos2d::CCMenu *mMenu;
-    cocos2d::CCMenuItemImage *mSwitch;
-    cocos2d::CCMenuItemImage *mSwitch2;
+    cocos2d::MenuItemImage *mSwitch;
+    cocos2d::MenuItemImage *mSwitch2;
 
     bool mDisplay;//display content true=classic false=arcade
 
@@ -473,8 +473,8 @@ class PopObj :
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzeScore", Label*, mBronzeScore);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBronzePrize", Label*, mBronzePrize);
       CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu*, mMenu);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSwitch", CCMenuItemImage*, mSwitch);
-      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSwitch2", CCMenuItemImage*, mSwitch2);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSwitch", MenuItemImage*, mSwitch);
+      CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSwitch2", MenuItemImage*, mSwitch2);
       return false;
     }
 
@@ -507,7 +507,7 @@ void PopObj::displayClassic()
   {
     Achievement *obj = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
     mDailyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode , obj->achieveNumber ,GameRecord::sharedGameRecord()->task->dailyObjective->count)->getCString());
-    mDailyObjective->setColor(ccc3(255, 255, 255));
+    mDailyObjective->setColor(Color3B(255, 255, 255));
 
     mDailyIcon->setVisible(true);
     Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
@@ -518,18 +518,18 @@ void PopObj::displayClassic()
     //判断是否完成
     if( GameRecord::sharedGameRecord()->task->dailyObjective->count >= ach->achieveNumber )
     {
-      mDailyObjective->setColor(ccc3(128, 128, 128));
+      mDailyObjective->setColor(Color3B(128, 128, 128));
     }
   }
   else {
     mDailyObjective->setString("已完成！");
-    mDailyObjective->setColor(ccc3(128, 128, 128));
+    mDailyObjective->setColor(Color3B(128, 128, 128));
   }
   if( GameRecord::sharedGameRecord()->task->weeklyObjective->uiid >= 0 )
   {
     Achievement *obj = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
     mWeeklyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode ,obj->achieveNumber ,GameRecord::sharedGameRecord()->task->weeklyObjective->count)->getCString());
-    mWeeklyObjective->setColor(ccc3(255, 255, 255));
+    mWeeklyObjective->setColor(Color3B(255, 255, 255));
 
     mWeeklyIcon->setVisible(true);
     Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
@@ -540,18 +540,18 @@ void PopObj::displayClassic()
     //判断是否完成
     if( GameRecord::sharedGameRecord()->task->weeklyObjective->count >= ach->achieveNumber )
     {
-      mWeeklyObjective->setColor(ccc3(128, 128, 128));
+      mWeeklyObjective->setColor(Color3B(128, 128, 128));
     }
   }
   else {
     mWeeklyObjective->setString("已完成！");
-    mWeeklyObjective->setColor(ccc3(128, 128, 128));
+    mWeeklyObjective->setColor(Color3B(128, 128, 128));
   }
   if( GameRecord::sharedGameRecord()->task->monthlyObjective->uiid >= 0 )
   {
     Achievement *obj = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
     mMonthlyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode ,obj->achieveNumber ,GameRecord::sharedGameRecord()->task->monthlyObjective->count)->getCString());
-    mMonthlyObjective->setColor(ccc3(255, 255, 255));
+    mMonthlyObjective->setColor(Color3B(255, 255, 255));
 
     mMonthlyIcon->setVisible(true);
     Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
@@ -562,12 +562,12 @@ void PopObj::displayClassic()
     //判断是否完成
     if( GameRecord::sharedGameRecord()->task->monthlyObjective->count >= ach->achieveNumber )
     {
-      mMonthlyObjective->setColor(ccc3(128, 128, 128));
+      mMonthlyObjective->setColor(Color3B(128, 128, 128));
     }
   }
   else {
     mMonthlyObjective->setString("已完成！");
-    mMonthlyObjective->setColor(ccc3(128, 128, 128));
+    mMonthlyObjective->setColor(Color3B(128, 128, 128));
   }
   //update crown
   for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
@@ -601,7 +601,7 @@ void PopObj::displayArcade()
       mGoldCoin->setVisible(false);
       mGoldPrize->setVisible(false);
       mGoldScore->setString("已完成！");
-      mGoldScore->setColor(ccc3(128, 128, 128));
+      mGoldScore->setColor(Color3B(128, 128, 128));
     }
     else
     {//not completed
@@ -616,7 +616,7 @@ void PopObj::displayArcade()
       mSilverCoin->setVisible(false);
       mSilverPrize->setVisible(false);
       mSilverScore->setString("已完成！");
-      mSilverScore->setColor(ccc3(128, 128, 128));
+      mSilverScore->setColor(Color3B(128, 128, 128));
     }
     else
     {//not completed
@@ -631,7 +631,7 @@ void PopObj::displayArcade()
       mBronzeCoin->setVisible(false);
       mBronzePrize->setVisible(false);
       mBronzeScore->setString("已完成！");
-      mBronzeScore->setColor(ccc3(128, 128, 128));
+      mBronzeScore->setColor(Color3B(128, 128, 128));
     }
     else
     {//not completed
@@ -1278,8 +1278,8 @@ bool TitleMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMe
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEnemies", Node*, mEnemies)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMiniButton", CCMenu*, mMiniButton) 
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainButton", CCMenu*, mMainButton) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mOption", CCMenuItemImage*, mOption) 
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter", CCMenuItemImage*, mTwitter) 
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mOption", MenuItemImage*, mOption) 
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTwitter", MenuItemImage*, mTwitter) 
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMask", LayerColor*, mMask)
 
   return true;

@@ -19,7 +19,7 @@ void PauseMenuClassic::updateClassic()
     {
         Achievement *obj = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
         mDailyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode , obj->achieveNumber ,GameRecord::sharedGameRecord()->task->dailyObjective->count)->getCString());
-        mDailyObjective->setColor(ccc3(255, 255, 255));
+        mDailyObjective->setColor(Color3B(255, 255, 255));
         
         mDailyIcon->setVisible(true);
         Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
@@ -30,18 +30,18 @@ cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->ge
         //判断是否完成
         if( GameRecord::sharedGameRecord()->task->dailyObjective->count >= ach->achieveNumber )
         {
-            mDailyObjective->setColor(ccc3(128, 128, 128));
+            mDailyObjective->setColor(Color3B(128, 128, 128));
         }
     }
     else {
         mDailyObjective->setString("已完成！");
-        mDailyObjective->setColor(ccc3(128, 128, 128));
+        mDailyObjective->setColor(Color3B(128, 128, 128));
     }
     if( GameRecord::sharedGameRecord()->task->weeklyObjective->uiid >= 0 )
     {
         Achievement *obj = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
         mWeeklyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode ,obj->achieveNumber ,GameRecord::sharedGameRecord()->task->weeklyObjective->count)->getCString());
-        mWeeklyObjective->setColor(ccc3(255, 255, 255));
+        mWeeklyObjective->setColor(Color3B(255, 255, 255));
         
         mWeeklyIcon->setVisible(true);
         Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
@@ -52,18 +52,18 @@ cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->ge
         //判断是否完成
         if( GameRecord::sharedGameRecord()->task->weeklyObjective->count >= ach->achieveNumber )
         {
-            mWeeklyObjective->setColor(ccc3(128, 128, 128));
+            mWeeklyObjective->setColor(Color3B(128, 128, 128));
         }
     }
     else {
         mWeeklyObjective->setString("已完成！");
-        mWeeklyObjective->setColor(ccc3(128, 128, 128));
+        mWeeklyObjective->setColor(Color3B(128, 128, 128));
     }
     if( GameRecord::sharedGameRecord()->task->monthlyObjective->uiid >= 0 )
     {
         Achievement *obj = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
         mMonthlyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode ,obj->achieveNumber ,GameRecord::sharedGameRecord()->task->monthlyObjective->count)->getCString());
-        mMonthlyObjective->setColor(ccc3(255, 255, 255));
+        mMonthlyObjective->setColor(Color3B(255, 255, 255));
         
         mMonthlyIcon->setVisible(true);
         Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
@@ -74,12 +74,12 @@ cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->ge
         //判断是否完成
         if( GameRecord::sharedGameRecord()->task->monthlyObjective->count >= ach->achieveNumber )
         {
-            mMonthlyObjective->setColor(ccc3(128, 128, 128));
+            mMonthlyObjective->setColor(Color3B(128, 128, 128));
         }
     }
     else {
         mMonthlyObjective->setString("已完成！");
-        mMonthlyObjective->setColor(ccc3(128, 128, 128));
+        mMonthlyObjective->setColor(Color3B(128, 128, 128));
     }
     //update crown
     for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
@@ -115,7 +115,7 @@ void PauseMenuClassic::updateArcade()
             mGoldCoin->setVisible(false);
             mGoldPrize->setVisible(false);
             mGoldScore->setString("已完成！");
-            mGoldScore->setColor(ccc3(128, 128, 128));
+            mGoldScore->setColor(Color3B(128, 128, 128));
         }
         else
         {//not completed
@@ -130,7 +130,7 @@ void PauseMenuClassic::updateArcade()
             mSilverCoin->setVisible(false);
             mSilverPrize->setVisible(false);
             mSilverScore->setString("已完成！");
-            mSilverScore->setColor(ccc3(128, 128, 128));
+            mSilverScore->setColor(Color3B(128, 128, 128));
         }
         else
         {//not completed
@@ -145,7 +145,7 @@ void PauseMenuClassic::updateArcade()
             mBronzeCoin->setVisible(false);
             mBronzePrize->setVisible(false);
             mBronzeScore->setString("已完成！");
-            mBronzeScore->setColor(ccc3(128, 128, 128));
+            mBronzeScore->setColor(Color3B(128, 128, 128));
         }
         else
         {//not completed
@@ -165,7 +165,7 @@ cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui
 cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-change.plist");
     
     GamePlay *play = GamePlay::sharedGamePlay();
-    play->scheduleMask(ccc3(0, 0, 0), 128, 0);
+    play->scheduleMask(Color3B(0, 0, 0), 128, 0);
     
     NodeLoaderLibrary *pNodeLib = NodeLoaderLibrary::sharedNodeLoaderLibrary();
 CCBReader *pReader = new CCBReader(pNodeLib, this, this);
@@ -375,12 +375,12 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjDaily", Node*, mObjDaily);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjWeekly", Node*, mObjWeekly);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mObjMonthly", Node*, mObjMonthly);
 CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBest", Label*, mBest);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", CCMenuItemImage*, mSfx);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", CCMenuItemImage*, mMusic);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mQuit", CCMenuItemImage*, mQuit);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mResume", CCMenuItemImage*, mResume);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRetry", CCMenuItemImage*, mRetry);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mChange", CCMenuItemImage*, mChange);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mSfx", MenuItemImage*, mSfx);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMusic", MenuItemImage*, mMusic);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mQuit", MenuItemImage*, mQuit);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mResume", MenuItemImage*, mResume);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRetry", MenuItemImage*, mRetry);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mChange", MenuItemImage*, mChange);
     
     return false;
 }

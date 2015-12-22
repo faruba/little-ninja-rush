@@ -26,8 +26,8 @@ cocos2d::Node *mNode;
 cocos2d::Label *mCount;
 cocos2d::Label *mTip;
     int mIndex;
-cocos2d::CCMenuItemImage *mLeft;
-cocos2d::CCMenuItemImage *mRight;
+cocos2d::MenuItemImage *mLeft;
+cocos2d::MenuItemImage *mRight;
 
 
 

@@ -135,7 +135,7 @@ void GameScript::invokeSpell5(cocos2d::Node*,void*)
 void GameScript::invokeSpell6(cocos2d::CCInteger*) 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
-    play->scheduleMask(ccc3(255, 255, 255), 0.5f, 1);
+    play->scheduleMask(Color3B(255, 255, 255), 0.5f, 1);
     GameTool::PlaySound("sound/hit.mp3");
     unsigned int n = 0;
     while( n < play->darts->count() )
@@ -248,7 +248,7 @@ CCARRAY_FOREACH(play->darts, node)
 void GameScript::invokeSpell17() 
 {
   GamePlay *play = GamePlay::sharedGamePlay();
-  play->scheduleMask(ccc3(255, 0, 0), 0.1f, 1);
+  play->scheduleMask(Color3B(255, 0, 0), 0.1f, 1);
   GameTool::PlaySound("sound/blade-clay.mp3");
 cocos2d::Ref* node = NULL;
 CCARRAY_FOREACH(play->enemies, node)

@@ -76,8 +76,8 @@ cocos2d::CCArray *mSakura;
   float mWindx;
 cocos2d::Sprite *mNew;
 cocos2d::Sprite *mCNew;
-cocos2d::CCMenuItemImage *mTwitter;
-cocos2d::CCMenuItemImage *mOption;
+cocos2d::MenuItemImage *mTwitter;
+cocos2d::MenuItemImage *mOption;
 
   GTAnimatedSprite *mAni[RUN];
   float mSpeed[RUN];

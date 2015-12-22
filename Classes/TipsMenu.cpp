@@ -70,7 +70,7 @@ void TipsMenu::updateTip(int index)
         this->removeChild(mTip, true);
     }
     std::string tip =  GameData::fetchTips()[index];
-cocos2d::Size size = cocos2d::CCSizeMake(300, 100);
+cocos2d::Size size = cocos2d::Size(300, 100);
     //CGSize actualSize = tip->sizeWithFont([UIFont, TIP_FONTNAME, 24)
     //                    constrainedToSize:size
     //                        lineBreakMode:UILineBreakModeWordWrap];
@@ -127,8 +127,8 @@ void TipsMenu::onRight()
 
 bool TipsMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeft", CCMenuItemImage*, mLeft);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRight", CCMenuItemImage*, mRight);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLeft", MenuItemImage*, mLeft);
+CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRight", MenuItemImage*, mRight);
     return false;
 }
 

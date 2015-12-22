@@ -63,10 +63,10 @@ class SelectMenu :
     cocos2d::Sprite *mDesc;
     cocos2d::Node *mHearts;
     cocos2d::Node *mDarts;
-    cocos2d::CCMenuItemImage *mBtnStart;
-    cocos2d::CCMenuItemImage *mBtnDart;
-    cocos2d::CCMenuItemImage *mBtnBlade;
-    cocos2d::CCMenuItemImage *mBtnSpecial;
+    cocos2d::MenuItemImage *mBtnStart;
+    cocos2d::MenuItemImage *mBtnDart;
+    cocos2d::MenuItemImage *mBtnBlade;
+    cocos2d::MenuItemImage *mBtnSpecial;
     cocos2d::Sprite *mEquipDart;
     cocos2d::Sprite *mEquipBlade;
     cocos2d::Sprite *mEquipSpecial;
@@ -75,7 +75,7 @@ class SelectMenu :
     cocos2d::Sprite *mRightMark;
     cocos2d::Label *mMoney;
     cocos2d::Sprite *mCoinMark;
-    cocos2d::CCMenuItemImage *mClickMe;
+    cocos2d::MenuItemImage *mClickMe;
     cocos2d::Sprite *mHeroDesc;
     cocos2d::Sprite *mTitle;
     cocos2d::Sprite *mParam;

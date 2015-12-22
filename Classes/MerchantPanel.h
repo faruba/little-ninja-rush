@@ -36,9 +36,9 @@ cocos2d::Node *mMerchantbox;
     int mIC3;
 
     //auto assign
-cocos2d::CCMenuItemImage *mBuyItem1;
-cocos2d::CCMenuItemImage *mBuyItem2;
-cocos2d::CCMenuItemImage *mBuyItem3;
+cocos2d::MenuItemImage *mBuyItem1;
+cocos2d::MenuItemImage *mBuyItem2;
+cocos2d::MenuItemImage *mBuyItem3;
 cocos2d::Sprite *mBody;
 cocos2d::Sprite *mHead;
 cocos2d::Label *mItemCount1;

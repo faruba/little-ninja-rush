@@ -60,7 +60,7 @@ void Pumpkin::onUpdate(float delta)
         mHurtTimer += delta;
         if( mHurtTimer > 0.2f )
         {
-            mSprite->setColor(ccc3(255, 255, 255));
+            mSprite->setColor(Color3B(255, 255, 255));
             mSprite->setScale(1);
             mHurtTimer = -1;
             mSprite->setRotation(0);
@@ -231,7 +231,7 @@ bool Pumpkin::deliverHit(int type, cocos2d::Point dir)
             play->manager->addGameObject(Item::item(0, mSprite->getPosition(), play, false));
             mSprite->playGTAnimation(1, false);
             mHurtTimer = 0;
-            mSprite->setColor(ccc3(255, 142, 142));
+            mSprite->setColor(Color3B(255, 142, 142));
             GameTool::PlaySound("sound/pumpkinhurt.mp3");
             if( mSprite->getScaleX() > 0 )
             {

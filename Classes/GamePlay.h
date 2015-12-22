@@ -30,8 +30,6 @@ class GamePlay :
 
     virtual bool onTouchBegan(Touch * touch, Event * event);
     virtual void onTouchMoved(Touch * touch, Event * event);
-    virtual void onTouchEnded(Touch * touch, Event * event);
-    virtual void onTouchCancelled(Touch * touch, Event * event);
     virtual void onAcceleration(Acceleration* acc, Event* unsedEvent);
     static GamePlay *sharedGamePlay();
 
@@ -76,7 +74,7 @@ cocos2d::Layer* ui();
     void decreaseScheduleCounter();
 
     //模式：0-突变 1-突变淡出 2-淡入
-    void scheduleMask(ccColor3B target, float time, int maskmode);
+    void scheduleMask(Color3B target, float time, int maskmode);
     void unscheduleMask();
 
 
@@ -107,7 +105,7 @@ cocos2d::Layer* ui();
     cocos2d::Point mTouchBegin;
     bool  mTouchProcessed;
 cocos2d::Layer *mUI;
-cocos2d::CCMenu *mMenu;//菜单项目
+cocos2d::Menu *mMenu;//菜单项目
 
     float mFeverAdd;//因为fever游戏加速的程度
     int mFeverBegin;

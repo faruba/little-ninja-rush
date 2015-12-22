@@ -60,7 +60,7 @@ cocos2d::CCLog("begin tutorial: role id(%d), cacheDartId(%d)", rid, cacheDartId)
   mTeachText->setAnchorPoint(cocos2d::Vec2( 0, 0.5f));
   mTeachText->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2 - 60, SCREEN_HEIGHT/2));
   play->addChild(mTeachText, LAYER_UI);
-cocos2d::CCMenuItemImage * skip = cocos2d::CCMenuItemImage::create();
+cocos2d::MenuItemImage * skip = cocos2d::MenuItemImage::create();
   skip->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("jcskip.png"));
   skip->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_jcskip.png"));
    skip->setTarget(this, menu_selector(TutorialDirector::onSkip));

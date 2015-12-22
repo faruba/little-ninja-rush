@@ -103,7 +103,7 @@ void ClassicMode::onUpdate(float delta)
                             play->mainrole2->setAI(1, Vec2( 600, 0));
                         }
                         play->stateTimer = 0;
-                        play->scheduleMask(ccc3(0, 0, 0), GAME_SCENEFADE, 2);
+                        play->scheduleMask(Color3B(0, 0, 0), GAME_SCENEFADE, 2);
                     }
                 }
                     break;
@@ -124,7 +124,7 @@ void ClassicMode::onUpdate(float delta)
                             play->manager->removeGameObject(em);
                         }
                         
-                        play->scheduleMask(ccc3(0, 0, 0), GAME_SCENEFADE, 1);
+                        play->scheduleMask(Color3B(0, 0, 0), GAME_SCENEFADE, 1);
                         
                         if( play->mainrole2 != NULL )
                         {//分身术

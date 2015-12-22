@@ -104,13 +104,13 @@ FoldItem* FoldItem::foldItem(int title, int cost, bool iap, int icon, const char
 
     if( btntyp == 1 )
     {
-      ret->mPurchase = cocos2d::CCMenuItemImage::create();
+      ret->mPurchase = cocos2d::MenuItemImage::create();
       ret->mPurchase->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_buy1.png"));
       ret->mPurchase->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_buy2.png"));
       ret->mPurchase->setTarget(ret, menu_selector(FoldItem::purchase));
     }
     else {
-      ret->mPurchase = cocos2d::CCMenuItemImage::create();
+      ret->mPurchase = cocos2d::MenuItemImage::create();
       ret->mPurchase->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_upgrade1.png"));
       ret->mPurchase->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_upgrade2.png"));
       ret->mPurchase->setTarget(ret, menu_selector(FoldItem::purchase));
@@ -224,7 +224,7 @@ void FoldItem::toggleFold(bool flag)
     {
 cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
         mBgButton->setDisplayFrame(cache->spriteFrameByName("shoplist.png"));
-        mBgButton->setContentSize(cocos2d::CCSizeMake(435, 55));
+        mBgButton->setContentSize(cocos2d::Size(435, 55));
         setContentSize(mBgButton->getContentSize());
         
         //update components
@@ -241,7 +241,7 @@ cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameC
     else {
 cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
         mBgButton->setDisplayFrame(cache->spriteFrameByName("shoplist2.png"));
-        mBgButton->setContentSize(cocos2d::CCSizeMake(435, 100));
+        mBgButton->setContentSize(cocos2d::Size(435, 100));
         setContentSize(mBgButton->getContentSize());
         
         //update components

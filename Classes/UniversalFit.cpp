@@ -89,7 +89,7 @@ void UniversalFit::setAutofit(cocos2d::Size size)
 {
   screenSize = size;
   scaleFactor = size.width/SCREEN_WIDTH < size.height/SCREEN_HEIGHT ? size.width/SCREEN_WIDTH : size.height/SCREEN_HEIGHT;//以宽度为基准 (maximum extend)
-  cocos2d::Size scaleSize = cocos2d::CCSizeMake(SCREEN_WIDTH*scaleFactor, SCREEN_HEIGHT*scaleFactor);
+  cocos2d::Size scaleSize = cocos2d::Size(SCREEN_WIDTH*scaleFactor, SCREEN_HEIGHT*scaleFactor);
   sceneOffset = Vec2(0, 0);//Vec2((size.width - SCREEN_WIDTH*scaleFactor)/2, (size.height - SCREEN_HEIGHT*scaleFactor)/2);
   clipRect.setRect(0, (size.height - scaleSize.height)/2, size.width, scaleSize.height);
   //clipRect.setRect(0, 0, SCREEN_WIDTH*4, SCREEN_HEIGHT*4);//hammer android titlemenu clip test
@@ -97,14 +97,14 @@ void UniversalFit::setAutofit(cocos2d::Size size)
   topHeight = SCREEN_HEIGHT;//baseHeight + clipRect.size.height;
   baseLeft = 0;//(size.width - scaleSize.width)/2;
   baseRight = SCREEN_WIDTH;//baseLeft + scaleSize.width;
-  playSize = cocos2d::CCSizeMake(SCREEN_WIDTH + 2*baseLeft, SCREEN_HEIGHT);
+  playSize = cocos2d::Size(SCREEN_WIDTH + 2*baseLeft, SCREEN_HEIGHT);
 
   if( size.width > 480 ) {
     gRetinaGraphics = true;
   }
   cocos2d::Director *pDirector = cocos2d::Director::getInstance();
   cocos2d::Size surface = pDirector->getOpenGLView()->getFrameSize();
-  cocos2d::Size need = cocos2d::CCSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
+  cocos2d::Size need = cocos2d::Size(SCREEN_WIDTH, SCREEN_HEIGHT);
   need.width *= pDirector->getContentScaleFactor();
   need.height *= pDirector->getContentScaleFactor();
   transform.width = surface.width/need.width;

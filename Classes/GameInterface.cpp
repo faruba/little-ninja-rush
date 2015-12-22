@@ -258,7 +258,7 @@ cocos2d::Node *mSpeedBoost = pReader->readNodeGraphFromFile("ui-arcade-speed.ccb
         mArcadeX->setAnchorPoint(cocos2d::Vec2(1, 0.5f));
         mArcadeX->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width - 10, 180));
         mArcadeX->setVisible(false);
-        mArcadeX->setColor(ccc3(255, 204, 0));
+        mArcadeX->setColor(Color3B(255, 204, 0));
         mParent->addChild(mArcadeX, LAYER_UI);
     }
     
@@ -406,7 +406,7 @@ void GameInterface::onUpdateArcade(float delta, GamePlay* play)
         int targetstate = 0;
         if( arcade->speed < ARCADE_INITSPEED )
         {//red flash
-            mSpeedBg->setColor(ccc3(116, 10, 10));
+            mSpeedBg->setColor(Color3B(116, 10, 10));
             mSpeedNormal->setVisible(false);
             mSpeedFever->setVisible(false);
 cocos2d::Size redsize = mSpeedRed->getContentSize();
@@ -416,7 +416,7 @@ cocos2d::Size redsize = mSpeedRed->getContentSize();
         }
         else if( arcade->speed < ARCADE_FEVER1 )
         {//normal
-            mSpeedBg->setColor(ccc3(117, 89, 6));
+            mSpeedBg->setColor(Color3B(117, 89, 6));
             mSpeedRed->setVisible(true);
 cocos2d::Size redsize = mSpeedRed->getContentSize();
             redsize.width = 12.5f;
@@ -430,7 +430,7 @@ cocos2d::Size normalsize = mSpeedNormal->getContentSize();
         }
         else if( arcade->speed < ARCADE_FEVER2 )
         {//yellow flash
-            mSpeedBg->setColor(ccc3(117, 89, 6));
+            mSpeedBg->setColor(Color3B(117, 89, 6));
             mSpeedRed->setVisible(true);
 cocos2d::Size redsize = mSpeedRed->getContentSize();
             redsize.width = 12.5f;
@@ -447,7 +447,7 @@ cocos2d::Size feversize = mSpeedFever->getContentSize();
         }
         else
         {//yellow flash 2
-            mSpeedBg->setColor(ccc3(117, 89, 6));
+            mSpeedBg->setColor(Color3B(117, 89, 6));
             mSpeedRed->setVisible(true);
 cocos2d::Size redsize = mSpeedRed->getContentSize();
             redsize.width = 12.5f;
@@ -608,12 +608,12 @@ void GameInterface::popHits(int number)
 {
     if( number>=PLAY_FEVERCOMBO && GamePlay::sharedGamePlay()->mode == MODE_CLASSIC )
     {
-        mHits->setColor(ccc3(227, 0, 0));
-        mHitCount->setColor(ccc3(227, 0, 0));
+        mHits->setColor(Color3B(227, 0, 0));
+        mHitCount->setColor(Color3B(227, 0, 0));
     }
     else {
-        mHits->setColor(ccc3(255, 204, 0));
-        mHitCount->setColor(ccc3(255, 204, 0));
+        mHits->setColor(Color3B(255, 204, 0));
+        mHitCount->setColor(Color3B(255, 204, 0));
     }
     mHitNode->stopAllActions();
     mHitCount->setString(cocos2d::CCString::createWithFormat("%d", number)->getCString());
