@@ -487,7 +487,7 @@ void CommitScroll::implementPrize()
                     if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
                     {
                         Shuriken *sh = GameData::queryShuriken(uiid);
-                        GamePlay::pushNotification(sh->name, sh->icon, 4);
+                        GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
                     }
                     break;
                 }
@@ -537,7 +537,7 @@ void CommitScroll::implementPrize()
                     if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
                     {
                         Katana *sh = GameData::queryKatana(uiid);
-                        GamePlay::pushNotification(sh->name, sh->icon, 4);
+                        GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
                     }
                     break;
                 }
@@ -587,7 +587,7 @@ void CommitScroll::implementPrize()
                     if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
                     {
                         Special *sh = GameData::querySpecial(uiid);
-                        GamePlay::pushNotification(sh->name, sh->icon, 4);
+                        GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
                     }
                     break;
                 }
@@ -603,7 +603,7 @@ void CommitScroll::implementPrize()
             //pop notification
 //            if( GameRecord::sharedGameRecord()->collection->life_piece%9 == 0 )
 //            {
-//                GamePlay::pushNotification(cocos2d::CCString::create("lifeplus.png"), CCString::create("pulife.png"), 4);
+//                GamePlay::sharedGamePlay()->pushNotification(cocos2d::CCString::create("lifeplus.png"), CCString::create("pulife.png"), 4);
 //            }
         }
             break;
@@ -613,7 +613,7 @@ void CommitScroll::implementPrize()
 //            //pop notification
 //            if( GameRecord::sharedGameRecord()->collection->dart_piece%9 == 0 )
 //            {
-//                GamePlay::pushNotification(cocos2d::CCString::create("dartplus.png"), CCString::create("pushuriken.png"), 4);
+//                GamePlay::sharedGamePlay()->pushNotification(cocos2d::CCString::create("dartplus.png"), CCString::create("pushuriken.png"), 4);
 //            }
         }
             break;

@@ -17,10 +17,12 @@ class GamePlay :
   public cocos2d::Layer
 {
   public:
+    bool isPlayingArcade = false;
+
     ~GamePlay();
     virtual bool init();
-cocos2d::Scene* scene();
-CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GamePlay, create);
+    cocos2d::Scene* scene();
+    CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GamePlay, create);
 
     virtual void onEnter();
     virtual void update(float);
@@ -41,7 +43,6 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GamePlay, create);
     void pieceComplete(std::string title, std::string icon);
     void popText(std::string text);
     void scheduleSpellRelease(cocos2d::Node* target, SEL_CallFunc sel);
-    bool isPlayingArcade();
     void setGameMode(int mod);
     int getGameMode();
 
@@ -96,11 +97,11 @@ cocos2d::Layer* ui();
 
     void doneIntro();
 
-    static void setTaskCompleteNode(cocos2d::Node* node);
+    void setTaskCompleteNode(cocos2d::Node* node);
     bool completeSomeObjectives();
 
     //0-daily 1-weekly 2-monthly 3-achievement 4-collection 5-text
-    static void pushNotification(std::string name, std::string icon, int type);
+    void pushNotification(std::string name, std::string icon, int type);
 
     void stepDust(cocos2d::Point pos);
     cocos2d::Point mTouchBegin;
@@ -214,6 +215,9 @@ cocos2d::SpriteBatchNode *footprints;
     int count_runscene;//是否滚动场景
   private:
     UISwapper mUISwapper;
+    float mGravityFix = 1;
+    cocos2d::Node *mTaskComplete = NULL;
+    int mGameMode = MODE_CLASSIC;
 };
 
 #endif

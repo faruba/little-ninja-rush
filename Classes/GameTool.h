@@ -51,7 +51,6 @@ class GameTool {
         clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
         clip->addChild(tm);
         ret->addChild(clip);
-        //ret->addChild(tm);
         return ret;
 
       }

@@ -83,7 +83,7 @@ void CollectionMenu::onEnter() {
   cocos2d::Node *taskcomplete = cocos2d::Node::create();
   taskcomplete->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, 5);
-  GamePlay::setTaskCompleteNode(taskcomplete);
+  GamePlay::sharedGamePlay()->setTaskCompleteNode(taskcomplete);
 
   cocos2d::Node * node = createUIByCCBI("menu-collection", "CollectionMenu", CollectionMenuLayerLoader::loader(), this);
   if(node != NULL) {
@@ -162,7 +162,7 @@ void CollectionMenu::onEnter() {
 void CollectionMenu::onExit()
 {
   GameRecord::sharedGameRecord()->collection->cleanNewList();
-  GamePlay::setTaskCompleteNode(NULL);
+  GamePlay::sharedGamePlay()->setTaskCompleteNode(NULL);
 
   //MidBridge::sharedMidbridge()->setFacebookCallback(NULL, menu_selector(CollectionMenu::doneFacebook));
   //MidBridge::sharedMidbridge()->setTwitterCallback(NULL, menu_selector(CollectionMenu::doneTwitter));

@@ -93,7 +93,7 @@ void ShopMenu::onEnter()
 cocos2d::Node *taskcomplete = cocos2d::Node::create();
     taskcomplete->setPosition(cocos2d::Vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT));
     this->addChild(taskcomplete);
-    GamePlay::setTaskCompleteNode(taskcomplete);
+    GamePlay::sharedGamePlay()->setTaskCompleteNode(taskcomplete);
 cocos2d::Node * node = createUIByCCBI("menu-shop", "ShopMenu", ShopMenuLayerLoader::loader(), this);
     if(node != NULL) {
       this->addChild(node);
@@ -155,7 +155,7 @@ cocos2d::Layer::onEnter();
 
 void ShopMenu::onExit() 
 {
-  GamePlay::setTaskCompleteNode(NULL);
+  GamePlay::sharedGamePlay()->setTaskCompleteNode(NULL);
     PublicLoad::menuShop()->unloadAll();
 cocos2d::Layer::onExit();
 }

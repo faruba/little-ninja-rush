@@ -19,12 +19,7 @@
 #include "SpeedLine.h"
 
 GamePlay* gPlay = NULL;
-float gGravityFix = 1;
-bool gArcadePlaying = false;
 
-cocos2d::Node *gTaskComplete = NULL;
-
-int gGameMode = MODE_CLASSIC;
 /* PopQueue */
 class PopQueue : 
   public Ref
@@ -38,8 +33,8 @@ class PopQueue :
     int type;
 };
 
-
 cocos2d::CCArray *gPopQueues = NULL;
+
 #define VIBRATE_PERIOD (0.04f)
 #define VIBRATE_ZOOM (0.2f)
 #define VIBRATE_MS (400.0f)
@@ -84,29 +79,22 @@ GamePlay* GamePlay::sharedGamePlay()
     return gPlay;
 }
 
-bool GamePlay::isPlayingArcade()
-{
-    return gArcadePlaying;
-}
-
 void GamePlay::setGameMode(int mod)
 {
-    gGameMode = mod;
+    mGameMode = mod;
 }
 
 int GamePlay::getGameMode()
 {
-    return gGameMode;
+    return mGameMode;
 }
 
 bool GamePlay::init()
 {
   if(cocos2d::Layer::init())
   {
-
     this->setAccelerometerEnabled(true);
     state = -1;
-
 
     //初始化方向 TODO:
     //        UIInterfaceOrientation orientation = UIApplication->sharedApplication()->statusBarOrientation();
@@ -128,14 +116,13 @@ void GamePlay::onEnter()
 {
   mUISwapper.onEnter();
 
-
   setAccelerometerEnabled(true);
   cocos2d::Node *taskcomplete = cocos2d::Node::create();
   taskcomplete->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, SCREEN_HEIGHT));
   this->addChild(taskcomplete, LAYER_MASK+10);
   setTaskCompleteNode(taskcomplete);
 
-  this->initGamePlay(gGameMode);
+  this->initGamePlay(mGameMode);
 
   mUISwapper.setSceneIntro(this);
   cocos2d::Layer::onEnter();
@@ -153,7 +140,7 @@ void GamePlay::onEnter()
 
 void GamePlay::onExit()
 {
-  gArcadePlaying = false;
+  isPlayingArcade = false;
   setTaskCompleteNode(NULL);
 
   //demo -->
@@ -165,14 +152,7 @@ cocos2d::Layer::onExit();
 //初始化游戏
 void GamePlay::initGamePlay(int mod)
 {
-  if( mod == MODE_CLASSIC )
-  {
-    gArcadePlaying = false;
-  }
-  else
-  {
-    gArcadePlaying = true;
-  }
+  isPlayingArcade = (mod != MODE_CLASSIC);
 
   //init manager
   manager = GameObjectManager::create();
@@ -419,7 +399,7 @@ cocos2d::CCCallFunc *callSelectorAction = cocos2d::CCCallFunc::create(mScheduleR
 
 void GamePlay::fixGravity(float val)
 {
-    gGravityFix = val;
+    mGravityFix = val;
 }
 
 void GamePlay::resetGame()
@@ -809,10 +789,10 @@ void GamePlay::onAcceleration(Acceleration* pAccelerationValue, Event*)
     pAccelerationValue->y = pAccelerationValue->x;
     if( count_control <= 0 )
     {
-        mainrole->setTilt(pAccelerationValue->y*gGravityFix);
+        mainrole->setTilt(pAccelerationValue->y*mGravityFix);
         if( mainrole2 != NULL )
         {
-            mainrole2->setTilt(pAccelerationValue->y*gGravityFix);
+            mainrole2->setTilt(pAccelerationValue->y*mGravityFix);
         }
     }
     else {
@@ -1234,7 +1214,7 @@ void GamePlay::operate()
 
 void GamePlay::setTaskCompleteNode(cocos2d::Node * node)
 {
-    gTaskComplete = node;
+    mTaskComplete = node;
 }
 
 bool GamePlay::completeSomeObjectives()
@@ -1271,7 +1251,7 @@ void GamePlay::taskCompleted(std::string tile, std::string icon, int type)
 {
 cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
-    gTaskComplete->addChild(board);
+    mTaskComplete->addChild(board);
 cocos2d::Sprite *ibg = NULL;
 cocos2d::Label *label = NULL;
     switch (type) {
@@ -1326,7 +1306,7 @@ void GamePlay::pieceComplete(std::string title, std::string icon)
 {
 cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
-    gTaskComplete->addChild(board);
+    mTaskComplete->addChild(board);
 cocos2d::Sprite *item = cocos2d::Sprite::create(icon.c_str());
     item->setPosition(cocos2d::Vec2(26, 19));
     item->setScale(0.7f);
@@ -1351,7 +1331,7 @@ void GamePlay::popText(std::string text)
 {
 cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
     board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
-    gTaskComplete->addChild(board);
+    mTaskComplete->addChild(board);
 cocos2d::Label *label = cocos2d::Label::createWithBMFont("ab34.fnt", text.c_str());
     label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     label->setPosition(cocos2d::Vec2(90, 20));
@@ -1368,7 +1348,7 @@ cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
 
 void GamePlay::pushNotification(std::string name, std::string icon, int type)
 {
-    if( gTaskComplete == NULL )
+    if( mTaskComplete == NULL )
     {
         return;
     }
@@ -1384,7 +1364,7 @@ void GamePlay::pushNotification(std::string name, std::string icon, int type)
     pop->type = type;
     gPopQueues->addObject(pop);
     
-    if( gTaskComplete->getChildrenCount() <= 0 )
+    if( mTaskComplete->getChildrenCount() <= 0 )
     {
         GamePlay::sharedGamePlay()->processNotificationQueue();
     }
@@ -1392,7 +1372,7 @@ void GamePlay::pushNotification(std::string name, std::string icon, int type)
 
 void GamePlay::processNotificationQueue()
 {
-    gTaskComplete->removeAllChildrenWithCleanup(true);
+    mTaskComplete->removeAllChildrenWithCleanup(true);
     if( gPopQueues != NULL && gPopQueues->count() > 0)
     {
         PopQueue *pop = (PopQueue*)gPopQueues->objectAtIndex(0);

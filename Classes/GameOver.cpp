@@ -50,7 +50,7 @@ cocos2d::CCLog("%d coins earned.", play->coins);
 //        if( GameRecord::sharedGameRecord()->collection->isItemCompleted(38) )
 //        {
 //            Special *sh = GameData::querySpecial(38);
-//            GamePlay::pushNotification(sh->name, sh->icon, 4);
+//            GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
 //        }
     }
     
@@ -556,7 +556,7 @@ void GameOver::doneFacebook(cocos2d::CCInteger* res)
 //        GameRecord::sharedGameRecord()->share_facebook = NSDate->date()->timeIntervalSince1970();
 //        GameRecord::sharedGameRecord()->checkPoint();
 //        
-//        GamePlay::pushNotification("You have got 100 coins\nfor sharing your score.", NULL, 5);
+//        GamePlay::sharedGamePlay()->pushNotification("You have got 100 coins\nfor sharing your score.", NULL, 5);
 //        mFacebookCoins->setVisible(false);
 //    }
 }
@@ -584,7 +584,7 @@ void GameOver::doneTwitter(cocos2d::CCInteger* res)
 //        GameRecord::sharedGameRecord()->share_twitter = NSDate->date()->timeIntervalSince1970();
 //        GameRecord::sharedGameRecord()->checkPoint();
 //        
-//        GamePlay::pushNotification("You have got 100 coins\nfor sharing your score.", NULL, 5);
+//        GamePlay::sharedGamePlay()->pushNotification("You have got 100 coins\nfor sharing your score.", NULL, 5);
 //        mTwitterCoins->setVisible(false);
 //    }
 }

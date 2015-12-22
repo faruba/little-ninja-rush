@@ -386,7 +386,7 @@ void Tasks::dispatchTask(int achieveCode, int cnt)
         if( t->achieveCode == achieveCode )
         {
             //1.2.0 arcade check
-            if( GamePlay::sharedGamePlay()->isPlayingArcade() &&
+            if( GamePlay::sharedGamePlay()->isPlayingArcade &&
                (t->taskType == TASK_OBJECTIVEDAILY
                || t->taskType == TASK_OBJECTIVEWEEKLY
                || t->taskType == TASK_OBJECTIVEMONTHLY) )
@@ -510,7 +510,7 @@ void Tasks::completeAchievement(int tid)
 {
 cocos2d::CCLog("!!! Achievement Completed!");
     Achievement *obj = Tasks::achievementWithUiid(tid);
-    //TODO:GamePlay::pushNotification(obj->text, obj->icon, 3);
+    //TODO:GamePlay::sharedGamePlay()->pushNotification(obj->text, obj->icon, 3);
 }
 
 void Tasks::completeObjectiveDaily(int oid) 
@@ -524,7 +524,7 @@ cocos2d::CCLog("!!! Daily Objective Completed! (Step%d)", dailyObjective->index+
     }
     GameRecord::sharedGameRecord()->task->dispatchTask(ACH_COMPLETEWORKS, 1);
     //GamePlay::taskCompleted(NULL, obj->icon, 0);
-    //TODO:GamePlay::pushNotification(NULL, obj->icon, 0);
+    //TODO:GamePlay::sharedGamePlay()->pushNotification(NULL, obj->icon, 0);
 }
 
 void Tasks::completeObjectiveWeekly(int oid) 
@@ -537,7 +537,7 @@ cocos2d::CCLog("!!! Weekly Objective Completed! (Step%d)", weeklyObjective->inde
     }
     GameRecord::sharedGameRecord()->task->dispatchTask(ACH_COMPLETEWORKS, 1);
     //GamePlay::taskCompleted(NULL, obj->icon, 1);
-    //TODO:GamePlay::pushNotification(NULL, obj->icon, 1);
+    //TODO:GamePlay::sharedGamePlay()->pushNotification(NULL, obj->icon, 1);
 }
 
 void Tasks::completeObjectiveMonthly(int oid) 
@@ -550,7 +550,7 @@ cocos2d::CCLog("!!! Monthly Objective Completed! (Step%d)", monthlyObjective->in
     }
     GameRecord::sharedGameRecord()->task->dispatchTask(ACH_COMPLETEWORKS, 1);
     //GamePlay::taskCompleted(NULL, obj->icon, 2);
-    //TODO:GamePlay::pushNotification(NULL, obj->icon, 2);
+    //TODO:GamePlay::sharedGamePlay()->pushNotification(NULL, obj->icon, 2);
 }
 
 //给参数加了引用，为什么之前没有引用，有一部分也能功能，不科学

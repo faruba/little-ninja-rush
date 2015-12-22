@@ -184,7 +184,7 @@ void MerchantPanel::gainShurikenPiece()
     if( GameRecord::sharedGameRecord()->collection->isItemCompleted(poss[res]) )
     {
         Shuriken* sh = GameData::queryShuriken(poss[res]);
-        GamePlay::pushNotification(sh->name, sh->icon, 4);
+        GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
     }*/
 }
 
@@ -207,7 +207,7 @@ void MerchantPanel::gainKatanaPiece()
     if( GameRecord::sharedGameRecord()->collection->isItemCompleted(poss[res]) )
     {
         Katana* sh = GameData::queryKatana(poss[res]);
-        GamePlay::pushNotification(sh->name, sh->icon, 4);
+        GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
     }*/
 }
 
@@ -230,7 +230,7 @@ void MerchantPanel::gainSpecialPiece()
     if( GameRecord::sharedGameRecord()->collection->isItemCompleted(poss[res]) )
     {
         Special* sh = GameData::querySpecial(poss[res]);
-        GamePlay::pushNotification(sh->name, sh->icon, 4);
+        GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
     }*/
 }
 
