@@ -20,19 +20,6 @@
 
 GamePlay* gPlay = NULL;
 
-/* PopQueue */
-class PopQueue : 
-  public Ref
-{
-  public:
-    CREATE_FUNC(PopQueue);
-
-    bool init(){return true;};
-    std::string title;
-    std::string icon;
-    int type;
-};
-
 cocos2d::CCArray *gPopQueues = NULL;
 
 #define VIBRATE_PERIOD (0.04f)
@@ -1216,103 +1203,63 @@ bool GamePlay::completeSomeObjectives()
 
   return false;
 }
-
-void GamePlay::taskCompleted(std::string tile, std::string icon, int type)
-{
+void GamePlay::popNotification(PopQueue *pop) {
   cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
   board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
   mTaskComplete->addChild(board);
-  cocos2d::Sprite *ibg = NULL;
-  cocos2d::Label *label = NULL;
-  switch (type) {
-    case 0:
-      {
-        ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg1.png");
-        label = cocos2d::Label::create("日常任务\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
-      }
-      break;
-    case 1:
-      {
-        ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg3.png");
-        label = cocos2d::Label::create("周常\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
-      }
-      break;
-    case 2:
-      {
-        ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg2.png");
-        label = cocos2d::Label::create("月常\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
-      }
-      break;
-    case 3:
-      {
-        ibg = cocos2d::Sprite::createWithSpriteFrameName("ms_bg4.png");
-        label = cocos2d::Label::create(cocos2d::CCString::createWithFormat("%s\n已完成！", tile.c_str())->getCString(), GFONT_NAME, GFONT_SIZE_NORMAL);
-      }
-      break;
+  int type = pop->type;
+  std::string title = pop->title;
+  std::string icon = pop->icon;
+
+  if (type == 5) {
+    cocos2d::Label *label = cocos2d::Label::createWithBMFont("ab34.fnt", title.c_str());
+    label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+    label->setPosition(cocos2d::Vec2(90, 20));
+    board->addChild(label);
+  } else if (type = 4) {
+    cocos2d::Sprite *item = cocos2d::Sprite::create(icon.c_str());
+    item->setPosition(cocos2d::Vec2(26, 19));
+    item->setScale(0.7f);
+    board->addChild(item);
+
+    cocos2d::Sprite *sname = cocos2d::Sprite::create(title.c_str());
+    sname->setPosition(cocos2d::Vec2(117, 30));
+    board->addChild(sname);
+    cocos2d::Sprite *scoll = cocos2d::Sprite::create("collected.png");
+    scoll->setPosition(cocos2d::Vec2(117, 13));
+    board->addChild(scoll);
+  } else {
+    std::string config[4][2] = {
+      {"ms_bg1.png", "日常任务"},
+      {"ms_bg3.png", "周常任务"},
+      {"ms_bg2.png", "月常任务"},
+      {"ms_bg4.png", title}
+    };
+    cocos2d::Sprite *ibg = cocos2d::Sprite::createWithSpriteFrameName(config[type][0]+"\n已完成！");
+    cocos2d::Label *label = cocos2d::Label::createWithTTF(config[type][1], GFONT_NAME, GFONT_SIZE_NORMAL);
+
+    ibg->setPosition(cocos2d::Vec2(22, 22));
+    board->addChild(ibg);
+    cocos2d::Sprite *iconsp = cocos2d::Sprite::createWithSpriteFrameName(icon.c_str());
+    iconsp->setPosition(ibg->getPosition());
+    if( type == 3 )
+    {
+      iconsp->setScale(0.625f);
+    }
+    board->addChild(iconsp);
+
+    label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+    label->setPosition(cocos2d::Vec2(100, 20));
+    board->addChild(label);
   }
-  ibg->setPosition(cocos2d::Vec2(22, 22));
-  board->addChild(ibg);
-  cocos2d::Sprite *iconsp = cocos2d::Sprite::createWithSpriteFrameName(icon.c_str());
-  iconsp->setPosition(ibg->getPosition());
-  if( type == 3 )
-  {
-    iconsp->setScale(0.625f);
-  }
-  board->addChild(iconsp);
-  label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-  label->setPosition(cocos2d::Vec2(100, 20));
-  board->addChild(label);
-  cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, -board->getContentSize().height));
-  cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
-  cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, board->getContentSize().height));
-  cocos2d::CCHide *a4 = cocos2d::CCHide::create();
-  cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
-  cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
-  board->runAction(sq);
-  GameTool::PlaySound("sound/objective-complete.mp3");
-}
 
-void GamePlay::pieceComplete(std::string title, std::string icon)
-{
-  cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
-  board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
-  mTaskComplete->addChild(board);
-  cocos2d::Sprite *item = cocos2d::Sprite::create(icon.c_str());
-  item->setPosition(cocos2d::Vec2(26, 19));
-  item->setScale(0.7f);
-  board->addChild(item);
-  cocos2d::Sprite *sname = cocos2d::Sprite::create(title.c_str());
-  sname->setPosition(cocos2d::Vec2(117, 30));
-  board->addChild(sname);
-  cocos2d::Sprite *scoll = cocos2d::Sprite::create("collected.png");
-  scoll->setPosition(cocos2d::Vec2(117, 13));
-  board->addChild(scoll);
-  cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, -board->getContentSize().height));
-  cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
-  cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, board->getContentSize().height));
-  cocos2d::CCHide *a4 = cocos2d::CCHide::create();
-  cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
-  cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
-  board->runAction(sq);
-  GameTool::PlaySound("sound/objective-complete.mp3");
-}
-
-void GamePlay::popText(std::string text)
-{
-  cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
-  board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
-  mTaskComplete->addChild(board);
-  cocos2d::Label *label = cocos2d::Label::createWithBMFont("ab34.fnt", text.c_str());
-  label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-  label->setPosition(cocos2d::Vec2(90, 20));
-  board->addChild(label);
-  cocos2d::CCMoveBy *a1 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, -board->getContentSize().height));
-  cocos2d::CCDelayTime *a2 = cocos2d::CCDelayTime::create(2);
-  cocos2d::CCMoveBy *a3 = cocos2d::CCMoveBy::create(0.5f, Vec2(0, board->getContentSize().height));
-  cocos2d::CCHide *a4 = cocos2d::CCHide::create();
-  cocos2d::CCCallFunc *cb = cocos2d::CCCallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::callBack));
-  cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, cb, NULL);
-  board->runAction(sq);
+  board->runAction(cocos2d::Sequence::create(
+        cocos2d::MoveBy::create(0.5f, Vec2(0, -board->getContentSize().height)),
+        cocos2d::DelayTime::create(2),
+        cocos2d::MoveBy::create(0.5f, Vec2(0, board->getContentSize().height)),
+        cocos2d::Hide::create(),
+        cocos2d::CallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::processNextNotification)),
+        nullptr));
   GameTool::PlaySound("sound/objective-complete.mp3");
 }
 
@@ -1345,27 +1292,7 @@ void GamePlay::processNotificationQueue()
   mTaskComplete->removeAllChildrenWithCleanup(true);
   if( gPopQueues != NULL && gPopQueues->count() > 0)
   {
-    PopQueue *pop = (PopQueue*)gPopQueues->objectAtIndex(0);
-    switch (pop->type) {
-      case 0:
-      case 1:
-      case 2:
-      case 3:
-        {
-          GamePlay::taskCompleted(pop->title, pop->icon, pop->type);
-        }
-        break;
-      case 4:
-        {
-          GamePlay::pieceComplete(pop->title, pop->icon);
-        }
-        break;
-      case 5:
-        {
-          GamePlay::popText(pop->title);
-        }
-        break;
-    }
+    popNotification(gPopQueues->objectAtIndex(0));
     gPopQueues->removeObjectAtIndex(0);
   }
 }

@@ -13,6 +13,16 @@
 
 #define OP_RESET (0)
 
+class PopQueue : public Ref {
+  public:
+    CREATE_FUNC(PopQueue);
+
+    bool init(){return true;};
+    std::string title;
+    std::string icon;
+    int type;
+};
+
 class GamePlay : 
   public cocos2d::Layer
 {
@@ -33,13 +43,11 @@ class GamePlay :
     virtual void onAcceleration(Acceleration* acc, Event* unsedEvent);
     static GamePlay *sharedGamePlay();
 
-    void callBack() {GamePlay::sharedGamePlay()->processNotificationQueue();};
+    void processNextNotification() {GamePlay::sharedGamePlay()->processNotificationQueue();};
     void startLoopFever();
     void stopLoopFever();
 
-    void taskCompleted(std::string tile, std::string icon, int type);
-    void pieceComplete(std::string title, std::string icon);
-    void popText(std::string text);
+    void popNotification(PopQueue *);
     void scheduleSpellRelease(cocos2d::Node* target, SEL_CallFunc sel);
     void setGameMode(int mod);
     int getGameMode();

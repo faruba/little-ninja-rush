@@ -425,14 +425,14 @@ cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile(
     */
 }
 
-void GameOver::onChange() 
+void GameOver::onChange(cocos2d::Ref*)
 {
     GameTool::PlaySound("sound/click.mp3");
     GamePlay *play = GamePlay::sharedGamePlay();
     play->change();
 }
 
-void GameOver::onMenu() 
+void GameOver::onMenu(cocos2d::Ref*)
 {
     
     GameTool::PlaySound("sound/click.mp3");
@@ -440,7 +440,7 @@ void GameOver::onMenu()
     play->exit();
 }
 
-void GameOver::onRestart() 
+void GameOver::onRestart(cocos2d::Ref*) 
 {
     GameTool::PlaySound("sound/click.mp3");
     if( GameRecord::sharedGameRecord()->coins >= mCost )
@@ -459,7 +459,7 @@ cocos2d::CCLog("cost=%d", mCost);
     }
 }
 
-void GameOver::onFacebook() 
+void GameOver::onFacebook(cocos2d::Ref*)
 {
 //    if( !mPostingFacebook )
 //    {
@@ -477,7 +477,7 @@ void GameOver::onFacebook()
 //    }
 }
 
-void GameOver::onTwitter() 
+void GameOver::onTwitter(cocos2d::Ref*)
 {
 //    if( !mPostingTwitter )
 //    {
@@ -561,7 +561,7 @@ void GameOver::doneFacebook(cocos2d::CCInteger* res)
 //    }
 }
 
-void GameOver::doneTwitter(cocos2d::CCInteger* res) 
+void GameOver::doneTwitter(cocos2d::CCInteger* res)
 {
 //    int result = res->intValue();
 //    mPostingTwitter = false;
@@ -592,12 +592,12 @@ void GameOver::doneTwitter(cocos2d::CCInteger* res)
 
 SEL_MenuHandler GameOver::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChange", GameOver::onChange);
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMenu", GameOver::onMenu);
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRestart", GameOver::onRestart);
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onFacebook", GameOver::onFacebook);
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTwitter", GameOver::onTwitter);
-//    
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChange", GameOver::onChange);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMenu", GameOver::onMenu);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRestart", GameOver::onRestart);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onFacebook", GameOver::onFacebook);
+CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onTwitter", GameOver::onTwitter);
+    
     return NULL;
 }
 

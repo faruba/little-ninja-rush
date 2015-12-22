@@ -77,11 +77,11 @@ cocos2d::Sprite *mCup;
 
 
     //-- auto callback --
-    void onChange();
-    void onMenu();
-    void onRestart();
-    void onFacebook();
-    void onTwitter();
+    void onChange(cocos2d::Ref*);
+    void onMenu(cocos2d::Ref*);
+    void onRestart(cocos2d::Ref*);
+    void onFacebook(cocos2d::Ref*);
+    void onTwitter(cocos2d::Ref*);
 
     void doneFacebook(cocos2d::CCInteger* res);
     void doneTwitter(cocos2d::CCInteger* res);
