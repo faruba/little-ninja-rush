@@ -122,17 +122,17 @@ if ( WIN32 )
 )
 endif( WIN32 )
 
+file(GLOB SOURCE_FILE Classes/*.cpp)
 set(GAME_SRC
   Classes/AppDelegate.cpp
-  Classes/HelloWorldScene.cpp
-  Classes/*.cpp
+	${SOURCE_FILE}
   ${PLATFORM_SPECIFIC_SRC}
 )
 
+file(GLOB HEADER_FILE Classes/*.h)
 set(GAME_HEADERS
   Classes/AppDelegate.h
-  Classes/HelloWorldScene.h
-  Classes/*.h
+	${HEADER_FILE}
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 
