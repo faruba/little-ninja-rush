@@ -150,7 +150,7 @@ std::string gtReadString(cocos2d::CCDictionary *dic, const char *key, std::strin
 void unloadTextureFromeSpriteFrameFile(const char *plist);
 
 //UIImage* makeScreenshot();
-cocos2d::CCSequence *createScaleSequence(float fDuration[], float fScale[], int count);
+cocos2d::Sequence *createScaleSequence(float fDuration[], float fScale[], int count);
 cocos2d::Node *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pNodeLoader, Ref *target);
 
 

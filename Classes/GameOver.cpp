@@ -471,8 +471,8 @@ void GameOver::onFacebook(cocos2d::Ref*)
 //        
 //        mFacebookAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("ftloading.png"));
 //        mFacebookAction->stopAllActions();
-//        CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 360);
-//        CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
+//        RotateBy *rb = cocos2d::RotateBy::create(1, 360);
+//        RepeatForever *rf = cocos2d::RepeatForever::create(rb);
 //        mFacebookAction->runAction(rf);
 //    }
 }
@@ -508,8 +508,8 @@ void GameOver::onTwitter(cocos2d::Ref*)
 //        
 //        mTwitterAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("ftloading.png"));
 //        mTwitterAction->stopAllActions();
-//        CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 360);
-//        CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
+//        RotateBy *rb = cocos2d::RotateBy::create(1, 360);
+//        RepeatForever *rf = cocos2d::RepeatForever::create(rb);
 //        mTwitterAction->runAction(rf);
 //    }
 }

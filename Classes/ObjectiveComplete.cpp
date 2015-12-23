@@ -45,7 +45,7 @@ void ObjectiveComplete::onCreate()
     pReader->release();
     mNode->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->baseLeft, 0));
     play->addChild(mNode, LAYER_MASK+1);
-cocos2d::CCRect clip = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(0, 142, UniversalFit::sharedUniversalFit()->playSize.width, 36));
+cocos2d::CCRect clip = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::Rect(0, 142, UniversalFit::sharedUniversalFit()->playSize.width, 36));
     mObjRect = CEClipedNode::create();
     mObjRect->setClipRect(&clip);
     mObjRect->setPosition(cocos2d::Vec2(12, 12));

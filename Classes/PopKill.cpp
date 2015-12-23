@@ -32,14 +32,14 @@ void PopKill::onCreate()
     GamePlay::sharedGamePlay()->addChild(label, LAYER_MAINROLE+1);
     //set animation
     //label->setScale(0);
-cocos2d::CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.2f, 1.2f);
-cocos2d::CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.1f, 0.9f);
-cocos2d::CCScaleTo *st3 = cocos2d::CCScaleTo::create(0.05f, 1.1f);
-cocos2d::CCScaleTo *st4 = cocos2d::CCScaleTo::create(0.05f, 1);
-cocos2d::CCDelayTime *dt = cocos2d::CCDelayTime::create(0.6f);
-cocos2d::CCScaleTo *st5 = cocos2d::CCScaleTo::create(0.1f, 0);
+cocos2d::ScaleTo *st1 = cocos2d::ScaleTo::create(0.2f, 1.2f);
+cocos2d::ScaleTo *st2 = cocos2d::ScaleTo::create(0.1f, 0.9f);
+cocos2d::ScaleTo *st3 = cocos2d::ScaleTo::create(0.05f, 1.1f);
+cocos2d::ScaleTo *st4 = cocos2d::ScaleTo::create(0.05f, 1);
+cocos2d::DelayTime *dt = cocos2d::DelayTime::create(0.6f);
+cocos2d::ScaleTo *st5 = cocos2d::ScaleTo::create(0.1f, 0);
 cocos2d::CCCallFunc *cf = cocos2d::CCCallFunc::create(this, callfunc_selector(PopKill::onCompleteAction));
-cocos2d::CCSequence *seq = cocos2d::CCSequence::create(st1, st2, st3, st4, dt, st5, cf, NULL);
+cocos2d::Sequence *seq = cocos2d::Sequence::create(st1, st2, st3, st4, dt, st5, cf, NULL);
     label->runAction(seq);
 }
 

@@ -61,7 +61,7 @@ void GameInterface::onCreate()
     mSpFgTop->setVisible(false);
     mSpFgNode->addChild(mSpFgTop);
 cocos2d::CCBlink *usaBlink = cocos2d::CCBlink::create(60, 300);
-cocos2d::CCRepeatForever *usaRep = cocos2d::CCRepeatForever::create(usaBlink);
+cocos2d::RepeatForever *usaRep = cocos2d::RepeatForever::create(usaBlink);
     mSpFgNode->runAction(usaRep);
     
     //动态使用框子
@@ -477,13 +477,13 @@ cocos2d::Size feversize = mSpeedFever->getContentSize();
             if( targetstate == 1 )
             {
 cocos2d::CCBlink *bnk = cocos2d::CCBlink::create(1, 5);
-cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(bnk);
+cocos2d::RepeatForever *rf = cocos2d::RepeatForever::create(bnk);
                 mSpeedRed->runAction(rf);
             }
             else if( targetstate == 2 )
             {
 cocos2d::CCBlink *bnk = cocos2d::CCBlink::create(1, 5);
-cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(bnk);
+cocos2d::RepeatForever *rf = cocos2d::RepeatForever::create(bnk);
                 mSpeedFever->runAction(rf);
             }
             mSpeedState = targetstate;
@@ -595,11 +595,11 @@ void GameInterface::popFeverCoins(int coins)
     mFeverCoins->stopAllActions();
     mFeverFont->setString(cocos2d::CCString::createWithFormat("+%d", coins)->getCString());
     mFeverCoins->setScale(0.8f);
-cocos2d::CCScaleTo *a1 = cocos2d::CCScaleTo::create(0.1f, 1.1f);
-cocos2d::CCScaleTo *a2 = cocos2d::CCScaleTo::create(0.2f, 1);
-cocos2d::CCDelayTime *a3 = cocos2d::CCDelayTime::create(3);
+cocos2d::ScaleTo *a1 = cocos2d::ScaleTo::create(0.1f, 1.1f);
+cocos2d::ScaleTo *a2 = cocos2d::ScaleTo::create(0.2f, 1);
+cocos2d::DelayTime *a3 = cocos2d::DelayTime::create(3);
 cocos2d::CCHide *a4 = cocos2d::CCHide::create();
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, a3, a4, NULL);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(a1, a2, a3, a4, NULL);
     mFeverCoins->runAction(sq);
     mFeverCoins->setVisible(true);
 }
@@ -618,9 +618,9 @@ void GameInterface::popHits(int number)
     mHitNode->stopAllActions();
     mHitCount->setString(cocos2d::CCString::createWithFormat("%d", number)->getCString());
     mHitNode->setScale(0.01f);
-cocos2d::CCScaleTo *a1 = cocos2d::CCScaleTo::create(0.1f, 1.5f);
-cocos2d::CCScaleTo *a2 = cocos2d::CCScaleTo::create(0.2f, 1);
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, NULL);
+cocos2d::ScaleTo *a1 = cocos2d::ScaleTo::create(0.1f, 1.5f);
+cocos2d::ScaleTo *a2 = cocos2d::ScaleTo::create(0.2f, 1);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(a1, a2, NULL);
     mHitNode->runAction(sq);
     mHitNode->setVisible(true);
 }
@@ -645,9 +645,9 @@ void GameInterface::updateHits(float time)
 void GameInterface::fadeHits() 
 {
     mHitNode->stopAllActions();
-cocos2d::CCScaleTo *a1 = cocos2d::CCScaleTo::create(0.5f, 0);
+cocos2d::ScaleTo *a1 = cocos2d::ScaleTo::create(0.5f, 0);
 cocos2d::CCHide *a2 = cocos2d::CCHide::create();
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(a1, a2, NULL);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(a1, a2, NULL);
     mHitNode->runAction(sq);
 }
 
@@ -656,20 +656,20 @@ void GameInterface::setArcadeX(int x)
     mArcadeX->setString(cocos2d::CCString::createWithFormat("x%d", x)->getCString());
     if( x <= 0 )
     {
-cocos2d::CCScaleTo *st = cocos2d::CCScaleTo::create(1, 0);
+cocos2d::ScaleTo *st = cocos2d::ScaleTo::create(1, 0);
 cocos2d::CCHide *hd = cocos2d::CCHide::create();
-cocos2d::CCSequence *seq = cocos2d::CCSequence::create(st,  hd, NULL);
+cocos2d::Sequence *seq = cocos2d::Sequence::create(st,  hd, NULL);
         mArcadeX->runAction(seq);
     }
     else
     {
         mArcadeX->setScale(0);
         mArcadeX->setVisible(true);
-cocos2d::CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.3f, 1.5f);
-cocos2d::CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.2f, 0.8f);
-cocos2d::CCScaleTo *st3 = cocos2d::CCScaleTo::create(0.1f, 1.2f);
-cocos2d::CCScaleTo *st4 = cocos2d::CCScaleTo::create(0.1f, 1);
-cocos2d::CCSequence *seq = cocos2d::CCSequence::create(st1, st2, st3, st4, NULL);
+cocos2d::ScaleTo *st1 = cocos2d::ScaleTo::create(0.3f, 1.5f);
+cocos2d::ScaleTo *st2 = cocos2d::ScaleTo::create(0.2f, 0.8f);
+cocos2d::ScaleTo *st3 = cocos2d::ScaleTo::create(0.1f, 1.2f);
+cocos2d::ScaleTo *st4 = cocos2d::ScaleTo::create(0.1f, 1);
+cocos2d::Sequence *seq = cocos2d::Sequence::create(st1, st2, st3, st4, NULL);
         mArcadeX->runAction(seq);
     }
 }

@@ -25,8 +25,8 @@ void ReflectDart::onCreate()
     mSprite = cocos2d::Sprite::createWithSpriteFrameName("tjshuriken.png");
     mSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     mSprite->setPosition(mPos);
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(0.5f, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::RotateBy* rb = cocos2d::RotateBy::create(0.5f, 720);
+cocos2d::RepeatForever* rf = cocos2d::RepeatForever::create(rb);
     mSprite->runAction(rf);
     GamePlay::sharedGamePlay()->addChild(mSprite, LAYER_MAINROLE+1);
     

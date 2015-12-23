@@ -79,14 +79,14 @@ cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui
     
     mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
     mOver = false;
-cocos2d::CCRotateBy *rb1 = cocos2d::CCRotateBy::create(1, 60);
-cocos2d::CCRepeatForever *rf1 = cocos2d::CCRepeatForever::create(rb1);
+cocos2d::RotateBy *rb1 = cocos2d::RotateBy::create(1, 60);
+cocos2d::RepeatForever *rf1 = cocos2d::RepeatForever::create(rb1);
     mRotateCW->runAction(rf1);
-cocos2d::CCRotateBy *rb2 = cocos2d::CCRotateBy::create(1, -30);
-cocos2d::CCRepeatForever *rf2 = cocos2d::CCRepeatForever::create(rb2);
+cocos2d::RotateBy *rb2 = cocos2d::RotateBy::create(1, -30);
+cocos2d::RepeatForever *rf2 = cocos2d::RepeatForever::create(rb2);
     mRotateACW->runAction(rf2);
-cocos2d::CCRotateBy *rb3 = cocos2d::CCRotateBy::create(1, 20);
-cocos2d::CCRepeatForever *rf3 = cocos2d::CCRepeatForever::create(rb3);
+cocos2d::RotateBy *rb3 = cocos2d::RotateBy::create(1, 20);
+cocos2d::RepeatForever *rf3 = cocos2d::RepeatForever::create(rb3);
     mLightBack->runAction(rf3);
     mState = 0;
     mPrize = 0;
@@ -167,9 +167,9 @@ void CommitScroll::onUpdate(float delta)
 //                else {
 //                    mScroll->stopAllActions();
 //                    mScroll->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("js_bjzd.png"));
-//cocos2d::CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.3f, 1.2f);
-//cocos2d::CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.1f, 1.0f);
-//cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
+//cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.3f, 1.2f);
+//cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.1f, 1.0f);
+//cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
 //                    mScroll->runAction(sq);
 //                }
 //            }
@@ -185,9 +185,9 @@ void CommitScroll::onUpdate(float delta)
 //                mScroll->setVisible(true);
 //                mScroll->stopAllActions();
 //                mScroll->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("js_bjzd.png"));
-//cocos2d::CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.3f, 1.2f);
-//cocos2d::CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.1f, 1.0f);
-//cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
+//cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.3f, 1.2f);
+//cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.1f, 1.0f);
+//cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
 //                mScroll->runAction(sq);
 //            }
 //        }
@@ -249,9 +249,9 @@ void CommitScroll::onScroll()
                     const char *filename = "prize-1.png";
                     mScroll->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename));
                     mScroll->setScale(0.01f);
-cocos2d::CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.4f, 1.5f);
-cocos2d::CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.2f, 1.0f);
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
+cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.4f, 1.5f);
+cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.2f, 1.0f);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
                     mScroll->runAction(sq);
                 }
                 else {
@@ -261,16 +261,16 @@ cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
             else {
                 GameTool::PlaySound("sound/openscroll.mp3");
                 mFlash->setVisible(true);
-cocos2d::CCFadeOut *fo1 = cocos2d::CCFadeOut::create(3);
+cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(3);
                 mFlash->runAction(fo1);
                 mRotateNode->setVisible(true);
                 
                 const char *filename = cocos2d::CCString::createWithFormat("prize-%d.png", prize)->getCString();
                 mScroll->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename));
                 mScroll->setScale(0.01f);
-cocos2d::CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.4f, 1.5f);
-cocos2d::CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.2f, 1.0f);
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
+cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.4f, 1.5f);
+cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.2f, 1.0f);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
                 mScroll->runAction(sq);
             }
             
@@ -284,9 +284,9 @@ cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
         this->implementPrize();
         
         mScroll->stopAllActions();
-cocos2d::CCScaleTo *sc1 = cocos2d::CCScaleTo::create(0.1f, 1.2f);
-cocos2d::CCScaleTo *sc2 = cocos2d::CCScaleTo::create(0.3f, 0);
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(sc1, sc2, NULL);
+cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.1f, 1.2f);
+cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.3f, 0);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
         mScroll->runAction(sq);
         
         mState = 2;
@@ -404,7 +404,7 @@ int CommitScroll::lottery()
     mPrize = prize;
     mItemName->setString(gPrizeItem[mPrize]);
     mItemName->stopAllActions();
-cocos2d::CCFadeIn *fo = cocos2d::CCFadeIn::create(2);
+cocos2d::FadeIn *fo = cocos2d::FadeIn::create(2);
     mItemName->runAction(fo);
     return prize;
 }

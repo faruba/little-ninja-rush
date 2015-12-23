@@ -100,7 +100,7 @@ void CollectionMenu::onEnter() {
   }
 
   mScroll = ABScrollContent::create();
-  cocos2d::CCRect clip = cocos2d::CCRectMake(mScrollPoint->getPosition().x, mScrollPoint->getPosition().y, 322, 177.5f);
+  cocos2d::CCRect clip = cocos2d::Rect(mScrollPoint->getPosition().x, mScrollPoint->getPosition().y, 322, 177.5f);
   mScroll->clickTarget = this;
   mScroll->clickMethod = callfunc_selector(CollectionMenu::clickMethod);
   mScroll->setClipRect(clip);

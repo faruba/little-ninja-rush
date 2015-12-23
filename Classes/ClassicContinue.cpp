@@ -79,9 +79,9 @@ cocos2d::Node *node = pReader->readNodeGraphFromFile("ui-continue.ccbi", this);
 void ControlLayer::tickNumber(int n) 
 {
     mNumber->setString(cocos2d::CCString::createWithFormat("%d", n)->getCString());
-cocos2d::CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.2f, 1.5f);
-cocos2d::CCScaleTo *st2 = cocos2d::CCScaleTo::create(0.4f, 1);
-cocos2d::CCSequence *seq = cocos2d::CCSequence::create(st1, st2, NULL);
+cocos2d::ScaleTo *st1 = cocos2d::ScaleTo::create(0.2f, 1.5f);
+cocos2d::ScaleTo *st2 = cocos2d::ScaleTo::create(0.4f, 1);
+cocos2d::Sequence *seq = cocos2d::Sequence::create(st1, st2, NULL);
     mNumber->runAction(seq);
     
     GameTool::PlaySound("sound/feverbgmend.mp3");

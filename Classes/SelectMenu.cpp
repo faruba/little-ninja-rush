@@ -98,15 +98,15 @@ cocos2d::Node *ui = createUIByCCBI("menu-select", "SelectMenu", SelectMenuLayerL
   mSlideTimer = -1;
   mTargetRole = -1;
   //添加动画
-cocos2d::CCMoveBy *lmb1 = cocos2d::CCMoveBy::create(0.2f, Vec2(-10, 0));
-cocos2d::CCMoveBy *lmb2 = cocos2d::CCMoveBy::create(0.2f, Vec2(10, 0));
-cocos2d::CCSequence *lseq = (cocos2d::CCSequence*)CCSequence::create(lmb1, lmb2, NULL);
-cocos2d::CCRepeatForever *lrep = cocos2d::CCRepeatForever::create(lseq);
+cocos2d::MoveBy *lmb1 = cocos2d::MoveBy::create(0.2f, Vec2(-10, 0));
+cocos2d::MoveBy *lmb2 = cocos2d::MoveBy::create(0.2f, Vec2(10, 0));
+cocos2d::Sequence *lseq = (cocos2d::Sequence*)Sequence::create(lmb1, lmb2, NULL);
+cocos2d::RepeatForever *lrep = cocos2d::RepeatForever::create(lseq);
   mLeftMark->runAction(lrep);
-cocos2d::CCMoveBy *rmb1 = cocos2d::CCMoveBy::create(0.2f, Vec2(10, 0));
-cocos2d::CCMoveBy *rmb2 = cocos2d::CCMoveBy::create(0.2f, Vec2(-10, 0));
-cocos2d::CCSequence *rseq = (cocos2d::CCSequence*)CCSequence::create(rmb1, rmb2, NULL);
-cocos2d::CCRepeatForever *rrep = cocos2d::CCRepeatForever::create(rseq);
+cocos2d::MoveBy *rmb1 = cocos2d::MoveBy::create(0.2f, Vec2(10, 0));
+cocos2d::MoveBy *rmb2 = cocos2d::MoveBy::create(0.2f, Vec2(-10, 0));
+cocos2d::Sequence *rseq = (cocos2d::Sequence*)Sequence::create(rmb1, rmb2, NULL);
+cocos2d::RepeatForever *rrep = cocos2d::RepeatForever::create(rseq);
   mRightMark->runAction(rrep);
   mCurrRole = GameRecord::sharedGameRecord()->curr_char;
   this->updateCharacterInfo(mCurrRole);

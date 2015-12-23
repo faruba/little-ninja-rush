@@ -49,9 +49,9 @@ cocos2d::Node *node = pReader->readNodeGraphFromFile("merchant", this);
     //animation set
 cocos2d::CCMoveTo *mt1 = cocos2d::CCMoveTo::create(0.5f, Vec2(UniversalFit::sharedUniversalFit()->baseLeft, 0));
     mMerchantbox->runAction(mt1);
-cocos2d::CCDelayTime *dt2 = cocos2d::CCDelayTime::create(0.5f);
-cocos2d::CCFadeIn *fi2 = cocos2d::CCFadeIn::create(0.5f);
-cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(dt2, fi2, NULL);
+cocos2d::DelayTime *dt2 = cocos2d::DelayTime::create(0.5f);
+cocos2d::FadeIn *fi2 = cocos2d::FadeIn::create(0.5f);
+cocos2d::Sequence *sq2 = cocos2d::Sequence::create(dt2, fi2, NULL);
     mTalkbox->runAction(sq2);
     
     mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
@@ -269,13 +269,13 @@ void MerchantPanel::onMerchantBuy1()
         mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
         
         mItem1->stopAllActions();
-cocos2d::CCFadeOut *fo1 = cocos2d::CCFadeOut::create(0.5f);
-cocos2d::CCFadeIn *fi1 = cocos2d::CCFadeIn::create(0);
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(fo1, fi1, NULL);
+cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(0.5f);
+cocos2d::FadeIn *fi1 = cocos2d::FadeIn::create(0);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(fo1, fi1, NULL);
         mItem1->runAction(sq);
-cocos2d::CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.5f, 1.5f);
-cocos2d::CCScaleTo *st2 = cocos2d::CCScaleTo::create(0, 1);
-cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(st1, st2, NULL);
+cocos2d::ScaleTo *st1 = cocos2d::ScaleTo::create(0.5f, 1.5f);
+cocos2d::ScaleTo *st2 = cocos2d::ScaleTo::create(0, 1);
+cocos2d::Sequence *sq2 = cocos2d::Sequence::create(st1, st2, NULL);
         mItem1->runAction(sq2);
         
         this->updateBuy1();
@@ -320,13 +320,13 @@ void MerchantPanel::onMerchantBuy2()
          mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
          
          mItem2->stopAllActions();
-cocos2d::CCFadeOut *fo1 = cocos2d::CCFadeOut::create(0.5f);
-cocos2d::CCFadeIn *fi1 = cocos2d::CCFadeIn::create(0);
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(fo1, fi1, NULL);
+cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(0.5f);
+cocos2d::FadeIn *fi1 = cocos2d::FadeIn::create(0);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(fo1, fi1, NULL);
          mItem2->runAction(sq);
-cocos2d::CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.5f, 1.5f);
-cocos2d::CCScaleTo *st2 = cocos2d::CCScaleTo::create(0, 1);
-cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(st1, st2, NULL);
+cocos2d::ScaleTo *st1 = cocos2d::ScaleTo::create(0.5f, 1.5f);
+cocos2d::ScaleTo *st2 = cocos2d::ScaleTo::create(0, 1);
+cocos2d::Sequence *sq2 = cocos2d::Sequence::create(st1, st2, NULL);
          mItem2->runAction(sq2);
          
          this->updateBuy2();
@@ -371,13 +371,13 @@ void MerchantPanel::onMerchantBuy3()
         mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
         
         mItem3->stopAllActions();
-cocos2d::CCFadeOut *fo1 = cocos2d::CCFadeOut::create(0.5f);
-cocos2d::CCFadeIn *fi1 = cocos2d::CCFadeIn::create(0);
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(fo1, fi1, NULL);
+cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(0.5f);
+cocos2d::FadeIn *fi1 = cocos2d::FadeIn::create(0);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(fo1, fi1, NULL);
         mItem3->runAction(sq);
-cocos2d::CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.5f, 1.5f);
-cocos2d::CCScaleTo *st2 = cocos2d::CCScaleTo::create(0, 1);
-cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(st1, st2, NULL);
+cocos2d::ScaleTo *st1 = cocos2d::ScaleTo::create(0.5f, 1.5f);
+cocos2d::ScaleTo *st2 = cocos2d::ScaleTo::create(0, 1);
+cocos2d::Sequence *sq2 = cocos2d::Sequence::create(st1, st2, NULL);
         mItem3->runAction(sq2);
         
         this->updateBuy3();
@@ -416,13 +416,13 @@ void MerchantPanel::onMerchantBuy4()
         mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
         
         mItem4->stopAllActions();
-cocos2d::CCFadeOut *fo1 = cocos2d::CCFadeOut::create(0.5f);
-cocos2d::CCFadeIn *fi1 = cocos2d::CCFadeIn::create(0);
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(fo1, fi1, NULL);
+cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(0.5f);
+cocos2d::FadeIn *fi1 = cocos2d::FadeIn::create(0);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(fo1, fi1, NULL);
         mItem4->runAction(sq);
-cocos2d::CCScaleTo *st1 = cocos2d::CCScaleTo::create(0.5f, 1.5f);
-cocos2d::CCScaleTo *st2 = cocos2d::CCScaleTo::create(0, 1);
-cocos2d::CCSequence *sq2 = cocos2d::CCSequence::create(st1, st2, NULL);
+cocos2d::ScaleTo *st1 = cocos2d::ScaleTo::create(0.5f, 1.5f);
+cocos2d::ScaleTo *st2 = cocos2d::ScaleTo::create(0, 1);
+cocos2d::Sequence *sq2 = cocos2d::Sequence::create(st1, st2, NULL);
         mItem4->runAction(sq2);
     }
     else {

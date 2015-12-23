@@ -207,22 +207,22 @@ void Item::onCreate()
     
     if( mTid < 2 )
     {
-cocos2d::CCRotateBy *rot = cocos2d::CCRotateBy::create(1, 1080);
-cocos2d::CCRepeatForever *rep = cocos2d::CCRepeatForever::create(rot);
+cocos2d::RotateBy *rot = cocos2d::RotateBy::create(1, 1080);
+cocos2d::RepeatForever *rep = cocos2d::RepeatForever::create(rot);
         mSprite->runAction(rep);
         
         mSprite->setScale(0.1f);
-cocos2d::CCScaleTo *scale1 = cocos2d::CCScaleTo::create(0.15f, 1.2f);
-cocos2d::CCScaleTo *scale2 = cocos2d::CCScaleTo::create(0.15f, 1);
-cocos2d::CCSequence *seq = cocos2d::CCSequence::create(scale1, scale2, NULL);
+cocos2d::ScaleTo *scale1 = cocos2d::ScaleTo::create(0.15f, 1.2f);
+cocos2d::ScaleTo *scale2 = cocos2d::ScaleTo::create(0.15f, 1);
+cocos2d::Sequence *seq = cocos2d::Sequence::create(scale1, scale2, NULL);
         mSprite->runAction(seq);
     }
     else
     {
         mSprite->setScale(0.05f);
-cocos2d::CCScaleTo *scale1 = cocos2d::CCScaleTo::create(0.15f, 0.95f);
-cocos2d::CCScaleTo *scale2 = cocos2d::CCScaleTo::create(0.15f, 0.8f);
-cocos2d::CCSequence *seq = cocos2d::CCSequence::create(scale1, scale2, NULL);
+cocos2d::ScaleTo *scale1 = cocos2d::ScaleTo::create(0.15f, 0.95f);
+cocos2d::ScaleTo *scale2 = cocos2d::ScaleTo::create(0.15f, 0.8f);
+cocos2d::Sequence *seq = cocos2d::Sequence::create(scale1, scale2, NULL);
         mSprite->runAction(seq);
     }
     

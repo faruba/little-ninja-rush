@@ -204,28 +204,28 @@ void CommitArcade::onUpdate(float delta)
                 mTimer = 0;
                 mCup->setScale(0);
                 mCup->setVisible(true);
-cocos2d::CCScaleTo *cst = cocos2d::CCScaleTo::create(0.2f, 1.5f);
-cocos2d::CCScaleTo *cst2 = cocos2d::CCScaleTo::create(0.1f, 1);
-cocos2d::CCDelayTime *dt = cocos2d::CCDelayTime::create(2);
-cocos2d::CCScaleTo *cst3 = cocos2d::CCScaleTo::create(1, 0);
-cocos2d::CCSequence *cseq = cocos2d::CCSequence::create(cst, cst2, dt, cst3, NULL);
+cocos2d::ScaleTo *cst = cocos2d::ScaleTo::create(0.2f, 1.5f);
+cocos2d::ScaleTo *cst2 = cocos2d::ScaleTo::create(0.1f, 1);
+cocos2d::DelayTime *dt = cocos2d::DelayTime::create(2);
+cocos2d::ScaleTo *cst3 = cocos2d::ScaleTo::create(1, 0);
+cocos2d::Sequence *cseq = cocos2d::Sequence::create(cst, cst2, dt, cst3, NULL);
                 mCup->runAction(cseq);
                 
                 mLight->setScale(0);
                 mLight->setVisible(true);
                 mLight->setOpacity(0);
-cocos2d::CCFadeIn *lfi = cocos2d::CCFadeIn::create(0.2f);
-cocos2d::CCDelayTime *ldy = cocos2d::CCDelayTime::create(2);
-cocos2d::CCFadeOut *lfo = cocos2d::CCFadeOut::create(2);
-cocos2d::CCSequence *lfs = cocos2d::CCSequence::create(lfi, ldy, lfo, NULL);
+cocos2d::FadeIn *lfi = cocos2d::FadeIn::create(0.2f);
+cocos2d::DelayTime *ldy = cocos2d::DelayTime::create(2);
+cocos2d::FadeOut *lfo = cocos2d::FadeOut::create(2);
+cocos2d::Sequence *lfs = cocos2d::Sequence::create(lfi, ldy, lfo, NULL);
                 mLight->runAction(lfs);
-cocos2d::CCScaleTo *lst = cocos2d::CCScaleTo::create(1, 3);
+cocos2d::ScaleTo *lst = cocos2d::ScaleTo::create(1, 3);
                 mLight->runAction(lst);
-cocos2d::CCRotateBy *lrt = cocos2d::CCRotateBy::create(6, 1000);
+cocos2d::RotateBy *lrt = cocos2d::RotateBy::create(6, 1000);
                 mLight->runAction(lrt);
                 
                 mFlash->setVisible(true);
-cocos2d::CCFadeOut *fo1 = cocos2d::CCFadeOut::create(2);
+cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(2);
                 mFlash->runAction(fo1);
                 
                 GameTool::PlaySound("sound/openscroll.mp3");

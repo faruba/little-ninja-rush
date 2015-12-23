@@ -188,8 +188,8 @@ cocos2d::Sprite *finger = cocos2d::Sprite::createWithSpriteFrameName("jc4.png");
     panel->addChild(finger);
 cocos2d::CCMoveTo *mt = cocos2d::CCMoveTo::create(1, Vec2(64, 36));
 cocos2d::CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.1, Vec2(37.5, 20.5));
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(mt, mt2, NULL);
-cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(sq);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(mt, mt2, NULL);
+cocos2d::RepeatForever *rf = cocos2d::RepeatForever::create(sq);
     finger->runAction(rf);
 }
 
@@ -211,8 +211,8 @@ cocos2d::Sprite *finger = cocos2d::Sprite::createWithSpriteFrameName("jc4.png");
     panel->addChild(finger);
 cocos2d::CCMoveTo *mt = cocos2d::CCMoveTo::create(1, Vec2(63.5f, 28));
 cocos2d::CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.1, Vec2(34.5f, 28));
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(mt, mt2, NULL);
-cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(sq);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(mt, mt2, NULL);
+cocos2d::RepeatForever *rf = cocos2d::RepeatForever::create(sq);
     finger->runAction(rf);
 }
 
@@ -229,8 +229,8 @@ cocos2d::Sprite *finger = cocos2d::Sprite::createWithSpriteFrameName("jc4.png");
     panel->addChild(finger);
 cocos2d::CCMoveTo *mt = cocos2d::CCMoveTo::create(1, Vec2(50, 20));
 cocos2d::CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.1, Vec2(50, 37.5f));
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(mt, mt2, NULL);
-cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(sq);
+cocos2d::Sequence *sq = cocos2d::Sequence::create(mt, mt2, NULL);
+cocos2d::RepeatForever *rf = cocos2d::RepeatForever::create(sq);
     finger->runAction(rf);
 }
 

@@ -99,7 +99,7 @@ cocos2d::Node * node = createUIByCCBI("menu-shop", "ShopMenu", ShopMenuLayerLoad
       this->addChild(node);
     }
     mClipedList = CEClipedNode::create();
-    mClipedList->setClipRect(new CCRect((UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(12, 12, 455, 264)))));
+    mClipedList->setClipRect(new CCRect((UniversalFit::sharedUniversalFit()->transformRect(cocos2d::Rect(12, 12, 455, 264)))));
     mList->addChild(mClipedList);
     mItemList = cocos2d::Node::create();
     mClipedList->addChild(mItemList);
@@ -502,7 +502,7 @@ bool ShopMenu::onTouchBegan(Touch * touch, Event * event)
     pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
     mTouchBegin = pos;
-cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
+cocos2d::CCRect rect = cocos2d::Rect(12, 12, 455, 264);
     if( rect.containsPoint(pos) )
     {
         mBeginPressY = pos.y;
@@ -551,7 +551,7 @@ void ShopMenu::onTouchEnded(Touch * touch, Event * event)
         cocos2d::Point pos = touch->getLocationInView();
         pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
         pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
-cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
+cocos2d::CCRect rect = cocos2d::Rect(12, 12, 455, 264);
         if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
                 rect.containsPoint(pos) )
         {
@@ -615,8 +615,8 @@ cocos2d::Sprite *titlesp = cocos2d::Sprite::createWithSpriteFrameName("sp-tc3.pn
 cocos2d::Sprite *descsp = cocos2d::Sprite::createWithSpriteFrameName("sp-tc2.png");
             descsp->setPosition(cocos2d::Vec2( spbg->getContentSize().width/2, 55));
             spbg->addChild(descsp);
-cocos2d::CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 720);
-cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::RotateBy *rb = cocos2d::RotateBy::create(1, 720);
+cocos2d::RepeatForever *rf = cocos2d::RepeatForever::create(rb);
             descsp->runAction(rf);
             
             mModalPurchase = pid;
