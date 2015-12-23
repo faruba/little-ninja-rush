@@ -1174,8 +1174,7 @@ void GamePlay::setTaskCompleteNode(cocos2d::Node * node)
   mTaskComplete = node;
 }
 
-bool GamePlay::completeSomeObjectives()
-{
+bool GamePlay::completeSomeObjectives() {
   {
     Objective *obj = GameRecord::sharedGameRecord()->task->dailyObjective;
     Achievement *ach = Tasks::dailyObjectiveWithUiid(obj->uiid);
@@ -1292,7 +1291,7 @@ void GamePlay::processNotificationQueue()
   mTaskComplete->removeAllChildrenWithCleanup(true);
   if( gPopQueues != NULL && gPopQueues->count() > 0)
   {
-    popNotification(gPopQueues->objectAtIndex(0));
+    popNotification((PopQueue*)gPopQueues->objectAtIndex(0));
     gPopQueues->removeObjectAtIndex(0);
   }
 }
