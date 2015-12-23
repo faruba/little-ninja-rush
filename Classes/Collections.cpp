@@ -2,6 +2,8 @@
 #include "GameTool.h"
 #include "GameRecord.h"
 #include "GameConstants.h"
+#include "json/filestream.h"
+#include "json/prettywriter.h"
 
 //常量定义
 #define PIECE_COUNT (47)
@@ -79,29 +81,31 @@ cocos2d::Ref* nli = dic->objectForKey("collection_newlist");
 
 void Collections::writeCollections(rapidjson::Document &document) 
 {
-//    document.AddMember("magic_piece", magic_piece, document.GetAllocator());
-//    for( int i=0; i<PIECE_COUNT; ++i)
-//    {
-//        document.AddMember(cocos2d::CCString::createWithFormat("pieces__%d", i)->getCString(), pieces[i], document.GetAllocator());
-//    }
-//    //write CCArray
-//    {
-//        Value lst(kArrayType);
-//        if( newlist != NULL )
-//        {
-//cocos2d::Ref *pObj = NULL;
-//CCARRAY_FOREACH(newlist, pObj)
-//            {
-//cocos2d::CCInteger *pInt = (cocos2d::CCInteger*)pObj;
-//                lst.AddMember("", pInt->getValue(), document.GetAllocator());
-//            }
-//        }
-//        document.AddMember("collection_newlist", lst, document.GetAllocator());
-//    }
-    //document.AddMember("collection_newlist", newlist, document.GetAllocator());
-    
-    document.AddMember("life_piece", life_piece, document.GetAllocator());
-    document.AddMember("dart_piece", dart_piece, document.GetAllocator());
+  document.AddMember("magic_piece", magic_piece, document.GetAllocator());
+  for( int i=0; i<PIECE_COUNT; ++i)
+  {
+      const std::string key = std::string("pieces__")+std::to_string(i);
+      rapidjson::Value index(key.c_str(), key.size(), document.GetAllocator());
+    document.AddMember(index, pieces[i], document.GetAllocator());
+  }
+  //write CCArray
+  {
+      rapidjson::Value lst(kArrayType);
+    if( newlist != NULL )
+    {
+      cocos2d::Ref *pObj = NULL;
+      CCARRAY_FOREACH(newlist, pObj)
+      {
+        cocos2d::CCInteger *pInt = (cocos2d::CCInteger*)pObj;
+        lst.AddMember("", pInt->getValue(), document.GetAllocator());
+      }
+    }
+    document.AddMember("collection_newlist", lst, document.GetAllocator());
+  }
+  //document.AddMember("collection_newlist", newlist, document.GetAllocator());
+
+  document.AddMember("life_piece", life_piece, document.GetAllocator());
+  document.AddMember("dart_piece", dart_piece, document.GetAllocator());
 }
 
 bool Collections::isItemCompleted(int pid) 

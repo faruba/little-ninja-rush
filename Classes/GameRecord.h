@@ -93,8 +93,6 @@ cocos2d::CCString **lba_names;
     void setItemUpgrade(int value, int itemid);
     void setIAPFlag(int value, int iapid);
 
-    //GameRecord* loadGameRecordFromURL(NSURL* url);
-
     void makeCoins(int num);
 
     void checkPoint();

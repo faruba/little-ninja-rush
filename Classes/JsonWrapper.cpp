@@ -74,12 +74,12 @@ cocos2d::Ref* processNode(const rapidjson::Value& value) {
     return pRet;
 }
 
-cocos2d::Ref* JsonWrapper::parseJson(std::string *pStr)
+cocos2d::Ref* JsonWrapper::parseJson(std::string &pStr)
 {
     cocos2d::Ref *pRet = NULL;
     
     Document doc;
-    doc.Parse<0>(pStr->c_str());
+    doc.Parse<0>(pStr.c_str());
     if( !doc.HasParseError() )
     {
         pRet = processNode(doc);

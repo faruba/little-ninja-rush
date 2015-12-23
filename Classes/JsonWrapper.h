@@ -92,7 +92,7 @@ class JsonWrapper
 public:
     template <typename T>
     static void parseJsonFileForVector(const char filename[], std::vector<T> &vector);
-    static cocos2d::Ref* parseJson(std::string *pStr);
+    static cocos2d::Ref* parseJson(std::string &pStr);
     static const char* dumpJson(cocos2d::ValueMap *pDic);
 };
 
