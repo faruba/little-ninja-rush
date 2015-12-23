@@ -110,10 +110,17 @@ endif()
 include_directories(
   /usr/local/include/GLFW
   /usr/include/GLFW
+  ${COCOS2D_ROOT}
+  ${COCOS2D_ROOT}/external
+  ${COCOS2D_ROOT}/extensions
   ${COCOS2D_ROOT}/cocos
   ${COCOS2D_ROOT}/cocos/platform
   ${COCOS2D_ROOT}/cocos/audio/include/
+  ${COCOS2D_ROOT}/cocos/editor-support
   Classes
+  Classes/rapidjson
+	Classes/ABKit
+	Classes/mycocos2d
 )
 if ( WIN32 )
   include_directories(
