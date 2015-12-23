@@ -67,13 +67,14 @@ void Collections::readCollections(cocos2d::CCDictionary* dic)
 cocos2d::Ref* nli = dic->objectForKey("collection_newlist");
     if( nli != NULL )
     {
-        if( newlist != NULL )
-        {
-            newlist->release();
-            newlist = NULL;
-        }
-        newlist = (cocos2d::CCArray*)nli;
-        newlist->retain();
+        //TODO:Fix this, this crashes
+//        if( newlist != NULL )
+//        {
+//            newlist->release();
+//            newlist = NULL;
+//        }
+//        newlist = (cocos2d::CCArray*)nli;
+//        newlist->retain();
     }
     life_piece = gtReadInt(dic, "life_piece", 0);
     dart_piece = gtReadInt(dic, "dart_piece", 0);

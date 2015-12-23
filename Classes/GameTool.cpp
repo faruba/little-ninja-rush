@@ -134,16 +134,16 @@ cocos2d::Ref* obj = dic->objectForKey(key);
     }
 }
 
-cocos2d::CCString* gtReadString(cocos2d::CCDictionary *dic, const char *key, CCString *def)
+std::string gtReadString(cocos2d::CCDictionary *dic, const char *key, std::string def)
 {
-cocos2d::Ref* obj = dic->objectForKey(key);
-    if( obj != NULL )
-    {
-        return (cocos2d::CCString*)obj;
-    }
-    else{
-        return def;
-    }
+  cocos2d::Ref* obj = dic->objectForKey(key);
+  if( obj != NULL )
+  {
+    return std::string(((cocos2d::CCString*)obj)->getCString());
+  }
+  else{
+    return def;
+  }
 }
 
 void unloadTextureFromeSpriteFrameFile(const char *plist)

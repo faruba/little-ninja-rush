@@ -31,13 +31,13 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(FoldItem, create);
   private:
     int mTitle;
     int mIconId;
-cocos2d::CCString *mDetail;
+    std::string mDetail;
     int mBtnType;
     bool mIsIAP;
     int mCostNumber;
     //--------------------
 cocos2d::Sprite *mIcon;
-cocos2d::CCMenu *mMenu;
+cocos2d::Menu *mMenu;
 cocos2d::Sprite *mBgButton;
 cocos2d::MenuItemImage *mPurchase;
 cocos2d::Node *mCost;

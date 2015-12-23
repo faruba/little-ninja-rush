@@ -96,8 +96,7 @@ FoldItem* FoldItem::foldItem(int title, int cost, bool iap, int icon, const char
   }
   else
   {
-    ret->mDetail = cocos2d::CCString::create(detail);
-    ret->mDetail->retain();
+      ret->mDetail = std::string(detail);
     ret->mBgButton = cocos2d::Sprite::createWithSpriteFrameName("shoplist.png");
     ret->mBgButton->setAnchorPoint(cocos2d::Vec2(0, 0));
     ret->addChild(ret->mBgButton);
@@ -327,7 +326,7 @@ cocos2d::Sprite *mark = cocos2d::Sprite::createWithSpriteFrameName("sp_completed
         
         mPurchase->setVisible(false);
     }
-    if( mDetail != NULL )
+    if( mDetail != "" )
     {
         //update detail
         mDetailSp->setString(detail);

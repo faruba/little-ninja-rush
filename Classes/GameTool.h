@@ -145,7 +145,7 @@ float gtReadFloat(cocos2d::CCDictionary *dic, const char *key, float def=0.0f);
 
 double gtReadDouble(cocos2d::CCDictionary *dic, const char *key, double def=0.0f);
 
-cocos2d::CCString* gtReadString(cocos2d::CCDictionary *dic, const char *key, CCString *def=NULL);
+std::string gtReadString(cocos2d::CCDictionary *dic, const char *key, std::string def);
 
 void unloadTextureFromeSpriteFrameFile(const char *plist);
 

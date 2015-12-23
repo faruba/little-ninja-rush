@@ -12,7 +12,7 @@
 #include "cocos2d.h"
 #include "RingTile.h"
 
-class SceneInterface: public cocos2d::Object {
+class SceneInterface: public cocos2d::Ref {
 public:
     virtual void loadScene() = 0;
     virtual void unloadScene() = 0;

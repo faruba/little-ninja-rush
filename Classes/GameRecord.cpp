@@ -9,8 +9,8 @@
 #define ICLOUDFILE "littleninjarush.bin"
 
 #define LB_RANK (3)//Local Leader Board
-#define LB_DEFAULT (cocos2d::CCString::create("(ME)"))
-#define LB_EMPITY (cocos2d::CCString::create("EMPITY"))
+#define LB_DEFAULT (std::string("(ME)"))
+#define LB_EMPITY (std::string("EMPITY"))
 
 #define IAP_COUNT (8)
 
@@ -96,12 +96,12 @@ cocos2d::CCLog("GameRecord::init");
     iap_flag[i] = 0;
   }
 
-    lb_playername = LB_DEFAULT;lb_playername->retain();
+  lb_playername = LB_DEFAULT;
   lb_scores = new int[LB_RANK];
-  lb_names = new CCString*[LB_RANK];
+  lb_names = new std::string[LB_RANK];
   //--- arcade ---
   lba_scores = new int[LB_RANK];
-  lba_names = new CCString*[LB_RANK];
+  lba_names = new std::string[LB_RANK];
   for(int i=0; i<LB_RANK; ++i)
   {
     lb_names[i] = LB_EMPITY;
@@ -230,26 +230,17 @@ cocos2d::CCString *key = cocos2d::CCString::createWithFormat("iap_flags__%d", i)
     }
     
     //读入LocalLeaderBoard
-    if( lb_playername != NULL )
-    {
-        lb_playername->release();
-    }
     lb_playername = gtReadString(dic, "lead_playername", LB_DEFAULT);
-    lb_playername->retain();
     for( int i=0; i<LB_RANK; ++i)
     {
 cocos2d::CCString *strNameKey = cocos2d::CCString::createWithFormat("lead_name__%d", i);
 cocos2d::CCString *strScoreKey = cocos2d::CCString::createWithFormat("lead_score__%d", i);
-        lb_names[i]->release();
         lb_names[i] = gtReadString(dic, strNameKey->getCString(), LB_EMPITY);
-        lb_names[i]->retain();
         lb_scores[i] = gtReadInt(dic, strScoreKey->getCString(), 0);
         //--- load arcade leader board
 cocos2d::CCString *strArcadeNameKey = cocos2d::CCString::createWithFormat("leada_name__%d", i);
 cocos2d::CCString *strArcadeScoreKey = cocos2d::CCString::createWithFormat("leada_score__%d", i);
-        lba_names[i]->release();
         lba_names[i] = gtReadString(dic, strArcadeNameKey->getCString(), LB_EMPITY);
-        lba_names[i]->retain();
         lba_scores[i] = gtReadInt(dic, strArcadeScoreKey->getCString(), 0);
     }
     
@@ -325,14 +316,14 @@ void GameRecord::write(rapidjson::Document &document)
     }
     
     //写入LocalLeaderBoard
-    rapidjson::Value v(lb_playername->getCString(), lb_playername->length(), document.GetAllocator());
+    rapidjson::Value v(lb_playername.c_str(), lb_playername.size(), document.GetAllocator());
     document.AddMember("lead_playername", v, document.GetAllocator());
     for( int i=0; i<LB_RANK; ++i)
     {
-        addMemberWithFormatToDocument(document, "lead_name__", i, std::string(lb_names[i]->getCString()));
+        addMemberWithFormatToDocument(document, "lead_name__", i, lb_names[i]);
         addMemberWithFormatToDocument(document, "lead_score__", i, lb_scores[i]);
         //--- write arcade leaderboards
-        addMemberWithFormatToDocument(document, "leada_name__", i, std::string(lb_names[i]->getCString()));
+        addMemberWithFormatToDocument(document, "leada_name__", i, lb_names[i]);
         addMemberWithFormatToDocument(document, "leada_score__", i, lb_scores[i]);
     }
     
@@ -342,24 +333,19 @@ void GameRecord::write(rapidjson::Document &document)
     collection->writeCollections(document);
 }
 
-void GameRecord::setLocalPlayerName(cocos2d::CCString * name) 
+void GameRecord::setLocalPlayerName(std::string& name) 
 {
-    lb_playername->release();
     lb_playername = name;
-    lb_playername->retain();
-    if( name != NULL )
-    {
-        for(int i=0; i<LB_RANK; ++i)
+ for(int i=0; i<LB_RANK; ++i)
         {
-            if( lb_names[i]->compare(LB_DEFAULT->getCString()) == 0 )
+            if( lb_names[i] == LB_DEFAULT)
             {
                 lb_names[i] = name;
             }
         }
-    }
 }
 
-void GameRecord::submitScore(int score, CCString* name) 
+void GameRecord::submitScore(int score, std::string& name) 
 {
   /*
     if( score > lb_scores[LB_RANK-1] )
@@ -406,7 +392,7 @@ cocos2d::CCString *tn = lb_names[j];
     */
 }
 
-void GameRecord::submitArcadeScore(int score, CCString* name) 
+void GameRecord::submitArcadeScore(int score, std::string& name) 
 {
   /*
     if( score > lba_scores[LB_RANK-1] )
