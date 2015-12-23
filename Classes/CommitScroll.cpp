@@ -166,7 +166,7 @@ void CommitScroll::onUpdate(float delta)
 //                }
 //                else {
 //                    mScroll->stopAllActions();
-//                    mScroll->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("js_bjzd.png"));
+//                    mScroll->setDisplayFrame(GameTool::getSpriteFrameByName("js_bjzd.png"));
 //cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.3f, 1.2f);
 //cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.1f, 1.0f);
 //cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
@@ -184,7 +184,7 @@ void CommitScroll::onUpdate(float delta)
 //            else {
 //                mScroll->setVisible(true);
 //                mScroll->stopAllActions();
-//                mScroll->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("js_bjzd.png"));
+//                mScroll->setDisplayFrame(GameTool::getSpriteFrameByName("js_bjzd.png"));
 //cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.3f, 1.2f);
 //cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.1f, 1.0f);
 //cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
@@ -247,7 +247,7 @@ void CommitScroll::onScroll()
                 if( prize == 1 )
                 {
                     const char *filename = "prize-1.png";
-                    mScroll->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename));
+                    mScroll->setDisplayFrame(GameTool::getSpriteFrameByName(filename));
                     mScroll->setScale(0.01f);
 cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.4f, 1.5f);
 cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.2f, 1.0f);
@@ -266,7 +266,7 @@ cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(3);
                 mRotateNode->setVisible(true);
                 
                 const char *filename = cocos2d::CCString::createWithFormat("prize-%d.png", prize)->getCString();
-                mScroll->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename));
+                mScroll->setDisplayFrame(GameTool::getSpriteFrameByName(filename));
                 mScroll->setScale(0.01f);
 cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.4f, 1.5f);
 cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.2f, 1.0f);

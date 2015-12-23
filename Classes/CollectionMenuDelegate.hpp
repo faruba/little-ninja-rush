@@ -274,17 +274,16 @@ class PowerUpCollectionDelegate: public CollectionMenuDelegate {
 
       //update mask
       //TODO:Refactor this
-      cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
       int lm = GameRecord::sharedGameRecord()->collection->life_piece%9;
       int lc = GameRecord::sharedGameRecord()->collection->life_piece/9;
       cocos2d::CCString *lfn = cocos2d::CCString::createWithFormat("sc_sp%d.png", lm);
-      mLifeMask->setDisplayFrame(cache->spriteFrameByName(lfn->getCString()));
+      mLifeMask->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(lfn->getCString()));
       mLifeCount->setString(cocos2d::CCString::createWithFormat("%d", lc)->getCString());
 
       int dm = GameRecord::sharedGameRecord()->collection->dart_piece%9;
       int dc = GameRecord::sharedGameRecord()->collection->dart_piece/9;
       cocos2d::CCString *dfn = cocos2d::CCString::createWithFormat("sc_sp%d.png", dm);
-      mDartMask->setDisplayFrame(cache->spriteFrameByName(dfn->getCString()));
+      mDartMask->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(dfn->getCString()));
       mDartCount->setString(cocos2d::CCString::createWithFormat("%d", dc)->getCString());
       mCurrItem = 0;
 

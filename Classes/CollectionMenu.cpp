@@ -93,10 +93,10 @@ void CollectionMenu::onEnter() {
   //1.2.0 SinaWeibo
   if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() )
   {
-    mTwitter->setDisabledSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("go_weibo.png"));
-    mTwitter->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("go_weibo.png"));
-    mTwitter->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("go_weibo.png"));
-    mTwitterAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("go_weibo2.png"));
+    mTwitter->setDisabledSpriteFrame(GameTool::getSpriteFrameByName("go_weibo.png"));
+    mTwitter->setNormalSpriteFrame(GameTool::getSpriteFrameByName("go_weibo.png"));
+    mTwitter->setSelectedSpriteFrame(GameTool::getSpriteFrameByName("go_weibo.png"));
+    mTwitterAction->setDisplayFrame(GameTool::getSpriteFrameByName("go_weibo2.png"));
   }
 
   mScroll = ABScrollContent::create();

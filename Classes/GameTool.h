@@ -40,6 +40,8 @@ class GameTool {
       CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
     }
 
+    static SpriteFrame* getSpriteFrameByName(const std::string&name) { return cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(name); }
+
     template<typename LayerType>
       static cocos2d::Scene* scene() { 
         cocos2d::Scene *ret = cocos2d::Scene::create();
@@ -52,7 +54,6 @@ class GameTool {
         clip->addChild(tm);
         ret->addChild(clip);
         return ret;
-
       }
 };
 

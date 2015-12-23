@@ -379,21 +379,21 @@ void GameInterface::onUpdateArcade(float delta, GamePlay* play)
             case 1:
             {
                 mCup->setVisible(true);
-                mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-bronze.png"));
+                mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-bronze.png"));
                 GameTool::PlaySound("sound/getscroll.mp3");
             }
                 break;
             case 2:
             {
                 mCup->setVisible(true);
-                mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-silver.png"));
+                mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-silver.png"));
                 GameTool::PlaySound("sound/getscroll.mp3");
             }
                 break;
             case 3:
             {
                 mCup->setVisible(true);
-                mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-gold.png"));
+                mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-gold.png"));
                 GameTool::PlaySound("sound/getscroll.mp3");
             }
                 break;

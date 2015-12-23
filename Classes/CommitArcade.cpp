@@ -40,7 +40,7 @@ CCBReader *pReader = new CCBReader(pNodeLib, this, this);
     // TODO
     //mFlash.blendFunc =  (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };//fix flash bug
 cocos2d::CCString *rolefile = cocos2d::CCString::createWithFormat("sc_role%d0.png", GameRecord::sharedGameRecord()->curr_char);
-    mRole->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(rolefile->getCString()));
+    mRole->setDisplayFrame(GameTool::getSpriteFrameByName(rolefile->getCString()));
     mLight->setVisible(false);
     mCup->setVisible(false);
     mScore->setString(cocos2d::CCString::createWithFormat("%d", play->arcade->score)->getCString());
@@ -110,7 +110,7 @@ void CommitArcade::onUpdate(float delta)
                        mCurrentScore >= GameRecord::sharedGameRecord()->task->goldPrize->score )
                     {
                         ccup = 3;
-                        mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-gold2.png"));
+                        mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-gold2.png"));
                         //take the cup
                         play->coins = GameRecord::sharedGameRecord()->task->goldPrize->prize;
                         GameRecord::sharedGameRecord()->task->goldPrize->prize = -1;
@@ -128,7 +128,7 @@ void CommitArcade::onUpdate(float delta)
                             mCurrentScore >= GameRecord::sharedGameRecord()->task->silverPrize->score )
                     {
                         ccup = 2;
-                        mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-silver2.png"));
+                        mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-silver2.png"));
                         //take the cup
                         play->coins = GameRecord::sharedGameRecord()->task->silverPrize->prize;
                         GameRecord::sharedGameRecord()->task->silverPrize->prize = -1;
@@ -141,7 +141,7 @@ void CommitArcade::onUpdate(float delta)
                             mCurrentScore >= GameRecord::sharedGameRecord()->task->bronzePrize->score )
                     {
                         ccup = 1;
-                        mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-bronze2.png"));
+                        mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-bronze2.png"));
                         //take the cup
                         play->coins = GameRecord::sharedGameRecord()->task->bronzePrize->prize;
                         GameRecord::sharedGameRecord()->task->bronzePrize->prize = -1;

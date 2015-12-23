@@ -67,19 +67,19 @@ cocos2d::Node * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLayerL
   switch (mMode) {
     case 0:
       {
-        mBanner->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb6.png"));
+        mBanner->setDisplayFrame(GameTool::getSpriteFrameByName("exb6.png"));
         this->loadAchievements();
       }
       break;
     case 1:
       {
-        mBanner->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb7.png"));
+        mBanner->setDisplayFrame(GameTool::getSpriteFrameByName("exb7.png"));
         this->loadStatistics();
       }
       break;
     case 2:
       {
-        mBanner->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb5.png"));
+        mBanner->setDisplayFrame(GameTool::getSpriteFrameByName("exb5.png"));
         this->loadAboutUs();
       }
       break;

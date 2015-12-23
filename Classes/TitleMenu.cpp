@@ -830,8 +830,8 @@ void TitleMenu::onEnter()
   //select SinaWeibo / Twitter
   if(UniversalFit::shouldUsingSinaWeibo())
   {
-    mTwitter->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("contact3.png"));
-    mTwitter->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("contact3.png"));
+    mTwitter->setNormalSpriteFrame(GameTool::getSpriteFrameByName("contact3.png"));
+    mTwitter->setSelectedSpriteFrame(GameTool::getSpriteFrameByName("contact3.png"));
   }
 
   for(int i=0; i<RUN; ++i)

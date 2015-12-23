@@ -186,8 +186,8 @@ void GamePlay::initGamePlay(int mod)
 
   //增加菜单
   cocos2d::MenuItemImage *xpause = cocos2d::MenuItemImage::create();
-  xpause->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
-  xpause->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
+  xpause->setNormalSpriteFrame(GameTool::getSpriteFrameByName("pause.png"));
+  xpause->setSelectedSpriteFrame(GameTool::getSpriteFrameByName("pause.png"));
   xpause->setTarget(this, menu_selector(GamePlay::pause));
   xpause->setAnchorPoint(cocos2d::Vec2(1, 1));
   xpause->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width, SCREEN_HEIGHT));

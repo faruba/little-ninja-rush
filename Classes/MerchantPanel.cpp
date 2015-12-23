@@ -248,17 +248,17 @@ void MerchantPanel::onMerchantBuy1()
         switch (randomInt(3)) {
             case 0:
             {
-                mTalkText->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text2.png"));
+                mTalkText->setDisplayFrame(GameTool::getSpriteFrameByName("lt_text2.png"));
             }
                 break;
             case 1:
             {
-                mTalkText->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text3.png"));
+                mTalkText->setDisplayFrame(GameTool::getSpriteFrameByName("lt_text3.png"));
             }
                 break;
             case 2:
             {
-                mTalkText->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text4.png"));
+                mTalkText->setDisplayFrame(GameTool::getSpriteFrameByName("lt_text4.png"));
             }
                 break;
         }
@@ -299,17 +299,17 @@ void MerchantPanel::onMerchantBuy2()
          switch (randomInt(3)) {
              case 0:
              {
-                 mTalkText->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text2.png"));
+                 mTalkText->setDisplayFrame(GameTool::getSpriteFrameByName("lt_text2.png"));
              }
                  break;
              case 1:
              {
-                 mTalkText->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text3.png"));
+                 mTalkText->setDisplayFrame(GameTool::getSpriteFrameByName("lt_text3.png"));
              }
                  break;
              case 2:
              {
-                 mTalkText->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text4.png"));
+                 mTalkText->setDisplayFrame(GameTool::getSpriteFrameByName("lt_text4.png"));
              }
                  break;
          }
@@ -350,17 +350,17 @@ void MerchantPanel::onMerchantBuy3()
         switch (randomInt(3)) {
             case 0:
             {
-                mTalkText->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text2.png"));
+                mTalkText->setDisplayFrame(GameTool::getSpriteFrameByName("lt_text2.png"));
             }
                 break;
             case 1:
             {
-                mTalkText->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text3.png"));
+                mTalkText->setDisplayFrame(GameTool::getSpriteFrameByName("lt_text3.png"));
             }
                 break;
             case 2:
             {
-                mTalkText->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text4.png"));
+                mTalkText->setDisplayFrame(GameTool::getSpriteFrameByName("lt_text4.png"));
             }
                 break;
         }
@@ -397,17 +397,17 @@ void MerchantPanel::onMerchantBuy4()
         switch (randomInt(3)) {
             case 0:
             {
-                mTalkText->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text2.png"));
+                mTalkText->setDisplayFrame(GameTool::getSpriteFrameByName("lt_text2.png"));
             }
                 break;
             case 1:
             {
-                mTalkText->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text3.png"));
+                mTalkText->setDisplayFrame(GameTool::getSpriteFrameByName("lt_text3.png"));
             }
                 break;
             case 2:
             {
-                mTalkText->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("lt_text4.png"));
+                mTalkText->setDisplayFrame(GameTool::getSpriteFrameByName("lt_text4.png"));
             }
                 break;
         }

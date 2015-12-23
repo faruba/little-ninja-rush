@@ -68,13 +68,13 @@ cocos2d::Node *ui = createUIByCCBI("menu-select", "SelectMenu", SelectMenuLayerL
 
   if( GamePlay::sharedGamePlay()->getGameMode() == MODE_CLASSIC )
   {
-    mTitle->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("classict.png"));
-    mParam->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_jz-life.png"));
+    mTitle->setDisplayFrame(GameTool::getSpriteFrameByName("classict.png"));
+    mParam->setDisplayFrame(GameTool::getSpriteFrameByName("xr_jz-life.png"));
   }
   else
   {
-    mTitle->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("arcadet.png"));
-    mParam->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_jz-bouns.png"));
+    mTitle->setDisplayFrame(GameTool::getSpriteFrameByName("arcadet.png"));
+    mParam->setDisplayFrame(GameTool::getSpriteFrameByName("xr_jz-bouns.png"));
   }
 
   mProtraits[0] = cocos2d::Sprite::createWithSpriteFrameName("xr_main.png");
@@ -135,7 +135,7 @@ void SelectMenu::updateCharacterInfo(int rid) {
     }
     mBouns->setVisible(false);
   } else {
-    mBouns->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(gBouns[rid]));
+    mBouns->setDisplayFrame(GameTool::getSpriteFrameByName(gBouns[rid]));
     mHearts->setVisible(false);
   }
   //更新飞镖数
@@ -165,22 +165,22 @@ void SelectMenu::updateCharacterInfo(int rid) {
   //更新人物显示
   switch (rid) {
     case 0:
-      mDesc->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_kt.png"));
+      mDesc->setDisplayFrame(GameTool::getSpriteFrameByName("xr_kt.png"));
       mBtnStart->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st1.png"));
       mBtnStart->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st1.png"));
       break;
     case 1:
-      mDesc->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_sr.png"));
+      mDesc->setDisplayFrame(GameTool::getSpriteFrameByName("xr_sr.png"));
       mBtnStart->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st2.png"));
       mBtnStart->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st2.png"));
       break;
     case 2:
-      mDesc->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_ms.png"));
+      mDesc->setDisplayFrame(GameTool::getSpriteFrameByName("xr_ms.png"));
       mBtnStart->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st3.png"));
       mBtnStart->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st3.png"));
       break;
     case 3:
-      mDesc->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("xr_mr.png"));
+      mDesc->setDisplayFrame(GameTool::getSpriteFrameByName("xr_mr.png"));
       mBtnStart->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st4.png"));
       mBtnStart->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("xr_st4.png"));
       break;
@@ -213,7 +213,7 @@ void SelectMenu::updateCharacterInfo(int rid) {
     mStartPos->addChild(mStart);
   }
 
-  mHeroDesc->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(gHeroDesc[rid]));
+  mHeroDesc->setDisplayFrame(GameTool::getSpriteFrameByName(gHeroDesc[rid]));
 }
 
 void SelectMenu::updateAngle()

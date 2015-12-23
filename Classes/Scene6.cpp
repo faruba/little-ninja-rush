@@ -203,7 +203,7 @@ void Scene6::update(float delta)
             np.x -= woff;
             if( np.x + mSmallTrees[i]->getContentSize().width < 0 )
             {
-                mSmallTrees[i]->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(cocos2d::CCString::createWithFormat("hw-hj4-%d.png", randomInt(6)+1)->getCString()));
+                mSmallTrees[i]->setDisplayFrame(GameTool::getSpriteFrameByName(cocos2d::CCString::createWithFormat("hw-hj4-%d.png", randomInt(6)+1)->getCString()));
                 np.x = mSmallDistance;
                 if( np.x < UniversalFit::sharedUniversalFit()->playSize.width + 50 )
                 {

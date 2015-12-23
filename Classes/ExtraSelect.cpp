@@ -31,7 +31,7 @@ cocos2d::Node * node = createUIByCCBI("menu-extramenu", "ExtraMenu", ExtraSelect
 
 //    if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() )
 //    {
-//        mTwitterBanner->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb10.png"));
+//        mTwitterBanner->setDisplayFrame(GameTool::getSpriteFrameByName("exb10.png"));
 //    }
     
     mUISwapper.setSceneIntro(this);
