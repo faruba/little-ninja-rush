@@ -201,60 +201,26 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname->g
                 //--- to flip ---
                 mState = STATE_FLIP;
                 mStateTimer = 0;
-                if( mCurrObj->index < 2 )
-                {
-                    switch (mCurrIndex) {
-                        case 0:
-                        {
-                            GameRecord::sharedGameRecord()->task->refreshDailyObjective();
-                            mCurrObj = GameRecord::sharedGameRecord()->task->dailyObjective;
-                            mCurrAch = Tasks::dailyObjectiveWithUiid(mCurrObj->uiid);
-                        }
-                            break;
-                        case 1:
-                        {
-                            GameRecord::sharedGameRecord()->task->refreshWeeklyObjective();
-                            mCurrObj = GameRecord::sharedGameRecord()->task->weeklyObjective;
-                            mCurrAch = Tasks::weeklyObjectiveWithUiid(mCurrObj->uiid);
-                        }
-                            break;
-                        case 2:
-                        {
-                            GameRecord::sharedGameRecord()->task->refreshMonthlyObjective();
-                            mCurrObj = GameRecord::sharedGameRecord()->task->monthlyObjective;
-                            mCurrAch = Tasks::monthlyObjectiveWithUiid(mCurrObj->uiid);
-                        }
-                            break;
-                    }
-cocos2d::Node *newobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
-                    newobj->setPosition(cocos2d::Vec2(18, 54));
-                    mObjRect->addChild(newobj);
-                }
-                else {
+                Tasks *task = GameRecord::sharedGameRecord()->task;
+                ObjectiveManager *managers[] = { &task->dailyObjective, &task->weeklyObjective, &task->monthlyObjective };
+                if ( mCurrObj->index < 2 ) {
+                  Tasks *task = GameRecord::sharedGameRecord()->task;
+                  managers[mCurrIndex]->refresh();
+                  mCurrObj = &(managers[mCurrIndex]->currentObjective);
+                  //TODO: fix this
+                  //mCurrAch = managers[mCurrIndex]->info();
+                  //cocos2d::Node *newobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
+                  //newobj->setPosition(cocos2d::Vec2(18, 54));
+                  //mObjRect->addChild(newobj);
+                } else {
                     mCurrAch = NULL;
-cocos2d::Node *newobj = this->genObjectiveInfo(NULL, mCurrIndex);
+                    cocos2d::Node *newobj = this->genObjectiveInfo(NULL, mCurrIndex);
                     newobj->setPosition(cocos2d::Vec2(18, 54));
                     mObjRect->addChild(newobj);
                     //mark completed
-                    switch (mCurrIndex) {
-                        case 0:
-                        {
-                            GameRecord::sharedGameRecord()->task->dailyObjective->index = 3;
-                            GameRecord::sharedGameRecord()->task->dailyObjective->uiid = -1;
-                        }
-                            break;
-                        case 1:
-                        {
-                            GameRecord::sharedGameRecord()->task->weeklyObjective->index = 3;
-                            GameRecord::sharedGameRecord()->task->weeklyObjective->uiid = -1;
-                        }
-                            break;
-                        case 2:
-                        {
-                            GameRecord::sharedGameRecord()->task->monthlyObjective->index = 3;
-                            GameRecord::sharedGameRecord()->task->monthlyObjective->uiid = -1;
-                        }
-                            break;
+                    for (int i = 0; i < sizeof(managers); i++) {
+                      managers[i]->currentObjective.index = 3;
+                      managers[i]->currentObjective.uiid = -1;
                     }
                 }
             }
@@ -317,28 +283,11 @@ cocos2d::Node *newobj = this->genObjectiveInfo(NULL, mCurrIndex);
 
 void ObjectiveComplete::retriveObjectiveInfo(int index, Objective ** obj, Achievement ** ach) 
 {
-    *obj = NULL;
-    *ach = NULL;
-    switch (index) {
-        case 0:
-        {
-            *obj = GameRecord::sharedGameRecord()->task->dailyObjective;
-            *ach = Tasks::dailyObjectiveWithUiid((*obj)->uiid);
-        }
-            break;
-        case 1:
-        {
-            *obj = GameRecord::sharedGameRecord()->task->weeklyObjective;
-            *ach = Tasks::weeklyObjectiveWithUiid((*obj)->uiid);
-        }
-            break;
-        case 2:
-        {
-            *obj = GameRecord::sharedGameRecord()->task->monthlyObjective;
-            *ach = Tasks::monthlyObjectiveWithUiid((*obj)->uiid);
-        }
-            break;
-    }
+  *obj = NULL;
+  *ach = NULL;
+  Tasks *task = GameRecord::sharedGameRecord()->task;
+  ObjectiveManager *managers[] = { &task->dailyObjective, &task->weeklyObjective, &task->monthlyObjective };
+  //TODO:*ach = managers[index]->info();
 }
 
 cocos2d::Node* ObjectiveComplete::genObjectiveInfo(Achievement * ach, int typ) 
@@ -396,10 +345,10 @@ cocos2d::Sprite *spbg = NULL;
             }
                 break;
         }
-cocos2d::Sprite *spicon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
+cocos2d::Sprite *spicon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon.c_str());
         spicon->setPosition(cocos2d::Vec2(spbg->getContentSize().width/2, spbg->getContentSize().height/2));
         spbg->addChild(spicon, 0, 0);
-cocos2d::Label *desc = cocos2d::Label::createWithBMFont("ab34.fnt", ach->desc->getCString());
+cocos2d::Label *desc = cocos2d::Label::createWithBMFont("ab34.fnt", ach->desc.c_str());
         desc->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
         desc->setPosition(cocos2d::Vec2(54, 12));
         spbg->addChild(desc, 0, 1);

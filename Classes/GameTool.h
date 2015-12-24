@@ -55,7 +55,30 @@ class GameTool {
         ret->addChild(clip);
         return ret;
       }
+
+    template<typename DataType>
+    static void addMemberWithFormatToDocument(rapidjson::Document &document, std::string head, int id, DataType data) {
+      const std::string key = head+std::to_string(id);
+      rapidjson::Value index(key.c_str(), key.size(), document.GetAllocator());
+      document.AddMember(index, data, document.GetAllocator());
+    }
+
+    template<typename DataType>
+    static void addMemberWithFormatToDocument(rapidjson::Document &document, std::string head, const char id[], DataType data) {
+      const std::string key = head+std::to_string(*id);
+      rapidjson::Value index(key.c_str(), key.size(), document.GetAllocator());
+      document.AddMember(index, data, document.GetAllocator());
+    }
+
+    static void addMemberWithFormatToDocument(rapidjson::Document &document, std::string head, int id, std::string data) {
+        const std::string key = head+std::to_string(id);
+        rapidjson::Value index(key.c_str(), key.size(), document.GetAllocator());
+        rapidjson::Value value(data.c_str(), data.size(), document.GetAllocator());
+        document.AddMember(index, value, document.GetAllocator());
+    }
 };
+
+
 
 class UISwapper {
   public:
@@ -140,7 +163,7 @@ int randomInt(int max);
 
 bool exCollisionWithCircles(cocos2d::Point op, float ox, float oy, float r, cocos2d::Point p, float pr);
 
-int gtReadInt(cocos2d::CCDictionary *dic, const char *key, int def=0);
+int gtReadInt(cocos2d::CCDictionary *dic, std::string key, int def=0);
 
 float gtReadFloat(cocos2d::CCDictionary *dic, const char *key, float def=0.0f);
 

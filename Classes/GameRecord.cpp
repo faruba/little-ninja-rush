@@ -34,8 +34,7 @@ bool GameRecord::init()
 {
 cocos2d::CCLog("GameRecord::init");
   collection = Collections::sharedCollections();
-  task = Tasks::create();
-  task->retain();
+  task = Tasks::sharedTasks();
   //初始化数据
   revision = 0;
   uploadflag = 0;
@@ -251,20 +250,6 @@ cocos2d::CCString *strArcadeScoreKey = cocos2d::CCString::createWithFormat("lead
     collection->readCollections(dic);
 }
 
-template<typename DataType>
-void addMemberWithFormatToDocument(rapidjson::Document &document, const char* head, int id, DataType data) {
-  const std::string key = std::string(head)+std::to_string(id);
-  rapidjson::Value index(key.c_str(), key.size(), document.GetAllocator());
-  document.AddMember(index, data, document.GetAllocator());
-}
-
-void addMemberWithFormatToDocument(rapidjson::Document &document, const char* head, int id, std::string data) {
-    const std::string key = std::string(head)+std::to_string(id);
-    rapidjson::Value index(key.c_str(), key.size(), document.GetAllocator());
-    rapidjson::Value value(data.c_str(), data.size(), document.GetAllocator());
-    document.AddMember(index, value, document.GetAllocator());
-}
-
 void GameRecord::write(rapidjson::Document &document) 
 {
     //写入基础数据
@@ -287,18 +272,18 @@ void GameRecord::write(rapidjson::Document &document)
     //写入角色数据
     for( int i=0; i<GAME_CHARCOUNT; ++i)
     {
-        addMemberWithFormatToDocument(document, "char_hp__", i, char_hp[i]);
-        addMemberWithFormatToDocument(document, "char_dart__", i, char_dart[i]);
-        addMemberWithFormatToDocument(document, "char_contract__", i, char_contract[i]);
-        addMemberWithFormatToDocument(document, "char_equip_dart__", i, char_equip_dart[i]);
-        addMemberWithFormatToDocument(document, "char_equip_blade__", i, char_equip_blade[i]);
-        addMemberWithFormatToDocument(document, "char_equip_spell__", i, char_equip_spell[i]);
-        addMemberWithFormatToDocument(document, "char_usecount__", i, char_usecount[i]);
+        GameTool::addMemberWithFormatToDocument(document, "char_hp__", i, char_hp[i]);
+        GameTool::addMemberWithFormatToDocument(document, "char_dart__", i, char_dart[i]);
+        GameTool::addMemberWithFormatToDocument(document, "char_contract__", i, char_contract[i]);
+        GameTool::addMemberWithFormatToDocument(document, "char_equip_dart__", i, char_equip_dart[i]);
+        GameTool::addMemberWithFormatToDocument(document, "char_equip_blade__", i, char_equip_blade[i]);
+        GameTool::addMemberWithFormatToDocument(document, "char_equip_spell__", i, char_equip_spell[i]);
+        GameTool::addMemberWithFormatToDocument(document, "char_usecount__", i, char_usecount[i]);
     }
     //写入升级数据
     for( int i=0; i<GAME_UPGRADECOUNT; ++i)
     {
-        addMemberWithFormatToDocument(document, "item_upgrade__", i,  item_upgrade[i]);
+      GameTool::addMemberWithFormatToDocument(document, "item_upgrade__", i,  item_upgrade[i]);
     }
     //写入游戏运行信息
     document.AddMember("game_time", game_time, document.GetAllocator());
@@ -312,7 +297,7 @@ void GameRecord::write(rapidjson::Document &document)
     //write iap flags
     for(int i=0; i<IAP_COUNT; ++i)
     {
-      addMemberWithFormatToDocument(document, "iap_flags__", i, iap_flag[i]);
+      GameTool::addMemberWithFormatToDocument(document, "iap_flags__", i, iap_flag[i]);
     }
     
     //写入LocalLeaderBoard
@@ -320,11 +305,11 @@ void GameRecord::write(rapidjson::Document &document)
     document.AddMember("lead_playername", v, document.GetAllocator());
     for( int i=0; i<LB_RANK; ++i)
     {
-        addMemberWithFormatToDocument(document, "lead_name__", i, lb_names[i]);
-        addMemberWithFormatToDocument(document, "lead_score__", i, lb_scores[i]);
+      GameTool::addMemberWithFormatToDocument(document, "lead_name__", i, lb_names[i]);
+      GameTool::addMemberWithFormatToDocument(document, "lead_score__", i, lb_scores[i]);
         //--- write arcade leaderboards
-        addMemberWithFormatToDocument(document, "leada_name__", i, lb_names[i]);
-        addMemberWithFormatToDocument(document, "leada_score__", i, lb_scores[i]);
+      GameTool::addMemberWithFormatToDocument(document, "leada_name__", i, lb_names[i]);
+      GameTool::addMemberWithFormatToDocument(document, "leada_score__", i, lb_scores[i]);
     }
     
     document.AddMember("share_facebook", share_facebook, document.GetAllocator());

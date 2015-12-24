@@ -14,95 +14,54 @@ PauseMenuClassic* PauseMenuClassic::pauseMenu()
 
 void PauseMenuClassic::updateClassic() 
 {
-    //update objectives
-    if( GameRecord::sharedGameRecord()->task->dailyObjective->uiid >= 0 )
-    {
-        Achievement *obj = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
-        mDailyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode , obj->achieveNumber ,GameRecord::sharedGameRecord()->task->dailyObjective->count)->getCString());
-        mDailyObjective->setColor(Color3B(255, 255, 255));
-        
-        mDailyIcon->setVisible(true);
-        Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
-cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-        icon->setPosition(cocos2d::Vec2(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
-        mDailyIcon->addChild(icon);
-        
-        //判断是否完成
-        if( GameRecord::sharedGameRecord()->task->dailyObjective->count >= ach->achieveNumber )
-        {
-            mDailyObjective->setColor(Color3B(128, 128, 128));
-        }
+  //update objectives TODO:refactor this
+  Tasks *task = GameRecord::sharedGameRecord()->task;
+  ObjectiveManager *managers[] = { &task->dailyObjective, &task->weeklyObjective, &task->monthlyObjective };
+  cocos2d::Label* labels[] = { mDailyObjective, mWeeklyObjective, mMonthlyObjective };
+  cocos2d::Sprite* icons[] = { mDailyIcon, mWeeklyIcon, mMonthlyIcon };
+  for (int i = 0; i < 3; i++) {
+    if (managers[i]->hasObjective()) {
+      const Achievement &info = managers[i]->info();
+
+      labels[i]->setString(Tasks::stringForObjective(info.desc, info.achieveCode,  info.achieveNumber, managers[i]->currentObjective.count)->getCString());
+      labels[i]->setColor(Color3B(255, 255, 255));
+
+      icons[i]->setVisible(true);
+      cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(info.icon.c_str());
+      icon->setPosition(cocos2d::Vec2(icons[i]->getContentSize().width/2, icons[i]->getContentSize().height/2));
+      icons[i]->addChild(icon);
+
+      if (managers[i]->isCompleted()) {
+        labels[i]->setColor(Color3B(128, 128, 128));
+      }
+    } else {
+      labels[i]->setString("已完成！");
+      labels[i]->setColor(Color3B(128, 128, 128));
     }
-    else {
-        mDailyObjective->setString("已完成！");
-        mDailyObjective->setColor(Color3B(128, 128, 128));
-    }
-    if( GameRecord::sharedGameRecord()->task->weeklyObjective->uiid >= 0 )
-    {
-        Achievement *obj = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
-        mWeeklyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode ,obj->achieveNumber ,GameRecord::sharedGameRecord()->task->weeklyObjective->count)->getCString());
-        mWeeklyObjective->setColor(Color3B(255, 255, 255));
-        
-        mWeeklyIcon->setVisible(true);
-        Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
-cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-        icon->setPosition(cocos2d::Vec2(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
-        mWeeklyIcon->addChild(icon);
-        
-        //判断是否完成
-        if( GameRecord::sharedGameRecord()->task->weeklyObjective->count >= ach->achieveNumber )
-        {
-            mWeeklyObjective->setColor(Color3B(128, 128, 128));
-        }
-    }
-    else {
-        mWeeklyObjective->setString("已完成！");
-        mWeeklyObjective->setColor(Color3B(128, 128, 128));
-    }
-    if( GameRecord::sharedGameRecord()->task->monthlyObjective->uiid >= 0 )
-    {
-        Achievement *obj = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
-        mMonthlyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode ,obj->achieveNumber ,GameRecord::sharedGameRecord()->task->monthlyObjective->count)->getCString());
-        mMonthlyObjective->setColor(Color3B(255, 255, 255));
-        
-        mMonthlyIcon->setVisible(true);
-        Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
-cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-        icon->setPosition(cocos2d::Vec2(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
-        mMonthlyIcon->addChild(icon);
-        
-        //判断是否完成
-        if( GameRecord::sharedGameRecord()->task->monthlyObjective->count >= ach->achieveNumber )
-        {
-            mMonthlyObjective->setColor(Color3B(128, 128, 128));
-        }
-    }
-    else {
-        mMonthlyObjective->setString("已完成！");
-        mMonthlyObjective->setColor(Color3B(128, 128, 128));
-    }
-    //update crown
-    for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
-    {
-cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-        crown->setPosition(cocos2d::Vec2(32-16*i, 0));
-        mDailyCrown->addChild(crown);
-    }
-    for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective->index; ++i)
-    {
-cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-        crown->setPosition(cocos2d::Vec2(32-16*i, 0));
-        mWeeklyCrown->addChild(crown);
-    }
-    for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective->index; ++i)
-    {
-cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-        crown->setPosition(cocos2d::Vec2(32-16*i, 0));
-        mMonthlyCrown->addChild(crown);
-    }
-    
-    //update best score
-    mBest->setString(cocos2d::CCString::createWithFormat("最佳: %dm", GameRecord::sharedGameRecord()->score_high)->getCString());
+  }
+
+  //update crown
+  for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective.currentObjective.index; ++i)
+  {
+    cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+    crown->setPosition(cocos2d::Vec2(32-16*i, 0));
+    mDailyCrown->addChild(crown);
+  }
+  for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective.currentObjective.index; ++i)
+  {
+    cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+    crown->setPosition(cocos2d::Vec2(32-16*i, 0));
+    mWeeklyCrown->addChild(crown);
+  }
+  for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective.currentObjective.index; ++i)
+  {
+    cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+    crown->setPosition(cocos2d::Vec2(32-16*i, 0));
+    mMonthlyCrown->addChild(crown);
+  }
+
+  //update best score
+  mBest->setString(cocos2d::CCString::createWithFormat("最佳: %dm", GameRecord::sharedGameRecord()->score_high)->getCString());
 }
 
 void PauseMenuClassic::updateArcade() 

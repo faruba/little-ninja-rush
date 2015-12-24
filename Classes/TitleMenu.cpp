@@ -446,8 +446,8 @@ class PopObj :
     void onDoneAnimation();
 
     //callbacks
-    void onChangeDisplay();
-    void onClose();
+    void onChangeDisplay(cocos2d::Ref*);
+    void onClose(cocos2d::Ref*);
 
     //cocosbuilder support
     bool onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
@@ -480,10 +480,9 @@ class PopObj :
 
     SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
     {
-      /* TODO:
          CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onClose", PopObj::onClose);
          CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onChangeDisplay", PopObj::onChangeDisplay);
-         */return NULL;
+         return NULL;
     }
 
     cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
@@ -502,87 +501,44 @@ class PopObj :
 
 void PopObj::displayClassic()
 {
-  //update objectives
-  if( GameRecord::sharedGameRecord()->task->dailyObjective->uiid >= 0 )
-  {
-    Achievement *obj = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
-    mDailyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode , obj->achieveNumber ,GameRecord::sharedGameRecord()->task->dailyObjective->count)->getCString());
-    mDailyObjective->setColor(Color3B(255, 255, 255));
+  //update objectives TODO:refactor this
+  Tasks *task = GameRecord::sharedGameRecord()->task;
+  ObjectiveManager *managers[] = { &task->dailyObjective, &task->weeklyObjective, &task->monthlyObjective };
+  cocos2d::Label* labels[] = { mDailyObjective, mWeeklyObjective, mMonthlyObjective };
+  cocos2d::Sprite* icons[] = { mDailyIcon, mWeeklyIcon, mMonthlyIcon };
+  for (int i = 0; i < 3; i++) {
+    if (managers[i]->hasObjective()) {
+      const Achievement &info = managers[i]->info();
 
-    mDailyIcon->setVisible(true);
-    Achievement *ach = Tasks::dailyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->dailyObjective->uiid);
-    cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-    icon->setPosition(cocos2d::Vec2(mDailyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
-    mDailyIcon->addChild(icon);
+      labels[i]->setString(Tasks::stringForObjective(info.desc, info.achieveCode,  info.achieveNumber, managers[i]->currentObjective.count)->getCString());
+      labels[i]->setColor(Color3B(255, 255, 255));
 
-    //判断是否完成
-    if( GameRecord::sharedGameRecord()->task->dailyObjective->count >= ach->achieveNumber )
-    {
-      mDailyObjective->setColor(Color3B(128, 128, 128));
+      icons[i]->setVisible(true);
+      cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(info.icon.c_str());
+      icon->setPosition(cocos2d::Vec2(icons[i]->getContentSize().width/2, icons[i]->getContentSize().height/2));
+      icons[i]->addChild(icon);
+
+      if (managers[i]->isCompleted()) {
+        labels[i]->setColor(Color3B(128, 128, 128));
+      }
+    } else {
+      labels[i]->setString("已完成！");
+      labels[i]->setColor(Color3B(128, 128, 128));
     }
   }
-  else {
-    mDailyObjective->setString("已完成！");
-    mDailyObjective->setColor(Color3B(128, 128, 128));
-  }
-  if( GameRecord::sharedGameRecord()->task->weeklyObjective->uiid >= 0 )
-  {
-    Achievement *obj = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
-    mWeeklyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode ,obj->achieveNumber ,GameRecord::sharedGameRecord()->task->weeklyObjective->count)->getCString());
-    mWeeklyObjective->setColor(Color3B(255, 255, 255));
-
-    mWeeklyIcon->setVisible(true);
-    Achievement *ach = Tasks::weeklyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->weeklyObjective->uiid);
-    cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-    icon->setPosition(cocos2d::Vec2(mWeeklyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
-    mWeeklyIcon->addChild(icon);
-
-    //判断是否完成
-    if( GameRecord::sharedGameRecord()->task->weeklyObjective->count >= ach->achieveNumber )
-    {
-      mWeeklyObjective->setColor(Color3B(128, 128, 128));
-    }
-  }
-  else {
-    mWeeklyObjective->setString("已完成！");
-    mWeeklyObjective->setColor(Color3B(128, 128, 128));
-  }
-  if( GameRecord::sharedGameRecord()->task->monthlyObjective->uiid >= 0 )
-  {
-    Achievement *obj = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
-    mMonthlyObjective->setString(Tasks::stringForObjective(obj->desc ,obj->achieveCode ,obj->achieveNumber ,GameRecord::sharedGameRecord()->task->monthlyObjective->count)->getCString());
-    mMonthlyObjective->setColor(Color3B(255, 255, 255));
-
-    mMonthlyIcon->setVisible(true);
-    Achievement *ach = Tasks::monthlyObjectiveWithUiid(GameRecord::sharedGameRecord()->task->monthlyObjective->uiid);
-    cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(ach->icon->getCString());
-    icon->setPosition(cocos2d::Vec2(mMonthlyIcon->getContentSize().width/2, mDailyIcon->getContentSize().height/2));
-    mMonthlyIcon->addChild(icon);
-
-    //判断是否完成
-    if( GameRecord::sharedGameRecord()->task->monthlyObjective->count >= ach->achieveNumber )
-    {
-      mMonthlyObjective->setColor(Color3B(128, 128, 128));
-    }
-  }
-  else {
-    mMonthlyObjective->setString("已完成！");
-    mMonthlyObjective->setColor(Color3B(128, 128, 128));
-  }
-  //update crown
-  for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective->index; ++i)
+  for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective.currentObjective.index; ++i)
   {
     cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
     crown->setPosition(cocos2d::Vec2(32-16*i, 0));
     mDailyCrown->addChild(crown);
   }
-  for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective->index; ++i)
+  for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective.currentObjective.index; ++i)
   {
     cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
     crown->setPosition(cocos2d::Vec2(32-16*i, 0));
     mWeeklyCrown->addChild(crown);
   }
-  for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective->index; ++i)
+  for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective.currentObjective.index; ++i)
   {
     cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
     crown->setPosition(cocos2d::Vec2(32-16*i, 0));
@@ -702,7 +658,7 @@ void PopObj::onDestroy()
   this->removeChild(mBoard, true);
 }
 
-void PopObj::onClose()
+void PopObj::onClose(cocos2d::Ref*)
 {
   master->hideObjs();
 }
@@ -723,10 +679,9 @@ void PopObj::onFlip()
   }
 }
 
-void PopObj::onChangeDisplay()
+void PopObj::onChangeDisplay(cocos2d::Ref*)
 {
   mDisplay = !mDisplay;
-  /*TODO:
   //play animation
   //CCRect rect = cocos2d::Rect(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
   cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::Rect(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
@@ -735,19 +690,12 @@ void PopObj::onChangeDisplay()
   cocos2d::CCCallFunc *cf1 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onFlip)));
   cocos2d::CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.2f, Vec2(-301+381, 58));
   cocos2d::CCCallFunc *cf2 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onDoneAnimation)));
-  cocos2d::CCArray *sqa = cocos2d::CCArray::create();
-  sqa->addObject(mt1);
-  sqa->addObject(cf1);
-  sqa->addObject(mt2);
-  sqa->addObject(cf2);
-  cocos2d::Sequence *seq = cocos2d::Sequence::create(sqa);
-  //Sequence *seq = cocos2d::Sequence::create(mt1, cf1, mt2, cf2);
+  Sequence *seq = cocos2d::Sequence::create(mt1, cf1, mt2, cf2, nullptr);
 
   mBoard->runAction(seq);
 
   mSwitch->setVisible(false);
   mSwitch2->setVisible(false);
-  */
   GameTool::PlaySound("sound/flip.mp3");
 }
 

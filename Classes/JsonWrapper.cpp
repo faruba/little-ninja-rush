@@ -23,6 +23,7 @@ cocos2d::Ref* processNode(const rapidjson::Value& value) {
     
     if ( value.IsArray() ) {
         cocos2d::CCArray *pArray = new CCArray();
+        pArray->init();
         
         for(SizeType i=0; i<value.Size(); ++i) {
             const rapidjson::Value& sub = value[i];
