@@ -46,12 +46,16 @@ void ABScrollContent::removeAllContent()
   contentNode->removeAllChildrenWithCleanup(true);
 }
 
+
 void ABScrollContent::setClipRect(cocos2d::CCRect rect) 
 {
   clipRect = rect;
-  mClipNode->setClipRect(new Rect(UniversalFit::sharedUniversalFit()->transformRect(clipRect)));
+	CCRect* newRect = new Rect(UniversalFit::sharedUniversalFit()->transformRect(clipRect));
 
   contentNode->setPosition(cocos2d::Vec2(0, clipRect.size.height));
+
+  mClipNode->setClipRect(newRect);
+	delete newRect;
 }
 
 void ABScrollContent::update(float delta) 
@@ -117,7 +121,7 @@ void ABScrollContent::update(float delta)
     float chy = np.y - clipRect.size.height;
 cocos2d::CCLog("Fly, %f, %f %f %f", mFlySpeed, chy, minY, maxY );
 
-    if( fabsf(mFlySpeed)<1000 && chy >= minY && chy <= maxY )
+    if( fabsf(mFlySpeed)<1000 && chy >= minY && chy <= maxY || fabsf(chy) <= 0.01f)
     {
       mFly = false;
     }
