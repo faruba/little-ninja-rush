@@ -291,6 +291,7 @@ void CollectionMenu::onPowerup(cocos2d::Ref*)
   mCurrentDelegate = newDelegate;
 
   mCurrentDelegate->updateScroll();
+  updateCharacterInfo(GameRecord::sharedGameRecord()->curr_char, 0);
 
   mPowerUp->setVisible(true);
 
@@ -443,8 +444,8 @@ void CollectionMenu::onSelectLife(cocos2d::Ref*)
   if( mCurrItem != 1 )
   {
     GameTool::PlaySound("sound/click.mp3");
-    mCurrentMark->setPosition(cocos2d::Vec2(385, 145));
-    mCurrentMark->setVisible(true);
+    CollectionMenuDelegate::mCurrentMark->setPosition(cocos2d::Vec2(385, 145));
+    CollectionMenuDelegate::mCurrentMark->setVisible(true);
     mCurrItem = 1;
     updateCharacterInfo(GameRecord::sharedGameRecord()->curr_char, mCurrItem);
 
@@ -459,8 +460,8 @@ void CollectionMenu::onSelectDart(cocos2d::Ref*)
   if( mCurrItem != 2 )
   {
     GameTool::PlaySound("sound/click.mp3");
-    mCurrentMark->setPosition(cocos2d::Vec2(385, 65));
-    mCurrentMark->setVisible(true);
+    CollectionMenuDelegate::mCurrentMark->setPosition(cocos2d::Vec2(385, 65));
+    CollectionMenuDelegate::mCurrentMark->setVisible(true);
     mCurrItem = 2;
     updateCharacterInfo(GameRecord::sharedGameRecord()->curr_char, mCurrItem);
 
@@ -500,11 +501,11 @@ bool CollectionMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerUp",        Node*         , mPowerUp)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeGuage",      Node*         , mLifeGuage)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartGuage",      Node*         , mDartGuage)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeMask",       Sprite*       , mLifeMask)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartMask",       Sprite*       , mDartMask)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeMask",       Sprite*       , mPowerUpDelegate.mLifeMask)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartMask",       Sprite*       , mPowerUpDelegate.mDartMask)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPowerupMenu",    CCMenu*         , mPowerupMenu)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeCount",      Label*  , mLifeCount)
-  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartCount",      Label*  , mDartCount)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mLifeCount",      Label*  , mPowerUpDelegate.mLifeCount)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDartCount",      Label*  , mPowerUpDelegate.mDartCount)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mItemTitle",      Sprite*       , mItemTitle)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mShare",          Sprite*       , mShare)
   CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu",           CCMenu*         , mMenu)
