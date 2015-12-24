@@ -129,17 +129,17 @@ if ( WIN32 )
 )
 endif( WIN32 )
 
-file(GLOB SOURCE_FILE Classes/*.cpp)
+file(GLOB_RECURSE SOURCE_FILE Classes/*.cpp)
 set(GAME_SRC
-  Classes/AppDelegate.cpp
 	${SOURCE_FILE}
+	#${SOURCE_FILE_COCOS}
   ${PLATFORM_SPECIFIC_SRC}
 )
 
-file(GLOB HEADER_FILE Classes/*.h)
+file(GLOB_RECURSE  HEADER_FILE Classes/*.h)
 set(GAME_HEADERS
-  Classes/AppDelegate.h
 	${HEADER_FILE}
+	#${HEADER_FILE_COCOS}
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 
