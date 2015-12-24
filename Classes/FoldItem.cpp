@@ -1,6 +1,6 @@
 #include "FoldItem.h"
 #include "GameConstants.h"
-
+#include "GameTool.h"
 extern const char *gIAPCost[];
 
 FoldItem* FoldItem::foldItem(const char* title, const char* icon, const char* detail, int achieve, int counter, FoldItemController* controller) 
@@ -96,8 +96,7 @@ FoldItem* FoldItem::foldItem(int title, int cost, bool iap, int icon, const char
   }
   else
   {
-    ret->mDetail = cocos2d::CCString::create(detail);
-    ret->mDetail->retain();
+      ret->mDetail = std::string(detail);
     ret->mBgButton = cocos2d::Sprite::createWithSpriteFrameName("shoplist.png");
     ret->mBgButton->setAnchorPoint(cocos2d::Vec2(0, 0));
     ret->addChild(ret->mBgButton);
@@ -105,14 +104,14 @@ FoldItem* FoldItem::foldItem(int title, int cost, bool iap, int icon, const char
     if( btntyp == 1 )
     {
       ret->mPurchase = cocos2d::MenuItemImage::create();
-      ret->mPurchase->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_buy1.png"));
-      ret->mPurchase->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_buy2.png"));
+      ret->mPurchase->setNormalSpriteFrame(GameTool::getSpriteFrameByName("sp_buy1.png"));
+      ret->mPurchase->setSelectedSpriteFrame(GameTool::getSpriteFrameByName("sp_buy2.png"));
       ret->mPurchase->setTarget(ret, menu_selector(FoldItem::purchase));
     }
     else {
       ret->mPurchase = cocos2d::MenuItemImage::create();
-      ret->mPurchase->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_upgrade1.png"));
-      ret->mPurchase->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("sp_upgrade2.png"));
+      ret->mPurchase->setNormalSpriteFrame(GameTool::getSpriteFrameByName("sp_upgrade1.png"));
+      ret->mPurchase->setSelectedSpriteFrame(GameTool::getSpriteFrameByName("sp_upgrade2.png"));
       ret->mPurchase->setTarget(ret, menu_selector(FoldItem::purchase));
     }
 
@@ -327,7 +326,7 @@ cocos2d::Sprite *mark = cocos2d::Sprite::createWithSpriteFrameName("sp_completed
         
         mPurchase->setVisible(false);
     }
-    if( mDetail != NULL )
+    if( mDetail != "" )
     {
         //update detail
         mDetailSp->setString(detail);

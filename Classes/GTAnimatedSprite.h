@@ -13,7 +13,7 @@ class GTAnimatedSprite :
 {
   public:
     virtual bool init(){return cocos2d::Sprite::init();};  
-    virtual bool initWithTexture(cocos2d::CCTexture2D * texture, cocos2d::CCRect rect);
+    virtual bool initWithTexture(cocos2d::Texture2D * texture, cocos2d::Rect rect);
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GTAnimatedSprite, create);
 
     static GTAnimatedSprite* spriteWithGTAnimation(GTAnimation * animation);

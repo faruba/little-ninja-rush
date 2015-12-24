@@ -174,8 +174,8 @@ cocos2d::Node *node = pReader->readNodeGraphFromFile("pause_classic.ccbi", this)
     
     mBoard = CEClipedNode::create();
     mBoard->addChild(node);
-cocos2d::CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
-    //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH*4, SCREEN_HEIGHT*4);
+cocos2d::CCRect rect = cocos2d::Rect(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
+    //CCRect rect = cocos2d::Rect(60, 0, SCREEN_WIDTH*4, SCREEN_HEIGHT*4);
     mBoard->setClipRect(new CCRect(UniversalFit::sharedUniversalFit()->transformRect(rect)));
     mBoard->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->baseLeft-301, 68));
     play->ui()->addChild(mBoard);

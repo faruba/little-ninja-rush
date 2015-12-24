@@ -1,5 +1,5 @@
 #include "RingTile.h"
-
+#include "GameTool.h"
 RingTile* RingTile::tile(float TileSize, float WindowSize, int BufferSize) 
 {
     RingTile *tile = RingTile::create();
@@ -165,7 +165,7 @@ void RingTile::runTiles(float delta)
             int si = (mWindowSpriteIndex + i) % mWindowTileCount;
             //加载前n个pending精灵
             int pi = (mWindowIndex + mWindowTileCount + i) % mBufferSize;
-            mpWindowTiles[si]->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(cocos2d::CCString::createWithFormat("tile_%d.png", mpBuffer[pi])->getCString()));
+            mpWindowTiles[si]->setDisplayFrame(GameTool::getSpriteFrameByName(cocos2d::CCString::createWithFormat("tile_%d.png", mpBuffer[pi])->getCString()));
             mpWindowTiles[si]->getTexture()->setAliasTexParameters();//1.0.4
         }
         mWindowIndex = (mWindowIndex + n) % mBufferSize;

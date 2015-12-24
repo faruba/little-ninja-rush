@@ -508,14 +508,12 @@ void Tasks::dispatchTask(int achieveCode, int cnt)
 
 void Tasks::completeAchievement(int tid) 
 {
-  cocos2d::CCLog("!!! Achievement Completed!");
   Achievement *obj = Tasks::achievementWithUiid(tid);
   //TODO:GamePlay::sharedGamePlay()->pushNotification(obj->text, obj->icon, 3);
 }
 
 void Tasks::completeObjectiveDaily(int oid) 
 {
-  cocos2d::CCLog("!!! Daily Objective Completed! (Step%d)", dailyObjective->index+1);
   Achievement *obj = Tasks::dailyObjectiveWithUiid(oid);
   GameRecord::sharedGameRecord()->task->dispatchTask(ACH_DAYWORK, 1);
   if( dailyObjective->index == 2 )
@@ -529,7 +527,6 @@ void Tasks::completeObjectiveDaily(int oid)
 
 void Tasks::completeObjectiveWeekly(int oid) 
 {
-  cocos2d::CCLog("!!! Weekly Objective Completed! (Step%d)", weeklyObjective->index+1);
   Achievement *obj = Tasks::weeklyObjectiveWithUiid(oid);
   if( weeklyObjective->index == 2 )
   {
@@ -542,7 +539,7 @@ void Tasks::completeObjectiveWeekly(int oid)
 
 void Tasks::completeObjectiveMonthly(int oid) 
 {
-  cocos2d::CCLog("!!! Monthly Objective Completed! (Step%d)", monthlyObjective->index+1);
+  cocos2d::log("!!! Monthly Objective Completed! (Step%d)", monthlyObjective->index+1);
   Achievement *obj = Tasks::monthlyObjectiveWithUiid(oid);
   if( monthlyObjective->index == 2 )
   {

@@ -98,7 +98,6 @@
 		BE38EBD91C1EB75D0087D38E /* Mechanic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE38EB341C1EB75D0087D38E /* Mechanic.cpp */; };
 		BE38EBDA1C1EB75D0087D38E /* Merchant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE38EB361C1EB75D0087D38E /* Merchant.cpp */; };
 		BE38EBDB1C1EB75D0087D38E /* MerchantPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE38EB381C1EB75D0087D38E /* MerchantPanel.cpp */; };
-		BE38EBDC1C1EB75D0087D38E /* MessageManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE38EB3A1C1EB75D0087D38E /* MessageManager.cpp */; };
 		BE38EBDD1C1EB75D0087D38E /* Messager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE38EB3C1C1EB75D0087D38E /* Messager.cpp */; };
 		BE38EBDE1C1EB75D0087D38E /* MiddleNinja.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE38EB3E1C1EB75D0087D38E /* MiddleNinja.cpp */; };
 		BE38EBDF1C1EB75D0087D38E /* MoonWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE38EB401C1EB75D0087D38E /* MoonWave.cpp */; };
@@ -690,8 +689,6 @@
 		BE38EB371C1EB75D0087D38E /* Merchant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Merchant.h; sourceTree = "<group>"; };
 		BE38EB381C1EB75D0087D38E /* MerchantPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MerchantPanel.cpp; sourceTree = "<group>"; };
 		BE38EB391C1EB75D0087D38E /* MerchantPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantPanel.h; sourceTree = "<group>"; };
-		BE38EB3A1C1EB75D0087D38E /* MessageManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MessageManager.cpp; sourceTree = "<group>"; };
-		BE38EB3B1C1EB75D0087D38E /* MessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageManager.h; sourceTree = "<group>"; };
 		BE38EB3C1C1EB75D0087D38E /* Messager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Messager.cpp; sourceTree = "<group>"; };
 		BE38EB3D1C1EB75D0087D38E /* Messager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messager.h; sourceTree = "<group>"; };
 		BE38EB3E1C1EB75D0087D38E /* MiddleNinja.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MiddleNinja.cpp; sourceTree = "<group>"; };
@@ -1686,12 +1683,8 @@
 				BE38EAEF1C1EB75C0087D38E /* Bomb.h */,
 				BE38EAF01C1EB75C0087D38E /* BombDart.cpp */,
 				BE38EAF11C1EB75C0087D38E /* BombDart.h */,
-				BE38EAF31C1EB75C0087D38E /* ClassicContinue.cpp */,
-				BE38EAF41C1EB75C0087D38E /* ClassicContinue.h */,
 				BE38EAF51C1EB75C0087D38E /* ClassicMode.cpp */,
 				BE38EAF61C1EB75C0087D38E /* ClassicMode.h */,
-				BE38EAF71C1EB75C0087D38E /* CoinsMenu.cpp */,
-				BE38EAF81C1EB75C0087D38E /* CoinsMenu.h */,
 				BE01EA081C23DFD3009CAF14 /* UI */,
 				BE38EAFB1C1EB75C0087D38E /* Collections.cpp */,
 				BE38EAFC1C1EB75C0087D38E /* Collections.h */,
@@ -1754,8 +1747,6 @@
 				BE38EB371C1EB75D0087D38E /* Merchant.h */,
 				BE38EB381C1EB75D0087D38E /* MerchantPanel.cpp */,
 				BE38EB391C1EB75D0087D38E /* MerchantPanel.h */,
-				BE38EB3A1C1EB75D0087D38E /* MessageManager.cpp */,
-				BE38EB3B1C1EB75D0087D38E /* MessageManager.h */,
 				BE38EB3C1C1EB75D0087D38E /* Messager.cpp */,
 				BE38EB3D1C1EB75D0087D38E /* Messager.h */,
 				BE38EB3E1C1EB75D0087D38E /* MiddleNinja.cpp */,
@@ -1903,6 +1894,10 @@
 		BE01EA081C23DFD3009CAF14 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BE38EAF71C1EB75C0087D38E /* CoinsMenu.cpp */,
+				BE38EAF81C1EB75C0087D38E /* CoinsMenu.h */,
+				BE38EAF31C1EB75C0087D38E /* ClassicContinue.cpp */,
+				BE38EAF41C1EB75C0087D38E /* ClassicContinue.h */,
 				BE38EAF91C1EB75C0087D38E /* CollectionMenu.cpp */,
 				BE38EAFA1C1EB75C0087D38E /* CollectionMenu.h */,
 				BE01EA091C23E032009CAF14 /* CollectionMenuDelegate.cpp */,
@@ -2511,7 +2506,6 @@
 				BE38EBC31C1EB75D0087D38E /* FootPrint.cpp in Sources */,
 				BE38EBD21C1EB75D0087D38E /* GTLoadList.cpp in Sources */,
 				BE38EBBF1C1EB75D0087D38E /* ExtraMenu.cpp in Sources */,
-				BE38EBDC1C1EB75D0087D38E /* MessageManager.cpp in Sources */,
 				BE38EBD81C1EB75D0087D38E /* MainRole.cpp in Sources */,
 				BE38EBD61C1EB75D0087D38E /* Loading.cpp in Sources */,
 				BE38EBD71C1EB75D0087D38E /* LogoSplash.cpp in Sources */,

@@ -33,8 +33,8 @@ void Bomb::onCreate()
     mSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     mSprite->setPosition(mPosition);
     mParent->addChild(mSprite, LAYER_MAINROLE+1);
-cocos2d::CCRotateBy* rb = cocos2d::CCRotateBy::create(1, 720);
-cocos2d::CCRepeatForever* rf = cocos2d::CCRepeatForever::create(rb);
+cocos2d::RotateBy* rb = cocos2d::RotateBy::create(1, 720);
+cocos2d::RepeatForever* rf = cocos2d::RepeatForever::create(rb);
     mSprite->runAction(rf);
     //初始化direction
     mDirection.x = (mDirection.x - mPosition.x)/BOMB_FLY;

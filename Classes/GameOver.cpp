@@ -177,19 +177,19 @@ void GameOver::updateArcade()
         case 1:
         {
             mCup->setVisible(true);
-            mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-bronze.png"));
+            mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-bronze.png"));
         }
             break;
         case 2:
         {
             mCup->setVisible(true);
-            mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-silver.png"));
+            mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-silver.png"));
         }
             break;
         case 3:
         {
             mCup->setVisible(true);
-            mCup->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("tp-gold.png"));
+            mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-gold.png"));
         }
             break;
     }
@@ -310,9 +310,9 @@ cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui
     if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() )
     {
       /*
-        mTwitter->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gowb.png"));
-        mTwitter->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gowb2.png"));
-        mTwitterAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gowb3.png"));
+        mTwitter->setNormalSpriteFrame(GameTool::getSpriteFrameByName("gowb.png"));
+        mTwitter->setSelectedSpriteFrame(GameTool::getSpriteFrameByName("gowb2.png"));
+        mTwitterAction->setDisplayFrame(GameTool::getSpriteFrameByName("gowb3.png"));
         */
     }
     
@@ -469,10 +469,10 @@ void GameOver::onFacebook(cocos2d::Ref*)
 //        
 //        //do some facebook actions
 //        
-//        mFacebookAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("ftloading.png"));
+//        mFacebookAction->setDisplayFrame(GameTool::getSpriteFrameByName("ftloading.png"));
 //        mFacebookAction->stopAllActions();
-//        CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 360);
-//        CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
+//        RotateBy *rb = cocos2d::RotateBy::create(1, 360);
+//        RepeatForever *rf = cocos2d::RepeatForever::create(rb);
 //        mFacebookAction->runAction(rf);
 //    }
 }
@@ -506,10 +506,10 @@ void GameOver::onTwitter(cocos2d::Ref*)
 //        social->present(del.navController);
 //        */
 //        
-//        mTwitterAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("ftloading.png"));
+//        mTwitterAction->setDisplayFrame(GameTool::getSpriteFrameByName("ftloading.png"));
 //        mTwitterAction->stopAllActions();
-//        CCRotateBy *rb = cocos2d::CCRotateBy::create(1, 360);
-//        CCRepeatForever *rf = cocos2d::CCRepeatForever::create(rb);
+//        RotateBy *rb = cocos2d::RotateBy::create(1, 360);
+//        RepeatForever *rf = cocos2d::RepeatForever::create(rb);
 //        mTwitterAction->runAction(rf);
 //    }
 }
@@ -547,7 +547,7 @@ void GameOver::doneFacebook(cocos2d::CCInteger* res)
 //    
 //    mFacebookAction->stopAllActions();
 //    mFacebookAction->setRotation(0);
-//    mFacebookAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gofb3.png"));
+//    mFacebookAction->setDisplayFrame(GameTool::getSpriteFrameByName("gofb3.png"));
 //    
 //    if( this->haveFacebookCoins() && result > 0 )
 //    {
@@ -570,11 +570,11 @@ void GameOver::doneTwitter(cocos2d::CCInteger* res)
 //    mTwitterAction->setRotation(0);
 //    if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() )
 //    {
-//        mTwitterAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gowb3.png"));
+//        mTwitterAction->setDisplayFrame(GameTool::getSpriteFrameByName("gowb3.png"));
 //    }
 //    else
 //    {
-//        mTwitterAction->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("gott3.png"));
+//        mTwitterAction->setDisplayFrame(GameTool::getSpriteFrameByName("gott3.png"));
 //    }
 //    
 //    if( this->haveTwitterCoins() && result > 0 )

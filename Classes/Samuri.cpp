@@ -41,10 +41,10 @@ void Samuri::onCreate()
     mHint->setAnchorPoint(cocos2d::Vec2(1, 0.5f));
     mHint->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width, PLAY_PLAYERLINE+20));
     mParent->addChild(mHint, LAYER_ROLE);
-cocos2d::CCMoveBy *mb1 = cocos2d::CCMoveBy::create(0.2f, Vec2(-20, 0));
-cocos2d::CCMoveBy *mb2 = cocos2d::CCMoveBy::create(0.2f, Vec2(20, 0));
-cocos2d::CCSequence *sq = cocos2d::CCSequence::create(mb1,mb2, NULL);
-cocos2d::CCRepeatForever *rp = cocos2d::CCRepeatForever::create(sq);
+cocos2d::MoveBy *mb1 = cocos2d::MoveBy::create(0.2f, Vec2(-20, 0));
+cocos2d::MoveBy *mb2 = cocos2d::MoveBy::create(0.2f, Vec2(20, 0));
+cocos2d::Sequence *sq = cocos2d::Sequence::create(mb1,mb2, NULL);
+cocos2d::RepeatForever *rp = cocos2d::RepeatForever::create(sq);
     mHint->runAction(rp);
     //CCBlink *blink2 = cocos2d::CCBlink::create(SAMURAI_WARNING, SAMURAI_WARNING*5);
     //mHint->runAction(blink2);

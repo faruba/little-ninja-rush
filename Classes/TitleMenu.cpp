@@ -225,7 +225,7 @@ void PopOption::loadDelivery()
   //  sp->scale(0);
   //  float sq0Duration[] = {0.2f, 0.1f, 0.05f, 0.05f};
   //  float sq0Scale[] = {1.2f, 0.9f, 1.1f, 1};
-  //  CCSequence *sq0 = createScaleSequence(sq0Duration, sq0Scale, 4);
+  //  Sequence *sq0 = createScaleSequence(sq0Duration, sq0Scale, 4);
   //  sp->runAction(seq);
 }
 
@@ -646,10 +646,10 @@ void PopObj::onCreate()
   cocos2d::Node * node = createUIByCCBI("menu-titlepop", "TitleMenu", TitleMenuLayerLoader::loader(), this);
   mBoard = CEClipedNode::create();
   mBoard->addChild(node);
-  cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
+  cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::Rect(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
   //CCLog("CLIP = %fx%f %fx%f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
   mBoard->setClipRect(&rect);
-  //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
+  //CCRect rect = cocos2d::Rect(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
   mBoard->setClipRect(&rect);
   mBoard->setPosition(cocos2d::Vec2(-301, 58));
   this->addChild(mBoard);
@@ -678,7 +678,7 @@ void PopObj::onCreate()
   //run animation
   cocos2d::CCMoveTo *mt = cocos2d::CCMoveTo::create(0.2f, Vec2(-301+381, 58));
   cocos2d::CCCallFunc *cf = cocos2d::CCCallFunc::create(this, callfunc_selector(PopObj::onDoneAnimation));
-  cocos2d::CCSequence *seq = cocos2d::CCSequence::createWithTwoActions(mt, cf);
+  cocos2d::Sequence *seq = cocos2d::Sequence::createWithTwoActions(mt, cf);
 
   mBoard->runAction(seq);
   mSwitch->setVisible(false);
@@ -689,8 +689,8 @@ void PopObj::onDoneAnimation()
 {
   mBoard->setPosition(cocos2d::Vec2( -301 + 381, 58));
   mMenu->setVisible(true);
-  //CCRect rect = cocos2d::CCRectMake(0, 0, UniversalFit::sharedUniversalFit()->screenSize.width, UniversalFit::sharedUniversalFit()->screenSize.height);
-  //CCRect rect = cocos2d::CCRectMake(0, 0, 10000, 10000);
+  //CCRect rect = cocos2d::Rect(0, 0, UniversalFit::sharedUniversalFit()->screenSize.width, UniversalFit::sharedUniversalFit()->screenSize.height);
+  //CCRect rect = cocos2d::Rect(0, 0, 10000, 10000);
   //mBoard->setClipRect(&rect);
   mSwitch->setVisible(true);
   mSwitch2->setVisible(true);
@@ -728,8 +728,8 @@ void PopObj::onChangeDisplay()
   mDisplay = !mDisplay;
   /*TODO:
   //play animation
-  //CCRect rect = cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
-  cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
+  //CCRect rect = cocos2d::Rect(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
+  cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::Rect(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
   mBoard->setClipRect(&rect);
   cocos2d::CCMoveTo *mt1 = cocos2d::CCMoveTo::create(0.2f, Vec2(-301, 58));
   cocos2d::CCCallFunc *cf1 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onFlip)));
@@ -740,8 +740,8 @@ void PopObj::onChangeDisplay()
   sqa->addObject(cf1);
   sqa->addObject(mt2);
   sqa->addObject(cf2);
-  cocos2d::CCSequence *seq = cocos2d::CCSequence::create(sqa);
-  //CCSequence *seq = cocos2d::CCSequence::create(mt1, cf1, mt2, cf2);
+  cocos2d::Sequence *seq = cocos2d::Sequence::create(sqa);
+  //Sequence *seq = cocos2d::Sequence::create(mt1, cf1, mt2, cf2);
 
   mBoard->runAction(seq);
 
@@ -830,8 +830,8 @@ void TitleMenu::onEnter()
   //select SinaWeibo / Twitter
   if(UniversalFit::shouldUsingSinaWeibo())
   {
-    mTwitter->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("contact3.png"));
-    mTwitter->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("contact3.png"));
+    mTwitter->setNormalSpriteFrame(GameTool::getSpriteFrameByName("contact3.png"));
+    mTwitter->setSelectedSpriteFrame(GameTool::getSpriteFrameByName("contact3.png"));
   }
 
   for(int i=0; i<RUN; ++i)
@@ -846,7 +846,7 @@ void TitleMenu::onEnter()
       ));
 
   mMainButton->runAction(cocos2d::Sequence::create(
-        cocos2d::CCDelayTime::create(0.6f),
+        cocos2d::DelayTime::create(0.6f),
         cocos2d::CCShow::create(),
         nullptr
         ));
@@ -879,10 +879,10 @@ void TitleMenu::onEnter()
   if( GameRecord::sharedGameRecord()->task->newrefresh )
   {
     mNew->runAction(cocos2d::Sequence::create(
-          cocos2d::CCDelayTime::create(1.0f),
+          cocos2d::DelayTime::create(1.0f),
           cocos2d::CCShow::create(),
-          cocos2d::CCScaleTo::create(0.2f, 1.5f),
-          cocos2d::CCScaleTo::create(0.1f, 1.0f),
+          cocos2d::ScaleTo::create(0.2f, 1.5f),
+          cocos2d::ScaleTo::create(0.1f, 1.0f),
           nullptr
           ));
   }
@@ -892,10 +892,10 @@ void TitleMenu::onEnter()
   if( GameRecord::sharedGameRecord()->collection->newlist->count() > 0 )
   {
     mCNew->runAction(cocos2d::Sequence::create(
-          cocos2d::CCDelayTime::create(1.5f),
+          cocos2d::DelayTime::create(1.5f),
           cocos2d::CCShow::create(),
-          cocos2d::CCScaleTo::create(0.2f, 1.5f),
-          cocos2d::CCScaleTo::create(0.1f, 1.0f),
+          cocos2d::ScaleTo::create(0.2f, 1.5f),
+          cocos2d::ScaleTo::create(0.1f, 1.0f),
           nullptr
           ));
   }

@@ -40,6 +40,8 @@ class GameTool {
       CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
     }
 
+    static SpriteFrame* getSpriteFrameByName(const std::string&name) { return cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(name); }
+
     template<typename LayerType>
       static cocos2d::Scene* scene() { 
         cocos2d::Scene *ret = cocos2d::Scene::create();
@@ -52,7 +54,6 @@ class GameTool {
         clip->addChild(tm);
         ret->addChild(clip);
         return ret;
-
       }
 };
 
@@ -119,7 +120,7 @@ CFAbsoluteTime CFAbsoluteTimeGetCurrent();
 
 #define LNR_GET_TOUCH_POS \
     cocos2d::Point pos = touch->getLocationInView(); \
-    pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos); \
+    pos = cocos2d::Director::getInstance()->convertToGL(pos); \
     pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
 class Scene
@@ -145,13 +146,11 @@ float gtReadFloat(cocos2d::CCDictionary *dic, const char *key, float def=0.0f);
 
 double gtReadDouble(cocos2d::CCDictionary *dic, const char *key, double def=0.0f);
 
-cocos2d::CCString* gtReadString(cocos2d::CCDictionary *dic, const char *key, CCString *def=NULL);
+std::string gtReadString(cocos2d::CCDictionary *dic, const char *key, std::string def);
 
 void unloadTextureFromeSpriteFrameFile(const char *plist);
 
-//UIImage* makeScreenshot();
-cocos2d::CCSequence *createScaleSequence(float fDuration[], float fScale[], int count);
+cocos2d::Sequence *createScaleSequence(float fDuration[], float fScale[], int count);
 cocos2d::Node *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pNodeLoader, Ref *target);
-
 
 #endif

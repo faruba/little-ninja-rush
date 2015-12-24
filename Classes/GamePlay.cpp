@@ -186,8 +186,8 @@ void GamePlay::initGamePlay(int mod)
 
   //增加菜单
   cocos2d::MenuItemImage *xpause = cocos2d::MenuItemImage::create();
-  xpause->setNormalSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
-  xpause->setSelectedSpriteFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("pause.png"));
+  xpause->setNormalSpriteFrame(GameTool::getSpriteFrameByName("pause.png"));
+  xpause->setSelectedSpriteFrame(GameTool::getSpriteFrameByName("pause.png"));
   xpause->setTarget(this, menu_selector(GamePlay::pause));
   xpause->setAnchorPoint(cocos2d::Vec2(1, 1));
   xpause->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width, SCREEN_HEIGHT));
@@ -556,7 +556,6 @@ void GamePlay::resetGame()
   GameRecord::sharedGameRecord()->task->dispatchTask(ACH_USECHARACTER0+roleId, 1);
 
   GameTool::PlayBackgroundMusic("sound/music-menu.mp3");
-  cocos2d::CCLog("GamePlay:done resetGame");
 
 #ifdef DEBUG
   cocos2d::CCTextureCache::sharedTextureCache()->dumpCachedTextureInfo();
@@ -891,7 +890,7 @@ void GamePlay::makeCombo()
       }
     }
     cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("combo%d.mp3", cn);
-    SimpleAudioEngine::sharedEngine()->playEffect(filename->getCString());
+    GameTool::PlaySound(filename->getCString());
   }
 
   if( mode == MODE_CLASSIC )
@@ -925,7 +924,7 @@ void GamePlay::makeCombo()
           fn = 5;
         }
         cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("fever%d.mp3", fn);
-        SimpleAudioEngine::sharedEngine()->playEffect(filename->getCString());
+          GameTool::PlaySound(filename->getCString());
       }
     }
     if( combo == PLAY_FEVERCOMBO )
@@ -1215,7 +1214,7 @@ void GamePlay::popNotification(PopQueue *pop) {
     label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     label->setPosition(cocos2d::Vec2(90, 20));
     board->addChild(label);
-  } else if (type = 4) {
+  } else if (type == 4) {
     cocos2d::Sprite *item = cocos2d::Sprite::create(icon.c_str());
     item->setPosition(cocos2d::Vec2(26, 19));
     item->setScale(0.7f);
@@ -1257,7 +1256,9 @@ void GamePlay::popNotification(PopQueue *pop) {
         cocos2d::DelayTime::create(2),
         cocos2d::MoveBy::create(0.5f, Vec2(0, board->getContentSize().height)),
         cocos2d::Hide::create(),
-        cocos2d::CallFunc::create(GamePlay::sharedGamePlay(), callfunc_selector(GamePlay::processNextNotification)),
+        cocos2d::CallFunc::create([this] () -> void {
+            this->processNotificationQueue();
+        }),
         nullptr));
   GameTool::PlaySound("sound/objective-complete.mp3");
 }

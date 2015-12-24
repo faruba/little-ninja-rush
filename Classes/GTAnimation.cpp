@@ -96,7 +96,7 @@ bool GTAnimation::addFrame(const char * FrameName)
 {
   if(mCurrentAnimationId < mAnimationCount && mCurrentFrameId < mpAnimationData[mCurrentAnimationId].framecount)
   {
-    mpAnimationData[mCurrentAnimationId].frames[mCurrentFrameId] = cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(FrameName);
+    mpAnimationData[mCurrentAnimationId].frames[mCurrentFrameId] = GameTool::getSpriteFrameByName(FrameName);
     if (mpAnimationData[mCurrentAnimationId].frames[mCurrentFrameId])
     {
       mpAnimationData[mCurrentAnimationId].frames[mCurrentFrameId]->retain();

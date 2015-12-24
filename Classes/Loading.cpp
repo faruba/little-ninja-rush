@@ -85,7 +85,7 @@ void Loading::update(float delta)
         mLoading = cocos2d::Sprite::create("tts.png");
         mLoading->setPosition(cocos2d::Vec2( 370, 30 ));
 cocos2d::CCBlink *bk = cocos2d::CCBlink::create(5, 5);
-cocos2d::CCRepeatForever *rf = cocos2d::CCRepeatForever::create(bk);
+cocos2d::RepeatForever *rf = cocos2d::RepeatForever::create(bk);
         mLoading->runAction(rf);
         this->addChild(mLoading);
       }

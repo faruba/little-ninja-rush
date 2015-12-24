@@ -47,7 +47,7 @@ cocos2d::Node * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLayerL
   }
 
   mClipedList = CEClipedNode::create();
-  mClipedList->setClipRect(new CCRect((UniversalFit::sharedUniversalFit()->transformRect(cocos2d::CCRectMake(12, 12, 455, 264)))));
+  mClipedList->setClipRect(new CCRect((UniversalFit::sharedUniversalFit()->transformRect(cocos2d::Rect(12, 12, 455, 264)))));
   mList->addChild(mClipedList);
   mItemList = cocos2d::Node::create();
   mClipedList->addChild(mItemList);
@@ -67,19 +67,19 @@ cocos2d::Node * node = createUIByCCBI("menu-extra", "ExtraMenu", ExtraMenuLayerL
   switch (mMode) {
     case 0:
       {
-        mBanner->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb6.png"));
+        mBanner->setDisplayFrame(GameTool::getSpriteFrameByName("exb6.png"));
         this->loadAchievements();
       }
       break;
     case 1:
       {
-        mBanner->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb7.png"));
+        mBanner->setDisplayFrame(GameTool::getSpriteFrameByName("exb7.png"));
         this->loadStatistics();
       }
       break;
     case 2:
       {
-        mBanner->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("exb5.png"));
+        mBanner->setDisplayFrame(GameTool::getSpriteFrameByName("exb5.png"));
         this->loadAboutUs();
       }
       break;
@@ -348,7 +348,7 @@ bool ExtraMenu::onTouchBegan(Touch * touch, Event * event)
   LNR_GET_TOUCH_POS;
     
     mTouchBegin = pos;
-cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
+cocos2d::CCRect rect = cocos2d::Rect(12, 12, 455, 264);
     if( rect.containsPoint(pos) )
     {
         mBeginPressY = pos.y;
@@ -388,7 +388,7 @@ void ExtraMenu::onTouchEnded(Touch * touch, Event * event)
 {
 //    mFly = true;
 //  LNR_GET_TOUCH_POS;
-//cocos2d::CCRect rect = cocos2d::CCRectMake(12, 12, 455, 264);
+//cocos2d::CCRect rect = cocos2d::Rect(12, 12, 455, 264);
 //    if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&
 //       rect.containsPoint(pos) && mCurrState == 0 )//only available in achievement state
 //    {

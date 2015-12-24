@@ -57,7 +57,7 @@ void  CollectionMenuDelegate::onUse () {
           GameTool::PlaySound("sound/getitem.mp3");
           int piece = GameRecord::sharedGameRecord()->collection->itemTotalPiece(uiid) - GameRecord::sharedGameRecord()->collection->itemLostPiece(uiid);
           cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
-          mask->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(filename->getCString()));
+          mask->setDisplayFrame(GameTool::getSpriteFrameByName(filename->getCString()));
           //bugfix
           if( GameRecord::sharedGameRecord()->collection->magic_piece <= 0 )
           {

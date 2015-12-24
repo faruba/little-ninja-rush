@@ -11,7 +11,7 @@
 
 #include "cocos2d.h"
 
-class CCNumber : public cocos2d::Object
+class CCNumber : public cocos2d::Ref
 {
 public:
     CCNumber(float v)

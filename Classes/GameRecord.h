@@ -54,12 +54,12 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GameRecord, create);
     int *char_equip_spell;
 
     //Local Leader Board 本地排行榜
-cocos2d::CCString *lb_playername;
+    std::string lb_playername;
     int *lb_scores;
-cocos2d::CCString **lb_names;
+    std::string *lb_names;
     //--- for arcade mode ---
     int *lba_scores;
-cocos2d::CCString **lba_names;
+    std::string *lba_names;
     double share_facebook;
     double share_twitter;
 
@@ -93,8 +93,6 @@ cocos2d::CCString **lba_names;
     void setItemUpgrade(int value, int itemid);
     void setIAPFlag(int value, int iapid);
 
-    //GameRecord* loadGameRecordFromURL(NSURL* url);
-
     void makeCoins(int num);
 
     void checkPoint();
@@ -105,9 +103,9 @@ cocos2d::CCString **lba_names;
     void mergeWith(GameRecord * record) ;
 
     //--- local leader board ---
-    void setLocalPlayerName(cocos2d::CCString* name);
-    void submitScore(int score, CCString* name);
-    void submitArcadeScore(int score, CCString* name);
+    void setLocalPlayerName(std::string& name);
+    void submitScore(int score, std::string& name);
+    void submitArcadeScore(int score, std::string& name);
 
 };
 #endif

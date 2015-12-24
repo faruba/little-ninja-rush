@@ -81,7 +81,7 @@ cocos2d::LayerColor *mSpeedRed;
 cocos2d::LayerColor *mSpeedNormal;
 cocos2d::LayerColor *mSpeedFever;
     int mSpeedState;//0-normal 1-red flash 2-fever flash
-cocos2d::CCAction *mSpeedAction;
+cocos2d::Action *mSpeedAction;
 
     //arcade * timer
     int mTimerCache;
@@ -94,9 +94,9 @@ cocos2d::Sprite *mCup;
 
     //arcade x
 cocos2d::Label *mArcadeX;
-cocos2d::CCMenu *mMenu;
-cocos2d::CCMenuItemSprite *mFly;
-cocos2d::CCMenuItemSprite *mSP;
+cocos2d::Menu *mMenu;
+cocos2d::MenuItemSprite *mFly;
+cocos2d::MenuItemSprite *mSP;
 cocos2d::Sprite *mFlyBg;
 cocos2d::Sprite *mSPBg;
 cocos2d::Label *mFlyNumber;
