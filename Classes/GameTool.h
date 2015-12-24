@@ -120,7 +120,7 @@ CFAbsoluteTime CFAbsoluteTimeGetCurrent();
 
 #define LNR_GET_TOUCH_POS \
     cocos2d::Point pos = touch->getLocationInView(); \
-    pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos); \
+    pos = cocos2d::Director::getInstance()->convertToGL(pos); \
     pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
 class Scene
@@ -150,9 +150,7 @@ std::string gtReadString(cocos2d::CCDictionary *dic, const char *key, std::strin
 
 void unloadTextureFromeSpriteFrameFile(const char *plist);
 
-//UIImage* makeScreenshot();
 cocos2d::Sequence *createScaleSequence(float fDuration[], float fScale[], int count);
 cocos2d::Node *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pNodeLoader, Ref *target);
-
 
 #endif

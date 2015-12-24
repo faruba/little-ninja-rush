@@ -739,7 +739,6 @@ void GameInterface::onDestroy()
 
 void GameInterface::onFly(cocos2d::Ref*)
 {
-    //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpellRelease), CCInteger::create(SPELL_FLY));
     GameScript::sharedScript()->invokeSpellRelease(cocos2d::CCInteger::create(SPELL_FLY));
     GameRecord::sharedGameRecord()->item_fly--;
     mFly->setVisible(false);
@@ -752,7 +751,7 @@ void GameInterface::onFly(cocos2d::Ref*)
 void GameInterface::onSP(cocos2d::Ref*)
 {
     GameTool::PlaySound("sound/charge.mp3");
-    //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSP), NULL);
+
     GameScript::sharedScript()->invokeSP();
     GameRecord::sharedGameRecord()->item_sp--;
     mSP->setVisible(false);

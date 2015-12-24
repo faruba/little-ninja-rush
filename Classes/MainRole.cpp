@@ -168,7 +168,6 @@ void MainRole::fire(cocos2d::Point dir)
   {
     Vector2d *d = Vector2d::create();
     d->value = dir;
-//    MessageManager::sharedMessageManager()->pushMsg(this, callfuncND_selector(MainRole::commitFire), d);
       this->commitFire(NULL, d);
   }
 }
@@ -303,7 +302,6 @@ void MainRole::slice()
     mBladeAction = !mBladeAction;
   }
   mLoadTimer = 0;//中断load
-//  MessageManager::sharedMessageManager()->pushMsg(this, callfuncND_selector(MainRole::commitSlice), NULL);
     this->commitSlice();
 }
 
@@ -447,7 +445,6 @@ void MainRole::spell(cocos2d::Point param)
   {
     Vector2d *d = Vector2d::create();
     d->value = param;
-//    MessageManager::sharedMessageManager()->pushMsg(this, callfuncND_selector(MainRole::commitSpell), d);
       commitSpell(d);
   }
 }

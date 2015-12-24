@@ -342,28 +342,28 @@ void Item::onUpdate(float delta)
                 break;
             case 2://八方手里剑
             {
-                //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell0), CCInteger::create(get));
+
                 GameScript::sharedScript()->invokeSpell0(cocos2d::CCInteger::create(get));
                 GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
             case 3://隐身术
             {
-                //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell2), NULL);
+
                 GameScript::sharedScript()->invokeSpell2(NULL);
                 GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
             case 4://子弹时间
             {
-                //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell3), NULL);
+
                 GameScript::sharedScript()->invokeSpell3(NULL);
                 GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
             case 5://加血
             {
-                //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell4), NULL);
+ 
                 GameScript::sharedScript()->invokeSpell4(NULL, NULL);
                 GameTool::PlaySound("sound/charge.mp3");
                 for( int i=0; i<5; ++i)
@@ -374,35 +374,35 @@ void Item::onUpdate(float delta)
                 break;
             case 6://加气
             {
-//                MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell5), NULL);
+
                 GameScript::sharedScript()->invokeSpell5(NULL, NULL);
                 GameTool::PlaySound("sound/charge.mp3");
             }
                 break;
             case 7://一闪
             {
-                //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell6), NULL);
+
                 GameScript::sharedScript()->invokeSpell6(NULL);
                 GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
             case 8://流星雨
             {
-                //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell7), NULL);
+
                 GameScript::sharedScript()->invokeSpell7(NULL);
                 GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
             case 9://飞镖无限
             {
-                //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpell8), NULL);
+
                 GameScript::sharedScript()->invokeSpell8(NULL);
                 GameTool::PlaySound("sound/getitem.mp3");
             }
                 break;
             case 10://全屏分身
             {
-                //MessageManager::sharedMessageManager()->pushMsg(GameScript::sharedScript(), callfuncND_selector(GameScript::invokeSpellRelease), CCInteger::create(SPELL_SHADOWKILL));
+
                 GameScript::sharedScript()->invokeSpellRelease(cocos2d::CCInteger::create(SPELL_SHADOWKILL));
                 GameTool::PlaySound("sound/getitem.mp3");
             }
