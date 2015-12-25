@@ -119,7 +119,7 @@ void GamePlay::onEnter()
   auto listener = EventListenerTouchOneByOne::create();
   listener->onTouchBegan = CC_CALLBACK_2(GamePlay::onTouchBegan, this);
   listener->onTouchEnded = CC_CALLBACK_2(GamePlay::onTouchEnded, this);
-  listener->onTouchMoved = CC_CALLBACK_2(GamePlay::onTouchEnded, this);
+  listener->onTouchMoved = CC_CALLBACK_2(GamePlay::onTouchMoved, this);
   listener->onTouchCancelled = CC_CALLBACK_2(GamePlay::onTouchEnded, this);
   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
@@ -708,10 +708,10 @@ bool GamePlay::onTouchBegan(Touch * touch, Event * event)
   {
     return false;
   }
-  LNR_GET_TOUCH_POS;
 
   if( count_control <= 0 )
   {
+    LNR_GET_TOUCH_POS;
     mTouchBegin = pos;
     mTouchProcessed = false;
   }
