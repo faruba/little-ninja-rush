@@ -4,6 +4,7 @@
 #include "GameRecord.h"
 #include "Collections.h"
 #include "GamePlay.h"
+#include "patch.h"
 //#include "GameCenterController.h"
 
 ///////////////////////// ObjectiveManager

@@ -110,10 +110,17 @@ endif()
 include_directories(
   /usr/local/include/GLFW
   /usr/include/GLFW
+  ${COCOS2D_ROOT}
+  ${COCOS2D_ROOT}/external
+  ${COCOS2D_ROOT}/extensions
   ${COCOS2D_ROOT}/cocos
   ${COCOS2D_ROOT}/cocos/platform
   ${COCOS2D_ROOT}/cocos/audio/include/
+  ${COCOS2D_ROOT}/cocos/editor-support
   Classes
+  Classes/rapidjson
+	Classes/ABKit
+	Classes/mycocos2d
 )
 if ( WIN32 )
   include_directories(
@@ -122,17 +129,17 @@ if ( WIN32 )
 )
 endif( WIN32 )
 
+file(GLOB_RECURSE SOURCE_FILE Classes/*.cpp)
 set(GAME_SRC
-  Classes/AppDelegate.cpp
-  Classes/HelloWorldScene.cpp
-  Classes/*.cpp
+	${SOURCE_FILE}
+	#${SOURCE_FILE_COCOS}
   ${PLATFORM_SPECIFIC_SRC}
 )
 
+file(GLOB_RECURSE  HEADER_FILE Classes/*.h)
 set(GAME_HEADERS
-  Classes/AppDelegate.h
-  Classes/HelloWorldScene.h
-  Classes/*.h
+	${HEADER_FILE}
+	#${HEADER_FILE_COCOS}
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 
