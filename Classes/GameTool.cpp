@@ -99,9 +99,9 @@ bool exCollisionWithCircles(cocos2d::Point op, float ox, float oy, float r, coco
   }
 }
 
-int gtReadInt(cocos2d::CCDictionary *dic, const char *key, int def)
+int gtReadInt(cocos2d::CCDictionary *dic, std::string key, int def)
 {
-cocos2d::Ref *obj = dic->objectForKey(key);
+  cocos2d::Ref *obj = dic->objectForKey(key.c_str());
   if( obj != NULL ) {
     return ((CCNumber*)obj)->getInt();
   }

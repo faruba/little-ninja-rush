@@ -1174,33 +1174,12 @@ void GamePlay::setTaskCompleteNode(cocos2d::Node * node)
 }
 
 bool GamePlay::completeSomeObjectives() {
-  {
-    Objective *obj = GameRecord::sharedGameRecord()->task->dailyObjective;
-    Achievement *ach = Tasks::dailyObjectiveWithUiid(obj->uiid);
-    if( ach != NULL && obj->count >= ach->achieveNumber )
-    {
-      return true;
-    }
-  }
-  {
-    Objective *obj = GameRecord::sharedGameRecord()->task->weeklyObjective;
-    Achievement *ach = Tasks::weeklyObjectiveWithUiid(obj->uiid);
-    if( ach != NULL && obj->count >= ach->achieveNumber )
-    {
-      return true;
-    }
-  }
-  {
-    Objective *obj = GameRecord::sharedGameRecord()->task->monthlyObjective;
-    Achievement *ach = Tasks::monthlyObjectiveWithUiid(obj->uiid);
-    if( ach != NULL && obj->count >= ach->achieveNumber )
-    {
-      return true;
-    }
-  }
-
-  return false;
+  Tasks *manager = GameRecord::sharedGameRecord()->task;
+  return manager->dailyObjective.isCompleted() ||
+         manager->weeklyObjective.isCompleted() ||
+         manager->monthlyObjective.isCompleted();
 }
+
 void GamePlay::popNotification(PopQueue *pop) {
   cocos2d::Sprite *board = cocos2d::Sprite::createWithSpriteFrameName("task-complete.png");
   board->setAnchorPoint(cocos2d::Vec2(0.5f, 0));

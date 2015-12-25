@@ -255,7 +255,7 @@ cocos2d::CCLog("*(%d) - %s", ach->achieveCode, ach->text->getCString());
     {
       achnum = 1;
     }
-    FoldItem *fi = FoldItem::foldItem(ach->name->getCString(), ach->icon->getCString(), ach->desc->getCString(), achnum, ach->achieveCount, this);
+    FoldItem *fi = FoldItem::foldItem(ach->name->getCString(), ach->icon.c_str(), ach->desc.c_str(), achnum, ach->achieveCount, this);
     fi->setPosition(cocos2d::Vec2(0, mOffset));
     mItemList->addChild(fi, 1, mItemList->getChildrenCount());
     mOffset -= fi->getContentSize().height + PADDING;
