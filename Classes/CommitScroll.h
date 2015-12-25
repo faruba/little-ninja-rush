@@ -50,9 +50,9 @@ cocos2d::LayerColor *mFlash;
 cocos2d::Label *mItemName;
 
 
-    void onCashIn();
+    void onCashIn(cocos2d::Ref*);
 
-    void onScroll();
+    void onScroll(cocos2d::Ref*);
 
     bool isPrizeAvailable(int pid);
 

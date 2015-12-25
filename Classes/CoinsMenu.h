@@ -75,7 +75,7 @@ cocos2d::LayerColor *mMask;
     void addItem(int iid);
 
     //-- auto callback
-    void onBack();
+    void onBack(cocos2d::Ref*);
 
   private:
     UISwapper mUISwapper;

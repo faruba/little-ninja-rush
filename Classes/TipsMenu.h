@@ -9,9 +9,9 @@ class TipsMenu:
 {
   public:
     virtual bool init();
-    
-CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TipsMenu, create);
-    
+
+    CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TipsMenu, create);
+
     bool onAssignCCBMemberVariable(cocos2d::Ref*, const char*, cocos2d::Node*);
     SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::Ref *, const char*);
     cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(cocos2d::Ref * , const char* );
@@ -20,22 +20,20 @@ CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(TipsMenu, create);
     //virtual void update(float);
     virtual void onExit();
 
-private:
+  private:
     void updateTip(int index);
-cocos2d::Node *mNode;
-cocos2d::Label *mCount;
-cocos2d::Label *mTip;
+    cocos2d::Node *mNode;
+    cocos2d::Label *mCount;
+    cocos2d::Label *mTip;
     int mIndex;
-cocos2d::MenuItemImage *mLeft;
-cocos2d::MenuItemImage *mRight;
+    cocos2d::MenuItemImage *mLeft;
+    cocos2d::MenuItemImage *mRight;
 
+    void onBack(cocos2d::Ref*);
+    void onLeft(cocos2d::Ref*);
+    void onRight(cocos2d::Ref*);
 
-
-    void onBack();
-    void onLeft();
-    void onRight();
-
-private:
+  private:
     UISwapper mUISwapper;
 };
 #endif

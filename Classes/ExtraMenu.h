@@ -66,7 +66,7 @@ cocos2d::Sprite *mBanner;
     void onWeibo();
 
     //-- auto callback
-    void onBack();
+    void onBack(cocos2d::Ref*);
 
 
     virtual void purchase(int cid) {};

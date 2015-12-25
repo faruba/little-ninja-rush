@@ -41,7 +41,7 @@ void ObjectiveComplete::onCreate()
     play->scheduleMask(Color3B(0, 0, 0), 128, 0);
     cocosbuilder::NodeLoaderLibrary *pNodeLib = cocosbuilder::NodeLoaderLibrary::getInstance();
     cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
-    mNode = pReader->readNodeGraphFromFile("ui-scroll", this);
+    mNode = pReader->readNodeGraphFromFile("ui-objective", this);
     pReader->release();
     mNode->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->baseLeft, 0));
     play->addChild(mNode, LAYER_MASK+1);

@@ -61,149 +61,143 @@ CommitScroll* CommitScroll::commitScorll()
 
 void CommitScroll::onCreate() 
 {
-    //hot load
-cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-scroll.plist");
-    
-    GamePlay *play = GamePlay::sharedGamePlay();
-    play->scheduleMask(Color3B(0, 0, 0), 128, 0);
-    cocosbuilder::NodeLoaderLibrary *pNodeLib = cocosbuilder::NodeLoaderLibrary::getInstance();
-    cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
-    mNode = pReader->readNodeGraphFromFile("ui-scroll", this);
-    pReader->release();
+  //hot load
+  cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("ui-scroll.plist");
 
-    mNode->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->baseLeft, 0));
-    play->addChild(mNode, LAYER_MASK+1);
-    
-    //TODO: 
-    //mFlash->blendFunc =  (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };//fix flash bug
-    
-    mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
-    mOver = false;
-cocos2d::RotateBy *rb1 = cocos2d::RotateBy::create(1, 60);
-cocos2d::RepeatForever *rf1 = cocos2d::RepeatForever::create(rb1);
-    mRotateCW->runAction(rf1);
-cocos2d::RotateBy *rb2 = cocos2d::RotateBy::create(1, -30);
-cocos2d::RepeatForever *rf2 = cocos2d::RepeatForever::create(rb2);
-    mRotateACW->runAction(rf2);
-cocos2d::RotateBy *rb3 = cocos2d::RotateBy::create(1, 20);
-cocos2d::RepeatForever *rf3 = cocos2d::RepeatForever::create(rb3);
-    mLightBack->runAction(rf3);
-    mState = 0;
-    mPrize = 0;
-    
-    mEffect = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("effect"));
-    mEffect->setScale(2.42f);
-    mEffect->setVisible(false);
-    mEffect->setPosition(mScroll->getPosition());
-    mNode->addChild(mEffect);
-    
-    mReviveFlag = false;
+  GamePlay *play = GamePlay::sharedGamePlay();
+  play->scheduleMask(Color3B(0, 0, 0), 128, 0);
+  cocosbuilder::NodeLoaderLibrary *pNodeLib = cocosbuilder::NodeLoaderLibrary::getInstance();
+  cocosbuilder::CCBReader *pReader = new cocosbuilder::CCBReader(pNodeLib, this, this);
+  mNode = pReader->readNodeGraphFromFile("ui-scroll", this);
+  pReader->release();
+
+  mNode->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->baseLeft, 0));
+  play->addChild(mNode, LAYER_MASK+1);
+
+  //TODO: 
+  //mFlash->blendFunc =  (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };//fix flash bug
+
+  mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
+  mOver = false;
+  cocos2d::RotateBy *rb1 = cocos2d::RotateBy::create(1, 60);
+  cocos2d::RepeatForever *rf1 = cocos2d::RepeatForever::create(rb1);
+  mRotateCW->runAction(rf1);
+  cocos2d::RotateBy *rb2 = cocos2d::RotateBy::create(1, -30);
+  cocos2d::RepeatForever *rf2 = cocos2d::RepeatForever::create(rb2);
+  mRotateACW->runAction(rf2);
+  cocos2d::RotateBy *rb3 = cocos2d::RotateBy::create(1, 20);
+  cocos2d::RepeatForever *rf3 = cocos2d::RepeatForever::create(rb3);
+  mLightBack->runAction(rf3);
+  mState = 0;
+  mPrize = 0;
+
+  mEffect = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("effect"));
+  mEffect->setScale(2.42f);
+  mEffect->setVisible(false);
+  mEffect->setPosition(mScroll->getPosition());
+  mNode->addChild(mEffect);
+
+  mReviveFlag = false;
 }
 
 void CommitScroll::onUpdate(float delta) 
 {
-//    GamePlay *play = GamePlay::sharedGamePlay();
-//    if( mReviveFlag )
-//    {
-//        play->manager->removeGameObject(this);
-//    }
-//    if( mOver )
-//    {
-//        mOverTimer += delta;
-//        if( mOverTimer > 1 )
-//        {
-//            play->manager->removeGameObject(this);
-//        }
-//    }
-//    if( mEffect->isVisible() )
-//    {
-//        if( mEffect->updateGTAnimation(delta) )
-//        {
-//            mEffect->setVisible(false);
-//        }
-//    }
-//    if( mState == 2 )
-//    {
-//        if( mPrize >= 2 )
-//        {
-//            mTimer+= delta;
-//            float r = 1.0f - mTimer/1;
-//            int op = 255*r;
-//            mLightBack->setOpacity(op);
-//cocos2d::Ref* node = NULL;
-//CCARRAY_FOREACH( mRotateCW->getChildren(), node)
-//            {
-//cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
-//              sp->setOpacity(op);
-//            }
-//CCARRAY_FOREACH( mRotateACW->getChildren(), node)
-//            {
-//cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
-//              sp->setOpacity(op);
-//            }
-//            if( mTimer > 1 )
-//            {
-//                mLightBack->setOpacity(255);
-//CCARRAY_FOREACH( mRotateCW->getChildren(), node)
-//                {
-//cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
-//                  sp->setOpacity(255);
-//                }
-//CCARRAY_FOREACH( mRotateACW->getChildren(), node)
-//                {
-//cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
-//                  sp->setOpacity(255);
-//                }
-//                mFlash->setVisible(false);
-//                mFlash->setOpacity(255);
-//                mRotateNode->setVisible(false);
-//                mState = 0;
-//                
-//                if( play->scrolls <= 0 )
-//                {
-//                    mOver = true;
-//                    mOverTimer = 0.5f;
-//                }
-//                else {
-//                    mScroll->stopAllActions();
-//                    mScroll->setDisplayFrame(GameTool::getSpriteFrameByName("js_bjzd.png"));
-//cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.3f, 1.2f);
-//cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.1f, 1.0f);
-//cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
-//                    mScroll->runAction(sq);
-//                }
-//            }
-//        }
-//        else {
-//            mState = 0;
-//            if( play->scrolls <= 0 )
-//            {
-//                mOver = true;
-//                mOverTimer = 0.5f;
-//            }
-//            else {
-//                mScroll->setVisible(true);
-//                mScroll->stopAllActions();
-//                mScroll->setDisplayFrame(GameTool::getSpriteFrameByName("js_bjzd.png"));
-//cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.3f, 1.2f);
-//cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.1f, 1.0f);
-//cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
-//                mScroll->runAction(sq);
-//            }
-//        }
-//    }
-//    if( mState == 1 && mPrize == 0 )
-//    {
-//        mTimer += delta;
-//        if( mTimer > 1 )
-//        {
-//            mState = 2;
-//            mTimer = 0;
-//        }
-//    }
+  GamePlay *play = GamePlay::sharedGamePlay();
+  if( mReviveFlag )
+  {
+    play->manager->removeGameObject(this);
+  }
+  if( mOver )
+  {
+    mOverTimer += delta;
+    if( mOverTimer > 1 )
+    {
+      play->manager->removeGameObject(this);
+    }
+  }
+  if( mEffect->isVisible() )
+  {
+    if( mEffect->updateGTAnimation(delta) )
+    {
+      mEffect->setVisible(false);
+    }
+  }
+  if( mState == 2 )
+  {
+    if( mPrize >= 2 )
+    {
+      mTimer+= delta;
+      float r = 1.0f - mTimer/1;
+      int op = 255*r;
+      mLightBack->setOpacity(op);
+      for (auto& node : mRotateCW->getChildren()) {
+        cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
+        sp->setOpacity(op);
+      }
+      for (auto& node : mRotateACW->getChildren()) {
+        cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
+        sp->setOpacity(op);
+      }
+      if( mTimer > 1 )
+      {
+        mLightBack->setOpacity(255);
+        for (auto& node : mRotateCW->getChildren()) {
+          cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
+          sp->setOpacity(255);
+        }
+        for (auto& node : mRotateACW->getChildren()) {
+          cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
+          sp->setOpacity(255);
+        }
+        mFlash->setVisible(false);
+        mFlash->setOpacity(255);
+        mRotateNode->setVisible(false);
+        mState = 0;
+
+        if( play->scrolls <= 0 )
+        {
+          mOver = true;
+          mOverTimer = 0.5f;
+        }
+        else {
+          mScroll->stopAllActions();
+          mScroll->setDisplayFrame(GameTool::getSpriteFrameByName("js_bjzd.png"));
+          cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.3f, 1.2f);
+          cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.1f, 1.0f);
+          cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
+          mScroll->runAction(sq);
+        }
+      }
+    } else {
+      mState = 0;
+      if( play->scrolls <= 0 )
+      {
+        mOver = true;
+        mOverTimer = 0.5f;
+      }
+      else {
+        mScroll->setVisible(true);
+        mScroll->stopAllActions();
+        mScroll->setDisplayFrame(GameTool::getSpriteFrameByName("js_bjzd.png"));
+        cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.3f, 1.2f);
+        cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.1f, 1.0f);
+        cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
+        mScroll->runAction(sq);
+      }
+    }
+  }
+  if( mState == 1 && mPrize == 0 )
+  {
+    mTimer += delta;
+    if( mTimer > 1 )
+    {
+      mState = 2;
+      mTimer = 0;
+    }
+  }
 }
 
-void CommitScroll::onCashIn() 
+void CommitScroll::onCashIn(cocos2d::Ref*) 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     if( play->scrolls > 0 )
@@ -220,7 +214,7 @@ void CommitScroll::onCashIn()
     }
 }
 
-void CommitScroll::onScroll() 
+void CommitScroll::onScroll(cocos2d::Ref*) 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     if( mState == 0 )
@@ -411,7 +405,6 @@ cocos2d::FadeIn *fo = cocos2d::FadeIn::create(2);
 
 void CommitScroll::implementPrize() 
 {
-    /*
     GamePlay *play = GamePlay::sharedGamePlay();
     //implement prize
     switch (mPrize) {
@@ -447,156 +440,156 @@ void CommitScroll::implementPrize()
         }
             break;
             
-        case 6://Piece Of Shuriken
-        {
-            float sweight[ITEM_SHURIKENEND - ITEM_SHURIKENSTART];
-            float ssum = 0;
-            int index = 0;
-            for( int i=ITEM_SHURIKENSTART; i<ITEM_SHURIKENEND; ++i)
-            {
-                Shuriken* sh = GameData::queryShuriken(i);
-                if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) && sh != NULL )
-                {
-                    sweight[index] = sh->wght;
-                    ssum += sweight[index];
-                }
-                else {
-                    sweight[index] = 0;
-                }
-                
-                index++;
-            }
-            float sroller = 0;
-            float sres = 1.0f*randomInt(100000)/100000.0f;
-            
-            //debug print
-            //CCLog("sres = %f", sres);
-            
-            for( int i=0; i<(ITEM_SHURIKENEND - ITEM_SHURIKENSTART); ++i)
-            {
-                float skey = sweight[i]/ssum;
-                
-                //debug print
-                //CCLog("- %d - weight = %f / rate = %f", i, sweight[i], sroller + skey);
-                
-                if( sres < sroller + skey )
-                {
-                    GameRecord::sharedGameRecord()->collection->gainItemPiece(ITEM_SHURIKENSTART+i);
-                    //pop notification
-                    int uiid = ITEM_SHURIKENSTART+i;
-                    if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
-                    {
-                        Shuriken *sh = GameData::queryShuriken(uiid);
-                        GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
-                    }
-                    break;
-                }
-                else {
-                    sroller += skey;
-                }
-            }
-        }
-            break;
-        case 7://Piece Of Katana
-        {
-            float sweight[ITEM_KATANAEND - ITEM_KATANASTART];
-            float ssum = 0;
-            int index = 0;
-            for( int i=ITEM_KATANASTART; i<ITEM_KATANAEND; ++i)
-            {
-                Katana* sh = GameData::queryKatana(i);
-                if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) && sh != NULL )
-                {
-                    sweight[index] = sh->wght;
-                    ssum += sweight[index];
-                }
-                else {
-                    sweight[index] = 0;
-                }
-                
-                index++;
-            }
-            float sroller = 0;
-            float sres = 1.0f*randomInt(100000)/100000.0f;
-            
-            //debug print
-            //CCLog("sres = %f", sres);
-            
-            for( int i=0; i<(ITEM_KATANAEND - ITEM_KATANASTART); ++i)
-            {
-                float skey = sweight[i]/ssum;
-                
-                //debug print
-                //CCLog("- %d - weight = %f / rate = %f", i, sweight[i], sroller + skey);
-                
-                if( sres < sroller + skey )
-                {
-                    GameRecord::sharedGameRecord()->collection->gainItemPiece(ITEM_KATANASTART+i);
-                    //pop notification
-                    int uiid = ITEM_KATANASTART+i;
-                    if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
-                    {
-                        Katana *sh = GameData::queryKatana(uiid);
-                        GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
-                    }
-                    break;
-                }
-                else {
-                    sroller += skey;
-                }
-            }
-        }
-            break;
-        case 8://Piece Of Special
-        {
-            float sweight[ITEM_SPECIALEND - ITEM_SPECIALSTART];
-            float ssum = 0;
-            int index = 0;
-            for( int i=ITEM_SPECIALSTART; i<ITEM_SPECIALEND; ++i)
-            {
-                Special* sh = GameData::querySpecial(i);
-                if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) && sh != NULL )
-                {
-                    sweight[index] = sh->wght;
-                    ssum += sweight[index];
-                }
-                else {
-                    sweight[index] = 0;
-                }
-                
-                index++;
-            }
-            float sroller = 0;
-            float sres = 1.0f*randomInt(100000)/100000.0f;
-            
-            //debug print
-            //CCLog("sres = %f", sres);
-            
-            for( int i=0; i<(ITEM_SPECIALEND - ITEM_SPECIALSTART); ++i)
-            {
-                float skey = sweight[i]/ssum;
-                
-                //debug print
-                //CCLog("- %d - weight = %f / rate = %f", i, sweight[i], sroller + skey);
-                
-                if( sres < sroller + skey )
-                {
-                    GameRecord::sharedGameRecord()->collection->gainItemPiece(ITEM_SPECIALSTART+i);
-                    //pop notification
-                    int uiid = ITEM_SPECIALSTART+i;
-                    if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
-                    {
-                        Special *sh = GameData::querySpecial(uiid);
-                        GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
-                    }
-                    break;
-                }
-                else {
-                    sroller += skey;
-                }
-            }
-        }
-            break;
+//      case 6://Piece Of Shuriken
+//      {
+//          float sweight[ITEM_SHURIKENEND - ITEM_SHURIKENSTART];
+//          float ssum = 0;
+//          int index = 0;
+//          for( int i=ITEM_SHURIKENSTART; i<ITEM_SHURIKENEND; ++i)
+//          {
+//              Shuriken* sh = GameData::queryShuriken(i);
+//              if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) && sh != NULL )
+//              {
+//                  sweight[index] = sh->wght;
+//                  ssum += sweight[index];
+//              }
+//              else {
+//                  sweight[index] = 0;
+//              }
+//              
+//              index++;
+//          }
+//          float sroller = 0;
+//          float sres = 1.0f*randomInt(100000)/100000.0f;
+//          
+//          //debug print
+//          //CCLog("sres = %f", sres);
+//          
+//          for( int i=0; i<(ITEM_SHURIKENEND - ITEM_SHURIKENSTART); ++i)
+//          {
+//              float skey = sweight[i]/ssum;
+//              
+//              //debug print
+//              //CCLog("- %d - weight = %f / rate = %f", i, sweight[i], sroller + skey);
+//              
+//              if( sres < sroller + skey )
+//              {
+//                  GameRecord::sharedGameRecord()->collection->gainItemPiece(ITEM_SHURIKENSTART+i);
+//                  //pop notification
+//                  int uiid = ITEM_SHURIKENSTART+i;
+//                  if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
+//                  {
+//                      Shuriken *sh = GameData::queryShuriken(uiid);
+//                      GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
+//                  }
+//                  break;
+//              }
+//              else {
+//                  sroller += skey;
+//              }
+//          }
+//      }
+//          break;
+//      case 7://Piece Of Katana
+//      {
+//          float sweight[ITEM_KATANAEND - ITEM_KATANASTART];
+//          float ssum = 0;
+//          int index = 0;
+//          for( int i=ITEM_KATANASTART; i<ITEM_KATANAEND; ++i)
+//          {
+//              Katana* sh = GameData::queryKatana(i);
+//              if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) && sh != NULL )
+//              {
+//                  sweight[index] = sh->wght;
+//                  ssum += sweight[index];
+//              }
+//              else {
+//                  sweight[index] = 0;
+//              }
+//              
+//              index++;
+//          }
+//          float sroller = 0;
+//          float sres = 1.0f*randomInt(100000)/100000.0f;
+//          
+//          //debug print
+//          //CCLog("sres = %f", sres);
+//          
+//          for( int i=0; i<(ITEM_KATANAEND - ITEM_KATANASTART); ++i)
+//          {
+//              float skey = sweight[i]/ssum;
+//              
+//              //debug print
+//              //CCLog("- %d - weight = %f / rate = %f", i, sweight[i], sroller + skey);
+//              
+//              if( sres < sroller + skey )
+//              {
+//                  GameRecord::sharedGameRecord()->collection->gainItemPiece(ITEM_KATANASTART+i);
+//                  //pop notification
+//                  int uiid = ITEM_KATANASTART+i;
+//                  if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
+//                  {
+//                      Katana *sh = GameData::queryKatana(uiid);
+//                      GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
+//                  }
+//                  break;
+//              }
+//              else {
+//                  sroller += skey;
+//              }
+//          }
+//      }
+//          break;
+//      case 8://Piece Of Special
+//      {
+//          float sweight[ITEM_SPECIALEND - ITEM_SPECIALSTART];
+//          float ssum = 0;
+//          int index = 0;
+//          for( int i=ITEM_SPECIALSTART; i<ITEM_SPECIALEND; ++i)
+//          {
+//              Special* sh = GameData::querySpecial(i);
+//              if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) && sh != NULL )
+//              {
+//                  sweight[index] = sh->wght;
+//                  ssum += sweight[index];
+//              }
+//              else {
+//                  sweight[index] = 0;
+//              }
+//              
+//              index++;
+//          }
+//          float sroller = 0;
+//          float sres = 1.0f*randomInt(100000)/100000.0f;
+//          
+//          //debug print
+//          //CCLog("sres = %f", sres);
+//          
+//          for( int i=0; i<(ITEM_SPECIALEND - ITEM_SPECIALSTART); ++i)
+//          {
+//              float skey = sweight[i]/ssum;
+//              
+//              //debug print
+//              //CCLog("- %d - weight = %f / rate = %f", i, sweight[i], sroller + skey);
+//              
+//              if( sres < sroller + skey )
+//              {
+//                  GameRecord::sharedGameRecord()->collection->gainItemPiece(ITEM_SPECIALSTART+i);
+//                  //pop notification
+//                  int uiid = ITEM_SPECIALSTART+i;
+//                  if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
+//                  {
+//                      Special *sh = GameData::querySpecial(uiid);
+//                      GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
+//                  }
+//                  break;
+//              }
+//              else {
+//                  sroller += skey;
+//              }
+//          }
+//      }
+//          break;
         case 9://Power Up for HP
         {
             GameRecord::sharedGameRecord()->collection->life_piece++;
@@ -618,7 +611,6 @@ void CommitScroll::implementPrize()
         }
             break;
     }
-    */
 }
 
 bool CommitScroll::isPrizeAvailable(int pid) 
@@ -719,31 +711,27 @@ cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile(
 
 SEL_MenuHandler CommitScroll::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCashIn", CommitScroll::onCashIn)
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onScroll", CommitScroll::onScroll)
-    //  CCLog(pSelectorName);
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onCashIn", CommitScroll::onCashIn)
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onScroll", CommitScroll::onScroll)
   return NULL;
 }
 
 cocos2d::extension::Control::Handler   CommitScroll::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-cocos2d::CCLog("Control");
   return NULL;
 }
 bool CommitScroll::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mArrow", Sprite *, mArrow)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScroll", Sprite *, mScroll)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mTitle", Sprite *, mTitle)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScrollCount", Label *, mScrollCount)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateNode", Node *, mRotateNode)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mLightBack", Sprite *, mLightBack)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateACW", Node *, mRotateACW)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateCW", Node *, mRotateCW)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mFlash", LayerColor *, mFlash)
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mItemName", Label *, mItemName)
-
-  //  CCLog(pMemberVariableName);
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mArrow", Sprite *, mArrow)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScroll", Sprite *, mScroll)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mTitle", Sprite *, mTitle)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mScrollCount", Label *, mScrollCount)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateNode", Node *, mRotateNode)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mLightBack", Sprite *, mLightBack)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateACW", Node *, mRotateACW)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mRotateCW", Node *, mRotateCW)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mFlash", LayerColor *, mFlash)
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this,"mItemName", Label *, mItemName)
 
   return false;
 }
