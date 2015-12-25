@@ -16,7 +16,8 @@ void CEClipedNode::setClipRect(cocos2d::Rect *rect)
 {
   if (NULL == rect) return;
 
-  float factor = cocos2d::Director::getInstance()->getContentScaleFactor();
+  float factor = UniversalFit::sharedUniversalFit()->scaleFactor;
+  //float factor = cocos2d::Director::getInstance()->getContentScaleFactor();
   clipRectInPixel = *rect;
   clipRectInPixel.origin.x *= factor;
   clipRectInPixel.origin.y *= factor;
