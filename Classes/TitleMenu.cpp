@@ -594,20 +594,23 @@ void PopObj::displayArcade()
       mBronzeScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score)->getCString());
       mBronzePrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize)->getCString());
     }
-  }
+  } 
 }
 
+#define OBJECT_BOADER_OFFSET 90
+#define OBJECT_BEGEN_X_POS -60
 void PopObj::onCreate()
 {
-  cocos2d::Node * node = createUIByCCBI("menu-titlepop", "TitleMenu", TitleMenuLayerLoader::loader(), this);
+  
   mBoard = CEClipedNode::create();
-  mBoard->addChild(node);
-  cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::Rect(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
+  mBoard->setPosition(cocos2d::Vec2(-301+381, 58));
+  cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::Rect(OBJECT_BOADER_OFFSET, 0, SCREEN_WIDTH-OBJECT_BOADER_OFFSET, SCREEN_HEIGHT));
   //CCLog("CLIP = %fx%f %fx%f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
   mBoard->setClipRect(&rect);
-  //CCRect rect = cocos2d::Rect(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
-  mBoard->setClipRect(&rect);
-  mBoard->setPosition(cocos2d::Vec2(-301, 58));
+  
+  cocos2d::Node * node = createUIByCCBI("menu-titlepop", "TitleMenu", TitleMenuLayerLoader::loader(), this);
+  mBoard->addChild(node);
+  node->setPosition(cocos2d::Vec2(OBJECT_BEGEN_X_POS, 0));
   this->addChild(mBoard);
 
   mRode = cocos2d::Sprite::createWithSpriteFrameName("index_jz.png");
@@ -632,11 +635,11 @@ void PopObj::onCreate()
   }
 
   //run animation
-  cocos2d::CCMoveTo *mt = cocos2d::CCMoveTo::create(0.2f, Vec2(-301+381, 58));
+  cocos2d::CCMoveTo *mt = cocos2d::CCMoveTo::create(0.2f, Vec2(0, 0));
   cocos2d::CCCallFunc *cf = cocos2d::CCCallFunc::create(this, callfunc_selector(PopObj::onDoneAnimation));
   cocos2d::Sequence *seq = cocos2d::Sequence::createWithTwoActions(mt, cf);
 
-  mBoard->runAction(seq);
+  node->runAction(seq);
   mSwitch->setVisible(false);
   mSwitch2->setVisible(false);
 }
@@ -645,9 +648,8 @@ void PopObj::onDoneAnimation()
 {
   mBoard->setPosition(cocos2d::Vec2( -301 + 381, 58));
   mMenu->setVisible(true);
-  //CCRect rect = cocos2d::Rect(0, 0, UniversalFit::sharedUniversalFit()->screenSize.width, UniversalFit::sharedUniversalFit()->screenSize.height);
-  //CCRect rect = cocos2d::Rect(0, 0, 10000, 10000);
-  //mBoard->setClipRect(&rect);
+  cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
+  mBoard->setClipRect(&rect);
   mSwitch->setVisible(true);
   mSwitch2->setVisible(true);
 }
@@ -684,11 +686,11 @@ void PopObj::onChangeDisplay(cocos2d::Ref*)
   mDisplay = !mDisplay;
   //play animation
   //CCRect rect = cocos2d::Rect(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT);
-  cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::Rect(60, 0, SCREEN_WIDTH-60, SCREEN_HEIGHT));
+  cocos2d::CCRect rect = UniversalFit::sharedUniversalFit()->transformRect(cocos2d::Rect(OBJECT_BOADER_OFFSET, 0, SCREEN_WIDTH-OBJECT_BOADER_OFFSET, SCREEN_HEIGHT));
   mBoard->setClipRect(&rect);
-  cocos2d::CCMoveTo *mt1 = cocos2d::CCMoveTo::create(0.2f, Vec2(-301, 58));
+  cocos2d::CCMoveBy *mt1 = cocos2d::MoveBy::create(0.2f, Vec2(-301,0));
   cocos2d::CCCallFunc *cf1 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onFlip)));
-  cocos2d::CCMoveTo *mt2 = cocos2d::CCMoveTo::create(0.2f, Vec2(-301+381, 58));
+  cocos2d::CCMoveBy *mt2 = cocos2d::MoveBy::create(0.2f, Vec2(0,0));
   cocos2d::CCCallFunc *cf2 = cocos2d::CCCallFunc::create(this, (callfunc_selector(PopObj::onDoneAnimation)));
   Sequence *seq = cocos2d::Sequence::create(mt1, cf1, mt2, cf2, nullptr);
 
