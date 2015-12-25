@@ -162,6 +162,9 @@ class ShurikenCollectionDelegate: public CollectionMenuDelegate {
     }
 
     bool isCollected(int id) {
+      if(id == -1){
+        return true;
+      }
       Shuriken &sh = GameData::fetchShurikens()[id];
       return GameRecord::sharedGameRecord()->collection->isItemCompleted(sh.uiid);
     }
