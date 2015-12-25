@@ -100,7 +100,7 @@ void TipsMenu::onBack(cocos2d::Ref*)
     {
         this->removeChild(mTip, true);
         this->removeChild(mCount, true);
-        GameTool::PlaySound("sound/menu-change.mp3");
+        GameTool::PlaySound("menu-change.mp3");
         mUISwapper.setSceneOutro(GameTool::scene<ExtraSelect>(), this);
     }
 }
@@ -109,7 +109,7 @@ void TipsMenu::onLeft(cocos2d::Ref*)
 {
     if( mIndex > 0 )
     {
-        GameTool::PlaySound("sound/click.mp3");
+        GameTool::PlaySound("click.mp3");
         mIndex--;
         this->updateTip(mIndex);
     }
@@ -119,7 +119,7 @@ void TipsMenu::onRight(cocos2d::Ref*)
 {
     if( mIndex < GameData::fetchTips().size() - 1 )
     {
-        GameTool::PlaySound("sound/click.mp3");
+        GameTool::PlaySound("click.mp3");
         mIndex++;
         this->updateTip(mIndex);
     }

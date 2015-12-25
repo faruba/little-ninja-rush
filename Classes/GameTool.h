@@ -21,18 +21,20 @@
 
 class GameTool {
   public:
-    static int PlaySound(const char* path) {
-      return CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(path);
+    static int PlaySound(const char* filename) {
+      std::string path = "sound/";
+      return CocosDenshion::SimpleAudioEngine::getInstance()->playEffect((path+filename).c_str());
     }
 
     static void StopSound(const int id) {
       CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(id);
     }
 
-    static void PlayBackgroundMusic(const char* path) {
+    static void PlayBackgroundMusic(const char* filename) {
+      std::string path = "sound/";
       CocosDenshion::SimpleAudioEngine *instance = CocosDenshion::SimpleAudioEngine::getInstance();
       if ( !instance->isBackgroundMusicPlaying() ) {
-        instance->playBackgroundMusic(path, true);
+        instance->playBackgroundMusic((path+filename).c_str(), true);
       }
     }
 

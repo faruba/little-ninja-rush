@@ -98,7 +98,7 @@ void ExtraMenu::activate(int cid)
 //  bool unfold = false;
 //  if( newitem->isFoldable() )
 //  {
-//    GameTool::PlaySound("sound/ui-cancel.mp3");
+//    GameTool::PlaySound("ui-cancel.mp3");
 //    if( cid == mCurrUnFold )
 //    {
 //      //fold
@@ -157,7 +157,7 @@ void ExtraMenu::onBack(cocos2d::Ref*)
 {
     if(mUISwapper.isDone())
     {
-        GameTool::PlaySound("sound/menu-change.mp3");
+        GameTool::PlaySound("menu-change.mp3");
         mUISwapper.setSceneOutro(GameTool::scene<ExtraSelect>(), this);
     }
 }

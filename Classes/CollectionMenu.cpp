@@ -61,7 +61,7 @@ void CollectionMenu::onModalConfirm(cocos2d::Ref*)
   mMenu->setTouchEnabled(true);
   mPowerupMenu->setTouchEnabled(true);
   this->runAction(cocos2d::CallFunc::create(mModalTarget, mModalSel));
-  GameTool::PlaySound("sound/charge.mp3");
+  GameTool::PlaySound("charge.mp3");
 }
 
 void CollectionMenu::onModalCancel(cocos2d::Ref*)
@@ -214,7 +214,7 @@ void CollectionMenu::onBack(cocos2d::Ref*)
 {
   if(mUISwapper.isDone())
   {
-    GameTool::PlaySound("sound/menu-change.mp3");
+    GameTool::PlaySound("menu-change.mp3");
     if( gNavBack == 0 ) {
       mUISwapper.setSceneOutro(GameTool::scene<TitleMenu>(), this);
     } else {
@@ -232,7 +232,7 @@ void CollectionMenu::onCharacter(int nRole)
   int orole = GameRecord::sharedGameRecord()->curr_char;
   if( orole == nRole )
     return;
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
 cocos2d::MenuItemImage *orl = character(orole);
   orl->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", orole, 1)->getCString()));
   orl->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", orole, 0)->getCString()));
@@ -263,7 +263,7 @@ void CollectionMenu::onItem(CollectionMenuDelegate *newDelegate)
   if( newDelegate == mCurrentDelegate )
     return ;
 
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   mCurrentDelegate->activate(false);
   newDelegate->activate(true);
   mCurrentDelegate = newDelegate;
@@ -285,7 +285,7 @@ void CollectionMenu::onPowerup(cocos2d::Ref*)
   if( newDelegate == mCurrentDelegate )
     return ;
 
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   mCurrentDelegate->updateButtonImage(false);
   newDelegate->updateButtonImage(true);
   mCurrentDelegate = newDelegate;
@@ -364,7 +364,7 @@ void CollectionMenu::onItemCallback(int i)
 //          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
 //          if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
 //          {
-//            GameTool::PlaySound("sound/error.mp3");
+//            GameTool::PlaySound("error.mp3");
 //            return;
 //          }
 //        }
@@ -380,7 +380,7 @@ void CollectionMenu::onItemCallback(int i)
 //          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
 //          if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
 //          {
-//            GameTool::PlaySound("sound/error.mp3");
+//            GameTool::PlaySound("error.mp3");
 //            return;
 //          }
 //        }
@@ -391,14 +391,14 @@ void CollectionMenu::onItemCallback(int i)
 //          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
 //          if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
 //          {
-//            GameTool::PlaySound("sound/error.mp3");
+//            GameTool::PlaySound("error.mp3");
 //            return;
 //          }
 //        }
 //        break;
 //    }
 //  }
-//  GameTool::PlaySound("sound/click.mp3");
+//  GameTool::PlaySound("click.mp3");
 //  markCurrent(i);
 //  mCurrentDelegate->updateItemInfo();
 }
@@ -443,7 +443,7 @@ void CollectionMenu::onSelectLife(cocos2d::Ref*)
 {
   if( mCurrItem != 1 )
   {
-    GameTool::PlaySound("sound/click.mp3");
+    GameTool::PlaySound("click.mp3");
     CollectionMenuDelegate::mCurrentMark->setPosition(cocos2d::Vec2(385, 145));
     CollectionMenuDelegate::mCurrentMark->setVisible(true);
     mCurrItem = 1;
@@ -459,7 +459,7 @@ void CollectionMenu::onSelectDart(cocos2d::Ref*)
 {
   if( mCurrItem != 2 )
   {
-    GameTool::PlaySound("sound/click.mp3");
+    GameTool::PlaySound("click.mp3");
     CollectionMenuDelegate::mCurrentMark->setPosition(cocos2d::Vec2(385, 65));
     CollectionMenuDelegate::mCurrentMark->setVisible(true);
     mCurrItem = 2;

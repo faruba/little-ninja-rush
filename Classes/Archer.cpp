@@ -41,7 +41,7 @@ void Archer::onCreate()
     mArrow->playGTAnimation(0, false);
     mArrow->setPosition(mTarget);
     mParent->addChild(mArrow, LAYER_ROLE);
-    GameTool::PlaySound("sound/shoot ready.mp3");
+    GameTool::PlaySound("shoot ready.mp3");
 }
 
 void Archer::onUpdate(float delta) 
@@ -108,7 +108,7 @@ void Archer::onUpdate(float delta)
                 }
                 mMidPoint = ccpMidpoint(mFrom, mTarget);
                 mMidPoint.y += 75 + CCRANDOM_0_1()*100;
-                GameTool::PlaySound("sound/lock on.mp3");
+                GameTool::PlaySound("lock on.mp3");
             }
         }
             break;
@@ -128,7 +128,7 @@ void Archer::onUpdate(float delta)
                 mArrow->setPosition(mFrom);
                 mState = 2;
                 play->darts->addObject(this);
-                GameTool::PlaySound("sound/shooting.mp3");
+                GameTool::PlaySound("shooting.mp3");
             }
         }
             break;
@@ -166,7 +166,7 @@ void Archer::onUpdate(float delta)
                     }
                     if( hit )
                     {
-                        GameTool::PlaySound("sound/hit.mp3");
+                        GameTool::PlaySound("hit.mp3");
                         GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
                         hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                         hiteff->setPosition(pos);

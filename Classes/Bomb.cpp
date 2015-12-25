@@ -38,7 +38,7 @@ cocos2d::RepeatForever* rf = cocos2d::RepeatForever::create(rb);
     mSprite->runAction(rf);
     //初始化direction
     mDirection.x = (mDirection.x - mPosition.x)/BOMB_FLY;
-    GameTool::PlaySound("sound/bomb1.mp3");
+    GameTool::PlaySound("bomb1.mp3");
     mTimer = 0;
 }
 
@@ -84,7 +84,7 @@ void Bomb::onUpdate(float delta)
         eff->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
         eff->setPosition(np);
         mParent->addChild(eff, LAYER_ROLE);
-        GameTool::PlaySound("sound/bomb2.mp3");
+        GameTool::PlaySound("bomb2.mp3");
         
         play->manager->removeGameObject(this);
     }

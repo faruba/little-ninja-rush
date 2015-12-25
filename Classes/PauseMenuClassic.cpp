@@ -275,7 +275,7 @@ void PauseMenuClassic::toggleMusic(Ref* ref)
 
 void PauseMenuClassic::quit(Ref* ref)
 {
-    GameTool::PlaySound("sound/click.mp3");
+    GameTool::PlaySound("click.mp3");
     GamePlay *play = GamePlay::sharedGamePlay();
     play->manager->removeGameObject(this);
     play->exit();
@@ -283,7 +283,7 @@ void PauseMenuClassic::quit(Ref* ref)
 
 void PauseMenuClassic::resume(Ref* ref)
 {
-    GameTool::PlaySound("sound/click.mp3");
+    GameTool::PlaySound("click.mp3");
     GamePlay *play = GamePlay::sharedGamePlay();
     play->manager->removeGameObject(this);
     play->resume();
@@ -291,7 +291,7 @@ void PauseMenuClassic::resume(Ref* ref)
 
 void PauseMenuClassic::retry(Ref* ref)
 {
-    GameTool::PlaySound("sound/click.mp3");
+    GameTool::PlaySound("click.mp3");
     GamePlay *play = GamePlay::sharedGamePlay();
     play->manager->removeGameObject(this);
     play->restart();
@@ -300,7 +300,7 @@ void PauseMenuClassic::retry(Ref* ref)
 void PauseMenuClassic::change(Ref* ref)
 {
     /*
-    GameTool::PlaySound("sound/click.mp3");
+    GameTool::PlaySound("click.mp3");
     GamePlay *play = GamePlay::sharedGamePlay();
     play->change();
      */

@@ -181,7 +181,7 @@ cocos2d::CCLog("unload scene");
           Scene5 *scene = Scene5::create();
           scene->retain();
           //begin sound
-          //mStepSound = SimpleAudioEngine::sharedEngine()->playEffect("waterstep.mp3", true);
+          //mStepSound = GameTool::PlaySound("waterstep.mp3", true);
           mScene = scene;
         }
         break;

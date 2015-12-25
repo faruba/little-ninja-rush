@@ -380,21 +380,21 @@ void GameInterface::onUpdateArcade(float delta, GamePlay* play)
             {
                 mCup->setVisible(true);
                 mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-bronze.png"));
-                GameTool::PlaySound("sound/getscroll.mp3");
+                GameTool::PlaySound("getscroll.mp3");
             }
                 break;
             case 2:
             {
                 mCup->setVisible(true);
                 mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-silver.png"));
-                GameTool::PlaySound("sound/getscroll.mp3");
+                GameTool::PlaySound("getscroll.mp3");
             }
                 break;
             case 3:
             {
                 mCup->setVisible(true);
                 mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-gold.png"));
-                GameTool::PlaySound("sound/getscroll.mp3");
+                GameTool::PlaySound("getscroll.mp3");
             }
                 break;
         }
@@ -750,7 +750,7 @@ void GameInterface::onFly(cocos2d::Ref*)
 
 void GameInterface::onSP(cocos2d::Ref*)
 {
-    GameTool::PlaySound("sound/charge.mp3");
+    GameTool::PlaySound("charge.mp3");
 
     GameScript::sharedScript()->invokeSP();
     GameRecord::sharedGameRecord()->item_sp--;

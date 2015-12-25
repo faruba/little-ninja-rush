@@ -84,7 +84,7 @@ cocos2d::ScaleTo *st2 = cocos2d::ScaleTo::create(0.4f, 1);
 cocos2d::Sequence *seq = cocos2d::Sequence::create(st1, st2, NULL);
     mNumber->runAction(seq);
     
-    GameTool::PlaySound("sound/feverbgmend.mp3");
+    GameTool::PlaySound("feverbgmend.mp3");
 }
 
 void ControlLayer::updateButton() 
@@ -387,7 +387,7 @@ void ClassicContinue::onUseCredit()
         play->unscheduleMask();
         
         play->manager->removeGameObject(this);
-        GameTool::PlaySound("sound/charge.mp3");
+        GameTool::PlaySound("charge.mp3");
     }
 }
 
@@ -437,7 +437,7 @@ void ClassicContinue::onButton(int bid)
         }
             break;
     }
-    GameTool::PlaySound("sound/click.mp3");
+    GameTool::PlaySound("click.mp3");
 }
 
 void ClassicContinue::onBuyCredit1() 

@@ -109,7 +109,7 @@ CCARRAY_FOREACH(play->enemies, node)
             bool hit = em->deliverHit(HIT_MAGIC, mDir);
             if( hit )
             {
-                GameTool::PlaySound("sound/hit.mp3");
+                GameTool::PlaySound("hit.mp3");
                 GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
                 hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                 hiteff->setPosition(em->center());

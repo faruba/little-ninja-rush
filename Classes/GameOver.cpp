@@ -400,7 +400,7 @@ void GameOver::onDestroy()
 
 void GameOver::onChange(cocos2d::Ref*)
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   GamePlay *play = GamePlay::sharedGamePlay();
   play->change();
 }
@@ -408,19 +408,19 @@ void GameOver::onChange(cocos2d::Ref*)
 void GameOver::onMenu(cocos2d::Ref*)
 {
 
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   GamePlay *play = GamePlay::sharedGamePlay();
   play->exit();
 }
 
 void GameOver::onRestart(cocos2d::Ref*) 
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   if( GameRecord::sharedGameRecord()->coins >= mCost )
   {
     if( mCost > 0 )
     {
-      GameTool::PlaySound("sound/buy.mp3");
+      GameTool::PlaySound("buy.mp3");
       cocos2d::CCLog("cost=%d", mCost);
     }
     GameRecord::sharedGameRecord()->makeCoins(-mCost);
@@ -428,7 +428,7 @@ void GameOver::onRestart(cocos2d::Ref*)
     play->restart();
   }
   else {
-    GameTool::PlaySound("sound/error.mp3");
+    GameTool::PlaySound("error.mp3");
   }
 }
 
@@ -438,7 +438,7 @@ void GameOver::onFacebook(cocos2d::Ref*)
   //    {
   //        mPostingFacebook = true;
   //        
-  //        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
+  //        GameTool::PlaySound("click.mp3");
   //        
   //        //do some facebook actions
   //        
@@ -456,7 +456,7 @@ void GameOver::onTwitter(cocos2d::Ref*)
   //    {
   //        mPostingTwitter = true;
   //        
-  //        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
+  //        GameTool::PlaySound("click.mp3");
   //        AppController *del = (AppController*)UIApplication->sharedApplication().delegate;
   //        
   //        bool sina = UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo();
@@ -525,7 +525,7 @@ void GameOver::doneFacebook(cocos2d::CCInteger* res)
   //    if( this->haveFacebookCoins() && result > 0 )
   //    {
   //        GameRecord::sharedGameRecord()->makeCoins(100);
-  //        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3");
+  //        GameTool::PlaySound("getcoin.mp3");
   //        GameRecord::sharedGameRecord()->share_facebook = NSDate->date()->timeIntervalSince1970();
   //        GameRecord::sharedGameRecord()->checkPoint();
   //        
@@ -553,7 +553,7 @@ void GameOver::doneTwitter(cocos2d::CCInteger* res)
   //    if( this->haveTwitterCoins() && result > 0 )
   //    {
   //        GameRecord::sharedGameRecord()->makeCoins(100);
-  //        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3");
+  //        GameTool::PlaySound("getcoin.mp3");
   //        GameRecord::sharedGameRecord()->share_twitter = NSDate->date()->timeIntervalSince1970();
   //        GameRecord::sharedGameRecord()->checkPoint();
   //        

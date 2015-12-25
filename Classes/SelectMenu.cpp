@@ -349,7 +349,7 @@ cocos2d::Layer::update(delta);
 }
 void SelectMenu::onClickMe(cocos2d::Ref*)
 {
-  GameTool::PlaySound("sound/menu-change.mp3");
+  GameTool::PlaySound("menu-change.mp3");
   ShopMenu::setNavBack(1);
   mUISwapper.setSceneOutro(GameTool::scene<ShopMenu>(), this);
 }
@@ -368,14 +368,14 @@ void SelectMenu::onStart(cocos2d::Ref*)
       GameRecord::sharedGameRecord()->makeCoins(-cost);
       if( cost > 0 )
       {
-        GameTool::PlaySound("sound/buy.mp3");
+        GameTool::PlaySound("buy.mp3");
       }
 
-      GameTool::PlaySound("sound/menu-start.mp3");
+      GameTool::PlaySound("menu-start.mp3");
       mUISwapper.setSceneOutro(Loading::loadTo(GamePlay::sharedGamePlay()->scene(), PublicLoad::gameLoadingList(), PublicLoad::menuSelect(), true), this);
     }
     else {
-      GameTool::PlaySound("sound/error.mp3");
+      GameTool::PlaySound("error.mp3");
     }
   }
 }
@@ -384,7 +384,7 @@ void SelectMenu::onChangeDart(cocos2d::Ref*)
 {
   if( mUISwapper.isDone() )
   {
-    GameTool::PlaySound("sound/menu-change.mp3");
+    GameTool::PlaySound("menu-change.mp3");
     CollectionMenu::setNavBack(1);
     mUISwapper.setSceneOutro(GameTool::scene<CollectionMenu>(), this);
   }
@@ -394,7 +394,7 @@ void SelectMenu::onChangeBlade(cocos2d::Ref*)
 {
   if( mUISwapper.isDone() )
   {
-    GameTool::PlaySound("sound/menu-change.mp3");
+    GameTool::PlaySound("menu-change.mp3");
     CollectionMenu::setNavBack(2);
     mUISwapper.setSceneOutro(GameTool::scene<CollectionMenu>(), this);
   }
@@ -404,7 +404,7 @@ void SelectMenu::onChangeSpecial(cocos2d::Ref*)
 {
   if( mUISwapper.isDone() )
   {
-    GameTool::PlaySound("sound/menu-change.mp3");
+    GameTool::PlaySound("menu-change.mp3");
     CollectionMenu::setNavBack(3);
     mUISwapper.setSceneOutro(GameTool::scene<CollectionMenu>(), this);
   }
@@ -414,7 +414,7 @@ void SelectMenu::onBack(cocos2d::Ref*)
 {
   if(mUISwapper.isDone())
   {
-    GameTool::PlaySound("sound/menu-change.mp3");
+    GameTool::PlaySound("menu-change.mp3");
     mUISwapper.setSceneOutro(GameTool::scene<TitleMenu>(), this);
   }
 }
@@ -426,7 +426,7 @@ void SelectMenu::onLeftRole(cocos2d::Ref*)
 
   //achievement select role
   GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SELECTBUTTON, 1);
-  GameTool::PlaySound("sound/flip.mp3");
+  GameTool::PlaySound("flip.mp3");
 }
 
 void SelectMenu::onRightRole(cocos2d::Ref*)
@@ -440,7 +440,7 @@ void SelectMenu::onRightRole(cocos2d::Ref*)
 
   //achievement select role
   GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SELECTBUTTON, 1);
-  GameTool::PlaySound("sound/flip.mp3");
+  GameTool::PlaySound("flip.mp3");
 }
 
 bool SelectMenu::onTouchBegan(Touch * touch, Event * event)
@@ -497,7 +497,7 @@ void SelectMenu::onTouchMoved(Touch * touch, Event * event)
       mSlideTimer = -1;
       //achievement
       GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SELECTBUTTON, 1);
-      GameTool::PlaySound("sound/flip.mp3");
+      GameTool::PlaySound("flip.mp3");
     }
 
     mSlideAngle = mCurrAngle;

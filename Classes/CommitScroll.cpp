@@ -205,7 +205,7 @@ void CommitScroll::onCashIn(cocos2d::Ref*)
         //achievement cash in
         GameRecord::sharedGameRecord()->task->dispatchTask(ACH_CASHEDIN, play->scrolls);
         
-        GameTool::PlaySound("sound/buy.mp3");
+        GameTool::PlaySound("buy.mp3");
         play->coins += play->scrolls*PLAY_SCROLLPRICE;
         play->scrolls = 0;
         mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
@@ -234,7 +234,7 @@ void CommitScroll::onScroll(cocos2d::Ref*)
             mScroll->stopAllActions();
             if( prize < 2 )
             {
-                GameTool::PlaySound("sound/smoke.mp3");
+                GameTool::PlaySound("smoke.mp3");
                 mEffect->playGTAnimation(5, false);
                 mEffect->setVisible(true);
                 
@@ -253,7 +253,7 @@ cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
                 }
             }
             else {
-                GameTool::PlaySound("sound/openscroll.mp3");
+                GameTool::PlaySound("openscroll.mp3");
                 mFlash->setVisible(true);
 cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(3);
                 mFlash->runAction(fo1);
@@ -411,32 +411,32 @@ void CommitScroll::implementPrize()
         case 1://Gold 10
         {
             play->coins += 10;
-            GameTool::PlaySound("sound/getcoin.mp3");
+            GameTool::PlaySound("getcoin.mp3");
         }
             break;
         case 2://Gold 100
         {
             play->coins += 100;
-            GameTool::PlaySound("sound/getcoin.mp3");
+            GameTool::PlaySound("getcoin.mp3");
         }
             break;
         case 3://Gold 500
         {
             play->coins += 500;
-            GameTool::PlaySound("sound/getcoin.mp3");
+            GameTool::PlaySound("getcoin.mp3");
         }
             break;
         case 4://Revive
         {
             mReviveFlag = true;
-            GameTool::PlaySound("sound/charge.mp3");
+            GameTool::PlaySound("charge.mp3");
             play->reviveCount++;
         }
             break;
         case 5://x2 Gold Next Run
         {
             GameRecord::sharedGameRecord()->game_doublecoin++;
-            GameTool::PlaySound("sound/getcoin.mp3");
+            GameTool::PlaySound("getcoin.mp3");
         }
             break;
             

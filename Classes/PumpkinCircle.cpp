@@ -223,7 +223,7 @@ CCARRAY_FOREACH(play->darts, node)
               }
               if( hit )
               {
-                GameTool::PlaySound("sound/reflect.mp3");
+                GameTool::PlaySound("reflect.mp3");
               }
             }
                 break;

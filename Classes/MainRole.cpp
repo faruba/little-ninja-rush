@@ -208,10 +208,10 @@ void MainRole::commitFire(cocos2d::Node* p, Node* pdata)
     play->darts->addObject(play->manager->addGameObject(d));
     if( dartEffect == 3 )
     {
-      GameTool::PlaySound("sound/shuriken-laser.mp3");
+      GameTool::PlaySound("shuriken-laser.mp3");
     }
     else {
-      GameTool::PlaySound("sound/throw.mp3");
+      GameTool::PlaySound("throw.mp3");
     }
     if( dir.x < 0 )
     {
@@ -425,11 +425,11 @@ CCARRAY_FOREACH(play->enemies, node)
     }
   }
 
-//  SimpleAudioEngine::sharedEngine()->playEffect(bladeSound->getCString());
+//  GameTool::PlaySound(bladeSound->getCString());
 
   if( hit )
   {
-    GameTool::PlaySound("sound/reflect.mp3");
+    GameTool::PlaySound("reflect.mp3");
     play->scheduleSpeed(0, EXP_HITSLOW, 0);
 
     GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 3, false);
@@ -481,7 +481,7 @@ CCARRAY_FOREACH(play->enemies, node)
       case SPELL_REPLEACE:
         {//替身术
           this->attachEffect("effect", 5, false, true);
-          GameTool::PlaySound("sound/smoke.mp3");
+          GameTool::PlaySound("smoke.mp3");
           //-------
           mSprite->setVisible(false);
           play->count_control++;
@@ -519,7 +519,7 @@ CCARRAY_FOREACH(play->enemies, node)
           float angle = 30 + CCRANDOM_0_1()*120;
           cocos2d::Point dir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle));
           play->manager->addGameObject(TraceDart::dart(this->center(), dir));
-          GameTool::PlaySound("sound/duofa.mp3");
+          GameTool::PlaySound("duofa.mp3");
           spelled = true;
         }
         break;
@@ -529,7 +529,7 @@ CCARRAY_FOREACH(play->enemies, node)
           float angle = 30 + CCRANDOM_0_1()*120;
           cocos2d::Point dir = ccpForAngle(CC_DEGREES_TO_RADIANS(angle));
           play->manager->addGameObject(ReflectDart::dart(this->center(), dir));
-          GameTool::PlaySound("sound/duofa.mp3");
+          GameTool::PlaySound("duofa.mp3");
           spelled = true;
         }
         break;
@@ -598,7 +598,7 @@ CCARRAY_FOREACH(play->enemies, node)
             this->timedInvincible(DASH_TIME);
             spelled = true;
 
-            GameTool::PlaySound("sound/dash.mp3");
+            GameTool::PlaySound("dash.mp3");
           }
         }
         break;
@@ -745,7 +745,7 @@ void MainRole::onUpdate(float delta)
       GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 8, false);
       eff->setPosition(cocos2d::Vec2( 31, 18));
       mSprite->addChild(eff);
-      GameTool::PlaySound("sound/blade_ready.mp3");
+      GameTool::PlaySound("blade_ready.mp3");
     }
   }
   //武藏专用
@@ -758,7 +758,7 @@ void MainRole::onUpdate(float delta)
       GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 8, false);
       eff->setPosition(cocos2d::Vec2( 31, 18));
       mSprite->addChild(eff);
-      GameTool::PlaySound("sound/blade_ready.mp3");
+      GameTool::PlaySound("blade_ready.mp3");
     }
   }
 
@@ -1060,7 +1060,7 @@ void MainRole::onHitClassic(int type)
 
     //sound
 cocos2d::CCString *hit = cocos2d::CCString::createWithFormat("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
-    SimpleAudioEngine::sharedEngine()->playEffect(hit->getCString());
+    GameTool::PlaySound(hit->getCString());
 
     //achievement wounded
     GameRecord::sharedGameRecord()->task->dispatchTask(ACH_WOUNDED, 1);
@@ -1078,7 +1078,7 @@ cocos2d::CCString *hit = cocos2d::CCString::createWithFormat("hit-%d%d.mp3", mRo
 
     //sound
 cocos2d::CCString *hit = cocos2d::CCString::createWithFormat("die-%d.mp3", mRoleId);
-    SimpleAudioEngine::sharedEngine()->playEffect(hit->getCString());
+    GameTool::PlaySound(hit->getCString());
 
     //achievement death
     GameRecord::sharedGameRecord()->task->dispatchTask(ACH_DEATH, 1);
@@ -1134,7 +1134,7 @@ void MainRole::onHitArcade(int type)
 
   //sound
 cocos2d::CCString *hit = cocos2d::CCString::createWithFormat("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
-  SimpleAudioEngine::sharedEngine()->playEffect(hit->getCString());
+  GameTool::PlaySound(hit->getCString());
 
   //achievement wounded
   play->wounded++;

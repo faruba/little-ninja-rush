@@ -94,7 +94,7 @@ void ShadowKilling::onUpdate(float delta)
                         mSteak = 9;
                     }
 cocos2d::CCString *sound = cocos2d::CCString::createWithFormat("combo%d.mp3", mSteak);
-                    SimpleAudioEngine::sharedEngine()->playEffect(sound->getCString());
+                    GameTool::PlaySound(sound->getCString());
                     
                     GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 28, false);
                     hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));

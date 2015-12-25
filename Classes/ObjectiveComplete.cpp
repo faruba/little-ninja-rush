@@ -65,7 +65,7 @@ void ObjectiveComplete::onUpdate(float delta)
         mSoundTimer += delta;
         if( mSoundTimer > 0.1 )
         {
-            GameTool::PlaySound("sound/getcoin.mp3");
+            GameTool::PlaySound("getcoin.mp3");
             mSoundTimer = 0;
         }
         int dst = mTargetBounsCoins - mCurrBounsCoins;
@@ -124,7 +124,7 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCS
                     mCrowns->addChild(crown);
                 }
                 mStateTimer = 0;
-                GameTool::PlaySound("sound/flip.mp3");
+                GameTool::PlaySound("flip.mp3");
             }
             else {
                 //Finish of ObjectiveComplete
@@ -158,7 +158,7 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCS
             mStateTimer += delta;
             if( mStateTimer >= 2 )
             {
-                GameTool::PlaySound("sound/getcrown.mp3");
+                GameTool::PlaySound("getcrown.mp3");
 cocos2d::CCString *crownname = cocos2d::CCString::createWithFormat("crown%d.png", mCurrObj->index);
 cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname->getCString());
                 crown->setPosition(cocos2d::Vec2(-20*mCurrObj->index, 0));
@@ -252,7 +252,7 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname->g
             if( mStateTimer >= 2 )
             {
                 mState = STATE_OUT;
-                GameTool::PlaySound("sound/flip.mp3");
+                GameTool::PlaySound("flip.mp3");
             }
         }
             break;

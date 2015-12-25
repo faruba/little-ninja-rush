@@ -104,7 +104,7 @@ void CoinsMenu::activate(int cid)
     bool unfold = false;
     if( newitem->isFoldable() )
     {
-        GameTool::PlaySound("sound/ui-cancel.mp3");
+        GameTool::PlaySound("ui-cancel.mp3");
         if( cid == mCurrUnFold )
         {
             //fold
@@ -178,7 +178,7 @@ cocos2d::Layer::onExit();
 
 void CoinsMenu::onBack(cocos2d::Ref*)
 {
-    GameTool::PlaySound("sound/menu-change.mp3");
+    GameTool::PlaySound("menu-change.mp3");
     mUISwapper.setSceneOutro(GameTool::scene<ShopMenu>(), this);
 }
 
@@ -447,7 +447,7 @@ void CoinsMenu::purchaseVerified(int pid)
         GameRecord::sharedGameRecord()->purchaseVerified(pid);
     }
     mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
-    GameTool::PlaySound("sound/getscroll.mp3");
+    GameTool::PlaySound("getscroll.mp3");
 }
 
 void CoinsMenu::purchaseFailed(int pid) 

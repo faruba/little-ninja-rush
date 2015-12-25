@@ -300,7 +300,7 @@ void Item::onUpdate(float delta)
             case -1:
             {
                 play->festivalPieces++;
-                GameTool::PlaySound("sound/getscroll.mp3");
+                GameTool::PlaySound("getscroll.mp3");
             }
                 break;
             case 0:
@@ -322,7 +322,7 @@ void Item::onUpdate(float delta)
                 {
                     play->manager->addGameObject(AnimatedParticle::particleCoin(pos, i));
                 }
-                GameTool::PlaySound("sound/getcoin.mp3");
+                GameTool::PlaySound("getcoin.mp3");
             }
                 break;
             case 1:
@@ -334,7 +334,7 @@ void Item::onUpdate(float delta)
                 {
                     play->manager->addGameObject(AnimatedParticle::particleCoin(pos, i));
                 }
-                GameTool::PlaySound("sound/getscroll.mp3");
+                GameTool::PlaySound("getscroll.mp3");
                 
                 //achievement
                 GameRecord::sharedGameRecord()->task->dispatchTask(ACH_COLLECTSCROLL, 1);
@@ -344,28 +344,28 @@ void Item::onUpdate(float delta)
             {
 
                 GameScript::sharedScript()->invokeSpell0(cocos2d::CCInteger::create(get));
-                GameTool::PlaySound("sound/getitem.mp3");
+                GameTool::PlaySound("getitem.mp3");
             }
                 break;
             case 3://隐身术
             {
 
                 GameScript::sharedScript()->invokeSpell2(NULL);
-                GameTool::PlaySound("sound/getitem.mp3");
+                GameTool::PlaySound("getitem.mp3");
             }
                 break;
             case 4://子弹时间
             {
 
                 GameScript::sharedScript()->invokeSpell3(NULL);
-                GameTool::PlaySound("sound/getitem.mp3");
+                GameTool::PlaySound("getitem.mp3");
             }
                 break;
             case 5://加血
             {
  
                 GameScript::sharedScript()->invokeSpell4(NULL, NULL);
-                GameTool::PlaySound("sound/charge.mp3");
+                GameTool::PlaySound("charge.mp3");
                 for( int i=0; i<5; ++i)
                 {
                     play->manager->addGameObject(StaticParticle::particleAddHP(role->center()));
@@ -376,35 +376,35 @@ void Item::onUpdate(float delta)
             {
 
                 GameScript::sharedScript()->invokeSpell5(NULL, NULL);
-                GameTool::PlaySound("sound/charge.mp3");
+                GameTool::PlaySound("charge.mp3");
             }
                 break;
             case 7://一闪
             {
 
                 GameScript::sharedScript()->invokeSpell6(NULL);
-                GameTool::PlaySound("sound/getitem.mp3");
+                GameTool::PlaySound("getitem.mp3");
             }
                 break;
             case 8://流星雨
             {
 
                 GameScript::sharedScript()->invokeSpell7(NULL);
-                GameTool::PlaySound("sound/getitem.mp3");
+                GameTool::PlaySound("getitem.mp3");
             }
                 break;
             case 9://飞镖无限
             {
 
                 GameScript::sharedScript()->invokeSpell8(NULL);
-                GameTool::PlaySound("sound/getitem.mp3");
+                GameTool::PlaySound("getitem.mp3");
             }
                 break;
             case 10://全屏分身
             {
 
                 GameScript::sharedScript()->invokeSpellRelease(cocos2d::CCInteger::create(SPELL_SHADOWKILL));
-                GameTool::PlaySound("sound/getitem.mp3");
+                GameTool::PlaySound("getitem.mp3");
             }
                 break;
         }
