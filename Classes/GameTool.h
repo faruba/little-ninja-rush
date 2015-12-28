@@ -82,6 +82,7 @@ class GameTool {
         rapidjson::Value value(data.c_str(), data.size(), document.GetAllocator());
         document.AddMember(index, value, document.GetAllocator());
     }
+		static void UpdateObjectives(cocos2d::Label* labels[3],cocos2d::Sprite* icons[3],cocos2d::Node* crowns[3]);
 };
 
 

@@ -2,7 +2,39 @@
 #include "GameConstants.h"
 #include "SimpleAudioEngine.h"
 #include "CCNumber.h"
+#include "GameRecord.h"
 
+void GameTool::UpdateObjectives(cocos2d::Label* labels[3],cocos2d::Sprite* icons[3],cocos2d::Node* crowns[3]){
+	Tasks *task = GameRecord::sharedGameRecord()->task;
+  ObjectiveManager *managers[] = { &task->dailyObjective, &task->weeklyObjective, &task->monthlyObjective };
+  for (int i = 0; i < 3; i++) {
+    if (managers[i]->hasObjective()) {
+      const Achievement &info = managers[i]->info();
+
+      labels[i]->setString(Tasks::stringForObjective(info.desc, info.achieveCode,  info.achieveNumber, managers[i]->currentObjective.count)->getCString());
+      labels[i]->setColor(Color3B(255, 255, 255));
+
+      icons[i]->setVisible(true);
+      cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(info.icon.c_str());
+      icon->setPosition(cocos2d::Vec2(icons[i]->getContentSize().width/2, icons[i]->getContentSize().height/2));
+      icons[i]->addChild(icon);
+
+      if (managers[i]->isCompleted()) {
+        labels[i]->setColor(Color3B(128, 128, 128));
+      }
+    } else {
+      labels[i]->setString("已完成！");
+      labels[i]->setColor(Color3B(128, 128, 128));
+    }
+
+		for(int ii=0; i<managers[i]->currentObjective.index; ++ii)
+		{
+			cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", ii)->getCString());
+			crown->setPosition(cocos2d::Vec2(32-16*ii, 0));
+			crowns[ii]->addChild(crown);
+		}
+  }
+}
 // ----------
 // UISwapper
 // ----------
