@@ -31,7 +31,7 @@ void Star::onCreate()
     mSprite->setPosition(mPos);
     play->addChild(mSprite, LAYER_MAINROLE+1);
     
-    GameTool::PlaySound("sound/starfall.mp3");
+    GameTool::PlaySound("starfall.mp3");
 }
 
 void Star::onUpdate(float delta) 
@@ -51,7 +51,7 @@ CCARRAY_FOREACH(play->enemies, node)
             play->manager->removeGameObject(this);
             if( hit )
             {
-                GameTool::PlaySound("sound/hit.mp3");
+                GameTool::PlaySound("hit.mp3");
                 GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
                 hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                 hiteff->setPosition(em->center());

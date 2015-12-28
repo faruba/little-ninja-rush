@@ -100,7 +100,7 @@ void GamePlay::onEnter()
   auto listener = EventListenerTouchOneByOne::create();
   listener->onTouchBegan = CC_CALLBACK_2(GamePlay::onTouchBegan, this);
   listener->onTouchEnded = CC_CALLBACK_2(GamePlay::onTouchEnded, this);
-  listener->onTouchMoved = CC_CALLBACK_2(GamePlay::onTouchEnded, this);
+  listener->onTouchMoved = CC_CALLBACK_2(GamePlay::onTouchMoved, this);
   listener->onTouchCancelled = CC_CALLBACK_2(GamePlay::onTouchEnded, this);
   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
@@ -536,7 +536,7 @@ void GamePlay::resetGame()
   }
   GameRecord::sharedGameRecord()->task->dispatchTask(ACH_USECHARACTER0+roleId, 1);
 
-  GameTool::PlayBackgroundMusic("sound/music-menu.mp3");
+  GameTool::PlayBackgroundMusic("music-menu.mp3");
 
 #ifdef DEBUG
   cocos2d::CCTextureCache::sharedTextureCache()->dumpCachedTextureInfo();
@@ -689,10 +689,10 @@ bool GamePlay::onTouchBegan(Touch * touch, Event * event)
   {
     return false;
   }
-  LNR_GET_TOUCH_POS;
 
   if( count_control <= 0 )
   {
+    LNR_GET_TOUCH_POS;
     mTouchBegin = pos;
     mTouchProcessed = false;
   }
@@ -813,7 +813,7 @@ void GamePlay::setFeverLevel(int lv)
     //setup for fever effect
     if( lv > mFeverLevel )
     {
-      GameTool::PlaySound("sound/fever.mp3");
+      GameTool::PlaySound("fever.mp3");
       manager->addGameObject(FeverBrust::feverbrust(27, true));
 
       //clean darts
@@ -839,7 +839,7 @@ void GamePlay::setFeverLevel(int lv)
     //play combo close sound
     if( mFeverLevel == 2 )
     {
-      GameTool::PlaySound("sound/feverbgmend.mp3");
+      GameTool::PlaySound("feverbgmend.mp3");
     }
     mFeverLevel = lv;
   }
@@ -968,7 +968,7 @@ void GamePlay::stopCombo()
 //暂停
 void GamePlay::pause(cocos2d::Ref* ref)
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   CCLOG("canPause = %d paused = %d", canPause, paused);
   if( this->canPause && !this->paused )
   {
@@ -1220,7 +1220,7 @@ void GamePlay::popNotification(PopQueue *pop) {
             this->processNotificationQueue();
         }),
         nullptr));
-  GameTool::PlaySound("sound/objective-complete.mp3");
+  GameTool::PlaySound("objective-complete.mp3");
 }
 
 void GamePlay::pushNotification(std::string name, std::string icon, int type)

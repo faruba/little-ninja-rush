@@ -104,7 +104,7 @@ void CoinsMenu::activate(int cid)
     bool unfold = false;
     if( newitem->isFoldable() )
     {
-        GameTool::PlaySound("sound/ui-cancel.mp3");
+        GameTool::PlaySound("ui-cancel.mp3");
         if( cid == mCurrUnFold )
         {
             //fold
@@ -176,9 +176,9 @@ void CoinsMenu::onExit()
 cocos2d::Layer::onExit();
 }
 
-void CoinsMenu::onBack() 
+void CoinsMenu::onBack(cocos2d::Ref*)
 {
-    GameTool::PlaySound("sound/menu-change.mp3");
+    GameTool::PlaySound("menu-change.mp3");
     mUISwapper.setSceneOutro(GameTool::scene<ShopMenu>(), this);
 }
 
@@ -447,7 +447,7 @@ void CoinsMenu::purchaseVerified(int pid)
         GameRecord::sharedGameRecord()->purchaseVerified(pid);
     }
     mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
-    GameTool::PlaySound("sound/getscroll.mp3");
+    GameTool::PlaySound("getscroll.mp3");
 }
 
 void CoinsMenu::purchaseFailed(int pid) 
@@ -497,24 +497,20 @@ void CoinsMenu::modalOver()
 
 SEL_MenuHandler CoinsMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", CoinsMenu::onBack);
-
-    //CCLog(pSelectorName);
-    return NULL;
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", CoinsMenu::onBack);
+  return NULL;
 }
 
 cocos2d::extension::Control::Handler   CoinsMenu::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-cocos2d::CCLog("Control");
   return NULL;
 }
+
 bool CoinsMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", Label *, mCoins);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", Node *, mList);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu *, mMenu);
-
-  //CCLog(pMemberVariableName);
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", Label *, mCoins);
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", Node *, mList);
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCMenu *, mMenu);
 
   return false;
 }

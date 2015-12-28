@@ -260,7 +260,7 @@ void PopOption::onAddFriend(cocos2d::Ref*)
 //        switch (ret) {
 //            case 0:
 //            {
-//                SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3");
+//                GameTool::PlaySound("getcoin.mp3");
 //                mCoin->setString(cocos2d::CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount()));
 //                UIAlertView *alert = [UIAlertView->alloc(), "Success", "Share code has been added.", NULL, "OK", NULL);
 //                alert->show();
@@ -306,7 +306,7 @@ void PopOption::onCloseOption(cocos2d::Ref*)
 
 void PopOption::onToggleSfx(cocos2d::Ref*)
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   if( GameRecord::sharedGameRecord()->setting_sfx )
   {
     GameRecord::sharedGameRecord()->setting_sfx = 0;
@@ -324,7 +324,7 @@ void PopOption::onToggleSfx(cocos2d::Ref*)
 
 void PopOption::onToggleMusic(cocos2d::Ref*)
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   if( GameRecord::sharedGameRecord()->setting_music )
   {
     GameRecord::sharedGameRecord()->setting_music = 0;
@@ -343,7 +343,7 @@ void PopOption::onToggleMusic(cocos2d::Ref*)
 void PopOption::onTogglePushNotification(cocos2d::Ref*)
 {
   //feature removed from android
-  //    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
+  //    GameTool::PlaySound("click.mp3");
   //    if( GameRecord::sharedGameRecord()->game_notify < 0 )
   //    {
   //        GameRecord::sharedGameRecord()->game_notify = 1;
@@ -361,7 +361,7 @@ void PopOption::onTogglePushNotification(cocos2d::Ref*)
 
 void PopOption::onToggleTutorial(cocos2d::Ref*)
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   if( GameRecord::sharedGameRecord()->game_tutorial == 0 )
   {
     GameRecord::sharedGameRecord()->game_tutorial = 1;
@@ -378,7 +378,7 @@ void PopOption::onToggleTutorial(cocos2d::Ref*)
 void PopOption::onToggleiCloud(cocos2d::Ref*)
 {
   //feature removed from android
-  //    SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/click.mp3");
+  //    GameTool::PlaySound("click.mp3");
   //    if( GameRecord::sharedGameRecord()->setting_icloud > 0 )
   //    {
   //        GameRecord::sharedGameRecord()->setting_icloud = 0;
@@ -698,7 +698,7 @@ void PopObj::onChangeDisplay(cocos2d::Ref*)
 
   mSwitch->setVisible(false);
   mSwitch2->setVisible(false);
-  GameTool::PlaySound("sound/flip.mp3");
+  GameTool::PlaySound("flip.mp3");
 }
 
 #ifdef TITLESTYLE_SPRING
@@ -807,7 +807,7 @@ void TitleMenu::onEnter()
 
   
   
-    GameTool::PlayBackgroundMusic("sound/menu.mp3");
+    GameTool::PlayBackgroundMusic("menu.mp3");
   
 
      if(mUISwapper.isDone())
@@ -859,7 +859,7 @@ void TitleMenu::onEnter()
   //    if( FriendList->sharedFriendList()->canHaveBouns() )
   //    {
   //        [this showOpt:1);
-  //        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("sound/getcoin.mp3");
+  //        GameTool::PlaySound("getcoin.mp3");
   //        GameRecord::sharedGameRecord()->coins += [FriendList->sharedFriendList() bounsCount);
   //        [FriendList->sharedFriendList() dealBouns);
   //    }
@@ -894,7 +894,7 @@ void TitleMenu::showObjs()
 //
 void TitleMenu::hideObjs()
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   mMask->setVisible(false);
   mPop->onDestroy();
   mMask->removeAllChildrenWithCleanup(true);
@@ -920,7 +920,7 @@ void TitleMenu::showOpt(int typ)
 
 void TitleMenu::hideOpt()
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   mMask->setVisible(false);
   mMask->removeAllChildrenWithCleanup(true);
 
@@ -1073,37 +1073,37 @@ void TitleMenu::onPlayClassic(cocos2d::Ref*)
 {
   cocos2d::CCLog("Player");
   GamePlay::sharedGamePlay()->setGameMode(MODE_CLASSIC);
-  GameTool::PlaySound("sound/menu-change.mp3");
+  GameTool::PlaySound("menu-change.mp3");
   mUISwapper.setSceneOutro(GameTool::scene<SelectMenu>(), this);
 }
 
 void TitleMenu::onPlayArcade(cocos2d::Ref*)
 {
   GamePlay::sharedGamePlay()->setGameMode(MODE_ARCADE);
-  GameTool::PlaySound("sound/menu-change.mp3");
+  GameTool::PlaySound("menu-change.mp3");
   mUISwapper.setSceneOutro(GameTool::scene<SelectMenu>(), this);
 }
 
 void TitleMenu::onCollections(cocos2d::Ref*)
 {
   CollectionMenu::setNavBack(0);
-  GameTool::PlaySound("sound/menu-change.mp3");
+  GameTool::PlaySound("menu-change.mp3");
   mUISwapper.setSceneOutro(GameTool::scene<CollectionMenu>(), this);
 }
 
 void TitleMenu::onStore(cocos2d::Ref*) {
   ShopMenu::setNavBack(0);
-  GameTool::PlaySound("sound/menu-change.mp3");
+  GameTool::PlaySound("menu-change.mp3");
   mUISwapper.setSceneOutro(GameTool::scene<ShopMenu>(), this);
 }
 
 void TitleMenu::onFacebook(cocos2d::Ref*) {
-  GameTool::PlaySound("sound/menu-change.mp3");
+  GameTool::PlaySound("menu-change.mp3");
   Application::getInstance()->openURL(std::string("http://www.facebook.com/pages/Little-Ninja-Rush/397668056947647"));
 }
 
 void TitleMenu::onTwitter(cocos2d::Ref*) {
-  GameTool::PlaySound("sound/menu-change.mp3");
+  GameTool::PlaySound("menu-change.mp3");
   if( UniversalFit::sharedUniversalFit()->shouldUsingSinaWeibo() ) {
     Application::getInstance()->openURL(std::string("http://weibo.com/u/2810380794"));
   } else {
@@ -1113,7 +1113,7 @@ void TitleMenu::onTwitter(cocos2d::Ref*) {
 
 void TitleMenu::onLeaderboard(cocos2d::Ref * node)
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   //    if( GameCenterManager->isGameCenterAvailable() )
   //    {
   //        if( GameCenterManager->isGameCenterLoggedIn() )
@@ -1133,7 +1133,7 @@ void TitleMenu::onLeaderboard(cocos2d::Ref * node)
 
 void TitleMenu::onAchievement(cocos2d::Ref*)
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   //    if( GameCenterManager->isGameCenterAvailable() )
   //    {
   //        if( GameCenterManager->isGameCenterLoggedIn() )
@@ -1153,19 +1153,19 @@ void TitleMenu::onAchievement(cocos2d::Ref*)
 
 void TitleMenu::onExtra(cocos2d::Ref*)
 {
-  GameTool::PlaySound("sound/menu-change.mp3");
+  GameTool::PlaySound("menu-change.mp3");
   mUISwapper.setSceneOutro(GameTool::scene<ExtraSelect>(), this);
 }
 
 void TitleMenu::onShowObjectives(cocos2d::Ref *)
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   this->showObjs();
 }
 
 void TitleMenu::onOption(cocos2d::Ref*)
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   showOpt(0);
 }
 
@@ -1184,7 +1184,7 @@ void TitleMenu::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 
 void TitleMenu::onShareCode(cocos2d::Ref*)
 {
-  GameTool::PlaySound("sound/click.mp3");
+  GameTool::PlaySound("click.mp3");
   showOpt(2);
 }
 

@@ -253,7 +253,7 @@ void HighNinja::onUpdate(float delta)
                     if(mTimer>0.3f && mFlag)
                     {
                         int n = 1 + randomInt(3);
-                        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCString::createWithFormat("ahh%d.mp3", n)->getCString());
+                        GameTool::PlaySound(cocos2d::CCString::createWithFormat("ahh%d.mp3", n)->getCString());
                         mFlag = false;
                     }
                     //fix pos
@@ -359,7 +359,7 @@ bool HighNinja::deliverHit(int type, cocos2d::Point dir)
     {
         mSpell = 1;
         //发动替身术
-        GameTool::PlaySound("sound/smoke.mp3");
+        GameTool::PlaySound("smoke.mp3");
         GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 5, false);
         eff->setAnchorPoint(mSprite->getAnchorPoint());
         eff->setPosition(mSprite->getPosition());

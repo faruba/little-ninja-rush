@@ -34,7 +34,7 @@ void  CollectionMenuDelegate::onUse () {
       markUsing(mCurrItem);
       //保存数据
       equipItem();
-      GameTool::PlaySound("sound/equip.mp3");
+      GameTool::PlaySound("equip.mp3");
 
       mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
       mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
@@ -49,12 +49,12 @@ void  CollectionMenuDelegate::onUse () {
         cocos2d::Sprite *mask = (cocos2d::Sprite*)(mScroll->contentNode->getChildByTag(mCurrItem));
 
         if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) ) {
-          GameTool::PlaySound("sound/getscroll.mp3");
+          GameTool::PlaySound("getscroll.mp3");
           mScroll->contentNode->removeChild(mask);
           mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip1.png"));
           mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equip2.png"));
         } else {
-          GameTool::PlaySound("sound/getitem.mp3");
+          GameTool::PlaySound("getitem.mp3");
           int piece = GameRecord::sharedGameRecord()->collection->itemTotalPiece(uiid) - GameRecord::sharedGameRecord()->collection->itemLostPiece(uiid);
           cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
           mask->setDisplayFrame(GameTool::getSpriteFrameByName(filename->getCString()));
@@ -67,7 +67,7 @@ void  CollectionMenuDelegate::onUse () {
         }
         mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", GameRecord::sharedGameRecord()->collection->magic_piece)->getCString());
       } else {
-        GameTool::PlaySound("sound/error.mp3");
+        GameTool::PlaySound("error.mp3");
       }
     }
   }

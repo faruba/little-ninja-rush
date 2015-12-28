@@ -52,7 +52,7 @@ void LogoSplash::onEnter()
   mLogo->setPosition(UniversalFit::sharedUniversalFit()->centralPoint);
 
   bg->addChild(mLogo);
-  mSoundId = GameTool::PlaySound("sound/logo.mp3");
+  mSoundId = GameTool::PlaySound("logo.mp3");
 
   mTimer = 0;
   mLoadFlag = 0;

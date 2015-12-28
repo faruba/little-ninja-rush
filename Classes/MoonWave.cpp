@@ -33,7 +33,7 @@ void MoonWave::onCreate()
     play->addChild(mShadow, LAYER_MAINROLE);
     mShadow->toggleShadow(true);
     
-    GameTool::PlaySound("sound/moonblade2.mp3");
+    GameTool::PlaySound("moonblade2.mp3");
 }
 
 void MoonWave::onUpdate(float delta) 
@@ -71,7 +71,7 @@ CCARRAY_FOREACH(play->enemies, node)
       bool hit = em->deliverHit(HIT_MAGIC, Vec2(1, 0));
       if( hit )
       {
-        GameTool::PlaySound("sound/hit.mp3");
+        GameTool::PlaySound("hit.mp3");
         GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
         hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
         hiteff->setPosition(em->center());
@@ -87,7 +87,7 @@ CCARRAY_FOREACH(play->enemies, node)
   }
   if( ref )
   {
-    GameTool::PlaySound("sound/reflect.mp3");
+    GameTool::PlaySound("reflect.mp3");
   }
   //越界删除
   if( mSprite->getPosition().x > UniversalFit::sharedUniversalFit()->playSize.width+100 )

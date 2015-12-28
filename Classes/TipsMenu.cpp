@@ -94,32 +94,32 @@ cocos2d::Size size = cocos2d::Size(300, 100);
     }
 }
 
-void TipsMenu::onBack() 
+void TipsMenu::onBack(cocos2d::Ref*) 
 {
     if(mUISwapper.isDone())
     {
         this->removeChild(mTip, true);
         this->removeChild(mCount, true);
-        GameTool::PlaySound("sound/menu-change.mp3");
+        GameTool::PlaySound("menu-change.mp3");
         mUISwapper.setSceneOutro(GameTool::scene<ExtraSelect>(), this);
     }
 }
 
-void TipsMenu::onLeft() 
+void TipsMenu::onLeft(cocos2d::Ref*) 
 {
     if( mIndex > 0 )
     {
-        GameTool::PlaySound("sound/click.mp3");
+        GameTool::PlaySound("click.mp3");
         mIndex--;
         this->updateTip(mIndex);
     }
 }
 
-void TipsMenu::onRight() 
+void TipsMenu::onRight(cocos2d::Ref*) 
 {
     if( mIndex < GameData::fetchTips().size() - 1 )
     {
-        GameTool::PlaySound("sound/click.mp3");
+        GameTool::PlaySound("click.mp3");
         mIndex++;
         this->updateTip(mIndex);
     }
@@ -134,15 +134,15 @@ CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mRight", MenuItemImage*, mRight);
 
 SEL_MenuHandler TipsMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onLeft", TipsMenu::onLeft);
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRight", TipsMenu::onRight);
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", TipsMenu::onBack);
-    return NULL;
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onLeft", TipsMenu::onLeft);
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onRight", TipsMenu::onRight);
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", TipsMenu::onBack);
+  return NULL;
 }
 
 cocos2d::extension::Control::Handler   TipsMenu::onResolveCCBCCControlSelector(cocos2d::Ref *, const char*)
 {
-    return NULL;
+  return NULL;
 }
 
 

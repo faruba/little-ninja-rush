@@ -103,7 +103,7 @@ cocos2d::RepeatForever* rf = cocos2d::RepeatForever::create(rb);
         mSprite->setScale(1.4f);
         mIsEnemy = true;
         speed = HNINJA_DARTSPEED*play->difficulty/2;
-        GameTool::PlaySound("sound/freeze_fly.mp3");
+        GameTool::PlaySound("freeze_fly.mp3");
 cocos2d::RotateBy* rb = cocos2d::RotateBy::create(0.5f, 720);
 cocos2d::RepeatForever* rf = cocos2d::RepeatForever::create(rb);
         mSprite->runAction(rf);
@@ -368,14 +368,14 @@ CCARRAY_FOREACH(play->enemies, node)
           switch (type) {
             case 1://fire
               {
-                GameTool::PlaySound("sound/hit-fire.mp3");
+                GameTool::PlaySound("hit-fire.mp3");
                 //achievement enemy burnt
                 GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ENEMYBURNT, 1);
               }
               break;
             case 2://thunder
               {
-                GameTool::PlaySound("sound/hit-thunder.mp3");
+                GameTool::PlaySound("hit-thunder.mp3");
               }
               break;
             case 6:
@@ -384,7 +384,7 @@ CCARRAY_FOREACH(play->enemies, node)
                 {
                   play->manager->addGameObject(StaticParticle::particleIcePiece(em->center(), direction));
                 }
-                GameTool::PlaySound("sound/ice-hurt.mp3");
+                GameTool::PlaySound("ice-hurt.mp3");
               }
               break;
             case 7:
@@ -393,22 +393,22 @@ CCARRAY_FOREACH(play->enemies, node)
                 {
                   play->manager->addGameObject(StaticParticle::particleDart(em->center(), direction, 3));
                 }
-                GameTool::PlaySound("sound/hit.mp3");
+                GameTool::PlaySound("hit.mp3");
               }
               break;
             case 9://狼牙
               {
-                GameTool::PlaySound("sound/bloodfangs.mp3");
+                GameTool::PlaySound("bloodfangs.mp3");
               }
               break;
             case 10://黄金
               {
-                GameTool::PlaySound("sound/golden.mp3");
+                GameTool::PlaySound("golden.mp3");
               }
               break;
             default:
               {
-                GameTool::PlaySound("sound/hit.mp3");
+                GameTool::PlaySound("hit.mp3");
               }
           }
           //achievement reflect to death
@@ -440,7 +440,7 @@ CCARRAY_FOREACH(play->enemies, node)
     }
     if( hit )
     {
-      GameTool::PlaySound("sound/hit.mp3");
+      GameTool::PlaySound("hit.mp3");
       GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
       hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
       hiteff->setPosition(xpos);

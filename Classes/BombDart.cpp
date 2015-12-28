@@ -39,7 +39,7 @@ cocos2d::RepeatForever* rf = cocos2d::RepeatForever::create(rb);
     mMid.x = (mPos.x + mDst.x)/2;
     mMid.y = 30 + dsty + CCRANDOM_0_1()*50;
     mTimer = 0;
-    GameTool::PlaySound("sound/bomb1.mp3");
+    GameTool::PlaySound("bomb1.mp3");
     
     mPaused = false;
 }
@@ -82,7 +82,7 @@ CCARRAY_FOREACH(play->enemies, node)
                 bool hit = em->deliverHit(HIT_BOMB, mDir);
                 if( hit )
                 {
-                    GameTool::PlaySound("sound/hit.mp3");
+                    GameTool::PlaySound("hit.mp3");
                     GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
                     hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                     hiteff->setPosition(em->center());
@@ -104,7 +104,7 @@ CCARRAY_FOREACH(play->enemies, node)
         effpos.y -= 20;
         eff->setPosition(effpos);
         play->addChild(eff, LAYER_ROLE);
-        GameTool::PlaySound("sound/bomb2.mp3");
+        GameTool::PlaySound("bomb2.mp3");
         play->manager->removeGameObject(this);
     }
 }

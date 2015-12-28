@@ -98,7 +98,7 @@ void ExtraMenu::activate(int cid)
 //  bool unfold = false;
 //  if( newitem->isFoldable() )
 //  {
-//    GameTool::PlaySound("sound/ui-cancel.mp3");
+//    GameTool::PlaySound("ui-cancel.mp3");
 //    if( cid == mCurrUnFold )
 //    {
 //      //fold
@@ -153,11 +153,11 @@ void ExtraMenu::onExit()
 cocos2d::Layer::onExit();
 }
 
-void ExtraMenu::onBack() 
+void ExtraMenu::onBack(cocos2d::Ref*) 
 {
     if(mUISwapper.isDone())
     {
-        GameTool::PlaySound("sound/menu-change.mp3");
+        GameTool::PlaySound("menu-change.mp3");
         mUISwapper.setSceneOutro(GameTool::scene<ExtraSelect>(), this);
     }
 }
@@ -414,24 +414,19 @@ void ExtraMenu::onTouchEnded(Touch * touch, Event * event)
 
 SEL_MenuHandler ExtraMenu::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-//CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraMenu::onBack);
-
-  //CCLog(pSelectorName);
-    return NULL;
+  CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", ExtraMenu::onBack);
+  return NULL;
 }
 
 cocos2d::extension::Control::Handler   ExtraMenu::onResolveCCBCCControlSelector(cocos2d::Ref * pTarget, const char* pSelectorName)
 {
-cocos2d::CCLog("Control");
   return NULL;
 }
 bool ExtraMenu::onAssignCCBMemberVariable(cocos2d::Ref* pTarget, const char* pMemberVariableName, Node* pNode)
 {
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", Label *,  mCoins);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", Node *, mList);
-CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBanner", Sprite *, mBanner);
-
-  //CCLog(pMemberVariableName);
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mCoins", Label *,  mCoins);
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mList", Node *, mList);
+  CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBanner", Sprite *, mBanner);
 
   return false;
 }

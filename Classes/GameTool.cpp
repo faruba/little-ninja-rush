@@ -42,7 +42,7 @@ void UISwapper::doSceneOutro(cocos2d::Node* target) {
         nullptr
         ));
 
-  GameTool::PlaySound("sound/close.mp3");
+  GameTool::PlaySound("close.mp3");
 }
 
 void UISwapper::doSceneIntro(cocos2d::Node* target) {
@@ -67,7 +67,7 @@ void UISwapper::doSceneIntro(cocos2d::Node* target) {
         nullptr
         ));
 
-  GameTool::PlaySound("sound/open.mp3");
+  GameTool::PlaySound("open.mp3");
 }
 
 using namespace CocosDenshion;

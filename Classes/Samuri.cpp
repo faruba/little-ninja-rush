@@ -54,7 +54,7 @@ cocos2d::RepeatForever *rp = cocos2d::RepeatForever::create(sq);
     mFlag = false;
     
     //play samurai warning
-    GameTool::PlaySound("sound/samurai_warning.mp3");
+    GameTool::PlaySound("samurai_warning.mp3");
 }
 
 void Samuri::onUpdate(float delta) 
@@ -70,7 +70,7 @@ void Samuri::onUpdate(float delta)
         {
             if( !mFlag && mSprite->getPosition().x < UniversalFit::sharedUniversalFit()->playSize.width )
             {
-                GameTool::PlaySound("sound/samurai_attack.mp3");
+                GameTool::PlaySound("samurai_attack.mp3");
                 mFlag = true;
             }
             float rds = play->runspeed*0.5f;
@@ -101,7 +101,7 @@ void Samuri::onUpdate(float delta)
                 }
                 if( hit )
                 {
-                    GameTool::PlaySound("sound/hit");
+                    GameTool::PlaySound("hit");
                     play->mainrole->deliverHit(HIT_BLADE, Vec2(0, 0));//武士总是对付第一个人物造成伤害
                     mFlag = true;
                 }
@@ -117,7 +117,7 @@ void Samuri::onUpdate(float delta)
                 {
                     mTimer = 0;
                     mFlag = false;
-                    GameTool::PlaySound("sound/samurai_die.mp3");
+                    GameTool::PlaySound("samurai_die.mp3");
                 }
             }
         }
@@ -178,7 +178,7 @@ bool Samuri::deliverHit(int type, cocos2d::Point dir)
 {
     if( mState < 2 )
     {
-        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCString::createWithFormat("ahh%d.mp3", (randomInt(3)+1))->getCString());
+        GameTool::PlaySound(cocos2d::CCString::createWithFormat("ahh%d.mp3", (randomInt(3)+1))->getCString());
         mState = 2;
         mSprite->playGTAnimation(2, false);
         mFlag = true;

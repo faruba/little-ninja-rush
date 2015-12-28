@@ -47,7 +47,7 @@ void ExtraSelect::onBack(cocos2d::Ref* )
 {
     if(mUISwapper.isDone())
     {
-        GameTool::PlaySound("sound/menu-change.mp3");
+        GameTool::PlaySound("menu-change.mp3");
         mUISwapper.setSceneOutro(GameTool::scene<TitleMenu>(), this);
     }
 }
@@ -56,7 +56,7 @@ void ExtraSelect::onAchievement()
 {
     if(mUISwapper.isDone())
     {
-        GameTool::PlaySound("sound/menu-change.mp3");
+        GameTool::PlaySound("menu-change.mp3");
         mUISwapper.setSceneOutro(ExtraMenu::scene(0), this);
     }
 }
@@ -65,7 +65,7 @@ void ExtraSelect::onCredits()
 {
     if(mUISwapper.isDone())
     {
-        GameTool::PlaySound("sound/menu-change.mp3");
+        GameTool::PlaySound("menu-change.mp3");
         mUISwapper.setSceneOutro(ExtraMenu::scene(2), this);
     }
 }
@@ -74,7 +74,7 @@ void ExtraSelect::onStatics()
 {
     if(mUISwapper.isDone())
     {
-        GameTool::PlaySound("sound/menu-change.mp3");
+        GameTool::PlaySound("menu-change.mp3");
         mUISwapper.setSceneOutro(ExtraMenu::scene(1), this);
     }
 }
@@ -83,7 +83,7 @@ void ExtraSelect::onTips()
 {
     if(mUISwapper.isDone())
     {
-        GameTool::PlaySound("sound/menu-change.mp3");
+        GameTool::PlaySound("menu-change.mp3");
         mUISwapper.setSceneOutro(GameTool::scene<TipsMenu>(), this);
     }
 }

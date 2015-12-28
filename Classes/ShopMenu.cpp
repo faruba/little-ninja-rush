@@ -225,7 +225,7 @@ void ShopMenu::activate(int cid)
     bool unfold = false;
     if( newitem->isFoldable() )
     {
-        GameTool::PlaySound("sound/ui-cancel.mp3");
+        GameTool::PlaySound("ui-cancel.mp3");
         if( cid == mCurrUnFold )
         {
             //fold
@@ -288,7 +288,7 @@ cocos2d::CCLog("PID = %d", cid);
             {
                 level++;
                 GameRecord::sharedGameRecord()->setItemUpgrade(level, index);
-                GameTool::PlaySound("sound/buy.mp3");
+                GameTool::PlaySound("buy.mp3");
                 FoldItem *item = (FoldItem*)(mItemList->getChildByTag(cid));
                 int icon = 4*index + level;
                 int detbase = 7;
@@ -301,7 +301,7 @@ cocos2d::CCLog("PID = %d", cid);
                 GameRecord::sharedGameRecord()->makeCoins(-cost);
             }
             else {
-                GameTool::PlaySound("sound/error.mp3");
+                GameTool::PlaySound("error.mp3");
             }
         }
     }
@@ -312,12 +312,12 @@ cocos2d::CCLog("PID = %d", cid);
             int cost = 100000;
             if( GameRecord::sharedGameRecord()->coins >= cost )
             {
-                GameTool::PlaySound("sound/buy.mp3");
+                GameTool::PlaySound("buy.mp3");
                 GameRecord::sharedGameRecord()->makeCoins(-cost);
                 GameRecord::sharedGameRecord()->setCharacterContract(1, cid-9+1);
             }
             else {
-                GameTool::PlaySound("sound/error.mp3");
+                GameTool::PlaySound("error.mp3");
             }
         }
         else if( cid == 1 || cid == 2 || cid == 3 )
@@ -326,7 +326,7 @@ cocos2d::CCLog("PID = %d", cid);
             int cost = gJoykitCost[cid-1];
             if( GameRecord::sharedGameRecord()->coins >= cost )
             {
-                GameTool::PlaySound("sound/buy.mp3");
+                GameTool::PlaySound("buy.mp3");
                 GameRecord::sharedGameRecord()->makeCoins(-cost);
                 switch (cid) {
                     case 9:
@@ -347,7 +347,7 @@ cocos2d::CCLog("PID = %d", cid);
                 }
             }
             else {
-                GameTool::PlaySound("sound/error.mp3");
+                GameTool::PlaySound("error.mp3");
             }
         }
         else
@@ -355,7 +355,7 @@ cocos2d::CCLog("PID = %d", cid);
             int cost = gUtilityPrice[cid-4];
             if( GameRecord::sharedGameRecord()->coins >= cost )
             {
-                GameTool::PlaySound("sound/buy.mp3");
+                GameTool::PlaySound("buy.mp3");
                 GameRecord::sharedGameRecord()->makeCoins(-cost);
                 switch (cid) {
                     case 4:
@@ -381,7 +381,7 @@ cocos2d::CCLog("PID = %d", cid);
                 }
             }
             else {
-                GameTool::PlaySound("sound/error.mp3");
+                GameTool::PlaySound("error.mp3");
             }
         }
     }
@@ -392,7 +392,7 @@ cocos2d::CCLog("PID = %d", cid);
 void ShopMenu::onBack(cocos2d::Ref*)
 {
     if(mUISwapper.isDone()) {
-      GameTool::PlaySound("sound/menu-change.mp3");
+      GameTool::PlaySound("menu-change.mp3");
       if( gNavBack == 0 ) {
           mUISwapper.setSceneOutro(GameTool::scene<TitleMenu>(), this);
       } else {
@@ -404,7 +404,7 @@ void ShopMenu::onBack(cocos2d::Ref*)
 void ShopMenu::onMoreCoins(cocos2d::Ref* )
 {
     if(mUISwapper.isDone()) {
-      GameTool::PlaySound("sound/menu-change.mp3");
+      GameTool::PlaySound("menu-change.mp3");
       mUISwapper.setSceneOutro(GameTool::scene<CoinsMenu>(), this);
     }
 }
@@ -655,7 +655,7 @@ cocos2d::CCLog("Contract %d Purchased!", contractid);
         int cid = pid+1;
         FoldItem *item = (FoldItem*)(mItemList->getChildByTag(cid));
         item->updateInfo(-1, 0, gDetails[3+cid], -1);
-        GameTool::PlaySound("sound/getscroll.mp3");
+        GameTool::PlaySound("getscroll.mp3");
     }
     else {
         GameRecord::sharedGameRecord()->purchaseVerified(pid);

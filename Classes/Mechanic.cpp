@@ -94,7 +94,7 @@ void Mechanic::onUpdate(float delta)
                     mTimer -= delta;
                     if( mTimer <= 0 )
                     {
-                        GameTool::PlaySound("sound/duofa.mp3");
+                        GameTool::PlaySound("duofa.mp3");
                     }
                 }
                 if( mTimer <= 0 )
@@ -136,7 +136,7 @@ void Mechanic::onUpdate(float delta)
                     if(mTimer>0.3f && mFlag)
                     {
                         int n = 1 + randomInt(3);
-                        SimpleAudioEngine::sharedEngine()->playEffect(cocos2d::CCString::createWithFormat("ahh%d.mp3", n)->getCString());
+                        GameTool::PlaySound(cocos2d::CCString::createWithFormat("ahh%d.mp3", n)->getCString());
                         mFlag = false;
                     }
                     //fix pos
@@ -205,7 +205,7 @@ bool Mechanic::deliverHit(int type, cocos2d::Point dir)
     if( dir.x > 0 && type == HIT_DART )
     {
         //block darts
-        GameTool::PlaySound("sound/reflect.mp3");
+        GameTool::PlaySound("reflect.mp3");
         
         GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
         hiteff2->setScale(0.5f);
