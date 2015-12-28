@@ -1193,8 +1193,8 @@ void GamePlay::popNotification(PopQueue *pop) {
       {"ms_bg2.png", "月常任务"},
       {"ms_bg4.png", title}
     };
-    cocos2d::Sprite *ibg = cocos2d::Sprite::createWithSpriteFrameName(config[type][0]+"\n已完成！");
-    cocos2d::Label *label = cocos2d::Label::createWithTTF(config[type][1], GFONT_NAME, GFONT_SIZE_NORMAL);
+    cocos2d::Sprite *ibg = cocos2d::Sprite::createWithSpriteFrameName(config[type][0]);
+    cocos2d::Label *label = cocos2d::Label::createWithSystemFont(config[type][1]+"\n已完成！", GFONT_NAME, GFONT_SIZE_NORMAL);
 
     ibg->setPosition(cocos2d::Vec2(22, 22));
     board->addChild(ibg);

@@ -85,6 +85,7 @@ class ObjectiveManager {
     Tasks *mTasks = nullptr;
     std::vector<Achievement> mObjectives;
     int mWorkType;
+    int mTaskType;
     std::string mMark;
 
     void init (Tasks *task, int workType, std::string mark) {
@@ -92,6 +93,12 @@ class ObjectiveManager {
       mTasks = task;
       workType = workType;
       mMark = std::string("obj_")+mark+"_";
+
+      switch (mWorkType) {
+        case ACH_DAILYWORK: mTaskType = TASK_OBJECTIVEDAILY; break;
+        case ACH_WEEKLYWORK: mTaskType = TASK_OBJECTIVEWEEKLY; break;
+        case ACH_MONTHLYWORK: mTaskType = TASK_OBJECTIVEMONTHLY; break;
+      }
     }
 
     void write (rapidjson::Document &document) {
@@ -101,16 +108,7 @@ class ObjectiveManager {
       GameTool::addMemberWithFormatToDocument(document, mMark, "date", currentObjective.date);
     }
 
-    void initCurrentObjective (cocos2d::CCDictionary* dic) {
-      currentObjective.uiid = gtReadInt(dic, mMark+"uiid", -1);
-      currentObjective.count = gtReadInt(dic, mMark+"count", 0);
-      currentObjective.index = gtReadInt(dic, mMark+"index", -1);
-      currentObjective.date = gtReadInt(dic, mMark+"date", 0);
-
-      if (currentObjective.uiid != -1) {
-        setCurrentObjectiveWithID(currentObjective.uiid);
-      }
-    }
+    void initCurrentObjective (cocos2d::CCDictionary* dic);
 
     const Achievement &infoWithUiid (int uiid) {
       auto result = std::find(std::begin(mObjectives), std::end(mObjectives), uiid);

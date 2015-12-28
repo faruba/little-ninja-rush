@@ -101,6 +101,7 @@ void LogoSplash::update(float delta)
 
 void LogoSplash::load()
 {
+  initRandom(0);
   cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("items.plist");
 
   Tasks::loadObjectivesFromFile();

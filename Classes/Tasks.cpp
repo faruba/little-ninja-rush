@@ -15,20 +15,32 @@ void ObjectiveManager::complete (int oid) {
     mTasks->dispatchTask(mWorkType, 1);
   }
   mTasks->dispatchTask(ACH_COMPLETEWORKS, 1);
-  GamePlay::sharedGamePlay()->pushNotification(NULL, std::string(obj.icon.c_str()), 0);
+  GamePlay::sharedGamePlay()->pushNotification("", std::string(obj.icon.c_str()), 0);
 }
 
 void ObjectiveManager::setCurrentObjectiveWithID (int id) {
   try {
     const Achievement &ach = infoWithUiid(id);
 
-    mTasks->assignTask(ach.achieveCode, ach.achieveNumber, 0, TASK_OBJECTIVEDAILY, ach.uiid);
+    mTasks->assignTask(ach.achieveCode, ach.achieveNumber, 0, mTaskType, ach.uiid);
     currentObjective.uiid = ach.uiid;
     currentObjective.index = currentObjective.index+1;
     currentObjective.count = 0;
     currentObjective.date = time(NULL);
   } catch (char* err) {
     cocos2d::log("failed to refresh objective. (%d)", id);
+  }
+}
+
+void ObjectiveManager::initCurrentObjective (cocos2d::CCDictionary* dic) {
+  currentObjective.uiid = gtReadInt(dic, mMark+"uiid", -1);
+  currentObjective.count = gtReadInt(dic, mMark+"count", 0);
+  currentObjective.index = gtReadInt(dic, mMark+"index", -1);
+  currentObjective.date = gtReadInt(dic, mMark+"date", 0);
+
+  if (currentObjective.uiid != -1) {
+    const Achievement &ach = infoWithUiid(currentObjective.uiid);
+    mTasks->assignTask(ach.achieveCode, ach.achieveCount, currentObjective.count, mTaskType, currentObjective.uiid);
   }
 }
 ///////////////////////// ObjectiveManager
