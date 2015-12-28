@@ -66,8 +66,8 @@ class GameTool {
     }
 
     template<typename DataType>
-    static void addMemberWithFormatToDocument(rapidjson::Document &document, std::string head, const char id[], DataType data) {
-      const std::string key = head+std::to_string(*id);
+    static void addMemberWithFormatToDocument(rapidjson::Document &document, std::string head, const char* id, DataType data) {
+      const std::string key = head+id;
       rapidjson::Value index(key.c_str(), key.size(), document.GetAllocator());
       document.AddMember(index, data, document.GetAllocator());
     }
