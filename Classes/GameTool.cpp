@@ -40,7 +40,7 @@ void GameTool::UpdateObjectives(cocos2d::Label* labels[3],cocos2d::Sprite* icons
 // ----------
 void UISwapper::initiateDoors(cocos2d::Node* target) {
     mDoornode = cocos2d::Node::create();
-    target->addChild(mDoornode, 99);
+    target->addChild(mDoornode, 999);
     mLeftDoor = cocos2d::Sprite::create("door.png");
     mLeftDoor->setAnchorPoint(cocos2d::Vec2(1, 0));
     mDoornode->addChild(mLeftDoor, 0, 0);
