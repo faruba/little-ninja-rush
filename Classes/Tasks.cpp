@@ -646,7 +646,7 @@ cocos2d::CCString* Tasks::stringForObjective(const std::string &descr, const int
 {
   cocos2d::CCString *all ;
   if( achcode < ACH_OVERLINE && num > 1 && num-count > 0 ) {
-    all = cocos2d::CCString::createWithFormat("%s，还剩%d。", descr.c_str(), num-count);
+    all = cocos2d::CCString::createWithFormat("%s还剩%d。", descr.c_str(), num-count);
   } else {
     all = cocos2d::CCString::createWithFormat(descr.c_str());
   }
