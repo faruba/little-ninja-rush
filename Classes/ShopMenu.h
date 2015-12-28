@@ -46,7 +46,7 @@ cocos2d::LayerColor *mMask;
     float mLastY;
     float mFlySpeed;
     //CFAbsoluteTime mLastTime;
-    time_t mLastTime;
+    timeval mLastTime;
     //-- auto assign --
 cocos2d::Label *mCoins;
 cocos2d::Node *mList;

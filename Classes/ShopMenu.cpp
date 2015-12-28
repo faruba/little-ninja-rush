@@ -516,31 +516,36 @@ cocos2d::CCRect rect = cocos2d::Rect(12, 12, 455, 264);
 
 void ShopMenu::onTouchMoved(Touch * touch, Event * event) 
 {
-//    if( !mIsModal )
-//    {
-//        cocos2d::Point pos = touch->getLocationInView();
-//        pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
-//        pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
-//
-//        float dy = pos.y - mBeginPressY;
-//        float y = mBeginNodeY + dy;
-//        cocos2d::Point np = mItemList->getPosition();
-//        np.y = y;
-//        mItemList->setPosition(np);
-//        //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
-//        time_t time;
-//cocos2d::CCTime::gettimeofdayCocos2d(&time, NULL);
-//        if( mLastY > -10000 )
-//        {
-//            float ds = np.y - mLastY;
-//            //float dt = time - mLastTime;
-//            float dt = cocos2d::CCTime::timersubCocos2d(&mLastTime, &time)/1000.0;
-//            mFlySpeed = ds/dt;
-//        }
-//        mLastY = np.y;
-//        mLastTime = time;
-//        this->updateScorll();
-//    }
+    if( !mIsModal )
+    {
+        cocos2d::Point pos = touch->getLocationInView();
+        pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
+        pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
+
+        float dy = pos.y - mBeginPressY;
+        float y = mBeginNodeY + dy;
+        cocos2d::Point np = mItemList->getPosition();
+        np.y = y;
+        mItemList->setPosition(np);
+        //CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
+        timeval time;
+				gettimeofday(&time, NULL);
+        if( mLastY > -10000 )
+        {
+            float ds = np.y - mLastY;
+            //float dt = time - mLastTime;
+          float dt = GameTool::diffTimeval(time, mLastTime)/1000.0;
+          cocos2d::CCLog("dt : %f",dt);
+          if(dt <= 0.01){
+            dt = 1.0f;
+          }
+            mFlySpeed = ds/dt;
+          
+        }
+        mLastY = np.y;
+        mLastTime = time;
+        this->updateScorll();
+    }
 }
 
 void ShopMenu::onTouchEnded(Touch * touch, Event * event) 

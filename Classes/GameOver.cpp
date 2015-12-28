@@ -68,48 +68,12 @@ void GameOver::updateClassic()
   GameRecord::sharedGameRecord()->checkPoint();
 
   //update objectives TODO:refactor this
-  Tasks *task = GameRecord::sharedGameRecord()->task;
-  ObjectiveManager *managers[] = { &task->dailyObjective, &task->weeklyObjective, &task->monthlyObjective };
-  cocos2d::Label* labels[] = { mDailyObjective, mWeeklyObjective, mMonthlyObjective };
-  cocos2d::Sprite* icons[] = { mDailyIcon, mWeeklyIcon, mMonthlyIcon };
-  for (int i = 0; i < 3; i++) {
-    if (managers[i]->hasObjective()) {
-      const Achievement &info = managers[i]->info();
+	cocos2d::Label* labels[] = { mDailyObjective, mWeeklyObjective, mMonthlyObjective };
+	cocos2d::Sprite* icons[] = { mDailyIcon, mWeeklyIcon, mMonthlyIcon };
+	cocos2d::Node* crowns[] = {mDailyCrown, mWeeklyCrown, mMonthlyCrown};
+	GameTool::UpdateObjectives(labels,icons,crowns);
 
-      labels[i]->setString(Tasks::stringForObjective(info.desc, info.achieveCode,  info.achieveNumber, managers[i]->currentObjective.count)->getCString());
-      labels[i]->setColor(Color3B(255, 255, 255));
-
-      icons[i]->setVisible(true);
-      cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(info.icon.c_str());
-      icon->setPosition(cocos2d::Vec2(icons[i]->getContentSize().width/2, icons[i]->getContentSize().height/2));
-      icons[i]->addChild(icon);
-    } else {
-      labels[i]->setString("已完成！");
-      labels[i]->setColor(Color3B(128, 128, 128));
-    }
-  }
-
-  //update crown
-  for(int i=0; i<GameRecord::sharedGameRecord()->task->dailyObjective.currentObjective.index; ++i)
-  {
-    cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-    crown->setPosition(cocos2d::Vec2(32-16*i, 0));
-    mDailyCrown->addChild(crown);
-  }
-  for(int i=0; i<GameRecord::sharedGameRecord()->task->weeklyObjective.currentObjective.index; ++i)
-  {
-    cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-    crown->setPosition(cocos2d::Vec2(32-16*i, 0));
-    mWeeklyCrown->addChild(crown);
-  }
-  for(int i=0; i<GameRecord::sharedGameRecord()->task->monthlyObjective.currentObjective.index; ++i)
-  {
-    cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
-    crown->setPosition(cocos2d::Vec2(32-16*i, 0));
-    mMonthlyCrown->addChild(crown);
-  }
-
-  //---- No.1 ----
+    //---- No.1 ----
   if( GameRecord::sharedGameRecord()->lb_scores[0] > 0 )
   {
     mLeadLb0->setString(cocos2d::CCString::createWithFormat("%dm", GameRecord::sharedGameRecord()->lb_scores[0])->getCString());
@@ -373,6 +337,9 @@ void GameOver::onCreate()
     mClassic->setVisible(false);
     this->updateArcade();
   }
+  mLeadLb0->setBMFontFilePath("ab40.fnt");
+  mLeadLb1->setBMFontFilePath("ab40.fnt");
+  mLeadLb2->setBMFontFilePath("ab40.fnt");
 }
 
 void GameOver::onUpdate(float delta) 
