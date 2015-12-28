@@ -373,6 +373,9 @@ void GameOver::onCreate()
     mClassic->setVisible(false);
     this->updateArcade();
   }
+  mLeadLb0->setBMFontFilePath("ab40.fnt");
+  mLeadLb1->setBMFontFilePath("ab40.fnt");
+  mLeadLb2->setBMFontFilePath("ab40.fnt");
 }
 
 void GameOver::onUpdate(float delta) 
