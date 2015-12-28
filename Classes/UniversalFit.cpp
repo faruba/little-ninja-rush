@@ -90,7 +90,7 @@ void UniversalFit::setAutofit(cocos2d::Size size)
   screenSize = size;
   scaleFactor = size.width/SCREEN_WIDTH < size.height/SCREEN_HEIGHT ? size.width/SCREEN_WIDTH : size.height/SCREEN_HEIGHT;//以宽度为基准 (maximum extend)
   cocos2d::Size scaleSize = cocos2d::Size(SCREEN_WIDTH*scaleFactor, SCREEN_HEIGHT*scaleFactor);
-  sceneOffset = Vec2(0, 0);//Vec2((size.width - SCREEN_WIDTH*scaleFactor)/2, (size.height - SCREEN_HEIGHT*scaleFactor)/2);
+  sceneOffset = Vec2((size.width - SCREEN_WIDTH*scaleFactor)/2, (size.height - SCREEN_HEIGHT*scaleFactor)/2);
   clipRect.setRect(0, (size.height - scaleSize.height)/2, size.width, scaleSize.height);
   //clipRect.setRect(0, 0, SCREEN_WIDTH*4, SCREEN_HEIGHT*4);//hammer android titlemenu clip test
   baseHeight =0;//clipRect.origin.y;

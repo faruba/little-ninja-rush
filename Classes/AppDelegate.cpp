@@ -13,9 +13,9 @@
 //#include "MyViewController.h"
 //#include "ABSystem.h"
 
-;
 
 static cocos2d::Size designResolutionSize = cocos2d::Size(480, 320);
+//static cocos2d::Size designResolutionSize = cocos2d::Size(480, 310);
 static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);
 static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);
 static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 1536);
@@ -51,7 +51,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+//#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
         glview = GLViewImpl::createWithRect("little-ninja-rush", Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
 #else
         glview = GLViewImpl::create("little-ninja-rush");
@@ -66,8 +67,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // Set the design resolution
-    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::EXACT_FIT);
-    Size frameSize = glview->getFrameSize();
     // if the frame's height is larger than the height of medium size.
     /*
     if (frameSize.height > mediumResolutionSize.height)
@@ -86,7 +85,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
     */
     //director->setContentScaleFactor(MAX(frameSize.height/designResolutionSize.height, frameSize.width/designResolutionSize.width));
+		//                      W      H
+		// Resource solution : >=960   640
+		// Design solution :   >=480   320
+		// Screen solution :   any     any
+		// R -> D  fixed height  RH/DH => 2
     director->setContentScaleFactor(2);
+    glview->setDesignResolutionSize(SCREEN_WIDTH, SCREEN_HEIGHT, ResolutionPolicy::FIXED_HEIGHT);
+    //Size frameSize = glview->getFrameSize();
 
     UniversalFit::sharedUniversalFit()->init();
     //configure for autofit
@@ -97,7 +103,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
       screensize.width = screensize.height;
       screensize.height = t;
     }
-    UniversalFit::sharedUniversalFit()->setAutofit(screensize);
+		UniversalFit::sharedUniversalFit()->setAutofit(screensize);
 
     register_all_packages();
 

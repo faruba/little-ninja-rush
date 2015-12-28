@@ -45,12 +45,16 @@ class GameTool {
     static SpriteFrame* getSpriteFrameByName(const std::string&name) { return cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(name); }
 
     template<typename LayerType>
-      static cocos2d::Scene* scene() { 
+      static cocos2d::Scene* scene(LayerType** pLayer = NULL) {
         cocos2d::Scene *ret = cocos2d::Scene::create();
         LayerType *tm = LayerType::create();
+        if(pLayer != NULL){
+          *pLayer = tm;
+        }
         ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-        ret->setAnchorPoint(cocos2d::Vec2(0, 0));
-        ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
+        ret->setAnchorPoint(cocos2d::Vec2(0,0));
+        //ret->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
+        tm->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
         CEClipedNode *clip = CEClipedNode::create();
         clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
         clip->addChild(tm);
