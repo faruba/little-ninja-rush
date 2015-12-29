@@ -27,7 +27,7 @@ void GameTool::UpdateObjectives(cocos2d::Label* labels[3],cocos2d::Sprite* icons
       labels[i]->setColor(Color3B(128, 128, 128));
     }
 
-		for(int ii=0; i<managers[i]->currentObjective.index; ++ii)
+		for(int ii=0; ii<managers[i]->currentObjective.index; ++ii)
 		{
 			cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", ii)->getCString());
 			crown->setPosition(cocos2d::Vec2(32-16*ii, 0));
