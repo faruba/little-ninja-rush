@@ -15,15 +15,6 @@
 #include "UniversalFit.h"
 #include "FootPrint.h"
 
-
-
-Santa* Santa::role(cocos2d::Node * parent) 
-{
-    Santa *em = Santa::create();
-    em->mParent = parent;
-    return em;
-}
-
 void Santa::onCreate() 
 {
     GamePlay *play = GamePlay::sharedGamePlay();

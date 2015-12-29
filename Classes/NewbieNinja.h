@@ -29,8 +29,6 @@ class NewbieNinja:
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
 
-    static NewbieNinja* role(cocos2d::Node* parent);
-cocos2d::Node *mParent;
     GTAnimatedSprite *mSprite;
     int    mState;
     float  mTimer;

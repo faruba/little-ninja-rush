@@ -13,11 +13,6 @@
 #include "GameRecord.h"
 #include "UniversalFit.h"
 
-Mechanic* Mechanic::role() 
-{
-    return Mechanic::create();
-}
-
 void Mechanic::onCreate() 
 {
     GamePlay *play = GamePlay::sharedGamePlay();

@@ -13,13 +13,6 @@
 #include "GameRecord.h"
 #include "UniversalFit.h"
 
-Samuri* Samuri::role(cocos2d::Node * parent) 
-{
-    Samuri *em = Samuri::create();
-    em->mParent = parent;
-    return em;
-}
-
 void Samuri::onCreate() 
 {
     GamePlay *play = GamePlay::sharedGamePlay();

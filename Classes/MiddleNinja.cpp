@@ -16,12 +16,6 @@
 #include "UniversalFit.h"
 #include "FootPrint.h"
 
-MiddleNinja* MiddleNinja::role(cocos2d::Node * parent) 
-{
-    MiddleNinja *em = MiddleNinja::create();
-    em->mParent = parent;
-    return em;
-}
 
 void MiddleNinja::onCreate() 
 {

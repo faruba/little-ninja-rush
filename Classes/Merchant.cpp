@@ -14,15 +14,6 @@
 #include "GameRecord.h"
 #include "UniversalFit.h"
 
-
-
-Merchant* Merchant::role(cocos2d::Node * parent) 
-{
-    Merchant *ret = Merchant::create();
-    ret->mParent = parent;
-    return  ret;
-}
-
 void Merchant::onCreate() 
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("merchant"));

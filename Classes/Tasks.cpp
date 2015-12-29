@@ -623,7 +623,6 @@ void Tasks::checkObjectives()
 
 void Tasks::refreshArcadePrizes() 
 {
-  cocos2d::CCLog("refreshing arcade prize...");
   if( goldPrize->prize >= 0 )
   {
     //stop golden steak

@@ -8,13 +8,6 @@
 
 
 
-NewbieNinja* NewbieNinja::role(cocos2d::Node * parent) 
-{
-    NewbieNinja *em = NewbieNinja::create();
-    em->mParent = parent;
-    return em;
-}
-
 void NewbieNinja::onCreate() 
 {
     GamePlay *play = GamePlay::sharedGamePlay();

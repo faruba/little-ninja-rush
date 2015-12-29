@@ -23,5 +23,14 @@ class Role:
 
     virtual void toggleVisible(bool flag) = 0;
     virtual bool isEnemy() {return false;};
+
+    cocos2d::Node *mParent;
+    template<typename RoleType>
+      static Role* CreateRole(cocos2d::Node *parent) {
+        Role *role = RoleType::create();
+        role->mParent = parent;
+        return role;
+      }
 };
+
 #endif

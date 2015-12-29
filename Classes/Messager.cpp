@@ -23,14 +23,6 @@
 //加速速度
 #define ACCELER_SPEED (250.0f)
 
-
-Messager* Messager::role(cocos2d::Node * parent) 
-{
-    Messager *ret = Messager::create();
-    ret->mParent = parent;
-    return  ret;
-}
-
 void Messager::onCreate() 
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("messager"));

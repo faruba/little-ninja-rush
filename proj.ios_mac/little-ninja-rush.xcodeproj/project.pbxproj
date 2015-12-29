@@ -1744,21 +1744,11 @@
 				BE38EB311C1EB75D0087D38E /* LogoSplash.h */,
 				BE38EB321C1EB75D0087D38E /* MainRole.cpp */,
 				BE38EB331C1EB75D0087D38E /* MainRole.h */,
-				BE38EB341C1EB75D0087D38E /* Mechanic.cpp */,
-				BE38EB351C1EB75D0087D38E /* Mechanic.h */,
-				BE38EB361C1EB75D0087D38E /* Merchant.cpp */,
-				BE38EB371C1EB75D0087D38E /* Merchant.h */,
 				BE38EB381C1EB75D0087D38E /* MerchantPanel.cpp */,
 				BE38EB391C1EB75D0087D38E /* MerchantPanel.h */,
-				BE38EB3C1C1EB75D0087D38E /* Messager.cpp */,
-				BE38EB3D1C1EB75D0087D38E /* Messager.h */,
-				BE38EB3E1C1EB75D0087D38E /* MiddleNinja.cpp */,
-				BE38EB3F1C1EB75D0087D38E /* MiddleNinja.h */,
 				BE38EB401C1EB75D0087D38E /* MoonWave.cpp */,
 				BE38EB411C1EB75D0087D38E /* MoonWave.h */,
 				BE38EB421C1EB75D0087D38E /* mycocos2d */,
-				BE38EB451C1EB75D0087D38E /* NewbieNinja.cpp */,
-				BE38EB461C1EB75D0087D38E /* NewbieNinja.h */,
 				BE38EB471C1EB75D0087D38E /* ObjectiveComplete.cpp */,
 				BE38EB481C1EB75D0087D38E /* ObjectiveComplete.h */,
 				BE38EB491C1EB75D0087D38E /* PauseMenuClassic.cpp */,
@@ -1781,11 +1771,7 @@
 				BE38EB681C1EB75D0087D38E /* Respawn.h */,
 				BE38EB691C1EB75D0087D38E /* RingTile.cpp */,
 				BE38EB6A1C1EB75D0087D38E /* RingTile.h */,
-				BE38EB6B1C1EB75D0087D38E /* Role.h */,
-				BE38EB6C1C1EB75D0087D38E /* Samuri.cpp */,
-				BE38EB6D1C1EB75D0087D38E /* Samuri.h */,
-				BE38EB6E1C1EB75D0087D38E /* Santa.cpp */,
-				BE38EB6F1C1EB75D0087D38E /* Santa.h */,
+				BE3B880F1C329E9D003D67C3 /* Role */,
 				BE38EB701C1EB75D0087D38E /* Scene.h */,
 				BE38EB711C1EB75D0087D38E /* Scene1.cpp */,
 				BE38EB721C1EB75D0087D38E /* Scene1.h */,
@@ -1925,6 +1911,28 @@
 				BE38EB441C1EB75D0087D38E /* CCNumber.h */,
 			);
 			path = mycocos2d;
+			sourceTree = "<group>";
+		};
+		BE3B880F1C329E9D003D67C3 /* Role */ = {
+			isa = PBXGroup;
+			children = (
+				BE38EB451C1EB75D0087D38E /* NewbieNinja.cpp */,
+				BE38EB461C1EB75D0087D38E /* NewbieNinja.h */,
+				BE38EB341C1EB75D0087D38E /* Mechanic.cpp */,
+				BE38EB351C1EB75D0087D38E /* Mechanic.h */,
+				BE38EB361C1EB75D0087D38E /* Merchant.cpp */,
+				BE38EB371C1EB75D0087D38E /* Merchant.h */,
+				BE38EB3C1C1EB75D0087D38E /* Messager.cpp */,
+				BE38EB3D1C1EB75D0087D38E /* Messager.h */,
+				BE38EB3E1C1EB75D0087D38E /* MiddleNinja.cpp */,
+				BE38EB3F1C1EB75D0087D38E /* MiddleNinja.h */,
+				BE38EB6C1C1EB75D0087D38E /* Samuri.cpp */,
+				BE38EB6D1C1EB75D0087D38E /* Samuri.h */,
+				BE38EB6E1C1EB75D0087D38E /* Santa.cpp */,
+				BE38EB6F1C1EB75D0087D38E /* Santa.h */,
+				BE38EB6B1C1EB75D0087D38E /* Role.h */,
+			);
+			name = Role;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

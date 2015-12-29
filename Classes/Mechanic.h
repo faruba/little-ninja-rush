@@ -7,8 +7,6 @@ class Mechanic:
   public Role
 {
   public:
-    static Mechanic* role();
-
     CREATE_FUNC(Mechanic);
 
     virtual void onCreate();

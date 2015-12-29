@@ -17,14 +17,6 @@
 #include "FootPrint.h"
 
 
-
-HighNinja* HighNinja::role(cocos2d::Node * parent) 
-{
-    HighNinja *em = HighNinja::create();
-    em->mParent = parent;
-    return em;
-}
-
 void HighNinja::onCreate() 
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("hninja"));

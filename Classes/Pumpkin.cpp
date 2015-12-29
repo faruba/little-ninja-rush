@@ -18,15 +18,6 @@
 
 #define HIT_EXPLODE (10) 
 
-
-
-Pumpkin* Pumpkin::role(cocos2d::Node * parent) 
-{
-    Pumpkin *em = Pumpkin::create();
-    em->mParent = parent;
-    return em;
-}
-
 void Pumpkin::onCreate() 
 {
     mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("pumpkin"));

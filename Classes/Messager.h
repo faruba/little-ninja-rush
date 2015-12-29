@@ -7,8 +7,6 @@ class Messager:
   public Role
 {
 public:
-static Messager* role(cocos2d::Node* parent);
-
     CREATE_FUNC(Messager);
 
     virtual void onCreate();
@@ -22,7 +20,6 @@ static Messager* role(cocos2d::Node* parent);
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
-cocos2d::Node* mParent;
     GTAnimatedSprite *mSprite;
     int mState;
     float mAwake;

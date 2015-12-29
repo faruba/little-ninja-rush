@@ -7,8 +7,6 @@ class Samuri:
   public Role
 {
   public:
-    static Samuri* role(cocos2d::Node* parent);
-
     CREATE_FUNC(Samuri);
 
     virtual void onCreate();
@@ -22,7 +20,7 @@ class Samuri:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
     virtual void toggleVisible(bool flag);
-cocos2d::Node* mParent;
+
     GTAnimatedSprite* mSprite;
     GTAnimatedSprite *mHint;
     //Sprite* mMark;
