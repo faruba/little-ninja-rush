@@ -385,6 +385,10 @@
           "frames" : ["hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng2.png",  "hw-ng3.png",  "hw-ng4.png",  "hw-ng3.png",  "hw-ng2.png",  "hw-ng3.png",  "hw-ng4.png",  "hw-ng3.png",  "hw-ng2.png",  "hw-ng3.png",  "hw-ng4.png",  "hw-ng3.png",  "hw-ng2.png",  "hw-ng3.png",  "hw-ng4.png",  "hw-ng3.png",  "hw-ng2.png",  "hw-ng3.png",  "hw-ng4.png"]
         },
         {
+          "duration_per_frame" : 0.2,
+          "frames" : ["hw-ng2.png"]
+        },
+        {
           "duration_per_frame" : 0.05,
           "frames" : ["hw-ngbz1.png",  "hw-ngbz2.png",  "hw-ngbz3.png",  "hw-ngbz4.png",  "hw-ngbz5.png"]
         }

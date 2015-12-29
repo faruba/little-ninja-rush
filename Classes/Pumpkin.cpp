@@ -16,7 +16,7 @@
 #define NEAR (50)
 #define RANGE (27)//半径
 
-#define HIT_EXPLODE (10) 
+#define HIT_EXPLODE (10)
 
 
 
@@ -200,6 +200,10 @@ void Pumpkin::onUpdate(float delta)
 //碰撞检测
 bool Pumpkin::collisionWithCircle(cocos2d::Point cc, float rad) 
 {
+	if(mSprite == NULL){
+		cocos2d::CCLog("???? %p", this);
+    return false;
+	}
     if( mState < 2 )
     {
         cocos2d::Point dp = ccpSub(mSprite->getPosition(), cc);
