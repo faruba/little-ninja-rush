@@ -223,6 +223,7 @@ void ClassicMode::onUpdate(float delta)
             if( play->stateTimer > 3)
             if( play->stateTimer > 3 && play->substate == 0 )
             {
+                //play->scrolls += 20; //TODO: this is test
                 if( play->scrolls <= 0 )
                 {
                     this->goOver();

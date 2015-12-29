@@ -75,7 +75,7 @@ void CommitScroll::onCreate()
   play->addChild(mNode, LAYER_MASK+1);
 
   //TODO: 
-  //mFlash->blendFunc =  (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };//fix flash bug
+  mFlash->setBlendFunc({ GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA });//fix flash bug
 
   mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
   mOver = false;
@@ -216,497 +216,246 @@ void CommitScroll::onCashIn(cocos2d::Ref*)
 
 void CommitScroll::onScroll(cocos2d::Ref*) 
 {
-    GamePlay *play = GamePlay::sharedGamePlay();
-    if( mState == 0 )
+  GamePlay *play = GamePlay::sharedGamePlay();
+  if( mState == 0 )
+  {
+    if( play->scrolls > 0 )
     {
-        if( play->scrolls > 0 )
+      play->scrolls--;
+      mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
+
+      int prize = this->lottery();
+      if( prize == 0 )
+      {
+        GameRecord::sharedGameRecord()->task->dispatchTask(ACH_EMPITYSCROLL, 1);
+      }
+
+      //弹出效果
+      mScroll->stopAllActions();
+      if( prize < 2 )
+      {
+        GameTool::PlaySound("smoke.mp3");
+        mEffect->playGTAnimation(5, false);
+        mEffect->setVisible(true);
+
+        if( prize == 1 )
         {
-            play->scrolls--;
-            mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
-            
-            int prize = this->lottery();
-            if( prize == 0 )
-            {
-                GameRecord::sharedGameRecord()->task->dispatchTask(ACH_EMPITYSCROLL, 1);
-            }
-            
-            //弹出效果
-            mScroll->stopAllActions();
-            if( prize < 2 )
-            {
-                GameTool::PlaySound("smoke.mp3");
-                mEffect->playGTAnimation(5, false);
-                mEffect->setVisible(true);
-                
-                if( prize == 1 )
-                {
-                    const char *filename = "prize-1.png";
-                    mScroll->setDisplayFrame(GameTool::getSpriteFrameByName(filename));
-                    mScroll->setScale(0.01f);
-cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.4f, 1.5f);
-cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.2f, 1.0f);
-cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
-                    mScroll->runAction(sq);
-                }
-                else {
-                    mScroll->setVisible(false);
-                }
-            }
-            else {
-                GameTool::PlaySound("openscroll.mp3");
-                mFlash->setVisible(true);
-cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(3);
-                mFlash->runAction(fo1);
-                mRotateNode->setVisible(true);
-                
-                const char *filename = cocos2d::CCString::createWithFormat("prize-%d.png", prize)->getCString();
-                mScroll->setDisplayFrame(GameTool::getSpriteFrameByName(filename));
-                mScroll->setScale(0.01f);
-cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.4f, 1.5f);
-cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.2f, 1.0f);
-cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
-                mScroll->runAction(sq);
-            }
-            
-            mState = 1;
-            mTimer = 0;
+          const char *filename = "prize-1.png";
+          mScroll->setDisplayFrame(GameTool::getSpriteFrameByName(filename));
+          mScroll->setScale(0.01f);
+          cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.4f, 1.5f);
+          cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.2f, 1.0f);
+          cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
+          mScroll->runAction(sq);
         }
-    }
-    else if (mState == 1 )
-    {
-        mItemName->setString("");
-        this->implementPrize();
-        
-        mScroll->stopAllActions();
-cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.1f, 1.2f);
-cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.3f, 0);
-cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
+        else {
+          mScroll->setVisible(false);
+        }
+      }
+      else {
+        GameTool::PlaySound("openscroll.mp3");
+        mFlash->setVisible(true);
+        cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(3);
+        mFlash->runAction(fo1);
+        mRotateNode->setVisible(true);
+
+        const char *filename = cocos2d::CCString::createWithFormat("prize-%d.png", prize)->getCString();
+        mScroll->setDisplayFrame(GameTool::getSpriteFrameByName(filename));
+        mScroll->setScale(0.01f);
+        cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.4f, 1.5f);
+        cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.2f, 1.0f);
+        cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
         mScroll->runAction(sq);
-        
-        mState = 2;
-        mTimer = 0;
+      }
+
+      mState = 1;
+      mTimer = 0;
     }
+  }
+  else if (mState == 1 )
+  {
+    mItemName->setString("");
+    this->implementPrize();
+
+    mScroll->stopAllActions();
+    cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.1f, 1.2f);
+    cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.3f, 0);
+    cocos2d::Sequence *sq = cocos2d::Sequence::create(sc1, sc2, NULL);
+    mScroll->runAction(sq);
+
+    mState = 2;
+    mTimer = 0;
+  }
 }
 
-int CommitScroll::lottery() 
-{
-    float sum = 0;
-    float weight[PRIZE_COUNT];
-    //initialize fixed weight
-    for(int i=0; i<4; ++i)
-    {
-        weight[i] = gPrizeRates[i];
-        sum += gPrizeRates[i];
+int countUncollectedBetween(int from, int to) {
+  int count = 0;
+  for (int i = from; i < to; i+=1) {
+    if ( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) ) {
+      count += 1;
     }
-    //adding dynamic weight
-    {//for revive rate
-        if( GamePlay::sharedGamePlay()->reviveCount > 3 )
-        {
-            weight[4] = 0;
-            //sum do not need to plus zero
-        }
-        else
-        {
-            weight[4] = gPrizeRates[4];
-            sum += gPrizeRates[4];
-        }
-    }
-    {//for double coin next round
-        if( this->isPrizeAvailable(5) )
-        {
-            weight[5] = gPrizeRates[5];
-            sum += weight[5];
-        }
-        else {
-            weight[5] = 0;
-            sum += weight[5];
-        }
-    }
-    {//for shurikens 6
-        int cnt = 0;
-        for( int i=ITEM_SHURIKENSTART; i<ITEM_SHURIKENEND; ++i)
-        {
-            if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) )
-            {
-                cnt++;
-            }
-        }
-        weight[6] = gPrizeRates[6]*cnt;
-        sum += weight[6];
-    }
-    {//for katanas 7
-        int cnt = 0;
-        for( int i=ITEM_KATANASTART; i<ITEM_KATANAEND; ++i)
-        {
-            if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) )
-            {
-                cnt++;
-            }
-        }
-        weight[7] = gPrizeRates[7]*cnt;
-        sum += weight[7];
-    }
-    {//for specials 8
-        int cnt = 0;
-        for( int i=ITEM_SPECIALSTART; i<ITEM_SPECIALEND; ++i)
-        {
-            if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) )
-            {
-                cnt++;
-            }
-        }
-        weight[8] = gPrizeRates[8]*cnt;
-        sum += weight[8];
-    }
-    //for pu life 9
-    if( this->isPrizeAvailable(9) )
-    {
-        weight[9] = gPrizeRates[9];
-        sum += gPrizeRates[9];
-    }
-    else {
-        weight[9] = 0;
-        sum += gPrizeRates[9];
-    }
-    //for pu shuirken 10
-    if( this->isPrizeAvailable(10) )
-    {
-        weight[10] = gPrizeRates[10];
-        sum += gPrizeRates[10];
-    }
-    else {
-        weight[10] = 0;
-        sum += gPrizeRates[10];
-    }
-    //rolling lottey...
-    int prize = 0;
-    float res = 1.0f*randomInt(100000)/100000.0f;
-    float roller = 0;
-    for(int i=0; i<PRIZE_COUNT; ++i)
-    {
-        float key = weight[i]/sum;
-        if( res < key + roller )
-        {
-            prize = i;
-            break;
-        }
-        else {
-            roller += key;
-        }
-    }
-    
-    mPrize = prize;
-    mItemName->setString(gPrizeItem[mPrize]);
-    mItemName->stopAllActions();
-cocos2d::FadeIn *fo = cocos2d::FadeIn::create(2);
-    mItemName->runAction(fo);
-    return prize;
+  }
+  return count;
 }
 
-void CommitScroll::implementPrize() 
-{
+int CommitScroll::lottery() {
+  float sum = 0;
+  float weight[PRIZE_COUNT];
+
+  for (int i=0; i < 4; i += 1) { weight[i] = gPrizeRates[i]; }
+  weight[4] =  GamePlay::sharedGamePlay()->reviveCount > 3 ? 0 : gPrizeRates[4];
+  weight[5] = isPrizeAvailable(5) ? gPrizeRates[5] : 0;
+  weight[9] = isPrizeAvailable(9) ? gPrizeRates[9] : 0;
+  weight[10] = isPrizeAvailable(10) ? gPrizeRates[10] : 0;
+
+  weight[6] = gPrizeRates[6]*countUncollectedBetween(ITEM_SHURIKENSTART, ITEM_SHURIKENEND);
+  weight[7] = gPrizeRates[7]*countUncollectedBetween(ITEM_KATANASTART, ITEM_KATANAEND);
+  weight[8] = gPrizeRates[8]*countUncollectedBetween(ITEM_SPECIALSTART, ITEM_SPECIALEND);
+
+  for (int i = 0; i < PRIZE_COUNT; i += 1) {
+    sum += weight[i];
+  }
+
+  // draw a lottey
+  mPrize = 0;
+  float res = 1.0f*randomInt(100000)/100000.0f;
+  float roller = 0;
+  for (int i=0; i<PRIZE_COUNT; ++i) {
+    float key = weight[i]/sum;
+    roller += key;
+
+    if( res < roller ) {
+      mPrize = i;
+      break;
+    }
+  }
+
+  mItemName->setString(gPrizeItem[mPrize]);
+  mItemName->stopAllActions();
+  cocos2d::FadeIn *fo = cocos2d::FadeIn::create(2);
+  mItemName->runAction(fo);
+  return mPrize;
+}
+
+void CommitScroll::implementPrize() {
     GamePlay *play = GamePlay::sharedGamePlay();
     //implement prize
     switch (mPrize) {
-        case 1://Gold 10
-        {
-            play->coins += 10;
-            GameTool::PlaySound("getcoin.mp3");
+      case 1:
+        play->coins += 10;
+        GameTool::PlaySound("getcoin.mp3");
+        break;
+      case 2://Gold 100
+        play->coins += 100;
+        GameTool::PlaySound("getcoin.mp3");
+        break;
+      case 3://Gold 500
+        play->coins += 500;
+        GameTool::PlaySound("getcoin.mp3");
+        break;
+      case 4://Revive
+        mReviveFlag = true;
+        GameTool::PlaySound("charge.mp3");
+        play->reviveCount++;
+        break;
+      case 5://x2 Gold Next Run
+        GameRecord::sharedGameRecord()->game_doublecoin++;
+        GameTool::PlaySound("getcoin.mp3");
+        break;
+      case 6:
+        drawLottoryBetween(ITEM_SHURIKENSTART, ITEM_SHURIKENEND, GameData::fetchShurikens());
+        break;
+      case 7:
+        drawLottoryBetween(ITEM_KATANASTART, ITEM_KATANAEND, GameData::fetchKatanas());
+        break;
+      case 8:
+        drawLottoryBetween(ITEM_SPECIALSTART, ITEM_SPECIALEND, GameData::fetchSpecials());
+        break;
+      case 9://Power Up for HP
+        GameRecord::sharedGameRecord()->collection->life_piece++;
+        if( GameRecord::sharedGameRecord()->collection->life_piece%9 == 0 ) {
+          GamePlay::sharedGamePlay()->pushNotification("lifeplus.png", "pulife.png", 4);
         }
-            break;
-        case 2://Gold 100
-        {
-            play->coins += 100;
-            GameTool::PlaySound("getcoin.mp3");
+        break;
+      case 10://Power Up for Shuriken
+        GameRecord::sharedGameRecord()->collection->dart_piece++;
+        if ( GameRecord::sharedGameRecord()->collection->dart_piece%9 == 0 ) {
+          GamePlay::sharedGamePlay()->pushNotification("dartplus.png", "pushuriken.png", 4);
         }
-            break;
-        case 3://Gold 500
-        {
-            play->coins += 500;
-            GameTool::PlaySound("getcoin.mp3");
-        }
-            break;
-        case 4://Revive
-        {
-            mReviveFlag = true;
-            GameTool::PlaySound("charge.mp3");
-            play->reviveCount++;
-        }
-            break;
-        case 5://x2 Gold Next Run
-        {
-            GameRecord::sharedGameRecord()->game_doublecoin++;
-            GameTool::PlaySound("getcoin.mp3");
-        }
-            break;
-            
-//      case 6://Piece Of Shuriken
-//      {
-//          float sweight[ITEM_SHURIKENEND - ITEM_SHURIKENSTART];
-//          float ssum = 0;
-//          int index = 0;
-//          for( int i=ITEM_SHURIKENSTART; i<ITEM_SHURIKENEND; ++i)
-//          {
-//              Shuriken* sh = GameData::queryShuriken(i);
-//              if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) && sh != NULL )
-//              {
-//                  sweight[index] = sh->wght;
-//                  ssum += sweight[index];
-//              }
-//              else {
-//                  sweight[index] = 0;
-//              }
-//              
-//              index++;
-//          }
-//          float sroller = 0;
-//          float sres = 1.0f*randomInt(100000)/100000.0f;
-//          
-//          //debug print
-//          //CCLog("sres = %f", sres);
-//          
-//          for( int i=0; i<(ITEM_SHURIKENEND - ITEM_SHURIKENSTART); ++i)
-//          {
-//              float skey = sweight[i]/ssum;
-//              
-//              //debug print
-//              //CCLog("- %d - weight = %f / rate = %f", i, sweight[i], sroller + skey);
-//              
-//              if( sres < sroller + skey )
-//              {
-//                  GameRecord::sharedGameRecord()->collection->gainItemPiece(ITEM_SHURIKENSTART+i);
-//                  //pop notification
-//                  int uiid = ITEM_SHURIKENSTART+i;
-//                  if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
-//                  {
-//                      Shuriken *sh = GameData::queryShuriken(uiid);
-//                      GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
-//                  }
-//                  break;
-//              }
-//              else {
-//                  sroller += skey;
-//              }
-//          }
-//      }
-//          break;
-//      case 7://Piece Of Katana
-//      {
-//          float sweight[ITEM_KATANAEND - ITEM_KATANASTART];
-//          float ssum = 0;
-//          int index = 0;
-//          for( int i=ITEM_KATANASTART; i<ITEM_KATANAEND; ++i)
-//          {
-//              Katana* sh = GameData::queryKatana(i);
-//              if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) && sh != NULL )
-//              {
-//                  sweight[index] = sh->wght;
-//                  ssum += sweight[index];
-//              }
-//              else {
-//                  sweight[index] = 0;
-//              }
-//              
-//              index++;
-//          }
-//          float sroller = 0;
-//          float sres = 1.0f*randomInt(100000)/100000.0f;
-//          
-//          //debug print
-//          //CCLog("sres = %f", sres);
-//          
-//          for( int i=0; i<(ITEM_KATANAEND - ITEM_KATANASTART); ++i)
-//          {
-//              float skey = sweight[i]/ssum;
-//              
-//              //debug print
-//              //CCLog("- %d - weight = %f / rate = %f", i, sweight[i], sroller + skey);
-//              
-//              if( sres < sroller + skey )
-//              {
-//                  GameRecord::sharedGameRecord()->collection->gainItemPiece(ITEM_KATANASTART+i);
-//                  //pop notification
-//                  int uiid = ITEM_KATANASTART+i;
-//                  if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
-//                  {
-//                      Katana *sh = GameData::queryKatana(uiid);
-//                      GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
-//                  }
-//                  break;
-//              }
-//              else {
-//                  sroller += skey;
-//              }
-//          }
-//      }
-//          break;
-//      case 8://Piece Of Special
-//      {
-//          float sweight[ITEM_SPECIALEND - ITEM_SPECIALSTART];
-//          float ssum = 0;
-//          int index = 0;
-//          for( int i=ITEM_SPECIALSTART; i<ITEM_SPECIALEND; ++i)
-//          {
-//              Special* sh = GameData::querySpecial(i);
-//              if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) && sh != NULL )
-//              {
-//                  sweight[index] = sh->wght;
-//                  ssum += sweight[index];
-//              }
-//              else {
-//                  sweight[index] = 0;
-//              }
-//              
-//              index++;
-//          }
-//          float sroller = 0;
-//          float sres = 1.0f*randomInt(100000)/100000.0f;
-//          
-//          //debug print
-//          //CCLog("sres = %f", sres);
-//          
-//          for( int i=0; i<(ITEM_SPECIALEND - ITEM_SPECIALSTART); ++i)
-//          {
-//              float skey = sweight[i]/ssum;
-//              
-//              //debug print
-//              //CCLog("- %d - weight = %f / rate = %f", i, sweight[i], sroller + skey);
-//              
-//              if( sres < sroller + skey )
-//              {
-//                  GameRecord::sharedGameRecord()->collection->gainItemPiece(ITEM_SPECIALSTART+i);
-//                  //pop notification
-//                  int uiid = ITEM_SPECIALSTART+i;
-//                  if( GameRecord::sharedGameRecord()->collection->isItemCompleted(uiid) )
-//                  {
-//                      Special *sh = GameData::querySpecial(uiid);
-//                      GamePlay::sharedGamePlay()->pushNotification(sh->name, sh->icon, 4);
-//                  }
-//                  break;
-//              }
-//              else {
-//                  sroller += skey;
-//              }
-//          }
-//      }
-//          break;
-        case 9://Power Up for HP
-        {
-            GameRecord::sharedGameRecord()->collection->life_piece++;
-            //pop notification
-//            if( GameRecord::sharedGameRecord()->collection->life_piece%9 == 0 )
-//            {
-//                GamePlay::sharedGamePlay()->pushNotification(cocos2d::CCString::create("lifeplus.png"), CCString::create("pulife.png"), 4);
-//            }
-        }
-            break;
-        case 10://Power Up for Shuriken
-        {
-//            GameRecord::sharedGameRecord()->collection->dart_piece++;
-//            //pop notification
-//            if( GameRecord::sharedGameRecord()->collection->dart_piece%9 == 0 )
-//            {
-//                GamePlay::sharedGamePlay()->pushNotification(cocos2d::CCString::create("dartplus.png"), CCString::create("pushuriken.png"), 4);
-//            }
-        }
-            break;
+        break;
     }
 }
 
-bool CommitScroll::isPrizeAvailable(int pid) 
-{
-    if( pid == 5 )
-    {//double coins next time
-        if( GameRecord::sharedGameRecord()->game_doublecoin > 0 )
-        {
-            return false;
-        }
-        return true;
+bool notAllItemCompletedBetween(int from, int to) {
+  for (int i = from; i < to; i +=1) {
+    if ( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) ) {
+      return true;
     }
-    if( pid == 6 )
-    {//Piece Of Shuriken
-        for( int i=ITEM_SHURIKENSTART; i<ITEM_SHURIKENEND; ++i)
-        {
-            if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) )
-            {
-                return true;
+  }
+  return false;
+}
+
+bool CommitScroll::isPrizeAvailable(int pid) {
+  switch (pid) {
+    case 5: return !GameRecord::sharedGameRecord()->game_doublecoin > 0; break;
+    case 6: notAllItemCompletedBetween(ITEM_SHURIKENEND, ITEM_SHURIKENSTART); break;
+    case 7: notAllItemCompletedBetween(ITEM_KATANAEND, ITEM_KATANASTART); break;
+    case 8: notAllItemCompletedBetween(ITEM_SPECIALEND, ITEM_SPECIALSTART); break;
+    case 9:
+            {//Piece Of HP Maxium
+              int thl = 0;
+              for (int i=0; i<GAME_CHARCOUNT; ++i) {
+                thl += (GameData::roleMaxHP(i) - GameData::roleCurrHP(i))*9;
+              }
+              if( GameRecord::sharedGameRecord()->collection->life_piece >= thl )
+              {
+                return false;
+              }
             }
-        }
-        return false;
-    }
-    if( pid == 7 )
-    {//Piece Of Katana
-        for( int i=ITEM_KATANASTART; i<ITEM_KATANAEND; ++i)
-        {
-            if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) )
-            {
-                return true;
+            break;
+    case 10:
+            {//Piece Of Shuriken Maxium
+              int thl = 0;
+              for(int i=0; i<GAME_CHARCOUNT; ++i)
+              {
+                thl += (GameData::roleMaxDart(i) - GameData::roleCurrDart(i))*9;
+              }
+              if( GameRecord::sharedGameRecord()->collection->dart_piece >= thl )
+              {
+                return false;
+              }
             }
-        }
-        return false;
-    }
-    if( pid == 8 )
-    {//Piece Of Special
-        for( int i=ITEM_SPECIALSTART; i<ITEM_SPECIALEND; ++i)
-        {
-            if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(i) )
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    if( pid == 9 )
-    {//Piece Of HP Maxium
-        int thl = 0;
-        for(int i=0; i<GAME_CHARCOUNT; ++i)
-        {
-            thl += (GameData::roleMaxHP(i) - GameData::roleCurrHP(i))*9;
-        }
-        if( GameRecord::sharedGameRecord()->collection->life_piece >= thl )
-        {
-            return false;
-        }
-    }
-    if( pid == 10 )
-    {//Piece Of Shuriken Maxium
-        int thl = 0;
-        for(int i=0; i<GAME_CHARCOUNT; ++i)
-        {
-            thl += (GameData::roleMaxDart(i) - GameData::roleCurrDart(i))*9;
-        }
-        if( GameRecord::sharedGameRecord()->collection->dart_piece >= thl )
-        {
-            return false;
-        }
-    }
-    return true;
+            break;
+    default: return true; break;
+  }
+
+  return true;
 }
 
 void CommitScroll::onDestroy() 
 {
-    GamePlay *play = GamePlay::sharedGamePlay();
-    play->unscheduleMask();
-    play->removeChild(mNode, true);
-    if( !mReviveFlag )
-    {
-        play->classic->goOver();
-    }
-    else {//Revive
-        play->state = STATE_REVIVE;
-        play->substate = 0;
-        play->stateTimer = 0;
-        play->gameOverTimer = -1;
-        play->mainrole->HP = 1;
-        play->mainrole->customAction(1);
-        play->count_runscene--;
-        play->gameOverTimer=-1;
-        play->mainrole->timedInvincible(5);
-    }
-    
-    //hot release
-cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-scroll.plist");
-    unloadTextureFromeSpriteFrameFile("ui-scroll.plist");
+  GamePlay *play = GamePlay::sharedGamePlay();
+  play->unscheduleMask();
+  play->removeChild(mNode, true);
+  if( !mReviveFlag )
+  {
+    play->classic->goOver();
+  }
+  else {//Revive
+    play->state = STATE_REVIVE;
+    play->substate = 0;
+    play->stateTimer = 0;
+    play->gameOverTimer = -1;
+    play->mainrole->HP = 1;
+    play->mainrole->customAction(1);
+    play->count_runscene--;
+    play->gameOverTimer=-1;
+    play->mainrole->timedInvincible(5);
+  }
+
+  //hot release
+  cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("ui-scroll.plist");
+  unloadTextureFromeSpriteFrameFile("ui-scroll.plist");
 }
 
 SEL_MenuHandler CommitScroll::onResolveCCBCCMenuItemSelector(cocos2d::Ref * pTarget, const char* pSelectorName)

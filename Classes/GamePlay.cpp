@@ -110,8 +110,8 @@ void GamePlay::onExit()
   isPlayingArcade = false;
   setTaskCompleteNode(NULL);
 
-  gPlay->release();
   cocos2d::Layer::onExit();
+  release();
 }
 
 //初始化游戏
