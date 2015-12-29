@@ -16,7 +16,7 @@
 #define NEAR (50)
 #define RANGE (27)//半径
 
-#define HIT_EXPLODE (10) 
+#define HIT_EXPLODE (10)
 
 void Pumpkin::onCreate() {
   mCollisionCircles.push_back(Circle(cocos2d::Vec2(0, 0), RANGE));
