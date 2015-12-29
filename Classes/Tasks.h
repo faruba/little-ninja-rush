@@ -91,7 +91,7 @@ class ObjectiveManager {
     void init (Tasks *task, int workType, std::string mark) {
       currentObjective.uiid = -1;
       mTasks = task;
-      workType = workType;
+      mWorkType = workType;
       mMark = std::string("obj_")+mark+"_";
 
       switch (mWorkType) {

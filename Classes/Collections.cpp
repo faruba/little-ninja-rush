@@ -98,7 +98,7 @@ void Collections::writeCollections(rapidjson::Document &document)
       CCARRAY_FOREACH(newlist, pObj)
       {
         cocos2d::CCInteger *pInt = (cocos2d::CCInteger*)pObj;
-        lst.AddMember("", pInt->getValue(), document.GetAllocator());
+        lst.PushBack(pInt->getValue(), document.GetAllocator());
       }
     }
     document.AddMember("collection_newlist", lst, document.GetAllocator());
