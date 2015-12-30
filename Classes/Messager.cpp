@@ -25,7 +25,9 @@
 
 void Messager::onCreate() 
 {
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("messager"));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(1, 13), 8));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(-1, 32.5), 13));
+  Role::onCreate();
     mSprite->setAnchorPoint(cocos2d::Vec2(0.5438f, 0.0625f));
     int y = CCRANDOM_0_1()*RESPAWN_Y;
     mSprite->setPosition(cocos2d::Vec2(-80, RESPAWN_YMIN+y));
@@ -198,22 +200,6 @@ void Messager::onDestroy()
     mParent->removeChild(mSprite, true);
 }
 
-bool Messager::collisionWithCircle(cocos2d::Point cc, float rad) 
-{
-    if( mState == 3 )
-    {
-        return false;//禁止鞭尸
-    }
-    if( mSprite != NULL )//shame defense
-    {
-        if( exCollisionWithCircles(mSprite->getPosition(), 1.0f, 13.0f, 8, cc, rad) ||
-           exCollisionWithCircles(mSprite->getPosition(), -1.0f, 32.5f, 13, cc, rad) )
-        {
-            return true;
-        }
-    }
-    return false;
-}
 
 bool Messager::deliverHit(int type, cocos2d::Point dir) 
 {
@@ -251,16 +237,6 @@ bool Messager::deliverHit(int type, cocos2d::Point dir)
     return  true;
 }
 
-cocos2d::Point Messager::position() 
-{
-    return mSprite->getPosition();
-}
-
-void Messager::setPosition(cocos2d::Point pos) 
-{
-    mSprite->setPosition(pos);
-}
-
 cocos2d::Point Messager::center() 
 {
     return ccpAdd(mSprite->getPosition(), Vec2(0, 21));
@@ -276,10 +252,3 @@ bool Messager::supportAimAid()
         return false;
     }
 }
-
-void Messager::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
-}
-
-

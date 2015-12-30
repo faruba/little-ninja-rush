@@ -20,12 +20,12 @@
 
 void Pumpkin::onCreate() 
 {
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("pumpkin"));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(0, 0), RANGE));
+  Role::onCreate();
     mSprite->playGTAnimation(0, true);
     mSprite->setPosition(cocos2d::Vec2( -100, SCREEN_HEIGHT ));
     mParent->addChild(mSprite, LAYER_MAINROLE);
     
-    mState = 0;
     mTimer = 0;
     mHitCount = 0;
     mHurtTimer = -1;
@@ -188,28 +188,6 @@ void Pumpkin::onUpdate(float delta)
     }
 }
 
-//碰撞检测
-bool Pumpkin::collisionWithCircle(cocos2d::Point cc, float rad) 
-{
-    if( mState < 2 )
-    {
-        cocos2d::Point dp = ccpSub(mSprite->getPosition(), cc);
-        float lensq = ccpLengthSQ(dp);
-        if( lensq < (rad + RANGE)*(rad + RANGE) )
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    else
-    {
-        return false;
-    }
-}
-
 //受到伤害
 bool Pumpkin::deliverHit(int type, cocos2d::Point dir) 
 {
@@ -256,16 +234,6 @@ bool Pumpkin::deliverHit(int type, cocos2d::Point dir)
     }
 }
 
-cocos2d::Point Pumpkin::position() 
-{
-    return mSprite->getPosition();
-}
-
-void Pumpkin::setPosition(cocos2d::Point pos) 
-{
-    mSprite->setPosition(pos);
-}
-
 cocos2d::Point Pumpkin::center() 
 {
     return mSprite->getPosition();
@@ -274,11 +242,6 @@ cocos2d::Point Pumpkin::center()
 bool Pumpkin::supportAimAid() 
 {
     return  false;
-}
-
-void Pumpkin::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
 }
 
 void Pumpkin::onDestroy() 

@@ -15,15 +15,17 @@
 
 void Mechanic::onCreate() 
 {
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 13));
+  Role::onCreate();
     GamePlay *play = GamePlay::sharedGamePlay();
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("mechanic"));
     mSprite->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
     int y = CCRANDOM_0_1()*RESPAWN_Y;
     mSprite->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
     mSprite->playGTAnimation(0, true);
     play->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
     
-    mState = 0;//0 walk 1 prepare 2 attack 3 dead
+    //TODO::mState = 0;//0 walk 1 prepare 2 attack 3 dead
     mSpeed = 0.2f*ENEMY_NNRUNSPEED;
 }
 
@@ -172,26 +174,6 @@ void Mechanic::onUpdate(float delta)
     }
 }
 
-//碰撞检测
-bool Mechanic::collisionWithCircle(cocos2d::Point cc, float rad) 
-{
-    if( mState == 3 )
-    {
-        return false;
-    }
-    else {
-        if( mSprite != NULL )//shame defense
-        {
-            if( exCollisionWithCircles(mSprite->getPosition(), 6, 12, 9, cc, rad) ||
-               exCollisionWithCircles(mSprite->getPosition(), 17, 27, 13, cc, rad) )
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
 //受到伤害
 bool Mechanic::deliverHit(int type, cocos2d::Point dir) 
 {
@@ -257,16 +239,6 @@ bool Mechanic::deliverHit(int type, cocos2d::Point dir)
     return false;
 }
 
-cocos2d::Point Mechanic::position() 
-{
-    return mSprite->getPosition();
-}
-
-void Mechanic::setPosition(cocos2d::Point pos) 
-{
-    mSprite->setPosition(pos);
-}
-
 cocos2d::Point Mechanic::center() 
 {
     return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
@@ -279,11 +251,6 @@ bool Mechanic::supportAimAid()
         return false;
     }
     return  true;
-}
-
-void Mechanic::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
 }
 
 void Mechanic::onDestroy() 

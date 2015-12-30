@@ -19,19 +19,20 @@
 
 void MiddleNinja::onCreate() 
 {
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 13));
+  Role::onCreate();
     int y = CCRANDOM_0_1()*RESPAWN_Y;
     mTargetPos.x = UniversalFit::sharedUniversalFit()->playSize.width*(0.75f*CCRANDOM_0_1());
     mTargetPos.y = RESPAWN_YMIN + y;
     //计算起跳点
     cocos2d::Point rjp = ccpForAngle(PI*3.0f/5.0f);
     
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("mninja"));
     mSprite->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
     mSprite->setPosition(ccpAdd(mTargetPos, ccpMult(rjp, 100)));
     mSprite->playGTAnimation(7, true);
     mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
     
-    mState = 0;//0 onstage 1 run 2 prepare 3 shoot 4 escape 5 dead
     mDartCount = 0;
     mFlag = true;
     mSpeed = ENEMY_NNRUNSPEED*3;
@@ -304,37 +305,6 @@ void MiddleNinja::onUpdate(float delta)
     }
 }
 
-//碰撞检测
-bool MiddleNinja::collisionWithCircle(cocos2d::Point cc, float rad) 
-{
-    if( mState == 0 )
-    {
-        return false;
-    }
-    else if( mState == 5 )
-    {
-        return false;
-        //取消鞭尸功能
-        //        if( exCollisionWithCircles(mSprite->getPosition, -20, 7, 11, cc, rad) ||
-        //            exCollisionWithCircles(mSprite->getPosition, -5, 5, 5, cc, rad) ||
-        //            exCollisionWithCircles(mSprite->getPosition, 5, 6, 5, cc, rad) )
-        //        {
-        //            return true;
-        //        }
-    }
-    else {
-        if( mSprite != NULL )
-        {
-            if( exCollisionWithCircles(mSprite->getPosition(), 6, 12, 9, cc, rad) ||
-               exCollisionWithCircles(mSprite->getPosition(), 17, 27, 13, cc, rad) )
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
 //受到伤害
 bool MiddleNinja::deliverHit(int type, cocos2d::Point dir) 
 {
@@ -398,16 +368,6 @@ bool MiddleNinja::deliverHit(int type, cocos2d::Point dir)
     return true;
 }
 
-cocos2d::Point MiddleNinja::position() 
-{
-    return mSprite->getPosition();
-}
-
-void MiddleNinja::setPosition(cocos2d::Point pos) 
-{
-    mSprite->setPosition(pos);
-}
-
 cocos2d::Point MiddleNinja::center() 
 {
     return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
@@ -422,17 +382,9 @@ bool MiddleNinja::supportAimAid()
     return  true;
 }
 
-void MiddleNinja::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
-}
-
 void MiddleNinja::onDestroy() 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     play->enemies->removeObject(this);
     mParent->removeChild(mSprite, false);
 }
-
-
-

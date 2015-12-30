@@ -15,8 +15,10 @@
 
 void Samuri::onCreate() 
 {
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(1, 10), 15));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(0, 30), 14));
+  Role::onCreate();
     GamePlay *play = GamePlay::sharedGamePlay();
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("samurai"));
     mSprite->setAnchorPoint(cocos2d::Vec2(0.694f, 0.08125f));
     mSprite->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+play->runspeed*SAMURAI_WARNING, PLAY_PLAYERLINE));
     mSprite->playGTAnimation(0, true);
@@ -42,7 +44,6 @@ cocos2d::RepeatForever *rp = cocos2d::RepeatForever::create(sq);
     //CCBlink *blink2 = cocos2d::CCBlink::create(SAMURAI_WARNING, SAMURAI_WARNING*5);
     //mHint->runAction(blink2);
     
-    mState = 0;
     mTimer = 0;
     mFlag = false;
     
@@ -151,22 +152,6 @@ void Samuri::onDestroy()
 }
 
 //碰撞检测
-bool Samuri::collisionWithCircle(cocos2d::Point cc, float rad)
-{
-    if( mState < 2 )
-    {
-        if( mSprite != NULL )
-        {
-            if( exCollisionWithCircles(mSprite->getPosition(), 1, 10, 15, cc, rad) ||
-               exCollisionWithCircles(mSprite->getPosition(), 0, 31, 14, cc, rad) )
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
 bool Samuri::deliverHit(int type, cocos2d::Point dir)
 {
     if( mState < 2 )
@@ -219,16 +204,6 @@ bool Samuri::deliverHit(int type, cocos2d::Point dir)
     return false;
 }
 
-cocos2d::Point Samuri::position()
-{
-    return mSprite->getPosition();
-}
-
-void Samuri::setPosition(cocos2d::Point pos)
-{
-    mSprite->setPosition(pos);
-}
-
 cocos2d::Point Samuri::center() 
 {
     return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
@@ -238,10 +213,3 @@ bool Samuri::supportAimAid()
 {
     return false;
 }
-
-void Samuri::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
-}
-
-

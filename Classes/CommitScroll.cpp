@@ -397,7 +397,7 @@ bool notAllItemCompletedBetween(int from, int to) {
 
 bool CommitScroll::isPrizeAvailable(int pid) {
   switch (pid) {
-    case 5: return !GameRecord::sharedGameRecord()->game_doublecoin > 0; break;
+    case 5: return !(GameRecord::sharedGameRecord()->game_doublecoin > 0); break;
     case 6: notAllItemCompletedBetween(ITEM_SHURIKENEND, ITEM_SHURIKENSTART); break;
     case 7: notAllItemCompletedBetween(ITEM_KATANAEND, ITEM_KATANASTART); break;
     case 8: notAllItemCompletedBetween(ITEM_SPECIALEND, ITEM_SPECIALSTART); break;

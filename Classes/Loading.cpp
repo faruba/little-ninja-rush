@@ -144,6 +144,6 @@ void Loading::onTouchEnded(Touch * touch, Event * event) {
 
 void Loading::finishLoading() 
 {
-cocos2d::CCDirector::sharedDirector()->replaceScene(mDst);
+cocos2d::CCDirector::getInstance()->replaceScene(mDst);
   mDst->release();
 }

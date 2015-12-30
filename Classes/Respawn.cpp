@@ -373,7 +373,11 @@ void Respawn::gen(int tid) {
     case 0:
     case 1:
     case 2:
-      play->enemies->addObject(play->manager->addGameObject(creatorFunc[tid](play)));
+      {
+      Role *temp = creatorFunc[tid](play);
+      temp->collisionWithCircle(cocos2d::Point(0,0), 20);
+      play->enemies->addObject(play->manager->addGameObject(temp));
+      }
       break;
     case 3://武士
       {

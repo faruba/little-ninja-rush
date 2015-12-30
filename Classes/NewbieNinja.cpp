@@ -6,15 +6,14 @@
 #include "UniversalFit.h"
 #include "FootPrint.h"
 
-
-
-void NewbieNinja::onCreate() 
+void NewbieNinja::onCreate()
 {
-    GamePlay *play = GamePlay::sharedGamePlay();
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("enemy"));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 13));
+  Role::onCreate();
     mSprite->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
     int y = CCRANDOM_0_1()*RESPAWN_Y;
-    if( play->state == STATE_RUSH )
+    if( GamePlay::sharedGamePlay()->state == STATE_RUSH )
     {
         mSprite->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
     }
@@ -24,7 +23,6 @@ void NewbieNinja::onCreate()
     mSprite->playGTAnimation(0, true);
     mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
 
-    mState = 0;//0 onstage 1 run 2 prepare 3 shoot 4 escape 5 dead
     mDartCount = 0;
     mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
     mFlag = true;
@@ -241,30 +239,6 @@ void NewbieNinja::onUpdate(float delta)
     }
 }
 
-//碰撞检测
-bool NewbieNinja::collisionWithCircle(cocos2d::Point cc, float rad) 
-{
-    if( mState == 5 )
-    {
-        return false;
-        //取消鞭尸功能
-        //        if( exCollisionWithCircles(mSprite->getPosition, -20, 7, 11, cc, rad) ||
-        //            exCollisionWithCircles(mSprite->getPosition, -5, 5, 5, cc, rad) ||
-        //            exCollisionWithCircles(mSprite->getPosition, 5, 6, 5, cc, rad) )
-        //        {
-        //            return true;
-        //        }
-    }
-    else {
-      if( mSprite && (exCollisionWithCircles(mSprite->getPosition(), 6, 12, 9, cc, rad) ||
-          exCollisionWithCircles(mSprite->getPosition(), 17, 27, 13, cc, rad)))
-      {
-        return true;
-      }
-    }  
-    return false;
-}
-
 //受到伤害
 bool NewbieNinja::deliverHit(int type, cocos2d::Point dir) 
 {
@@ -325,16 +299,6 @@ bool NewbieNinja::deliverHit(int type, cocos2d::Point dir)
     return true;
 }
 
-cocos2d::Point NewbieNinja::position() 
-{
-    return mSprite->getPosition();
-}
-
-void NewbieNinja::setPosition(cocos2d::Point pos) 
-{
-    mSprite->setPosition(pos);
-}
-
 cocos2d::Point NewbieNinja::center() 
 {
     return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
@@ -349,16 +313,9 @@ bool NewbieNinja::supportAimAid()
     return  true;
 }
 
-void NewbieNinja::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
-}
-
 void NewbieNinja::onDestroy() 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     play->enemies->removeObject(this);
     mParent->removeChild(mSprite, false);
 }
-
-

@@ -17,8 +17,10 @@
 
 void Santa::onCreate() 
 {
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(1, 13), 8));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(-1, 32.5), 13));
+  Role::onCreate();
     GamePlay *play = GamePlay::sharedGamePlay();
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("santa"));
     mSprite->setAnchorPoint(cocos2d::Vec2(0.5438f, 0.0625f));
     int y = CCRANDOM_0_1()*RESPAWN_Y;
     if( play->state == STATE_RUSH )
@@ -31,7 +33,6 @@ void Santa::onCreate()
     mSprite->playGTAnimation(0, true);
     mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
     
-    mState = 0;//0 run 1 stop 2 hit 3 away
     mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
     mSpeed = ENEMY_NNRUNSPEED;
     
@@ -56,7 +57,7 @@ void Santa::onUpdate(float delta)
     }
     else {
         switch (mState) {
-            case 0:// run to position
+            case Entering:// run to position
             {
                 float ds = delta*mSpeed;
                 float dis = mTargetPos - mSprite->getPosition().x;
@@ -75,7 +76,7 @@ void Santa::onUpdate(float delta)
                 else {
                     np.x = mTargetPos;
                     //上场就奔跑
-                    mState = 1;
+                    mState = Running;
                     mActionTimer = 2 + 3*CCRANDOM_0_1();
                 }
                 if( playend )
@@ -87,18 +88,18 @@ void Santa::onUpdate(float delta)
                 mTimer += delta;
                 if( mTimer > SANTA_LIFE )
                 {
-                    mState = 3;
+                    mState = Fleeing;
                     mTargetPos = UniversalFit::sharedUniversalFit()->playSize.width+150;
                     mSpeed = ENEMY_NNRUNSPEED;
                 }
             }
                 break;
-            case 1:// stop
+            case Running:// stop
             {
                 mActionTimer -= delta;
                 if( mActionTimer <= 0 )
                 {
-                    mState = 0;
+                    mState = Entering;
                     mActionTimer = 0;
                     mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
                     mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
@@ -112,21 +113,21 @@ void Santa::onUpdate(float delta)
                 mTimer += delta;
                 if( mTimer > SANTA_LIFE )
                 {
-                    mState = 3;
+                    mState = Fleeing;
                     mTargetPos = UniversalFit::sharedUniversalFit()->playSize.width+150;
                     mSpeed = ENEMY_NNRUNSPEED;
                 }
             }
                 break;
-            case 2:// hit
+            case Hit:// hit
             {
                 if( playend )
                 {
-                    mState = 4;
+                    mState = Dead;
                 }
             }
                 break;
-            case 3:// run away
+            case Fleeing:// run away
             {
                 float ds = delta*mSpeed;
                 float dis = mTargetPos - mSprite->getPosition().x;
@@ -151,7 +152,7 @@ void Santa::onUpdate(float delta)
                 }
             }
                 break;
-            case 4://dead
+            case Dead://dead
             {
                 if( playend )
                 {
@@ -213,7 +214,7 @@ void Santa::onUpdate(float delta)
     }
     
     //snow step
-    if( mState != 2 )
+    if( mState != Hit )
     {
         FootPrint::goFootPrint(&mStepSnow, mSprite->getPosition());
     }
@@ -237,44 +238,17 @@ void Santa::onUpdate(float delta)
     }
 }
 
-//碰撞检测
-bool Santa::collisionWithCircle(cocos2d::Point cc, float rad) 
-{
-    if( mState > 1 )
-    {
-        return false;
-    }
-    else {
-        if( exCollisionWithCircles(mSprite->getPosition(), 1.0f, 13.0f, 8, cc, rad) ||
-           exCollisionWithCircles(mSprite->getPosition(), -1.0f, 32.5f, 13, cc, rad) )
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
 //受到伤害
 bool Santa::deliverHit(int type, cocos2d::Point dir) 
 {
     mTimer = 0;
     mSprite->playGTAnimation(1, false);
     
-    mState = 4;
+    mState = Dead;
     mHited = true;
     mFlag = true;
     
     return true;
-}
-
-cocos2d::Point Santa::position() 
-{
-    return mSprite->getPosition();
-}
-
-void Santa::setPosition(cocos2d::Point pos) 
-{
-    mSprite->setPosition(pos);
 }
 
 cocos2d::Point Santa::center() 
@@ -287,16 +261,9 @@ bool Santa::supportAimAid()
     return false;
 }
 
-void Santa::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
-}
-
 void Santa::onDestroy() 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     play->enemies->removeObject(this);
     mParent->removeChild(mSprite, false);
 }
-
-

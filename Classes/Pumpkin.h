@@ -14,15 +14,12 @@ class Pumpkin:
     virtual void onUpdate(float delta);
     virtual void onDestroy();
 
-    virtual bool collisionWithCircle(cocos2d::Point cc, float rad);
+    virtual const char* animationSetName() { return "pumpkin"; }
+
     virtual bool deliverHit(int type, cocos2d::Point dir);
-    virtual cocos2d::Point position();
-    virtual void setPosition(cocos2d::Point pos);
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
-    virtual void toggleVisible(bool flag);
 
-    GTAnimatedSprite *mSprite;
     int mState;//0-floating 1-escape 2-dying
     float mTimer;
     int mHitCount;
@@ -36,7 +33,5 @@ class Pumpkin:
 
     int mFacing;
     int mCoinsCounter;
-
-
 };
 #endif

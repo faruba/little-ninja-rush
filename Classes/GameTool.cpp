@@ -123,12 +123,13 @@ bool exCollisionWithCircles(cocos2d::Point op, float ox, float oy, float r, coco
 {
   cocos2d::Point cc = Vec2(op.x+ox, op.y+oy);
   float disq = ccpLengthSQ(ccpSub(p, cc));
-  if( disq < (r+pr)*(r+pr) ) {
-    return true;
-  }
-  else {
-    return false;
-  }
+  return disq < (r+pr)*(r+pr);
+}
+
+bool collide(const Circle &c1, const Circle &c2) {
+  float disq = (c1.center - c2.center).getLengthSq();
+  float radius_sum = c1.radius + c2.radius;
+  return disq < radius_sum*radius_sum;
 }
 
 int gtReadInt(cocos2d::CCDictionary *dic, std::string key, int def)
@@ -180,7 +181,7 @@ std::string gtReadString(cocos2d::CCDictionary *dic, const char *key, std::strin
 
 void unloadTextureFromeSpriteFrameFile(const char *plist)
 {
-    const char *path = cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename(plist).c_str();
+    const char *path = cocos2d::CCFileUtils::getInstance()->fullPathForFilename(plist).c_str();
   //const char *path = cocos2d::CCFileUtils::sharedFileUtils()->fullPathFromRelativePath(plist);
 //cocos2d::CCDictionary *dict = cocos2d::CCDictionary::createWithContentsOfFile(path);
 //cocos2d::CCDictionary *meta = (cocos2d::CCDictionary*)dict->objectForKey("metadata");
@@ -190,11 +191,11 @@ void unloadTextureFromeSpriteFrameFile(const char *plist)
 
 //UIImage* makeScreenshot()
 //{
-//    int tx = cocos2d::CCDirector->sharedDirector().winSize.width;
-//    int ty = cocos2d::CCDirector->sharedDirector().winSize.height;
+//    int tx = cocos2d::CCDirector->getInstance().winSize.width;
+//    int ty = cocos2d::CCDirector->getInstance().winSize.height;
 //    CCRenderTexture *renderer	= cocos2d::CCRenderTexture->renderTextureWithWidth(tx, ty);
 //    renderer->begin();
-//    CCDirector->sharedDirector().runningScene->visit();
+//    CCDirector->getInstance().runningScene->visit();
 //    renderer->end();
 //    
 //    //return renderer->getUIImageFromBuffer();

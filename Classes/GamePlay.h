@@ -54,7 +54,7 @@ class GamePlay :
 
     void initGamePlay(int mod);
     void resetGame();
-cocos2d::Layer* ui();
+    cocos2d::Layer* ui();
 
     void fixGravity(float val);
 
@@ -112,12 +112,12 @@ cocos2d::Layer* ui();
     void stepDust(cocos2d::Point pos);
     cocos2d::Point mTouchBegin;
     bool  mTouchProcessed;
-cocos2d::Layer *mUI;
-cocos2d::Menu *mMenu;//菜单项目
+    cocos2d::Layer *mUI;
+    cocos2d::Menu *mMenu;//菜单项目
 
     float mFeverAdd;//因为fever游戏加速的程度
     int mFeverBegin;
-cocos2d::LayerColor *mFeverMask;
+    cocos2d::LayerColor *mFeverMask;
     float mFeverMaskTimer;
 
     float mScheduleSpeedOrigin;
@@ -128,7 +128,7 @@ cocos2d::LayerColor *mFeverMask;
     int   mScheduleSpeedCounter;
 
     float mScheduleSpellRelease;
-cocos2d::Node*      mScheduleReleaseTarget;
+    cocos2d::Node*      mScheduleReleaseTarget;
     SEL_CallFunc mScheduleReleaseSelector;
 
     float mScheduleMaskTime;
@@ -146,17 +146,17 @@ cocos2d::Node*      mScheduleReleaseTarget;
     int mFeverLevel;
     GameObjectManager *manager;
     GameScene *tiles;
-cocos2d::CCArray *enemies;
-cocos2d::CCArray *darts;
+    cocos2d::CCArray *enemies;
+    cocos2d::CCArray *darts;
     MainRole *mainrole;
     MainRole *mainrole2;//分身
     GameInterface *interface;
     int state;//游戏状态
 
     int mode;//游戏模式
-cocos2d::LayerColor *mask;
-cocos2d::LayerColor *spellMask;
-cocos2d::SpriteBatchNode *footprints;
+    cocos2d::LayerColor *mask;
+    cocos2d::LayerColor *spellMask;
+    cocos2d::SpriteBatchNode *footprints;
 
     //Arcade Mode
     ArcadeMode *arcade;

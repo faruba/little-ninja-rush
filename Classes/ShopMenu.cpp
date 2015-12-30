@@ -498,7 +498,7 @@ void ShopMenu::updateScorll()
 bool ShopMenu::onTouchBegan(Touch * touch, Event * event) 
 {
     cocos2d::Point pos = touch->getLocationInView();
-    pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
+    pos = cocos2d::CCDirector::getInstance()->convertToGL(pos);
     pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
     mTouchBegin = pos;
@@ -519,7 +519,7 @@ void ShopMenu::onTouchMoved(Touch * touch, Event * event)
     if( !mIsModal )
     {
         cocos2d::Point pos = touch->getLocationInView();
-        pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
+        pos = cocos2d::CCDirector::getInstance()->convertToGL(pos);
         pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
         float dy = pos.y - mBeginPressY;
@@ -554,7 +554,7 @@ void ShopMenu::onTouchEnded(Touch * touch, Event * event)
     {
         mFly = true;
         cocos2d::Point pos = touch->getLocationInView();
-        pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
+        pos = cocos2d::CCDirector::getInstance()->convertToGL(pos);
         pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 cocos2d::CCRect rect = cocos2d::Rect(12, 12, 455, 264);
         if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&

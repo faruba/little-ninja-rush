@@ -16,7 +16,7 @@
 
 void Merchant::onCreate() 
 {
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("merchant"));
+  Role::onCreate();
     mSprite->setAnchorPoint(cocos2d::Vec2(0.5f , 0));
     mSprite->setPosition(cocos2d::Vec2(-50, PLAY_PLAYERLINE+5));
     mSprite->playGTAnimation(0, true);
@@ -69,19 +69,9 @@ void Merchant::onDestroy()
     mParent->removeChild(mSprite, true);
 }
 
-bool Merchant::collisionWithCircle(cocos2d::Point cc, float rad) 
-{
-    return false;
-}
-
 bool Merchant::deliverHit(int type, cocos2d::Point dir) 
 {
     return false;
-}
-
-cocos2d::Point Merchant::position() 
-{
-    return mSprite->getPosition();
 }
 
 cocos2d::Point Merchant::center() 
@@ -93,15 +83,3 @@ bool Merchant::supportAimAid()
 {
     return  false;
 }
-
-void Merchant::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
-}
-
-void Merchant::setPosition(cocos2d::Point pos) 
-{
-    mSprite->setPosition(pos);
-}
-
-

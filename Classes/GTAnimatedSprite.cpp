@@ -9,7 +9,7 @@ GTAnimatedSprite* GTAnimatedSprite::spriteWithGTAnimation(GTAnimation * animatio
     return ret;
 }
 
-bool GTAnimatedSprite::initWithTexture(cocos2d::CCTexture2D * texture, cocos2d::CCRect rect)
+bool GTAnimatedSprite::initWithTexture(cocos2d::Texture2D * texture, cocos2d::Rect rect)
 {
     if(cocos2d::Sprite::initWithTexture(texture, rect))
     {
