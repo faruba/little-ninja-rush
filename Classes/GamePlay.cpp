@@ -34,7 +34,27 @@ GamePlay::~GamePlay()
 
 cocos2d::Scene* GamePlay::scene()
 {
-  return GameTool::scene(&gPlay);
+	cocos2d::Scene *ret = cocos2d::Scene::create();
+
+	if( gPlay == NULL )
+	{
+		gPlay = GamePlay::create();
+	}
+
+	//universal
+	ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
+	ret->setAnchorPoint(cocos2d::Vec2(0, 0));
+	gPlay->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
+
+	CEClipedNode *clip = CEClipedNode::create();
+	clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
+
+	clip->addChild(gPlay);
+
+	ret->addChild(clip);
+
+	return ret;
+  //return GameTool::scene(&gPlay);
 }
 
 GamePlay* GamePlay::sharedGamePlay()
