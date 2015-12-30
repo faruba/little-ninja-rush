@@ -12,7 +12,8 @@
 #include "GameRecord.h"
 #include "GameData.h"
 
-class CollectionMenuDelegate {
+class CollectionMenu;
+class CollectionMenuDelegate :public cocos2d::Ref{
 public:
     cocos2d::MenuItemImage *mMenuButtonRef = nullptr;
     static ABScrollContent *mScroll;
@@ -37,7 +38,7 @@ public:
 protected:
     std::string mImageFilename;
     
-    virtual void init() = 0;
+    virtual void init(CollectionMenu* collectionMenu) = 0;
     
     int mItemCount;
     int mEquipedItem;
@@ -156,7 +157,7 @@ public:
 
 class ShurikenCollectionDelegate: public CollectionMenuDelegate {
   public:
-    void init() {
+    void init(CollectionMenu* collectionMenu) {
       mImageFilename = "sc_shuriken";
       updateButtonImage(false);
     }
@@ -186,7 +187,7 @@ class ShurikenCollectionDelegate: public CollectionMenuDelegate {
 
 class KatanaCollectionDelegate: public CollectionMenuDelegate {
   public:
-    void init() {
+    void init(CollectionMenu* collectionMenu) {
       mImageFilename = "sc_katana";
       updateButtonImage(false);
     }
@@ -229,7 +230,7 @@ class KatanaCollectionDelegate: public CollectionMenuDelegate {
 
 class SpecialCollectionDelegate: public CollectionMenuDelegate {
   public:
-    void init() {
+    void init(CollectionMenu* collectionMenu) {
       mImageFilename = "sc_special";
       updateButtonImage(false);
     }
@@ -257,16 +258,14 @@ class SpecialCollectionDelegate: public CollectionMenuDelegate {
 
 class PowerUpCollectionDelegate: public CollectionMenuDelegate {
   private:
+    CollectionMenu* mCollectionMenu;
   public:
     cocos2d::Sprite *mLifeMask;
     cocos2d::Sprite *mDartMask;
     cocos2d::Label *mLifeCount;
     cocos2d::Label *mDartCount;
 
-    void init() {
-      mImageFilename = "sc_powerup";
-      updateButtonImage(false);
-    }
+    void init(CollectionMenu* collectionMenu);
     void updateScroll() {
       mScroll->contentNode->removeAllChildren();
 
@@ -292,93 +291,8 @@ class PowerUpCollectionDelegate: public CollectionMenuDelegate {
       mCurrItem = 0;
     }
 
-    void onUse() {
-      int roleid = GameRecord::sharedGameRecord()->curr_char;
-      bool enable = true;
-      SEL_CallFunc selector = NULL;
-      if( mCurrItem == 1 )
-      {
-        //TODO:selector = callfunc_selector(PowerUpCollectionDelegate::onUseLife);
-        if( GameData::roleCurrHP(roleid) >= GameData::roleMaxHP(roleid) || GameRecord::sharedGameRecord()->collection->life_piece < 9 )
-        {
-          enable = false;
-        }
-      }
-      else {
-        //TODO:selector = callfunc_selector(PowerUpCollectionDelegate::onUseDart);
-        if( GameData::roleCurrDart(roleid) >= GameData::roleMaxDart(roleid) || GameRecord::sharedGameRecord()->collection->dart_piece < 9 )
-        {
-          enable = false;
-        }
-      }
-      const char *desc = NULL;
-
-      switch (roleid) {
-        case 0:
-          {
-            desc = "xr_kt.png";
-          }
-          break;
-        case 1:
-          {
-            desc = "xr_sr.png";
-          }
-          break;
-        case 2:
-          {
-            desc = "xr_ms.png";
-          }
-          break;
-        case 3:
-          {
-            desc = "xr_mr.png";
-          }
-          break;
-      }
-      if( enable )
-      {
-        GameTool::PlaySound("sound/click.mp3");
-        //TODO:setModal("pu-tc1.png", desc, this, selector);
-      }
-      else {
-        GameTool::PlaySound("sound/error.mp3");
-      }
-    }
-
-    void onUseLife(cocos2d::Ref*)
-    {
-      int role = GameRecord::sharedGameRecord()->curr_char;
-      if( GameData::roleCurrHP(role) < GameData::roleMaxHP(role) )
-      {
-        GameRecord::sharedGameRecord()->collection->life_piece -= 9;
-        GameRecord::sharedGameRecord()->setCharacterHp(GameRecord::sharedGameRecord()->char_hp[role]+1, role);
-        //TODO::updateCharacterInfo(role, 1);
-        int lc = GameRecord::sharedGameRecord()->collection->life_piece/9;
-        mLifeCount->setString(cocos2d::CCString::createWithFormat("%d", lc)->getCString());
-        if( GameData::roleCurrHP(role) >= GameData::roleMaxHP(role) )
-        {
-          mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_use2.png"));
-          mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_use2.png"));
-        }
-      }
-    }
-
-    void onUseDart(cocos2d::Ref*)
-    {
-      int role = GameRecord::sharedGameRecord()->curr_char;
-      if( GameData::roleCurrDart(role) < GameData::roleMaxDart(role) )
-      {
-        GameRecord::sharedGameRecord()->collection->dart_piece -= 9;
-        GameRecord::sharedGameRecord()->setCharacterDart(GameRecord::sharedGameRecord()->char_dart[role]+1, role);
-        //TODO:updateCharacterInfo(role, 2);
-        int lc = GameRecord::sharedGameRecord()->collection->dart_piece/9;
-        mDartCount->setString(cocos2d::CCString::createWithFormat("%d", lc)->getCString());
-        if( GameData::roleCurrDart(role) >= GameData::roleMaxDart(role) )
-        {
-          mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_use2.png"));
-          mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_use2.png"));
-        }
-      }
-    } 
-};
+    void onUse() ;
+    void onUseDart();
+    void onUseLife();
+    };
 #endif /* CollectionMenuDelegate_hpp */
