@@ -7,6 +7,7 @@
 //
 
 #include "CollectionMenuDelegate.hpp"
+#include "CollectionMenu.h"
 
 
 cocos2d::Sprite *CollectionMenuDelegate::mEquipedMark;
@@ -144,4 +145,99 @@ void CollectionMenuDelegate::markCurrent(int i) {
   mCurrItem = i;
   //获取当前道具的信息
   updateUseButtonInfo(i);
+}
+
+void PowerUpCollectionDelegate::init(CollectionMenu* collectionMenu) {
+  mImageFilename = "sc_powerup";
+  updateButtonImage(false);
+  mCollectionMenu = collectionMenu;
+
+}
+
+void PowerUpCollectionDelegate::onUse() {
+  int roleid = GameRecord::sharedGameRecord()->curr_char;
+  bool enable = true;
+  SEL_CallFunc selector = NULL;
+  if( mCollectionMenu->mCurrItem == 1 )
+  {
+    selector = CC_CALLFUNC_SELECTOR(PowerUpCollectionDelegate::onUseLife);
+    if( GameData::roleCurrHP(roleid) >= GameData::roleMaxHP(roleid) || GameRecord::sharedGameRecord()->collection->life_piece < 9 )
+    {
+      enable = false;
+    }
+  }
+  else {
+    selector = callfunc_selector(PowerUpCollectionDelegate::onUseDart);
+    if( GameData::roleCurrDart(roleid) >= GameData::roleMaxDart(roleid) || GameRecord::sharedGameRecord()->collection->dart_piece < 9 )
+    {
+      enable = false;
+    }
+  }
+  const char *desc = NULL;
+  
+  switch (roleid) {
+    case 0:
+    {
+      desc = "xr_kt.png";
+    }
+      break;
+    case 1:
+    {
+      desc = "xr_sr.png";
+    }
+      break;
+    case 2:
+    {
+      desc = "xr_ms.png";
+    }
+      break;
+    case 3:
+    {
+      desc = "xr_mr.png";
+    }
+      break;
+  }
+  if( enable )
+  {
+    GameTool::PlaySound("click.mp3");
+    mCollectionMenu->setModal("pu-tc1.png", desc, this, selector);
+  }
+  else {
+    GameTool::PlaySound("error.mp3");
+  }
+}
+void PowerUpCollectionDelegate::onUseLife()
+{
+  int role = GameRecord::sharedGameRecord()->curr_char;
+  if( GameData::roleCurrHP(role) < GameData::roleMaxHP(role) )
+  {
+    GameRecord::sharedGameRecord()->collection->life_piece -= 9;
+    GameRecord::sharedGameRecord()->setCharacterHp(GameRecord::sharedGameRecord()->char_hp[role]+1, role);
+    mCollectionMenu->updateCharacterInfo(role, 1);
+    int lc = GameRecord::sharedGameRecord()->collection->life_piece/9;
+    mLifeCount->setString(cocos2d::CCString::createWithFormat("%d", lc)->getCString());
+    if( GameData::roleCurrHP(role) >= GameData::roleMaxHP(role) )
+    {
+      mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_use2.png"));
+      mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_use2.png"));
+    }
+  }
+}
+
+void PowerUpCollectionDelegate::onUseDart()
+{
+  int role = GameRecord::sharedGameRecord()->curr_char;
+  if( GameData::roleCurrDart(role) < GameData::roleMaxDart(role) )
+  {
+    GameRecord::sharedGameRecord()->collection->dart_piece -= 9;
+    GameRecord::sharedGameRecord()->setCharacterDart(GameRecord::sharedGameRecord()->char_dart[role]+1, role);
+    mCollectionMenu->updateCharacterInfo(role, 2);
+    int lc = GameRecord::sharedGameRecord()->collection->dart_piece/9;
+    mDartCount->setString(cocos2d::CCString::createWithFormat("%d", lc)->getCString());
+    if( GameData::roleCurrDart(role) >= GameData::roleMaxDart(role) )
+    {
+      mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_use2.png"));
+      mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_use2.png"));
+    }
+  }
 }
