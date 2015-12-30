@@ -13,40 +13,30 @@
 #include "GameRecord.h"
 #include "UniversalFit.h"
 
-Mechanic* Mechanic::role() 
-{
-    return Mechanic::create();
-}
+void Mechanic::onCreate() {
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 13));
 
-void Mechanic::onCreate() 
-{
-    GamePlay *play = GamePlay::sharedGamePlay();
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("mechanic"));
-    mSprite->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
-    int y = CCRANDOM_0_1()*RESPAWN_Y;
-    mSprite->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
-    mSprite->playGTAnimation(0, true);
-    play->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
-    
-    mState = 0;//0 walk 1 prepare 2 attack 3 dead
-    mSpeed = 0.2f*ENEMY_NNRUNSPEED;
+  Role::onCreate();
+
+  GamePlay *play = GamePlay::sharedGamePlay();
+  int y = CCRANDOM_0_1()*RESPAWN_Y;
+  mSprite->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
+  mSprite->playGTAnimation(0, true);
+  play->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
+
+  mSpeed = 0.2f*ENEMY_NNRUNSPEED;
 }
 
 void Mechanic::onUpdate(float delta) 
 {
     GamePlay* play = GamePlay::sharedGamePlay();
     bool playend = mSprite->updateGTAnimation(delta);
-    
-    if( mState < 3 && play->gameOverTimer >= 0 )
-    {//主角死亡的处理
-        float ds = delta*(play->levelspeed - play->runspeed);
-        cocos2d::Point np = mSprite->getPosition();
-        np.x += ds;
-        mSprite->setPosition(np);
-    }
-    else {
+    bool gameOver = handleGameOver(delta);
+
+    if (!gameOver) {//主角死亡的处理
         switch (mState) {
-            case 0:// walk
+            case Entering:// walk
             {
                 if( mTimer > 0 )
                 {//attack cd
@@ -61,7 +51,7 @@ void Mechanic::onUpdate(float delta)
                 {
                     if( randomInt(3) == 0 )
                     {
-                        mState = 1;
+                        mState = PreparingToShoot;
                         mSprite->playGTAnimation(1, true);
                         mTimer = 0;
                     }
@@ -71,7 +61,7 @@ void Mechanic::onUpdate(float delta)
                 }
             }
                 break;
-            case 1:// prepare
+            case PreparingToShoot:// prepare
             {
                 mTimer += delta;
                 float prepare = MECHANIC_PREPARE;
@@ -81,13 +71,13 @@ void Mechanic::onUpdate(float delta)
                 }
                 if( mTimer > prepare )
                 {
-                    mState = 2;
+                    mState = Shooting;
                     mTimer = 0.5f;
                     mCount = 0;
                 }
             }
                 break;
-            case 2:// fire
+            case Shooting:// fire
             {
                 if( mTimer > 0 )
                 {
@@ -109,12 +99,12 @@ void Mechanic::onUpdate(float delta)
                     }
                     else {
                         mSprite->playGTAnimation(0, true);
-                        mState = 0;
+                        mState = Entering;
                     }
                 }
             }
                 break;
-            case 3:// dead
+            case Dead:// dead
             {
                 if( playend )
                 {
@@ -155,7 +145,7 @@ void Mechanic::onUpdate(float delta)
         }
     }
     
-    if( playend && mState != 3 )
+    if( playend && mState != Dead )
     {
         mSprite->playGTAnimation(0, true);
     }
@@ -177,26 +167,6 @@ void Mechanic::onUpdate(float delta)
     }
 }
 
-//碰撞检测
-bool Mechanic::collisionWithCircle(cocos2d::Point cc, float rad) 
-{
-    if( mState == 3 )
-    {
-        return false;
-    }
-    else {
-        if( mSprite != NULL )//shame defense
-        {
-            if( exCollisionWithCircles(mSprite->getPosition(), 6, 12, 9, cc, rad) ||
-               exCollisionWithCircles(mSprite->getPosition(), 17, 27, 13, cc, rad) )
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
 //受到伤害
 bool Mechanic::deliverHit(int type, cocos2d::Point dir) 
 {
@@ -216,13 +186,13 @@ bool Mechanic::deliverHit(int type, cocos2d::Point dir)
         return false;
     }
     
-    if( mState != 3 )
+    if( mState != Dead )
     {
         mSprite->playGTAnimation(3, false);
         
         //combo
         bool isCombo = false;
-        if( mState == 1 || mState == 2 )
+        if( mState == PreparingToShoot || mState == Shooting )
         {
             play->makeCombo();
             isCombo = true;
@@ -244,7 +214,7 @@ bool Mechanic::deliverHit(int type, cocos2d::Point dir)
         //add sp
         play->mainrole->gainSP(4);
         
-        mState = 3;
+        mState = Dead;
         mTimer = 0;
         mFlag = true;
         
@@ -262,16 +232,6 @@ bool Mechanic::deliverHit(int type, cocos2d::Point dir)
     return false;
 }
 
-cocos2d::Point Mechanic::position() 
-{
-    return mSprite->getPosition();
-}
-
-void Mechanic::setPosition(cocos2d::Point pos) 
-{
-    mSprite->setPosition(pos);
-}
-
 cocos2d::Point Mechanic::center() 
 {
     return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
@@ -279,16 +239,11 @@ cocos2d::Point Mechanic::center()
 
 bool Mechanic::supportAimAid() 
 {
-    if( mState == 3 )
+    if( mState == Dead )
     {
         return false;
     }
     return  true;
-}
-
-void Mechanic::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
 }
 
 void Mechanic::onDestroy() 

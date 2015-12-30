@@ -186,4 +186,14 @@ void unloadTextureFromeSpriteFrameFile(const char *plist);
 cocos2d::Sequence *createScaleSequence(float fDuration[], float fScale[], int count);
 cocos2d::Node *createUIByCCBI(const char* szCCBI, const char *pClassName, cocosbuilder::NodeLoader *pNodeLoader, Ref *target);
 
+struct Circle {
+  cocos2d::Vec2 center;
+  float radius;
+  Circle(cocos2d::Vec2 _center, float _radius) {
+    center = _center;
+    radius = _radius;
+  }
+};
+bool collide(const Circle &c1, const Circle &c2);
+
 #endif

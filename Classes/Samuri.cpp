@@ -13,48 +13,33 @@
 #include "GameRecord.h"
 #include "UniversalFit.h"
 
-Samuri* Samuri::role(cocos2d::Node * parent) 
-{
-    Samuri *em = Samuri::create();
-    em->mParent = parent;
-    return em;
-}
+void Samuri::onCreate() {
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(1, 10), 15));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(0, 30), 14));
+  mAnchor = cocos2d::Vec2(0.694f, 0.08125f);
 
-void Samuri::onCreate() 
-{
-    GamePlay *play = GamePlay::sharedGamePlay();
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("samurai"));
-    mSprite->setAnchorPoint(cocos2d::Vec2(0.694f, 0.08125f));
-    mSprite->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+play->runspeed*SAMURAI_WARNING, PLAY_PLAYERLINE));
-    mSprite->playGTAnimation(0, true);
-    mParent->addChild(mSprite, LAYER_ROLE);
-    
-    //add smark
-    //mMark = cocos2d::Sprite::createWithSpriteFrameName("smark.png");
-    //mMark->setAnchorPoint(cocos2d::Vec2( 0.5f, 0.5f));
-    //mMark->setPosition(cocos2d::Vec2( SCREEN_WIDTH/2, SCREEN_HEIGHT/2 ));
-    //mParent->addChild(mMark, LAYER_UI);
-    //CCBlink *blink = cocos2d::CCBlink::create(SAMURAI_WARNING, SAMURAI_WARNING*5);
-    //mMark->runAction(blink);
-    mHint = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("misc"));
-    mHint->playGTAnimation(1, true);
-    mHint->setAnchorPoint(cocos2d::Vec2(1, 0.5f));
-    mHint->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width, PLAY_PLAYERLINE+20));
-    mParent->addChild(mHint, LAYER_ROLE);
-cocos2d::MoveBy *mb1 = cocos2d::MoveBy::create(0.2f, Vec2(-20, 0));
-cocos2d::MoveBy *mb2 = cocos2d::MoveBy::create(0.2f, Vec2(20, 0));
-cocos2d::Sequence *sq = cocos2d::Sequence::create(mb1,mb2, NULL);
-cocos2d::RepeatForever *rp = cocos2d::RepeatForever::create(sq);
-    mHint->runAction(rp);
-    //CCBlink *blink2 = cocos2d::CCBlink::create(SAMURAI_WARNING, SAMURAI_WARNING*5);
-    //mHint->runAction(blink2);
-    
-    mState = 0;
-    mTimer = 0;
-    mFlag = false;
-    
-    //play samurai warning
-    GameTool::PlaySound("samurai_warning.mp3");
+  Role::onCreate();
+
+  GamePlay *play = GamePlay::sharedGamePlay();
+  mSprite->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+play->runspeed*SAMURAI_WARNING, PLAY_PLAYERLINE));
+  mSprite->playGTAnimation(0, true);
+  mParent->addChild(mSprite, LAYER_ROLE);
+
+  mHint = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("misc"));
+  mHint->playGTAnimation(1, true);
+  mHint->setAnchorPoint(cocos2d::Vec2(1, 0.5f));
+  mHint->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width, PLAY_PLAYERLINE+20));
+  mParent->addChild(mHint, LAYER_ROLE);
+  cocos2d::MoveBy *mb1 = cocos2d::MoveBy::create(0.2f, Vec2(-20, 0));
+  cocos2d::MoveBy *mb2 = cocos2d::MoveBy::create(0.2f, Vec2(20, 0));
+  cocos2d::Sequence *sq = cocos2d::Sequence::create(mb1,mb2, NULL);
+  cocos2d::RepeatForever *rp = cocos2d::RepeatForever::create(sq);
+  mHint->runAction(rp);
+
+  mTimer = 0;
+  mFlag = false;
+
+  GameTool::PlaySound("samurai_warning.mp3");
 }
 
 void Samuri::onUpdate(float delta) 
@@ -66,7 +51,7 @@ void Samuri::onUpdate(float delta)
     np.x -= play->runspeed*delta;
     mSprite->setPosition(np);
     switch (mState) {
-        case 0:
+        case Entering:
         {
             if( !mFlag && mSprite->getPosition().x < UniversalFit::sharedUniversalFit()->playSize.width )
             {
@@ -76,13 +61,13 @@ void Samuri::onUpdate(float delta)
             float rds = play->runspeed*0.5f;
             if( mSprite->getPosition().x - play->mainrole->position().x < rds )
             {
-                mState = 1;
+                mState = Running;
                 mSprite->playGTAnimation(1, false);
                 mFlag = false;
             }
         }
             break;
-        case 1:
+        case Running:
         {
             if( mFlag == false )
             {
@@ -108,7 +93,7 @@ void Samuri::onUpdate(float delta)
             }
         }
             break;
-        case 2:
+        case Dead:
         {
             if(mFlag)
             {
@@ -158,28 +143,12 @@ void Samuri::onDestroy()
 }
 
 //碰撞检测
-bool Samuri::collisionWithCircle(cocos2d::Point cc, float rad)
-{
-    if( mState < 2 )
-    {
-        if( mSprite != NULL )
-        {
-            if( exCollisionWithCircles(mSprite->getPosition(), 1, 10, 15, cc, rad) ||
-               exCollisionWithCircles(mSprite->getPosition(), 0, 31, 14, cc, rad) )
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
 bool Samuri::deliverHit(int type, cocos2d::Point dir)
 {
-    if( mState < 2 )
+    if( mState != Dead )
     {
         GameTool::PlaySound(cocos2d::CCString::createWithFormat("ahh%d.mp3", (randomInt(3)+1))->getCString());
-        mState = 2;
+        mState = Dead;
         mSprite->playGTAnimation(2, false);
         mFlag = true;
         mTimer = 0;
@@ -226,16 +195,6 @@ bool Samuri::deliverHit(int type, cocos2d::Point dir)
     return false;
 }
 
-cocos2d::Point Samuri::position()
-{
-    return mSprite->getPosition();
-}
-
-void Samuri::setPosition(cocos2d::Point pos)
-{
-    mSprite->setPosition(pos);
-}
-
 cocos2d::Point Samuri::center() 
 {
     return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
@@ -245,10 +204,3 @@ bool Samuri::supportAimAid()
 {
     return false;
 }
-
-void Samuri::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
-}
-
-

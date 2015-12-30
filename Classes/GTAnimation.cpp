@@ -21,11 +21,7 @@ GTAnimation* GTAnimation::loadedAnimationSet(const char * Name)
 
   if(gAniSetDic != NULL)
     pAnimation = (GTAnimation*)gAniSetDic->objectForKey(std::string(Name));
-  if(pAnimation == NULL)
-  {
-cocos2d::CCLog("***,  loadedAnimationSet: '%s' is not loaded", Name);
-    return NULL;
-  }
+
   return pAnimation;
 }
 

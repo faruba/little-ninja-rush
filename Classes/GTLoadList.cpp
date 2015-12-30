@@ -130,7 +130,6 @@ void GTLoadList::addSpriteSheet(const char * name)
 {
     if( mLoadIndex < 0 )
     {
-cocos2d::CCLog(name);
       LoadItem *it = LoadItem::itemWithInfo(name, GTLoadSpriteSheet);
       mList->addObject(it);
     }

@@ -75,7 +75,7 @@ void Respawn::setPipleLine(int pc)
     }
     int old = mPiple;
     mPiple = pc;
-cocos2d::CCLog("PIPLE = %d", mPiple);//hammer debug
+
     for(int i=old; i<pc; ++i)
     {
         mPT[i] = i - old;
@@ -288,7 +288,6 @@ void Respawn::updateArcade(float delta)
 {
     if( mPiple > 100 )
     {
-cocos2d::CCLog("XXX PIPLE = %d", mPiple);
         assert(false);
     }
     
@@ -363,49 +362,41 @@ bool Respawn::judge(int tid)
     return true;
 }
 
-void Respawn::gen(int tid) 
-{
+typedef Role* (*RoleCreator)(cocos2d::Node*);
+
+void Respawn::gen(int tid) {
+  RoleCreator creatorFunc[] = {
+    Role::CreateRole<NewbieNinja>, Role::CreateRole<MiddleNinja>, Role::CreateRole<HighNinja>
+  };
   GamePlay *play = GamePlay::sharedGamePlay();
   switch (tid) {
-    case 0://下忍
+    case 0:
+    case 1:
+    case 2:
       {
-        play->enemies->addObject(play->manager->addGameObject(NewbieNinja::role(play)));
-      }
-      break;
-    case 1://中忍
-      {
-        play->enemies->addObject(play->manager->addGameObject(MiddleNinja::role(play)));
-      }
-      break;
-    case 2://上忍
-      {
-        play->enemies->addObject(play->manager->addGameObject(HighNinja::role(play)));
+      Role *temp = creatorFunc[tid](play);
+      temp->collisionWithCircle(cocos2d::Point(0,0), 20);
+      play->enemies->addObject(play->manager->addGameObject(temp));
       }
       break;
     case 3://武士
       {
-        play->enemies->addObject(play->manager->addGameObject(Samuri::role(play)));
+        play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<Samuri>(play)));
         play->flag_samurai = true;
       }
       break;
     case 4://弓箭手
-      {
-        play->manager->addGameObject(Archer::role(play));
-      }
+      play->manager->addGameObject(Archer::role(play));
       break;
     case 5://神工
-      {
-        play->enemies->addObject(play->manager->addGameObject(Mechanic::role()));
-      }
+      play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<Mechanic>(play)));
       break;
     case ENEMIES://信使
-      {
-        play->enemies->addObject(play->manager->addGameObject(Messager::role(play)));
-      }
+      play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<Messager>(play)));
       break;
     case ENEMIES+1://商人
       {
-        play->manager->addGameObject(Merchant::role(play));
+        play->manager->addGameObject(Role::CreateRole<Merchant>(play));
         play->count_respawn++;
       }
       break;
@@ -414,12 +405,12 @@ void Respawn::gen(int tid)
         switch (mFestivalRole) {
           case 0://halloween
             {
-              play->enemies->addObject(play->manager->addGameObject(Pumpkin::role(play)));
+              play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<Pumpkin>(play)));
             }
             break;
           case 1:
             {
-              play->enemies->addObject(play->manager->addGameObject(Santa::role(play)));
+              play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<Santa>(play)));
             }
             break;
         }

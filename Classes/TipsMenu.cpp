@@ -54,7 +54,7 @@ void TipsMenu::updateTip(int index)
 {
     if( mCount == NULL )
     {
-        mCount = cocos2d::Label::create(cocos2d::CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips().size())->getCString(), GFONT_NAME, GFONT_SIZE_LARGE);
+        mCount = cocos2d::Label::create(cocos2d::CCString::createWithFormat("%d/%lu", index+1, GameData::fetchTips().size())->getCString(), GFONT_NAME, GFONT_SIZE_LARGE);
         //mCount = [Label, CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips)->size()()
         //                            fontName:TIP_FONTNAME fontSize:24];
         mCount->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
@@ -63,7 +63,7 @@ void TipsMenu::updateTip(int index)
     }
     else {
         //mCount->setString(cocos2d::CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips)->size())();
-        mCount->setString(cocos2d::CCString::createWithFormat("%d/%d", index+1, GameData::fetchTips().size())->getCString());
+        mCount->setString(cocos2d::CCString::createWithFormat("%d/%lu", index+1, GameData::fetchTips().size())->getCString());
     }
     if( mTip != NULL )
     {

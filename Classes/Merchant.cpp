@@ -14,25 +14,17 @@
 #include "GameRecord.h"
 #include "UniversalFit.h"
 
+void Merchant::onCreate() {
+  mAnchor = cocos2d::Vec2(0.5f , 0);
 
+  Role::onCreate();
 
-Merchant* Merchant::role(cocos2d::Node * parent) 
-{
-    Merchant *ret = Merchant::create();
-    ret->mParent = parent;
-    return  ret;
-}
+  mSprite->setPosition(cocos2d::Vec2(-50, PLAY_PLAYERLINE+5));
+  mSprite->playGTAnimation(0, true);
+  mParent->addChild(mSprite, LAYER_MAINROLE-1);
 
-void Merchant::onCreate() 
-{
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("merchant"));
-    mSprite->setAnchorPoint(cocos2d::Vec2(0.5f , 0));
-    mSprite->setPosition(cocos2d::Vec2(-50, PLAY_PLAYERLINE+5));
-    mSprite->playGTAnimation(0, true);
-    mParent->addChild(mSprite, LAYER_MAINROLE-1);
-    
-    mFlag = true;
-    mStepTimer = 0;
+  mFlag = true;
+  mStepTimer = 0;
 }
 
 void Merchant::onUpdate(float delta) 
@@ -78,19 +70,9 @@ void Merchant::onDestroy()
     mParent->removeChild(mSprite, true);
 }
 
-bool Merchant::collisionWithCircle(cocos2d::Point cc, float rad) 
-{
-    return false;
-}
-
 bool Merchant::deliverHit(int type, cocos2d::Point dir) 
 {
     return false;
-}
-
-cocos2d::Point Merchant::position() 
-{
-    return mSprite->getPosition();
 }
 
 cocos2d::Point Merchant::center() 
@@ -102,15 +84,3 @@ bool Merchant::supportAimAid()
 {
     return  false;
 }
-
-void Merchant::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
-}
-
-void Merchant::setPosition(cocos2d::Point pos) 
-{
-    mSprite->setPosition(pos);
-}
-
-

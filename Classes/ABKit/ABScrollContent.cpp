@@ -119,9 +119,9 @@ void ABScrollContent::update(float delta)
     contentNode->setPosition(np);
 
     float chy = np.y - clipRect.size.height;
-cocos2d::CCLog("Fly, %f, %f %f %f", mFlySpeed, chy, minY, maxY );
+cocos2d::log("Fly, %f, %f %f %f", mFlySpeed, chy, minY, maxY );
 
-    if( fabsf(mFlySpeed)<1000 && chy >= minY && chy <= maxY || fabsf(chy) <= 0.01f)
+    if( (fabsf(mFlySpeed)<1000 && chy >= minY && chy <= maxY) || fabsf(chy) <= 0.01f)
     {
       mFly = false;
     }
@@ -133,7 +133,7 @@ cocos2d::CCLog("Fly, %f, %f %f %f", mFlySpeed, chy, minY, maxY );
 bool ABScrollContent::onTouchBegan(Touch * touch, Event * event) 
 {
   cocos2d::Point pos = touch->getLocationInView();
-  pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
+  pos = cocos2d::CCDirector::getInstance()->convertToGL(pos);
   pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
   mTouchBegin = pos;
@@ -151,7 +151,7 @@ bool ABScrollContent::onTouchBegan(Touch * touch, Event * event)
 void ABScrollContent::onTouchMoved(Touch * touch, Event * event) 
 {
   cocos2d::Point pos = touch->getLocationInView();
-  pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
+  pos = cocos2d::CCDirector::getInstance()->convertToGL(pos);
   pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
   float dy = pos.y - mBeginPressY;
@@ -180,7 +180,7 @@ void ABScrollContent::onTouchEnded(Touch * touch, Event * event)
 {
   mFly = true;
   cocos2d::Point pos = touch->getLocationInView();
-  pos = cocos2d::CCDirector::sharedDirector()->convertToGL(pos);
+  pos = cocos2d::CCDirector::getInstance()->convertToGL(pos);
   pos = UniversalFit::sharedUniversalFit()->restorePoint(pos);
 
   if( ccpLengthSQ(ccpSub(pos, mTouchBegin)) < 10*10 &&

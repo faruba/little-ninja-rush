@@ -16,31 +16,26 @@
 #include "UniversalFit.h"
 #include "FootPrint.h"
 
-MiddleNinja* MiddleNinja::role(cocos2d::Node * parent) 
-{
-    MiddleNinja *em = MiddleNinja::create();
-    em->mParent = parent;
-    return em;
-}
 
-void MiddleNinja::onCreate() 
-{
-    int y = CCRANDOM_0_1()*RESPAWN_Y;
-    mTargetPos.x = UniversalFit::sharedUniversalFit()->playSize.width*(0.75f*CCRANDOM_0_1());
-    mTargetPos.y = RESPAWN_YMIN + y;
-    //计算起跳点
-    cocos2d::Point rjp = ccpForAngle(PI*3.0f/5.0f);
-    
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("mninja"));
-    mSprite->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
-    mSprite->setPosition(ccpAdd(mTargetPos, ccpMult(rjp, 100)));
-    mSprite->playGTAnimation(7, true);
-    mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
-    
-    mState = 0;//0 onstage 1 run 2 prepare 3 shoot 4 escape 5 dead
-    mDartCount = 0;
-    mFlag = true;
-    mSpeed = ENEMY_NNRUNSPEED*3;
+void MiddleNinja::onCreate() {
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 13));
+
+  Role::onCreate();
+
+  int y = CCRANDOM_0_1()*RESPAWN_Y;
+  mTargetPos.x = UniversalFit::sharedUniversalFit()->playSize.width*(0.75f*CCRANDOM_0_1());
+  mTargetPos.y = RESPAWN_YMIN + y;
+  //计算起跳点
+  cocos2d::Point rjp = ccpForAngle(PI*3.0f/5.0f);
+
+  mSprite->setPosition(ccpAdd(mTargetPos, ccpMult(rjp, 100)));
+  mSprite->playGTAnimation(7, true);
+  mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
+
+  mDartCount = 0;
+  mFlag = true;
+  mSpeed = ENEMY_NNRUNSPEED*3;
 }
 
 void MiddleNinja::onUpdate(float delta) 
@@ -48,17 +43,11 @@ void MiddleNinja::onUpdate(float delta)
     GamePlay* play = GamePlay::sharedGamePlay();
     bool playend = mSprite->updateGTAnimation(delta);
     bool removeflag = false;
-    
-    if( mState < 5 && play->gameOverTimer >= 0 && mState != 0)
-    {//主角死亡的处理
-        float ds = delta*(play->levelspeed - play->runspeed);
-        cocos2d::Point np = mSprite->getPosition();
-        np.x += ds;
-        mSprite->setPosition(np);
-    }
-    else {
+    bool gameOver = handleGameOver(delta);
+
+    if (!gameOver) {//主角死亡的处理
         switch (mState) {
-            case 0:// onstage
+            case Entering:// onstage
             {
                 if( mSprite->getPosition().y > mTargetPos.y )
                 {
@@ -88,14 +77,14 @@ void MiddleNinja::onUpdate(float delta)
                     if( playend || mTimer >mSprite->playBackTime() )
                     {
                         mTargetPos = mSprite->getPosition();
-                        mState = 1;
+                        mState = Running;
                         mTimer = 0;
                         mSprite->playGTAnimation(0, true);
                     }
                 }
             }
-                break;
-            case 1:// run
+            break;
+            case Running:// run
             {
                 if( mSprite->getPosition().x != mTargetPos.x )
                 {
@@ -126,7 +115,7 @@ void MiddleNinja::onUpdate(float delta)
                         {
                             if( mDartCount < MNINJA_MAXDART && GamePlay::sharedGamePlay()->count_attack <= 0 )
                             {
-                                mState = 2;
+                                mState = PreparingToShoot;
                                 mTimer = 0;
                                 mSprite->playGTAnimation(6, true);
                                 //play effect
@@ -135,7 +124,7 @@ void MiddleNinja::onUpdate(float delta)
                                 mSprite->addChild(eff);
                             }
                             else {
-                                mState = 4;
+                                mState = Fleeing;
                             }
                         }
                         mTimer = 0;
@@ -147,8 +136,8 @@ void MiddleNinja::onUpdate(float delta)
                     mSprite->playGTAnimation(0, true);
                 }
             }
-                break;
-            case 2:// prepare
+            break;
+            case PreparingToShoot:// prepare
             {
                 mTimer += delta;
                 float prepare = MNINJA_PREPARE;
@@ -158,14 +147,14 @@ void MiddleNinja::onUpdate(float delta)
                 }
                 if( mTimer > prepare && GamePlay::sharedGamePlay()->count_attack <= 0 )
                 {
-                    mState = 3;
+                    mState = Shooting;
                     mTimer = 0;
                     mFlag = false;
                     mDartCount++;
                 }
             }
                 break;
-            case 3:// shoot
+            case Shooting:// shoot
             {
                 if( playend )
                 {
@@ -203,13 +192,13 @@ void MiddleNinja::onUpdate(float delta)
                         if( randomInt(3) < 2 )
                         {
                             mTargetPos.x = UniversalFit::sharedUniversalFit()->playSize.width*(0.2f+0.6f*CCRANDOM_0_1());
-                            mState = 1;
+                            mState = Running;
                             mTimer = 0; 
                             mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
                         }
                         else {
                             mTargetPos.x = mSprite->getPosition().x;
-                            mState = 1;
+                            mState = Running;
                             mTimer = 0;
                         }
                     }
@@ -217,7 +206,7 @@ void MiddleNinja::onUpdate(float delta)
                 }
             }
                 break;
-            case 4:// escape
+            case Fleeing:// escape
             {
                 float ds = delta*ENEMY_NNRUNSPEED;
                 if( mSprite->getPosition().x > -100 )
@@ -233,7 +222,7 @@ void MiddleNinja::onUpdate(float delta)
                 
             }
                 break;
-            case 5:// dead
+            case Dead:// dead
             {
                 if( playend )
                 {
@@ -293,7 +282,7 @@ void MiddleNinja::onUpdate(float delta)
         mSprite->setPosition(np);
     }
     
-    if( mState != 5 )
+    if( mState != Dead )
     {
         FootPrint::goFootPrint(&mStepSnow, mSprite->getPosition());
     }
@@ -310,42 +299,11 @@ void MiddleNinja::onUpdate(float delta)
     }
 }
 
-//碰撞检测
-bool MiddleNinja::collisionWithCircle(cocos2d::Point cc, float rad) 
-{
-    if( mState == 0 )
-    {
-        return false;
-    }
-    else if( mState == 5 )
-    {
-        return false;
-        //取消鞭尸功能
-        //        if( exCollisionWithCircles(mSprite->getPosition, -20, 7, 11, cc, rad) ||
-        //            exCollisionWithCircles(mSprite->getPosition, -5, 5, 5, cc, rad) ||
-        //            exCollisionWithCircles(mSprite->getPosition, 5, 6, 5, cc, rad) )
-        //        {
-        //            return true;
-        //        }
-    }
-    else {
-        if( mSprite != NULL )
-        {
-            if( exCollisionWithCircles(mSprite->getPosition(), 6, 12, 9, cc, rad) ||
-               exCollisionWithCircles(mSprite->getPosition(), 17, 27, 13, cc, rad) )
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
 //受到伤害
 bool MiddleNinja::deliverHit(int type, cocos2d::Point dir) 
 {
     mTimer = 0;
-    if( mState == 5 )
+    if( mState == Dead )
     {
         mSprite->playGTAnimation(4, false);
         mFlag = false;
@@ -363,7 +321,7 @@ bool MiddleNinja::deliverHit(int type, cocos2d::Point dir)
     GamePlay *play = GamePlay::sharedGamePlay();
     //combo
     bool isCombo = false;
-    if( mState == 2 || mState == 4 )
+    if( mState == PreparingToShoot || mState == Fleeing )
     {
         play->makeCombo();
         isCombo = true;
@@ -384,7 +342,7 @@ bool MiddleNinja::deliverHit(int type, cocos2d::Point dir)
     //SP
     play->mainrole->gainSP(3);
     
-    mState = 5;
+    mState = Dead;
     //随机掉落道具
     Item::triggerItem(1, mSprite->getPosition());
 
@@ -404,33 +362,13 @@ bool MiddleNinja::deliverHit(int type, cocos2d::Point dir)
     return true;
 }
 
-cocos2d::Point MiddleNinja::position() 
-{
-    return mSprite->getPosition();
-}
-
-void MiddleNinja::setPosition(cocos2d::Point pos) 
-{
-    mSprite->setPosition(pos);
-}
-
 cocos2d::Point MiddleNinja::center() 
 {
     return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
 }
 
-bool MiddleNinja::supportAimAid() 
-{
-    if( mState == 5 || mState == 0 )
-    {
-        return false;
-    }
-    return  true;
-}
-
-void MiddleNinja::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
+bool MiddleNinja::supportAimAid() {
+    return !( mState == Dead || mState == Initializing || mState == Entering );
 }
 
 void MiddleNinja::onDestroy() 
@@ -439,6 +377,3 @@ void MiddleNinja::onDestroy()
     play->enemies->removeObject(this);
     mParent->removeChild(mSprite, false);
 }
-
-
-

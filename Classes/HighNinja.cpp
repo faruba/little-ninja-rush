@@ -16,41 +16,34 @@
 #include "UniversalFit.h"
 #include "FootPrint.h"
 
+void HighNinja::onCreate() {
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 13));
 
+  Role::onCreate();
 
-HighNinja* HighNinja::role(cocos2d::Node * parent) 
-{
-    HighNinja *em = HighNinja::create();
-    em->mParent = parent;
-    return em;
-}
+  int y = CCRANDOM_0_1()*RESPAWN_Y;
 
-void HighNinja::onCreate() 
-{
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("hninja"));
-    mSprite->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
-    int y = CCRANDOM_0_1()*RESPAWN_Y;
-    mSprite->setPosition(cocos2d::Vec2(20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1(), RESPAWN_YMIN+y));
-    mSprite->playGTAnimation(0, true);
-    mSprite->setVisible(false);
-    mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
+  mSprite->setPosition(cocos2d::Vec2(20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1(), RESPAWN_YMIN+y));
+  mSprite->playGTAnimation(0, true);
+  mSprite->setVisible(false);
+  mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
     
-    mState = 0;//0 onstage 1 run 2 prepare 3 shoot 4 escape 5 dead
-    mDartCount = 0;
-    mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
-    mFlag = true;
-    mSpeed = ENEMY_NNRUNSPEED;
-    mTimer = 0;
-    mSpell = 0;
-    
-    //出场特效
-    GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 5, false);
-    eff->setAnchorPoint(mSprite->getAnchorPoint());
-    eff->setPosition(mSprite->getPosition());
-    mParent->addChild(eff, LAYER_ROLE+RESPAWN_Y-y);
-    
-    mWoodLink.uid=-1;
-    mWoodLink.index=-1;
+  mDartCount = 0;
+  mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
+  mFlag = true;
+  mSpeed = ENEMY_NNRUNSPEED;
+  mTimer = 0;
+  mSpell = 0;
+
+  //出场特效
+  GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 5, false);
+  eff->setAnchorPoint(mSprite->getAnchorPoint());
+  eff->setPosition(mSprite->getPosition());
+  mParent->addChild(eff, LAYER_ROLE+RESPAWN_Y-y);
+
+  mWoodLink.uid=-1;
+  mWoodLink.index=-1;
 }
 
 void HighNinja::onUpdate(float delta) 
@@ -58,17 +51,11 @@ void HighNinja::onUpdate(float delta)
     bool playend = mSprite->updateGTAnimation(delta);
     GamePlay* play = GamePlay::sharedGamePlay();
     bool removeflag = false;
-    
-    if( mState < 5 && play->gameOverTimer >= 0 && mState != 0 )
-    {//主角死亡的处理
-        float ds = delta*(play->levelspeed - play->runspeed);
-        cocos2d::Point np = mSprite->getPosition();
-        np.x += ds;
-        mSprite->setPosition(np);
-    }
-    else {
+    bool gameOver = handleGameOver(delta);
+
+    if (!gameOver) {//主角死亡的处理
         switch (mState) {
-            case 0:// onstage
+            case Entering:// onstage
             {
                 mTimer += delta;
                 if( mTimer > 0.30f && mSprite->isVisible() == false )
@@ -77,13 +64,13 @@ void HighNinja::onUpdate(float delta)
                 }
                 if( mTimer >= 0.4f )
                 {
-                    mState = 1;
+                    mState = Running;
                     mTimer = 0;
                     mSprite->playGTAnimation(0, true);
                 }
             }
                 break;
-            case 1:// run
+            case Running:// run
             {
                 if( mSprite->getPosition().x != mTargetPos )
                 {
@@ -114,7 +101,7 @@ void HighNinja::onUpdate(float delta)
                         {
                             if( GamePlay::sharedGamePlay()->count_attack <= 0 )
                             {
-                                mState = 2;
+                                mState = PreparingToShoot;
                                 mTimer = 0;
                                 mSprite->playGTAnimation(6, true);
                                 //play effect
@@ -139,7 +126,7 @@ void HighNinja::onUpdate(float delta)
                 }
             }
                 break;
-            case 2:// prepare
+            case PreparingToShoot:// prepare
             {
                 mTimer += delta;
                 float prepare = HNINJA_PREPARE;
@@ -149,7 +136,7 @@ void HighNinja::onUpdate(float delta)
                 }
                 if( mTimer > prepare && GamePlay::sharedGamePlay()->count_attack <= 0 )
                 {
-                    mState = 3;
+                    mState = Shooting;
                     mTimer = 0;
                     mDartCount = 0;
                     mFlag = false;
@@ -160,7 +147,7 @@ void HighNinja::onUpdate(float delta)
                 }
             }
                 break;
-            case 3:// shoot
+            case Shooting:// shoot
             {
                 if( playend )
                 {
@@ -203,12 +190,12 @@ void HighNinja::onUpdate(float delta)
                         if( randomInt(3) < 2 )
                         {
                             mTargetPos = UniversalFit::sharedUniversalFit()->playSize.width*(0.2f+0.6f*CCRANDOM_0_1());
-                            mState = 1;
+                            mState = Running;
                             mTimer = 0;
                             mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
                         }
                         else {
-                            mState = 1;
+                            mState = Running;
                             mTimer = 0;
                         }
                     }
@@ -217,7 +204,7 @@ void HighNinja::onUpdate(float delta)
                 
             }
                 break;
-            case 4:// escape
+            case Fleeing:// escape
             {
                 float ds = delta*ENEMY_NNRUNSPEED;
                 if( mSprite->getPosition().x > -100 )
@@ -233,7 +220,7 @@ void HighNinja::onUpdate(float delta)
                 
             }
                 break;
-            case 5:// dead
+            case Dead:// dead
             {
                 if( playend )
                 {
@@ -282,11 +269,11 @@ void HighNinja::onUpdate(float delta)
                 }
             }
                 break;
-            case 6:
+            case Dummy:
             {//替身术
                 if( mSprite->isVisible() == true )
                 {
-                    mState = 1;
+                    mState = Running;
                     mTargetPos = mSprite->getPosition().x;
                 }
             }
@@ -302,7 +289,7 @@ void HighNinja::onUpdate(float delta)
         mSprite->setPosition(np);
     }
     
-    if( mState != 5 )
+    if( mState != Dead )
     {
         FootPrint::goFootPrint(&mStepSnow, mSprite->getPosition());
     }
@@ -319,43 +306,12 @@ void HighNinja::onUpdate(float delta)
     }
 }
 
-//碰撞检测
-bool HighNinja::collisionWithCircle(cocos2d::Point cc, float rad) 
-{
-    if( mState == 6 )
-    {
-        return false;
-    }
-    if( mState == 5 )
-    {
-        return false;
-        //取消鞭尸功能
-        //        if( exCollisionWithCircles(mSprite->getPosition, -20, 7, 11, cc, rad) ||
-        //            exCollisionWithCircles(mSprite->getPosition, -5, 5, 5, cc, rad) ||
-        //            exCollisionWithCircles(mSprite->getPosition, 5, 6, 5, cc, rad) )
-        //        {
-        //            return true;
-        //        }
-    }
-    else {
-        if( mSprite != NULL )//shame defense
-        {
-            if( exCollisionWithCircles(mSprite->getPosition(), 6, 12, 9, cc, rad) ||
-               exCollisionWithCircles(mSprite->getPosition(), 17, 27, 13, cc, rad) )
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
 //受到伤害
 bool HighNinja::deliverHit(int type, cocos2d::Point dir) 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
     //替身术
-    if( mState != 5 && mState != 2 && mState != 3 && mSpell == 0 )
+    if( mState != Dead && mState != PreparingToShoot && mState != Shooting && mSpell == 0 )
     {
         mSpell = 1;
         //发动替身术
@@ -364,7 +320,7 @@ bool HighNinja::deliverHit(int type, cocos2d::Point dir)
         eff->setAnchorPoint(mSprite->getAnchorPoint());
         eff->setPosition(mSprite->getPosition());
         mParent->addChild(eff, LAYER_ROLE+RESPAWN_Y+RESPAWN_YMIN-mSprite->getPosition().y);
-        mState = 6;
+        mState = Dummy;
         mTimer = 0;
         mPoint = dir;
         
@@ -377,7 +333,7 @@ bool HighNinja::deliverHit(int type, cocos2d::Point dir)
         return false;
     }
     mTimer = 0;
-    if( mState == 5 )
+    if( mState == Dead )
     {
         mSprite->playGTAnimation(4, false);
         mFlag = false;
@@ -394,7 +350,7 @@ bool HighNinja::deliverHit(int type, cocos2d::Point dir)
     }
     //combo
     bool isCombo = false;
-    if( mState == 2 || mState == 4 )
+    if( mState == PreparingToShoot || mState == Fleeing )
     {
         play->makeCombo();
         isCombo = true;
@@ -415,7 +371,7 @@ bool HighNinja::deliverHit(int type, cocos2d::Point dir)
     //SP
     play->mainrole->gainSP(4);
     
-    mState = 5;
+    mState = Dead;
     //随机掉落道具
     Item::triggerItem(2, mSprite->getPosition());
     
@@ -436,33 +392,13 @@ bool HighNinja::deliverHit(int type, cocos2d::Point dir)
     return true;
 }
 
-cocos2d::Point HighNinja::position() 
-{
-    return mSprite->getPosition();
-}
-
-void HighNinja::setPosition(cocos2d::Point pos) 
-{
-    mSprite->setPosition(pos);
-}
-
 cocos2d::Point HighNinja::center() 
 {
     return ccpAdd(mSprite->getPosition(), Vec2(9, 20));
 }
 
-bool HighNinja::supportAimAid() 
-{
-    if( mState == 5 || !mSprite->isVisible())
-    {
-        return false;
-    }
-    return  true;
-}
-
-void HighNinja::toggleVisible(bool flag) 
-{
-    mSprite->setVisible(flag);
+bool HighNinja::supportAimAid() {
+  return !( mState == Dead || !mSprite->isVisible());
 }
 
 void HighNinja::onDestroy() 
