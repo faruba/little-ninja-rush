@@ -6,209 +6,198 @@
 #include "UniversalFit.h"
 #include "FootPrint.h"
 
-void NewbieNinja::onCreate()
-{
+void NewbieNinja::onCreate() {
   mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
   mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 13));
-  Role::onCreate();
-    mSprite->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
-    int y = CCRANDOM_0_1()*RESPAWN_Y;
-    if( GamePlay::sharedGamePlay()->state == STATE_RUSH )
-    {
-        mSprite->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
-    }
-    else {
-        mSprite->setPosition(cocos2d::Vec2(-100, RESPAWN_YMIN+y));
-    }
-    mSprite->playGTAnimation(0, true);
-    mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
 
-    mDartCount = 0;
-    mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
-    mFlag = true;
-    mSpeed = ENEMY_NNRUNSPEED;
+  Role::onCreate();
+
+  int y = CCRANDOM_0_1()*RESPAWN_Y ;
+  int x = (GamePlay::sharedGamePlay()->state == STATE_RUSH) ? UniversalFit::sharedUniversalFit()->playSize.width+100 : -100;
+
+  mSprite->setPosition(cocos2d::Vec2(x, y + RESPAWN_YMIN ));
+  mSprite->playGTAnimation(0, true);
+  mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
+
+  mDartCount = 0;
+  mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
+  mFlag = true;
+  mSpeed = ENEMY_NNRUNSPEED;
 }
 
-void NewbieNinja::onUpdate(float delta) 
-{
+void NewbieNinja::onUpdate(float delta) {
     bool playend = mSprite->updateGTAnimation(delta);
     GamePlay* play = GamePlay::sharedGamePlay();
     bool removeflag = false;
-    
-    if( mState < 5 && play->gameOverTimer >= 0 && mState != 0 )
-    {//主角死亡的处理
-        float ds = delta*(play->levelspeed - play->runspeed);
-        cocos2d::Point np = mSprite->getPosition();
-        np.x += ds;
-        mSprite->setPosition(np);
-    }
-    else {
+    bool gameOver = handleGameOver(delta);
+
+    if (!gameOver) {//主角死亡的处理
         switch (mState) {
-        case 0:// onstage
-        {
-            float ds = delta*mSpeed;
-            float dis = mTargetPos - mSprite->getPosition().x;
-            cocos2d::Point np = mSprite->getPosition();
-            if( fabsf(dis) > ds )
+          case Entering:// onstage
             {
+              float ds = delta*mSpeed;
+              float dis = mTargetPos - mSprite->getPosition().x;
+              cocos2d::Point np = mSprite->getPosition();
+              if( fabsf(dis) > ds )
+              {
                 if( dis > 0 )
                 {
-                    np.x += ds;
+                  np.x += ds;
                 }
                 else {
-                    np.x -= ds;
+                  np.x -= ds;
                 }
                 mSprite->setPosition(np);
-            }
-            else {
+              }
+              else {
                 np.x = mTargetPos;
                 //上场就奔跑
-                mState = 1;
+                mState = Running;
                 mTimer = 0;
-            }
-            if( playend )
-            {
+              }
+              if( playend )
+              {
                 mSprite->playGTAnimation(0, true);
+              }
             }
-        }
             break;
-        case 1:// run
-        {
-            mTimer += delta;
-            if( mTimer > NNINJA_POLLTIME )
+          case Running:// run
             {
+              mTimer += delta;
+              if( mTimer > NNINJA_POLLTIME )
+              {
                 if( randomInt(100) < NNINJA_AGGRISIVE )
                 {
-                    if( mDartCount < NNINJA_MAXDART && GamePlay::sharedGamePlay()->count_attack <= 0 )
-                    {
-                        mState = 2;
-                        mTimer = 0;
-                        mSprite->playGTAnimation(6, true);
-                        //play effect
-                        GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
-                        eff->setPosition(cocos2d::Vec2(47, 19));
-                        mSprite->addChild(eff);
-                    }
-                    else {
-                        mState = 4;
-                    }
+                  if( mDartCount < NNINJA_MAXDART && GamePlay::sharedGamePlay()->count_attack <= 0 )
+                  {
+                    mState = PreparingToShoot;
+                    mTimer = 0;
+                    mSprite->playGTAnimation(6, true);
+                    //play effect
+                    GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
+                    eff->setPosition(cocos2d::Vec2(47, 19));
+                    mSprite->addChild(eff);
+                  }
+                  else {
+                    mState = Fleeing;
+                  }
                 }
                 mTimer = 0;
-            }
-            if( playend )
-            {
+              }
+              if( playend )
+              {
                 mSprite->playGTAnimation(0, true);
+              }
             }
-        }
             break;
-        case 2:// prepare
-        {
-            mTimer += delta;
-            float prepare = NNINJA_PREPARE;
-            if( play->mode == MODE_ARCADE )
+          case PreparingToShoot:// prepare
             {
+              mTimer += delta;
+              float prepare = NNINJA_PREPARE;
+              if( play->mode == MODE_ARCADE )
+              {
                 prepare *= play->arcade->prepare;
-            }
-            if( mTimer > prepare && GamePlay::sharedGamePlay()->count_attack <= 0 )
-            {
-                mState = 3;
+              }
+              if( mTimer > prepare && GamePlay::sharedGamePlay()->count_attack <= 0 )
+              {
+                mState = Shooting;
                 mTimer = 0;
                 mDartCount++;
+              }
             }
-        }
             break;
-        case 3:// shoot
-        {
-            cocos2d::Point target = play->mainrole->center();
-            if( play->mainrole2 != NULL )
+          case Shooting:// shoot
             {
+              cocos2d::Point target = play->mainrole->center();
+              if( play->mainrole2 != NULL )
+              {
                 if( randomInt(2) == 0 )
                 {
-                    target = play->mainrole2->center();
+                  target = play->mainrole2->center();
                 }
-            }
-            cocos2d::Point dir = ccpNormalize(ccpSub(target, this->center()));
-            float angle = ccpToAngle(dir);
-            angle += CC_DEGREES_TO_RADIANS(-NNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*NNINJA_ACCURATE)*CCRANDOM_0_1();
-            dir = ccpForAngle(angle);
-            std::string shape = "dart.png";
-            play->darts->addObject(play->manager->addGameObject(Dart::dart(shape, this->center(), dir, -1, mParent)));
-            mSprite->playGTAnimation(5, false);
-            
-            if( randomInt(2) == 0 )
-            {
+              }
+              cocos2d::Point dir = ccpNormalize(ccpSub(target, this->center()));
+              float angle = ccpToAngle(dir);
+              angle += CC_DEGREES_TO_RADIANS(-NNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*NNINJA_ACCURATE)*CCRANDOM_0_1();
+              dir = ccpForAngle(angle);
+              std::string shape = "dart.png";
+              play->darts->addObject(play->manager->addGameObject(Dart::dart(shape, this->center(), dir, -1, mParent)));
+              mSprite->playGTAnimation(5, false);
+
+              if( randomInt(2) == 0 )
+              {
                 mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
-                mState = 0;
+                mState = Entering;
                 mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
+              }
+              else {
+                mState = Running;
+              }
             }
-            else {
-                mState = 1;
-            }
-        }
             break;
-        case 4:// escape
-        {
-            float ds = delta*ENEMY_NNRUNSPEED;
-            if( mSprite->getPosition().x > -100 )
+          case Fleeing:// escape
             {
+              float ds = delta*ENEMY_NNRUNSPEED;
+              if( mSprite->getPosition().x > -100 )
+              {
                 cocos2d::Point np = mSprite->getPosition();
                 np.x -= ds;
                 mSprite->setPosition(np);
-            }
-            else {
+              }
+              else {
                 //销毁对象
                 removeflag = true;
+              }
             }
-        }
             break;
-        case 5:// dead
-        {
-            if( playend )
+          case Dead:// dead
             {
+              if( playend )
+              {
                 //fix pos
                 float ds = delta*play->runspeed;
                 cocos2d::Point np = mSprite->getPosition();
                 np.x -= ds;
                 mSprite->setPosition(np);
-                
+
                 if( mSprite->getPosition().x < -100 )
                 {
-                    removeflag = true;
+                  removeflag = true;
                 }
-            }
-            else {
+              }
+              else {
                 mTimer += delta;
                 if(mTimer>0.3f && mFlag)
                 {
-                    int n = 1 + randomInt(3);
-                    GameTool::PlaySound(cocos2d::CCString::createWithFormat("ahh%d.mp3", n)->getCString());
-                    mFlag = false;
+                  int n = 1 + randomInt(3);
+                  GameTool::PlaySound(cocos2d::CCString::createWithFormat("ahh%d.mp3", n)->getCString());
+                  mFlag = false;
                 }
                 //fix pos
                 cocos2d::Point np = mSprite->getPosition();
                 if( mSprite->animationId() == 3 )
                 {
-                    float ra = mTimer/mSprite->playBackTime();
-                    if( ra > 1 )
-                    {
-                        ra = 1;
-                    }
-                    ra = 1 - ra;
-                    float ds = delta*200*ra;
-                    np.x += ds;
+                  float ra = mTimer/mSprite->playBackTime();
+                  if( ra > 1 )
+                  {
+                    ra = 1;
+                  }
+                  ra = 1 - ra;
+                  float ds = delta*200*ra;
+                  np.x += ds;
                 }
                 else {
-                    float ra = mTimer/mSprite->playBackTime();
-                    if( ra > 1 )
-                    {
-                        ra = 1;
-                    }
-                    float ds = delta*300*ra;
-                    np.x -= ds;
+                  float ra = mTimer/mSprite->playBackTime();
+                  if( ra > 1 )
+                  {
+                    ra = 1;
+                  }
+                  float ds = delta*300*ra;
+                  np.x -= ds;
                 }
                 mSprite->setPosition(np);
+              }
             }
-        }
             break;
         }
     }
@@ -222,7 +211,7 @@ void NewbieNinja::onUpdate(float delta)
     }
     
     //snow step
-    if( mState != 5 )
+    if( mState != Dead )
     {
         FootPrint::goFootPrint(&mStepSnow, mSprite->getPosition());
     }
@@ -243,7 +232,7 @@ void NewbieNinja::onUpdate(float delta)
 bool NewbieNinja::deliverHit(int type, cocos2d::Point dir) 
 {
     mTimer = 0;
-    if( mState == 5 )
+    if( mState == Dead )
     {
         mSprite->playGTAnimation(4, false);
         mFlag = false;
@@ -261,7 +250,7 @@ bool NewbieNinja::deliverHit(int type, cocos2d::Point dir)
     GamePlay *play = GamePlay::sharedGamePlay();
     //combo
     bool isCombo = false;
-    if( mState == 2 || mState == 4 )
+    if( mState == PreparingToShoot || mState == Fleeing )
     {
         play->makeCombo();
         isCombo = true;
@@ -282,7 +271,7 @@ bool NewbieNinja::deliverHit(int type, cocos2d::Point dir)
     //SP
     play->mainrole->gainSP(2);
     
-    mState = 5;
+    mState = Dead;
     
     //随机掉落道具
     Item::triggerItem(0, mSprite->getPosition());
@@ -306,11 +295,7 @@ cocos2d::Point NewbieNinja::center()
 
 bool NewbieNinja::supportAimAid() 
 {
-    if( mState == 5 )
-    {
-        return false;
-    }
-    return  true;
+    return !( mState == Dead );
 }
 
 void NewbieNinja::onDestroy() 

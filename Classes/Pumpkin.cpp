@@ -18,26 +18,27 @@
 
 #define HIT_EXPLODE (10) 
 
-void Pumpkin::onCreate() 
-{
+void Pumpkin::onCreate() {
   mCollisionCircles.push_back(Circle(cocos2d::Vec2(0, 0), RANGE));
+
   Role::onCreate();
-    mSprite->playGTAnimation(0, true);
-    mSprite->setPosition(cocos2d::Vec2( -100, SCREEN_HEIGHT ));
-    mParent->addChild(mSprite, LAYER_MAINROLE);
-    
-    mTimer = 0;
-    mHitCount = 0;
-    mHurtTimer = -1;
-    
-    //init parameters
-    mTargetPos = Vec2(50, 210);
-    mTargetSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-45)), 100);
-    mPumpkinSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-90)), 50);
-    
-    GameTool::PlaySound("pumpkinstart.mp3");
-    
-    mFlySound = 3 + 7*CCRANDOM_0_1();
+
+  mSprite->playGTAnimation(0, true);
+  mSprite->setPosition(cocos2d::Vec2( -100, SCREEN_HEIGHT ));
+  mParent->addChild(mSprite, LAYER_MAINROLE);
+
+  mTimer = 0;
+  mHitCount = 0;
+  mHurtTimer = -1;
+
+  //init parameters
+  mTargetPos = Vec2(50, 210);
+  mTargetSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-45)), 100);
+  mPumpkinSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-90)), 50);
+
+  GameTool::PlaySound("pumpkinstart.mp3");
+
+  mFlySound = 3 + 7*CCRANDOM_0_1();
 }
 
 void Pumpkin::onUpdate(float delta) 
@@ -75,13 +76,13 @@ void Pumpkin::onUpdate(float delta)
     }
     
     switch (mState) {
-        case 0://floating
+        case Entering://floating
         {
             //tick timer
             mTimer += delta;
             if( mTimer > FLOATING_TIME)
             {
-                mState = 1;
+                mState = Fleeing;
                 mTimer = 0;
             }
             if( playend )
@@ -115,7 +116,7 @@ void Pumpkin::onUpdate(float delta)
             }
         }
             break;
-        case 1://escape
+        case Fleeing://escape
         {
             mTargetPos = Vec2(UniversalFit::sharedUniversalFit()->playSize.width + 100, SCREEN_HEIGHT/2);
             if( ccpDistance(mSprite->getPosition(), mTargetPos) < NEAR )
@@ -128,7 +129,7 @@ void Pumpkin::onUpdate(float delta)
             }
         }
             break;
-        case 2://dying
+        case Dead://dying
         {
             mTimer += delta;
             if( mTimer >= 1 && mSprite->animationId() == 1 )
@@ -192,7 +193,7 @@ void Pumpkin::onUpdate(float delta)
 bool Pumpkin::deliverHit(int type, cocos2d::Point dir) 
 {
     GamePlay *play = GamePlay::sharedGamePlay();
-    if( mState < 2 )
+    if( mState != Dead )
     {
         if( mHitCount < HIT_EXPLODE )
         {
@@ -213,7 +214,7 @@ bool Pumpkin::deliverHit(int type, cocos2d::Point dir)
         }
         else
         {
-            mState = 2;
+            mState = Dead;
             // die
             mSprite->playGTAnimation(1, true);
             GameTool::PlaySound("pumpkindie.mp3");

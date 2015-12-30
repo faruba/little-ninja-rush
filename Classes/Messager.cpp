@@ -40,12 +40,12 @@ void Messager::onCreate()
         mSprite->playGTAnimation(1, true);
         mSprite->setPosition(cocos2d::Vec2( -80, RESPAWN_YMIN+y));
         mSpeed = CHASE_SPEED;
-        mState = 0;
+        mState = Entering;
     }
     else {//drop out mode
         mSprite->playGTAnimation(0, true);
         mSprite->setPosition(cocos2d::Vec2( 80+UniversalFit::sharedUniversalFit()->playSize.width, RESPAWN_YMIN+y));
-        mState = 1;
+        mState = Running;
         mSpeed = DROPOUT_SPEED;
         mAwake = 0.4f*UniversalFit::sharedUniversalFit()->playSize.width + 0.3f*CCRANDOM_0_1()*UniversalFit::sharedUniversalFit()->playSize.width;
     }
@@ -64,24 +64,18 @@ void Messager::onUpdate(float delta)
 {
     bool playend = mSprite->updateGTAnimation(delta);
     GamePlay *play = GamePlay::sharedGamePlay();
-    
-    if( mState < 3 && play->gameOverTimer >= 0 )
-    {//主角死亡的处理
-        float ds = delta*(play->levelspeed - play->runspeed);
-        cocos2d::Point np = mSprite->getPosition();
-        np.x += ds;
-        mSprite->setPosition(np);
-    }
-    else {
+    bool gameOver = handleGameOver(delta);
+
+    if (!gameOver) {//主角死亡的处理
         switch (mState) {
-            case 0://chase
+            case Entering://chase
             {
                 cocos2d::Point np = mSprite->getPosition();
                 np.x += delta*mSpeed;
                 mSprite->setPosition(np);
                 if( mFlagFalldown && mSprite->getPosition().x > mFalldown )
                 {
-                    mState = 3;
+                    mState = Dead;
                     mSprite->playGTAnimation(5, false);
                     //随机掉落道具
                     play->manager->addGameObject(Item::item(1, mSprite->getPosition(), mParent, false));
@@ -90,7 +84,7 @@ void Messager::onUpdate(float delta)
                 FootPrint::goFootPrint(&mStepSnow, mSprite->getPosition());
             }
                 break;
-            case 1://drop out
+            case Running://drop out
             {
                 cocos2d::Point np = mSprite->getPosition();
                 np.x += delta*mSpeed;
@@ -102,22 +96,22 @@ void Messager::onUpdate(float delta)
                     hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
                     hiteff2->setPosition(position());
                     play->addChild(hiteff2, LAYER_MAINROLE+1);
-                    mState = 2;
+                    mState = Fleeing;
                     mSprite->playGTAnimation(3, false);
                 }
             }
                 break;
-            case 2://awake
+            case Fleeing://awake
             {
                 if( playend )
                 {
-                    mState = 0;
+                    mState = Entering;
                     mSprite->playGTAnimation(2, true);
                     mSpeed = ACCELER_SPEED;
                 }
             }
                 break;
-            case 3://dead
+            case Dead://dead
             {
                 if( playend )
                 {
@@ -179,14 +173,6 @@ void Messager::onUpdate(float delta)
         mSprite->setPosition(np);
     }
     
-    //主角死亡的处理
-    if( mState < 3 && play->gameOverTimer >= 0 )
-    {
-        float ds = play->runspeed*delta;
-        cocos2d::Point np = mSprite->getPosition();
-        np.x += ds;
-        mSprite->setPosition(np);
-    }
     //删除检查
     if( mSprite->getPosition().x < -100 || mSprite->getPosition().x > 100+UniversalFit::sharedUniversalFit()->playSize.width )
     {
@@ -218,7 +204,7 @@ bool Messager::deliverHit(int type, cocos2d::Point dir)
         play->mainrole->SP = play->mainrole->maxSP;
     }
     
-    mState = 3;
+    mState = Dead;
     mTimer = 0;
     //随机掉落道具
     play->manager->addGameObject(Item::item(1, mSprite->getPosition(), mParent, false));
@@ -244,7 +230,7 @@ cocos2d::Point Messager::center()
 
 bool Messager::supportAimAid() 
 {
-    if( mState != 3 )
+    if( mState != Dead )
     {
         return  true;
     }

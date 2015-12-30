@@ -15,30 +15,27 @@
 #include "UniversalFit.h"
 #include "FootPrint.h"
 
-void Santa::onCreate() 
-{
+void Santa::onCreate() {
   mCollisionCircles.push_back(Circle(cocos2d::Vec2(1, 13), 8));
   mCollisionCircles.push_back(Circle(cocos2d::Vec2(-1, 32.5), 13));
+  mAnchor = cocos2d::Vec2(0.5438f, 0.0625f);
+
   Role::onCreate();
-    GamePlay *play = GamePlay::sharedGamePlay();
-    mSprite->setAnchorPoint(cocos2d::Vec2(0.5438f, 0.0625f));
-    int y = CCRANDOM_0_1()*RESPAWN_Y;
-    if( play->state == STATE_RUSH )
-    {
-        mSprite->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
-    }
-    else {
-        mSprite->setPosition(cocos2d::Vec2(-100, RESPAWN_YMIN+y));
-    }
-    mSprite->playGTAnimation(0, true);
-    mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
-    
-    mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
-    mSpeed = ENEMY_NNRUNSPEED;
-    
-    mCoinTimer = 0;
-    mActionTimer = 0;
-    mHited = false;
+
+  GamePlay *play = GamePlay::sharedGamePlay();
+  int y = CCRANDOM_0_1()*RESPAWN_Y;
+  int x = (play->state == STATE_RUSH) ? UniversalFit::sharedUniversalFit()->playSize.width+100:-100;
+
+  mSprite->setPosition(cocos2d::Vec2(x, RESPAWN_YMIN+y));
+  mSprite->playGTAnimation(0, true);
+  mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
+
+  mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
+  mSpeed = ENEMY_NNRUNSPEED;
+
+  mCoinTimer = 0;
+  mActionTimer = 0;
+  mHited = false;
 }
 
 void Santa::onUpdate(float delta) 
@@ -47,15 +44,9 @@ void Santa::onUpdate(float delta)
     GamePlay* play = GamePlay::sharedGamePlay();
     bool removeflag = false;
     bool dropcoins = false;
-    
-    if( play->gameOverTimer >= 0 )
-    {//主角死亡的处理
-        float ds = delta*(play->levelspeed - play->runspeed);
-        cocos2d::Point np = mSprite->getPosition();
-        np.x += ds;
-        mSprite->setPosition(np);
-    }
-    else {
+    bool gameOver = handleGameOver(delta);
+
+    if (!gameOver) {//主角死亡的处理
         switch (mState) {
             case Entering:// run to position
             {

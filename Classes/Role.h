@@ -52,6 +52,7 @@ class Role: public GameObject {
     virtual void onCreate() {
       GameObject::onCreate();
       mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(animationSetName()));
+      mSprite->setAnchorPoint(mAnchor);
       mState = Entering;
 
       auto node = DrawNode::create();
@@ -61,8 +62,11 @@ class Role: public GameObject {
       mSprite->addChild(node);
     }
 
+    bool handleGameOver (float delta) ;
+
     std::vector<Circle> mCollisionCircles;
     GTAnimatedSprite *mSprite;
+    cocos2d::Vec2 mAnchor = cocos2d::Vec2(0.4f, 0.0625f);
     int mState = Initializing;
     //enum RoleState mState;
 

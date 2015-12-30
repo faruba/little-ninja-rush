@@ -14,16 +14,17 @@
 #include "GameRecord.h"
 #include "UniversalFit.h"
 
-void Merchant::onCreate() 
-{
+void Merchant::onCreate() {
+  mAnchor = cocos2d::Vec2(0.5f , 0);
+
   Role::onCreate();
-    mSprite->setAnchorPoint(cocos2d::Vec2(0.5f , 0));
-    mSprite->setPosition(cocos2d::Vec2(-50, PLAY_PLAYERLINE+5));
-    mSprite->playGTAnimation(0, true);
-    mParent->addChild(mSprite, LAYER_MAINROLE-1);
-    
-    mFlag = true;
-    mStepTimer = 0;
+
+  mSprite->setPosition(cocos2d::Vec2(-50, PLAY_PLAYERLINE+5));
+  mSprite->playGTAnimation(0, true);
+  mParent->addChild(mSprite, LAYER_MAINROLE-1);
+
+  mFlag = true;
+  mStepTimer = 0;
 }
 
 void Merchant::onUpdate(float delta) 
