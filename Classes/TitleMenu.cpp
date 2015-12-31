@@ -792,7 +792,7 @@ void TitleMenu::onEnter()
   {
     mNew->runAction(cocos2d::Sequence::create(
           cocos2d::DelayTime::create(1.0f),
-          cocos2d::CCShow::create(),
+          cocos2d::Show::create(),
           cocos2d::ScaleTo::create(0.2f, 1.5f),
           cocos2d::ScaleTo::create(0.1f, 1.0f),
           nullptr
@@ -805,7 +805,7 @@ void TitleMenu::onEnter()
   {
     mCNew->runAction(cocos2d::Sequence::create(
           cocos2d::DelayTime::create(1.5f),
-          cocos2d::CCShow::create(),
+          cocos2d::Show::create(),
           cocos2d::ScaleTo::create(0.2f, 1.5f),
           cocos2d::ScaleTo::create(0.1f, 1.0f),
           nullptr

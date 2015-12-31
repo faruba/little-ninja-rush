@@ -169,6 +169,7 @@ void CollectionMenu::onExit()
 {
 	GameRecord::sharedGameRecord()->collection->cleanNewList();
 	GamePlay::sharedGamePlay()->setTaskCompleteNode(NULL);
+    PublicLoad::menuCollection()->unloadAll();
 
 	//MidBridge::sharedMidbridge()->setFacebookCallback(NULL, menu_selector(CollectionMenu::doneFacebook));
 	//MidBridge::sharedMidbridge()->setTwitterCallback(NULL, menu_selector(CollectionMenu::doneTwitter));
