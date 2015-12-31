@@ -73,6 +73,7 @@ void drawLottoryBetween (int start, int end, std::vector<Type>& vector) {
   float res = 1.0f*randomInt(100000)/100000.0f;
 
   for (auto &item : vector) {
+    if (GameRecord::sharedGameRecord()->collection->isItemCompleted(item.uiid)) continue;
     roller += ((float)item.wght)/sum;
 
     if ( res < roller ) {
