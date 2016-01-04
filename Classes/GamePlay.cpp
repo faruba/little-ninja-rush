@@ -1255,6 +1255,7 @@ void GamePlay::pushNotification(std::string name, std::string icon, int type)
     gPopQueues = cocos2d::CCArray::create();
     gPopQueues->retain();
   }
+  CCASSERT(icon.length()  != 0, "icon should not be empty");
   PopQueue *pop = PopQueue::create();
   pop->title = name;
   pop->icon = icon;
