@@ -208,10 +208,10 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname->g
                   managers[mCurrIndex]->refresh();
                   mCurrObj = &(managers[mCurrIndex]->currentObjective);
                   //TODO: fix this
-                  //mCurrAch = managers[mCurrIndex]->info();
-                  //cocos2d::Node *newobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
-                  //newobj->setPosition(cocos2d::Vec2(18, 54));
-                  //mObjRect->addChild(newobj);
+                  mCurrAch = managers[mCurrIndex]->info();
+                  cocos2d::Node *newobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
+                  newobj->setPosition(cocos2d::Vec2(18, 54));
+                  mObjRect->addChild(newobj);
                 } else {
                     mCurrAch = NULL;
                     cocos2d::Node *newobj = this->genObjectiveInfo(NULL, mCurrIndex);
@@ -281,7 +281,7 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname->g
     }
 }
 
-void ObjectiveComplete::retriveObjectiveInfo(int index, Objective ** obj, Achievement ** ach) 
+void ObjectiveComplete::retriveObjectiveInfo(int index, Objective ** obj, const Achievement ** ach)
 {
   *obj = NULL;
   *ach = NULL;
@@ -290,7 +290,7 @@ void ObjectiveComplete::retriveObjectiveInfo(int index, Objective ** obj, Achiev
   //TODO:*ach = managers[index]->info();
 }
 
-cocos2d::Node* ObjectiveComplete::genObjectiveInfo(Achievement * ach, int typ) 
+cocos2d::Node* ObjectiveComplete::genObjectiveInfo(const Achievement*  ach, int typ)
 {
     if( ach == NULL )
     {
