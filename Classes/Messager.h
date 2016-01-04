@@ -17,7 +17,6 @@ public:
     virtual bool deliverHit(int type, cocos2d::Point dir);
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
-    int mState;
     float mAwake;
     float mFalldown;
     bool mFlagFalldown;
