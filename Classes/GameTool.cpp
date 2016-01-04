@@ -9,13 +9,13 @@ void GameTool::UpdateObjectives(cocos2d::Label* labels[3],cocos2d::Sprite* icons
   ObjectiveManager *managers[] = { &task->dailyObjective, &task->weeklyObjective, &task->monthlyObjective };
   for (int i = 0; i < 3; i++) {
     if (managers[i]->hasObjective()) {
-      const Achievement &info = managers[i]->info();
+      const Achievement &info = *(managers[i]->info());
 
       labels[i]->setString(Tasks::stringForObjective(info.desc, info.achieveCode,  info.achieveNumber, managers[i]->currentObjective.count)->getCString());
       labels[i]->setColor(Color3B(255, 255, 255));
 
       icons[i]->setVisible(true);
-      cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(info.icon.c_str());
+      cocos2d::Sprite *icon = cocos2d::Sprite::createWithSpriteFrameName(info.icon);
       icon->setPosition(cocos2d::Vec2(icons[i]->getContentSize().width/2, icons[i]->getContentSize().height/2));
       icons[i]->addChild(icon);
 
