@@ -150,17 +150,24 @@ public:
   void initCurrentObjective (cocos2d::CCDictionary* dic);
   
   const Achievement &infoWithUiid (int uiid) {
-    if(mObjectives.size() == 0){
-      throw "Null";
-    }
 //    auto result = std::find(std::begin(mObjectives), std::end(mObjectives), uiid);
-    auto result = std::find(mObjectives.begin(), mObjectives.end(), uiid);
-    if (result == std::end(mObjectives)) throw "Null";
-    return *result;
+//    auto result = std::find(mObjectives.begin(), mObjectives.end(), uiid);
+//    if (result == std::end(mObjectives)) throw "Null";
+//    return *result;
+    for (Achievement& result : mObjectives){
+      if (result.uiid == uiid){
+        return result;
+      }
+    }
+    throw "Null";
   }
   
-  const Achievement &info () {
-    return infoWithUiid(currentObjective.uiid);
+  const Achievement* info () {
+    try {
+      return &(infoWithUiid(currentObjective.uiid));
+    } catch (const char* err) {
+      return NULL;
+    }
   }
   
   bool isCompleted () {
