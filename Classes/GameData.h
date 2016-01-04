@@ -154,6 +154,8 @@ void loadVectorFromJsonFile(const char *filename, std::vector<T> &vector) {
   try {
     JsonWrapper::parseJsonFileForVector(filename, vector);
   } catch ( const char *err ) {
+    
+    CCLOG("Error: failed to parse objectives data file %s.", filename);
   }
   CCLOG("%lu items loaded.", vector.size());
 }
