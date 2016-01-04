@@ -535,7 +535,6 @@ void ShopMenu::onTouchMoved(Touch * touch, Event * event)
             float ds = np.y - mLastY;
             //float dt = time - mLastTime;
           float dt = GameTool::diffTimeval(time, mLastTime)/1000.0;
-          cocos2d::CCLog("dt : %f",dt);
           if(dt <= 0.01){
             dt = 1.0f;
           }
