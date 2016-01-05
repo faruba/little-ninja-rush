@@ -247,30 +247,29 @@ void ShopMenu::activate(int cid)
         }
         //rearrange items
         mOffset = 0;
-cocos2d::Ref* node = NULL;
-//CCARRAY_FOREACH(mItemList->getChildren(), node)
-//        {
-//            FoldItem *it = (FoldItem*)node;
-//            it->setPosition(cocos2d::Vec2(0, mOffset));
-//            mOffset -= it->getContentSize().height + PADDING;
-//        }
-//        if( unfold )
-//        {
-//            float upbound = -newitem->getPosition().y - mItemList->getPosition().y;
-//            if( upbound < 0 )
-//            {
-//                cocos2d::Point np = mItemList->getPosition();
-//                np.y = -newitem->getPosition().y;
-//                mItemList->setPosition(np);
-//            }
-//            float downbound = upbound + newitem->getContentSize().height;
-//            if( downbound > 264 )
-//            {
-//                cocos2d::Point np = mItemList->getPosition();
-//                np.y = -newitem->getPosition().y + newitem->getContentSize().height - 264;
-//                mItemList->setPosition(np);
-//            }
-//        }
+        for(Node* node : mItemList->getChildren())
+        {
+            FoldItem *it = (FoldItem*)node;
+            it->setPosition(cocos2d::Vec2(0, mOffset));
+            mOffset -= it->getContentSize().height + PADDING;
+        }
+        if( unfold )
+        {
+            float upbound = -newitem->getPosition().y - mItemList->getPosition().y;
+            if( upbound < 0 )
+            {
+                cocos2d::Point np = mItemList->getPosition();
+                np.y = -newitem->getPosition().y;
+                mItemList->setPosition(np);
+            }
+            float downbound = upbound + newitem->getContentSize().height;
+            if( downbound > 264 )
+            {
+                cocos2d::Point np = mItemList->getPosition();
+                np.y = -newitem->getPosition().y + newitem->getContentSize().height - 264;
+                mItemList->setPosition(np);
+            }
+        }
     }
 }
 
@@ -562,20 +561,19 @@ cocos2d::CCRect rect = cocos2d::Rect(12, 12, 455, 264);
             float dy = mList->getPosition().y - pos.y;
             float offset = 0;
             int index = 0;
-cocos2d::Ref *node;
-//CCARRAY_FOREACH(mItemList->getChildren(), node)
-//            {
-//                FoldItem *item = (FoldItem*)node;
-//                float upbound = offset - mItemList->getPosition().y;
-//                float downbound = upbound + item->getContentSize().height + PADDING;
-//                if( dy >= upbound && dy < downbound )
-//                {
-//                    activate(index);
-//                    break;
-//                }
-//                offset += item->getContentSize().height + PADDING;
-//                index++;
-//            }
+            for(Node* node : mItemList->getChildren())
+            {
+                FoldItem *item = (FoldItem*)node;
+                float upbound = offset - mItemList->getPosition().y;
+                float downbound = upbound + item->getContentSize().height + PADDING;
+                if( dy >= upbound && dy < downbound )
+                {
+                    activate(index);
+                    break;
+                }
+                offset += item->getContentSize().height + PADDING;
+                index++;
+            }
         }
     }
 }
@@ -636,12 +634,11 @@ void ShopMenu::cancelModal()
         mIsModal = false;
         mMask->setVisible(false);
         mMenu->setTouchEnabled(true);
-cocos2d::Ref *node;
-//CCARRAY_FOREACH(mItemList->getChildren(), node)
-//        {
-//            FoldItem *it = (FoldItem*)node;
-//            it->togglePurchaseButton(true);
-//        }
+        for(Node* node : mItemList->getChildren())
+        {
+            FoldItem *it = (FoldItem*)node;
+            it->togglePurchaseButton(true);
+        }
     }
 }
 

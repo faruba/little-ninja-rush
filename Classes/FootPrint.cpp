@@ -64,20 +64,18 @@ void FootPrint::onUpdate(float delta)
         if( play->count_runscene <= 0 || (play->gameOverTimer>=0 && play->gameOverTimer<PLAY_GOSLIDETIME))
         {
             float ds = delta*play->runspeed;
-            /*TODO:Uncomment this
-            for(unsigned int i=0; i<play->footprints->getChildrenCount(); ++i)
+            /*TODO:Uncomment this */
+            for(Node* node : play->footprints->getChildren())
             {
-cocos2d::Sprite *sp = (cocos2d::Sprite*)play->footprints->getChildren()->objectAtIndex(i);
+              cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
                 cocos2d::Point pos = sp->getPosition();
                 pos.x -= ds;
                 sp->setPosition(pos);
                 if( pos.x + sp->getContentSize().width < 0 )
                 {
                     play->footprints->removeChild(sp, false);
-                    i--;
                 }
             }
-             */
         }
     }
 }

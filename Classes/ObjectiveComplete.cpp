@@ -204,10 +204,8 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname->g
                 Tasks *task = GameRecord::sharedGameRecord()->task;
                 ObjectiveManager *managers[] = { &task->dailyObjective, &task->weeklyObjective, &task->monthlyObjective };
                 if ( mCurrObj->index < 2 ) {
-                  Tasks *task = GameRecord::sharedGameRecord()->task;
                   managers[mCurrIndex]->refresh();
                   mCurrObj = &(managers[mCurrIndex]->currentObjective);
-                  //TODO: fix this
                   mCurrAch = managers[mCurrIndex]->info();
                   cocos2d::Node *newobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
                   newobj->setPosition(cocos2d::Vec2(18, 54));
@@ -287,7 +285,8 @@ void ObjectiveComplete::retriveObjectiveInfo(int index, Objective ** obj, const 
   *ach = NULL;
   Tasks *task = GameRecord::sharedGameRecord()->task;
   ObjectiveManager *managers[] = { &task->dailyObjective, &task->weeklyObjective, &task->monthlyObjective };
-  //TODO:*ach = managers[index]->info();
+  //TODO:
+  *ach = managers[index]->info();
 }
 
 cocos2d::Node* ObjectiveComplete::genObjectiveInfo(const Achievement*  ach, int typ)
