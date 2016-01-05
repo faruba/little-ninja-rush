@@ -515,6 +515,9 @@ void Tasks::checkObjectives()
 
 void Tasks::refreshArcadePrizes() 
 {
+  if (goldPrize == NULL){
+    return;
+  }
   if( goldPrize->prize >= 0 )
   {
     //stop golden steak

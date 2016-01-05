@@ -311,8 +311,10 @@ void GamePlay::update(float delta)
     if( mScheduleVibrate < 0 )
     {
       //clean up
-      this->setScale(1);
-      this->setPosition(cocos2d::Vec2(0, 0));
+      this->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
+      this->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
+      //this->setScale(1);
+      //this->setPosition(cocos2d::Vec2(0, 0));
     }
   }
   //scheduled slow
