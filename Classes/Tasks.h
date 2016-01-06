@@ -254,9 +254,9 @@ public:
   ObjectiveManager monthlyObjective;
   
   int prizeDate;
-  ArcadePrize *goldPrize;
-  ArcadePrize *silverPrize;
-  ArcadePrize *bronzePrize;
+  ArcadePrize *goldPrize = ArcadePrize::create();
+  ArcadePrize *silverPrize = ArcadePrize::create();
+  ArcadePrize *bronzePrize = ArcadePrize::create();
   
   void createObjectives();
   void readObjectives(cocos2d::CCDictionary* dic);

@@ -100,25 +100,25 @@ void Tasks::readObjectives(cocos2d::CCDictionary* dic)
     {
       prizeDate = gtReadInt(dic, "apz_date", 0);
       {
-        ArcadePrize *ap = ArcadePrize::create();
-        ap->score =gtReadInt(dic, "apz_gold_score", -1);
-        ap->prize =gtReadInt(dic, "apz_gold_prize", 0);
-        ap->retain();
-        goldPrize = ap;
+        //ArcadePrize *ap = ArcadePrize::create();
+        goldPrize->score =gtReadInt(dic, "apz_gold_score", -1);
+        goldPrize->prize =gtReadInt(dic, "apz_gold_prize", 0);
+        //goldPrize->retain();
+        //goldPrize = ap;
       }
       {
-        ArcadePrize *ap = ArcadePrize::create();
-        ap->score =gtReadInt(dic, "apz_silver_score", -1);
-        ap->prize =gtReadInt(dic, "apz_silver_prize", 0);
-        ap->retain();
-        silverPrize = ap;
+        //ArcadePrize *ap = ArcadePrize::create();
+        silverPrize->score =gtReadInt(dic, "apz_silver_score", -1);
+        silverPrize->prize =gtReadInt(dic, "apz_silver_prize", 0);
+        //silverPrize->retain();
+        //silverPrize = ap;
       }
       {
-        ArcadePrize *ap = ArcadePrize::create();
-        ap->score =gtReadInt(dic, "apz_bronze_score", -1);
-        ap->prize =gtReadInt(dic, "apz_bronze_prize", 0);
-        ap->retain();
-        bronzePrize = ap;
+        //ArcadePrize *ap = ArcadePrize::create();
+        bronzePrize->score =gtReadInt(dic, "apz_bronze_score", -1);
+        bronzePrize->prize =gtReadInt(dic, "apz_bronze_prize", 0);
+        //bronzePrize->retain();
+        //bronzePrize = ap;
       }
     }
     //载入成就记录
