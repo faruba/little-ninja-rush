@@ -10,7 +10,7 @@ typedef bool Predicate (const rapidjson::Value &arg);
 
 class ValueWrapper {
   public:
-    ValueWrapper(rapidjson::Value &arg) {
+   ValueWrapper(rapidjson::Value &arg) {
         value = arg;
     }
 
@@ -40,7 +40,11 @@ class ValueWrapper {
 
     template <typename Type>
       void getVector(const char* key, std::vector<Type>& vector);
-
+  
+    bool isKeyExist(const char* key){
+      return value.MemberEnd() != value.FindMember(key);
+    }
+   
   private:
     rapidjson::Value value;
 
@@ -50,7 +54,7 @@ class ValueWrapper {
       if (hasKey) {
         itr = value.FindMember(key);
         if (itr == value.MemberEnd()) {
-          throw "Field '`key`' missing."; // TODO: Good Exception
+              throw "Field '`key`' missing."; // TODO: Good Exception
         }
       }
 

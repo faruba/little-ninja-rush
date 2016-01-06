@@ -64,6 +64,7 @@ GTLoadList* PublicLoad::menuSelect()
     list->addSpriteSheet("menu-effect.plist");;
     list->addSpriteSheet("menu-select.plist");;
     list->addSpriteSheet("protrait.plist");;
+    list->addSpriteSheet("menu-collection.plist");;
     list->addLoadFunc(assetMainRole);;
     list->addLoadFunc(assetMainGirl);;
     list->addLoadFunc(assetMainMusashi);;

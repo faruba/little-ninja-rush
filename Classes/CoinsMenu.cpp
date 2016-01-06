@@ -126,13 +126,12 @@ void CoinsMenu::activate(int cid)
         }
         //rearrange items
         mOffset = 0;
-cocos2d::Ref* node = NULL;
-//CCARRAY_FOREACH(mItemList->getChildren(), node)
-//        {
-//            FoldItem *it = (FoldItem*)node;
-//            it->setPosition(cocos2d::Vec2(0, mOffset));
-//            mOffset -= it->getContentSize().height + PADDING;
-//        }
+        for(Node* node : mItemList->getChildren())
+        {
+            FoldItem *it = (FoldItem*)node;
+            it->setPosition(cocos2d::Vec2(0, mOffset));
+            mOffset -= it->getContentSize().height + PADDING;
+        }
         if( unfold )
         {
             float upbound = -newitem->getPosition().y - mItemList->getPosition().y;
@@ -395,12 +394,11 @@ void CoinsMenu::cancelModal()
         mIsModal = false;
         mMask->setVisible(false);
         mMenu->setTouchEnabled(true);
-cocos2d::Ref *node;
-//CCARRAY_FOREACH(mItemList->getChildren(), node)
-//        {
-//            FoldItem *it = (FoldItem*)node;
-//            it->togglePurchaseButton(true);
-//        }
+        for(Node* node : mItemList->getChildren())
+        {
+            FoldItem *it = (FoldItem*)node;
+            it->togglePurchaseButton(true);
+        }
     }
 }
 

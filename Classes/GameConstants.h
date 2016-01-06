@@ -4,7 +4,7 @@
 //游戏常数
 #define PI (3.14159f)
 
-#define GFONT_NAME ("Helvetica")
+#define GFONT_NAME ("Helvetica.ttf")
 #define GFONT_SIZE_LARGE (24)
 #define GFONT_SIZE_NORMAL (16)
 

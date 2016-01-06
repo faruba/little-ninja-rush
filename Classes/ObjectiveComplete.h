@@ -43,7 +43,7 @@ class ObjectiveComplete:
     int mCurrBounsScrolls;
 
     Objective *mCurrObj;
-    Achievement *mCurrAch;
+    const Achievement *mCurrAch;
 cocos2d::Node *mNode;
     CEClipedNode *mObjRect;
     //--- auto assign ---
@@ -55,10 +55,10 @@ cocos2d::Sprite *mScroll;
 cocos2d::Label *mBounsScroll;
 
 
-    void retriveObjectiveInfo(int index, Objective** obj, Achievement** ach);
+    void retriveObjectiveInfo(int index, Objective** obj, const Achievement** ach);
 
     //typ = 0 日任务 1 周任务 2 月任务
-cocos2d::Node* genObjectiveInfo(Achievement* ach, int typ);
+cocos2d::Node* genObjectiveInfo(const Achievement* ach, int typ);
 
 };
 #endif

@@ -237,6 +237,10 @@ class SpecialCollectionDelegate: public CollectionMenuDelegate {
 
     bool isCollected(int id)
     {
+      //TODO ? what's the meaning of -1?
+      if(id == -1 ){
+        return true;
+      }
       Special &sh = GameData::fetchSpecials()[id];
       return GameRecord::sharedGameRecord()->collection->isItemCompleted(sh.uiid);
     }

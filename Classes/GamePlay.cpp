@@ -311,8 +311,10 @@ void GamePlay::update(float delta)
     if( mScheduleVibrate < 0 )
     {
       //clean up
-      this->setScale(1);
-      this->setPosition(cocos2d::Vec2(0, 0));
+      this->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
+      this->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
+      //this->setScale(1);
+      //this->setPosition(cocos2d::Vec2(0, 0));
     }
   }
   //scheduled slow
@@ -1255,6 +1257,7 @@ void GamePlay::pushNotification(std::string name, std::string icon, int type)
     gPopQueues = cocos2d::CCArray::create();
     gPopQueues->retain();
   }
+  CCASSERT(icon.length()  != 0, "icon should not be empty");
   PopQueue *pop = PopQueue::create();
   pop->title = name;
   pop->icon = icon;

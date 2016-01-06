@@ -5,6 +5,7 @@
 #include "Collections.h"
 #include "GamePlay.h"
 #include "patch.h"
+#include "GameData.h"
 //#include "GameCenterController.h"
 
 ///////////////////////// ObjectiveManager
@@ -46,8 +47,8 @@ void ObjectiveManager::initCurrentObjective (cocos2d::CCDictionary* dic) {
 ///////////////////////// ObjectiveManager
 
 //装载数据
-cocos2d::CCArray *gAchievements = NULL;//成就
-cocos2d::CCArray *gStatistics = NULL;//统计
+std::vector<Achievement> gAchievements;//成就
+std::vector<Statistics> gStatistics;//统计
 bool gLoadFlag = false;
 
 Tasks* Tasks::sharedTasks() 
@@ -99,46 +100,45 @@ void Tasks::readObjectives(cocos2d::CCDictionary* dic)
     {
       prizeDate = gtReadInt(dic, "apz_date", 0);
       {
-        ArcadePrize *ap = ArcadePrize::create();
-        ap->score =gtReadInt(dic, "apz_gold_score", -1);
-        ap->prize =gtReadInt(dic, "apz_gold_prize", 0);
-        ap->retain();
-        goldPrize = ap;
+        //ArcadePrize *ap = ArcadePrize::create();
+        goldPrize->score =gtReadInt(dic, "apz_gold_score", -1);
+        goldPrize->prize =gtReadInt(dic, "apz_gold_prize", 0);
+        //goldPrize->retain();
+        //goldPrize = ap;
       }
       {
-        ArcadePrize *ap = ArcadePrize::create();
-        ap->score =gtReadInt(dic, "apz_silver_score", -1);
-        ap->prize =gtReadInt(dic, "apz_silver_prize", 0);
-        ap->retain();
-        silverPrize = ap;
+        //ArcadePrize *ap = ArcadePrize::create();
+        silverPrize->score =gtReadInt(dic, "apz_silver_score", -1);
+        silverPrize->prize =gtReadInt(dic, "apz_silver_prize", 0);
+        //silverPrize->retain();
+        //silverPrize = ap;
       }
       {
-        ArcadePrize *ap = ArcadePrize::create();
-        ap->score =gtReadInt(dic, "apz_bronze_score", -1);
-        ap->prize =gtReadInt(dic, "apz_bronze_prize", 0);
-        ap->retain();
-        bronzePrize = ap;
+        //ArcadePrize *ap = ArcadePrize::create();
+        bronzePrize->score =gtReadInt(dic, "apz_bronze_score", -1);
+        bronzePrize->prize =gtReadInt(dic, "apz_bronze_prize", 0);
+        //bronzePrize->retain();
+        //bronzePrize = ap;
       }
     }
     //载入成就记录
-    cocos2d::Ref *obj = NULL;
-    CCARRAY_FOREACH (gAchievements, obj)
+
+    for(Achievement& ach : gAchievements)
     {
-      Achievement *ach = (Achievement*)obj;
-      cocos2d::CCString *key = cocos2d::CCString::createWithFormat("achievement__%d", ach->uiid);
-      ach->achieveCount = gtReadInt(dic, key->getCString(), 0);
+      std::string key = std::string_format("achievement__%d", ach.uiid);
+      ach.achieveCount = gtReadInt(dic, key.c_str(), 0);
       //生成Task
-      if( ach->achieveCount < ach->achieveNumber )
+      if( ach.achieveCount < ach.achieveNumber )
       {
-        this->assignTask(ach->achieveCode, ach->achieveNumber, ach->achieveCount, TASK_ACHIEVEMENT, ach->uiid);
+        ach.registTask(this);
       }
       //gamecenter support
-      {
+      /*{
         bool shouldInGameCenter = false;
         double percent = 0;
-        if( ach->achieveCode > ACH_OVERLINE )
+        if( ach.achieveCode > ACH_OVERLINE )
         {//done or not done
-          if( ach->achieveCount >= ach->achieveNumber )
+          if( ach.achieveCount >= ach.achieveNumber )
           {
             shouldInGameCenter = true;
             percent = 100;
@@ -146,32 +146,30 @@ void Tasks::readObjectives(cocos2d::CCDictionary* dic)
         }
         else
         {
-          if( ach->achieveCount > 0 )
+          if( ach.achieveCount > 0 )
           {
             shouldInGameCenter = true;
-            if( ach->achieveCount >= ach->achieveNumber )
+            if( ach.achieveCount >= ach.achieveNumber )
             {
               percent = 100;
             }
             else
             {
-              percent = 100.0*ach->achieveCount/ach->achieveNumber;
+              percent = 100.0*ach.achieveCount/ach.achieveNumber;
             }
           }
         }
-      }
+      }*/
     }
     //载入统计记录
-    cocos2d::Ref *pObj = NULL;
-    CCARRAY_FOREACH(gStatistics, pObj)
+    for(Statistics& sta :gStatistics)
     {
-      Statistics *sta = (Statistics*)pObj;
-      if( sta->achieveCode >= 0 )
+      if( sta.achieveCode >= 0 )
       {
-        cocos2d::CCString *key = cocos2d::CCString::createWithFormat("statistics__%d", sta->uiid);
-        sta->achieveCount = gtReadInt(dic, key->getCString(), 0);
+        std::string key = std::string_format("statistics__%d", sta.uiid);
+        sta.achieveCount = gtReadInt(dic, key.c_str(), 0);
         //生成Task
-        this->assignTask(sta->achieveCode, -1, sta->achieveCount, TASK_STATISTICS, sta->uiid);
+        sta.registTask(this);
       }
     }
     gLoadFlag = true;
@@ -181,56 +179,56 @@ void Tasks::readObjectives(cocos2d::CCDictionary* dic)
 
 void Tasks::doneReadObjectives() 
 {
-  if( !mRecordRead )
-  {
-    //载入目标记录
-    {
-      prizeDate = 0;
-      {
-        ArcadePrize *pz = ArcadePrize::create();
-        pz->score = -1;
-        pz->prize = 0;
-        goldPrize = pz;
-      }
-      {
-        ArcadePrize *pz = ArcadePrize::create();
-        pz->score = -1;
-        pz->prize = 0;
-        silverPrize = pz;
-      }
-      {
-        ArcadePrize *pz = ArcadePrize::create();
-        pz->score = -1;
-        pz->prize = 0;
-        bronzePrize = pz;
-      }
-      goldPrize->retain();
-      silverPrize->retain();
-      bronzePrize->retain();
-    }
-    //载入成就记录
-    cocos2d::Ref *pObj = NULL;
-    CCARRAY_FOREACH(gAchievements, pObj)
-    {
-      Achievement  *ach = (Achievement *)pObj;
-      //生成Task
-      if( ach->achieveCount < ach->achieveNumber )
-      {
-        this->assignTask(ach->achieveCode, ach->achieveNumber, 0, TASK_ACHIEVEMENT, ach->uiid);
-      }
-    }
-    //载入统计记录
-    pObj = NULL;
-    CCARRAY_FOREACH(gStatistics, pObj)
-    {
-      Statistics *sta = (Statistics*)pObj;
-      if( sta->achieveCode >= 0 )
-      {
-        //生成Task
-        this->assignTask(sta->achieveCode, -1, 0, TASK_STATISTICS, sta->uiid);
-      }
-    }
-  }
+  //TODO if I'm right, this code will never be excuted
+  //if( !mRecordRead )
+  //{
+  //  //载入目标记录
+  //  {
+  //    prizeDate = 0;
+  //    {
+  //      ArcadePrize *pz = ArcadePrize::create();
+  //      pz->score = -1;
+  //      pz->prize = 0;
+  //      goldPrize = pz;
+  //    }
+  //    {
+  //      ArcadePrize *pz = ArcadePrize::create();
+  //      pz->score = -1;
+  //      pz->prize = 0;
+  //      silverPrize = pz;
+  //    }
+  //    {
+  //      ArcadePrize *pz = ArcadePrize::create();
+  //      pz->score = -1;
+  //      pz->prize = 0;
+  //      bronzePrize = pz;
+  //    }
+  //    goldPrize->retain();
+  //    silverPrize->retain();
+  //    bronzePrize->retain();
+  //  }
+  //  //载入成就记录
+  //  cocos2d::Ref *pObj = NULL;
+  //  for(Achievement& ach : gAchievements)
+  //  {
+  //    //生成Task
+  //    if( ach.achieveCount < ach.achieveNumber )
+  //    {
+  //      this->assignTask(ach.achieveCode, ach.achieveNumber, 0, TASK_ACHIEVEMENT, ach.uiid);
+  //    }
+  //  }
+  //  //载入统计记录
+  //  pObj = NULL;
+  //  CCARRAY_FOREACH(gStatistics, pObj)
+  //  {
+  //    Statistics *sta = (Statistics*)pObj;
+  //    if( sta->achieveCode >= 0 )
+  //    {
+  //      //生成Task
+  //      this->assignTask(sta->achieveCode, -1, 0, TASK_STATISTICS, sta->uiid);
+  //    }
+  //  }
+  //}
 
   //#ifdef DEBUG
   //    //PRINT TASKS
@@ -263,24 +261,16 @@ void Tasks::writeObjectives(rapidjson::Document &document)
     document.AddMember("apz_bronze_prize", bronzePrize->prize, document.GetAllocator());
   }
   //写入成就记录
-  cocos2d::Ref *obj = NULL;
-  CCARRAY_FOREACH (gAchievements, obj)
+  for(Achievement& ach : gAchievements)
   {
-    Achievement *ach = (Achievement*)obj;
-    const std::string key = std::string("achievement__")+std::to_string(ach->uiid);
-    rapidjson::Value index(key.c_str(), key.size(), document.GetAllocator());
-    document.AddMember(index, ach->achieveCount, document.GetAllocator());
+    ach.write(document);
   }
   //写入统计记录
-  cocos2d::Ref *pObj = NULL;
-  CCARRAY_FOREACH(gStatistics, pObj)
+  for(Statistics& sta: gStatistics)
   {
-    Statistics *sta = (Statistics*)pObj;
-    if( sta->achieveCode >= 0 )
+    if( sta.achieveCode >= 0 )
     {
-      const std::string key = std::string("statistics__")+std::to_string(sta->uiid);
-      rapidjson::Value index(key.c_str(), key.size(), document.GetAllocator());
-      document.AddMember(index, sta->achieveCount, document.GetAllocator());
+      sta.write(document);
     }
   }
 }
@@ -428,37 +418,16 @@ void Tasks::dispatchTask(int achieveCode, int cnt)
 void Tasks::completeAchievement(int tid) 
 {
   Achievement *obj = Tasks::achievementWithUiid(tid);
-  //TODO:GamePlay::sharedGamePlay()->pushNotification(obj->text, obj->icon, 3);
+  GamePlay::sharedGamePlay()->pushNotification(obj->text, obj->icon, 3);
 }
 
 //给参数加了引用，为什么之前没有引用，有一部分也能功能，不科学
 void loadObjectivesFromFile(const char* szJson, ObjectiveManager &manager)
 {
-  cocos2d::CCString *path = cocos2d::CCString::createWithFormat("data/%s", szJson);
-  cocos2d::CCString *str = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename(path->getCString()).c_str());
-  std::string data(str->getCString());
-  cocos2d::CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(data);
-  if (parsed) {
-    cocos2d::Ref *pObj = NULL;
-    CCARRAY_FOREACH(parsed, pObj)
-    {
-      cocos2d::CCDictionary *dic = (cocos2d::CCDictionary*)pObj; {
-        Achievement ach;
-        ach.uiid = gtReadInt(dic, "uiid");
-        ach.icon = gtReadString(dic, "icon", "");
-        ach.desc = gtReadString(dic, "desc", "");
-        ach.achieveCode = gtReadInt(dic, "code");
-        ach.achieveNumber = gtReadInt(dic, "cont");
-        ach.prizeType = gtReadInt(dic, "priz");
-        ach.prizeCount = gtReadInt(dic, "pcnt");
-        ach.achieveCount = 0;//从记录中读取
-        manager.mObjectives.push_back(ach);
-      }
-    }
-  }
-  else {
-    cocos2d::CCLog("Error: failed to parse objectives data file %s.", szJson);
-  }
+  
+  std::string path = std::string_format("data/%s", szJson);
+  loadVectorFromJsonFile(path.c_str(), manager.mObjectives);
+
 }
 
 void Tasks::loadObjectivesFromFile() 
@@ -472,123 +441,46 @@ void Tasks::loadObjectivesFromFile()
 }
 
 void Tasks::loadAchievementsFromFile() 
-{/*TODO:
-   if( gAchievements == NULL )
-   {
-   gAchievements = cocos2d::CCArray::create();
-   gAchievements->retain();
-   }
-   else
-   {
-   gAchievements->removeAllObjects();
-   }
-   cocos2d::CCString *str = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("data/achievements.json").c_str());
-   cocos2d::CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(str);
-   if (parsed)
-   {
-   cocos2d::Ref *pObj = NULL;
-   CCARRAY_FOREACH(parsed, pObj)
-   {
-   cocos2d::CCDictionary *dic = (cocos2d::CCDictionary*)pObj;
-   {
-   Achievement *ach = Achievement::create();
-   ach->uiid = gtReadInt(dic, "uiid");
-   ach->gcid = gtReadString(dic, "gcid");
-   ach->text = gtReadString(dic, "text");
-   ach->name = gtReadString(dic, "name");
-   ach->icon = gtReadString(dic, "icon");
-   ach->desc = gtReadString(dic, "desc");
-   ach->achieveCode = gtReadInt(dic, "code");
-   ach->achieveNumber = gtReadInt(dic, "cont");
-   ach->prizeType = gtReadInt(dic, "priz");
-   ach->prizeCount = gtReadInt(dic, "pcnt");
-   ach->achieveCount = 0;//从记录中读取
-   gAchievements->addObject(ach);
-   }
-   }
-   }
-   else {
-   cocos2d::CCLog("Error: failed to parse achievements data file %s.");
-   }*/
+{
+  gAchievements.clear();
+  loadVectorFromJsonFile("data/achievements.json",gAchievements);
 }
 
 void Tasks::loadStatisticsFromFile() 
 {
-  if( gStatistics == NULL )
-  {
-    gStatistics = cocos2d::CCArray::create();
-    gStatistics->retain();
-  }
-  else
-  {
-    gStatistics->removeAllObjects();
-  }
-  /*TODO:
-  //CCString *str = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathFromRelativeFile("statistics.json", "data"));
-  cocos2d::CCString *str = cocos2d::CCString::createWithContentsOfFile(cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("data/statistics.json").c_str());
-  cocos2d::CCArray *parsed = (cocos2d::CCArray*)JsonWrapper::parseJson(str);
-  if (parsed)
-  {
-  cocos2d::Ref *pObj = NULL;
-  CCARRAY_FOREACH(parsed, pObj)
-  {
-  cocos2d::CCDictionary *dic = (cocos2d::CCDictionary*)pObj;
-  {
-  Statistics *sta = Statistics::create();
-  sta->uiid = gtReadInt(dic, "uiid");
-  sta->name = gtReadString(dic, "name");
-  sta->psfx = gtReadString(dic, "psfx");
-  sta->achieveCode = gtReadInt(dic, "code");
-  sta->achieveCount = 0;//从记录中读取
-  gStatistics->addObject(sta);
-  }
-  }
-  }
-  else {
-  cocos2d::CCLog("Error: failed to load statistics file.");
-  }
-  */
+  gStatistics.clear();
+  loadVectorFromJsonFile("data/statistics.json",gStatistics);
 }
 
-Achievement* Tasks::achievementWithUiid(int uiid) 
-{
+template <typename T>
+T* findByUiid(int uiid, std::vector<T>& vec) {
   if( uiid >= 0 )
   {
-    cocos2d::Ref *pObj = NULL;
-    CCARRAY_FOREACH(gAchievements, pObj){
-      Achievement *obj = (Achievement*)pObj;
-      if( obj->uiid == uiid )
-      {
-        return obj;
-      }
+    typename std::vector<T>::iterator it = std::find_if(vec.begin(),vec.end(),[&](T& t){
+      return t.uiid == uiid;
+    });
+    if(it != vec.end()){
+      return it.operator->();
     }
   }
   return NULL;
 }
+Achievement* Tasks::achievementWithUiid(int uiid)
+{
+  return findByUiid(uiid, gAchievements);
+}
 
 Statistics* Tasks::statisticsWithUiid(int uiid) 
 {
-  //TODO:
-//  if( uiid >= 0 )
-//  {
-//    cocos2d::Ref *pObj = NULL;
-//    CCARRAY_FOREACH(gDailyObjectives, pObj){
-//      Statistics *obj = (Statistics*)pObj;
-//      if( obj->uiid == uiid )
-//      {
-//        return obj;
-//      }
-//    }
-//  }
-//  return NULL;
+  return findByUiid(uiid, gStatistics);
 }
 
-cocos2d::CCArray* Tasks::getStatistics() 
+std::vector<Statistics>& Tasks::getStatistics()
 {
   return gStatistics;
 }
 
-cocos2d::CCArray* Tasks::getAchievements() 
+std::vector<Achievement>& Tasks::getAchievements()
 {
   return gAchievements;
 }
@@ -623,6 +515,9 @@ void Tasks::checkObjectives()
 
 void Tasks::refreshArcadePrizes() 
 {
+  if (goldPrize == NULL){
+    return;
+  }
   if( goldPrize->prize >= 0 )
   {
     //stop golden steak
@@ -650,4 +545,10 @@ cocos2d::CCString* Tasks::stringForObjective(const std::string &descr, const int
     all = cocos2d::CCString::createWithFormat(descr.c_str());
   }
   return all;
+}
+
+void Record::registTask(Tasks *task){
+  if(isNeedAdd()){
+    task->assignTask(achieveCode, achieveNumber, 0, taskCode, uiid);
+  }
 }

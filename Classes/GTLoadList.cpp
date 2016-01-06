@@ -3,14 +3,14 @@
 
 void GTLoadSpriteSheet(const char* param, bool isload)
 {
-cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
+    cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::getInstance();
     if( isload )
     {
-cocos2d::CCLog("load spritesheet (%s)", param);
+        cocos2d::log("load spritesheet (%s)", param);
         cache->addSpriteFramesWithFile(param);
     }
     else {
-cocos2d::CCLog("unload spritesheet (%s)", param);
+        cocos2d::log("unload spritesheet (%s)", param);
         cache->removeSpriteFramesFromFile(param);
         unloadTextureFromeSpriteFrameFile(param);
     }
@@ -18,7 +18,7 @@ cocos2d::CCLog("unload spritesheet (%s)", param);
 
 void GTLoadMusic(const char* param, bool isload)
 {
-    SimpleAudioEngine *engine = SimpleAudioEngine::sharedEngine();
+    SimpleAudioEngine *engine = SimpleAudioEngine::getInstance();
     if( isload )
     {
         engine->preloadBackgroundMusic(param);
@@ -27,7 +27,7 @@ void GTLoadMusic(const char* param, bool isload)
 
 void GTLoadSfx(const char* param, bool isload)
 {
-    SimpleAudioEngine *engine = SimpleAudioEngine::sharedEngine();
+    SimpleAudioEngine *engine = SimpleAudioEngine::getInstance();
     if( isload )
     {
         engine->preloadEffect(param);

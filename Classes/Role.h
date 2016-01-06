@@ -55,11 +55,11 @@ class Role: public GameObject {
       mSprite->setAnchorPoint(mAnchor);
       mState = Entering;
 
-      auto node = DrawNode::create();
-      for (auto & circle : mCollisionCircles) {
-        node->drawCircle(circle.center, circle.radius, 180, 30, false, 1, 1, cocos2d::Color4F::RED);
-      }
-      mSprite->addChild(node);
+      //auto node = DrawNode::create();
+      //for (auto & circle : mCollisionCircles) {
+      //  node->drawCircle(circle.center, circle.radius, 180, 30, false, 1, 1, cocos2d::Color4F::RED);
+      //}
+      //mSprite->addChild(node);
     }
 
     bool handleGameOver (float delta) ;
