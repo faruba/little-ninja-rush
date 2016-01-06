@@ -1,738 +1,737 @@
 [
-{
-	"name":"main",
-		"animations":[
-		{
-			"duration_per_frame" : 0.05 ,
-			"frames":[ "main_run1.png", "main_run2.png", "main_run3.png" ]
-		},
-		{
-			"duration_per_frame" : 0.05 ,
-			"frames":[ "main_attack1.png", "main_attack2.png", "main_attack3.png", "main_attack4.png", "main_attack5.png" ]
-		},
-		{
-			"duration_per_frame" : 0.05 ,
-			"frames":[ "main_attack6.png", "main_attack7.png", "main_attack8.png", "main_attack9.png", "main_attack10.png" ]
-		},
-		{
-			"duration_per_frame" : 0.05 ,
-			"frames":[ "main_attack11.png", "main_attack12.png", "main_attack13.png", "main_attack14.png", "main_attack15.png", "main_attack16.png", "main_attack17.png" ]
-		},
-		{
-			"duration_per_frame" : 0.05 ,
-			"frames":[ "main_fall1.png", "main_fall2.png", "main_fall3.png", "main_fall4.png", "main_fall5.png", "main_fall6.png", "main_fall7.png" ]
-		},
-		{
-			"duration_per_frame" : 0.05 ,
-			"frames":[ "main_fall8.png", "main_fall9.png", "main_fall10.png", "main_fall11.png", "main_fall12.png", "main_fall13.png", "main_fall14.png" ]
-		},
-		{
-			"duration_per_frame" : 0.05 ,
-			"frames":[ "main_die1.png", "main_die2.png", "main_die3.png", "main_die4.png", "main_die5.png", "main_die6.png" ]
-		},
-		{
-			"duration_per_frame" : 0.05 ,
-			"frames":[ "main_die7.png", "main_die8.png" ]
-		},
-		{
-			"duration_per_frame" : 0.05 ,
-			"frames":[ "main_attack11.png" ]
-		},
-		{
-			"duration_per_frame" : 0.062 ,
-			"frames":[ "main_die8.png", "main_die7.png", "main_die6.png", "main_die5.png", "main_die4.png", "main_die3.png", "main_die2.png", "main_die1.png" ]
-		}
-	]
-}, 
-{
-	"name":"girl",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "girl_run1.png", "girl_run2.png", "girl_run3.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "girl_attack1.png", "girl_attack2.png", "girl_attack3.png", "girl_attack4.png", "girl_attack5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "girl_attack6.png", "girl_attack7.png", "girl_attack8.png", "girl_attack9.png", "girl_attack10.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "girl_attack11.png", "girl_attack12.png", "girl_attack13.png", "girl_attack14.png", "girl_attack15.png", "girl_attack16.png", "girl_attack17.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "girl_fall1.png", "girl_fall2.png", "girl_fall3.png", "girl_fall4.png", "girl_fall5.png", "girl_fall6.png", "girl_fall7.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "girl_fall8.png", "girl_fall9.png", "girl_fall10.png", "girl_fall11.png", "girl_fall12.png", "girl_fall13.png", "girl_fall14.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "girl_die1.png", "girl_die2.png", "girl_die3.png", "girl_die4.png", "girl_die5.png", "girl_die6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "girl_die7.png", "girl_die8.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "girl_attack11.png" ]
-	},
-	{
-		"duration_per_frame" : 0.062 ,
-		"frames":[ "girl_die8.png", "girl_die7.png", "girl_die6.png", "girl_die5.png", "girl_die4.png", "girl_die3.png", "girl_die2.png", "girl_die1.png" ]
-	}
-	]
-}, 
-{
-	"name":"musashi",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "musashi_run1.png", "musashi_run2.png", "musashi_run3.png", "musashi_run4.png", "musashi_run5.png", "musashi_run6.png", "musashi_run7.png", "musashi_run8.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "musashi_attack1.png", "musashi_attack2.png", "musashi_attack3.png", "musashi_attack4.png", "musashi_attack5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "musashi_attack6.png", "musashi_attack7.png", "musashi_attack8.png", "musashi_attack9.png", "musashi_attack10.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "musashi_attack11.png", "musashi_attack12.png", "musashi_attack13.png", "musashi_attack14.png", "musashi_attack15.png", "musashi_attack12.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "musashi_fall1.png", "musashi_fall2.png", "musashi_fall3.png", "musashi_fall4.png", "musashi_fall5.png", "musashi_fall6.png", "musashi_fall7.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "musashi_fall8.png", "musashi_fall9.png", "musashi_fall10.png", "musashi_fall11.png", "musashi_fall12.png", "musashi_fall13.png", "musashi_fall14.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "musashi_die1.png", "musashi_die2.png", "musashi_die3.png", "musashi_die4.png", "musashi_die5.png", "musashi_die6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "musashi_die7.png", "musashi_die8.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "musashi_attack11.png" ]
-	},
-	{
-		"duration_per_frame" : 0.062 ,
-		"frames":[ "musashi_die8.png", "musashi_die7.png", "musashi_die6.png", "musashi_die5.png", "musashi_die4.png", "musashi_die3.png", "musashi_die2.png", "musashi_die1.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "musashi_attack16.png", "musashi_attack17.png", "musashi_attack18.png", "musashi_attack19.png", "musashi_attack20.png", "musashi_attack17.png" ]
-	}
-	]
-}, 
-{
-	"name":"pussy",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "cat_run1.png", "cat_run2.png", "cat_run3.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "cat_attack1.png", "cat_attack2.png", "cat_attack3.png", "cat_attack4.png", "cat_attack5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "cat_attack6.png", "cat_attack7.png", "cat_attack8.png", "cat_attack9.png", "cat_attack10.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "cat_attack11.png", "cat_attack12.png", "cat_attack13.png", "cat_attack14.png", "cat_attack15.png", "cat_attack16.png", "cat_attack17.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "cat_fall1.png", "cat_fall2.png", "cat_fall3.png", "cat_fall4.png", "cat_fall5.png", "cat_fall6.png", "cat_fall7.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "cat_fall8.png", "cat_fall9.png", "cat_fall10.png", "cat_fall11.png", "cat_fall12.png", "cat_fall13.png", "cat_fall14.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "cat_die1.png", "cat_die2.png", "cat_die3.png", "cat_die4.png", "cat_die5.png", "cat_die6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "cat_die7.png", "cat_die8.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "cat_attack11.png" ]
-	},
-	{
-		"duration_per_frame" : 0.062 ,
-		"frames":[ "cat_die8.png", "cat_die7.png", "cat_die6.png", "cat_die5.png", "cat_die4.png", "cat_die3.png", "cat_die2.png", "cat_die1.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "cat_run4.png", "cat_run5.png", "cat_run6.png", "cat_run7.png", "cat_run8.png", "cat_run9.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "cat_attack01.png", "cat_attack02.png", "cat_attack03.png", "cat_attack04.png", "cat_attack05.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "cat_attack06.png", "cat_attack07.png", "cat_attack08.png", "cat_attack09.png", "cat_attack010.png", "cat_attack011.png" ]
-	}
-	]
-}, 
-{
-	"name":"enemy",
-	"animations":[
-	{
-		"duration_per_frame" : 0.057 ,
-		"frames":[ "enemy_run1.png", "enemy_run2.png", "enemy_run3.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "enemy_fall1.png", "enemy_fall2.png", "enemy_fall3.png", "enemy_fall4.png", "enemy_fall5.png", "enemy_fall6.png", "enemy_fall7.png", "enemy_fall8.png", "enemy_fall9.png", "enemy_fall10.png", "enemy_fall11.png", "enemy_fall12.png", "enemy_fall13.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "enemy_fall1.png", "enemy_fall2.png", "enemy_fall3.png", "enemy_fall4.png", "enemy_fall5.png", "enemy_fall6.png", "enemy_fall7.png", "enemy_fall14.png", "enemy_fall15.png", "enemy_fall16.png", "enemy_fall17.png", "enemy_fall18.png", "enemy_fall19.png", "enemy_fall20.png", "enemy_fall21.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "enemy_fall22.png", "enemy_fall23.png", "enemy_fall24.png", "enemy_fall25.png", "enemy_fall26.png", "enemy_fall27.png", "enemy_fall28.png", "enemy_fall29.png", "enemy_fall30.png", "enemy_fall30.png", "enemy_fall30.png", "enemy_fall33.png", "enemy_fall34.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "enemy_fall10.png", "enemy_fall11.png", "enemy_fall12.png", "enemy_fall13.png" ]
-	},
-	{
-		"duration_per_frame" : 0.1 ,
-		"frames":[ "enemy_attack6.png", "enemy_attack7.png", "enemy_attack8.png", "enemy_attack9.png", "enemy_attack10.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "enemy_attack11.png", "enemy_attack12.png", "enemy_attack13.png" ]
-	}
-	]
-}, 
-{
-	"name":"mninja",
-	"animations":[
-	{
-		"duration_per_frame" : 0.057 ,
-		"frames":[ "mninja_run1.png", "mninja_run2.png", "mninja_run3.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "mninja_fall1.png", "mninja_fall2.png", "mninja_fall3.png", "mninja_fall4.png", "mninja_fall5.png", "mninja_fall6.png", "mninja_fall7.png", "mninja_fall8.png", "mninja_fall9.png", "mninja_fall10.png", "mninja_fall11.png", "mninja_fall12.png", "mninja_fall13.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "mninja_fall1.png", "mninja_fall2.png", "mninja_fall3.png", "mninja_fall4.png", "mninja_fall5.png", "mninja_fall6.png", "mninja_fall7.png", "mninja_fall14.png", "mninja_fall15.png", "mninja_fall16.png", "mninja_fall17.png", "mninja_fall18.png", "mninja_fall19.png", "mninja_fall20.png", "mninja_fall21.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "mninja_fall22.png", "mninja_fall23.png", "mninja_fall24.png", "mninja_fall25.png", "mninja_fall26.png", "mninja_fall27.png", "mninja_fall28.png", "mninja_fall29.png", "mninja_fall30.png", "mninja_fall30.png", "mninja_fall30.png", "mninja_fall33.png", "mninja_fall34.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "mninja_fall10.png", "mninja_fall11.png", "mninja_fall12.png", "mninja_fall13.png" ]
-	},
-	{
-		"duration_per_frame" : 0.1 ,
-		"frames":[ "mninja_attack6.png", "mninja_attack7.png", "mninja_attack8.png", "mninja_attack9.png", "mninja_attack10.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "mninja_attack11.png", "mninja_attack12.png", "mninja_attack13.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "mninja_run4.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "mninja_run5.png", "mninja_run6.png", "mninja_run7.png", "mninja_run8.png", "mninja_run9.png", "mninja_run10.png" ]
-	}
-	]
-}, 
-{
-	"name":"hninja",
-	"animations":[
-	{
-		"duration_per_frame" : 0.057 ,
-		"frames":[ "hninja_run1.png", "hninja_run2.png", "hninja_run3.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "hninja_fall1.png", "hninja_fall2.png", "hninja_fall3.png", "hninja_fall4.png", "hninja_fall5.png", "hninja_fall6.png", "hninja_fall7.png", "hninja_fall8.png", "hninja_fall9.png", "hninja_fall10.png", "hninja_fall11.png", "hninja_fall12.png", "hninja_fall13.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "hninja_fall1.png", "hninja_fall2.png", "hninja_fall3.png", "hninja_fall4.png", "hninja_fall5.png", "hninja_fall6.png", "hninja_fall7.png", "hninja_fall14.png", "hninja_fall15.png", "hninja_fall16.png", "hninja_fall17.png", "hninja_fall18.png", "hninja_fall19.png", "hninja_fall20.png", "hninja_fall21.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "hninja_fall22.png", "hninja_fall23.png", "hninja_fall24.png", "hninja_fall25.png", "hninja_fall26.png", "hninja_fall27.png", "hninja_fall28.png", "hninja_fall29.png", "hninja_fall30.png", "hninja_fall30.png", "hninja_fall30.png", "hninja_fall33.png", "hninja_fall34.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "hninja_fall10.png", "hninja_fall11.png", "hninja_fall12.png", "hninja_fall13.png" ]
-	},
-	{
-		"duration_per_frame" : 0.1 ,
-		"frames":[ "hninja_attack6.png", "hninja_attack7.png", "hninja_attack8.png", "hninja_attack9.png", "hninja_attack10.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "hninja_attack11.png", "hninja_attack12.png", "hninja_attack13.png" ]
-	}
-	]
-}, 
-{
-	"name":"samurai",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "samurai_attack1.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "samurai_attack1.png", "samurai_attack2.png", "samurai_attack3.png", "samurai_attack4.png", "samurai_attack5.png", "samurai_attack6.png", "samurai_attack7.png", "samurai_attack8.png", "samurai_attack9.png", "samurai_attack10.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "samurai_fall1.png", "samurai_fall2.png", "samurai_fall3.png", "samurai_fall4.png", "samurai_fall5.png", "samurai_fall6.png", "samurai_fall7.png", "samurai_fall8.png", "samurai_fall9.png", "samurai_fall10.png", "samurai_fall11.png", "samurai_fall12.png", "samurai_fall11.png", "samurai_fall10.png" ]
-	}
-	]
-}, 
-{
-	"name":"archer",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "lockon1.png", "lockon2.png", "lockon3.png", "lockon4.png", "lockon5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.1 ,
-		"frames":[ "lockon4.png", "lockon5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "lockon5.png", "lockon6.png", "lockon7.png", "lockon6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "lockon5.png", "lockon4.png", "lockon3.png", "lockon2.png", "lockon1.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "arrow1.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "arrow2.png" ]
-	}
-	]
-}, 
-{
-	"name":"merchant",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "oldman1.png", "oldman2.png", "oldman3.png", "oldman4.png", "oldman5.png", "oldman6.png" ]
-	}
-	]
-}, 
-{
-	"name":"mechanic",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "srk_run1.png", "srk_run2.png", "srk_run3.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "srk_alarm1.png", "srk_alarm2.png", "srk_alarm3.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "srk_attack.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "srk_fall1.png", "srk_fall2.png", "srk_fall3.png", "srk_fall4.png", "srk_fall5.png", "srk_fall6.png", "srk_fall7.png", "srk_fall8.png", "srk_fall9.png", "srk_fall10.png", "srk_fall11.png", "srk_fall12.png", "srk_fall13.png" ]
-	}
-	]
-}, 
-{
-	"name":"pumpkin",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "hw-ng1.png", "hw-ng1.png", "hw-ng1.png", "hw-ng1.png", "hw-ng1.png", "hw-ng1.png", "hw-ng1.png", "hw-ng1.png", "hw-ng1.png", "hw-ng2.png", "hw-ng3.png", "hw-ng4.png", "hw-ng3.png", "hw-ng2.png", "hw-ng3.png", "hw-ng4.png", "hw-ng3.png", "hw-ng2.png", "hw-ng3.png", "hw-ng4.png", "hw-ng3.png", "hw-ng2.png", "hw-ng3.png", "hw-ng4.png", "hw-ng3.png", "hw-ng2.png", "hw-ng3.png", "hw-ng4.png" ]
-	},
-	{
-		"duration_per_frame" : 0.2 ,
-		"frames":[ "hw-ng2.png"] 
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "hw-ngbz1.png", "hw-ngbz2.png", "hw-ngbz3.png", "hw-ngbz4.png", "hw-ngbz5.png" ]
-	}
-	]
-}, 
-{
-	"name":"santa",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "santa1.png", "santa2.png", "santa3.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "santa-fall1.png", "santa-fall2.png", "santa-fall3.png", "santa-fall4.png", "santa-fall5.png", "santa-fall6.png", "santa-fall7.png", "santa-fall8.png", "santa-fall9.png", "santa-fall9.png", "santa-fall9.png", "santa-fall12.png", "santa-fall13.png" ] 
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "santa-fall1.png", "santa-fall2.png", "santa-fall3.png", "santa-fall4.png", "santa-fall5.png", "santa-fall6.png", "santa-fall7.png", "santa-fall8.png", "santa-fall9.png", "santa-fall9.png", "santa-fall9.png", "santa-fall12.png", "santa-fall13.png" ]
-	}
-	]
-}, 
-{
-	"name":"blade",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "dg1.png", "dg2.png", "dg3.png", "dg4.png", "dg5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "girlblade1.png", "girlblade2.png", "girlblade3.png", "girlblade4.png", "girlblade5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "musashiblade1.png", "musashiblade2.png", "musashiblade3.png", "musashiblade4.png", "musashiblade5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "catblade1.png", "catblade2.png", "catblade3.png", "catblade4.png", "catblade5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "fireblade1.png", "fireblade2.png", "fireblade3.png", "fireblade4.png", "fireblade5.png", "fireblade6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "ayblade1.png", "ayblade2.png", "ayblade3.png", "ayblade4.png", "ayblade5.png", "ayblade6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "lblade1.png", "lblade2.png", "lblade3.png", "lblade4.png", "lblade5.png", "lblade6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "chblade1.png", "chblade2.png", "chblade3.png", "chblade4.png", "chblade5.png", "chblade6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "zkblade1.png", "zkblade2.png", "zkblade3.png", "zkblade4.png", "zkblade5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "jgblade1.png", "jgblade2.png", "jgblade3.png", "jgblade4.png", "jgblade5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "skblade1.png", "skblade2.png", "skblade3.png", "skblade4.png", "skblade5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "swblade1.png", "swblade2.png", "swblade3.png", "swblade4.png", "swblade5.png", "swblade6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "hjblade1.png", "hjblade2.png", "hjblade3.png", "hjblade4.png", "hjblade5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "hdblade1.png", "hdblade2.png", "hdblade3.png", "hdblade4.png", "hdblade5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "bblade1.png", "bblade2.png", "bblade3.png", "bblade4.png", "bblade5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "mcblade1-1.png", "mcblade1-2.png", "mcblade1-3.png", "mcblade1-4.png", "mcblade1-5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "mcblade2-1.png", "mcblade2-2.png", "mcblade2-3.png", "mcblade2-4.png", "mcblade2-5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "mcblade3-1.png", "mcblade3-2.png", "mcblade3-3.png", "mcblade3-4.png", "mcblade3-5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "mcblade4-1.png", "mcblade4-2.png", "mcblade4-3.png", "mcblade4-4.png", "mcblade4-5.png" ]
-	}
-	]
-}, 
-{
-	"name":"effect",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "tx_jb1.png", "tx_jb2.png", "tx_jb3.png", "tx_jb4.png", "tx_jb5.png", "tx_jb6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "tx_fb1.png", "tx_fb2.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "tx_fby1.png", "tx_fby2.png", "tx_fby3.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "tx_hx1.png", "tx_hx2.png", "tx_hx3.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "dust1.png", "dust2.png", "dust3.png", "dust4.png", "dust5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "smoke1.png", "smoke2.png", "smoke3.png", "smoke4.png", "smoke5.png", "smoke6.png", "smoke7.png", "smoke8.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "bstx1.png", "bstx2.png", "bstx3.png", "bstx4.png", "bstx5.png", "bstx6.png", "bstx7.png", "bstx8.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "enemy_attack_tx1.png", "enemy_attack_tx2.png", "enemy_attack_tx3.png", "enemy_attack_tx4.png", "enemy_attack_tx5.png", "enemy_attack_tx6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "tx4.png", "tx5.png", "tx6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "coin1.png", "coin2.png", "coin3.png", "coin4.png", "coin5.png", "coin6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "scroll.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "hfbtx0.png", "hfbtx1.png", "hfbtx2.png", "hfbtx3.png", "hfbtx4.png", "hfbtx5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "lfbtx0.png", "lfbtx1.png", "lfbtx2.png", "lfbtx3.png", "lfbtx4.png", "lfbtx5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "htx1.png", "htx2.png", "htx3.png", "htx4.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "ayfbtx0.png", "ayfbtx1.png", "ayfbtx2.png", "ayfbtx3.png", "ayfbtx4.png", "ayfbtx5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "fbyh_tx1.png", "fbyh_tx2.png", "fbyh_tx3.png", "fbyh_tx4.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "fbyh_tx5.png", "fbyh_tx6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "bffbtx0.png", "bffbtx1.png", "bffbtx2.png", "bffbtx3.png", "bffbtx4.png", "bffbtx5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "fbzk_tx1.png", "fbzk_tx2.png", "fbzk_tx3.png", "fbzk_tx4.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "fbzk_tx5.png", "fbzk_tx6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "fbb_tx1.png", "fbb_tx2.png", "fbb_tx3.png", "fbb_tx4.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "fbb_tx5.png", "fbb_tx6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "fbhd_tx1.png", "fbhd_tx2.png", "fbhd_tx3.png", "fbhd_tx4.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "fbhd_tx5.png", "fbhd_tx6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "fbch_tx1.png", "fbch_tx2.png", "fbch_tx3.png", "fbch_tx4.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "fbch_tx5.png", "fbch_tx6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "tx_yyz1.png", "tx_yyz2.png", "tx_yyz3.png", "tx_yyz4.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "criticaltx1.png", "criticaltx2.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "ctctx2.png", "ctctx3.png" ]
-	}
-	]
-}, 
-{
-	"name":"messager",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "msg_run1.png", "msg_run2.png", "msg_run3.png", "msg_run4.png", "msg_run5.png", "msg_run6.png", "msg_run7.png", "msg_run8.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "msg_run1.png", "msg_run2.png", "msg_run4.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "msg_surprised9.png", "msg_surprised10.png", "msg_surprised11.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "msg_surprised1.png", "msg_surprised2.png", "msg_surprised3.png", "msg_surprised4.png", "msg_surprised5.png", "msg_surprised6.png", "msg_surprised7.png", "msg_surprised8.png", "msg_surprised1.png", "msg_surprised2.png", "msg_surprised3.png", "msg_surprised4.png", "msg_surprised5.png", "msg_surprised6.png", "msg_surprised7.png", "msg_surprised8.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "msg_fall14.png", "msg_fall15.png", "msg_fall16.png", "msg_fall17.png", "msg_fall18.png", "msg_fall19.png", "msg_fall20.png", "msg_fall21.png", "msg_fall22.png", "msg_fall23.png", "msg_fall24.png", "msg_fall25.png", "msg_fall26.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "msg_fall1.png", "msg_fall2.png", "msg_fall3.png", "msg_fall4.png", "msg_fall5.png", "msg_fall6.png", "msg_fall7.png", "msg_fall8.png", "msg_fall9.png", "msg_fall9.png", "msg_fall9.png", "msg_fall12.png", "msg_fall13.png" ]
-	}
-	]
-}, 
-{
-	"name":"item",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "coin1.png", "coin2.png", "coin3.png", "coin4.png", "coin5.png", "coin6.png" ]
-	}
-	]
-}, 
-{
-	"name":"bullets",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "baozha1.png", "baozha2.png", "baozha3.png", "baozha4.png", "baozha5.png", "baozha6.png", "baozha7.png", "baozha8.png", "baozha9.png", "baozha10.png", "baozha11.png", "baozha12.png", "baozha13.png", "baozha14.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "zhadan1.png", "zhadan2.png", "zhadan3.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "bingzhu1.png", "bingzhu2.png", "bingzhu3.png", "bingzhu4.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "bingzhu5.png", "bingzhu6.png", "bingzhu7.png", "bingzhu8.png", "bingzhu9.png", "bingzhu10.png" ]
-	}
-	]
-}, 
-{
-	"name":"misc",
-	"animations":[
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "fbl_tail1.png", "fbl_tail2.png", "fbl_tail3.png", "fbl_tail4.png", "fbl_tail5.png" ]
-	},
-	{
-		"duration_per_frame" : 0.150 ,
-		"frames":[ "wsts1.png", "wsts2.png" ]
-	},
-	{
-		"duration_per_frame" : 0.067 ,
-		"frames":[ "hd1.png", "hd2.png" ]
-	},
-	{
-		"duration_per_frame" : 0.067 ,
-		"frames":[ "hd3.png", "hd4.png" ]
-	},
-	{
-		"duration_per_frame" : 0.067 ,
-		"frames":[ "hd5.png", "hd6.png" ]
-	},
-	{
-		"duration_per_frame" : 0.067 ,
-		"frames":[ "hd7.png", "hd8.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "water1.png", "water2.png", "water3.png", "water4.png", "water5.png", "water6.png", "water7.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "smoke1.png", "smoke2.png", "smoke3.png", "smoke4.png", "smoke5.png", "smoke6.png", "smoke7.png", "smoke8.png" ]
-	},
-	{
-		"duration_per_frame" : 0.5,
-		"frames":[ "jc2.png", "jc3.png" ]
-	}
-	]
-}, 
-{
-	"name":"ui",
-	"animations":[
-	{
-		"duration_per_frame" : 0.25 ,
-		"frames":[ "heart.png", "pulife2.png" ]
-	},
-	{
-		"duration_per_frame" : 0.25 ,
-		"frames":[ "ui-dart.png", "pushuriken2.png" ]
-	},
-	{
-		"duration_per_frame" : 1.0,
-		"frames":[ "xr_start0.png" ]
-	},
-	{
-		"duration_per_frame" : 0.05 ,
-		"frames":[ "xr_start0.png", "xr_start1.png", "xr_start2.png", "xr_start3.png", "xr_start4.png", "xr_start5.png" ]
-	}
-	]
-}
+  {
+    "name" : "main",
+    "animations" : [
+      {
+        "duration_per_frame" : 0.05, 
+        "frames" : ["main_run1.png",  "main_run2.png",  "main_run3.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["main_attack1.png",  "main_attack2.png",  "main_attack3.png",  "main_attack4.png",  "main_attack5.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["main_attack6.png",  "main_attack7.png",  "main_attack8.png",  "main_attack9.png",  "main_attack10.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["main_attack11.png",  "main_attack12.png",  "main_attack13.png",  "main_attack14.png",  "main_attack15.png",  "main_attack16.png",  "main_attack17.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["main_fall1.png",  "main_fall2.png",  "main_fall3.png",  "main_fall4.png",  "main_fall5.png",  "main_fall6.png",  "main_fall7.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["main_fall8.png",  "main_fall9.png",  "main_fall10.png",  "main_fall11.png",  "main_fall12.png",  "main_fall13.png",  "main_fall14.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["main_die1.png",  "main_die2.png",  "main_die3.png",  "main_die4.png",  "main_die5.png",  "main_die6.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["main_die7.png",  "main_die8.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["main_attack11.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["main_die8.png",  "main_die7.png",  "main_die6.png",  "main_die5.png",  "main_die4.png",  "main_die3.png",  "main_die2.png",  "main_die1.png"]
+      }
+    ]
+  },
+  {
+    "name": "girl",
+    "animations": [
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["girl_run1.png",  "girl_run2.png",  "girl_run3.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["girl_attack1.png",  "girl_attack2.png",  "girl_attack3.png",  "girl_attack4.png",  "girl_attack5.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["girl_attack6.png",  "girl_attack7.png",  "girl_attack8.png",  "girl_attack9.png",  "girl_attack10.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["girl_attack11.png",  "girl_attack12.png",  "girl_attack13.png",  "girl_attack14.png",  "girl_attack15.png",  "girl_attack16.png",  "girl_attack17.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["girl_fall1.png",  "girl_fall2.png",  "girl_fall3.png",  "girl_fall4.png",  "girl_fall5.png",  "girl_fall6.png",  "girl_fall7.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["girl_fall8.png",  "girl_fall9.png",  "girl_fall10.png",  "girl_fall11.png",  "girl_fall12.png",  "girl_fall13.png",  "girl_fall14.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["girl_die1.png",  "girl_die2.png",  "girl_die3.png",  "girl_die4.png",  "girl_die5.png",  "girl_die6.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["girl_die7.png",  "girl_die8.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["girl_attack11.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["girl_die8.png",  "girl_die7.png",  "girl_die6.png",  "girl_die5.png",  "girl_die4.png",  "girl_die3.png",  "girl_die2.png",  "girl_die1.png"]
+      }
+    ]
+  },
+  {
+    "name": "musashi",
+    "animations" : [
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["musashi_run1.png",  "musashi_run2.png",  "musashi_run3.png",  "musashi_run4.png",  "musashi_run5.png",  "musashi_run6.png",  "musashi_run7.png",  "musashi_run8.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["musashi_attack1.png",  "musashi_attack2.png",  "musashi_attack3.png",  "musashi_attack4.png",  "musashi_attack5.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["musashi_attack6.png",  "musashi_attack7.png",  "musashi_attack8.png",  "musashi_attack9.png",  "musashi_attack10.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["musashi_attack11.png",  "musashi_attack12.png",  "musashi_attack13.png",  "musashi_attack14.png",  "musashi_attack15.png",  "musashi_attack12.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["musashi_fall1.png",  "musashi_fall2.png",  "musashi_fall3.png",  "musashi_fall4.png",  "musashi_fall5.png",  "musashi_fall6.png",  "musashi_fall7.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["musashi_fall8.png",  "musashi_fall9.png",  "musashi_fall10.png",  "musashi_fall11.png",  "musashi_fall12.png",  "musashi_fall13.png",  "musashi_fall14.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["musashi_die1.png",  "musashi_die2.png",  "musashi_die3.png",  "musashi_die4.png",  "musashi_die5.png",  "musashi_die6.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["musashi_die7.png",  "musashi_die8.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["musashi_attack11.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["musashi_die8.png",  "musashi_die7.png",  "musashi_die6.png",  "musashi_die5.png",  "musashi_die4.png",  "musashi_die3.png",  "musashi_die2.png",  "musashi_die1.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["musashi_attack16.png",  "musashi_attack17.png",  "musashi_attack18.png",  "musashi_attack19.png",  "musashi_attack20.png",  "musashi_attack17.png"]
+      }
+    ]
+  }, 
+  {
+    "name": "pussy",
+    "animations" : [
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_run1.png",  "cat_run2.png",  "cat_run3.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_attack1.png",  "cat_attack2.png",  "cat_attack3.png",  "cat_attack4.png",  "cat_attack5.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_attack6.png",  "cat_attack7.png",  "cat_attack8.png",  "cat_attack9.png",  "cat_attack10.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_attack11.png",  "cat_attack12.png",  "cat_attack13.png",  "cat_attack14.png",  "cat_attack15.png",  "cat_attack16.png",  "cat_attack17.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_fall1.png",  "cat_fall2.png",  "cat_fall3.png",  "cat_fall4.png",  "cat_fall5.png",  "cat_fall6.png",  "cat_fall7.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_fall8.png",  "cat_fall9.png",  "cat_fall10.png",  "cat_fall11.png",  "cat_fall12.png",  "cat_fall13.png",  "cat_fall14.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_die1.png",  "cat_die2.png",  "cat_die3.png",  "cat_die4.png",  "cat_die5.png",  "cat_die6.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_die7.png",  "cat_die8.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_attack11.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_die8.png",  "cat_die7.png",  "cat_die6.png",  "cat_die5.png",  "cat_die4.png",  "cat_die3.png",  "cat_die2.png",  "cat_die1.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_run4.png",  "cat_run5.png",  "cat_run6.png",  "cat_run7.png",  "cat_run8.png",  "cat_run9.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_attack01.png",  "cat_attack02.png",  "cat_attack03.png",  "cat_attack04.png",  "cat_attack05.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["cat_attack06.png",  "cat_attack07.png",  "cat_attack08.png",  "cat_attack09.png",  "cat_attack010.png",  "cat_attack011.png"]
+      }
+    ]
+  }, 
+  {
+    "name": "enemy",
+    "animations" : [
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["enemy_run1.png",  "enemy_run2.png",  "enemy_run3.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["enemy_fall1.png",  "enemy_fall2.png",  "enemy_fall3.png",  "enemy_fall4.png",  "enemy_fall5.png",  "enemy_fall6.png",  "enemy_fall7.png",  "enemy_fall8.png",  "enemy_fall9.png",  "enemy_fall10.png",  "enemy_fall11.png",  "enemy_fall12.png",  "enemy_fall13.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["enemy_fall1.png",  "enemy_fall2.png",  "enemy_fall3.png",  "enemy_fall4.png",  "enemy_fall5.png",  "enemy_fall6.png",  "enemy_fall7.png",  "enemy_fall14.png",  "enemy_fall15.png",  "enemy_fall16.png",  "enemy_fall17.png",  "enemy_fall18.png",  "enemy_fall19.png",  "enemy_fall20.png",  "enemy_fall21.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["enemy_fall22.png",  "enemy_fall23.png",  "enemy_fall24.png",  "enemy_fall25.png",  "enemy_fall26.png",  "enemy_fall27.png",  "enemy_fall28.png",  "enemy_fall29.png",  "enemy_fall30.png",  "enemy_fall30.png",  "enemy_fall30.png",  "enemy_fall33.png",  "enemy_fall34.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["enemy_fall10.png",  "enemy_fall11.png",  "enemy_fall12.png",  "enemy_fall13.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["enemy_attack6.png",  "enemy_attack7.png",  "enemy_attack8.png",  "enemy_attack9.png",  "enemy_attack10.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["enemy_attack11.png",  "enemy_attack12.png",  "enemy_attack13.png"]
+      }
+    ]
+  } ,
+  {
+    "name": "mninja",
+    "animations" : [
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["mninja_run1.png",  "mninja_run2.png",  "mninja_run3.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["mninja_fall1.png",  "mninja_fall2.png",  "mninja_fall3.png",  "mninja_fall4.png",  "mninja_fall5.png",  "mninja_fall6.png",  "mninja_fall7.png",  "mninja_fall8.png",  "mninja_fall9.png",  "mninja_fall10.png",  "mninja_fall11.png",  "mninja_fall12.png",  "mninja_fall13.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["mninja_fall1.png",  "mninja_fall2.png",  "mninja_fall3.png",  "mninja_fall4.png",  "mninja_fall5.png",  "mninja_fall6.png",  "mninja_fall7.png",  "mninja_fall14.png",  "mninja_fall15.png",  "mninja_fall16.png",  "mninja_fall17.png",  "mninja_fall18.png",  "mninja_fall19.png",  "mninja_fall20.png",  "mninja_fall21.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["mninja_fall22.png",  "mninja_fall23.png",  "mninja_fall24.png",  "mninja_fall25.png",  "mninja_fall26.png",  "mninja_fall27.png",  "mninja_fall28.png",  "mninja_fall29.png",  "mninja_fall30.png",  "mninja_fall30.png",  "mninja_fall30.png",  "mninja_fall33.png",  "mninja_fall34.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["mninja_fall10.png",  "mninja_fall11.png",  "mninja_fall12.png",  "mninja_fall13.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["mninja_attack6.png",  "mninja_attack7.png",  "mninja_attack8.png",  "mninja_attack9.png",  "mninja_attack10.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["mninja_attack11.png",  "mninja_attack12.png",  "mninja_attack13.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["mninja_run4.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["mninja_run5.png",  "mninja_run6.png",  "mninja_run7.png",  "mninja_run8.png",  "mninja_run9.png",  "mninja_run10.png"]
+      }
+    ]
+  },
+  {
+    "name": "hninja",
+    "animations" : [
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["hninja_run1.png",  "hninja_run2.png",  "hninja_run3.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["hninja_fall1.png",  "hninja_fall2.png",  "hninja_fall3.png",  "hninja_fall4.png",  "hninja_fall5.png",  "hninja_fall6.png",  "hninja_fall7.png",  "hninja_fall8.png",  "hninja_fall9.png",  "hninja_fall10.png",  "hninja_fall11.png",  "hninja_fall12.png",  "hninja_fall13.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["hninja_fall1.png",  "hninja_fall2.png",  "hninja_fall3.png",  "hninja_fall4.png",  "hninja_fall5.png",  "hninja_fall6.png",  "hninja_fall7.png",  "hninja_fall14.png",  "hninja_fall15.png",  "hninja_fall16.png",  "hninja_fall17.png",  "hninja_fall18.png",  "hninja_fall19.png",  "hninja_fall20.png",  "hninja_fall21.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["hninja_fall22.png",  "hninja_fall23.png",  "hninja_fall24.png",  "hninja_fall25.png",  "hninja_fall26.png",  "hninja_fall27.png",  "hninja_fall28.png",  "hninja_fall29.png",  "hninja_fall30.png",  "hninja_fall30.png",  "hninja_fall30.png",  "hninja_fall33.png",  "hninja_fall34.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["hninja_fall10.png",  "hninja_fall11.png",  "hninja_fall12.png",  "hninja_fall13.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["hninja_attack6.png",  "hninja_attack7.png",  "hninja_attack8.png",  "hninja_attack9.png",  "hninja_attack10.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["hninja_attack11.png",  "hninja_attack12.png",  "hninja_attack13.png"]
+      }
+    ]
+  } ,
+  {
+    "name": "samurai",
+    "animations" : [
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["samurai_attack1.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["samurai_attack1.png",  "samurai_attack2.png",  "samurai_attack3.png",  "samurai_attack4.png",  "samurai_attack5.png",  "samurai_attack6.png",  "samurai_attack7.png",  "samurai_attack8.png",  "samurai_attack9.png",  "samurai_attack10.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["samurai_fall1.png",  "samurai_fall2.png",  "samurai_fall3.png",  "samurai_fall4.png",  "samurai_fall5.png",  "samurai_fall6.png",  "samurai_fall7.png",  "samurai_fall8.png",  "samurai_fall9.png",  "samurai_fall10.png",  "samurai_fall11.png",  "samurai_fall12.png",  "samurai_fall11.png",  "samurai_fall10.png"]
+      }
+    ]
+  } ,
+  {
+    "name": "archer",
+    "animations" : [
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["lockon1.png",  "lockon2.png",  "lockon3.png",  "lockon4.png",  "lockon5.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["lockon4.png",  "lockon5.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["lockon5.png",  "lockon6.png",  "lockon7.png",  "lockon6.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["lockon5.png",  "lockon4.png",  "lockon3.png",  "lockon2.png",  "lockon1.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["arrow1.png"]
+      },
+      {
+        "duration_per_frame" : 0.05,
+        "frames" : ["arrow2.png"]
+      }
+    ]},
+    {
+      "name": "merchant",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["oldman1.png",  "oldman2.png",  "oldman3.png",  "oldman4.png",  "oldman5.png",  "oldman6.png"]
+        }
+      ]
+    },
+    {
+      "name": "mechanic",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["srk_run1.png",  "srk_run2.png",  "srk_run3.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["srk_alarm1.png",  "srk_alarm2.png",  "srk_alarm3.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["srk_attack.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["srk_fall1.png",  "srk_fall2.png",  "srk_fall3.png",  "srk_fall4.png",  "srk_fall5.png",  "srk_fall6.png",  "srk_fall7.png",  "srk_fall8.png",  "srk_fall9.png",  "srk_fall10.png",  "srk_fall11.png",  "srk_fall12.png",  "srk_fall13.png"]
+        }
+      ]
+    },
+    {
+      "name": "pumpkin",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng1.png",  "hw-ng2.png",  "hw-ng3.png",  "hw-ng4.png",  "hw-ng3.png",  "hw-ng2.png",  "hw-ng3.png",  "hw-ng4.png",  "hw-ng3.png",  "hw-ng2.png",  "hw-ng3.png",  "hw-ng4.png",  "hw-ng3.png",  "hw-ng2.png",  "hw-ng3.png",  "hw-ng4.png",  "hw-ng3.png",  "hw-ng2.png",  "hw-ng3.png",  "hw-ng4.png"]
+        },
+        {
+          "duration_per_frame" : 0.2,
+          "frames" : ["hw-ng2.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["hw-ngbz1.png",  "hw-ngbz2.png",  "hw-ngbz3.png",  "hw-ngbz4.png",  "hw-ngbz5.png"]
+        }
+      ]
+    }, 
+    {
+      "name": "santa",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["santa1.png",  "santa2.png",  "santa3.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["santa-fall1.png",  "santa-fall2.png",  "santa-fall3.png",  "santa-fall4.png",  "santa-fall5.png",  "santa-fall6.png",  "santa-fall7.png",  "santa-fall8.png",  "santa-fall9.png",  "santa-fall9.png",  "santa-fall9.png",  "santa-fall12.png",  "santa-fall13.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["santa-fall1.png",  "santa-fall2.png",  "santa-fall3.png",  "santa-fall4.png",  "santa-fall5.png",  "santa-fall6.png",  "santa-fall7.png",  "santa-fall8.png",  "santa-fall9.png",  "santa-fall9.png",  "santa-fall9.png",  "santa-fall12.png",  "santa-fall13.png"]
+        }
+      ]
+    } ,
+    {
+      "name": "blade",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["dg1.png",  "dg2.png",  "dg3.png",  "dg4.png",  "dg5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["girlblade1.png",  "girlblade2.png",  "girlblade3.png",  "girlblade4.png",  "girlblade5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["musashiblade1.png",  "musashiblade2.png",  "musashiblade3.png",  "musashiblade4.png",  "musashiblade5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["catblade1.png",  "catblade2.png",  "catblade3.png",  "catblade4.png",  "catblade5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["fireblade1.png",  "fireblade2.png",  "fireblade3.png",  "fireblade4.png",  "fireblade5.png",  "fireblade6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["ayblade1.png",  "ayblade2.png",  "ayblade3.png",  "ayblade4.png",  "ayblade5.png",  "ayblade6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["lblade1.png",  "lblade2.png",  "lblade3.png",  "lblade4.png",  "lblade5.png",  "lblade6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["chblade1.png",  "chblade2.png",  "chblade3.png",  "chblade4.png",  "chblade5.png",  "chblade6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["zkblade1.png",  "zkblade2.png",  "zkblade3.png",  "zkblade4.png",  "zkblade5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["jgblade1.png",  "jgblade2.png",  "jgblade3.png",  "jgblade4.png",  "jgblade5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["skblade1.png",  "skblade2.png",  "skblade3.png",  "skblade4.png",  "skblade5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["swblade1.png",  "swblade2.png",  "swblade3.png",  "swblade4.png",  "swblade5.png",  "swblade6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["hjblade1.png",  "hjblade2.png",  "hjblade3.png",  "hjblade4.png",  "hjblade5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["hdblade1.png",  "hdblade2.png",  "hdblade3.png",  "hdblade4.png",  "hdblade5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["bblade1.png",  "bblade2.png",  "bblade3.png",  "bblade4.png",  "bblade5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["mcblade1-1.png",  "mcblade1-2.png",  "mcblade1-3.png",  "mcblade1-4.png",  "mcblade1-5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["mcblade2-1.png",  "mcblade2-2.png",  "mcblade2-3.png",  "mcblade2-4.png",  "mcblade2-5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["mcblade3-1.png",  "mcblade3-2.png",  "mcblade3-3.png",  "mcblade3-4.png",  "mcblade3-5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["mcblade4-1.png",  "mcblade4-2.png",  "mcblade4-3.png",  "mcblade4-4.png",  "mcblade4-5.png"]
+        }
+      ]
+    } ,
+    {
+      "name": "effect",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["tx_jb1.png",  "tx_jb2.png",  "tx_jb3.png",  "tx_jb4.png",  "tx_jb5.png",  "tx_jb6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["tx_fb1.png",  "tx_fb2.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["tx_fby1.png",  "tx_fby2.png",  "tx_fby3.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["tx_hx1.png",  "tx_hx2.png",  "tx_hx3.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["dust1.png",  "dust2.png",  "dust3.png",  "dust4.png",  "dust5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["smoke1.png",  "smoke2.png",  "smoke3.png",  "smoke4.png",  "smoke5.png",  "smoke6.png",  "smoke7.png",  "smoke8.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["bstx1.png",  "bstx2.png",  "bstx3.png",  "bstx4.png",  "bstx5.png",  "bstx6.png",  "bstx7.png",  "bstx8.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["enemy_attack_tx1.png",  "enemy_attack_tx2.png",  "enemy_attack_tx3.png",  "enemy_attack_tx4.png",  "enemy_attack_tx5.png",  "enemy_attack_tx6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["tx4.png",  "tx5.png",  "tx6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["coin1.png",  "coin2.png",  "coin3.png",  "coin4.png",  "coin5.png",  "coin6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["scroll.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["hfbtx0.png",  "hfbtx1.png",  "hfbtx2.png",  "hfbtx3.png",  "hfbtx4.png",  "hfbtx5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["lfbtx0.png",  "lfbtx1.png",  "lfbtx2.png",  "lfbtx3.png",  "lfbtx4.png",  "lfbtx5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["htx1.png",  "htx2.png",  "htx3.png",  "htx4.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["ayfbtx0.png",  "ayfbtx1.png",  "ayfbtx2.png",  "ayfbtx3.png",  "ayfbtx4.png",  "ayfbtx5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["fbyh_tx1.png",  "fbyh_tx2.png",  "fbyh_tx3.png",  "fbyh_tx4.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["fbyh_tx5.png",  "fbyh_tx6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["bffbtx0.png",  "bffbtx1.png",  "bffbtx2.png",  "bffbtx3.png",  "bffbtx4.png",  "bffbtx5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["fbzk_tx1.png",  "fbzk_tx2.png",  "fbzk_tx3.png",  "fbzk_tx4.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["fbzk_tx5.png",  "fbzk_tx6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["fbb_tx1.png",  "fbb_tx2.png",  "fbb_tx3.png",  "fbb_tx4.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["fbb_tx5.png",  "fbb_tx6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["fbhd_tx1.png",  "fbhd_tx2.png",  "fbhd_tx3.png",  "fbhd_tx4.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["fbhd_tx5.png",  "fbhd_tx6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["fbch_tx1.png",  "fbch_tx2.png",  "fbch_tx3.png",  "fbch_tx4.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["fbch_tx5.png",  "fbch_tx6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["tx_yyz1.png",  "tx_yyz2.png",  "tx_yyz3.png",  "tx_yyz4.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["criticaltx1.png",  "criticaltx2.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["ctctx2.png",  "ctctx3.png"]
+        }
+      ]
+    },
+    {
+      "name": "messager",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["msg_run1.png",  "msg_run2.png",  "msg_run3.png",  "msg_run4.png",  "msg_run5.png",  "msg_run6.png",  "msg_run7.png",  "msg_run8.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["msg_run1.png",  "msg_run2.png",  "msg_run4.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["msg_surprised9.png",  "msg_surprised10.png",  "msg_surprised11.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["msg_surprised1.png",  "msg_surprised2.png",  "msg_surprised3.png",  "msg_surprised4.png",  "msg_surprised5.png",  "msg_surprised6.png",  "msg_surprised7.png",  "msg_surprised8.png",  "msg_surprised1.png",  "msg_surprised2.png",  "msg_surprised3.png",  "msg_surprised4.png",  "msg_surprised5.png",  "msg_surprised6.png",  "msg_surprised7.png",  "msg_surprised8.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["msg_fall14.png",  "msg_fall15.png",  "msg_fall16.png",  "msg_fall17.png",  "msg_fall18.png",  "msg_fall19.png",  "msg_fall20.png",  "msg_fall21.png",  "msg_fall22.png",  "msg_fall23.png",  "msg_fall24.png",  "msg_fall25.png",  "msg_fall26.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["msg_fall1.png",  "msg_fall2.png",  "msg_fall3.png",  "msg_fall4.png",  "msg_fall5.png",  "msg_fall6.png",  "msg_fall7.png",  "msg_fall8.png",  "msg_fall9.png",  "msg_fall9.png",  "msg_fall9.png",  "msg_fall12.png",  "msg_fall13.png"]
+        }
+      ]
+    }, 
+    {
+      "name": "item",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["coin1.png",  "coin2.png",  "coin3.png",  "coin4.png",  "coin5.png",  "coin6.png"]
+        }
+      ]
+    },
+    {
+      "name": "bullets",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["baozha1.png",  "baozha2.png",  "baozha3.png",  "baozha4.png",  "baozha5.png",  "baozha6.png",  "baozha7.png",  "baozha8.png",  "baozha9.png",  "baozha10.png",  "baozha11.png",  "baozha12.png",  "baozha13.png",  "baozha14.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["zhadan1.png",  "zhadan2.png",  "zhadan3.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["bingzhu1.png",  "bingzhu2.png",  "bingzhu3.png",  "bingzhu4.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["bingzhu5.png",  "bingzhu6.png",  "bingzhu7.png",  "bingzhu8.png",  "bingzhu9.png",  "bingzhu10.png"]
+        }
+      ]
+    },
+    {
+      "name": "misc",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["fbl_tail1.png",  "fbl_tail2.png",  "fbl_tail3.png",  "fbl_tail4.png",  "fbl_tail5.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["wsts1.png",  "wsts2.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["hd1.png",  "hd2.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["hd3.png",  "hd4.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["hd5.png",  "hd6.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["hd7.png",  "hd8.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["water1.png",  "water2.png",  "water3.png",  "water4.png",  "water5.png",  "water6.png",  "water7.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["smoke1.png",  "smoke2.png",  "smoke3.png",  "smoke4.png",  "smoke5.png",  "smoke6.png",  "smoke7.png",  "smoke8.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["jc2.png",  "jc3.png"]
+        }
+      ]
+    },
+    {
+      "name": "ui",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.25,
+          "frames" : ["heart.png",  "pulife2.png"]
+        },
+        {
+          "duration_per_frame" : 0.25,
+          "frames" : ["ui-dart.png",  "pushuriken2.png"]
+        },
+        {
+          "duration_per_frame" : 1.0,
+          "frames" : ["xr_start0.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : ["xr_start0.png",  "xr_start1.png",  "xr_start2.png",  "xr_start3.png",  "xr_start4.png",  "xr_start5.png"]
+        }
+      ]
+    }
 ]
