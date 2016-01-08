@@ -4,7 +4,11 @@
 //游戏常数
 #define PI (3.14159f)
 
+#if CC_TARGET_PLATFORM == CC_PLATFORM_MAC
 #define GFONT_NAME ("Helvetica.ttf")
+#else
+#define GFONT_NAME ("fonts/Helvetica.ttf")
+#endif
 #define GFONT_SIZE_LARGE (24)
 #define GFONT_SIZE_NORMAL (16)
 
