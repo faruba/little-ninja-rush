@@ -54,7 +54,6 @@ class CollectionMenu :
     cocos2d::Point mShadowDir;
     int mEquipedItem;
     int mCurrItem;
-    int mItemCount;
 
     cocos2d::Sprite *mCurrentMark;
     ABScrollContent *mScroll;

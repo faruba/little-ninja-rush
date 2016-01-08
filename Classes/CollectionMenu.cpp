@@ -363,54 +363,16 @@ void CollectionMenu::updateCharacterInfo(int rid, int bid)
 
 void CollectionMenu::onItemCallback(int i)
 {
-	//  //获取当前道具的信息
-	//  if( mCurrentType < 3 )
-	//  {
-	//    bool collected = false;
-	//    switch (mCurrentType) {
-	//      case 0:
-	//        {
-	//          Shuriken *sh = (Shuriken*)(GameData::fetchShurikens()->objectAtIndex(i));
-	//          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-	//          if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
-	//          {
-	//            GameTool::PlaySound("error.mp3");
-	//            return;
-	//          }
-	//        }
-	//        break;
-	//      case 1:
-	//        {
-	//          int index = i + GAME_CHARCOUNT - 1;
-	//          if( i == 0 )
-	//          {
-	//            index = GameRecord::sharedGameRecord()->curr_char;
-	//          }
-	//          Katana *sh = (Katana*)GameData::fetchKatanas()->objectAtIndex(index);
-	//          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-	//          if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
-	//          {
-	//            GameTool::PlaySound("error.mp3");
-	//            return;
-	//          }
-	//        }
-	//        break;
-	//      case 2:
-	//        {
-	//          Special *sh = (Special*)GameData::fetchSpecials()->objectAtIndex(i);
-	//          collected = GameRecord::sharedGameRecord()->collection->isItemCompleted(sh->uiid);
-	//          if( !collected && GameRecord::sharedGameRecord()->collection->itemLostPiece(sh->uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(sh->uiid) )
-	//          {
-	//            GameTool::PlaySound("error.mp3");
-	//            return;
-	//          }
-	//        }
-	//        break;
-	//    }
-	//  }
-	//  GameTool::PlaySound("click.mp3");
-	//  markCurrent(i);
-	//  mCurrentDelegate->updateItemInfo();
+	  //获取当前道具的信息
+	    bool collected = false;
+      auto data = mCurrentDelegate->fetchData(i);
+      if(! mCurrentDelegate->isCollected(i) && GameRecord::sharedGameRecord()->collection->itemLostPiece(data.uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(data.uiid) ){
+        GameTool::PlaySound("error.mp3");
+        return;
+      }
+	  GameTool::PlaySound("click.mp3");
+	  mCurrentDelegate->markCurrent(i);
+	  mCurrentDelegate->updateItemInfo();
 }
 
 void CollectionMenu::updatePowerUpButton()
@@ -487,7 +449,7 @@ void CollectionMenu::clickMethod()
 	int x = click.x / 79;
 	int y = click.y / 59;
 	int cid = x + y*4;
-	if( cid < mItemCount && cid >= 0 )
+	if( cid < mCurrentDelegate->getItemCount() && cid >= 0 )
 	{
 		onItemCallback(cid);
 	}

@@ -34,10 +34,13 @@ public:
     void updateButtonImage(bool isDisabled) ;
     void activate(bool flag) ;
     void markCurrent(int i) ;
+  int getItemCount(){return mItemCount;}
+  virtual bool isCollected(int id) { return false; }
     
 protected:
     std::string mImageFilename;
-    
+  std::string backgroundImageFileName;
+  
     virtual void init(CollectionMenu* collectionMenu) = 0;
     
     int mItemCount;
@@ -47,8 +50,8 @@ protected:
     void toggleShare(bool flag) { }
     void markUsing(int i) ;
     
-    virtual bool isCollected(int id) { return false; }
     virtual void updateUseButtonInfo(int i) ;
+    virtual bool isMineItem(int itemIdx, int currentCharater) { return true;}
     
 public:
     template<typename ItemType>
@@ -72,18 +75,16 @@ public:
         
         for(typename std::vector<ItemType>::iterator iterator = vector.begin(); iterator != vector.end(); iterator++) {
             ItemType &item = *iterator;
+          //CCLOG("name %s, pic %s id %d", item.name.c_str(), item.icon.c_str(),item.uiid);
             //获取对应飞镖玩家的收集数据
             int piece = GameRecord::sharedGameRecord()->collection->pieces[item.uiid];
             bool completed = GameRecord::sharedGameRecord()->collection->isItemCompleted(item.uiid);
             
-            //TODO: Bug when select charactor
-            if( i < GAME_CHARCOUNT ) {
-                if( i != cc ) {
-                    ++i;
-                    continue;
-                }
-            }
-            
+          if( !isMineItem(i,cc)){
+            ++i;
+            continue;
+          }
+          
             cocos2d::Sprite *itemSprite = cocos2d::Sprite::createWithSpriteFrameName("sc_fbbg2.png");
             int x = count%4;
             int y = count/4;
@@ -108,7 +109,7 @@ public:
             cocos2d::Sprite *icon = NULL;
             if( piece == 0 && !completed )
             {
-                icon = cocos2d::Sprite::createWithSpriteFrameName("sc_fbbg.png");
+                icon = cocos2d::Sprite::createWithSpriteFrameName(backgroundImageFileName);
             }
             else{
                 icon = cocos2d::Sprite::create(item.icon.c_str());
@@ -117,6 +118,7 @@ public:
             mScroll->contentNode->addChild(icon, 2);
             
             //MASK
+          //CCLOG("%s %s, %s [%d, %d] (%d) <%d>", item.titl.c_str(),  item.name.c_str(), item.icon.c_str() , x, y , piece, completed);
             if( piece > 0 && !completed )
             {
                 cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
@@ -159,6 +161,7 @@ class ShurikenCollectionDelegate: public CollectionMenuDelegate {
   public:
     void init(CollectionMenu* collectionMenu) {
       mImageFilename = "sc_shuriken";
+      backgroundImageFileName = "sc_fbbg.png";
       updateButtonImage(false);
     }
 
@@ -189,16 +192,18 @@ class KatanaCollectionDelegate: public CollectionMenuDelegate {
   public:
     void init(CollectionMenu* collectionMenu) {
       mImageFilename = "sc_katana";
+      backgroundImageFileName = "sc_ktnbg.png";
       updateButtonImage(false);
     }
     void updateScroll() { this->updateList(GameData::fetchKatanas()); }
 
     bool isCollected(int id) {
+      if( id == -1){ return true;}
       int index = id + GAME_CHARCOUNT - 1;
       if( id == 0 ) {
         index = GameRecord::sharedGameRecord()->curr_char;
       }
-      Katana &sh = GameData::fetchKatanas()[id];
+      auto &sh = fetchData(id); //GameData::fetchKatanas()[id];
       return GameRecord::sharedGameRecord()->collection->isItemCompleted(sh.uiid);
     }
 
@@ -215,7 +220,7 @@ class KatanaCollectionDelegate: public CollectionMenuDelegate {
       markUsing(index);
     }
 
-    virtual const GameItemBase& fetchData(int index) { return GameData::fetchKatanas()[index]; }
+    virtual const GameItemBase& fetchData(int index) { return GameData::fetchKatanas()[GAME_CHARCOUNT - 1 + index]; }
 
     void equipItem() {
       int cc = GameRecord::sharedGameRecord()->curr_char;
@@ -226,12 +231,20 @@ class KatanaCollectionDelegate: public CollectionMenuDelegate {
       }
       GameRecord::sharedGameRecord()->char_equip_blade[cc] = index;
     }
+protected:
+  virtual bool isMineItem(int itemIdx, int currentCharater){
+    if( itemIdx < GAME_CHARCOUNT ) {
+      return itemIdx == currentCharater ;
+    }
+    return true;
+  }
 };
 
 class SpecialCollectionDelegate: public CollectionMenuDelegate {
   public:
     void init(CollectionMenu* collectionMenu) {
       mImageFilename = "sc_special";
+      backgroundImageFileName = "sc_jnbg.png";
       updateButtonImage(false);
     }
 
