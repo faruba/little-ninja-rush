@@ -21,7 +21,7 @@ void PauseMenuClassic::updateClassic()
 	GameTool::UpdateObjectives(labels,icons,crowns);
 
 	//update best score
-  mBest->setString(cocos2d::CCString::createWithFormat("最佳: %dm", GameRecord::sharedGameRecord()->score_high)->getCString());
+  mBest->setString(std::string_format("最佳: %dm", GameRecord::sharedGameRecord()->score_high).c_str());
 }
 
 void PauseMenuClassic::updateArcade() 
@@ -38,8 +38,8 @@ void PauseMenuClassic::updateArcade()
         }
         else
         {//not completed
-            mGoldScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->score)->getCString());
-            mGoldPrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->prize)->getCString());
+            mGoldScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->goldPrize->score).c_str());
+            mGoldPrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->goldPrize->prize).c_str());
         }
     }
     //silver
@@ -53,8 +53,8 @@ void PauseMenuClassic::updateArcade()
         }
         else
         {//not completed
-            mSilverScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->score)->getCString());
-            mSilverPrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->prize)->getCString());
+            mSilverScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->silverPrize->score).c_str());
+            mSilverPrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->silverPrize->prize).c_str());
         }
     }
     //bronze
@@ -68,13 +68,13 @@ void PauseMenuClassic::updateArcade()
         }
         else
         {//not completed
-            mBronzeScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score)->getCString());
-            mBronzePrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize)->getCString());
+            mBronzeScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score).c_str());
+            mBronzePrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize).c_str());
         }
     }
     
     //update best score
-    mBest->setString(cocos2d::CCString::createWithFormat("最佳: %d", GameRecord::sharedGameRecord()->arcade_high)->getCString());
+    mBest->setString(std::string_format("最佳: %d", GameRecord::sharedGameRecord()->arcade_high).c_str());
 }
 
 void PauseMenuClassic::onCreate() 

@@ -39,15 +39,15 @@ CCBReader *pReader = new CCBReader(pNodeLib, this, this);
     
     // TODO
     //mFlash.blendFunc =  (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };//fix flash bug
-cocos2d::CCString *rolefile = cocos2d::CCString::createWithFormat("sc_role%d0.png", GameRecord::sharedGameRecord()->curr_char);
-    mRole->setDisplayFrame(GameTool::getSpriteFrameByName(rolefile->getCString()));
+std::string rolefile = std::string_format("sc_role%d0.png", GameRecord::sharedGameRecord()->curr_char);
+    mRole->setDisplayFrame(GameTool::getSpriteFrameByName(rolefile.c_str()));
     mLight->setVisible(false);
     mCup->setVisible(false);
-    mScore->setString(cocos2d::CCString::createWithFormat("%d", play->arcade->score)->getCString());
+    mScore->setString(std::string_format("%d", play->arcade->score).c_str());
     mBouns->setString("0");
-    mGoldenTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->golden_trophy)->getCString());
-    mSilverTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->silver_trophy)->getCString());
-    mBronzeTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->bronze_trophy)->getCString());
+    mGoldenTrophy->setString(std::string_format("%d", GameRecord::sharedGameRecord()->golden_trophy).c_str());
+    mSilverTrophy->setString(std::string_format("%d", GameRecord::sharedGameRecord()->silver_trophy).c_str());
+    mBronzeTrophy->setString(std::string_format("%d", GameRecord::sharedGameRecord()->bronze_trophy).c_str());
     
     mCurrentBouns = 0;
     mCurrentScore = play->arcade->score;
@@ -169,8 +169,8 @@ void CommitArcade::onUpdate(float delta)
                 mCurrentBouns += add;
                 mCurrentScore += add;
             }
-            mScore->setString(cocos2d::CCString::createWithFormat("%d", mCurrentScore)->getCString());
-            mBouns->setString(cocos2d::CCString::createWithFormat("%d", mCurrentBouns)->getCString());
+            mScore->setString(std::string_format("%d", mCurrentScore).c_str());
+            mBouns->setString(std::string_format("%d", mCurrentBouns).c_str());
         }
             break;
         case 2:
@@ -199,7 +199,7 @@ void CommitArcade::onUpdate(float delta)
             if( mTimer > 1 )
             {
                 GamePlay *play = GamePlay::sharedGamePlay();
-                mCoins->setString(cocos2d::CCString::createWithFormat("%d", play->coins)->getCString());
+                mCoins->setString(std::string_format("%d", play->coins).c_str());
                 mState = 2;
                 mTimer = 0;
                 mCup->setScale(0);
@@ -231,9 +231,9 @@ cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(2);
                 GameTool::PlaySound("openscroll.mp3");
                 
                 //update trophy count
-                mGoldenTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->golden_trophy)->getCString());
-                mSilverTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->silver_trophy)->getCString());
-                mBronzeTrophy->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->bronze_trophy)->getCString());
+                mGoldenTrophy->setString(std::string_format("%d", GameRecord::sharedGameRecord()->golden_trophy).c_str());
+                mSilverTrophy->setString(std::string_format("%d", GameRecord::sharedGameRecord()->silver_trophy).c_str());
+                mBronzeTrophy->setString(std::string_format("%d", GameRecord::sharedGameRecord()->bronze_trophy).c_str());
             }
         }
             break;

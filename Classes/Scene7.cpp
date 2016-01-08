@@ -95,7 +95,7 @@ cocos2d::Sprite *bgm = cocos2d::Sprite::createWithSpriteFrameName("mc-bg.png");
     {
         mWhiteLen += 10 + 60*CCRANDOM_0_1();
         int tr = 1 + randomInt(4);
-cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-tree2-%d.png", tr)->getCString());
+cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("mc-tree2-%d.png", tr).c_str());
         sp->setAnchorPoint(cocos2d::Vec2(0, 0));
         sp->setPosition(cocos2d::Vec2(mWhiteLen, 55));
         mWhiteTrees->addChild(sp);
@@ -119,7 +119,7 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
     {
         mWhiteLen2 += 10 + 60*CCRANDOM_0_1();
         int tr = 1 + randomInt(4);
-cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-tree2-%d.png", tr)->getCString());
+cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("mc-tree2-%d.png", tr).c_str());
         sp->setAnchorPoint(cocos2d::Vec2(0, 0));
         sp->setPosition(cocos2d::Vec2(mWhiteLen2, 60));
         mWhiteTrees2->addChild(sp);
@@ -134,7 +134,7 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
     {
         mGreenLen2 += 10 + 60*CCRANDOM_0_1();
         int tr = 1 + randomInt(4);
-cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-tree-%d.png", tr)->getCString());
+cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("mc-tree-%d.png", tr).c_str());
         sp->setAnchorPoint(cocos2d::Vec2(0, 0));
         sp->setPosition(cocos2d::Vec2(mGreenLen2, 41));
         mGreenTrees2->addChild(sp);
@@ -155,7 +155,7 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
     {
         mGreenLen += 10 + 60*CCRANDOM_0_1();
         int tr = 1 + randomInt(4);
-cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-tree-%d.png", tr)->getCString());
+cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("mc-tree-%d.png", tr).c_str());
         sp->setAnchorPoint(cocos2d::Vec2(0, 0));
         sp->setPosition(cocos2d::Vec2(mGreenLen, 51));
         mGreenTrees->addChild(sp);
@@ -180,7 +180,7 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
         if( randomInt(3) == 0 )
         {
             int sc = 1+randomInt(2);
-cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-stocking%d.png", sc)->getCString());
+cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("mc-stocking%d.png", sc).c_str());
             sp->setAnchorPoint(cocos2d::Vec2(0, 1));
             sp->setPosition(cocos2d::Vec2(mDecosLen, 198));
             
@@ -190,7 +190,7 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
         else
         {
             int sc = 1+randomInt(6);
-cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-top%d.png", sc)->getCString());
+cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("mc-top%d.png", sc).c_str());
             sp->setAnchorPoint(cocos2d::Vec2(0, 0));
             sp->setPosition(cocos2d::Vec2(mDecosLen, 248));
             
@@ -206,7 +206,7 @@ cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStri
     {
         mFrontLen += 10 + 30*CCRANDOM_0_1();
         int tr = 1 + randomInt(3);
-cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-qj%d.png", tr)->getCString());
+cocos2d::Sprite *sp = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("mc-qj%d.png", tr).c_str());
         sp->setAnchorPoint(cocos2d::Vec2(0, 0));
         sp->setPosition(cocos2d::Vec2(mFrontLen, 0));
         mFronts->addChild(sp);
@@ -386,7 +386,7 @@ cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
             if( randomInt(4) == 0 )
             {
               int sc = 1+randomInt(2);
-cocos2d::Sprite *nsp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-stocking%d.png", sc)->getCString());
+cocos2d::Sprite *nsp = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("mc-stocking%d.png", sc).c_str());
               sp->setDisplayFrame(nsp->displayFrame());
               sp->setAnchorPoint(cocos2d::Vec2(0, 1));
               np.y = 198;
@@ -394,7 +394,7 @@ cocos2d::Sprite *nsp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCStr
             else
             {
               int sc = 1+randomInt(6);
-cocos2d::Sprite *nsp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-top%d.png", sc)->getCString());
+cocos2d::Sprite *nsp = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("mc-top%d.png", sc).c_str());
               sp->setDisplayFrame(nsp->displayFrame());
               sp->setAnchorPoint(cocos2d::Vec2(0, 0));
               np.y = 248;
@@ -428,7 +428,7 @@ cocos2d::Sprite *sp = (cocos2d::Sprite*)node;
           if( np.x + sp->getContentSize().width < 0 )
           {
             int tr = 1 + randomInt(3);
-cocos2d::Sprite *nsp = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("mc-qj%d.png", tr)->getCString());
+cocos2d::Sprite *nsp = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("mc-qj%d.png", tr).c_str());
             sp->setDisplayFrame(nsp->displayFrame());
 
             np.x = mFrontLen;

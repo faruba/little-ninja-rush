@@ -130,7 +130,7 @@ class GameData : public cocos2d::Ref
     static int roleMaxHP(int rid);
     static float roleRunSpeed(int rid);
     static float roleArcadeBouns(int rid);
-    static cocos2d::CCString* roleAnimation(int rid);
+    static std::string roleAnimation(int rid);
     
     static int upgradeCost(int uid, int lev);
 

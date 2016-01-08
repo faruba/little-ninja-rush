@@ -67,7 +67,7 @@ cocos2d::Node * node = createUIByCCBI("menu-coins", "CoinsMenu", CoinsMenuLayerL
     mScrollBody->setAnchorPoint(cocos2d::Vec2(0, 1));
     mClipedList->addChild(mScrollBody);
     
-    mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+    mCoins->setString(std::string_format("%d", GameRecord::sharedGameRecord()->coins).c_str());
     mOffset = 0;
     mItemList->removeAllChildrenWithCleanup(true);
     mCurrUnFold = -1;
@@ -444,7 +444,7 @@ void CoinsMenu::purchaseVerified(int pid)
     else {
         GameRecord::sharedGameRecord()->purchaseVerified(pid);
     }
-    mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+    mCoins->setString(std::string_format("%d", GameRecord::sharedGameRecord()->coins).c_str());
     GameTool::PlaySound("getscroll.mp3");
 }
 

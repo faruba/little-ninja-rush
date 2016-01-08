@@ -89,8 +89,8 @@ cocos2d::Sprite *exsbg = cocos2d::Sprite::createWithSpriteFrameName("cj3_bg2.png
     //增加远山
     for(int i=0; i<3; ++i)
     {
-cocos2d::CCString *sp = cocos2d::CCString::createWithFormat("cj3_mountain%d.png", i+1);
-        mHills[i] = cocos2d::Sprite::createWithSpriteFrameName(sp->getCString());
+std::string sp = std::string_format("cj3_mountain%d.png", i+1);
+        mHills[i] = cocos2d::Sprite::createWithSpriteFrameName(sp.c_str());
         mHills[i]->setAnchorPoint(cocos2d::Vec2(0, 0));
         mHills[i]->setPosition(cocos2d::Vec2( 100 + 225*i, 262));
         mBg->addChild(mHills[i]);

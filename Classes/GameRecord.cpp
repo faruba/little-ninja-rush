@@ -185,32 +185,32 @@ void GameRecord::read(cocos2d::CCDictionary* dic)
     //读取角色数据
     for( int i=0; i<GAME_CHARCOUNT; ++i)
     {
-      cocos2d::CCString *strHP = cocos2d::CCString::createWithFormat("char_hp__%d", i);
-      cocos2d::CCString *strDart = cocos2d::CCString::createWithFormat("char_dart__%d", i);
-      cocos2d::CCString *strContract = cocos2d::CCString::createWithFormat("char_contract__%d", i);
-      cocos2d::CCString *strEquipDart = cocos2d::CCString::createWithFormat("char_equip_dart__%d", i);
-      cocos2d::CCString *strEquipBlade = cocos2d::CCString::createWithFormat("char_equip_blade__%d", i);
-      cocos2d::CCString *strEquipSpell = cocos2d::CCString::createWithFormat("char_equip_spell__%d", i);
-      cocos2d::CCString *strUseCount = cocos2d::CCString::createWithFormat("char_usecount__%d", i);
-      char_hp[i] = gtReadInt(dic, strHP->getCString(), 0);
-      char_dart[i] = gtReadInt(dic, strDart->getCString(), 0);
+      std::string strHP = std::string_format("char_hp__%d", i);
+      std::string strDart = std::string_format("char_dart__%d", i);
+      std::string strContract = std::string_format("char_contract__%d", i);
+      std::string strEquipDart = std::string_format("char_equip_dart__%d", i);
+      std::string strEquipBlade = std::string_format("char_equip_blade__%d", i);
+      std::string strEquipSpell = std::string_format("char_equip_spell__%d", i);
+      std::string strUseCount = std::string_format("char_usecount__%d", i);
+      char_hp[i] = gtReadInt(dic, strHP.c_str(), 0);
+      char_dart[i] = gtReadInt(dic, strDart.c_str(), 0);
       if( i == 0 )
       {
-        char_contract[i] = gtReadInt(dic, strContract->getCString(), 1);
+        char_contract[i] = gtReadInt(dic, strContract.c_str(), 1);
       }
       else {
-        char_contract[i] = gtReadInt(dic, strContract->getCString(), 0);
+        char_contract[i] = gtReadInt(dic, strContract.c_str(), 0);
       }
-      char_equip_dart[i] = gtReadInt(dic, strEquipDart->getCString(), 0);
-      char_equip_blade[i] = gtReadInt(dic, strEquipBlade->getCString(), i);
-      char_equip_spell[i] = gtReadInt(dic, strEquipSpell->getCString(), 0);
-      char_usecount[i] = gtReadInt(dic, strUseCount->getCString(), 0);
+      char_equip_dart[i] = gtReadInt(dic, strEquipDart.c_str(), 0);
+      char_equip_blade[i] = gtReadInt(dic, strEquipBlade.c_str(), i);
+      char_equip_spell[i] = gtReadInt(dic, strEquipSpell.c_str(), 0);
+      char_usecount[i] = gtReadInt(dic, strUseCount.c_str(), 0);
     }
     //读取升级数据
     for( int i=0; i<GAME_UPGRADECOUNT; ++i)
     {
-cocos2d::CCString *key = cocos2d::CCString::createWithFormat("item_upgrade__%d", i);
-        item_upgrade[i] = gtReadInt(dic, key->getCString(), 0);
+std::string key = std::string_format("item_upgrade__%d", i);
+        item_upgrade[i] = gtReadInt(dic, key.c_str(), 0);
     }
     //读取游戏运行数据
     game_time = gtReadInt(dic, "game_time", 0);
@@ -224,23 +224,23 @@ cocos2d::CCString *key = cocos2d::CCString::createWithFormat("item_upgrade__%d",
     //load iap flags
     for(int i=0; i<IAP_COUNT; ++i)
     {
-cocos2d::CCString *key = cocos2d::CCString::createWithFormat("iap_flags__%d", i);
-        iap_flag[i] = gtReadInt(dic, key->getCString(), 0);
+std::string key = std::string_format("iap_flags__%d", i);
+        iap_flag[i] = gtReadInt(dic, key.c_str(), 0);
     }
     
     //读入LocalLeaderBoard
     lb_playername = gtReadString(dic, "lead_playername", LB_DEFAULT);
     for( int i=0; i<LB_RANK; ++i)
     {
-cocos2d::CCString *strNameKey = cocos2d::CCString::createWithFormat("lead_name__%d", i);
-cocos2d::CCString *strScoreKey = cocos2d::CCString::createWithFormat("lead_score__%d", i);
-        lb_names[i] = gtReadString(dic, strNameKey->getCString(), LB_EMPITY);
-        lb_scores[i] = gtReadInt(dic, strScoreKey->getCString(), 0);
+std::string strNameKey = std::string_format("lead_name__%d", i);
+std::string strScoreKey = std::string_format("lead_score__%d", i);
+        lb_names[i] = gtReadString(dic, strNameKey.c_str(), LB_EMPITY);
+        lb_scores[i] = gtReadInt(dic, strScoreKey.c_str(), 0);
         //--- load arcade leader board
-cocos2d::CCString *strArcadeNameKey = cocos2d::CCString::createWithFormat("leada_name__%d", i);
-cocos2d::CCString *strArcadeScoreKey = cocos2d::CCString::createWithFormat("leada_score__%d", i);
-        lba_names[i] = gtReadString(dic, strArcadeNameKey->getCString(), LB_EMPITY);
-        lba_scores[i] = gtReadInt(dic, strArcadeScoreKey->getCString(), 0);
+std::string strArcadeNameKey = std::string_format("leada_name__%d", i);
+std::string strArcadeScoreKey = std::string_format("leada_score__%d", i);
+        lba_names[i] = gtReadString(dic, strArcadeNameKey.c_str(), LB_EMPITY);
+        lba_scores[i] = gtReadInt(dic, strArcadeScoreKey.c_str(), 0);
     }
     
     share_facebook = gtReadInt(dic, "share_facebook", 0);
@@ -364,7 +364,7 @@ void GameRecord::submitScore(int score, std::string& name)
                 if( lb_scores[j] < lb_scores[j+1] )
                 {
                     int ts = lb_scores[j];
-cocos2d::CCString *tn = lb_names[j];
+std::string tn = lb_names[j];
                     lb_scores[j] = lb_scores[j+1];
                     lb_names[j] = lb_names[j+1];
                     lb_scores[j+1] = ts;
@@ -411,7 +411,7 @@ void GameRecord::submitArcadeScore(int score, std::string& name)
                 if( lba_scores[j] < lba_scores[j+1] )
                 {
                     int ts = lba_scores[j];
-cocos2d::CCString *tn = lba_names[j];
+std::string tn = lba_names[j];
                     lba_scores[j] = lba_scores[j+1];
                     lba_names[j] = lba_names[j+1];
                     lba_scores[j+1] = ts;
@@ -544,8 +544,8 @@ void GameRecord::saveToiCloud(NSURL* icloudurl;)
     NSError *error = NULL;
     NSFileManager *manager = NSFileManager->defaultManager();
 cocos2d::CCArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
-cocos2d::CCString *documentsDirectory = paths->objectAtIndex(0);
-cocos2d::CCString *filename = documentsDirectory->stringByAppendingPathComponent(ICLOUDFILE);
+std::string documentsDirectory = paths->objectAtIndex(0);
+std::string filename = documentsDirectory->stringByAppendingPathComponent(ICLOUDFILE);
     NSURL *local = NSURL->fileURLWithPath(filename);
     this->writeToURL(local);
     if( manager->isUbiquitousItemAtURL(icloudurl) )

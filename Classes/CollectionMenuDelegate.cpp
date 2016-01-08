@@ -57,8 +57,8 @@ void  CollectionMenuDelegate::onUse () {
         } else {
           GameTool::PlaySound("getitem.mp3");
           int piece = GameRecord::sharedGameRecord()->collection->itemTotalPiece(uiid) - GameRecord::sharedGameRecord()->collection->itemLostPiece(uiid);
-          cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
-          mask->setDisplayFrame(GameTool::getSpriteFrameByName(filename->getCString()));
+          std::string filename = std::string_format("sc_sp%d.png", piece);
+          mask->setDisplayFrame(GameTool::getSpriteFrameByName(filename.c_str()));
           //bugfix
           if( GameRecord::sharedGameRecord()->collection->magic_piece <= 0 )
           {
@@ -66,7 +66,7 @@ void  CollectionMenuDelegate::onUse () {
             mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_unlock2.png"));
           }
         }
-        mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", GameRecord::sharedGameRecord()->collection->magic_piece)->getCString());
+        mScrollCount->setString(std::string_format("x%d", GameRecord::sharedGameRecord()->collection->magic_piece).c_str());
       } else {
         GameTool::PlaySound("error.mp3");
       }
@@ -215,7 +215,7 @@ void PowerUpCollectionDelegate::onUseLife()
     GameRecord::sharedGameRecord()->setCharacterHp(GameRecord::sharedGameRecord()->char_hp[role]+1, role);
     mCollectionMenu->updateCharacterInfo(role, 1);
     int lc = GameRecord::sharedGameRecord()->collection->life_piece/9;
-    mLifeCount->setString(cocos2d::CCString::createWithFormat("%d", lc)->getCString());
+    mLifeCount->setString(std::string_format("%d", lc).c_str());
     if( GameData::roleCurrHP(role) >= GameData::roleMaxHP(role) )
     {
       mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_use2.png"));
@@ -233,7 +233,7 @@ void PowerUpCollectionDelegate::onUseDart()
     GameRecord::sharedGameRecord()->setCharacterDart(GameRecord::sharedGameRecord()->char_dart[role]+1, role);
     mCollectionMenu->updateCharacterInfo(role, 2);
     int lc = GameRecord::sharedGameRecord()->collection->dart_piece/9;
-    mDartCount->setString(cocos2d::CCString::createWithFormat("%d", lc)->getCString());
+    mDartCount->setString(std::string_format("%d", lc).c_str());
     if( GameData::roleCurrDart(role) >= GameData::roleMaxDart(role) )
     {
       mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_use2.png"));

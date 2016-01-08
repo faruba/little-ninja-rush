@@ -61,7 +61,7 @@ void Collections::readCollections(cocos2d::CCDictionary* dic)
     magic_piece = gtReadInt(dic, "magic_piece", 0);
     for( int i=0; i<PIECE_COUNT; ++i)
     {
-        pieces[i] = gtReadInt(dic, CCString::createWithFormat("pieces__%d", i)->getCString(), 0);
+        pieces[i] = gtReadInt(dic, std::string_format("pieces__%d", i).c_str(), 0);
     }
     //read CCArray
 cocos2d::Ref* nli = dic->objectForKey("collection_newlist");

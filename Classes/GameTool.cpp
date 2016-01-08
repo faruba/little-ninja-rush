@@ -11,7 +11,7 @@ void GameTool::UpdateObjectives(cocos2d::Label* labels[3],cocos2d::Sprite* icons
     if (managers[i]->hasObjective()) {
       const Achievement &info = *(managers[i]->info());
 
-      labels[i]->setString(Tasks::stringForObjective(info.desc, info.achieveCode,  info.achieveNumber, managers[i]->currentObjective.count)->getCString());
+      labels[i]->setString(Tasks::stringForObjective(info.desc, info.achieveCode,  info.achieveNumber, managers[i]->currentObjective.count).c_str());
       labels[i]->setColor(Color3B(255, 255, 255));
 
       icons[i]->setVisible(true);
@@ -29,7 +29,7 @@ void GameTool::UpdateObjectives(cocos2d::Label* labels[3],cocos2d::Sprite* icons
 
 		for(int ii=0; ii<managers[i]->currentObjective.index; ++ii)
 		{
-			cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", ii)->getCString());
+			cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("crown%d.png", ii).c_str());
 			crown->setPosition(cocos2d::Vec2(32-16*ii, 0));
 			crowns[ii]->addChild(crown);
 		}
@@ -185,8 +185,8 @@ void unloadTextureFromeSpriteFrameFile(const char *plist)
   //const char *path = cocos2d::CCFileUtils::sharedFileUtils()->fullPathFromRelativePath(plist);
 //cocos2d::CCDictionary *dict = cocos2d::CCDictionary::createWithContentsOfFile(path);
 //cocos2d::CCDictionary *meta = (cocos2d::CCDictionary*)dict->objectForKey("metadata");
-//cocos2d::CCString *texname = (cocos2d::CCString*)meta->objectForKey("textureFileName");
-//cocos2d::CCTextureCache::sharedTextureCache()->removeTextureForKey(texname->getCString());
+//std::string texname = (std::string )meta->objectForKey("textureFileName");
+//cocos2d::CCTextureCache::sharedTextureCache()->removeTextureForKey(texname.c_str());
 }
 
 //UIImage* makeScreenshot()

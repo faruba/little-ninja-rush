@@ -200,7 +200,7 @@ void Item::onCreate()
             break;
         default:
         {
-            mSprite = cocos2d::Sprite::create(cocos2d::CCString::createWithFormat("icon%d.png", ani)->getCString());
+            mSprite = cocos2d::Sprite::create(std::string_format("icon%d.png", ani).c_str());
         }
             break;
     }

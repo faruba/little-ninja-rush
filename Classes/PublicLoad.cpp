@@ -99,13 +99,13 @@ GTLoadList* PublicLoad::gameLoadingList()
     int special = GameRecord::sharedGameRecord()->char_equip_spell[rid];
     //主角
     {
-cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("zchar%d.plist", rid+1);
-        list->addSpriteSheet(filename->getCString());
+std::string filename = std::string_format("zchar%d.plist", rid+1);
+        list->addSpriteSheet(filename.c_str());
     }
     //刀刃
     {
-cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("zblade%d.plist", blade+1);
-        list->addSpriteSheet(filename->getCString());
+std::string filename = std::string_format("zblade%d.plist", blade+1);
+        list->addSpriteSheet(filename.c_str());
         if( blade != 0 )
         {//hack: always load the first sprite frame
             list->addSpriteSheet("zblade1.plist");;

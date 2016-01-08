@@ -25,8 +25,8 @@ void Dart::addTail()
 {
   if( mTail == NULL )
   {
-cocos2d::CCString *tailstr = cocos2d::CCString::createWithFormat("%s_tail.png", mShap.substr(0, mShap.length()-4).c_str());
-    mTail = cocos2d::Sprite::createWithSpriteFrameName(tailstr->getCString());
+std::string tailstr = std::string_format("%s_tail.png", mShap.substr(0, mShap.length()-4).c_str());
+    mTail = cocos2d::Sprite::createWithSpriteFrameName(tailstr.c_str());
     mTail->setAnchorPoint(cocos2d::Vec2(0.5f, 0.95f));
     mTail->setPosition(mSprite->getPosition());
     mTail->setOpacity(0);
@@ -37,11 +37,11 @@ cocos2d::FadeIn *fi = cocos2d::FadeIn::create(0.5f);
   }
 }
 
-void Dart::addSTail(cocos2d::CCString * ani, int aid) 
+void Dart::addSTail(std::string ani, int aid) 
 {
   if( mSTail == NULL )
   {
-    mSTail = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(ani->getCString()));
+    mSTail = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(ani.c_str()));
     mSTail->playGTAnimation(aid, true);
     mSTail->setAnchorPoint(cocos2d::Vec2(0.5f, 0.95f));
     mSTail->setPosition(mSprite->getPosition());
@@ -155,7 +155,7 @@ cocos2d::RepeatForever* rf = cocos2d::RepeatForever::create(rb);
       break;
     case 2://雷飞镖
       {
-        this->addSTail(cocos2d::CCString::create("misc"), 0);
+        this->addSTail("misc", 0);
         mHitEffect = 12;
         //旋转代码
 cocos2d::RotateBy* rb = cocos2d::RotateBy::create(0.5f, 720);

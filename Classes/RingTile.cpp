@@ -94,10 +94,10 @@ cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameC
       //generate ccsprite
       if( mpWindowTiles[i] != NULL )
       {
-        mpWindowTiles[i]->setDisplayFrame(cache->spriteFrameByName(cocos2d::CCString::createWithFormat("tile_%d.png", Tiles[i])->getCString()));
+        mpWindowTiles[i]->setDisplayFrame(cache->spriteFrameByName(std::string_format("tile_%d.png", Tiles[i]).c_str()));
       }
       else {
-        mpWindowTiles[i] = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("tile_%d.png", Tiles[i])->getCString());
+        mpWindowTiles[i] = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("tile_%d.png", Tiles[i]).c_str());
         //mpWindowTiles[i]->retain();
         this->addChild(mpWindowTiles[i]);
       }
@@ -165,7 +165,7 @@ void RingTile::runTiles(float delta)
             int si = (mWindowSpriteIndex + i) % mWindowTileCount;
             //加载前n个pending精灵
             int pi = (mWindowIndex + mWindowTileCount + i) % mBufferSize;
-            mpWindowTiles[si]->setDisplayFrame(GameTool::getSpriteFrameByName(cocos2d::CCString::createWithFormat("tile_%d.png", mpBuffer[pi])->getCString()));
+            mpWindowTiles[si]->setDisplayFrame(GameTool::getSpriteFrameByName(std::string_format("tile_%d.png", mpBuffer[pi]).c_str()));
             mpWindowTiles[si]->getTexture()->setAliasTexParameters();//1.0.4
         }
         mWindowIndex = (mWindowIndex + n) % mBufferSize;

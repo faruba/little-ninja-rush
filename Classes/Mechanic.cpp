@@ -126,7 +126,7 @@ void Mechanic::onUpdate(float delta)
                     if(mTimer>0.3f && mFlag)
                     {
                         int n = 1 + randomInt(3);
-                        GameTool::PlaySound(cocos2d::CCString::createWithFormat("ahh%d.mp3", n)->getCString());
+                        GameTool::PlaySound(std::string_format("ahh%d.mp3", n).c_str());
                         mFlag = false;
                     }
                     //fix pos

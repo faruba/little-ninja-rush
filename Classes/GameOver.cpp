@@ -33,8 +33,8 @@ void GameOver::updateClassic()
   GamePlay *play = GamePlay::sharedGamePlay();
 
   int dm = play->distance/PLAY_DISMETER;
-  mDistance->setString(cocos2d::CCString::createWithFormat("%dm", dm)->getCString());
-  mCoins->setString(cocos2d::CCString::createWithFormat("%d", play->coins)->getCString());
+  mDistance->setString(std::string_format("%dm", dm).c_str());
+  mCoins->setString(std::string_format("%d", play->coins).c_str());
 
   //get coins
   GameRecord::sharedGameRecord()->makeCoins(play->coins);
@@ -76,7 +76,7 @@ void GameOver::updateClassic()
     //---- No.1 ----
   if( GameRecord::sharedGameRecord()->lb_scores[0] > 0 )
   {
-    mLeadLb0->setString(cocos2d::CCString::createWithFormat("%dm", GameRecord::sharedGameRecord()->lb_scores[0])->getCString());
+    mLeadLb0->setString(std::string_format("%dm", GameRecord::sharedGameRecord()->lb_scores[0]).c_str());
   }
   else {
     mLeadLb0->setString("-");
@@ -84,7 +84,7 @@ void GameOver::updateClassic()
   //---- No.2 ----
   if( GameRecord::sharedGameRecord()->lb_scores[1] > 0 )
   {
-    mLeadLb1->setString(cocos2d::CCString::createWithFormat("%dm", GameRecord::sharedGameRecord()->lb_scores[1])->getCString());
+    mLeadLb1->setString(std::string_format("%dm", GameRecord::sharedGameRecord()->lb_scores[1]).c_str());
   }
   else {
     mLeadLb1->setString("-");
@@ -92,7 +92,7 @@ void GameOver::updateClassic()
   //---- No.3 ----
   if( GameRecord::sharedGameRecord()->lb_scores[2] > 0 )
   {
-    mLeadLb2->setString(cocos2d::CCString::createWithFormat("%dm", GameRecord::sharedGameRecord()->lb_scores[2])->getCString());
+    mLeadLb2->setString(std::string_format("%dm", GameRecord::sharedGameRecord()->lb_scores[2]).c_str());
   }
   else {
     mLeadLb2->setString("-");
@@ -104,7 +104,7 @@ void GameOver::updateArcade()
   GamePlay *play = GamePlay::sharedGamePlay();
   int score = play->arcade->score;
 
-  mArcadeScore->setString(cocos2d::CCString::createWithFormat("%d", score)->getCString());
+  mArcadeScore->setString(std::string_format("%d", score).c_str());
   switch (play->arcade->cup) {
     case 0:
       {
@@ -159,8 +159,8 @@ void GameOver::updateArcade()
     }
     else
     {//not completed
-      mGoldScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->score)->getCString());
-      mGoldPrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->prize)->getCString());
+      mGoldScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->goldPrize->score).c_str());
+      mGoldPrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->goldPrize->prize).c_str());
     }
   }
   //silver
@@ -174,8 +174,8 @@ void GameOver::updateArcade()
     }
     else
     {//not completed
-      mSilverScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->score)->getCString());
-      mSilverPrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->prize)->getCString());
+      mSilverScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->silverPrize->score).c_str());
+      mSilverPrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->silverPrize->prize).c_str());
     }
   }
   //bronze
@@ -189,8 +189,8 @@ void GameOver::updateArcade()
     }
     else
     {//not completed
-      mBronzeScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score)->getCString());
-      mBronzePrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize)->getCString());
+      mBronzeScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score).c_str());
+      mBronzePrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize).c_str());
     }
   }
 
@@ -198,7 +198,7 @@ void GameOver::updateArcade()
   //---- No.1 ----
   if( GameRecord::sharedGameRecord()->lba_scores[0] > 0 )
   {
-    mLeadLb0->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->lba_scores[0])->getCString());
+    mLeadLb0->setString(std::string_format("%d", GameRecord::sharedGameRecord()->lba_scores[0]).c_str());
   }
   else {
     mLeadLb0->setString("-");
@@ -206,7 +206,7 @@ void GameOver::updateArcade()
   //---- No.2 ----
   if( GameRecord::sharedGameRecord()->lba_scores[1] > 0 )
   {
-    mLeadLb1->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->lba_scores[1])->getCString());
+    mLeadLb1->setString(std::string_format("%d", GameRecord::sharedGameRecord()->lba_scores[1]).c_str());
   }
   else {
     mLeadLb1->setString("-");
@@ -214,7 +214,7 @@ void GameOver::updateArcade()
   //---- No.3 ----
   if( GameRecord::sharedGameRecord()->lba_scores[2] > 0 )
   {
-    mLeadLb2->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->lba_scores[2])->getCString());
+    mLeadLb2->setString(std::string_format("%d", GameRecord::sharedGameRecord()->lba_scores[2]).c_str());
   }
   else {
     mLeadLb2->setString("-");
@@ -431,12 +431,12 @@ void GameOver::onTwitter(cocos2d::Ref*)
   //        if( sina )
   //        {
   //            social = ABSocial->feedOnSinaWeibo();
-  //            social.text = cocos2d::CCString::createWithFormat("刚刚在#LittleNinjaRush#的标准模式中跑了%dm，谁来挑战！", mScore);;
+  //            social.text = std::string_format("刚刚在#LittleNinjaRush#的标准模式中跑了%dm，谁来挑战！", mScore);;
   //        }
   //        else
   //        {
   //            social = ABSocial->feedOnTwitter();
-  //            social.text = cocos2d::CCString::createWithFormat("I have just got %dm in #LittleNinjaRush, beat that!", mScore);
+  //            social.text = std::string_format("I have just got %dm in #LittleNinjaRush, beat that!", mScore);
   //        }
   //        /*
   //        social.image = makeScreenshot();

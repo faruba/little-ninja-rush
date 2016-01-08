@@ -109,7 +109,7 @@ cocos2d::Node * node = createUIByCCBI("menu-shop", "ShopMenu", ShopMenuLayerLoad
     mScrollBody->setAnchorPoint(cocos2d::Vec2(0, 1));
     mClipedList->addChild(mScrollBody);
     
-    mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+    mCoins->setString(std::string_format("%d", GameRecord::sharedGameRecord()->coins).c_str());
     mOffset = 0;
     mItemList->removeAllChildrenWithCleanup(true);
     mCurrUnFold = -1;
@@ -384,7 +384,7 @@ cocos2d::CCLog("PID = %d", cid);
             }
         }
     }
-    mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+    mCoins->setString(std::string_format("%d", GameRecord::sharedGameRecord()->coins).c_str());
     GameRecord::sharedGameRecord()->checkPoint();
 }
 

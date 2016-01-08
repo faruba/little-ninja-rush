@@ -265,7 +265,7 @@ void ExtraMenu::loadStatistics()
     mOffset = 0;
   for(Statistics sta : Tasks::getStatistics())
     {
-        //CCLog("*(%d) - %s", sta->achieveCode, sta->name->getCString());
+        //CCLog("*(%d) - %s", sta->achieveCode, sta->name.c_str());
         
         if( sta.achieveCode != -1 )
         {//normal statistics

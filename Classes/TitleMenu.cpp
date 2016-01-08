@@ -199,7 +199,7 @@ void PopOption::loadFriendGain()
   //feature removed from android
   //    Node *node = [CCBReader nodeGraphFromFile:"menu-titlefriendgain.ccb" owner:this);
   //    this->addChild(node);
-  //    CCString* coin = cocos2d::CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount());
+  //    std::string coin = std::string_format("%d", FriendList->sharedFriendList()->bounsCount());
   //    mCoin->setString(coin);
 }
 
@@ -208,7 +208,7 @@ void PopOption::loadFriendAdd()
   //feature removed from android
   //    Node *node = [CCBReader nodeGraphFromFile:"menu-titlefriendset.ccb" owner:this);
   //    this->addChild(node);
-  //    CCString* coin = cocos2d::CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount());
+  //    std::string coin = std::string_format("%d", FriendList->sharedFriendList()->bounsCount());
   //    mCoin->setString(coin);
   //    Label *label = [Label, ABSystem->queryUserCode(), "Helvetica", 24);
   //    label->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
@@ -261,7 +261,7 @@ void PopOption::onAddFriend(cocos2d::Ref*)
 //            case 0:
 //            {
 //                GameTool::PlaySound("getcoin.mp3");
-//                mCoin->setString(cocos2d::CCString::createWithFormat("%d", FriendList->sharedFriendList()->bounsCount()));
+//                mCoin->setString(std::string_format("%d", FriendList->sharedFriendList()->bounsCount()));
 //                UIAlertView *alert = [UIAlertView->alloc(), "Success", "Share code has been added.", NULL, "OK", NULL);
 //                alert->show();
 //                alert->release();
@@ -523,8 +523,8 @@ void PopObj::displayArcade()
     }
     else
     {//not completed
-      mGoldScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->score)->getCString());
-      mGoldPrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->goldPrize->prize)->getCString());
+      mGoldScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->goldPrize->score).c_str());
+      mGoldPrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->goldPrize->prize).c_str());
     }
   }
   //silver
@@ -538,8 +538,8 @@ void PopObj::displayArcade()
     }
     else
     {//not completed
-      mSilverScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->score)->getCString());
-      mSilverPrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->silverPrize->prize)->getCString());
+      mSilverScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->silverPrize->score).c_str());
+      mSilverPrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->silverPrize->prize).c_str());
     }
   }
   //bronze
@@ -553,8 +553,8 @@ void PopObj::displayArcade()
     }
     else
     {//not completed
-      mBronzeScore->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score)->getCString());
-      mBronzePrize->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize)->getCString());
+      mBronzeScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score).c_str());
+      mBronzePrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize).c_str());
     }
   } 
 }

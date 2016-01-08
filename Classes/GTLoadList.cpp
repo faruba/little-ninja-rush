@@ -7,7 +7,7 @@ void GTLoadSpriteSheet(const char* param, bool isload)
     if( isload )
     {
         cocos2d::log("load spritesheet (%s)", param);
-        cache->addSpriteFramesWithFile(param);
+      cache->addSpriteFramesWithFile(std::string(param));
     }
     else {
         cocos2d::log("unload spritesheet (%s)", param);
@@ -43,16 +43,15 @@ LoadItem* LoadItem::itemWithInfo(const char * param, loadfunc func)
     ret->loadmethod = func;
     if( param != NULL )
     {
-        ret->stringparam = cocos2d::CCString::create(param);
-        ret->stringparam->retain();
+      ret->stringparam = std::string(param);
     }
     return ret;
 }
 void LoadItem::execute(bool isload) 
 {
   const char *szStr = NULL;
-  if (stringparam)
-    szStr = stringparam->getCString();
+  if (stringparam.size() > 0)
+    szStr = stringparam.c_str();
     loadmethod(szStr, isload);
 }
 

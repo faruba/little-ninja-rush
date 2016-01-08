@@ -78,7 +78,7 @@ cocos2d::Node *node = pReader->readNodeGraphFromFile("ui-continue.ccbi", this);
 
 void ControlLayer::tickNumber(int n) 
 {
-    mNumber->setString(cocos2d::CCString::createWithFormat("%d", n)->getCString());
+    mNumber->setString(std::string_format("%d", n).c_str());
 cocos2d::ScaleTo *st1 = cocos2d::ScaleTo::create(0.2f, 1.5f);
 cocos2d::ScaleTo *st2 = cocos2d::ScaleTo::create(0.4f, 1);
 cocos2d::Sequence *seq = cocos2d::Sequence::create(st1, st2, NULL);
@@ -98,7 +98,7 @@ void ControlLayer::updateButton()
         mBtnBuyStandard->setVisible(false);
         mBtnBuyDeluxe->setVisible(false);
         
-        mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_credit)->getCString());
+        mCoins->setString(std::string_format("%d", GameRecord::sharedGameRecord()->item_credit).c_str());
     }
     else
     {

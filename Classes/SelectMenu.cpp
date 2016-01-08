@@ -193,7 +193,7 @@ void SelectMenu::updateCharacterInfo(int rid) {
   {
     mStartPos->removeChild(mPreview, true);
   }
-  mPreview = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(GameData::roleAnimation(rid)->getCString()));
+  mPreview = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(GameData::roleAnimation(rid).c_str()));
   mPreview->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
   mPreview->setPosition(cocos2d::Vec2( -10, 10));
   mPreview->playGTAnimation(0, true);

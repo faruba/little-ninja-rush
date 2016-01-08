@@ -20,7 +20,7 @@ class LoadItem:
 {
   public:
 CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(LoadItem, create);
-cocos2d::CCString* stringparam;
+std::string stringparam;
     loadfunc  loadmethod;
 
     static LoadItem* itemWithInfo(const char* param, loadfunc func);

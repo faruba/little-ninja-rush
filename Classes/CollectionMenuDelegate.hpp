@@ -122,8 +122,8 @@ public:
           //CCLOG("%s %s, %s [%d, %d] (%d) <%d>", item.titl.c_str(),  item.name.c_str(), item.icon.c_str() , x, y , piece, completed);
             if( piece > 0 && !completed )
             {
-                cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("sc_sp%d.png", piece);
-                cocos2d::Sprite *mask = cocos2d::Sprite::createWithSpriteFrameName(filename->getCString());
+                std::string filename = std::string_format("sc_sp%d.png", piece);
+                cocos2d::Sprite *mask = cocos2d::Sprite::createWithSpriteFrameName(filename.c_str());
                 mask->setPosition(itemSprite->getPosition());
                 mScroll->contentNode->addChild(mask, 3, count);
             }
@@ -312,15 +312,15 @@ class PowerUpCollectionDelegate: public CollectionMenuDelegate {
       //TODO:Refactor this
       int lm = GameRecord::sharedGameRecord()->collection->life_piece%9;
       int lc = GameRecord::sharedGameRecord()->collection->life_piece/9;
-      cocos2d::CCString *lfn = cocos2d::CCString::createWithFormat("sc_sp%d.png", lm);
-      mLifeMask->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(lfn->getCString()));
-      mLifeCount->setString(cocos2d::CCString::createWithFormat("%d", lc)->getCString());
+      std::string lfn = std::string_format("sc_sp%d.png", lm);
+      mLifeMask->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(lfn.c_str()));
+      mLifeCount->setString(std::string_format("%d", lc).c_str());
 
       int dm = GameRecord::sharedGameRecord()->collection->dart_piece%9;
       int dc = GameRecord::sharedGameRecord()->collection->dart_piece/9;
-      cocos2d::CCString *dfn = cocos2d::CCString::createWithFormat("sc_sp%d.png", dm);
-      mDartMask->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(dfn->getCString()));
-      mDartCount->setString(cocos2d::CCString::createWithFormat("%d", dc)->getCString());
+      std::string dfn = std::string_format("sc_sp%d.png", dm);
+      mDartMask->setDisplayFrame(cocos2d::SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(dfn.c_str()));
+      mDartCount->setString(std::string_format("%d", dc).c_str());
       mCurrItem = 0;
     }
 

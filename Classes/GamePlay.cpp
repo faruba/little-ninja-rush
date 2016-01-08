@@ -894,8 +894,8 @@ void GamePlay::makeCombo()
         cn = 9;
       }
     }
-    cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("combo%d.mp3", cn);
-    GameTool::PlaySound(filename->getCString());
+    std::string filename = std::string_format("combo%d.mp3", cn);
+    GameTool::PlaySound(filename.c_str());
   }
 
   if( mode == MODE_CLASSIC )
@@ -928,8 +928,8 @@ void GamePlay::makeCombo()
         {
           fn = 5;
         }
-        cocos2d::CCString *filename = cocos2d::CCString::createWithFormat("fever%d.mp3", fn);
-          GameTool::PlaySound(filename->getCString());
+        std::string filename = std::string_format("fever%d.mp3", fn);
+          GameTool::PlaySound(filename.c_str());
       }
     }
     if( combo == PLAY_FEVERCOMBO )

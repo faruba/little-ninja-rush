@@ -536,13 +536,13 @@ void Tasks::mergeWith(Tasks* task)
   //do not merge task
 }
 
-cocos2d::CCString* Tasks::stringForObjective(const std::string &descr, const int achcode, const int num, const int count)
+std::string Tasks::stringForObjective(const std::string &descr, const int achcode, const int num, const int count)
 {
-  cocos2d::CCString *all ;
+  std::string all ;
   if( achcode < ACH_OVERLINE && num > 1 && num-count > 0 ) {
-    all = cocos2d::CCString::createWithFormat("%s还剩%d。", descr.c_str(), num-count);
+    all = std::string_format("%s还剩%d。", descr.c_str(), num-count);
   } else {
-    all = cocos2d::CCString::createWithFormat(descr.c_str());
+    all = std::string_format(descr.c_str());
   }
   return all;
 }

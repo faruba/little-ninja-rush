@@ -147,7 +147,7 @@ bool Samuri::deliverHit(int type, cocos2d::Point dir)
 {
     if( mState != Dead )
     {
-        GameTool::PlaySound(cocos2d::CCString::createWithFormat("ahh%d.mp3", (randomInt(3)+1))->getCString());
+        GameTool::PlaySound(std::string_format("ahh%d.mp3", (randomInt(3)+1)).c_str());
         mState = Dead;
         mSprite->playGTAnimation(2, false);
         mFlag = true;

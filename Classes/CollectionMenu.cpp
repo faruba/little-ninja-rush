@@ -130,8 +130,8 @@ void CollectionMenu::onEnter() {
 	int currRole = GameRecord::sharedGameRecord()->curr_char;
 	for(int i=0; i<GAME_CHARCOUNT; ++i) {
 		cocos2d::MenuItemImage *btn = character(i);
-		btn->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", i, i==currRole?0:1)->getCString()));
-		btn->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", i, i==currRole?1:0)->getCString()));
+		btn->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(std::string_format("sc_role%d%d.png", i, i==currRole?0:1).c_str()));
+		btn->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(std::string_format("sc_role%d%d.png", i, i==currRole?1:0).c_str()));
 	}
 
 	mShurikenDelegate.init(this);
@@ -146,7 +146,7 @@ void CollectionMenu::onEnter() {
 	}
 	mCurrentDelegate->activate(true);
 
-	mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", GameRecord::sharedGameRecord()->collection->magic_piece)->getCString());
+	mScrollCount->setString(std::string_format("x%d", GameRecord::sharedGameRecord()->collection->magic_piece).c_str());
 
 	mUse->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
 	mUse->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("sc_equiped2.png"));
@@ -241,13 +241,13 @@ void CollectionMenu::onCharacter(int nRole)
 		return;
 	GameTool::PlaySound("click.mp3");
 	cocos2d::MenuItemImage *orl = character(orole);
-	orl->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", orole, 1)->getCString()));
-	orl->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", orole, 0)->getCString()));
+	orl->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(std::string_format("sc_role%d%d.png", orole, 1).c_str()));
+	orl->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(std::string_format("sc_role%d%d.png", orole, 0).c_str()));
 
 	int nrole = nRole;
 	cocos2d::MenuItemImage *nr = character(nrole);
-	nr->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", nrole, 0)->getCString()));
-	nr->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("sc_role%d%d.png", nrole, 1)->getCString()));
+	nr->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName(std::string_format("sc_role%d%d.png", nrole, 0).c_str()));
+	nr->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName(std::string_format("sc_role%d%d.png", nrole, 1).c_str()));
 	GameRecord::sharedGameRecord()->curr_char = nrole;
 
 	if( mCurrentDelegate != &mPowerUpDelegate )

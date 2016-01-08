@@ -70,7 +70,7 @@ cocos2d::RepeatForever *usaRep = cocos2d::RepeatForever::create(usaBlink);
     {
         gn = 1;
     }
-    mSpellGrid = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("ui-spell%d.png", gn)->getCString());
+    mSpellGrid = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("ui-spell%d.png", gn).c_str());
     mSpellGrid->setAnchorPoint(cocos2d::Vec2(0, 0));
     mSpellGrid->setPosition(cocos2d::Vec2(23.5f, 2));
     mParent->addChild(mSpellGrid, LAYER_UI+1);
@@ -84,7 +84,7 @@ cocos2d::RepeatForever *usaRep = cocos2d::RepeatForever::create(usaBlink);
     mSpell->setAnchorPoint(cocos2d::Vec2(0.5, 0.5));
     mSpell->setPosition(cocos2d::Vec2(14, 14));
     mParent->addChild(mSpell,  LAYER_UI);
-    mSpellName = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("name%d.png", GameRecord::sharedGameRecord()->curr_char)->getCString());
+    mSpellName = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("name%d.png", GameRecord::sharedGameRecord()->curr_char).c_str());
     mSpellName->setAnchorPoint(cocos2d::Vec2(0, 0));
     mSpellName->setPosition(cocos2d::Vec2(37, 13));
     mParent->addChild(mSpellName,  LAYER_UI);
@@ -187,7 +187,7 @@ cocos2d::Sprite *fevercoin = cocos2d::Sprite::createWithSpriteFrameName("feverco
                 mFlyBg->setAnchorPoint(cocos2d::Vec2(0, 0));
                 mFlyBg->setPosition(ccpAdd(mFly->getPosition(), Vec2(3, 0)));
                 play->addChild(mFlyBg, LAYER_UI-1);
-                mFlyNumber = cocos2d::Label::createWithBMFont( "ra50.fnt", cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_fly)->getCString());
+                mFlyNumber = cocos2d::Label::createWithBMFont( "ra50.fnt", std::string_format("%d", GameRecord::sharedGameRecord()->item_fly).c_str());
                 mFlyNumber->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
                 mFlyNumber->setPosition(ccpAdd(mFly->getPosition(), Vec2(25, -10)));
                 play->addChild(mFlyNumber, LAYER_UI+1);
@@ -203,7 +203,7 @@ cocos2d::Sprite *fevercoin = cocos2d::Sprite::createWithSpriteFrameName("feverco
                 mSPBg->setAnchorPoint(cocos2d::Vec2(0, 0));
                 mSPBg->setPosition(ccpAdd(mSP->getPosition(), Vec2(3, 0)));
                 play->addChild(mSPBg, LAYER_UI-1);
-                mSPNumber = cocos2d::Label::createWithBMFont( "ra50.fnt", cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->item_sp)->getCString());
+                mSPNumber = cocos2d::Label::createWithBMFont( "ra50.fnt", std::string_format("%d", GameRecord::sharedGameRecord()->item_sp).c_str());
                 mSPNumber->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
                 mSPNumber->setPosition(ccpAdd(mSP->getPosition(), Vec2(25, -10)));
                 play->addChild(mSPNumber, LAYER_UI+1);
@@ -274,7 +274,7 @@ void GameInterface::onUpdateClassic(float delta, GamePlay* play)
     int dm = play->distance/PLAY_DISMETER;
     if( dm != mDistanceCache )
     {
-        mDistanceNumber->setString(cocos2d::CCString::createWithFormat("%d", dm)->getCString());
+        mDistanceNumber->setString(std::string_format("%d", dm).c_str());
         mDistanceCache = dm;
         mDistanceM->setPosition(cocos2d::Vec2(5+10*strlen(mDistanceNumber->getString().c_str()), SCREEN_HEIGHT-5));
     }
@@ -300,7 +300,7 @@ cocos2d::SpriteFrameCache *framecache = cocos2d::SpriteFrameCache::sharedSpriteF
     if( play->coins != mCoinCache )
     {
         mCoinCache = play->coins;
-        mCoinNumber->setString(cocos2d::CCString::createWithFormat("%d", mCoinCache)->getCString());
+        mCoinNumber->setString(std::string_format("%d", mCoinCache).c_str());
         mCoinMark->setPosition(cocos2d::Vec2(8+8*strlen(mCoinNumber->getString().c_str()), SCREEN_HEIGHT - mDistanceNumber->getContentSize().height - 15));
     }
     
@@ -348,7 +348,7 @@ void GameInterface::onUpdateArcade(float delta, GamePlay* play)
     //update score
     if( arcade->score != mScoreCache )
     {
-        mScoreNumber->setString(cocos2d::CCString::createWithFormat("%d", arcade->score)->getCString());
+        mScoreNumber->setString(std::string_format("%d", arcade->score).c_str());
         mScoreCache = arcade->score;
     }
     
@@ -362,7 +362,7 @@ void GameInterface::onUpdateArcade(float delta, GamePlay* play)
         }
         if( currtime != mTimerCache )
         {
-            mTimerLabel->setString(cocos2d::CCString::createWithFormat("%d", currtime)->getCString());
+            mTimerLabel->setString(std::string_format("%d", currtime).c_str());
             mTimerCache = currtime;
         }
     }
@@ -593,7 +593,7 @@ void GameInterface::toggleShowItemButtons(bool flag)
 void GameInterface::popFeverCoins(int coins) 
 {
     mFeverCoins->stopAllActions();
-    mFeverFont->setString(cocos2d::CCString::createWithFormat("+%d", coins)->getCString());
+    mFeverFont->setString(std::string_format("+%d", coins).c_str());
     mFeverCoins->setScale(0.8f);
 cocos2d::ScaleTo *a1 = cocos2d::ScaleTo::create(0.1f, 1.1f);
 cocos2d::ScaleTo *a2 = cocos2d::ScaleTo::create(0.2f, 1);
@@ -616,7 +616,7 @@ void GameInterface::popHits(int number)
         mHitCount->setColor(Color3B(255, 204, 0));
     }
     mHitNode->stopAllActions();
-    mHitCount->setString(cocos2d::CCString::createWithFormat("%d", number)->getCString());
+    mHitCount->setString(std::string_format("%d", number).c_str());
     mHitNode->setScale(0.01f);
 cocos2d::ScaleTo *a1 = cocos2d::ScaleTo::create(0.1f, 1.5f);
 cocos2d::ScaleTo *a2 = cocos2d::ScaleTo::create(0.2f, 1);
@@ -653,7 +653,7 @@ cocos2d::Sequence *sq = cocos2d::Sequence::create(a1, a2, NULL);
 
 void GameInterface::setArcadeX(int x) 
 {
-    mArcadeX->setString(cocos2d::CCString::createWithFormat("x%d", x)->getCString());
+    mArcadeX->setString(std::string_format("x%d", x).c_str());
     if( x <= 0 )
     {
 cocos2d::ScaleTo *st = cocos2d::ScaleTo::create(1, 0);

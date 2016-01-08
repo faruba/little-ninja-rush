@@ -17,6 +17,7 @@
 #include <cocos2d.h>
 #include "cocos-ext.h"
 #include <time.h>
+#include "patch.h"
 
 
 class GameTool {

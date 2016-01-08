@@ -114,10 +114,10 @@ void Loading::onEnter()
   if( mTip )
   {
     //TODO:
-    //cocos2d::CCString *tip = GameData::randomTip();
+    //std::string tip = GameData::randomTip();
     //cocos2d::Size size = cocos2d::SizeMake(335, 50);
     //cocos2d::Size actualSize = tip->sizeWithFont(UIFont->fontWithName(TIP_FONTNAME, 18), size, UILineBreakModeWordWrap);
-    //cocos2d::Label *tips = cocos2d::Label::create(tip->getCString(), TIP_FONTNAME, 18, actualSize, kCCTextAlignmentCenter);
+    //cocos2d::Label *tips = cocos2d::Label::create(tip.c_str(), TIP_FONTNAME, 18, actualSize, kCCTextAlignmentCenter);
     //tips->setAnchorPoint(cocos2d::Vec2(0, 0.5f));
     //tips->setPosition(cocos2d::Vec2(90, 38));
     //cocos2d::Sprite *bound = cocos2d::Sprite::create("tipsbg.png");

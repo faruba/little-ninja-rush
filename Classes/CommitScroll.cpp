@@ -77,7 +77,7 @@ void CommitScroll::onCreate()
   //TODO: 
   mFlash->setBlendFunc({ GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA });//fix flash bug
 
-  mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
+  mScrollCount->setString(std::string_format("x%d", play->scrolls).c_str());
   mOver = false;
   cocos2d::RotateBy *rb1 = cocos2d::RotateBy::create(1, 60);
   cocos2d::RepeatForever *rf1 = cocos2d::RepeatForever::create(rb1);
@@ -208,7 +208,7 @@ void CommitScroll::onCashIn(cocos2d::Ref*)
         GameTool::PlaySound("buy.mp3");
         play->coins += play->scrolls*PLAY_SCROLLPRICE;
         play->scrolls = 0;
-        mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
+        mScrollCount->setString(std::string_format("x%d", play->scrolls).c_str());
         mOver = true;
         mOverTimer = 0;
     }
@@ -222,7 +222,7 @@ void CommitScroll::onScroll(cocos2d::Ref*)
     if( play->scrolls > 0 )
     {
       play->scrolls--;
-      mScrollCount->setString(cocos2d::CCString::createWithFormat("x%d", play->scrolls)->getCString());
+      mScrollCount->setString(std::string_format("x%d", play->scrolls).c_str());
 
       int prize = this->lottery();
       if( prize == 0 )
@@ -259,7 +259,7 @@ void CommitScroll::onScroll(cocos2d::Ref*)
         mFlash->runAction(fo1);
         mRotateNode->setVisible(true);
 
-        const char *filename = cocos2d::CCString::createWithFormat("prize-%d.png", prize)->getCString();
+        const char *filename = std::string_format("prize-%d.png", prize).c_str();
         mScroll->setDisplayFrame(GameTool::getSpriteFrameByName(filename));
         mScroll->setScale(0.01f);
         cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.4f, 1.5f);

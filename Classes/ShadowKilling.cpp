@@ -31,7 +31,7 @@ void ShadowKilling::onCreate()
     mState = 0;
     mDirection = -1;
     //创建角色动画
-    mRole = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(GameData::roleAnimation(GameRecord::sharedGameRecord()->curr_char)->getCString()));
+    mRole = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(GameData::roleAnimation(GameRecord::sharedGameRecord()->curr_char).c_str()));
     mRole->setAnchorPoint(cocos2d::Vec2(0.4f, 0.0625f));
     mShadow = GTGhostShadow::shadow(mRole, 0.02f, 5);
     mParent->addChild(mRole, LAYER_MAINROLE+2);
@@ -93,8 +93,8 @@ void ShadowKilling::onUpdate(float delta)
                     {
                         mSteak = 9;
                     }
-cocos2d::CCString *sound = cocos2d::CCString::createWithFormat("combo%d.mp3", mSteak);
-                    GameTool::PlaySound(sound->getCString());
+std::string sound = std::string_format("combo%d.mp3", mSteak);
+                    GameTool::PlaySound(sound.c_str());
                     
                     GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 28, false);
                     hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));

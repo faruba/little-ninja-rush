@@ -54,7 +54,7 @@ cocos2d::FadeIn *fi2 = cocos2d::FadeIn::create(0.5f);
 cocos2d::Sequence *sq2 = cocos2d::Sequence::create(dt2, fi2, NULL);
     mTalkbox->runAction(sq2);
     
-    mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+    mCoins->setString(std::string_format("%d", GameRecord::sharedGameRecord()->coins).c_str());
     //统计还剩多少片
     int shuriken = 0;
     for(int i=ITEM_SHURIKENSTART; i<ITEM_SHURIKENEND; ++i)
@@ -115,7 +115,7 @@ void MerchantPanel::updateBuy1()
         mBuyItem1->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("lt_soldout.png"));
         mBuyItem1->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("lt_soldout.png"));
     }
-    mItemCount1->setString(cocos2d::CCString::createWithFormat("%d", mIC1)->getCString());
+    mItemCount1->setString(std::string_format("%d", mIC1).c_str());
 }
 
 void MerchantPanel::updateBuy2() 
@@ -129,7 +129,7 @@ void MerchantPanel::updateBuy2()
         mBuyItem2->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("lt_soldout.png"));
         mBuyItem2->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("lt_soldout.png"));
     }
-    mItemCount2->setString(cocos2d::CCString::createWithFormat("%d", mIC2)->getCString());
+    mItemCount2->setString(std::string_format("%d", mIC2).c_str());
 }
 
 void MerchantPanel::updateBuy3() 
@@ -143,7 +143,7 @@ void MerchantPanel::updateBuy3()
         mBuyItem3->setNormalImage(cocos2d::Sprite::createWithSpriteFrameName("lt_soldout.png"));
         mBuyItem3->setSelectedImage(cocos2d::Sprite::createWithSpriteFrameName("lt_soldout.png"));
     }
-    mItemCount3->setString(cocos2d::CCString::createWithFormat("%d", mIC3)->getCString());
+    mItemCount3->setString(std::string_format("%d", mIC3).c_str());
 }
 
 //商人系统
@@ -263,10 +263,10 @@ void MerchantPanel::onMerchantBuy1()
                 break;
         }
         mIC1--;
-        mItemCount1->setString(cocos2d::CCString::createWithFormat("%d", mIC1)->getCString());
+        mItemCount1->setString(std::string_format("%d", mIC1).c_str());
         GameRecord::sharedGameRecord()->makeCoins(-cost);
         GameRecord::sharedGameRecord()->checkPoint();
-        mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+        mCoins->setString(std::string_format("%d", GameRecord::sharedGameRecord()->coins).c_str());
         
         mItem1->stopAllActions();
 cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(0.5f);
@@ -314,10 +314,10 @@ void MerchantPanel::onMerchantBuy2()
                  break;
          }
          mIC2--;
-         mItemCount2->setString(cocos2d::CCString::createWithFormat("%d", mIC2)->getCString());
+         mItemCount2->setString(std::string_format("%d", mIC2).c_str());
          GameRecord::sharedGameRecord()->makeCoins(-cost);
          GameRecord::sharedGameRecord()->checkPoint();
-         mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+         mCoins->setString(std::string_format("%d", GameRecord::sharedGameRecord()->coins).c_str());
          
          mItem2->stopAllActions();
 cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(0.5f);
@@ -365,10 +365,10 @@ void MerchantPanel::onMerchantBuy3()
                 break;
         }
         mIC3--;
-        mItemCount3->setString(cocos2d::CCString::createWithFormat("%d", mIC3)->getCString());
+        mItemCount3->setString(std::string_format("%d", mIC3).c_str());
         GameRecord::sharedGameRecord()->makeCoins(-cost);
         GameRecord::sharedGameRecord()->checkPoint();
-        mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+        mCoins->setString(std::string_format("%d", GameRecord::sharedGameRecord()->coins).c_str());
         
         mItem3->stopAllActions();
 cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(0.5f);
@@ -413,7 +413,7 @@ void MerchantPanel::onMerchantBuy4()
         }
         GameRecord::sharedGameRecord()->makeCoins(-cost);
         GameRecord::sharedGameRecord()->checkPoint();
-        mCoins->setString(cocos2d::CCString::createWithFormat("%d", GameRecord::sharedGameRecord()->coins)->getCString());
+        mCoins->setString(std::string_format("%d", GameRecord::sharedGameRecord()->coins).c_str());
         
         mItem4->stopAllActions();
 cocos2d::FadeOut *fo1 = cocos2d::FadeOut::create(0.5f);

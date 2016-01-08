@@ -78,12 +78,12 @@ void ObjectiveComplete::onUpdate(float delta)
         else {
             mCurrBounsCoins += ds;
         }
-        mBounsCoins->setString(cocos2d::CCString::createWithFormat("%04d", mCurrBounsCoins)->getCString());
+        mBounsCoins->setString(std::string_format("%04d", mCurrBounsCoins).c_str());
     }
     if( mCurrBounsScrolls != mTargetBounsScrolls )
     {
         mScroll->setVisible(true);
-        mBounsScroll->setString(cocos2d::CCString::createWithFormat("x%d", mTargetBounsScrolls)->getCString());
+        mBounsScroll->setString(std::string_format("x%d", mTargetBounsScrolls).c_str());
         mCurrBounsScrolls = mTargetBounsScrolls;
     }
     
@@ -108,7 +108,7 @@ void ObjectiveComplete::onUpdate(float delta)
                 mState = STATE_MOVE;
                 //add objective detail
 cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::sharedSpriteFrameCache();
-                mObjType->setDisplayFrame(cache->spriteFrameByName(cocos2d::CCString::createWithFormat("objc-%d.png", mCurrIndex)->getCString()));
+                mObjType->setDisplayFrame(cache->spriteFrameByName(std::string_format("objc-%d.png", mCurrIndex).c_str()));
                 mObjRect->setPosition(cocos2d::Vec2(12, 12));
 cocos2d::Node *currobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
                 currobj->setPosition(cocos2d::Vec2(18, 18));
@@ -119,7 +119,7 @@ cocos2d::Node *currobj = this->genObjectiveInfo(mCurrAch, mCurrIndex);
                 //add crowns
                 for(int i=0; i<mCurrObj->index; ++i)
                 {
-cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("crown%d.png", i)->getCString());
+cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("crown%d.png", i).c_str());
                     crown->setPosition(cocos2d::Vec2(-20*i, 0));
                     mCrowns->addChild(crown);
                 }
@@ -159,8 +159,8 @@ cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCS
             if( mStateTimer >= 2 )
             {
                 GameTool::PlaySound("getcrown.mp3");
-cocos2d::CCString *crownname = cocos2d::CCString::createWithFormat("crown%d.png", mCurrObj->index);
-cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname->getCString());
+std::string crownname = std::string_format("crown%d.png", mCurrObj->index);
+cocos2d::Sprite *crown = cocos2d::Sprite::createWithSpriteFrameName(crownname.c_str());
                 crown->setPosition(cocos2d::Vec2(-20*mCurrObj->index, 0));
                 mCrowns->addChild(crown);
                 for(int i=0; i<10; ++i)

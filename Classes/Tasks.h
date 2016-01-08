@@ -283,7 +283,7 @@ public:
   void checkObjectives();
   bool isDay(CCDate* a, CCDate* b);
   void refreshArcadePrizes();
-  static CCString* stringForObjective(const std::string &desc, const int achcode, const int num, const int count);
+  static std::string stringForObjective(const std::string &desc, const int achcode, const int num, const int count);
 };
 
 class Task : public Ref

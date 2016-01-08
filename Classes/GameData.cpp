@@ -14,11 +14,11 @@ int gDartMax[GAME_CHARCOUNT] = {7, 9, 6, 6};
 int gSpeedBase[GAME_CHARCOUNT] = {300, 400, 250, 350};
 float gArcadeBouns[GAME_CHARCOUNT] = {0.3f, 0.1f, 0.6f, 0.8f};
 
-cocos2d::CCString *gAniSet[GAME_CHARCOUNT] = {
-    new CCString("main"),
-    new CCString("girl"),
-    new CCString("musashi"),
-    new CCString("pussy")
+std::string gAniSet[GAME_CHARCOUNT] = {
+    "main",
+    "girl",
+    "musashi",
+    "pussy"
 };
 
 int gUpgradeCost[GAME_UPGRADECOUNT*3] = 
@@ -72,7 +72,7 @@ float GameData::roleArcadeBouns(int rid)
     return gArcadeBouns[rid];
 }
 
-cocos2d::CCString* GameData::roleAnimation(int rid)
+std::string GameData::roleAnimation(int rid)
 {
     return gAniSet[rid];
 }

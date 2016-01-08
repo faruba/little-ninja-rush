@@ -37,7 +37,7 @@ void MainRole::onCreate()
   mHiddenPower = false;
 
   //初始化角色属性
-  mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(GameData::roleAnimation(mRoleId)->getCString()));
+  mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(GameData::roleAnimation(mRoleId).c_str()));
 
   HP = GameData::roleCurrHP(mRoleId);
   maxHP = HP;
@@ -425,7 +425,7 @@ CCARRAY_FOREACH(play->enemies, node)
     }
   }
 
-//  GameTool::PlaySound(bladeSound->getCString());
+//  GameTool::PlaySound(bladeSound.c_str());
 
   if( hit )
   {
@@ -1059,8 +1059,8 @@ void MainRole::onHitClassic(int type)
     }
 
     //sound
-cocos2d::CCString *hit = cocos2d::CCString::createWithFormat("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
-    GameTool::PlaySound(hit->getCString());
+std::string hit = std::string_format("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
+    GameTool::PlaySound(hit.c_str());
 
     //achievement wounded
     GameRecord::sharedGameRecord()->task->dispatchTask(ACH_WOUNDED, 1);
@@ -1077,8 +1077,8 @@ cocos2d::CCString *hit = cocos2d::CCString::createWithFormat("hit-%d%d.mp3", mRo
     mSprite->playGTAnimation(6, false);
 
     //sound
-cocos2d::CCString *hit = cocos2d::CCString::createWithFormat("die-%d.mp3", mRoleId);
-    GameTool::PlaySound(hit->getCString());
+std::string hit = std::string_format("die-%d.mp3", mRoleId);
+    GameTool::PlaySound(hit.c_str());
 
     //achievement death
     GameRecord::sharedGameRecord()->task->dispatchTask(ACH_DEATH, 1);
@@ -1133,8 +1133,8 @@ void MainRole::onHitArcade(int type)
   }
 
   //sound
-cocos2d::CCString *hit = cocos2d::CCString::createWithFormat("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
-  GameTool::PlaySound(hit->getCString());
+std::string hit = std::string_format("hit-%d%d.mp3", mRoleId, (randomInt(2)+1));
+  GameTool::PlaySound(hit.c_str());
 
   //achievement wounded
   play->wounded++;

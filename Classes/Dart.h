@@ -43,6 +43,6 @@ cocos2d::Sprite* mTail;
 
     void traceRole(GOHandler target);//跟踪角色
     void addTail();
-    void addSTail(cocos2d::CCString* ani, int aid);
+    void addSTail(std::string ani, int aid);
 };
 #endif

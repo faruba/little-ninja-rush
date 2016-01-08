@@ -97,7 +97,7 @@ cocos2d::Sprite *star4 = cocos2d::Sprite::createWithSpriteFrameName("hw-bg-star2
         mSmallDistance = 0;
         for(int i=0; i<4; ++i)
         {
-            mSmallTrees[i] = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("hw-hj4-%d.png", randomInt(6)+1)->getCString());
+            mSmallTrees[i] = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("hw-hj4-%d.png", randomInt(6)+1).c_str());
             mSmallTrees[i]->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
             mSmallTrees[i]->setPosition(cocos2d::Vec2(mSmallDistance, 58));
             mSmallDistance += 90 + 110*CCRANDOM_0_1();
@@ -123,7 +123,7 @@ cocos2d::Sprite *star4 = cocos2d::Sprite::createWithSpriteFrameName("hw-bg-star2
         float gap[] = {30,125, 40, 25, 30,139, 22, 40,112, 45, 32,131, 55, 32};
         for(int i=0; i<14; ++i)
         {
-            mSmokedObjs[i] = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("hw-smk-%d.png", seq[i])->getCString());
+            mSmokedObjs[i] = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("hw-smk-%d.png", seq[i]).c_str());
             mSmokedObjs[i]->setAnchorPoint(cocos2d::Vec2(0, 0));
             mSmokedObjs[i]->setPosition(cocos2d::Vec2(mSmokedDistance, 70));
             mSmokedDistance += gap[i];
@@ -149,7 +149,7 @@ cocos2d::Sprite *star4 = cocos2d::Sprite::createWithSpriteFrameName("hw-bg-star2
         float gap[] = {30,135, 40, 25, 30,129, 22, 40,142, 45, 32,121, 55, 32};
         for(int i=0; i<14; ++i)
         {
-            mFrontObjs[i] = cocos2d::Sprite::createWithSpriteFrameName(cocos2d::CCString::createWithFormat("hw-smk-%d.png", seq[i])->getCString());
+            mFrontObjs[i] = cocos2d::Sprite::createWithSpriteFrameName(std::string_format("hw-smk-%d.png", seq[i]).c_str());
             mFrontObjs[i]->setAnchorPoint(cocos2d::Vec2(0, 0));
             mFrontObjs[i]->setPosition(cocos2d::Vec2(mFrontDistance, 66));
             mFrontDistance += gap[i];
@@ -203,7 +203,7 @@ void Scene6::update(float delta)
             np.x -= woff;
             if( np.x + mSmallTrees[i]->getContentSize().width < 0 )
             {
-                mSmallTrees[i]->setDisplayFrame(GameTool::getSpriteFrameByName(cocos2d::CCString::createWithFormat("hw-hj4-%d.png", randomInt(6)+1)->getCString()));
+                mSmallTrees[i]->setDisplayFrame(GameTool::getSpriteFrameByName(std::string_format("hw-hj4-%d.png", randomInt(6)+1).c_str()));
                 np.x = mSmallDistance;
                 if( np.x < UniversalFit::sharedUniversalFit()->playSize.width + 50 )
                 {
