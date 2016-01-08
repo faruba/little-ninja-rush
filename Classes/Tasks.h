@@ -90,7 +90,6 @@ public:
     key="achievement";
   }
   
-  int uiid;
   std::string text;
   std::string name;
   std::string icon;
