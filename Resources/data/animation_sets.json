@@ -440,7 +440,7 @@
         },
         {
           "duration_per_frame" : 0.05,
-          "frames" : ["lblade1.png",  "lblade2.png",  "lblade3.png",  "lblade4.png",  "lblade5.png",  "lblade6.png"]
+          "frames" : ["lblade1.png",  "lblade2.png",  "lblade3.png",  "lblade4.png",  "lblade5.png"]
         },
         {
           "duration_per_frame" : 0.05,
