@@ -335,15 +335,14 @@ void SelectMenu::update(float delta)
 
   {
 //    //update money
-//    char szTmp[64];
-//    sprintf(szTmp, "%d", GameRecord::sharedGameRecord()->coins);
-//    mMoney->setString(szTmp);
-//    cocos2d::Point mp = mMoney->getPosition();
-//    mp.x = 450 - 7.15f*strlen(mMoney->getString());
-//    mMoney->setPosition( mp );
-//    cocos2d::Point cm = mCoinMark->getPosition();
-//    cm.x = mp.x - 10;
-//    mCoinMark->setPosition(cm);
+    std::string str = std::to_string(GameRecord::sharedGameRecord()->coins);
+    mMoney->setString(str.c_str());
+    cocos2d::Point mp = mMoney->getPosition();
+    mp.x = 450 - 7.15f*str.size();
+    mMoney->setPosition( mp );
+    cocos2d::Point cm = mCoinMark->getPosition();
+    cm.x = mp.x - 10;
+    mCoinMark->setPosition(cm);
   }
 cocos2d::Layer::update(delta);
 }
