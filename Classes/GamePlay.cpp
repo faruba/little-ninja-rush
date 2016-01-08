@@ -39,7 +39,9 @@ cocos2d::Scene* GamePlay::scene()
 	if( gPlay == NULL )
 	{
 		gPlay = GamePlay::create();
-	}
+  }else{
+    gPlay->removeFromParent();
+  }
 
 	//universal
 	ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
