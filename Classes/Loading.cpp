@@ -145,5 +145,9 @@ void Loading::onTouchEnded(Touch * touch, Event * event) {
 void Loading::finishLoading() 
 {
 cocos2d::CCDirector::getInstance()->replaceScene(mDst);
-  mDst->release();
+  // TODO 不知道为毛： 此处崩溃直接原因是release 多来一次， 多的这一次源自
+  //DisplayLinkDirector::mainLoop()
+  if(mDst->getReferenceCount() > 0){
+    mDst->release();
+  }
 }

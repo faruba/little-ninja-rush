@@ -395,10 +395,11 @@ void Respawn::gen(int tid) {
       play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<Messager>(play)));
       break;
     case ENEMIES+1://商人
-      {
-        play->manager->addGameObject(Role::CreateRole<Merchant>(play));
-        play->count_respawn++;
-      }
+      //TODO fixthis  look at MerchantPanel auto assign variables 
+      //{
+      //  play->manager->addGameObject(Role::CreateRole<Merchant>(play));
+      //  play->count_respawn++;
+      //}
       break;
     case ENEMIES+2://mFestivalEnemy
       {
