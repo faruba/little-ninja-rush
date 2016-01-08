@@ -7,7 +7,7 @@
 
 USING_NS_CC_EXT;
 
-typedef void (*loadfunc)(const char* param, bool isload);
+typedef void (*loadfunc)(const std::string param, bool isload);
 
 void GTLoadSpriteSheet(const char* param, bool isload);
 

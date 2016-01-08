@@ -1,39 +1,39 @@
 #include "GameTool.h"
 #include "GTLoadList.h"
 
-void GTLoadSpriteSheet(const char* param, bool isload)
+void GTLoadSpriteSheet(const std::string param, bool isload)
 {
     cocos2d::SpriteFrameCache *cache = cocos2d::SpriteFrameCache::getInstance();
     if( isload )
     {
-        cocos2d::log("load spritesheet (%s)", param);
-      cache->addSpriteFramesWithFile(std::string(param));
+        cocos2d::log("load spritesheet (%s)", param.c_str());
+      cache->addSpriteFramesWithFile(param);
     }
     else {
-        cocos2d::log("unload spritesheet (%s)", param);
+        cocos2d::log("unload spritesheet (%s)", param.c_str());
         cache->removeSpriteFramesFromFile(param);
-        unloadTextureFromeSpriteFrameFile(param);
+        //unloadTextureFromeSpriteFrameFile(param);
     }
 }
 
-void GTLoadMusic(const char* param, bool isload)
+void GTLoadMusic(const std::string param, bool isload)
 {
     SimpleAudioEngine *engine = SimpleAudioEngine::getInstance();
     if( isload )
     {
-        engine->preloadBackgroundMusic(param);
+        engine->preloadBackgroundMusic(param.c_str());
     }
 }
 
-void GTLoadSfx(const char* param, bool isload)
+void GTLoadSfx(const std::string param, bool isload)
 {
     SimpleAudioEngine *engine = SimpleAudioEngine::getInstance();
     if( isload )
     {
-        engine->preloadEffect(param);
+        engine->preloadEffect(param.c_str());
     }
     else {
-        engine->unloadEffect(param);
+        engine->unloadEffect(param.c_str());
     }
 }
 
@@ -49,10 +49,7 @@ LoadItem* LoadItem::itemWithInfo(const char * param, loadfunc func)
 }
 void LoadItem::execute(bool isload) 
 {
-  const char *szStr = NULL;
-  if (stringparam.size() > 0)
-    szStr = stringparam.c_str();
-    loadmethod(szStr, isload);
+    loadmethod( stringparam, isload);
 }
 
 
