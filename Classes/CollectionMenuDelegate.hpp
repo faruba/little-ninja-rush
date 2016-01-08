@@ -27,6 +27,7 @@ public:
     virtual const GameItemBase& fetchData(int index) { throw "Nothing to get"; }
     virtual void updateUsing() { markUsing(-1); }
     virtual void equipItem() { }
+  virtual int getCurrentEquipment(){ return 0;}
     virtual void  onUse () ;
     virtual void updateItemInfo() ;
     virtual void updateScroll() = 0;
@@ -142,14 +143,7 @@ public:
         mScroll->setContentSize(contentSize);//apply contentSize
         
         //当前配置
-        int eq = GameRecord::sharedGameRecord()->char_equip_dart[cc];
-        if( eq < GAME_CHARCOUNT )
-        {
-            eq = 0;
-        }
-        else {
-            eq -= GAME_CHARCOUNT-1;
-        }
+        int eq = getCurrentEquipment();
         mEquipedItem = -1;
         mCurrItem = -1;
         markUsing(eq);
@@ -186,6 +180,10 @@ class ShurikenCollectionDelegate: public CollectionMenuDelegate {
       int cc = GameRecord::sharedGameRecord()->curr_char;
       GameRecord::sharedGameRecord()->char_equip_dart[cc] = mEquipedItem;
     }
+  virtual int getCurrentEquipment(){
+      int cc = GameRecord::sharedGameRecord()->curr_char;
+      return GameRecord::sharedGameRecord()->char_equip_dart[cc];
+  }
 };
 
 class KatanaCollectionDelegate: public CollectionMenuDelegate {
@@ -231,6 +229,19 @@ class KatanaCollectionDelegate: public CollectionMenuDelegate {
       }
       GameRecord::sharedGameRecord()->char_equip_blade[cc] = index;
     }
+  
+  virtual int getCurrentEquipment(){
+    int cc = GameRecord::sharedGameRecord()->curr_char;
+    int eq = GameRecord::sharedGameRecord()->char_equip_blade[cc];
+    if( eq < GAME_CHARCOUNT )
+    {
+      eq = 0;
+    }
+    else {
+      eq -= GAME_CHARCOUNT-1;
+    }
+    return eq;
+  }
 protected:
   virtual bool isMineItem(int itemIdx, int currentCharater){
     if( itemIdx < GAME_CHARCOUNT ) {
@@ -271,6 +282,11 @@ class SpecialCollectionDelegate: public CollectionMenuDelegate {
       int cc = GameRecord::sharedGameRecord()->curr_char;
       GameRecord::sharedGameRecord()->char_equip_spell[cc] = mEquipedItem;
     }
+  
+  virtual int getCurrentEquipment(){
+    int cc = GameRecord::sharedGameRecord()->curr_char;
+    return GameRecord::sharedGameRecord()->char_equip_spell[cc];
+  }
 };
 
 class PowerUpCollectionDelegate: public CollectionMenuDelegate {
