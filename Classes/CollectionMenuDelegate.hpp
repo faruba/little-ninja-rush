@@ -306,7 +306,7 @@ class PowerUpCollectionDelegate: public CollectionMenuDelegate {
       mCurrentMark = cocos2d::Sprite::createWithSpriteFrameName("sc_xz.png");
       mCurrentMark->setVisible(false);
       mMenuButtonRef->addChild(mCurrentMark, 1, 999);
-      mUse->setVisible(false);
+      mUse->setVisible(true);
 
       //update mask
       //TODO:Refactor this
