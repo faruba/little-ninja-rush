@@ -13,11 +13,9 @@ cocos2d::Scene *Loading::loadTo(cocos2d::Scene* dst, GTLoadList* lst, GTLoadList
 	ll->mDst = dst;
 	ll->mDst->retain();
 	ll->mLoadlist = lst;
-	ll->mLoadlist->retain();
 	if( ull != NULL )
 	{
 		ll->mUnloadlist = ull;
-		ll->mUnloadlist->retain();
 	}
 
 	ll->mScene->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
@@ -64,7 +62,6 @@ void Loading::update(float delta)
 			if( mUnloadlist != NULL )
 			{
 				mUnloadlist->unloadAll();
-				mUnloadlist->release();
 				mUnloadlist = NULL;
 			}
 			unload = true;
@@ -72,7 +69,6 @@ void Loading::update(float delta)
 		int left = mLoadlist->loadSome();
 		if( left == 0 )
 		{
-			mLoadlist->release();
 			mLoadlist = NULL;
 			mFinish = true;
 			if( !mTip )
