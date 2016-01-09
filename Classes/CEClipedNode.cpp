@@ -9,22 +9,22 @@ void DrawRect(Node* pNode,cocos2d::CCRect& rect){
 	rectangle[1] = Vec2(rect.origin.x+rect.size.width,rect.origin.y);
 	rectangle[2] = Vec2(rect.origin.x+rect.size.width,rect.origin.y+rect.size.height);
 	rectangle[3] = Vec2(rect.origin.x,rect.origin.y+rect.size.height);
-  for(int i =0; i < 4 ; i++){
-    rectNode->drawSegment(rectangle[i], rectangle[(i+1)%4], 1, Color4F::RED);
-  }
+	for(int i =0; i < 4 ; i++){
+		rectNode->drawSegment(rectangle[i], rectangle[(i+1)%4], 1, Color4F::RED);
+	}
 	pNode->addChild(rectNode);
 }
 void CEClipedNode::setClipRect(cocos2d::Rect *rect)
 {
-  if (NULL == rect) return;
+	if (NULL == rect) return;
 
-  float factor = UniversalFit::sharedUniversalFit()->scaleFactor;
-  //float factor = cocos2d::Director::getInstance()->getContentScaleFactor();
-  clipRectInPixel = *rect;
-  clipRectInPixel.origin.x *= factor;
-  clipRectInPixel.origin.y *= factor;
-  clipRectInPixel.size.width *= factor;
-  clipRectInPixel.size.height *= factor;
+	float factor = UniversalFit::sharedUniversalFit()->scaleFactor;
+	//float factor = cocos2d::Director::getInstance()->getContentScaleFactor();
+	clipRectInPixel = *rect;
+	clipRectInPixel.origin.x *= factor;
+	clipRectInPixel.origin.y *= factor;
+	clipRectInPixel.size.width *= factor;
+	clipRectInPixel.size.height *= factor;
 
 	//DrawRect(this,clipRectInPixel);
 }

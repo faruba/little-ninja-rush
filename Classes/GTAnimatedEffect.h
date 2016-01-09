@@ -5,22 +5,22 @@
 
 class GTAnimatedEffect:public cocos2d::Sprite
 {
-public:
-  virtual void update(float);
-  GTAnimation *mAnimation;
-  int         mAnimationId;
-  int         mFrameId;
-  bool        mLoopPlay;
-  float       mTimer;
+	public:
+		virtual void update(float);
+		GTAnimation *mAnimation;
+		int         mAnimationId;
+		int         mFrameId;
+		bool        mLoopPlay;
+		float       mTimer;
 
-  static GTAnimatedEffect* create(GTAnimation* animation, int animationid, bool loop);
+		static GTAnimatedEffect* create(GTAnimation* animation, int animationid, bool loop);
 
-  void playGTAnimation(int AnimationId, bool LoopPlay);
-  void resetGTAnimation();//to play the animation from begining
-  int animationId();
-  int frameId();
-  bool updateGTAnimation(float delta);
-  float playBackTime();
+		void playGTAnimation(int AnimationId, bool LoopPlay);
+		void resetGTAnimation();//to play the animation from begining
+		int animationId();
+		int frameId();
+		bool updateGTAnimation(float delta);
+		float playBackTime();
 
 };
 #endif

@@ -7,30 +7,30 @@
 
 class GTGhostShadow:public cocos2d::Node
 {
-  public:
-    virtual bool init();
-    CREATE_FUNC(GTGhostShadow);
-    static GTGhostShadow* shadow(GTAnimatedSprite* copy, float interval, int number);
+	public:
+		virtual bool init();
+		CREATE_FUNC(GTGhostShadow);
+		static GTGhostShadow* shadow(GTAnimatedSprite* copy, float interval, int number);
 
-    GTAnimatedSprite *mCopy;
-    float mInterval;
-    int mNumber;
-cocos2d::Sprite **mShadows;
-    int mIndex;
-    int mCount;
-    float mTimer;
-    float mMove;
+		GTAnimatedSprite *mCopy;
+		float mInterval;
+		int mNumber;
+		cocos2d::Sprite **mShadows;
+		int mIndex;
+		int mCount;
+		float mTimer;
+		float mMove;
 
-    bool mToggle;
+		bool mToggle;
 
-    GLubyte opacity;
+		GLubyte opacity;
 
 
-    void syncShadow(float delta);
+		void syncShadow(float delta);
 
-    void toggleShadow(bool flag);
+		void toggleShadow(bool flag);
 
-    void setMoveSpeed(float move);
+		void setMoveSpeed(float move);
 
 };
 #endif

@@ -19,100 +19,100 @@
 
 Bomb* Bomb::bomb(cocos2d::Point pos, cocos2d::Point dir, Node * parent) 
 {
-    Bomb* ret = Bomb::create();
-    ret->mParent = parent;
-    ret->mPosition = pos;
-    ret->mDirection = dir;
-    return ret;
+	Bomb* ret = Bomb::create();
+	ret->mParent = parent;
+	ret->mPosition = pos;
+	ret->mDirection = dir;
+	return ret;
 }
 
 void Bomb::onCreate() 
 {
-    mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("bullets"));
-    mSprite->playGTAnimation(1, true);
-    mSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-    mSprite->setPosition(mPosition);
-    mParent->addChild(mSprite, LAYER_MAINROLE+1);
-cocos2d::RotateBy* rb = cocos2d::RotateBy::create(1, 720);
-cocos2d::RepeatForever* rf = cocos2d::RepeatForever::create(rb);
-    mSprite->runAction(rf);
-    //初始化direction
-    mDirection.x = (mDirection.x - mPosition.x)/BOMB_FLY;
-    GameTool::PlaySound("bomb1.mp3");
-    mTimer = 0;
+	mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("bullets"));
+	mSprite->playGTAnimation(1, true);
+	mSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+	mSprite->setPosition(mPosition);
+	mParent->addChild(mSprite, LAYER_MAINROLE+1);
+	cocos2d::RotateBy* rb = cocos2d::RotateBy::create(1, 720);
+	cocos2d::RepeatForever* rf = cocos2d::RepeatForever::create(rb);
+	mSprite->runAction(rf);
+	//初始化direction
+	mDirection.x = (mDirection.x - mPosition.x)/BOMB_FLY;
+	GameTool::PlaySound("bomb1.mp3");
+	mTimer = 0;
 }
 
 void Bomb::onUpdate(float delta) 
 {
-    GamePlay* play = GamePlay::sharedGamePlay();
-    //暂停和恢复动作
-    if( play->paused && !mPaused )
-    {
-        mPaused = true;
-        mSprite->pauseSchedulerAndActions();
-    }
-    if( mPaused && !play->paused )
-    {
-        mPaused = false;
-        mSprite->resumeSchedulerAndActions();
-    }
-    mSprite->updateGTAnimation(delta);
-    //飞行
-    mTimer += delta;
-    cocos2d::Point np;
-    np.y = mPosition.y + BOMB_V0*mTimer + (BOMB_G*mTimer*mTimer)/2;
-    np.x = mPosition.x + mDirection.x*mTimer;
-    if ( np.y <= PLAY_PLAYERLINE-5 ) {
-        //booom
-        //伤害检定
-        float dx = play->mainrole->position().x - np.x;
-        if( BOMB_RANGE*BOMB_RANGE >= dx*dx )
-        {
-            play->mainrole->deliverHit(HIT_BOMB, Vec2(0, 0));
-        }
-        //分身术
-        if( play->mainrole2 != NULL )
-        {
-            float dx2 = play->mainrole2->position().x - np.x;
-            if( BOMB_RANGE*BOMB_RANGE >= dx2*dx2 )
-            {
-                play->mainrole2->deliverHit(HIT_BOMB, Vec2(0, 0));
-            }
-        }
-        
-        GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("bullets"), 0, false);
-        eff->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
-        eff->setPosition(np);
-        mParent->addChild(eff, LAYER_ROLE);
-        GameTool::PlaySound("bomb2.mp3");
-        
-        play->manager->removeGameObject(this);
-    }
-    else {
-        mSprite->setPosition(np);
-    }
+	GamePlay* play = GamePlay::sharedGamePlay();
+	//暂停和恢复动作
+	if( play->paused && !mPaused )
+	{
+		mPaused = true;
+		mSprite->pauseSchedulerAndActions();
+	}
+	if( mPaused && !play->paused )
+	{
+		mPaused = false;
+		mSprite->resumeSchedulerAndActions();
+	}
+	mSprite->updateGTAnimation(delta);
+	//飞行
+	mTimer += delta;
+	cocos2d::Point np;
+	np.y = mPosition.y + BOMB_V0*mTimer + (BOMB_G*mTimer*mTimer)/2;
+	np.x = mPosition.x + mDirection.x*mTimer;
+	if ( np.y <= PLAY_PLAYERLINE-5 ) {
+		//booom
+		//伤害检定
+		float dx = play->mainrole->position().x - np.x;
+		if( BOMB_RANGE*BOMB_RANGE >= dx*dx )
+		{
+			play->mainrole->deliverHit(HIT_BOMB, Vec2(0, 0));
+		}
+		//分身术
+		if( play->mainrole2 != NULL )
+		{
+			float dx2 = play->mainrole2->position().x - np.x;
+			if( BOMB_RANGE*BOMB_RANGE >= dx2*dx2 )
+			{
+				play->mainrole2->deliverHit(HIT_BOMB, Vec2(0, 0));
+			}
+		}
+
+		GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("bullets"), 0, false);
+		eff->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
+		eff->setPosition(np);
+		mParent->addChild(eff, LAYER_ROLE);
+		GameTool::PlaySound("bomb2.mp3");
+
+		play->manager->removeGameObject(this);
+	}
+	else {
+		mSprite->setPosition(np);
+	}
 }
 
 bool Bomb::isEnemy() 
 {
-    return true;
+	return true;
 }
 
 cocos2d::Point Bomb::position() 
 {
-    return mSprite->getPosition();
+	return mSprite->getPosition();
 }
 
 void Bomb::onHitback(cocos2d::Point origin) 
 {
-    //do nothing
+	//do nothing
 }
 
 void Bomb::onDestroy() 
 {
-    GamePlay *play = GamePlay::sharedGamePlay();
-    play->darts->removeObject(this);
-    mParent->removeChild(mSprite, true);
+	GamePlay *play = GamePlay::sharedGamePlay();
+	play->darts->removeObject(this);
+	mParent->removeChild(mSprite, true);
 }
 
 

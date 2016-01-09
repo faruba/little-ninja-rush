@@ -11,22 +11,22 @@
 #include "GameTool.h"
 
 class FeverBrust:
-  public GameObject
+	public GameObject
 {
-  public:
-    CREATE_FUNC(FeverBrust);
+	public:
+		CREATE_FUNC(FeverBrust);
 
-    static FeverBrust* feverbrust(int eid, bool loop);
+		static FeverBrust* feverbrust(int eid, bool loop);
 
-    virtual bool init(){return true;};
-    virtual void onCreate();
-    virtual void onUpdate(float delta);
-    virtual void onDestroy();
+		virtual bool init(){return true;};
+		virtual void onCreate();
+		virtual void onUpdate(float delta);
+		virtual void onDestroy();
 
-    GTAnimatedSprite *mSprite;
-    float mTimer;
-    int mEffectId;
-    bool mLoop;
+		GTAnimatedSprite *mSprite;
+		float mTimer;
+		int mEffectId;
+		bool mLoop;
 
 
 };

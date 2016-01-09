@@ -4,45 +4,45 @@
 #include "Darts.h"
 
 class Dart:
-  public Darts
+	public Darts
 {
-  public:
-    CREATE_FUNC(Dart);
-    static Dart* dart(std::string& shap, cocos2d::Point pos, cocos2d::Point dir, int typ, Node* parent);
+	public:
+		CREATE_FUNC(Dart);
+		static Dart* dart(std::string& shap, cocos2d::Point pos, cocos2d::Point dir, int typ, Node* parent);
 
-    virtual bool isEnemy();
-    virtual cocos2d::Point position();
-    virtual void onHitback(cocos2d::Point origin);
-    virtual void onCreate();
-    virtual void onUpdate(float delta);
-    virtual void onDestroy();
-cocos2d::Node* mParent;
-cocos2d::Sprite* mSprite;
-cocos2d::Sprite* mTail;
-    GTAnimatedSprite *mSTail;
-    std::string mShap;
-    bool mPaused;
-    bool mIsEnemy;
-    int mHitEffect;
-    int mHitEffect2;
+		virtual bool isEnemy();
+		virtual cocos2d::Point position();
+		virtual void onHitback(cocos2d::Point origin);
+		virtual void onCreate();
+		virtual void onUpdate(float delta);
+		virtual void onDestroy();
+		cocos2d::Node* mParent;
+		cocos2d::Sprite* mSprite;
+		cocos2d::Sprite* mTail;
+		GTAnimatedSprite *mSTail;
+		std::string mShap;
+		bool mPaused;
+		bool mIsEnemy;
+		int mHitEffect;
+		int mHitEffect2;
 
-    int mParticle;
-    float mParticleInterval;
+		int mParticle;
+		float mParticleInterval;
 
-    bool mRemoved;
-    float mTimer;
+		bool mRemoved;
+		float mTimer;
 
-    GOHandler mTrace;
+		GOHandler mTrace;
 
-    int type;
-    cocos2d::Point direction;
-    cocos2d::Point pos;
-    float speed;
-    bool blocked;
+		int type;
+		cocos2d::Point direction;
+		cocos2d::Point pos;
+		float speed;
+		bool blocked;
 
 
-    void traceRole(GOHandler target);//跟踪角色
-    void addTail();
-    void addSTail(std::string ani, int aid);
+		void traceRole(GOHandler target);//跟踪角色
+		void addTail();
+		void addSTail(std::string ani, int aid);
 };
 #endif

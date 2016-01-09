@@ -5,24 +5,24 @@
 #include "GameTool.h"
 
 class ClassicMode:
-  public GameObject
+	public GameObject
 {
-  public:
-    CREATE_FUNC(ClassicMode);
+	public:
+		CREATE_FUNC(ClassicMode);
 
-    virtual bool init() {return true;};
-    virtual void onCreate();
-    virtual void onUpdate(float);
-    virtual void onDestroy();
+		virtual bool init() {return true;};
+		virtual void onCreate();
+		virtual void onUpdate(float);
+		virtual void onDestroy();
 
 
-    Respawn *mRespawn;
-    float mSpeedlineTimer;
-    bool mUsedMagicCredit;
+		Respawn *mRespawn;
+		float mSpeedlineTimer;
+		bool mUsedMagicCredit;
 
-    static ClassicMode* mode();
+		static ClassicMode* mode();
 
-    void goOver();
+		void goOver();
 
 };
 #endif

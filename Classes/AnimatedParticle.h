@@ -17,40 +17,40 @@ using namespace cocos2d;
 
 class AnimatedParticle:public GameObject
 {
-  private:
-cocos2d::Node *mParent;
-    GTAnimatedSprite *mSprite;
-    cocos2d::Point mDir;
-    cocos2d::Point mPos;
-    float mSpeed;
-    float mLife;
-    float mRotate;
-    float mFlipX;
-    float mGravityY;
-    float mGravityX;
-    bool mFade;
-    bool mStickScene;
-    bool mStickMainRole;
+	private:
+		cocos2d::Node *mParent;
+		GTAnimatedSprite *mSprite;
+		cocos2d::Point mDir;
+		cocos2d::Point mPos;
+		float mSpeed;
+		float mLife;
+		float mRotate;
+		float mFlipX;
+		float mGravityY;
+		float mGravityX;
+		bool mFade;
+		bool mStickScene;
+		bool mStickMainRole;
 
-    float mMainRoleX;
-    int mLayer;
-    float mTimer;
+		float mMainRoleX;
+		int mLayer;
+		float mTimer;
 
-  public:
+	public:
 
-    static AnimatedParticle* particleCoinUI(cocos2d::Point pos, int di, Node* parent);
-    static AnimatedParticle* particleCoin(cocos2d::Point pos, int di);
-    static AnimatedParticle* particleDeadSlide(cocos2d::Point pos);
-    static AnimatedParticle* particleButterfly(cocos2d::Point pos);
-    static AnimatedParticle* particleDart(cocos2d::Point pos, cocos2d::Point dir, int typ);
-    static AnimatedParticle* particleStepWater(cocos2d::Point pos);
+		static AnimatedParticle* particleCoinUI(cocos2d::Point pos, int di, Node* parent);
+		static AnimatedParticle* particleCoin(cocos2d::Point pos, int di);
+		static AnimatedParticle* particleDeadSlide(cocos2d::Point pos);
+		static AnimatedParticle* particleButterfly(cocos2d::Point pos);
+		static AnimatedParticle* particleDart(cocos2d::Point pos, cocos2d::Point dir, int typ);
+		static AnimatedParticle* particleStepWater(cocos2d::Point pos);
 
-    bool init();
-    CREATE_FUNC(AnimatedParticle);
+		bool init();
+		CREATE_FUNC(AnimatedParticle);
 
-    void onCreate();
-    void onUpdate(float delta);
-    void onDestroy();
+		void onCreate();
+		void onUpdate(float delta);
+		void onDestroy();
 };
 
 #endif

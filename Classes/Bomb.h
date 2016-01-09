@@ -13,25 +13,25 @@
 #include "Darts.h"
 
 class Bomb:
-  public Darts
+	public Darts
 {
-  public:
-    CREATE_FUNC(Bomb);
-    static Bomb* bomb(cocos2d::Point pos, cocos2d::Point dir, Node* parent);
+	public:
+		CREATE_FUNC(Bomb);
+		static Bomb* bomb(cocos2d::Point pos, cocos2d::Point dir, Node* parent);
 
-    virtual void onCreate();
-    virtual void onUpdate(float delta);
-    virtual void onDestroy();
-    virtual bool isEnemy();
-    virtual cocos2d::Point position();
-    virtual void onHitback(cocos2d::Point origin);
-cocos2d::Node *mParent;
+		virtual void onCreate();
+		virtual void onUpdate(float delta);
+		virtual void onDestroy();
+		virtual bool isEnemy();
+		virtual cocos2d::Point position();
+		virtual void onHitback(cocos2d::Point origin);
+		cocos2d::Node *mParent;
 
-    GTAnimatedSprite *mSprite;
-    cocos2d::Point mPosition;
-    cocos2d::Point mDirection;
-    float mTimer;
+		GTAnimatedSprite *mSprite;
+		cocos2d::Point mPosition;
+		cocos2d::Point mDirection;
+		float mTimer;
 
-    bool mPaused;
+		bool mPaused;
 };
 #endif

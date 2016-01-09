@@ -12,17 +12,17 @@
 
 class FootPrint:public GameObject
 {
-  public:
-    static FootPrint* footprint();
-    CREATE_FUNC(FootPrint);
-    virtual bool init(){return true;};
+	public:
+		static FootPrint* footprint();
+		CREATE_FUNC(FootPrint);
+		virtual bool init(){return true;};
 
-    virtual void onCreate();
-    virtual void onUpdate(float delta);
-    virtual void onDestroy();
+		virtual void onCreate();
+		virtual void onUpdate(float delta);
+		virtual void onDestroy();
 
-    //a helper function to go foot print
-    static void goFootPrint (float *pv, cocos2d::Point pos);
+		//a helper function to go foot print
+		static void goFootPrint (float *pv, cocos2d::Point pos);
 
 };
 #endif

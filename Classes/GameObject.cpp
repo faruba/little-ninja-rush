@@ -14,29 +14,29 @@ GameObject *gDummy = NULL;
 
 GameObject* GameObject::dummyObject() 
 {
-    if( gDummy == NULL )
-    {
-        gDummy = new GameObject();
-    }
-    return gDummy;
+	if( gDummy == NULL )
+	{
+		gDummy = new GameObject();
+	}
+	return gDummy;
 }
 
 bool GameObject::init()
 {
-    mHandler.index = -1;
-    mHandler.uid = -1;
-    return true;
+	mHandler.index = -1;
+	mHandler.uid = -1;
+	return true;
 }
 
 void GameObject::setHandler(int index, int uid) 
 {
-    mHandler.index = index;
-    mHandler.uid = uid;
+	mHandler.index = index;
+	mHandler.uid = uid;
 }
 
 GOHandler GameObject::handler() 
 {
-    return mHandler;
+	return mHandler;
 }
 
 void GameObject::onCreate(){}

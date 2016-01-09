@@ -24,226 +24,226 @@
 
 Archer* Archer::role(cocos2d::Node * parent) 
 {
-    Archer *ret = Archer::create();
-    ret->mParent = parent;
-    return ret;
+	Archer *ret = Archer::create();
+	ret->mParent = parent;
+	return ret;
 }
 
 void Archer::onCreate() 
 {
-    mTarget = Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, PLAY_PLAYERLINE);
-    mTimer = 0;
-    mState = 0;
-    mLockTimer = 0;
-    mAvaiable = true;
-    
-    mArrow = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("archer"));
-    mArrow->playGTAnimation(0, false);
-    mArrow->setPosition(mTarget);
-    mParent->addChild(mArrow, LAYER_ROLE);
-    GameTool::PlaySound("shoot ready.mp3");
+	mTarget = Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, PLAY_PLAYERLINE);
+	mTimer = 0;
+	mState = 0;
+	mLockTimer = 0;
+	mAvaiable = true;
+
+	mArrow = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("archer"));
+	mArrow->playGTAnimation(0, false);
+	mArrow->setPosition(mTarget);
+	mParent->addChild(mArrow, LAYER_ROLE);
+	GameTool::PlaySound("shoot ready.mp3");
 }
 
 void Archer::onUpdate(float delta) 
 {
-    GamePlay *play = GamePlay::sharedGamePlay();
-    bool playend = mArrow->updateGTAnimation(delta);
-    switch (mState) {
-        case 0://aim
-        {
-            if( playend )
-            {
-                mArrow->playGTAnimation(1, true);
-            }
-            bool lock = false;
-            cocos2d::Point pos = play->mainrole->position();
-            if( play->mainrole2 != NULL)
-            {//瞄准离它最近的一个
-                float dis = pos.x - mTarget.x;
-                float dis2 = play->mainrole2->center().x - mTarget.x;
-                if( fabsf(dis2) < fabsf(dis) )
-                {
-                    pos = play->mainrole2->position();
-                }
-            }
-            mTimer += delta;
-            float dir = pos.x - mTarget.x;
-            float len = fabsf(dir);
-            if( len > AIM_ACCURATE )
-            {
-                float ds = AIM_SPEED*delta;
-                if( len <= ds*ds )
-                {
-                    mTarget = pos;
-                }
-                else {
-                    dir = dir/len;
-                    mTarget.x = mTarget.x + dir*ds;
-                }
-                mLockTimer = 0;
-            }
-            else {
-                mLockTimer += delta;
-                if( mLockTimer >= LOCKON_TIME )
-                {
-                    lock = true;
-                }
-            }
-            mArrow->setPosition(mTarget);
-            if( mTimer >= AIM_TIME )
-            {
-                lock = true;
-            }
-            if( lock )
-            {
-                mArrow->playGTAnimation(2, true);
-                mState = 1;
-                mTimer = 0;
-                if( mTarget.x < UniversalFit::sharedUniversalFit()->playSize.width/2 )
-                {
-                    mFrom = Vec2(UniversalFit::sharedUniversalFit()->playSize.width, ARROW_HEIGHT);
-                }
-                else {
-                    mFrom = Vec2(0, ARROW_HEIGHT);
-                }
-                mMidPoint = ccpMidpoint(mFrom, mTarget);
-                mMidPoint.y += 75 + CCRANDOM_0_1()*100;
-                GameTool::PlaySound("lock on.mp3");
-            }
-        }
-            break;
-        case 1://lock
-        {
-            mTimer += delta;
-            if( mTimer > 1 && mArrow->animationId()==2 )
-            {
-                mTimer = 0;
-                mArrow->playGTAnimation(3, false);
-            }
-            if( playend && mArrow->animationId()==3 )
-            {
-                mTimer = 0;
-                mArrow->playGTAnimation(4, true);
-                mArrow->setAnchorPoint(cocos2d::Vec2( 0.5f, 1));
-                mArrow->setPosition(mFrom);
-                mState = 2;
-                play->darts->addObject(this);
-                GameTool::PlaySound("shooting.mp3");
-            }
-        }
-            break;
-        case 2://shoot
-        {
-            mTimer += delta;
-            if( mTimer < ARROW_TIME )
-            {
-                float k = mTimer/ARROW_TIME;
-                cocos2d::Point a = ccpLerp(mFrom, mMidPoint, k);
-                cocos2d::Point b = ccpLerp(mMidPoint, mTarget, k);
-                cocos2d::Point c = ccpLerp(a, b, k);
-                cocos2d::Point dir = ccpSub(c, mArrow->getPosition());
-                //计算角度
-                float rot = 90 - CC_RADIANS_TO_DEGREES(ccpToAngle(dir));
-                mArrow->setRotation(rot);
-                mArrow->setPosition(c);
-                //伤害判定
-                if( mAvaiable )
-                {
-                    bool hit = false;
-                    cocos2d::Point pos;
-                    if( play->mainrole->collisionWithCircle(mArrow->getPosition(), 5) )
-                    {
-                        hit = play->mainrole->deliverHit(HIT_ARCHER, dir);
-                        play->manager->removeGameObject(this);
-                        pos = play->mainrole->center();
-                    }
-                    //分身术
-                    if( play->mainrole2 != NULL && play->mainrole2->collisionWithCircle(mArrow->getPosition(), 5) )
-                    {
-                        hit = play->mainrole2->deliverHit(HIT_ARCHER, dir);
-                        play->manager->removeGameObject(this);
-                        pos = play->mainrole2->center();
-                    }
-                    if( hit )
-                    {
-                        GameTool::PlaySound("hit.mp3");
-                        GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
-                        hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-                        hiteff->setPosition(pos);
-                        hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(dir) ) + 60*CCRANDOM_0_1());
-                        mParent->addChild(hiteff, LAYER_MAINROLE+1);
-                        
-                        GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
-                        hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-                        hiteff2->setPosition(pos);
-                        mParent->addChild(hiteff2, LAYER_ROLE);
-                    }
-                }
-            }
-            else {
-                mState = 3;
-                mArrow->setPosition(mTarget);
-                mArrow->playGTAnimation(5, true);
-                mArrow->setAnchorPoint(cocos2d::Vec2(0.5f, 1));
-            }
-        }
-            break;
-        case 3:
-        {
-            cocos2d::Point np = mArrow->getPosition();
-            float ds = play->runspeed*delta;
-            np.x -= ds;
-            mArrow->setPosition(np);
-            
-            //越界清除
-            if( mArrow->getPosition().x < -100 )
-            {
-                play->manager->removeGameObject(this);
-            }
-        }
-            break;
-    }
+	GamePlay *play = GamePlay::sharedGamePlay();
+	bool playend = mArrow->updateGTAnimation(delta);
+	switch (mState) {
+		case 0://aim
+			{
+				if( playend )
+				{
+					mArrow->playGTAnimation(1, true);
+				}
+				bool lock = false;
+				cocos2d::Point pos = play->mainrole->position();
+				if( play->mainrole2 != NULL)
+				{//瞄准离它最近的一个
+					float dis = pos.x - mTarget.x;
+					float dis2 = play->mainrole2->center().x - mTarget.x;
+					if( fabsf(dis2) < fabsf(dis) )
+					{
+						pos = play->mainrole2->position();
+					}
+				}
+				mTimer += delta;
+				float dir = pos.x - mTarget.x;
+				float len = fabsf(dir);
+				if( len > AIM_ACCURATE )
+				{
+					float ds = AIM_SPEED*delta;
+					if( len <= ds*ds )
+					{
+						mTarget = pos;
+					}
+					else {
+						dir = dir/len;
+						mTarget.x = mTarget.x + dir*ds;
+					}
+					mLockTimer = 0;
+				}
+				else {
+					mLockTimer += delta;
+					if( mLockTimer >= LOCKON_TIME )
+					{
+						lock = true;
+					}
+				}
+				mArrow->setPosition(mTarget);
+				if( mTimer >= AIM_TIME )
+				{
+					lock = true;
+				}
+				if( lock )
+				{
+					mArrow->playGTAnimation(2, true);
+					mState = 1;
+					mTimer = 0;
+					if( mTarget.x < UniversalFit::sharedUniversalFit()->playSize.width/2 )
+					{
+						mFrom = Vec2(UniversalFit::sharedUniversalFit()->playSize.width, ARROW_HEIGHT);
+					}
+					else {
+						mFrom = Vec2(0, ARROW_HEIGHT);
+					}
+					mMidPoint = ccpMidpoint(mFrom, mTarget);
+					mMidPoint.y += 75 + CCRANDOM_0_1()*100;
+					GameTool::PlaySound("lock on.mp3");
+				}
+			}
+			break;
+		case 1://lock
+			{
+				mTimer += delta;
+				if( mTimer > 1 && mArrow->animationId()==2 )
+				{
+					mTimer = 0;
+					mArrow->playGTAnimation(3, false);
+				}
+				if( playend && mArrow->animationId()==3 )
+				{
+					mTimer = 0;
+					mArrow->playGTAnimation(4, true);
+					mArrow->setAnchorPoint(cocos2d::Vec2( 0.5f, 1));
+					mArrow->setPosition(mFrom);
+					mState = 2;
+					play->darts->addObject(this);
+					GameTool::PlaySound("shooting.mp3");
+				}
+			}
+			break;
+		case 2://shoot
+			{
+				mTimer += delta;
+				if( mTimer < ARROW_TIME )
+				{
+					float k = mTimer/ARROW_TIME;
+					cocos2d::Point a = ccpLerp(mFrom, mMidPoint, k);
+					cocos2d::Point b = ccpLerp(mMidPoint, mTarget, k);
+					cocos2d::Point c = ccpLerp(a, b, k);
+					cocos2d::Point dir = ccpSub(c, mArrow->getPosition());
+					//计算角度
+					float rot = 90 - CC_RADIANS_TO_DEGREES(ccpToAngle(dir));
+					mArrow->setRotation(rot);
+					mArrow->setPosition(c);
+					//伤害判定
+					if( mAvaiable )
+					{
+						bool hit = false;
+						cocos2d::Point pos;
+						if( play->mainrole->collisionWithCircle(mArrow->getPosition(), 5) )
+						{
+							hit = play->mainrole->deliverHit(HIT_ARCHER, dir);
+							play->manager->removeGameObject(this);
+							pos = play->mainrole->center();
+						}
+						//分身术
+						if( play->mainrole2 != NULL && play->mainrole2->collisionWithCircle(mArrow->getPosition(), 5) )
+						{
+							hit = play->mainrole2->deliverHit(HIT_ARCHER, dir);
+							play->manager->removeGameObject(this);
+							pos = play->mainrole2->center();
+						}
+						if( hit )
+						{
+							GameTool::PlaySound("hit.mp3");
+							GTAnimatedEffect *hiteff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 1, false);
+							hiteff->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+							hiteff->setPosition(pos);
+							hiteff->setRotation(60 - CC_RADIANS_TO_DEGREES( ccpToAngle(dir) ) + 60*CCRANDOM_0_1());
+							mParent->addChild(hiteff, LAYER_MAINROLE+1);
+
+							GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
+							hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+							hiteff2->setPosition(pos);
+							mParent->addChild(hiteff2, LAYER_ROLE);
+						}
+					}
+				}
+				else {
+					mState = 3;
+					mArrow->setPosition(mTarget);
+					mArrow->playGTAnimation(5, true);
+					mArrow->setAnchorPoint(cocos2d::Vec2(0.5f, 1));
+				}
+			}
+			break;
+		case 3:
+			{
+				cocos2d::Point np = mArrow->getPosition();
+				float ds = play->runspeed*delta;
+				np.x -= ds;
+				mArrow->setPosition(np);
+
+				//越界清除
+				if( mArrow->getPosition().x < -100 )
+				{
+					play->manager->removeGameObject(this);
+				}
+			}
+			break;
+	}
 }
 
 bool Archer::isEnemy() 
 {
-    return true;
+	return true;
 }
 
 cocos2d::Point Archer::position() 
 {
-    return mArrow->getPosition();
+	return mArrow->getPosition();
 }
 
 void Archer::setPosition(cocos2d::Point pos) 
 {
-    mArrow->setPosition(pos);
+	mArrow->setPosition(pos);
 }
 
 void Archer::onHitback(cocos2d::Point origin) 
 {
-    mAvaiable = false;
-    mArrow->setVisible(false);
-    GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SLICEARROW, 1);
-    
-    GamePlay *play = GamePlay::sharedGamePlay();
-    // arcade combo
-    if( play->mode == MODE_ARCADE )
-    {
-        play->arcade->addScore(ARCHER_SCORE, mArrow->getPosition());
-    }
-    
+	mAvaiable = false;
+	mArrow->setVisible(false);
+	GameRecord::sharedGameRecord()->task->dispatchTask(ACH_SLICEARROW, 1);
+
+	GamePlay *play = GamePlay::sharedGamePlay();
+	// arcade combo
+	if( play->mode == MODE_ARCADE )
+	{
+		play->arcade->addScore(ARCHER_SCORE, mArrow->getPosition());
+	}
+
 }
 
 void Archer::toggleVisible(bool flag) 
 {
-    mArrow->setVisible(flag);
+	mArrow->setVisible(flag);
 }
 
 void Archer::onDestroy() 
 {
-    mParent->removeChild(mArrow, true);
-    GamePlay::sharedGamePlay()->darts->removeObject(this);
+	mParent->removeChild(mArrow, true);
+	GamePlay::sharedGamePlay()->darts->removeObject(this);
 }
 
 

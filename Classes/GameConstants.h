@@ -60,7 +60,7 @@
 #define CONTROL_MAXSPEED (0.3f)       //重力感应最高速度范围
 #define CONTROL_MINSLIDE (50.0f)      //划屏幕的最小长度
 #define CONTROL_MAXSLIDE (100.0f)     //划屏幕的最大长度
- 
+
 #define HIT_DART (0)                  //伤害类型：飞镖
 #define HIT_BLADE (1)                 //伤害类型：刀刃
 #define HIT_BOMB (2)                  //伤害类型： 炸弹

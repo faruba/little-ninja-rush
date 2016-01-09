@@ -16,27 +16,27 @@ using namespace cocos2d;
 
 typedef struct
 {
-    int index;
-    int uid;
+	int index;
+	int uid;
 }GOHandler;
 
 class GameObject:
-  public Ref
+	public Ref
 {
-  private:
-    GOHandler mHandler;
+	private:
+		GOHandler mHandler;
 
-  public:
-    static GameObject* dummyObject();
+	public:
+		static GameObject* dummyObject();
 
-    void setHandler(int index, int uid);
-    GOHandler handler();
+		void setHandler(int index, int uid);
+		GOHandler handler();
 
-    virtual void onCreate();
-    virtual void onUpdate(float delta);
-    virtual void onDestroy();
+		virtual void onCreate();
+		virtual void onUpdate(float delta);
+		virtual void onDestroy();
 
-    virtual bool init();
-    CREATE_FUNC(GameObject);
+		virtual bool init();
+		CREATE_FUNC(GameObject);
 };
 #endif

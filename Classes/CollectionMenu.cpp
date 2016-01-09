@@ -42,15 +42,15 @@ void CollectionMenu::setModal(const char * title, const char * desc, Ref* target
 	cocos2d::Sprite *descsp = cocos2d::Sprite::createWithSpriteFrameName(desc);
 	descsp->setPosition(cocos2d::Vec2( spbg->getContentSize().width/2, 75));
 	spbg->addChild(descsp);
-  cocos2d::MenuItemSprite *menuConfirm = cocos2d::MenuItemSprite::create(
-    cocos2d::Sprite::createWithSpriteFrameName("pu-confirm1.png"),
-    cocos2d::Sprite::createWithSpriteFrameName("pu-confirm2.png"),
-    this, CC_MENU_SELECTOR(CollectionMenu::onModalConfirm));
+	cocos2d::MenuItemSprite *menuConfirm = cocos2d::MenuItemSprite::create(
+			cocos2d::Sprite::createWithSpriteFrameName("pu-confirm1.png"),
+			cocos2d::Sprite::createWithSpriteFrameName("pu-confirm2.png"),
+			this, CC_MENU_SELECTOR(CollectionMenu::onModalConfirm));
 	menuConfirm->setPosition(cocos2d::Vec2(75, 35));
 	cocos2d::MenuItemSprite *menuCancel = cocos2d::MenuItemSprite::create(
-    cocos2d::Sprite::createWithSpriteFrameName("pu-cancel1.png"),
-    cocos2d::Sprite::createWithSpriteFrameName("pu-cancel2.png"),
-    this, menu_selector(CollectionMenu::onModalCancel));
+			cocos2d::Sprite::createWithSpriteFrameName("pu-cancel1.png"),
+			cocos2d::Sprite::createWithSpriteFrameName("pu-cancel2.png"),
+			this, menu_selector(CollectionMenu::onModalCancel));
 
 	menuCancel->setPosition(cocos2d::Vec2(200, 35));
 	cocos2d::CCMenu *menu = cocos2d::CCMenu::create(menuConfirm, menuCancel, NULL);
@@ -293,17 +293,17 @@ void CollectionMenu::onPowerup(cocos2d::Ref*)
 		return ;
 
 	GameTool::PlaySound("click.mp3");
-  newDelegate->updateButtonImage(true);
+	newDelegate->updateButtonImage(true);
 	mCurrentDelegate->updateButtonImage(false);
-  
-	
+
+
 	mCurrentDelegate = newDelegate;
 
 	mCurrentDelegate->updateScroll();
 	updateCharacterInfo(GameRecord::sharedGameRecord()->curr_char, 0);
 
 	mPowerUp->setVisible(true);
-  mItemDesc->setVisible(false);
+	mItemDesc->setVisible(false);
 
 	this->onSelectLife(nullptr);
 
@@ -363,16 +363,16 @@ void CollectionMenu::updateCharacterInfo(int rid, int bid)
 
 void CollectionMenu::onItemCallback(int i)
 {
-	  //获取当前道具的信息
-	    bool collected = false;
-      auto data = mCurrentDelegate->fetchData(i);
-      if(! mCurrentDelegate->isCollected(i) && GameRecord::sharedGameRecord()->collection->itemLostPiece(data.uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(data.uiid) ){
-        GameTool::PlaySound("error.mp3");
-        return;
-      }
-	  GameTool::PlaySound("click.mp3");
-	  mCurrentDelegate->markCurrent(i);
-	  mCurrentDelegate->updateItemInfo();
+	//获取当前道具的信息
+	bool collected = false;
+	auto data = mCurrentDelegate->fetchData(i);
+	if(! mCurrentDelegate->isCollected(i) && GameRecord::sharedGameRecord()->collection->itemLostPiece(data.uiid) == GameRecord::sharedGameRecord()->collection->itemTotalPiece(data.uiid) ){
+		GameTool::PlaySound("error.mp3");
+		return;
+	}
+	GameTool::PlaySound("click.mp3");
+	mCurrentDelegate->markCurrent(i);
+	mCurrentDelegate->updateItemInfo();
 }
 
 void CollectionMenu::updatePowerUpButton()

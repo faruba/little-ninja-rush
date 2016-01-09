@@ -3,7 +3,7 @@
 
 #include "GameTool.h"
 namespace AnimationSets {
-  void loadAnimationSets ();
+	void loadAnimationSets ();
 }
 
 void assetMainRole(const std::string  param, bool isload);

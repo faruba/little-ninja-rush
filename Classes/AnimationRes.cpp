@@ -6,72 +6,72 @@
 #include "JsonWrapper.h"
 
 namespace TrinGame {
-  class Animation {
-  public:
-    std::vector<std::string> frames;
-    float duration_per_frame;
+	class Animation {
+		public:
+			std::vector<std::string> frames;
+			float duration_per_frame;
 
-    Animation () {}
-    Animation (const Animation &animation) {
-      frames = animation.frames;
-      duration_per_frame = animation.duration_per_frame;
-    }
+			Animation () {}
+			Animation (const Animation &animation) {
+				frames = animation.frames;
+				duration_per_frame = animation.duration_per_frame;
+			}
 
-    void handleJsonValue(ValueWrapper& value) {
-      duration_per_frame = value.getDouble("duration_per_frame");
-      value.getVector("frames", frames);
-    }
-  };
+			void handleJsonValue(ValueWrapper& value) {
+				duration_per_frame = value.getDouble("duration_per_frame");
+				value.getVector("frames", frames);
+			}
+	};
 
-  class AnimationSet {
-  public:
-    AnimationSet () {}
-    AnimationSet (const AnimationSet &set) {
-      animations = set.animations;
-      name = set.name;
-    }
+	class AnimationSet {
+		public:
+			AnimationSet () {}
+			AnimationSet (const AnimationSet &set) {
+				animations = set.animations;
+				name = set.name;
+			}
 
-    void load (bool isLoad) {
-      if (!isLoad) {
-        GTAnimation::unloadAnimationSet(name.c_str());
-        return;
-      }
+			void load (bool isLoad) {
+				if (!isLoad) {
+					GTAnimation::unloadAnimationSet(name.c_str());
+					return;
+				}
 
-      GTAnimation *ani = GTAnimation::startAnimationSet(animations.size());
-      for (std::vector<Animation>::iterator iterator = animations.begin(); iterator != animations.end(); iterator++) {
-        Animation &item = *iterator;
-        addAnimation(ani, item);
-      }
-      ani->endAnimationSet();
-      GTAnimation::loadAnimationSet(ani, name.c_str());
-    }
+				GTAnimation *ani = GTAnimation::startAnimationSet(animations.size());
+				for (std::vector<Animation>::iterator iterator = animations.begin(); iterator != animations.end(); iterator++) {
+					Animation &item = *iterator;
+					addAnimation(ani, item);
+				}
+				ani->endAnimationSet();
+				GTAnimation::loadAnimationSet(ani, name.c_str());
+			}
 
-    void handleJsonValue(ValueWrapper& value) {
-      name = value.getString("name");
-      value.getVector("animations", animations);
-    }
+			void handleJsonValue(ValueWrapper& value) {
+				name = value.getString("name");
+				value.getVector("animations", animations);
+			}
 
-  private:
-    std::vector<Animation> animations;
-    std::string name;
+		private:
+			std::vector<Animation> animations;
+			std::string name;
 
-    void addAnimation(GTAnimation* ani, Animation& animation) {
-      int count = animation.frames.size();
-      ani->startAnimation(count, animation.duration_per_frame*count);
-      for (std::vector<std::string>::iterator iterator = animation.frames.begin(); iterator != animation.frames.end(); iterator++) {
-        ani->addFrame(iterator->c_str());
-      }
-      ani->endAnimation();
-    }
-  };
+			void addAnimation(GTAnimation* ani, Animation& animation) {
+				int count = animation.frames.size();
+				ani->startAnimation(count, animation.duration_per_frame*count);
+				for (std::vector<std::string>::iterator iterator = animation.frames.begin(); iterator != animation.frames.end(); iterator++) {
+					ani->addFrame(iterator->c_str());
+				}
+				ani->endAnimation();
+			}
+	};
 }
 
 std::vector<TrinGame::AnimationSet> gAnimationSets;
 
 namespace AnimationSets {
-void loadAnimationSets () {
-  loadVectorFromJsonFile("data/animation_sets.json", gAnimationSets);
-}
+	void loadAnimationSets () {
+		loadVectorFromJsonFile("data/animation_sets.json", gAnimationSets);
+	}
 }
 
 // TODO:refactor the magic numbers

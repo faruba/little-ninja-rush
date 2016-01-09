@@ -16,41 +16,41 @@ void GTLoadMusic(const char* param, bool isload);
 void GTLoadSfx(const char* param, bool isload);
 
 class LoadItem:
-  public Ref
+	public Ref
 {
-  public:
-CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(LoadItem, create);
-std::string stringparam;
-    loadfunc  loadmethod;
+	public:
+		CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(LoadItem, create);
+		std::string stringparam;
+		loadfunc  loadmethod;
 
-    static LoadItem* itemWithInfo(const char* param, loadfunc func);
-    void execute(bool isload);
+		static LoadItem* itemWithInfo(const char* param, loadfunc func);
+		void execute(bool isload);
 };
 
 class GTLoadList:
-  public Ref
+	public Ref
 {
-  public:
-    virtual bool init();
-CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GTLoadList, create);
-cocos2d::CCArray *mList;
-    int mLoadIndex;
-    //CFTimeInterval mMaxInterval;
-    float mMaxInterval;
+	public:
+		virtual bool init();
+		CCB_STATIC_NEW_AUTORELEASE_OBJECT_WITH_INIT_METHOD(GTLoadList, create);
+		cocos2d::CCArray *mList;
+		int mLoadIndex;
+		//CFTimeInterval mMaxInterval;
+		float mMaxInterval;
 
-    GTLoadList* list();
+		GTLoadList* list();
 
-    void addSpriteSheet(const char* name);
-    void addLoadFunc(loadfunc func);
-    void addMusic(const char* name);
-    void addSfx(const char* name);
+		void addSpriteSheet(const char* name);
+		void addLoadFunc(loadfunc func);
+		void addMusic(const char* name);
+		void addSfx(const char* name);
 
-    void reset(float maxInterval);
-    int loadSome();
-    int length();
-    void unloadAll();
+		void reset(float maxInterval);
+		int loadSome();
+		int length();
+		void unloadAll();
 
-    void loadAll();
+		void loadAll();
 
 };
 #endif

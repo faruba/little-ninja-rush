@@ -12,24 +12,24 @@
 #include "GameTool.h"
 
 class BombDart:
-  public GameObject
+	public GameObject
 {
-  public:
-    static BombDart* dart(cocos2d::Point pos, cocos2d::Point dir);
+	public:
+		static BombDart* dart(cocos2d::Point pos, cocos2d::Point dir);
 
-    CREATE_FUNC(BombDart);
+		CREATE_FUNC(BombDart);
 
-    virtual void onCreate();
-    virtual void onUpdate(float delta);
-    virtual void onDestroy();
+		virtual void onCreate();
+		virtual void onUpdate(float delta);
+		virtual void onDestroy();
 
-    GTAnimatedSprite *mSprite;
-    cocos2d::Point mPos;
-    cocos2d::Point mDir;
-    cocos2d::Point mDst;
-    cocos2d::Point mMid;
-    float   mTimer;
+		GTAnimatedSprite *mSprite;
+		cocos2d::Point mPos;
+		cocos2d::Point mDir;
+		cocos2d::Point mDst;
+		cocos2d::Point mMid;
+		float   mTimer;
 
-    bool mPaused;
+		bool mPaused;
 };
 #endif

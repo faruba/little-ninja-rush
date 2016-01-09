@@ -14,31 +14,31 @@
 class ControlLayer;
 
 class ClassicContinue:
-  public GameObject
+	public GameObject
 {
-  public:
-    static ClassicContinue* classicContinue();
-    CREATE_FUNC(ClassicContinue);
+	public:
+		static ClassicContinue* classicContinue();
+		CREATE_FUNC(ClassicContinue);
 
-    virtual void onCreate();
-    virtual void onUpdate(float delta);
-    virtual void onDestroy();
+		virtual void onCreate();
+		virtual void onUpdate(float delta);
+		virtual void onDestroy();
 
-    ControlLayer *mLayer;
-    int mState;//0-counting 1-pause
-    float mTimer;
-    int mCounter;
+		ControlLayer *mLayer;
+		int mState;//0-counting 1-pause
+		float mTimer;
+		int mCounter;
 
-    void onButton(int bid);
-    void onCancel();
-    void onUseCredit();
-    void onBuyCredit1();
-    void onBuyCredit2();
-    void onBuyCredit3();
+		void onButton(int bid);
+		void onCancel();
+		void onUseCredit();
+		void onBuyCredit1();
+		void onBuyCredit2();
+		void onBuyCredit3();
 
-    void purchaseVerified(int pid);
-    void purchaseCancelled(int pid);
-    void purchaseFailed(int pid);
+		void purchaseVerified(int pid);
+		void purchaseCancelled(int pid);
+		void purchaseFailed(int pid);
 
 };
 #endif
