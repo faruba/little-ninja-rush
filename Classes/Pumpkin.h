@@ -20,7 +20,6 @@ class Pumpkin:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
 
-    int mState;//0-floating 1-escape 2-dying
     float mTimer;
     int mHitCount;
     float mHurtTimer;
