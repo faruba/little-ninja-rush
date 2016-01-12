@@ -87,8 +87,6 @@ void Ref::retain()
 
 void Ref::release()
 {
-  //TODO why?
-  // i'm fucking tired
   if( _referenceCount <= 0){
     return;
   }
