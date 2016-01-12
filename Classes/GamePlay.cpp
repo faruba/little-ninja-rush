@@ -46,7 +46,8 @@ cocos2d::Scene* GamePlay::scene()
 	//universal
 	ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
 	ret->setAnchorPoint(cocos2d::Vec2(0, 0));
-	gPlay->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
+  //gPlay->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
+  gPlay->setPosition(cocos2d::Vec2(0,UniversalFit::sharedUniversalFit()->sceneOffset.y));
 
 	CEClipedNode *clip = CEClipedNode::create();
 	clip->setClipRect(&(UniversalFit::sharedUniversalFit()->clipRect));
@@ -108,13 +109,13 @@ void GamePlay::onEnter()
 
 	setAccelerometerEnabled(true);
 	cocos2d::Node *taskcomplete = cocos2d::Node::create();
-	taskcomplete->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width/2, SCREEN_HEIGHT));
+	taskcomplete->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->screenSize.width/2, SCREEN_HEIGHT));
 	this->addChild(taskcomplete, LAYER_MASK+10);
 	setTaskCompleteNode(taskcomplete);
 
 	this->initGamePlay(mGameMode);
 
-	mUISwapper.setSceneIntro(this);
+	//mUISwapper.setSceneIntro(this);
 	cocos2d::Layer::onEnter();
 
 	scheduleUpdate();
@@ -193,7 +194,7 @@ void GamePlay::initGamePlay(int mod)
 	xpause->setSelectedSpriteFrame(GameTool::getSpriteFrameByName("pause.png"));
 	xpause->setTarget(this, menu_selector(GamePlay::pause));
 	xpause->setAnchorPoint(cocos2d::Vec2(1, 1));
-	xpause->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width, SCREEN_HEIGHT));
+	xpause->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->screenSize.width, SCREEN_HEIGHT));
 	this->mMenu = cocos2d::Menu::create();
 	this->mMenu->addChild(xpause);
 	mMenu->setPosition(cocos2d::Vec2(-7, -7));

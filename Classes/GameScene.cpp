@@ -98,7 +98,7 @@ void GameScene::onCreate()
 	mSceneFgNode = cocos2d::Node::create();
 	mParent->addChild(mSceneBgNode, LAYER_SCENEBG);
 	//add tiles
-	mTiles = RingTile::tile(60, UniversalFit::sharedUniversalFit()->playSize.width, 50);
+	mTiles = RingTile::tile(60, UniversalFit::sharedUniversalFit()->screenSize.width, 50);
 	mTiles->retain();
 	mTiles->setPosition(cocos2d::Vec2(0, 0));
 	mParent->addChild(mTiles, LAYER_SCENEBG+1);
