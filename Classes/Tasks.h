@@ -207,7 +207,10 @@ public:
       delete today;
       delete date;
     }
-    if (needRefresh) refresh();
+    if (needRefresh) {
+      currentObjective.index = -1;
+      refresh();
+    }
     return needRefresh;
   }
   
@@ -224,11 +227,16 @@ public:
 
 
 //arcade refreshes with daily task
-class ArcadePrize:public Ref
+class ArcadePrize
 {
 public:
-  CREATE_FUNC(ArcadePrize);
-  virtual bool init(){return true;};
+  ArcadePrize(){
+    reset();
+  }
+  void reset(){
+    score = -1;
+    prize = 0;
+  }
   int score;
   int prize;//when prize <0 then the prize is completed
 };
@@ -244,7 +252,7 @@ public:
   bool mRecordRead;
   static Tasks* sharedTasks();
   
-  void makeArcadePrize(ArcadePrize* p, int lev);
+  void makeArcadePrize(ArcadePrize& p, int lev);
   
   bool newrefresh;
   
@@ -253,9 +261,9 @@ public:
   ObjectiveManager monthlyObjective;
   
   int prizeDate;
-  ArcadePrize *goldPrize = ArcadePrize::create();
-  ArcadePrize *silverPrize = ArcadePrize::create();
-  ArcadePrize *bronzePrize = ArcadePrize::create();
+  ArcadePrize goldPrize;
+  ArcadePrize silverPrize;
+  ArcadePrize bronzePrize;
   
   void createObjectives();
   void readObjectives(cocos2d::CCDictionary* dic);

@@ -227,18 +227,18 @@ void ArcadeMode::onUpdate(float delta)
 					//update cup
 					{
 						int ccup = 0;
-						if( GameRecord::sharedGameRecord()->task->goldPrize->prize > 0 &&
-								score >= GameRecord::sharedGameRecord()->task->goldPrize->score )
+						if( GameRecord::sharedGameRecord()->task->goldPrize.prize > 0 &&
+								score >= GameRecord::sharedGameRecord()->task->goldPrize.score )
 						{
 							ccup = 3;
 						}
-						else if( GameRecord::sharedGameRecord()->task->silverPrize->prize > 0 &&
-								score >= GameRecord::sharedGameRecord()->task->silverPrize->score )
+						else if( GameRecord::sharedGameRecord()->task->silverPrize.prize > 0 &&
+								score >= GameRecord::sharedGameRecord()->task->silverPrize.score )
 						{
 							ccup = 2;
 						}
-						else if( GameRecord::sharedGameRecord()->task->bronzePrize->prize > 0 &&
-								score >= GameRecord::sharedGameRecord()->task->bronzePrize->score )
+						else if( GameRecord::sharedGameRecord()->task->bronzePrize.prize > 0 &&
+								score >= GameRecord::sharedGameRecord()->task->bronzePrize.score )
 						{
 							ccup = 1;
 						}

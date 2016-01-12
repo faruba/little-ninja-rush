@@ -106,14 +106,14 @@ void CommitArcade::onUpdate(float delta)
 					//update cup
 					{
 						int ccup = 0;
-						if( GameRecord::sharedGameRecord()->task->goldPrize->prize > 0 &&
-								mCurrentScore >= GameRecord::sharedGameRecord()->task->goldPrize->score )
+						if( GameRecord::sharedGameRecord()->task->goldPrize.prize > 0 &&
+								mCurrentScore >= GameRecord::sharedGameRecord()->task->goldPrize.score )
 						{
 							ccup = 3;
 							mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-gold2.png"));
 							//take the cup
-							play->coins = GameRecord::sharedGameRecord()->task->goldPrize->prize;
-							GameRecord::sharedGameRecord()->task->goldPrize->prize = -1;
+							play->coins = GameRecord::sharedGameRecord()->task->goldPrize.prize;
+							GameRecord::sharedGameRecord()->task->goldPrize.prize = -1;
 							GameRecord::sharedGameRecord()->golden_trophy++;
 							// TODO
 							//GameCenterController->sharedGameCenterController()->submitArcadeGoldenTrophy(GameRecord::sharedGameRecord()->golden_trophy);
@@ -124,27 +124,27 @@ void CommitArcade::onUpdate(float delta)
 							GameRecord::sharedGameRecord()->task->dispatchTask(ACH_GOLDSTEAK, GameRecord::sharedGameRecord()->golden_steak);
 							GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ARCADETROPHY, 1);
 						}
-						else if( GameRecord::sharedGameRecord()->task->silverPrize->prize > 0 &&
-								mCurrentScore >= GameRecord::sharedGameRecord()->task->silverPrize->score )
+						else if( GameRecord::sharedGameRecord()->task->silverPrize.prize > 0 &&
+								mCurrentScore >= GameRecord::sharedGameRecord()->task->silverPrize.score )
 						{
 							ccup = 2;
 							mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-silver2.png"));
 							//take the cup
-							play->coins = GameRecord::sharedGameRecord()->task->silverPrize->prize;
-							GameRecord::sharedGameRecord()->task->silverPrize->prize = -1;
+							play->coins = GameRecord::sharedGameRecord()->task->silverPrize.prize;
+							GameRecord::sharedGameRecord()->task->silverPrize.prize = -1;
 							GameRecord::sharedGameRecord()->silver_trophy++;
 							//TODO
 							//GameCenterController->sharedGameCenterController()->submitArcadeSilverTrophy(GameRecord::sharedGameRecord()->silver_trophy);
 							GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ARCADETROPHY, 1);
 						}
-						else if( GameRecord::sharedGameRecord()->task->bronzePrize->prize > 0 &&
-								mCurrentScore >= GameRecord::sharedGameRecord()->task->bronzePrize->score )
+						else if( GameRecord::sharedGameRecord()->task->bronzePrize.prize > 0 &&
+								mCurrentScore >= GameRecord::sharedGameRecord()->task->bronzePrize.score )
 						{
 							ccup = 1;
 							mCup->setDisplayFrame(GameTool::getSpriteFrameByName("tp-bronze2.png"));
 							//take the cup
-							play->coins = GameRecord::sharedGameRecord()->task->bronzePrize->prize;
-							GameRecord::sharedGameRecord()->task->bronzePrize->prize = -1;
+							play->coins = GameRecord::sharedGameRecord()->task->bronzePrize.prize;
+							GameRecord::sharedGameRecord()->task->bronzePrize.prize = -1;
 							GameRecord::sharedGameRecord()->bronze_trophy++;
 							//TODO
 							//GameCenterController->sharedGameCenterController()->submitArcadeBronzeTrophy(GameRecord::sharedGameRecord()->bronze_trophy);
