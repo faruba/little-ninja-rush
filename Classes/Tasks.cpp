@@ -82,10 +82,10 @@ void Tasks::createObjectives()
 {
 }
 
-void Tasks::makeArcadePrize(ArcadePrize* p, int lev) 
+void Tasks::makeArcadePrize(ArcadePrize& p, int lev)
 {
-	p->score = ARCADE_PRIZEBASE + ARCADE_PRIZEFACE*lev;
-	p->prize = ARCADE_PRIZEPBASE + ARCADE_PRIZEPFACE*lev;
+  p.score = ARCADE_PRIZEBASE + ARCADE_PRIZEFACE*lev;
+  p.prize = ARCADE_PRIZEPBASE + ARCADE_PRIZEPFACE*lev;
 }
 
 void Tasks::readObjectives(cocos2d::CCDictionary* dic) 
@@ -101,23 +101,23 @@ void Tasks::readObjectives(cocos2d::CCDictionary* dic)
 			prizeDate = gtReadInt(dic, "apz_date", 0);
 			{
 				//ArcadePrize *ap = ArcadePrize::create();
-				goldPrize->score =gtReadInt(dic, "apz_gold_score", -1);
-				goldPrize->prize =gtReadInt(dic, "apz_gold_prize", 0);
-				//goldPrize->retain();
+				goldPrize.score =gtReadInt(dic, "apz_gold_score", -1);
+				goldPrize.prize =gtReadInt(dic, "apz_gold_prize", 0);
+				//goldPrize.retain();
 				//goldPrize = ap;
 			}
 			{
 				//ArcadePrize *ap = ArcadePrize::create();
-				silverPrize->score =gtReadInt(dic, "apz_silver_score", -1);
-				silverPrize->prize =gtReadInt(dic, "apz_silver_prize", 0);
-				//silverPrize->retain();
+				silverPrize.score =gtReadInt(dic, "apz_silver_score", -1);
+				silverPrize.prize =gtReadInt(dic, "apz_silver_prize", 0);
+				//silverPrize.retain();
 				//silverPrize = ap;
 			}
 			{
 				//ArcadePrize *ap = ArcadePrize::create();
-				bronzePrize->score =gtReadInt(dic, "apz_bronze_score", -1);
-				bronzePrize->prize =gtReadInt(dic, "apz_bronze_prize", 0);
-				//bronzePrize->retain();
+				bronzePrize.score =gtReadInt(dic, "apz_bronze_score", -1);
+				bronzePrize.prize =gtReadInt(dic, "apz_bronze_prize", 0);
+				//bronzePrize.retain();
 				//bronzePrize = ap;
 			}
 		}
@@ -179,64 +179,44 @@ void Tasks::readObjectives(cocos2d::CCDictionary* dic)
 
 void Tasks::doneReadObjectives() 
 {
-	//TODO if I'm right, this code will never be excuted
-	//if( !mRecordRead )
-	//{
-	//  //载入目标记录
-	//  {
-	//    prizeDate = 0;
-	//    {
-	//      ArcadePrize *pz = ArcadePrize::create();
-	//      pz->score = -1;
-	//      pz->prize = 0;
-	//      goldPrize = pz;
-	//    }
-	//    {
-	//      ArcadePrize *pz = ArcadePrize::create();
-	//      pz->score = -1;
-	//      pz->prize = 0;
-	//      silverPrize = pz;
-	//    }
-	//    {
-	//      ArcadePrize *pz = ArcadePrize::create();
-	//      pz->score = -1;
-	//      pz->prize = 0;
-	//      bronzePrize = pz;
-	//    }
-	//    goldPrize->retain();
-	//    silverPrize->retain();
-	//    bronzePrize->retain();
-	//  }
-	//  //载入成就记录
-	//  cocos2d::Ref *pObj = NULL;
-	//  for(Achievement& ach : gAchievements)
-	//  {
-	//    //生成Task
-	//    if( ach.achieveCount < ach.achieveNumber )
-	//    {
-	//      this->assignTask(ach.achieveCode, ach.achieveNumber, 0, TASK_ACHIEVEMENT, ach.uiid);
-	//    }
-	//  }
-	//  //载入统计记录
-	//  pObj = NULL;
-	//  CCARRAY_FOREACH(gStatistics, pObj)
-	//  {
-	//    Statistics *sta = (Statistics*)pObj;
-	//    if( sta->achieveCode >= 0 )
-	//    {
-	//      //生成Task
-	//      this->assignTask(sta->achieveCode, -1, 0, TASK_STATISTICS, sta->uiid);
-	//    }
-	//  }
-	//}
+	if( !mRecordRead )
+	{
+    CCASSERT(false,"if I'm right, this code will never be excuted");
+	  //载入目标记录
+	  {
+	    prizeDate = 0;
+      goldPrize.reset();
+      silverPrize.reset();
+      bronzePrize.reset();
+	    
+	  }
+	  //载入成就记录
+	  for(Achievement& ach : gAchievements)
+	  {
+	    //生成Task
+	    if( ach.achieveCount < ach.achieveNumber )
+	    {
+	      this->assignTask(ach.achieveCode, ach.achieveNumber, 0, TASK_ACHIEVEMENT, ach.uiid);
+	    }
+	  }
+	  //载入统计记录
+    for(Statistics& sta : gStatistics)
+	  {
+	    if( sta.achieveCode >= 0 )
+	    {
+	      //生成Task
+	      this->assignTask(sta.achieveCode, -1, 0, TASK_STATISTICS, sta.uiid);
+	    }
+	  }
+	}
 
-	//#ifdef DEBUG
-	//    //PRINT TASKS
-	// Tasks::for(Task* t in mTasks) 
-	//    {
-	// Tasks::CCLog("#TASK TYPE=%d CODE=%d CNT/ACH=%d/%d", t->taskType, t->achieveCode, t->achieved, t->achieveNumber); 
-	//    }
-	//#endif
+	#ifdef DEBUG
+	    //PRINT TASKS
+	 Tasks::for(Task* t in mTasks)
+	    {
+	 Tasks::CCLog("#TASK TYPE=%d CODE=%d CNT/ACH=%d/%d", t->taskType, t->achieveCode, t->achieved, t->achieveNumber); 
+	    }
+	#endif
 }
 
 void Tasks::writeObjectives(rapidjson::Document &document) 
@@ -253,12 +233,12 @@ void Tasks::writeObjectives(rapidjson::Document &document)
 	//写入奖杯信息
 	{
 		document.AddMember("apz_date", prizeDate, document.GetAllocator());//best for long
-		document.AddMember("apz_gold_score", goldPrize->score, document.GetAllocator());
-		document.AddMember("apz_gold_prize", goldPrize->prize, document.GetAllocator());
-		document.AddMember("apz_silver_score", silverPrize->score, document.GetAllocator());
-		document.AddMember("apz_silver_prize", silverPrize->prize, document.GetAllocator());
-		document.AddMember("apz_bronze_score", bronzePrize->score, document.GetAllocator());
-		document.AddMember("apz_bronze_prize", bronzePrize->prize, document.GetAllocator());
+		document.AddMember("apz_gold_score", goldPrize.score, document.GetAllocator());
+		document.AddMember("apz_gold_prize", goldPrize.prize, document.GetAllocator());
+		document.AddMember("apz_silver_score", silverPrize.score, document.GetAllocator());
+		document.AddMember("apz_silver_prize", silverPrize.prize, document.GetAllocator());
+		document.AddMember("apz_bronze_score", bronzePrize.score, document.GetAllocator());
+		document.AddMember("apz_bronze_prize", bronzePrize.prize, document.GetAllocator());
 	}
 	//写入成就记录
 	for(Achievement& ach : gAchievements)
@@ -515,10 +495,7 @@ void Tasks::checkObjectives()
 
 void Tasks::refreshArcadePrizes() 
 {
-	if (goldPrize == NULL){
-		return;
-	}
-	if( goldPrize->prize >= 0 )
+	if( goldPrize.prize >= 0 )
 	{
 		//stop golden steak
 		GameRecord::sharedGameRecord()->golden_steak = 0;

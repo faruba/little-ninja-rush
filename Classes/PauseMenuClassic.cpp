@@ -29,7 +29,7 @@ void PauseMenuClassic::updateArcade()
 	//update trophies
 	//gold
 	{
-		if( GameRecord::sharedGameRecord()->task->goldPrize->prize < 0 )
+		if( GameRecord::sharedGameRecord()->task->goldPrize.prize < 0 )
 		{//completed
 			mGoldCoin->setVisible(false);
 			mGoldPrize->setVisible(false);
@@ -38,13 +38,13 @@ void PauseMenuClassic::updateArcade()
 		}
 		else
 		{//not completed
-			mGoldScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->goldPrize->score).c_str());
-			mGoldPrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->goldPrize->prize).c_str());
+			mGoldScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->goldPrize.score).c_str());
+			mGoldPrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->goldPrize.prize).c_str());
 		}
 	}
 	//silver
 	{
-		if( GameRecord::sharedGameRecord()->task->silverPrize->prize < 0 )
+		if( GameRecord::sharedGameRecord()->task->silverPrize.prize < 0 )
 		{//completed
 			mSilverCoin->setVisible(false);
 			mSilverPrize->setVisible(false);
@@ -53,13 +53,13 @@ void PauseMenuClassic::updateArcade()
 		}
 		else
 		{//not completed
-			mSilverScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->silverPrize->score).c_str());
-			mSilverPrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->silverPrize->prize).c_str());
+			mSilverScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->silverPrize.score).c_str());
+			mSilverPrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->silverPrize.prize).c_str());
 		}
 	}
 	//bronze
 	{
-		if( GameRecord::sharedGameRecord()->task->bronzePrize->prize < 0 )
+		if( GameRecord::sharedGameRecord()->task->bronzePrize.prize < 0 )
 		{//completed
 			mBronzeCoin->setVisible(false);
 			mBronzePrize->setVisible(false);
@@ -68,8 +68,8 @@ void PauseMenuClassic::updateArcade()
 		}
 		else
 		{//not completed
-			mBronzeScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->bronzePrize->score).c_str());
-			mBronzePrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->bronzePrize->prize).c_str());
+			mBronzeScore->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->bronzePrize.score).c_str());
+			mBronzePrize->setString(std::string_format("%d", GameRecord::sharedGameRecord()->task->bronzePrize.prize).c_str());
 		}
 	}
 
