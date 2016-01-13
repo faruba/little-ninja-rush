@@ -17,7 +17,7 @@
 #include "StaticParticle.h"
 #include "UniversalFit.h"
 #include "SpeedLine.h"
-
+bool g_EnableTap = true;
 GamePlay* gPlay = NULL;
 
 cocos2d::CCArray *gPopQueues = NULL;
@@ -724,24 +724,41 @@ bool GamePlay::onTouchBegan(Touch * touch, Event * event)
 	return true;
 }
 
+void GamePlay::onTouchEnded(Touch * touch, Event * event)
+{
+  LNR_GET_TOUCH_POS;
+  if(g_EnableTap){
+    cocos2d::Point dir = pos - mTouchBegin;
+    if( dir.lengthSquared() < CONTROL_MAXSLIDE * CONTROL_MAXSLIDE  )
+    {
+      mTouchProcessed = true;
+      dir = pos - mainrole->center();
+      this->slide(ccpNormalize(dir));
+    }              
+  }
+}
 void GamePlay::onTouchMoved(Touch * touch, Event * event)
 {
-	if( count_control <= 0 )
+	if( count_control <= 0)
 	{
 		if( mTouchProcessed == false )
 		{
 			LNR_GET_TOUCH_POS;
-
-			cocos2d::Point dir = pos - mTouchBegin;
-			float len = ccpLength(dir);
-			if( len > CONTROL_MAXSLIDE )
-			{
-				mTouchProcessed = true;
-				this->slide(ccpNormalize(dir));
-			}
+      
+      cocos2d::Point dir = pos - mTouchBegin;
+      float len = ccpLength(dir);
+      if( len > CONTROL_MAXSLIDE )
+      {
+        mTouchProcessed = true;
+        if(g_EnableTap && dir.x > 0){
+          return;
+        }
+        this->slide(ccpNormalize(dir));
+      }
+      
 		}
 	}
-	else {
+  else {
 		mTouchProcessed = true;
 	}
 }
