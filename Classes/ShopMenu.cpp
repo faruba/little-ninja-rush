@@ -295,7 +295,7 @@ void ShopMenu::purchase(int cid)
 				{
 					detbase = 20;
 				}
-				item->updateInfo(icon, GameData::upgradeCost(index, level), gDetails[detbase+cid-10], 0);
+				item->updateInfo(icon, GameData::upgradeCost(index, level), gDetails[detbase+cid-13], 0);
 				//cost coins
 				GameRecord::sharedGameRecord()->makeCoins(-cost);
 			}

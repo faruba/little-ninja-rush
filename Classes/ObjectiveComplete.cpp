@@ -285,8 +285,8 @@ void ObjectiveComplete::retriveObjectiveInfo(int index, Objective ** obj, const 
 	*ach = NULL;
 	Tasks *task = GameRecord::sharedGameRecord()->task;
 	ObjectiveManager *managers[] = { &task->dailyObjective, &task->weeklyObjective, &task->monthlyObjective };
-	//TODO:
 	*ach = managers[index]->info();
+  *obj = &(managers[index]->currentObjective);
 }
 
 cocos2d::Node* ObjectiveComplete::genObjectiveInfo(const Achievement*  ach, int typ)
