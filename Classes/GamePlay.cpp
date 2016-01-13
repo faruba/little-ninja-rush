@@ -17,8 +17,9 @@
 #include "StaticParticle.h"
 #include "UniversalFit.h"
 #include "SpeedLine.h"
-
+bool g_EnableTap = true;
 GamePlay* gPlay = NULL;
+
 
 cocos2d::CCArray *gPopQueues = NULL;
 
@@ -26,6 +27,9 @@ cocos2d::CCArray *gPopQueues = NULL;
 #define VIBRATE_ZOOM (0.2f)
 #define VIBRATE_MS (400.0f)
 #define VIBRATE_MOVE (3.0f)
+
+#define TAP 1
+#define SLIDE 2
 
 GamePlay::~GamePlay()
 {
@@ -636,7 +640,7 @@ cocos2d::Layer* GamePlay::ui()
 }
 
 //划屏幕
-void GamePlay::slide(cocos2d::Point dir)
+void GamePlay::gestureRecognize(cocos2d::Point dir , int type)
 {
 	//#bugfix: dead stand
 	if( mainrole->HP <= 0 )
@@ -658,22 +662,24 @@ void GamePlay::slide(cocos2d::Point dir)
 		mw = mpx;
 	}
 	cocos2d::Point lp = cocos2d::Vec2(mw, PLAY_MINSHOOT).getNormalized();
-	float slidedart = PLAY_SLIDEDART > lp.y ? PLAY_SLIDEDART : lp.y;
-	//slidedart 暂时还没有考虑到分身术
-	if( dir.y >= slidedart )
-	{//丢飞镖
-		mainrole->fire(dir);
-		return;
-	}
-	if( dir.y >= PLAY_SLIDERELOAD )
-	{
-		mainrole->slice();
-		if( mainrole2 != NULL )
-		{
-			mainrole2->slice();
-		}
-		return;
-	}
+  if (!g_EnableTap || type == TAP) {
+  	float slidedart = PLAY_SLIDEDART > lp.y ? PLAY_SLIDEDART : lp.y;
+  	//slidedart 暂时还没有考虑到分身术
+  	if( dir.y >= slidedart )
+  	{//丢飞镖
+  		mainrole->fire(dir);
+  		return;
+  	}
+  	if( dir.y >= PLAY_SLIDERELOAD )
+  	{
+  		mainrole->slice();
+  		if( mainrole2 != NULL )
+  		{
+  			mainrole2->slice();
+  		}
+  		return;
+  	}
+  }
 	//发动技能
 	if( mainrole->spellType != SPELL_REPLEACE
 			&& mainrole->spellType != SPELL_GODHAND)
@@ -724,24 +730,38 @@ bool GamePlay::onTouchBegan(Touch * touch, Event * event)
 	return true;
 }
 
+void GamePlay::onTouchEnded(Touch * touch, Event * event)
+{
+  LNR_GET_TOUCH_POS;
+  if(g_EnableTap){
+    cocos2d::Point dir = pos - mTouchBegin;
+    if( dir.lengthSquared() < CONTROL_MAXSLIDE * CONTROL_MAXSLIDE  )
+    {
+      mTouchProcessed = true;
+      dir = pos - mainrole->center();
+      this->gestureRecognize(ccpNormalize(dir),TAP);
+    }
+  }
+}
 void GamePlay::onTouchMoved(Touch * touch, Event * event)
 {
-	if( count_control <= 0 )
+	if( count_control <= 0)
 	{
 		if( mTouchProcessed == false )
 		{
 			LNR_GET_TOUCH_POS;
-
-			cocos2d::Point dir = pos - mTouchBegin;
-			float len = ccpLength(dir);
-			if( len > CONTROL_MAXSLIDE )
-			{
-				mTouchProcessed = true;
-				this->slide(ccpNormalize(dir));
-			}
+      
+      cocos2d::Point dir = pos - mTouchBegin;
+      float len = ccpLength(dir);
+      if( len > CONTROL_MAXSLIDE )
+      {
+        mTouchProcessed = true;
+        this->gestureRecognize(ccpNormalize(dir),SLIDE);
+      }
+      
 		}
 	}
-	else {
+  else {
 		mTouchProcessed = true;
 	}
 }

@@ -40,6 +40,7 @@ class GamePlay :
 
 		virtual bool onTouchBegan(Touch * touch, Event * event);
 		virtual void onTouchMoved(Touch * touch, Event * event);
+  void onTouchEnded(Touch * touch, Event * event);
 		virtual void onAcceleration(Acceleration* acc, Event* unsedEvent);
 		static GamePlay *sharedGamePlay();
 
@@ -88,7 +89,7 @@ class GamePlay :
 
 		void scheduleVibrate(float dur);
 
-		void slide(cocos2d::Point dir);
+		void gestureRecognize(cocos2d::Point dir,int type);
 		cocos2d::Point autoAim(cocos2d::Point dir);
 		Role *nearestEnemy(cocos2d::Point dir);
 
