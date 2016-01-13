@@ -19,7 +19,6 @@ class Mechanic:
     virtual bool supportAimAid();
 
     GTAnimatedSprite *mSprite;
-    int    mState;
     float  mTimer;
     float  mSpeed;
     bool   mFlag;
