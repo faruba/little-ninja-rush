@@ -259,8 +259,7 @@ void CommitScroll::onScroll(cocos2d::Ref*)
 				mFlash->runAction(fo1);
 				mRotateNode->setVisible(true);
 
-				const char *filename = std::string_format("prize-%d.png", prize).c_str();
-				mScroll->setDisplayFrame(GameTool::getSpriteFrameByName(filename));
+        mScroll->setDisplayFrame(GameTool::getSpriteFrameByName(std::string_format("prize-%d.png", prize)));
 				mScroll->setScale(0.01f);
 				cocos2d::ScaleTo *sc1 = cocos2d::ScaleTo::create(0.4f, 1.5f);
 				cocos2d::ScaleTo *sc2 = cocos2d::ScaleTo::create(0.2f, 1.0f);
