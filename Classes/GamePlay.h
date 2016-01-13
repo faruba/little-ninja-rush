@@ -89,7 +89,7 @@ class GamePlay :
 
 		void scheduleVibrate(float dur);
 
-		void slide(cocos2d::Point dir);
+		void gestureRecognize(cocos2d::Point dir,int type);
 		cocos2d::Point autoAim(cocos2d::Point dir);
 		Role *nearestEnemy(cocos2d::Point dir);
 

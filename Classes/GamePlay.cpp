@@ -20,12 +20,16 @@
 bool g_EnableTap = true;
 GamePlay* gPlay = NULL;
 
+
 cocos2d::CCArray *gPopQueues = NULL;
 
 #define VIBRATE_PERIOD (0.04f)
 #define VIBRATE_ZOOM (0.2f)
 #define VIBRATE_MS (400.0f)
 #define VIBRATE_MOVE (3.0f)
+
+#define TAP 1
+#define SLIDE 2
 
 GamePlay::~GamePlay()
 {
@@ -636,7 +640,7 @@ cocos2d::Layer* GamePlay::ui()
 }
 
 //划屏幕
-void GamePlay::slide(cocos2d::Point dir)
+void GamePlay::gestureRecognize(cocos2d::Point dir , int type)
 {
 	//#bugfix: dead stand
 	if( mainrole->HP <= 0 )
@@ -658,22 +662,24 @@ void GamePlay::slide(cocos2d::Point dir)
 		mw = mpx;
 	}
 	cocos2d::Point lp = cocos2d::Vec2(mw, PLAY_MINSHOOT).getNormalized();
-	float slidedart = PLAY_SLIDEDART > lp.y ? PLAY_SLIDEDART : lp.y;
-	//slidedart 暂时还没有考虑到分身术
-	if( dir.y >= slidedart )
-	{//丢飞镖
-		mainrole->fire(dir);
-		return;
-	}
-	if( dir.y >= PLAY_SLIDERELOAD )
-	{
-		mainrole->slice();
-		if( mainrole2 != NULL )
-		{
-			mainrole2->slice();
-		}
-		return;
-	}
+  if (!g_EnableTap || type == TAP) {
+  	float slidedart = PLAY_SLIDEDART > lp.y ? PLAY_SLIDEDART : lp.y;
+  	//slidedart 暂时还没有考虑到分身术
+  	if( dir.y >= slidedart )
+  	{//丢飞镖
+  		mainrole->fire(dir);
+  		return;
+  	}
+  	if( dir.y >= PLAY_SLIDERELOAD )
+  	{
+  		mainrole->slice();
+  		if( mainrole2 != NULL )
+  		{
+  			mainrole2->slice();
+  		}
+  		return;
+  	}
+  }
 	//发动技能
 	if( mainrole->spellType != SPELL_REPLEACE
 			&& mainrole->spellType != SPELL_GODHAND)
@@ -733,8 +739,8 @@ void GamePlay::onTouchEnded(Touch * touch, Event * event)
     {
       mTouchProcessed = true;
       dir = pos - mainrole->center();
-      this->slide(ccpNormalize(dir));
-    }              
+      this->gestureRecognize(ccpNormalize(dir),TAP);
+    }
   }
 }
 void GamePlay::onTouchMoved(Touch * touch, Event * event)
@@ -750,10 +756,7 @@ void GamePlay::onTouchMoved(Touch * touch, Event * event)
       if( len > CONTROL_MAXSLIDE )
       {
         mTouchProcessed = true;
-        if(g_EnableTap && dir.x > 0){
-          return;
-        }
-        this->slide(ccpNormalize(dir));
+        this->gestureRecognize(ccpNormalize(dir),SLIDE);
       }
       
 		}
