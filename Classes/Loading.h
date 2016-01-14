@@ -25,6 +25,7 @@ cocos2d::Scene* mScene;
     bool unload;
     bool mTip;
     bool mFinish;
+    bool mClicked = false;
 cocos2d::Sprite *mLoading;
 
     void prepareLoading();
