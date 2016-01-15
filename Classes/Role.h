@@ -3,9 +3,42 @@
 #include "GameObject.h"
 #include "GameTool.h"
 
+class Role;
+
+class RoleStateDelegate {
+public:
+  Role *mRole = nullptr;
+  virtual void update (float delta) {};
+  virtual void init () {};
+  virtual void reset () {};
+
+  template<typename DelegateType>
+    static DelegateType* CreateDelegate() {
+      DelegateType* delegate = new DelegateType();
+      delegate->init();
+      return delegate;
+    }
+};
+
+class EnteringStateDelegate : public RoleStateDelegate {
+public:
+  virtual void update (float delta) {};
+};
+
+class RepositioningStateDelegate : public RoleStateDelegate {
+public:
+  virtual void update (float delta);
+  virtual void init () { reset(); };
+  virtual void reset ();
+
+  float mTargetPos;
+private:
+};
+
 class Role: public GameObject {
   public:
     enum RoleState {
+      Repositioning,
       Entering,
       Running,
       PreparingToShoot,
@@ -14,8 +47,13 @@ class Role: public GameObject {
       Hit,
       Dead,
       Dummy,
-      Initializing
+      Initializing,
+      StateCount
     };
+
+    RoleStateDelegate *mStateDelegate[RoleState::StateCount] = {nullptr};
+    void switchStateDelegate(int state, RoleStateDelegate *delegate);
+    void switchToState(RoleState state) { mState = state; }
   public:
     //与圆做碰撞检测
     virtual bool collisionWithCircle(cocos2d::Point cc, float rad) {
@@ -49,17 +87,10 @@ class Role: public GameObject {
     virtual bool isEnemy() {return false;};
 
     virtual const char* animationSetName() { return ""; }
-    virtual void onCreate() {
-      GameObject::onCreate();
-      mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(animationSetName()));
-      mSprite->setAnchorPoint(mAnchor);
-      mState = Entering;
-
-      //auto node = DrawNode::create();
-      //for (auto & circle : mCollisionCircles) {
-      //  node->drawCircle(circle.center, circle.radius, 180, 30, false, 1, 1, cocos2d::Color4F::RED);
-      //}
-      //mSprite->addChild(node);
+    virtual void onCreate();
+    virtual void onDestroy();
+    virtual void onUpdate(float delta) {
+      mLifeSpan += delta;
     }
 
     bool handleGameOver (float delta) ;
@@ -68,7 +99,9 @@ class Role: public GameObject {
     GTAnimatedSprite *mSprite;
     cocos2d::Vec2 mAnchor = cocos2d::Vec2(0.4f, 0.0625f);
     int mState = Initializing;
-    //enum RoleState mState;
+    float mSpeed;
+    float  mTimer;
+    float mLifeSpan = 0;
 
     cocos2d::Node *mParent;
     template<typename RoleType>

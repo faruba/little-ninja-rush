@@ -22,6 +22,9 @@ void HighNinja::onCreate() {
 
 	Role::onCreate();
 
+  mRepositionDelegate = RoleStateDelegate::CreateDelegate<RepositioningStateDelegate>();
+  switchStateDelegate(Repositioning, mRepositionDelegate);
+
 	int y = CCRANDOM_0_1()*RESPAWN_Y;
 
 	mSprite->setPosition(cocos2d::Vec2(20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1(), RESPAWN_YMIN+y));
@@ -30,7 +33,6 @@ void HighNinja::onCreate() {
 	mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
 
 	mDartCount = 0;
-	mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
 	mFlag = true;
 	mSpeed = ENEMY_NNRUNSPEED;
 	mTimer = 0;
@@ -70,56 +72,37 @@ void HighNinja::onUpdate(float delta)
 					}
 				}
 				break;
+      case Repositioning:
+        mStateDelegate[Repositioning]->update(delta);
+        break;
 			case Running:// run
 				{
-					if( mSprite->getPosition().x != mTargetPos )
-					{
-						float ds = delta*mSpeed;
-						float dis = mTargetPos - mSprite->getPosition().x;
-						cocos2d::Point np = mSprite->getPosition();
-						if( fabsf(dis) > ds )
-						{
-							if( dis > 0 )
-							{
-								np.x += ds;
-							}
-							else {
-								np.x -= ds;
-							}
-						}
-						else {
-							np.x = mTargetPos;
-							mTimer = 0;
-						}
-						mSprite->setPosition(np);
-					}
-					else {
-						mTimer += delta;
-						if( mTimer > HNINJA_POLLTIME )
-						{
-							if( randomInt(100) < HNINJA_AGGRISIVE )
-							{
-								if( GamePlay::sharedGamePlay()->count_attack <= 0 )
-								{
-									mState = PreparingToShoot;
-									mTimer = 0;
-									mSprite->playGTAnimation(6, true);
-									//play effect
-									GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
-									eff->setPosition(cocos2d::Vec2(47, 19));
-									mSprite->addChild(eff);
-								}
-							}
-							else {
-								if( randomInt(2)== 0 )
-								{
-									mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
-									mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
-								}
-							}
-							mTimer = 0;
-						}
-					}
+          mTimer += delta;
+          if( mTimer > HNINJA_POLLTIME )
+          {
+            if( randomInt(100) < HNINJA_AGGRISIVE )
+            {
+              if( GamePlay::sharedGamePlay()->count_attack <= 0 )
+              {
+                mState = PreparingToShoot;
+                mTimer = 0;
+                mSprite->playGTAnimation(6, true);
+                //play effect
+                GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
+                eff->setPosition(cocos2d::Vec2(47, 19));
+                mSprite->addChild(eff);
+              }
+            }
+            else {
+              if( randomInt(2)== 0 )
+              {
+                mRepositionDelegate->reset();
+                mState = Repositioning;
+                mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
+              }
+            }
+            mTimer = 0;
+          }
 					if( playend )
 					{
 						mSprite->playGTAnimation(0, true);
@@ -189,8 +172,8 @@ void HighNinja::onUpdate(float delta)
 						{
 							if( randomInt(3) < 2 )
 							{
-								mTargetPos = UniversalFit::sharedUniversalFit()->playSize.width*(0.2f+0.6f*CCRANDOM_0_1());
-								mState = Running;
+                mRepositionDelegate->mTargetPos = UniversalFit::sharedUniversalFit()->playSize.width*(0.2f+0.6f*CCRANDOM_0_1());
+								mState = Repositioning;
 								mTimer = 0;
 								mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
 							}
@@ -274,7 +257,6 @@ void HighNinja::onUpdate(float delta)
 					if( mSprite->isVisible() == true )
 					{
 						mState = Running;
-						mTargetPos = mSprite->getPosition().x;
 					}
 				}
 				break;
