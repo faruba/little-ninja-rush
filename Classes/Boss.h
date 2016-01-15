@@ -173,6 +173,11 @@ public:
   virtual void afterDamage();
   int idx;
 private:
+  void markIndex(){
+    auto mark = cocos2d::Label::createWithBMFont("ab34.fnt", std::string_format("%d",idx));
+    mark->setPositionX(20);
+    mSprite->addChild(mark);
+  }
   Boss* owner;
 };
 #endif /* defined(__little_ninja_rush__Boss__) */

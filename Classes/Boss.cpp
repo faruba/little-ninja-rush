@@ -427,6 +427,8 @@ void FloatGun::onCreate() {
 	//mSprite->playGTAnimation(7, true);
 	mParent->addChild(mSprite,LAYER_ROLE+RESPAWN_Y);
 
+  markIndex();
+  
 	mDartCount = 0;
 	mFlag = true;
 	mSpeed = ENEMY_NNRUNSPEED/2;
