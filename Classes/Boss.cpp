@@ -242,21 +242,7 @@ void MoveAndAttackRole::onUpdate(float delta)
 bool MoveAndAttackRole::deliverHit(int type, cocos2d::Point dir)
 {
 	mTimer = 0;
-	if( mState == Dead )
-	{
-		mSprite->playGTAnimation(4, false);
-		mFlag = false;
-	}
-	else {
-		if( dir.x > 0 )
-		{
-			//mSprite->playGTAnimation(3 , false);
-		}
-		else {
-			//mSprite->playGTAnimation(1+randomInt(2 ), false);
-		}
-		mFlag = true;
-	}
+
 	GamePlay *play = GamePlay::sharedGamePlay();
 	//combo
 	bool isCombo = false;
@@ -286,6 +272,14 @@ bool MoveAndAttackRole::deliverHit(int type, cocos2d::Point dir)
   hp -= damage;
   if(isDead()){
     mState = Dead;
+		if( dir.x > 0 )
+		{
+			mSprite->playGTAnimation(3 , false);
+		}
+		else {
+			mSprite->playGTAnimation(1+randomInt(2 ), false);
+		}
+		mFlag = true;
     //随机掉落道具
     Item::triggerItem(1, mSprite->getPosition());
     
