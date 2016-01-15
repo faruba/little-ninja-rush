@@ -149,7 +149,7 @@ public:
 protected:
   virtual void onShooting();
   void onSpecialShoot(int count);
-  void releaseFloatGun(const Vec2& pos, int index);
+  void releaseFloatGun(const Vec2& pos, int& index);
   virtual void afterDamage();
 private:
   FloatGun* floatGunGroup[FLOAT_GUN_COUNT];

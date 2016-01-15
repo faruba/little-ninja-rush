@@ -346,7 +346,7 @@ void Boss::onCreate() {
   attackTimeIntervalRange.set(2, 5);
 	int y = CCRANDOM_0_1()*RESPAWN_Y;
   
-  mTargetPos.init(Vec2::ONE*(RESPAWN_YMIN + y), bossMoveRange);
+  mTargetPos.init(bossMoveRange, Vec2::ONE*(RESPAWN_YMIN + y));
 	//计算起跳点
 	cocos2d::Point rjp = ccpForAngle(PI*3.0f/5.0f);
 
@@ -364,26 +364,26 @@ void Boss::onShooting(){
   if(isMakedSpecialShoot || randomInt(100) < NOMAL_SHOOT_RATE){
     MoveAndAttackRole::onShooting();
   }else{
-    isMakedSpecialShoot = true;
     onSpecialShoot(FLOAT_GUN_COUNT);
   }
 }
 void Boss::onSpecialShoot(int count){
   clearFloatGun();
   mState = Shooting;
-  int currentCount = 0;
+  int *currentCount = new int(0);
   isMakedSpecialShoot = true;
-  safeStartAfterSecond(0.5f, [&,this](){
-    if(currentCount == count){
+  safeStartAfterSecond(0.5f, [count,currentCount,this](){
+    if(*currentCount == count){
       mState = Running;
+      delete currentCount;
       return false;
     }
-    releaseFloatGun(center(),currentCount);
-    currentCount++;
+    releaseFloatGun(center(),*currentCount);
+    *currentCount += 1;
     return true;
   });
 }
-void Boss::releaseFloatGun(const Vec2& pos, int index){
+void Boss::releaseFloatGun(const Vec2& pos, int& index){
   GamePlay* play = GamePlay::sharedGamePlay();
   FloatGun* enemy =static_cast<FloatGun*>(Role::CreateRole<FloatGun>(play));
   enemy->setOwner(this, index);
@@ -431,7 +431,7 @@ void FloatGun::onCreate() {
 
   
   attackTimeIntervalRange.set(4, 10);
-  mTargetPos.init(Vec2(RESPAWN_YMIN, RESPAWN_YMIN + RESPAWN_Y), bossMoveRange);
+  mTargetPos.init(bossMoveRange, Vec2(RESPAWN_YMIN, RESPAWN_YMIN + RESPAWN_Y));
 	//计算起跳点
 
   const Vec2& pos =mTargetPos.getTarget();
