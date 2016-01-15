@@ -263,10 +263,10 @@ bool MoveAndAttackRole::deliverHit(int type, cocos2d::Point dir)
 	else {
 		if( dir.x > 0 )
 		{
-			mSprite->playGTAnimation(3 , false);
+			//mSprite->playGTAnimation(3 , false);
 		}
 		else {
-			mSprite->playGTAnimation(1+randomInt(2 ), false);
+			//mSprite->playGTAnimation(1+randomInt(2 ), false);
 		}
 		mFlag = true;
 	}
@@ -442,7 +442,7 @@ void FloatGun::onCreate() {
 	mDartCount = 0;
 	mFlag = true;
 	mSpeed = ENEMY_NNRUNSPEED/2;
-  hp = MAX_BOSS_HP;
+  hp = 1;
 }
 
 
