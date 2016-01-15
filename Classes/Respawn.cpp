@@ -18,6 +18,7 @@
 #include "Mechanic.h"
 #include "Pumpkin.h"
 #include "Santa.h"
+#include "Boss.h"
 #include "UniversalFit.h"
 #include "GameScene.h"
 
@@ -369,6 +370,8 @@ void Respawn::gen(int tid) {
 		Role::CreateRole<NewbieNinja>, Role::CreateRole<MiddleNinja>, Role::CreateRole<HighNinja>
 	};
 	GamePlay *play = GamePlay::sharedGamePlay();
+  play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<Boss>(play)));
+  return ;
 	switch (tid) {
 		case 0:
 		case 1:

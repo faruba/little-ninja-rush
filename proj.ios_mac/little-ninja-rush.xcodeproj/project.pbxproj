@@ -518,6 +518,7 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		D446CC051C474D14008984DC /* Boss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D446CC031C474D14008984DC /* Boss.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -1163,6 +1164,8 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D446CC031C474D14008984DC /* Boss.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Boss.cpp; sourceTree = "<group>"; };
+		D446CC041C474D14008984DC /* Boss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boss.h; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -1933,6 +1936,8 @@
 				BE38EB3C1C1EB75D0087D38E /* Messager.cpp */,
 				BE38EB3D1C1EB75D0087D38E /* Messager.h */,
 				BE38EB3E1C1EB75D0087D38E /* MiddleNinja.cpp */,
+				D446CC031C474D14008984DC /* Boss.cpp */,
+				D446CC041C474D14008984DC /* Boss.h */,
 				BE38EB3F1C1EB75D0087D38E /* MiddleNinja.h */,
 				BE38EB6C1C1EB75D0087D38E /* Samuri.cpp */,
 				BE38EB6D1C1EB75D0087D38E /* Samuri.h */,
@@ -2480,6 +2485,7 @@
 				BE38EBCE1C1EB75D0087D38E /* GTAnimatedEffect.cpp in Sources */,
 				BE38EBF51C1EB75D0087D38E /* Scene7.cpp in Sources */,
 				BEDC36771C44A8CE006FF7BE /* patch.cpp in Sources */,
+				D446CC051C474D14008984DC /* Boss.cpp in Sources */,
 				BE38EBC61C1EB75D0087D38E /* GameObject.cpp in Sources */,
 				BE38EBFD1C1EB75D0087D38E /* Tasks.cpp in Sources */,
 				BE38EBB11C1EB75D0087D38E /* AnimationRes.cpp in Sources */,
