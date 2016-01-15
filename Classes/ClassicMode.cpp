@@ -34,7 +34,7 @@ void ClassicMode::onUpdate(float delta)
 		case STATE_NORMAL://正常状态
 			{
 				play->distance += play->runspeed*delta;
-				if(play->distance > play->changeflag - play->runspeed*3 )
+				if(false && play->distance > play->changeflag - play->runspeed*3)
 				{
 					play->state = STATE_CHANGESCENE;
 					play->count_attack++;
