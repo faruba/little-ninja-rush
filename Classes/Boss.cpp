@@ -436,8 +436,8 @@ void FloatGun::onCreate() {
 
   const Vec2& pos =mTargetPos.getTarget();
 	mSprite->setPosition(pos);
-	mSprite->playGTAnimation(7, true);
-	mParent->addChild(mSprite);
+	//mSprite->playGTAnimation(7, true);
+	mParent->addChild(mSprite,LAYER_ROLE+RESPAWN_Y);
 
 	mDartCount = 0;
 	mFlag = true;
