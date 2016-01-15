@@ -19,11 +19,14 @@ class Coroutine
 {
 public:
   Coroutine(){
-    callback = NULL;
-    timer = excuteTime = 0;
+    resetCoroutine();
   }
   // return true if loop
   typedef std::function<bool()> callbackFunction;
+  void resetCoroutine(){
+    callback = NULL;
+    timer = excuteTime = 0;
+  }
   bool startAfterSecond(float time, callbackFunction cb,bool replaceExist){
     if(!replaceExist && callback != NULL){
       return false;

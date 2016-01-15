@@ -207,7 +207,7 @@ void MoveAndAttackRole::onUpdate(float delta)
         onFleeing();
 				break;
 			case Dead:// dead
-        onDead(delta, playend);
+        removeflag = onDead(delta, playend);
 				break;
 		}
 	}
@@ -234,6 +234,7 @@ void MoveAndAttackRole::onUpdate(float delta)
 
 	if( removeflag )
 	{
+    //CCLOG("--remove %p", this);
 		play->manager->removeGameObject(this);
 	}
 }
@@ -275,13 +276,14 @@ bool MoveAndAttackRole::deliverHit(int type, cocos2d::Point dir)
   hp -= damage;
   if(isDead()){
     mState = Dead;
-		if( dir.x > 0 )
-		{
-			mSprite->playGTAnimation(3 , false);
-		}
-		else {
-			mSprite->playGTAnimation(1+randomInt(2 ), false);
-		}
+    mSprite->playGTAnimation(4 , false);
+//		if( dir.x > 0 )
+//		{
+//			mSprite->playGTAnimation(3 , false);
+//		}
+//		else {
+//			mSprite->playGTAnimation(1+randomInt(2 ), false);
+//		}
 		mFlag = true;
     //随机掉落道具
     Item::triggerItem(1, mSprite->getPosition());
@@ -370,6 +372,7 @@ void Boss::onSpecialShoot(int count){
 void Boss::releaseFloatGun(const Vec2& pos, int& index){
   GamePlay* play = GamePlay::sharedGamePlay();
   FloatGun* enemy =static_cast<FloatGun*>(Role::CreateRole<FloatGun>(play));
+  //CCLOG("create Float %d %p",index, enemy);
   enemy->setOwner(this, index);
   floatGunGroup[index]  = enemy;
   play->enemies->addObject(play->manager->addGameObject(enemy));
@@ -392,6 +395,7 @@ void Boss::onFloatGunDead(FloatGun* floatGun){
     for (int i = 0; i < idx; i++) {
       if(floatGunGroup[i] != NULL){
         //add new one
+        //CCLOG("%d still exsist recreate",i);
         releaseFloatGun(center(),idx);
         return ;
       }
@@ -403,10 +407,11 @@ void Boss::onFloatGunDead(FloatGun* floatGun){
 }
 void Boss::clearFloatGun()
 {
+  GamePlay *play = GamePlay::sharedGamePlay();
   for(int i =0; i < FLOAT_GUN_COUNT; i++){
     FloatGun* gun = floatGunGroup[i];
-    if(gun != NULL){
-      gun->mState = Dead;
+    if(gun != NULL && gun->mState != Dead){
+      play->manager->removeGameObject(gun);
     }
     floatGunGroup[i] = NULL;
   }
@@ -439,6 +444,8 @@ void FloatGun::onCreate() {
 void FloatGun::afterDamage()
 {
   if(isDead()){
+    //CCLOG("--floatGun %d dead %p",idx, this);
+    resetCoroutine();
     owner->onFloatGunDead(this);
   }
 }
