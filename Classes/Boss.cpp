@@ -241,6 +241,9 @@ void MoveAndAttackRole::onUpdate(float delta)
 //受到伤害
 bool MoveAndAttackRole::deliverHit(int type, cocos2d::Point dir)
 {
+  if(isGodmode){
+    return true;
+  }
 	mTimer = 0;
 
 	GamePlay *play = GamePlay::sharedGamePlay();
@@ -376,6 +379,7 @@ void Boss::afterDamage()
 {
   if(hp < BOSS_STATE2_HP && !isState2){
     isState2 = true;
+    isGodmode = true;
     onSpecialShoot(FLOAT_GUN_COUNT);
   }
   
@@ -391,6 +395,9 @@ void Boss::onFloatGunDead(FloatGun* floatGun){
         releaseFloatGun(center(),idx);
         return ;
       }
+    }
+    if(idx == FLOAT_GUN_COUNT -1){
+      isGodmode = false;
     }
   }
 }
