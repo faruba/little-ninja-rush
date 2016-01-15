@@ -103,6 +103,7 @@ protected:
   virtual void onRunning(float dt, bool playend);
   virtual void onPreparingToShoot(float dt);
   virtual void onShooting();
+  virtual void onFleeing(){}
   virtual bool onDead(float delta, bool playend);
   
   virtual void afterDamage() = 0;

@@ -16,7 +16,7 @@
 #include "UniversalFit.h"
 #include "FootPrint.h"
 
-#define  NOMAL_SHOOT_RATE 80
+#define  NOMAL_SHOOT_RATE 8
 #define MAX_BOSS_HP 10
 #define BOSS_STATE2_HP 4
 
@@ -204,20 +204,7 @@ void MoveAndAttackRole::onUpdate(float delta)
         //coroutine
 				break;
 			case Fleeing:// escape
-				{
-					float ds = delta*ENEMY_NNRUNSPEED;
-					if( mSprite->getPosition().x > -100 )
-					{
-						cocos2d::Point np = mSprite->getPosition();
-						np.x -= ds;
-						mSprite->setPosition(np);
-					}
-					else {
-						//销毁对象
-						removeflag = true;
-					}
-
-				}
+        onFleeing();
 				break;
 			case Dead:// dead
         onDead(delta, playend);
