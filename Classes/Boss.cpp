@@ -323,7 +323,7 @@ void MoveAndAttackRole::onDestroy()
 }
 
 
-Range bossMoveRange(SCREEN_WIDTH * 0.2,SCREEN_WIDTH * 0.8);
+Range bossMoveRange(SCREEN_WIDTH * 0.0,SCREEN_WIDTH * 1.0);
 void Boss::onCreate() {
 	mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
 	mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 13));
