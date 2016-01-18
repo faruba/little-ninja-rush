@@ -42,6 +42,7 @@ void MiddleNinja::onCreate() {
 
 void MiddleNinja::onUpdate(float delta) 
 {
+  Role::onUpdate(delta);
 	GamePlay* play = GamePlay::sharedGamePlay();
 	bool playend = mSprite->updateGTAnimation(delta);
 	bool removeflag = false;

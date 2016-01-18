@@ -50,6 +50,7 @@ void HighNinja::onCreate() {
 
 void HighNinja::onUpdate(float delta) 
 {
+  Role::onUpdate(delta);
 	bool playend = mSprite->updateGTAnimation(delta);
 	GamePlay* play = GamePlay::sharedGamePlay();
 	bool removeflag = false;

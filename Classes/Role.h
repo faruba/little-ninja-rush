@@ -8,9 +8,15 @@ class Role;
 class RoleStateDelegate {
 public:
   Role *mRole = nullptr;
-  virtual void update (float delta) {};
+  bool mAnimationIsOver = false;
   virtual void init () {};
   virtual void reset () {};
+
+  virtual void onEnter () {};
+  virtual void pre_update (float delta) ;
+  virtual void update (float delta) {} ;
+  virtual void after_update (float delta) ;
+  virtual void onLeave () {};
 
   template<typename DelegateType>
     static DelegateType* CreateDelegate() {
@@ -27,12 +33,51 @@ public:
 
 class RepositioningStateDelegate : public RoleStateDelegate {
 public:
+  virtual void init () { onEnter(); };
+
+  virtual void onEnter ();
   virtual void update (float delta);
-  virtual void init () { reset(); };
-  virtual void reset ();
 
   float mTargetPos;
 private:
+};
+
+class NinjaRunningStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+  float mTimer = 0;
+};
+
+class PreparingStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+  float mTimer = 0;
+};
+
+class ShootStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+};
+
+class FleeStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+};
+
+class DeadStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+  float mTimer = 0;
 };
 
 class Role: public GameObject {
@@ -53,7 +98,10 @@ class Role: public GameObject {
 
     RoleStateDelegate *mStateDelegate[RoleState::StateCount] = {nullptr};
     void switchStateDelegate(int state, RoleStateDelegate *delegate);
-    void switchToState(RoleState state) { mState = state; }
+    void switchToState(RoleState state) {
+      if (mStateDelegate[state] != nullptr) mStateDelegate[state]->onEnter();
+      mState = state;
+    }
   public:
     //与圆做碰撞检测
     virtual bool collisionWithCircle(cocos2d::Point cc, float rad) {
@@ -100,8 +148,9 @@ class Role: public GameObject {
     cocos2d::Vec2 mAnchor = cocos2d::Vec2(0.4f, 0.0625f);
     int mState = Initializing;
     float mSpeed;
-    float  mTimer;
     float mLifeSpan = 0;
+    int mDartCount = 0;
+    bool   mFlag;
 
     cocos2d::Node *mParent;
     template<typename RoleType>
