@@ -5,6 +5,8 @@
 
 class Role;
 
+#define INITIAL_OFFSET 100
+#define LIMITE_OFFSET 101
 class RoleStateDelegate {
 public:
   Role *mRole = nullptr;
@@ -26,9 +28,19 @@ public:
     }
 };
 
-class EnteringStateDelegate : public RoleStateDelegate {
+class BasicEnteringStateDelegate : public RoleStateDelegate {
 public:
-  virtual void update (float delta) {};
+  virtual void onEnter ();
+  virtual void update (float delta);
+};
+
+class MiddleNinjaEnteringStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+public:
+  cocos2d::Point mTargetPos;
+  float mTimer;
 };
 
 class RepositioningStateDelegate : public RoleStateDelegate {
@@ -46,6 +58,8 @@ class NinjaRunningStateDelegate : public RoleStateDelegate {
 public:
   virtual void onEnter ();
   virtual void update (float delta);
+  float mPollTime;
+  float mAggressive;
 private:
   float mTimer = 0;
 };
@@ -54,6 +68,7 @@ class PreparingStateDelegate : public RoleStateDelegate {
 public:
   virtual void onEnter ();
   virtual void update (float delta);
+  float mPreparingTime;
 private:
   float mTimer = 0;
 };
@@ -63,6 +78,15 @@ public:
   virtual void onEnter ();
   virtual void update (float delta);
 private:
+};
+
+class MShootStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+  float mTimer;
+  bool mFlag;
 };
 
 class FleeStateDelegate : public RoleStateDelegate {
@@ -78,6 +102,7 @@ public:
   virtual void update (float delta);
 private:
   float mTimer = 0;
+  bool  mFlag;
 };
 
 class Role: public GameObject {
@@ -150,7 +175,9 @@ class Role: public GameObject {
     float mSpeed;
     float mLifeSpan = 0;
     int mDartCount = 0;
-    bool   mFlag;
+    int mDartCapacity = 0;
+
+    bool haveDart () { return mDartCount < mDartCapacity; }
 
     cocos2d::Node *mParent;
     template<typename RoleType>

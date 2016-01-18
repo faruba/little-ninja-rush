@@ -13,43 +13,43 @@ void NewbieNinja::onCreate() {
 	Role::onCreate();
 
   RoleStateDelegate *delegate = RoleStateDelegate::CreateDelegate<RepositioningStateDelegate>();
-  switchStateDelegate(Entering, delegate);
+  NinjaRunningStateDelegate *running = RoleStateDelegate::CreateDelegate<NinjaRunningStateDelegate>();
+  running->mPollTime = NNINJA_POLLTIME;
+  running->mAggressive = NNINJA_AGGRISIVE;
+
+  PreparingStateDelegate *preparing = RoleStateDelegate::CreateDelegate<PreparingStateDelegate>();
+  preparing->mPreparingTime = NNINJA_PREPARE;
+
+  switchStateDelegate(Entering, RoleStateDelegate::CreateDelegate<BasicEnteringStateDelegate>());
   switchStateDelegate(Repositioning, delegate);
-  switchStateDelegate(Running, RoleStateDelegate::CreateDelegate<NinjaRunningStateDelegate>());
-  switchStateDelegate(PreparingToShoot, RoleStateDelegate::CreateDelegate<PreparingStateDelegate>());
+  switchStateDelegate(Running, running);
+  switchStateDelegate(PreparingToShoot, preparing);
   switchStateDelegate(Shooting, RoleStateDelegate::CreateDelegate<ShootStateDelegate>());
   switchStateDelegate(Fleeing, RoleStateDelegate::CreateDelegate<FleeStateDelegate>());
   switchStateDelegate(Dead, RoleStateDelegate::CreateDelegate<DeadStateDelegate>());
 
-	int y = CCRANDOM_0_1()*RESPAWN_Y ;
-	int x = (GamePlay::sharedGamePlay()->state == STATE_RUSH) ? UniversalFit::sharedUniversalFit()->playSize.width+100 : -100;
-
-	mSprite->setPosition(cocos2d::Vec2(x, y + RESPAWN_YMIN ));
-	mSprite->playGTAnimation(0, true);
-	mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
+  switchToState(Entering);
 
 	mDartCount = 0;
-	mFlag = true;
+  mDartCapacity = NNINJA_MAXDART;
 	mSpeed = ENEMY_NNRUNSPEED;
 }
 
 void NewbieNinja::onUpdate(float delta) {
   Role::onUpdate(delta);
-  GamePlay* play = GamePlay::sharedGamePlay();
-  bool removeflag = false;
-  bool gameOver = handleGameOver(delta);
 
-  if (!gameOver) {
-    if (mStateDelegate[mState] != nullptr) {
-      mStateDelegate[mState]->pre_update(delta);
+  if (mStateDelegate[mState] != nullptr) {
+    mStateDelegate[mState]->pre_update(delta);
+    bool gameOver = handleGameOver(delta);
+    if (!gameOver) {
       mStateDelegate[mState]->update(delta);
-      mStateDelegate[mState]->after_update(delta);
     }
+    mStateDelegate[mState]->after_update(delta);
   }
 
+  GamePlay* play = GamePlay::sharedGamePlay();
   //rush offset
-  if( play->state == STATE_RUSH )
-  {
+  if( play->state == STATE_RUSH ) {
     float offset = (play->runspeed - play->levelspeed)*delta;
     cocos2d::Point np = mSprite->getPosition();
     np.x -= offset;
@@ -57,18 +57,14 @@ void NewbieNinja::onUpdate(float delta) {
   }
 
   //snow step
-  if( mState != Dead )
-  {
+  if( mState != Dead ) {
     FootPrint::goFootPrint(&mStepSnow, mSprite->getPosition());
   }
 
   //删除检查
-  if( mSprite->getPosition().x < -120 || mSprite->getPosition().x > 120+UniversalFit::sharedUniversalFit()->playSize.width )
+  if (mSprite->getPosition().x < -LIMITE_OFFSET ||
+      mSprite->getPosition().x > LIMITE_OFFSET+UniversalFit::sharedUniversalFit()->playSize.width)
   {
-    removeflag = true;
-  }
-
-  if (removeflag || !mSprite->isVisible()) {
     play->manager->removeGameObject(this);
   }
 }
@@ -79,17 +75,12 @@ bool NewbieNinja::deliverHit(int type, cocos2d::Point dir)
 	if( mState == Dead )
 	{
 		mSprite->playGTAnimation(4, false);
-		mFlag = false;
-	}
-	else {
-		if( dir.x > 0 )
-		{
+	} else {
+		if ( dir.x > 0 ) {
 			mSprite->playGTAnimation(3 , false);
-		}
-		else {
+		} else {
 			mSprite->playGTAnimation(1+randomInt(2), false);
 		}
-		mFlag = true;
 	}
 	GamePlay *play = GamePlay::sharedGamePlay();
 	//combo
