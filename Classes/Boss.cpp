@@ -68,7 +68,8 @@ void MoveAndAttackRole::onRunning(float dt, bool playend)
     {
       if( mDartCount < MNINJA_MAXDART && GamePlay::sharedGamePlay()->count_attack <= 0 )
       {
-        mState = PreparingToShoot;
+        //mState = PreparingToShoot;
+        onPreparingToShoot(dt);
       }
     }
   }
@@ -87,7 +88,6 @@ void MoveAndAttackRole::playPrepareAnimation(){
 }
 
 void MoveAndAttackRole::onPreparingToShoot(float dt){
-  mState = Shooting;
   playPrepareAnimation();
   onShooting();
 }
@@ -117,7 +117,7 @@ Vec2 MoveAndAttackRole::getAttackDir(){
   }
 }
 void MoveAndAttackRole::onShooting(){
-  safeStartAfterSecond(nextAttackTimeInterval(), [this]() ->bool {
+  safeStartAfterSecond(0.5f, [this]() ->bool {
     GamePlay* play = GamePlay::sharedGamePlay();
     mState = Shooting;
     Vec2 dir = getAttackDir();
@@ -198,7 +198,7 @@ void MoveAndAttackRole::onUpdate(float delta)
         onRunning(delta, playend);
 				break;
 			case PreparingToShoot:// prepare
-        onPreparingToShoot(delta);
+        //onPreparingToShoot(delta);
 				break;
 			case Shooting:// shoot
         //coroutine
@@ -256,6 +256,7 @@ bool MoveAndAttackRole::deliverHit(int type, cocos2d::Point dir)
 		play->makeCombo();
 		isCombo = true;
     damage = 2;
+    CCLOG("========== X 2");
 	}
 	// arcade combo
 	if( play->mode == MODE_ARCADE )
@@ -356,9 +357,10 @@ void Boss::onShooting(){
 void Boss::onSpecialShoot(int count){
   clearFloatGun();
   mState = Shooting;
+  isHighAttackSpeedMode = true;
   int *currentCount = new int(0);
   isMakedSpecialShoot = true;
-  safeStartAfterSecond(0.5f, [count,currentCount,this](){
+  safeStartAfterSecond(0.1f, [count,currentCount,this](){
     if(*currentCount == count){
       mState = Running;
       delete currentCount;
@@ -400,10 +402,23 @@ void Boss::onFloatGunDead(FloatGun* floatGun){
         return ;
       }
     }
-    if(idx == FLOAT_GUN_COUNT -1){
+
+  }
+  if(isAllFloatGunDead()){
+    if(isState2){
       isGodmode = false;
     }
+    isHighAttackSpeedMode = false;
   }
+}
+bool Boss::isAllFloatGunDead()
+{
+  for(FloatGun* gun : floatGunGroup){
+    if(gun != NULL){
+      return false;
+    }
+  }
+  return true;
 }
 void Boss::clearFloatGun()
 {
@@ -424,7 +439,7 @@ void FloatGun::onCreate() {
 
   
   attackTimeIntervalRange.set(4, 10);
-  mTargetPos.init(bossMoveRange, Vec2(RESPAWN_YMIN, RESPAWN_YMIN + RESPAWN_Y));
+  mTargetPos.init(bossMoveRange, Vec2(RESPAWN_YMIN * 0.2f, RESPAWN_YMIN + RESPAWN_Y));
 	//计算起跳点
 
   const Vec2& pos =mTargetPos.getTarget();

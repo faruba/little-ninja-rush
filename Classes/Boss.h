@@ -157,6 +157,7 @@ protected:
   virtual void afterDamage();
 private:
   FloatGun* floatGunGroup[FLOAT_GUN_COUNT];
+  bool isAllFloatGunDead();
   //flag
   bool isMakedSpecialShoot = false;
   bool isState2 = false;

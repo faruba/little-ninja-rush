@@ -366,6 +366,11 @@ bool Respawn::judge(int tid)
 typedef Role* (*RoleCreator)(cocos2d::Node*);
 
 void Respawn::gen(int tid) {
+  static int  time = 0;
+  if(time != 0){
+    return;
+  }
+  time ++;
 	RoleCreator creatorFunc[] = {
 		Role::CreateRole<NewbieNinja>, Role::CreateRole<MiddleNinja>, Role::CreateRole<HighNinja>
 	};
