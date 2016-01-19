@@ -20,13 +20,8 @@ class HighNinja:
     virtual bool deliverHit(int type, cocos2d::Point dir);
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
-    float  mTimer;
-    int    mDartCount;
-    bool   mFlag;
     int   mSpell;
     cocos2d::Point mPoint;
-
-    RepositioningStateDelegate *mRepositionDelegate;
 
     float mStepSnow;
 

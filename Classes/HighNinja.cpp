@@ -17,276 +17,74 @@
 #include "FootPrint.h"
 
 void HighNinja::onCreate() {
-	mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
-	mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 13));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 13));
 
-	Role::onCreate();
+  Role::onCreate();
 
-  mRepositionDelegate = RoleStateDelegate::CreateDelegate<RepositioningStateDelegate>();
-  switchStateDelegate(Repositioning, mRepositionDelegate);
+  NinjaRunningStateDelegate *running = RoleStateDelegate::CreateDelegate<NinjaRunningStateDelegate>();
+  running->mPollTime = HNINJA_POLLTIME;
+  running->mAggressive = HNINJA_AGGRISIVE;
 
-	int y = CCRANDOM_0_1()*RESPAWN_Y;
+  PreparingStateDelegate *preparing = RoleStateDelegate::CreateDelegate<PreparingStateDelegate>();
+  preparing->mPreparingTime = HNINJA_PREPARE;
 
-	mSprite->setPosition(cocos2d::Vec2(20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1(), RESPAWN_YMIN+y));
-	mSprite->playGTAnimation(0, true);
-	mSprite->setVisible(false);
-	mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
+  switchStateDelegate(Repositioning, RoleStateDelegate::CreateDelegate<RepositioningStateDelegate>());
+  switchStateDelegate(Entering, RoleStateDelegate::CreateDelegate<HighNinjaEnteringStateDelegate>());
+  switchStateDelegate(Running, running);
+  switchStateDelegate(PreparingToShoot, preparing);
+  switchStateDelegate(Shooting, RoleStateDelegate::CreateDelegate<HShootStateDelegate>());
+  switchStateDelegate(Fleeing, RoleStateDelegate::CreateDelegate<FleeStateDelegate>());
+  switchStateDelegate(Dummy, RoleStateDelegate::CreateDelegate<DummyStateDelegate>());
+  switchStateDelegate(Dead, RoleStateDelegate::CreateDelegate<HDeadStateDelegate>());
 
-	mDartCount = 0;
-	mFlag = true;
-	mSpeed = ENEMY_NNRUNSPEED;
-	mTimer = 0;
-	mSpell = 0;
 
-	//出场特效
-	GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 5, false);
-	eff->setAnchorPoint(mSprite->getAnchorPoint());
-	eff->setPosition(mSprite->getPosition());
-	mParent->addChild(eff, LAYER_ROLE+RESPAWN_Y-y);
+  switchToState(Entering);
 
-	mWoodLink.uid=-1;
-	mWoodLink.index=-1;
+  mDartCount = 0;
+  mDartCapacity = MNINJA_MAXDART;
+  mFlag = true;
+  mSpeed = ENEMY_NNRUNSPEED;
+  mTimer = 0;
+  mSpell = 0;
+  mIsCoward = false;
+
+
+  mWoodLink.uid=-1;
+  mWoodLink.index=-1;
 }
 
 void HighNinja::onUpdate(float delta) 
 {
   Role::onUpdate(delta);
-	bool playend = mSprite->updateGTAnimation(delta);
-	GamePlay* play = GamePlay::sharedGamePlay();
-	bool removeflag = false;
-	bool gameOver = handleGameOver(delta);
 
-	if (!gameOver) {//主角死亡的处理
-		switch (mState) {
-			case Entering:// onstage
-				{
-					mTimer += delta;
-					if( mTimer > 0.30f && mSprite->isVisible() == false )
-					{
-						mSprite->setVisible(true);
-					}
-					if( mTimer >= 0.4f )
-					{
-						mState = Running;
-						mTimer = 0;
-						mSprite->playGTAnimation(0, true);
-					}
-				}
-				break;
-      case Repositioning:
-        mStateDelegate[Repositioning]->update(delta);
-        break;
-			case Running:// run
-				{
-          mTimer += delta;
-          if( mTimer > HNINJA_POLLTIME )
-          {
-            if( randomInt(100) < HNINJA_AGGRISIVE )
-            {
-              if( GamePlay::sharedGamePlay()->count_attack <= 0 )
-              {
-                mState = PreparingToShoot;
-                mTimer = 0;
-                mSprite->playGTAnimation(6, true);
-                //play effect
-                GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
-                eff->setPosition(cocos2d::Vec2(47, 19));
-                mSprite->addChild(eff);
-              }
-            }
-            else {
-              if( randomInt(2)== 0 )
-              {
-                mRepositionDelegate->reset();
-                mState = Repositioning;
-                mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
-              }
-            }
-            mTimer = 0;
-          }
-					if( playend )
-					{
-						mSprite->playGTAnimation(0, true);
-					}
-				}
-				break;
-			case PreparingToShoot:// prepare
-				{
-					mTimer += delta;
-					float prepare = HNINJA_PREPARE;
-					if( play->mode == MODE_ARCADE )
-					{
-						prepare *= play->arcade->prepare;
-					}
-					if( mTimer > prepare && GamePlay::sharedGamePlay()->count_attack <= 0 )
-					{
-						mState = Shooting;
-						mTimer = 0;
-						mDartCount = 0;
-						mFlag = false;
-						if( randomInt(3) == 0 )
-						{
-							mFlag = true;
-						}
-					}
-				}
-				break;
-			case Shooting:// shoot
-				{
-					if( playend )
-					{
-						mSprite->playGTAnimation(0, true);
-					}
-					mTimer -= delta;
-					if( mTimer <= 0 )
-					{
-						cocos2d::Point target = play->mainrole->center();
-						if( play->mainrole2 != NULL )
-						{
-							if( randomInt(2) == 0 )
-							{
-								target = play->mainrole2->center();
-							}
-						}
-						if( mFlag )
-						{//冰锥术
-							cocos2d::Point dst;
-							dst.x = UniversalFit::sharedUniversalFit()->playSize.width/2 + UniversalFit::sharedUniversalFit()->playSize.width*CCRANDOM_0_1()/2;
-							dst.y = play->mainrole->position().y;
-							cocos2d::Point dir = ccpNormalize(ccpSub(dst, this->center()));
-							std::string shape = "dart.png";
-							play->darts->addObject(play->manager->addGameObject(Dart::dart(shape, this->center(), dir, -4, mParent)));
-						}
-						else {
-							cocos2d::Point dir = ccpNormalize(ccpSub(target, this->center()));
-							float angle = ccpToAngle(dir);
-							angle += CC_DEGREES_TO_RADIANS(-HNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*HNINJA_ACCURATE)*CCRANDOM_0_1();
-							dir = ccpForAngle(angle);
-							std::string shape = "dart.png";
-							play->darts->addObject(play->manager->addGameObject(Dart::dart(shape, this->center(), dir, -3, mParent)));
-						}
+  if (mStateDelegate[mState] != nullptr) {
+    mStateDelegate[mState]->pre_update(delta);
+    bool gameOver = handleGameOver(delta);
+    if (!gameOver) {
+      mStateDelegate[mState]->update(delta);
+    }
+    mStateDelegate[mState]->after_update(delta);
+  }
 
-						mSprite->playGTAnimation(5, false);
-						mTimer = 0.3f;
-
-						if( mDartCount>=2 || mFlag )
-						{
-							if( randomInt(3) < 2 )
-							{
-                mRepositionDelegate->mTargetPos = UniversalFit::sharedUniversalFit()->playSize.width*(0.2f+0.6f*CCRANDOM_0_1());
-								mState = Repositioning;
-								mTimer = 0;
-								mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
-							}
-							else {
-								mState = Running;
-								mTimer = 0;
-							}
-						}
-						mDartCount++;
-					}
-
-				}
-				break;
-			case Fleeing:// escape
-				{
-					float ds = delta*ENEMY_NNRUNSPEED;
-					if( mSprite->getPosition().x > -100 )
-					{
-						cocos2d::Point np = mSprite->getPosition();
-						np.x -= ds;
-						mSprite->setPosition(np);
-					}
-					else {
-						//销毁对象
-						removeflag = true;
-					}
-
-				}
-				break;
-			case Dead:// dead
-				{
-					if( playend )
-					{
-						//fix pos
-						float ds = delta*play->runspeed;
-						cocos2d::Point np = mSprite->getPosition();
-						np.x -= ds;
-						mSprite->setPosition(np);
-
-						if( mSprite->getPosition().x < -100 )
-						{
-							removeflag = true;
-						}
-					}
-					else {
-						mTimer += delta;
-						if(mTimer>0.3f && mFlag)
-						{
-							int n = 1 + randomInt(3);
-							GameTool::PlaySound(std::string_format("ahh%d.mp3", n).c_str());
-							mFlag = false;
-						}
-						//fix pos
-						cocos2d::Point np = mSprite->getPosition();
-						if( mSprite->animationId() == 3 )
-						{
-							float ra = mTimer/mSprite->playBackTime();
-							if( ra > 1 )
-							{
-								ra = 1;
-							}
-							ra = 1 - ra;
-							float ds = delta*200*ra;
-							np.x += ds;
-						}
-						else {
-							float ra = mTimer/mSprite->playBackTime();
-							if( ra > 1 )
-							{
-								ra = 1;
-							}
-							float ds = delta*300*ra;
-							np.x -= ds;
-						}
-						mSprite->setPosition(np);
-					}
-				}
-				break;
-			case Dummy:
-				{//替身术
-					if( mSprite->isVisible() == true )
-					{
-						mState = Running;
-					}
-				}
-				break;
-		}  
-	}
+  GamePlay* play = GamePlay::sharedGamePlay();
 	//rush offset
-	if( play->state == STATE_RUSH )
-	{
+	if( play->state == STATE_RUSH ) {
 		float offset = (play->runspeed - play->levelspeed)*delta;
 		cocos2d::Point np = mSprite->getPosition();
 		np.x -= offset;
 		mSprite->setPosition(np);
 	}
 
-	if( mState != Dead )
-	{
+	if( mState != Dead ) {
 		FootPrint::goFootPrint(&mStepSnow, mSprite->getPosition());
 	}
 
-	//删除检查
-	if( mSprite->getPosition().x < -120 || mSprite->getPosition().x > 120+UniversalFit::sharedUniversalFit()->playSize.width )
-	{
-		removeflag = true;
-	}
-
-	if( removeflag )
-	{
-		play->manager->removeGameObject(this);
-	}
+  if (mSprite->getPosition().x < -LIMITE_OFFSET ||
+      mSprite->getPosition().x > LIMITE_OFFSET+UniversalFit::sharedUniversalFit()->playSize.width)
+  {
+    play->manager->removeGameObject(this);
+  }
 }
 
 //受到伤害

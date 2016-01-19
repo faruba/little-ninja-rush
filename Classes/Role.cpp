@@ -19,6 +19,7 @@ void Role::onCreate() {
   GameObject::onCreate();
   mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(animationSetName()));
   mSprite->setAnchorPoint(mAnchor);
+  mIsCoward = true;
 
   //auto node = DrawNode::create();
   //for (auto & circle : mCollisionCircles) {
@@ -79,6 +80,35 @@ void BasicEnteringStateDelegate::onEnter () {
 }
 void BasicEnteringStateDelegate::update (float delta) {
     mRole->switchToState(Role::RoleState::Running);
+}
+///// HighNinjaEnteringStateDelegate 
+void HighNinjaEnteringStateDelegate::onEnter () {
+  int y = CCRANDOM_0_1()*RESPAWN_Y;
+
+  mRole->setPosition(cocos2d::Vec2(20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1(), RESPAWN_YMIN+y));
+  mRole->mSprite->playGTAnimation(0, true);
+  mRole->mSprite->setVisible(false);
+  mRole->mParent->addChild(mRole->mSprite, LAYER_ROLE+RESPAWN_Y-y);
+  mTimer = 0;
+
+  //出场特效
+  GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 5, false);
+  eff->setAnchorPoint(mRole->mSprite->getAnchorPoint());
+  eff->setPosition(mRole->mSprite->getPosition());
+  mRole->mParent->addChild(eff, LAYER_ROLE+RESPAWN_Y-y);
+}
+
+void HighNinjaEnteringStateDelegate::update (float delta) {
+  mTimer += delta;
+  if( mTimer > 0.30f && mRole->mSprite->isVisible() == false )
+  {
+    mRole->mSprite->setVisible(true);
+  }
+  if( mTimer >= 0.4f )
+  {
+    mRole->switchToState(Role::RoleState::Running);
+    mRole->mSprite->playGTAnimation(0, true);
+  }
 }
 ///// MiddleNinjaEnteringStateDelegate 
 void MiddleNinjaEnteringStateDelegate::onEnter () {
@@ -141,8 +171,13 @@ void NinjaRunningStateDelegate::update (float delta) {
         GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
         eff->setPosition(cocos2d::Vec2(47, 19));
         mRole->mSprite->addChild(eff);
-      } else {
+      } else if (mRole->mIsCoward) {
         mRole->switchToState(Role::RoleState::Fleeing);
+      } else {
+        if( randomInt(2)== 0 ) {
+          mRole->switchToState(Role::RoleState::Repositioning);
+          mRole->mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
+        }
       }
     }
   }
@@ -167,6 +202,63 @@ void PreparingStateDelegate::update (float delta) {
   {
     mRole->switchToState(Role::RoleState::Shooting);
     mRole->mDartCount++;
+  }
+}
+///// HShootStateDelegate 
+void HShootStateDelegate::onEnter () {
+  mTimer = 0;
+  mFlag = (randomInt(3) == 0);
+}
+
+void HShootStateDelegate::update (float delta) {
+  if ( mAnimationIsOver ) {
+    mRole->mSprite->playGTAnimation(0, true);
+  }
+  mTimer -= delta;
+  GamePlay* play = GamePlay::sharedGamePlay();
+  if( mTimer <= 0 )
+  {
+    cocos2d::Point target = play->mainrole->center();
+    if( play->mainrole2 != NULL )
+    {
+      if( randomInt(2) == 0 )
+      {
+        target = play->mainrole2->center();
+      }
+    }
+    if( mFlag ) {//冰锥术
+      cocos2d::Point dst;
+      dst.x = UniversalFit::sharedUniversalFit()->playSize.width/2 + UniversalFit::sharedUniversalFit()->playSize.width*CCRANDOM_0_1()/2;
+      dst.y = play->mainrole->position().y;
+      cocos2d::Point dir = ccpNormalize(dst - mRole->center());
+      std::string shape = "dart.png";
+      play->darts->addObject(play->manager->addGameObject(Dart::dart(shape, mRole->center(), dir, -4, mRole->mParent)));
+    }
+    else {
+      cocos2d::Point dir = ccpNormalize(ccpSub(target, mRole->center()));
+      float angle = ccpToAngle(dir);
+      angle += CC_DEGREES_TO_RADIANS(-MNINJA_ACCURATE)+CC_DEGREES_TO_RADIANS(2*MNINJA_ACCURATE)*CCRANDOM_0_1();
+      dir = Vec2::forAngle(angle);
+      std::string shape = "dart.png";
+      play->darts->addObject(play->manager->addGameObject(Dart::dart(shape, mRole->center(), dir, -2, mRole->mParent)));
+    }
+
+    mRole->mSprite->playGTAnimation(5, false);
+    mTimer = 0.5f;
+    if( mFlag || mRole->mDartCount >= 2)
+    {
+      if( randomInt(3) < 2 )
+      {
+        //mRepositionDelegate->mTargetPos = UniversalFit::sharedUniversalFit()->playSize.width*(0.2f+0.6f*CCRANDOM_0_1());
+        mRole->mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
+        mRole->switchToState(Role::RoleState::Repositioning);
+      }
+      else {
+        mRole->switchToState(Role::RoleState::Running);
+      }
+      mTimer = 0;
+    }
+    mRole->mDartCount += 1;
   }
 }
 ///// MShootStateDelegate 
@@ -264,6 +356,61 @@ void FleeStateDelegate::update (float delta) {
   {
     cocos2d::Point np = mRole->position();
     np.x -= ds;
+    mRole->setPosition(np);
+  }
+}
+///// DummyStateDelegate
+void DummyStateDelegate::onEnter () {
+}
+void DummyStateDelegate::update (float delta) {
+  if( mRole->mSprite->isVisible() == true ) {
+    mRole->switchToState(Role::RoleState::Running);
+  }
+}
+///// HDeadStateDelegate
+void HDeadStateDelegate::onEnter () {
+  mTimer = 0;
+  mFlag = true;
+}
+
+void HDeadStateDelegate::update (float delta) {
+  GamePlay* play = GamePlay::sharedGamePlay();
+  if( mAnimationIsOver )
+  {
+    //fix pos
+    float ds = delta*play->runspeed;
+    cocos2d::Point np = mRole->position();
+    np.x -= ds;
+    mRole->setPosition(np);
+  }
+  else {
+    mTimer += delta;
+    if(mTimer>0.3f && mFlag)
+    {
+      int n = 1 + randomInt(3);
+      GameTool::PlaySound(std::string_format("ahh%d.mp3", n).c_str());
+      mFlag = false;
+    }
+    //fix pos
+    cocos2d::Point np = mRole->position();
+    if ( mRole->mSprite->animationId() == 3 ) {
+      float ra = mTimer/mRole->mSprite->playBackTime();
+      if( ra > 1 )
+      {
+        ra = 1;
+      }
+      ra = 1 - ra;
+      float ds = delta*200*ra;
+      np.x += ds;
+    } else {
+      float ra = mTimer/mRole->mSprite->playBackTime();
+      if( ra > 1 )
+      {
+        ra = 1;
+      }
+      float ds = delta*300*ra;
+      np.x -= ds;
+    }
     mRole->setPosition(np);
   }
 }

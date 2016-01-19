@@ -34,6 +34,14 @@ public:
   virtual void update (float delta);
 };
 
+class HighNinjaEnteringStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+public:
+  float mTimer;
+};
+
 class MiddleNinjaEnteringStateDelegate : public RoleStateDelegate {
 public:
   virtual void onEnter ();
@@ -80,6 +88,15 @@ public:
 private:
 };
 
+class HShootStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+  float mTimer;
+  bool mFlag;
+};
+
 class MShootStateDelegate : public RoleStateDelegate {
 public:
   virtual void onEnter ();
@@ -94,6 +111,21 @@ public:
   virtual void onEnter ();
   virtual void update (float delta);
 private:
+};
+
+class HDeadStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+  float mTimer = 0;
+  bool  mFlag;
+};
+
+class DummyStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
 };
 
 class DeadStateDelegate : public RoleStateDelegate {
@@ -176,6 +208,7 @@ class Role: public GameObject {
     float mLifeSpan = 0;
     int mDartCount = 0;
     int mDartCapacity = 0;
+    bool mIsCoward = true;
 
     bool haveDart () { return mDartCount < mDartCapacity; }
 
