@@ -19,6 +19,8 @@
 #define  NOMAL_SHOOT_RATE 8
 #define MAX_BOSS_HP 10
 #define BOSS_STATE2_HP 4
+#define FLOAT_GUN_HP1 2
+#define FLOAT_GUN_HP2 1
 
 
 
@@ -55,11 +57,10 @@ void MoveAndAttackRole::onRunning(float dt, bool playend)
   const Vec2& targetPos = mTargetPos.getTarget();
   
   float offset = dt * speed();
-  if(!fuzzyEquals(targetPos.x , curPos.x, offset)) {
-    if(targetPos.x < curPos.x){
-      offset = -offset;
-    }
-    curPos.x += offset;
+  if(!targetPos.fuzzyEquals(curPos, offset)){
+    Vect distance = (targetPos - curPos);
+    distance.normalize();
+    curPos += distance * offset;
     setCurrentPos(curPos);
   }
   else {
@@ -117,21 +118,31 @@ Vec2 MoveAndAttackRole::getAttackDir(){
   }
 }
 void MoveAndAttackRole::onShooting(){
-  safeStartAfterSecond(0.5f, [this]() ->bool {
-    GamePlay* play = GamePlay::sharedGamePlay();
-    mState = Shooting;
-    Vec2 dir = getAttackDir();
-    std::string shape = "dart.png";
+
+}
+
+void MoveAndAttackRole::shootDart(std::vector<Vec2>& dirList){
+  GamePlay* play = GamePlay::sharedGamePlay();
+  mState = Shooting;
+  std::string shape = "dart.png";
+  for(Vec2& dir : dirList){
     play->darts->addObject(play->manager->addGameObject(Dart::dart(shape, this->center(), dir, -2, mParent)));
-    mSprite->playGTAnimation(5, false);
-    if( randomInt(3) < 2 ) {
-      mState = Running;
+  }
+//    mSprite->playGTAnimation(5, false);
+}
+void MoveAndAttackRole::repeatAction(int times, float timeInterval,callbackFunction cb, callbackFunction onFinised){
+  int* currentCount = new int(0);
+  safeStartAfterSecond(timeInterval, [times,currentCount,cb, onFinised](){
+    if(*currentCount == times){
+      delete currentCount;
+      onFinised();
       return false;
     }
+    cb();
+    *currentCount += 1;
     return true;
   });
 }
-
 bool MoveAndAttackRole::onDead(float delta, bool playend) {
   bool  removeflag = false;
   if( playend )
@@ -256,7 +267,6 @@ bool MoveAndAttackRole::deliverHit(int type, cocos2d::Point dir)
 		play->makeCombo();
 		isCombo = true;
     damage = 2;
-    CCLOG("========== X 2");
 	}
 	// arcade combo
 	if( play->mode == MODE_ARCADE )
@@ -375,7 +385,7 @@ void Boss::releaseFloatGun(const Vec2& pos, int& index){
   GamePlay* play = GamePlay::sharedGamePlay();
   FloatGun* enemy =static_cast<FloatGun*>(Role::CreateRole<FloatGun>(play));
   //CCLOG("create Float %d %p",index, enemy);
-  enemy->setOwner(this, index);
+  enemy->setOwner(this, index,isState2);
   floatGunGroup[index]  = enemy;
   play->enemies->addObject(play->manager->addGameObject(enemy));
 }
@@ -439,7 +449,7 @@ void FloatGun::onCreate() {
 
   
   attackTimeIntervalRange.set(4, 10);
-  mTargetPos.init(bossMoveRange, Vec2(RESPAWN_YMIN * 0.2f, RESPAWN_YMIN + RESPAWN_Y));
+  mTargetPos.init(bossMoveRange, Vec2(RESPAWN_YMIN * 0.4f, RESPAWN_YMIN + RESPAWN_Y));
 	//计算起跳点
 
   const Vec2& pos =mTargetPos.getTarget();
@@ -452,7 +462,7 @@ void FloatGun::onCreate() {
 	mDartCount = 0;
 	mFlag = true;
 	mSpeed = ENEMY_NNRUNSPEED/2;
-  hp = 1;
+  setMaxHp(isOneStageAttackMode? FLOAT_GUN_HP1: FLOAT_GUN_HP2);
 }
 
 
@@ -463,4 +473,26 @@ void FloatGun::afterDamage()
     resetCoroutine();
     owner->onFloatGunDead(this);
   }
+}
+
+void FloatGun::onShooting(){
+  mState = Shooting;
+  mSprite->playGTAnimation(5, false);
+  repeatAction(3,0.3, [this]() ->bool {
+    std::vector<Vec2> dirList;
+    if(this->isOneStageAttackMode){
+      dirList.push_back(Vec2(-1,0));
+    }else{
+      dirList.push_back(Vec2(-1,-1));
+      dirList.push_back(Vec2(1,-1));
+    }
+    this->shootDart(dirList);
+    return true;
+  }, [this]() -> bool{
+    if( randomInt(3) < 2 ) {
+      mState = Running;
+      return false;
+    } 
+  });
+  
 }

@@ -96,6 +96,9 @@ public:
   bool   mFlag;
   
   float mStepSnow;
+  void setMaxHp(int hp){
+    this->hp = hp;
+  }
   
   
 protected:
@@ -108,6 +111,8 @@ protected:
   virtual void onShooting();
   virtual void onFleeing(){}
   virtual bool onDead(float delta, bool playend);
+  void shootDart(std::vector<Vec2>& dirList);
+  void repeatAction(int times, float timeInterval,callbackFunction cb, callbackFunction onFinished);
   
   virtual void afterDamage() = 0;
 
@@ -170,12 +175,16 @@ public:
   CREATE_FUNC(FloatGun);
   virtual void onCreate();
   virtual const char* animationSetName() { return "hninja"; }
-  void setOwner(Boss* boss,int index){
+  void setOwner(Boss* boss,int index,bool isOneStage){
     owner = boss;
     idx = index;
+    isOneStageAttackMode   = isOneStage;
   }
   virtual void afterDamage();
   int idx;
+  bool isOneStageAttackMode  = true;
+protected:
+  virtual void onShooting();
 private:
   void markIndex(){
     auto mark = cocos2d::Label::createWithBMFont("ab34.fnt", std::string_format("%d",idx));
