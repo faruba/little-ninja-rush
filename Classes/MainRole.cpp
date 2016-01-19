@@ -39,7 +39,8 @@ void MainRole::onCreate()
 	//初始化角色属性
 	mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(GameData::roleAnimation(mRoleId).c_str()));
 
-	HP = GameData::roleCurrHP(mRoleId);
+	//HP = GameData::roleCurrHP(mRoleId);
+	HP = 20;
 	maxHP = HP;
 	dart = GameData::roleCurrDart(mRoleId);
 	maxDart = dart;

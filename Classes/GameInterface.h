@@ -6,7 +6,7 @@
 #include "cocosbuilder/CocosBuilder.h"
 
 
-#define MAXHPMETER (6)
+#define MAXHPMETER (20)
 class GamePlay;
 
 ;
