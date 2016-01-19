@@ -112,7 +112,9 @@ protected:
   virtual void onFleeing(){}
   virtual bool onDead(float delta, bool playend);
   void shootDart(std::vector<Vec2>& dirList);
-  void repeatAction(int times, float timeInterval,callbackFunction cb, callbackFunction onFinished);
+  
+  typedef std::function<void (int index)> repeatCB;
+  void repeatAction(int times, float timeInterval, repeatCB cb, repeatCB onFinished);
   
   virtual void afterDamage() = 0;
 

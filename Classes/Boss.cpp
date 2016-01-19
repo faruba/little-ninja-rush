@@ -123,22 +123,21 @@ void MoveAndAttackRole::onShooting(){
 
 void MoveAndAttackRole::shootDart(std::vector<Vec2>& dirList){
   GamePlay* play = GamePlay::sharedGamePlay();
-  mState = Shooting;
   std::string shape = "dart.png";
   for(Vec2& dir : dirList){
     play->darts->addObject(play->manager->addGameObject(Dart::dart(shape, this->center(), dir, -2, mParent)));
   }
 //    mSprite->playGTAnimation(5, false);
 }
-void MoveAndAttackRole::repeatAction(int times, float timeInterval,callbackFunction cb, callbackFunction onFinised){
+void MoveAndAttackRole::repeatAction(int times, float timeInterval,repeatCB cb, repeatCB onFinised){
   int* currentCount = new int(0);
   safeStartAfterSecond(timeInterval, [times,currentCount,cb, onFinised](){
     if(*currentCount == times){
       delete currentCount;
-      onFinised();
+      onFinised(-1);
       return false;
     }
-    cb();
+    cb(*currentCount);
     *currentCount += 1;
     return true;
   });
@@ -359,33 +358,37 @@ void Boss::onCreate() {
 
 void Boss::onShooting(){
   if(isMakedSpecialShoot || randomInt(100) < NOMAL_SHOOT_RATE){
-    MoveAndAttackRole::onShooting();
+    
+    repeatAction(2, 0.5, [this](int idx) ->void{
+      static std::vector<Vec2> dirList {
+        Vec2(1,0), Vec2(1,1), Vec2(0,1), Vec2(-1,1),
+        Vec2(-1,0), Vec2(-1,-1), Vec2(0,-1), Vec2(1,-1),
+      };
+      this->shootDart(dirList);
+    }, [this](int idx) ->void{
+      this->mState = Running;
+    });
   }else{
     onSpecialShoot(FLOAT_GUN_COUNT);
   }
 }
 void Boss::onSpecialShoot(int count){
+
   clearFloatGun();
   mState = Shooting;
   isHighAttackSpeedMode = true;
-  int *currentCount = new int(0);
   isMakedSpecialShoot = true;
-  safeStartAfterSecond(0.1f, [count,currentCount,this](){
-    if(*currentCount == count){
-      mState = Running;
-      delete currentCount;
-      return false;
-    }
-    releaseFloatGun(center(),*currentCount);
-    *currentCount += 1;
-    return true;
+  repeatAction(count, 0.1f, [this](int index)->void{
+    this->releaseFloatGun(this->center(), index);
+  }, [this](int idx)->void{
+    this->mState = Running;
   });
 }
 void Boss::releaseFloatGun(const Vec2& pos, int& index){
   GamePlay* play = GamePlay::sharedGamePlay();
   FloatGun* enemy =static_cast<FloatGun*>(Role::CreateRole<FloatGun>(play));
   //CCLOG("create Float %d %p",index, enemy);
-  enemy->setOwner(this, index,isState2);
+  enemy->setOwner(this, index,!isState2);
   floatGunGroup[index]  = enemy;
   play->enemies->addObject(play->manager->addGameObject(enemy));
 }
@@ -478,21 +481,17 @@ void FloatGun::afterDamage()
 void FloatGun::onShooting(){
   mState = Shooting;
   mSprite->playGTAnimation(5, false);
-  repeatAction(3,0.3, [this]() ->bool {
+  repeatAction(3,0.3, [this](int idx) ->void {
     std::vector<Vec2> dirList;
     if(this->isOneStageAttackMode){
-      dirList.push_back(Vec2(-1,0));
+      dirList.push_back(Vec2(0,-1));
     }else{
       dirList.push_back(Vec2(-1,-1));
       dirList.push_back(Vec2(1,-1));
     }
     this->shootDart(dirList);
-    return true;
-  }, [this]() -> bool{
-    if( randomInt(3) < 2 ) {
-      mState = Running;
-      return false;
-    } 
+  }, [this](int idx) ->void{
+    mState = Running;
   });
   
 }
