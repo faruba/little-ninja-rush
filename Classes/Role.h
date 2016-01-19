@@ -34,6 +34,12 @@ public:
   virtual void update (float delta);
 };
 
+class MechanicEnteringStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+};
+
 class HighNinjaEnteringStateDelegate : public RoleStateDelegate {
 public:
   virtual void onEnter ();
@@ -62,12 +68,28 @@ public:
 private:
 };
 
+class MechanicRunningStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+  float mTimer = 0;
+};
+
 class NinjaRunningStateDelegate : public RoleStateDelegate {
 public:
   virtual void onEnter ();
   virtual void update (float delta);
   float mPollTime;
   float mAggressive;
+private:
+  float mTimer = 0;
+};
+
+class MPreparingStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
 private:
   float mTimer = 0;
 };
@@ -95,6 +117,15 @@ public:
 private:
   float mTimer;
   bool mFlag;
+};
+
+class MechanicShootStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+  float mTimer;
+  int mCount = 0;
 };
 
 class MShootStateDelegate : public RoleStateDelegate {

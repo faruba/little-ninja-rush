@@ -19,7 +19,6 @@ class Mechanic:
     virtual bool supportAimAid();
 
     float  mTimer;
-    float  mSpeed;
     bool   mFlag;
     int    mCount;
 };

@@ -39,6 +39,8 @@ void Samuri::onCreate() {
 	mTimer = 0;
 	mFlag = false;
 
+  switchToState(Entering);
+
 	GameTool::PlaySound("samurai_warning.mp3");
 }
 

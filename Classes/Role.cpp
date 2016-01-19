@@ -81,6 +81,17 @@ void BasicEnteringStateDelegate::onEnter () {
 void BasicEnteringStateDelegate::update (float delta) {
     mRole->switchToState(Role::RoleState::Running);
 }
+///// MechanicEnteringStateDelegate 
+void MechanicEnteringStateDelegate::onEnter () {
+	GamePlay *play = GamePlay::sharedGamePlay();
+	int y = CCRANDOM_0_1()*RESPAWN_Y;
+	mRole->setPosition(cocos2d::Vec2(UniversalFit::sharedUniversalFit()->playSize.width+100, RESPAWN_YMIN+y));
+	mRole->mSprite->playGTAnimation(0, true);
+	play->addChild(mRole->mSprite, LAYER_ROLE+RESPAWN_Y-y);
+}
+void MechanicEnteringStateDelegate::update (float delta) {
+  mRole->switchToState(Role::RoleState::Running);
+}
 ///// HighNinjaEnteringStateDelegate 
 void HighNinjaEnteringStateDelegate::onEnter () {
   int y = CCRANDOM_0_1()*RESPAWN_Y;
@@ -155,6 +166,30 @@ void MiddleNinjaEnteringStateDelegate::update (float delta) {
     }
   }
 }
+///// MechanicRunningStateDelegate 
+void MechanicRunningStateDelegate::onEnter () {
+  mTimer = 0;
+}
+
+void MechanicRunningStateDelegate::update (float delta) {
+  if( mTimer > 0 ) {//attack cd
+    mTimer -= delta;
+  }
+  float ds = mRole->mSpeed*delta;
+  cocos2d::Point np = mRole->position();
+  np.x -= ds;
+  mRole->setPosition(np);
+  //may attack
+  if( np.x > 30 && np.x < UniversalFit::sharedUniversalFit()->playSize.width - 30 && mTimer <= 0 )
+  {
+    if( randomInt(3) == 0 ) {
+      mRole->switchToState(Role::RoleState::PreparingToShoot);
+      mRole->mSprite->playGTAnimation(1, true);
+    } else {
+      mTimer = MECHANIC_POLLTIME;
+    }
+  }
+}
 ///// NinjaRunningStateDelegate 
 void NinjaRunningStateDelegate::onEnter () {
   mTimer = 0;
@@ -183,6 +218,24 @@ void NinjaRunningStateDelegate::update (float delta) {
   }
   if ( mAnimationIsOver ) {
     mRole->mSprite->playGTAnimation(0, true);
+  }
+}
+///// MPreparingStateDelegate 
+void MPreparingStateDelegate::onEnter () {
+  mTimer = 0;
+}
+
+void MPreparingStateDelegate::update (float delta) {
+	GamePlay* play = GamePlay::sharedGamePlay();
+  mTimer += delta;
+  float prepare = MECHANIC_PREPARE;
+  if( play->mode == MODE_ARCADE )
+  {
+    prepare *= play->arcade->prepare;
+  }
+  if( mTimer > prepare )
+  {
+    mRole->switchToState(Role::RoleState::Shooting);
   }
 }
 ///// PreparingStateDelegate 
@@ -313,6 +366,39 @@ void MShootStateDelegate::update (float delta) {
       mTimer = 0;
     }
     mFlag = true;
+  }
+}
+///// MechanicShootStateDelegate 
+void MechanicShootStateDelegate::onEnter () {
+  mCount = 0;
+  mTimer = 0.5;
+}
+
+void MechanicShootStateDelegate::update (float delta) {
+  GamePlay* play = GamePlay::sharedGamePlay();
+  if( mTimer > 0 )
+  {
+    mTimer -= delta;
+    if( mTimer <= 0 )
+    {
+      GameTool::PlaySound("duofa.mp3");
+    }
+  }
+  if( mTimer <= 0 )
+  {
+    if( mCount < MECHANIC_LAUNCH )
+    {
+      //launch dart
+      cocos2d::Point dir = ccpForAngle(CC_DEGREES_TO_RADIANS(-90-MECHANIC_ANGLE+CCRANDOM_0_1()*MECHANIC_ANGLE*2));
+      std::string dart = "dart.png";
+      play->darts->addObject(play->manager->addGameObject(Dart::dart(dart, mRole->center(), dir, -6, play)));
+      mTimer = MECHANIC_LAUNCHCD;
+      mCount++;
+    }
+    else {
+      mRole->mSprite->playGTAnimation(0, true);
+      mRole->switchToState(Role::RoleState::Running);
+    }
   }
 }
 ///// ShootStateDelegate 
@@ -455,7 +541,7 @@ void DeadStateDelegate::update (float delta) {
       {
         ra = 1;
       }
-      float ds = delta*300*ra;
+      float ds = delta*300*ra;//TODO:Mechanic 这里是300
       np.x -= ds;
     }
     mRole->setPosition(np);

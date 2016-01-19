@@ -38,17 +38,13 @@ void HighNinja::onCreate() {
   switchStateDelegate(Dummy, RoleStateDelegate::CreateDelegate<DummyStateDelegate>());
   switchStateDelegate(Dead, RoleStateDelegate::CreateDelegate<HDeadStateDelegate>());
 
-
   switchToState(Entering);
 
   mDartCount = 0;
   mDartCapacity = MNINJA_MAXDART;
-  mFlag = true;
   mSpeed = ENEMY_NNRUNSPEED;
-  mTimer = 0;
   mSpell = 0;
   mIsCoward = false;
-
 
   mWoodLink.uid=-1;
   mWoodLink.index=-1;
@@ -102,7 +98,6 @@ bool HighNinja::deliverHit(int type, cocos2d::Point dir)
 		eff->setPosition(mSprite->getPosition());
 		mParent->addChild(eff, LAYER_ROLE+RESPAWN_Y+RESPAWN_YMIN-mSprite->getPosition().y);
 		mState = Dummy;
-		mTimer = 0;
 		mPoint = dir;
 
 		//-------
@@ -113,11 +108,9 @@ bool HighNinja::deliverHit(int type, cocos2d::Point dir)
 		//-------
 		return false;
 	}
-	mTimer = 0;
 	if( mState == Dead )
 	{
 		mSprite->playGTAnimation(4, false);
-		mFlag = false;
 	}
 	else {
 		if( dir.x > 0 )
@@ -127,7 +120,6 @@ bool HighNinja::deliverHit(int type, cocos2d::Point dir)
 		else {
 			mSprite->playGTAnimation(1+randomInt(2 ), false);
 		}
-		mFlag = true;
 	}
 	//combo
 	bool isCombo = false;

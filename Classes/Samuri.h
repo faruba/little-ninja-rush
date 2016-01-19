@@ -20,7 +20,6 @@ class Samuri:
 
     GTAnimatedSprite *mHint;
     //Sprite* mMark;
-    int     mState;
     float   mTimer;
     bool    mFlag;
 };
