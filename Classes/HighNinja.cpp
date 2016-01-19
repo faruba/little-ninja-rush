@@ -113,12 +113,15 @@ bool HighNinja::deliverHit(int type, cocos2d::Point dir)
 		mSprite->playGTAnimation(4, false);
 	}
 	else {
+    DeadStateDelegate *delegate = static_cast<DeadStateDelegate*>(mStateDelegate[Dead]);
 		if( dir.x > 0 )
 		{
 			mSprite->playGTAnimation(3, false);
+      delegate->mIsDieForward = true;
 		}
 		else {
 			mSprite->playGTAnimation(1+randomInt(2 ), false);
+      delegate->mIsDieForward = false;
 		}
 	}
 	//combo

@@ -76,9 +76,12 @@ bool NewbieNinja::deliverHit(int type, cocos2d::Point dir)
 	{
 		mSprite->playGTAnimation(4, false);
 	} else {
+    DeadStateDelegate *delegate = static_cast<DeadStateDelegate*>(mStateDelegate[Dead]);
 		if ( dir.x > 0 ) {
+      delegate->mIsDieForward = true;
 			mSprite->playGTAnimation(3 , false);
 		} else {
+      delegate->mIsDieForward = false;
 			mSprite->playGTAnimation(1+randomInt(2), false);
 		}
 	}

@@ -57,6 +57,27 @@ public:
   float mTimer;
 };
 
+class MessagerEnteringStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+  int mMode;
+};
+
+class MessagerRepositioningStateDelegate : public RoleStateDelegate {
+public:
+  virtual void init () { onEnter(); };
+
+  virtual void onEnter ();
+  virtual void update (float delta);
+
+private:
+  float mTargetPos;
+  float mFalldown;
+  bool mFlagFalldown;
+};
+
 class RepositioningStateDelegate : public RoleStateDelegate {
 public:
   virtual void init () { onEnter(); };
@@ -66,6 +87,15 @@ public:
 
   float mTargetPos;
 private:
+};
+
+class MessagerRunningStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+  float mTimer = 0;
+  float mAwake;
 };
 
 class MechanicRunningStateDelegate : public RoleStateDelegate {
@@ -137,6 +167,13 @@ private:
   bool mFlag;
 };
 
+class MessagerFleeStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+};
+
 class FleeStateDelegate : public RoleStateDelegate {
 public:
   virtual void onEnter ();
@@ -163,6 +200,7 @@ class DeadStateDelegate : public RoleStateDelegate {
 public:
   virtual void onEnter ();
   virtual void update (float delta);
+  bool mIsDieForward = false;
 private:
   float mTimer = 0;
   bool  mFlag;

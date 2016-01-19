@@ -1,6 +1,14 @@
 #include "Role.h"
 #include "GamePlay.h"
 #include "Bomb.h"
+#include "Item.h"
+
+//摔死的概率(%)
+#define FALLDOWN (15)
+//追上的速度
+#define CHASE_SPEED (150.0f)
+//掉队的速度
+#define DROPOUT_SPEED (-50.0f)
 
 bool Role::handleGameOver (float delta) {
 	GamePlay* play = GamePlay::sharedGamePlay();
@@ -48,6 +56,36 @@ void RoleStateDelegate::pre_update (float delta) {
 }
 void RoleStateDelegate::after_update (float delta) {
 }
+///// MessagerRepositioningStateDelegate
+void MessagerRepositioningStateDelegate::onEnter () {
+	mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
+	if( randomInt(100) < FALLDOWN )
+	{
+		mFlagFalldown = true;
+		mFalldown = 0.1f*UniversalFit::sharedUniversalFit()->playSize.width + 0.8f*CCRANDOM_0_1()*UniversalFit::sharedUniversalFit()->playSize.width;
+	}
+	else {
+		mFlagFalldown = false;
+		mFalldown = 0;
+	}
+}
+
+void MessagerRepositioningStateDelegate::update (float delta) {
+	GamePlay *play = GamePlay::sharedGamePlay();
+  cocos2d::Point np = mRole->position();
+  np.x += delta*mRole->mSpeed;
+  mRole->setPosition(np);
+  if( mFlagFalldown && mRole->position().x > mFalldown )
+  {
+    static_cast<DeadStateDelegate*>(mRole->mStateDelegate[Role::RoleState::Dead])->mIsDieForward = true;
+    mRole->switchToState(Role::RoleState::Dead);
+    mRole->mSprite->playGTAnimation(5, false);
+    //随机掉落道具
+    play->manager->addGameObject(Item::item(1, mRole->position(), mRole->mParent, false));
+  }
+
+  //TODO:FootPrint::goFootPrint(&(mRole->mStepSnow), mRole->position());
+}
 ///// RepositioningStateDelegate
 void RepositioningStateDelegate::update (float delta) {
   cocos2d::Point np = mRole->position();
@@ -67,6 +105,29 @@ void RepositioningStateDelegate::update (float delta) {
 
 void RepositioningStateDelegate::onEnter () {
 	mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
+}
+///// BasicEnteringStateDelegate 
+void MessagerEnteringStateDelegate::onEnter () {
+	int y = CCRANDOM_0_1()*RESPAWN_Y;
+	mRole->mParent->addChild(mRole->mSprite, LAYER_ROLE+RESPAWN_Y-y);
+	mMode = randomInt(2);
+  if ( mMode == 0 ) {
+    mRole->setPosition(cocos2d::Vec2(-80, RESPAWN_YMIN+y));
+  } else {
+    mRole->setPosition(cocos2d::Vec2(80+UniversalFit::sharedUniversalFit()->playSize.width, RESPAWN_YMIN+y));
+  }
+
+}
+void MessagerEnteringStateDelegate::update (float delta) {
+  if ( mMode == 0 ) {
+    mRole->mSprite->playGTAnimation(1, true);
+    mRole->mSpeed = CHASE_SPEED;
+    mRole->switchToState(Role::RoleState::Repositioning);
+  } else {
+    mRole->mSprite->playGTAnimation(0, true);
+    mRole->switchToState(Role::RoleState::Running);
+    mRole->mSpeed = DROPOUT_SPEED;
+  }
 }
 ///// BasicEnteringStateDelegate 
 void BasicEnteringStateDelegate::onEnter () {
@@ -188,6 +249,28 @@ void MechanicRunningStateDelegate::update (float delta) {
     } else {
       mTimer = MECHANIC_POLLTIME;
     }
+  }
+}
+///// MessagerRunningStateDelegate 
+void MessagerRunningStateDelegate::onEnter () {
+  mTimer = 0;
+  mAwake = 0.4f*UniversalFit::sharedUniversalFit()->playSize.width + 0.3f*CCRANDOM_0_1()*UniversalFit::sharedUniversalFit()->playSize.width;
+}
+
+void MessagerRunningStateDelegate::update (float delta) {
+	GamePlay *play = GamePlay::sharedGamePlay();
+  cocos2d::Point np = mRole->position();
+  np.x += delta*mRole->mSpeed;
+  mRole->setPosition(np);
+  if( mRole->position().x < mAwake )
+  {
+    GTAnimatedEffect *hiteff2 = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 2, false);
+    hiteff2->setScale(0.5f);
+    hiteff2->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+    hiteff2->setPosition(mRole->position());
+    play->addChild(hiteff2, LAYER_MAINROLE+1);
+    mRole->switchToState(Role::RoleState::Fleeing);
+    mRole->mSprite->playGTAnimation(3, false);
   }
 }
 ///// NinjaRunningStateDelegate 
@@ -432,6 +515,19 @@ void ShootStateDelegate::update (float delta) {
     mRole->switchToState(Role::RoleState::Running);
   }
 }
+///// MessagerFleeStateDelegate
+void MessagerFleeStateDelegate::onEnter () {
+}
+
+//加速速度
+#define ACCELER_SPEED (250.0f)
+void MessagerFleeStateDelegate::update (float delta) {
+  if ( mAnimationIsOver ) {
+    mRole->switchToState(Role::RoleState::Repositioning);
+    mRole->mSprite->playGTAnimation(2, true);
+    mRole->mSpeed = ACCELER_SPEED;
+  }
+}
 ///// FleeStateDelegate
 void FleeStateDelegate::onEnter () {
 }
@@ -524,26 +620,16 @@ void DeadStateDelegate::update (float delta) {
     }
     //fix pos
     cocos2d::Point np = mRole->position();
-    if( mRole->mSprite->animationId() == 3 )
-    {
-      float ra = mTimer/mRole->mSprite->playBackTime();
-      if( ra > 1 )
-      {
-        ra = 1;
-      }
-      ra = 1 - ra;
-      float ds = delta*200*ra;
-      np.x += ds;
+    float ra = mTimer/mRole->mSprite->playBackTime();
+    if ( ra > 1 ) {
+      ra = 1;
     }
-    else {
-      float ra = mTimer/mRole->mSprite->playBackTime();
-      if( ra > 1 )
-      {
-        ra = 1;
-      }
-      float ds = delta*300*ra;//TODO:Mechanic 这里是300
-      np.x -= ds;
+    if (mIsDieForward) {
+      ra = (1 - ra) * 200;
+    } else {
+      ra = -ra * 300;
     }
+    np.x += delta*ra;
     mRole->setPosition(np);
   }
 }
