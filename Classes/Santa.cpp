@@ -16,162 +16,65 @@
 #include "FootPrint.h"
 
 void Santa::onCreate() {
-	mCollisionCircles.push_back(Circle(cocos2d::Vec2(1, 13), 8));
-	mCollisionCircles.push_back(Circle(cocos2d::Vec2(-1, 32.5), 13));
-	mAnchor = cocos2d::Vec2(0.5438f, 0.0625f);
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(1, 13), 8));
+  mCollisionCircles.push_back(Circle(cocos2d::Vec2(-1, 32.5), 13));
+  mAnchor = cocos2d::Vec2(0.5438f, 0.0625f);
 
-	Role::onCreate();
+  Role::onCreate();
 
+  switchStateDelegate(Entering, RoleStateDelegate::CreateDelegate<BasicEnteringStateDelegate>());
   switchStateDelegate(Repositioning, RoleStateDelegate::CreateDelegate<RepositioningStateDelegate>());
+  switchStateDelegate(Running, RoleStateDelegate::CreateDelegate<SantaRunningStateDelegate>());
+  switchStateDelegate(Fleeing, RoleStateDelegate::CreateDelegate<FleeStateDelegate>());
+  switchStateDelegate(Dead, RoleStateDelegate::CreateDelegate<DeadStateDelegate>());
 
-	GamePlay *play = GamePlay::sharedGamePlay();
-	int y = CCRANDOM_0_1()*RESPAWN_Y;
-	int x = (play->state == STATE_RUSH) ? UniversalFit::sharedUniversalFit()->playSize.width+100:-100;
+  switchToState(Entering);
+  mSpeed = ENEMY_NNRUNSPEED;
 
-	mSprite->setPosition(cocos2d::Vec2(x, RESPAWN_YMIN+y));
-	mSprite->playGTAnimation(0, true);
-	mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
-
-	mSpeed = ENEMY_NNRUNSPEED;
-
-	mCoinTimer = 0;
-	mActionTimer = -100;
-	mHited = false;
+  mCoinTimer = 0;
+  mHited = false;
 }
 
 void Santa::onUpdate(float delta) {
   Role::onUpdate(delta);
-	bool playend = mSprite->updateGTAnimation(delta);
-	GamePlay* play = GamePlay::sharedGamePlay();
-	bool removeflag = false;
-	bool dropcoins = false;
-	bool gameOver = handleGameOver(delta);
 
-	if (!gameOver) {//主角死亡的处理
-		switch (mState) {
-			case Entering:
-      case Repositioning:
-        mStateDelegate[Repositioning]->update(delta);
+  bool dropcoins = false;
+  if (mStateDelegate[mState] != nullptr) {
+    mStateDelegate[mState]->pre_update(delta);
+    bool gameOver = handleGameOver(delta);
+    if (!gameOver) {
+      mStateDelegate[mState]->update(delta);
 
-        dropcoins = true;
-        if( mLifeSpan > SANTA_LIFE ) {
-          mState = Fleeing;
-          mTargetPos = UniversalFit::sharedUniversalFit()->playSize.width+150;
-          mSpeed = ENEMY_NNRUNSPEED;
-        }
-				break;
-			case Running:// stop
-				{
-          if (mActionTimer <= -99) {
-            mActionTimer = 2 + 3*CCRANDOM_0_1();
+      switch (mState) {
+        case Repositioning:
+        case Running:
+          dropcoins = true;
+          if( mLifeSpan > SANTA_LIFE ) {
+            switchToState(Fleeing);
+            mSpeed = ENEMY_NNRUNSPEED;
           }
-					mActionTimer -= delta;
-					if( mActionTimer <= 0 )
-					{
-						switchToState(Entering);
-						mActionTimer = -100;
-            mStateDelegate[Repositioning]->reset();
-						mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
-					}
-					if( playend )
-					{
-						mSprite->playGTAnimation(0, true);
-					}
+          break;
+      }
+    }
+    mStateDelegate[mState]->after_update(delta);
+  }
 
-					dropcoins = true;
-					if ( mLifeSpan > SANTA_LIFE ) {
-						mState = Fleeing;
-						mTargetPos = UniversalFit::sharedUniversalFit()->playSize.width+150;
-						mSpeed = ENEMY_NNRUNSPEED;
-					}
-				}
-				break;
-			case Hit:// hit
-				{
-					if( playend )
-					{
-						mState = Dead;
-					}
-				}
-				break;
-			case Fleeing:// run away
-				{
-					float ds = delta*mSpeed;
-					float dis = mTargetPos - mSprite->getPosition().x;
-					cocos2d::Point np = mSprite->getPosition();
-					if( fabsf(dis) > ds )
-					{
-						if( dis > 0 )
-						{
-							np.x += ds;
-						}
-						else {
-							np.x -= ds;
-						}
-						mSprite->setPosition(np);
-					}
-					else {
-						removeflag = true;
-					}
-					if( playend )
-					{
-						mSprite->playGTAnimation(2, true);
-					}
-				}
-				break;
-			case Dead://dead
-				{
-					if( playend )
-					{
-						//fix pos
-						float ds = delta*play->runspeed;
-						cocos2d::Point np = mSprite->getPosition();
-						np.x -= ds;
-						mSprite->setPosition(np);
+  GamePlay* play = GamePlay::sharedGamePlay();
+  //rush offset
+  if( play->state == STATE_RUSH ) {
+    float offset = (play->runspeed - play->levelspeed)*delta;
+    cocos2d::Point np = mSprite->getPosition();
+    np.x -= offset;
+    mSprite->setPosition(np);
+  }
 
-						if( mSprite->getPosition().x < -100 )
-						{
-							play->enemies->removeObject(this);
-							play->manager->removeGameObject(this);
-						}
-					}
-					else {
-						mTimer += delta;
-						if(mTimer>0.3f && mFlag)
-						{
-							int n = 1 + randomInt(3);
-							GameTool::PlaySound(std::string_format("ahh%d.mp3", n).c_str());
-							mFlag = false;
-						}
-						//fix pos
-						cocos2d::Point np = mSprite->getPosition();
-						{
-							float ra = mTimer/mSprite->playBackTime();
-							if( ra > 1 )
-							{
-								ra = 1;
-							}
-							float ds = delta*300*ra;
-							np.x -= ds;
-						}
-						mSprite->setPosition(np);
-					}
-				}
-				break;
-		}
-	}
-	//rush offset
-	if( play->state == STATE_RUSH )
-	{
-		float offset = (play->runspeed - play->levelspeed)*delta;
-		cocos2d::Point np = mSprite->getPosition();
-		np.x -= offset;
-		mSprite->setPosition(np);
-	}
+  //snow step
+  if( mState != Dead ) {
+    FootPrint::goFootPrint(&mStepSnow, mSprite->getPosition());
+  }
 
 	//drop coins
-	if( dropcoins )
-	{
+	if( dropcoins ) {
 		mCoinTimer+=delta;
 		if( mCoinTimer > SANTA_COIN )
 		{
@@ -180,35 +83,23 @@ void Santa::onUpdate(float delta) {
 		}
 	}
 
-	//snow step
-	if( mState != Hit )
-	{
-		FootPrint::goFootPrint(&mStepSnow, mSprite->getPosition());
-	}
-
-	//删除检查
-	if( mSprite->getPosition().x < -120 || mSprite->getPosition().x > 120+UniversalFit::sharedUniversalFit()->playSize.width )
-	{
-		removeflag = true;
-	}
-
-	if( removeflag )
-	{
-		play->manager->removeGameObject(this);
-		if( !mHited )
-		{
+  //删除检查
+  if (mSprite->getPosition().x < -LIMITE_OFFSET ||
+      mSprite->getPosition().x > LIMITE_OFFSET+UniversalFit::sharedUniversalFit()->playSize.width)
+  {
+		if ( !mHited ) {
 			//achievement : meet christmas
 			play->meetchristmas++;
 			GameRecord::sharedGameRecord()->task->dispatchTask(ACH_MEETCHRISTMAS, 1);
 			GameRecord::sharedGameRecord()->task->dispatchTask(ACH_ONEMEETCHRISTMAS, play->meetchristmas);
 		}
-	}
+    play->manager->removeGameObject(this);
+  }
 }
 
 //受到伤害
 bool Santa::deliverHit(int type, cocos2d::Point dir) 
 {
-	mTimer = 0;
 	mSprite->playGTAnimation(1, false);
 
 	mState = Dead;

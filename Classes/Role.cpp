@@ -106,7 +106,7 @@ void RepositioningStateDelegate::update (float delta) {
 void RepositioningStateDelegate::onEnter () {
 	mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
 }
-///// BasicEnteringStateDelegate 
+///// MessagerEnteringStateDelegate 
 void MessagerEnteringStateDelegate::onEnter () {
 	int y = CCRANDOM_0_1()*RESPAWN_Y;
 	mRole->mParent->addChild(mRole->mSprite, LAYER_ROLE+RESPAWN_Y-y);
@@ -116,7 +116,6 @@ void MessagerEnteringStateDelegate::onEnter () {
   } else {
     mRole->setPosition(cocos2d::Vec2(80+UniversalFit::sharedUniversalFit()->playSize.width, RESPAWN_YMIN+y));
   }
-
 }
 void MessagerEnteringStateDelegate::update (float delta) {
   if ( mMode == 0 ) {
@@ -140,7 +139,7 @@ void BasicEnteringStateDelegate::onEnter () {
   mRole->mParent->addChild(mRole->mSprite, LAYER_ROLE+RESPAWN_Y-y);
 }
 void BasicEnteringStateDelegate::update (float delta) {
-    mRole->switchToState(Role::RoleState::Running);
+    mRole->switchToState(Role::RoleState::Repositioning);
 }
 ///// MechanicEnteringStateDelegate 
 void MechanicEnteringStateDelegate::onEnter () {
@@ -225,6 +224,23 @@ void MiddleNinjaEnteringStateDelegate::update (float delta) {
       mTimer = 0;
       mRole->mSprite->playGTAnimation(0, true);
     }
+  }
+}
+///// SantaRunningStateDelegate 
+void SantaRunningStateDelegate::onEnter () {
+  mTimer = 3 + 3*CCRANDOM_0_1();
+}
+
+void SantaRunningStateDelegate::update (float delta) {
+  if ( mTimer > 0 ) {
+    mTimer -= delta;
+  } else {
+    mRole->switchToState(Role::RoleState::Repositioning);
+    mRole->mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
+  }
+  if ( mAnimationIsOver )
+  {
+    mRole->mSprite->playGTAnimation(0, true);
   }
 }
 ///// MechanicRunningStateDelegate 

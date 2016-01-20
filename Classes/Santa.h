@@ -18,11 +18,6 @@ class Santa:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
 
-    float  mTimer;
-
-    float mTargetPos;
-    float mActionTimer;
-
     float mCoinTimer;
 
     float mStepSnow;

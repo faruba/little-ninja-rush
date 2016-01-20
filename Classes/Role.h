@@ -89,6 +89,14 @@ public:
 private:
 };
 
+class SantaRunningStateDelegate : public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+  float mTimer = 0;
+};
+
 class MessagerRunningStateDelegate : public RoleStateDelegate {
 public:
   virtual void onEnter ();

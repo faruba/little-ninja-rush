@@ -369,7 +369,6 @@ void Respawn::gen(int tid) {
 		Role::CreateRole<NewbieNinja>, Role::CreateRole<MiddleNinja>, Role::CreateRole<HighNinja>
 	};
 	GamePlay *play = GamePlay::sharedGamePlay();
-    tid = 6;
 	switch (tid) {
 		case 0:
 		case 1:
