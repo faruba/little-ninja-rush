@@ -16,8 +16,9 @@
 #include "UniversalFit.h"
 #include "FootPrint.h"
 
-#define  NOMAL_SHOOT_RATE 8
+#define  NOMAL_SHOOT_RATE 90
 #define MAX_BOSS_HP 10
+#define BOSS_STATE1_HP 9
 #define BOSS_STATE2_HP 4
 #define FLOAT_GUN_HP1 2
 #define FLOAT_GUN_HP2 1
@@ -44,7 +45,7 @@ void MoveAndAttackRole::onEntering(float delta, bool playend){
     }
   }
   else {
-      mState = Running;
+    changeState(Running);
   }
 }
 bool fuzzyEquals(float a, float b , float variance){
@@ -65,11 +66,10 @@ void MoveAndAttackRole::onRunning(float dt, bool playend)
   }
   else {
     mTargetPos.genNextPlan();
-    if( randomInt(100) < MNINJA_AGGRISIVE )
+    if( randomInt(900) < MNINJA_AGGRISIVE )
     {
       if( mDartCount < MNINJA_MAXDART && GamePlay::sharedGamePlay()->count_attack <= 0 )
       {
-        //mState = PreparingToShoot;
         onPreparingToShoot(dt);
       }
     }
@@ -122,6 +122,9 @@ void MoveAndAttackRole::onShooting(){
 }
 
 void MoveAndAttackRole::shootDart(std::vector<Vec2>& dirList){
+  if(currentState() == Dead){
+    return;
+  }
   GamePlay* play = GamePlay::sharedGamePlay();
   std::string shape = "dart.png";
   for(Vec2& dir : dirList){
@@ -130,8 +133,9 @@ void MoveAndAttackRole::shootDart(std::vector<Vec2>& dirList){
 //    mSprite->playGTAnimation(5, false);
 }
 void MoveAndAttackRole::repeatAction(int times, float timeInterval,repeatCB cb, repeatCB onFinised){
+  CCLOG("=====  add repeatAction %f", timeInterval);
   int* currentCount = new int(0);
-  safeStartAfterSecond(timeInterval, [times,currentCount,cb, onFinised](){
+  startAfterSecond(timeInterval, [times,currentCount,cb, onFinised](){
     if(*currentCount == times){
       delete currentCount;
       onFinised(-1);
@@ -200,7 +204,7 @@ void MoveAndAttackRole::onUpdate(float delta)
 	bool gameOver = handleGameOver(delta);
 
 	if (!gameOver) {//主角死亡的处理
-		switch (mState) {
+		switch (currentState()) {
 			case Entering:// onstage
         onEntering(delta,playend);
 				break;
@@ -231,7 +235,7 @@ void MoveAndAttackRole::onUpdate(float delta)
 		mSprite->setPosition(np);
 	}
 
-	if( mState != Dead )
+	if( currentState() != Dead )
 	{
 		FootPrint::goFootPrint(&mStepSnow, mSprite->getPosition());
 	}
@@ -261,7 +265,7 @@ bool MoveAndAttackRole::deliverHit(int type, cocos2d::Point dir)
 	//combo
 	bool isCombo = false;
   int damage = 1;
-	if( mState == PreparingToShoot || mState == Fleeing )
+	if( currentState() == PreparingToShoot || currentState() == Fleeing )
 	{
 		play->makeCombo();
 		isCombo = true;
@@ -285,7 +289,7 @@ bool MoveAndAttackRole::deliverHit(int type, cocos2d::Point dir)
 
   hp -= damage;
   if(isDead()){
-    mState = Dead;
+    changeState(Dead);
     mSprite->playGTAnimation(4 , false);
 //		if( dir.x > 0 )
 //		{
@@ -322,7 +326,7 @@ cocos2d::Point MoveAndAttackRole::center()
 }
 
 bool MoveAndAttackRole::supportAimAid() {
-	return !( mState == Dead || mState == Initializing || mState == Entering );
+	return !( currentState() == Dead || currentState() == Initializing || currentState() == Entering );
 }
 
 void MoveAndAttackRole::onDestroy()
@@ -354,10 +358,15 @@ void Boss::onCreate() {
 	mFlag = true;
 	mSpeed = ENEMY_NNRUNSPEED;
   hp = MAX_BOSS_HP;
+  floatGunGroup.assign(FLOAT_GUN_COUNT, NULL);
 }
 
 void Boss::onShooting(){
-  if(isMakedSpecialShoot || randomInt(100) < NOMAL_SHOOT_RATE){
+  
+  if(hp <= BOSS_STATE1_HP && !isMakedSpecialShoot){
+    onSpecialShoot();
+  }else{
+   if( randomInt(100) < NOMAL_SHOOT_RATE){
     
     repeatAction(2, 0.5, [this](int idx) ->void{
       static std::vector<Vec2> dirList {
@@ -366,22 +375,29 @@ void Boss::onShooting(){
       };
       this->shootDart(dirList);
     }, [this](int idx) ->void{
-      this->mState = Running;
+      this->changeState(Running);
     });
-  }else{
-    onSpecialShoot(FLOAT_GUN_COUNT);
+   } 
   }
+  
 }
-void Boss::onSpecialShoot(int count){
+void Boss::onSpecialShoot(){
 
   clearFloatGun();
-  mState = Shooting;
+  changeState(Shooting);
   isHighAttackSpeedMode = true;
   isMakedSpecialShoot = true;
+  int count;
+  if (isState2) {
+    isGodmode = true;
+    count = 10;
+  }else{
+    count = 8;
+  }
   repeatAction(count, 0.1f, [this](int index)->void{
     this->releaseFloatGun(this->center(), index);
   }, [this](int idx)->void{
-    this->mState = Running;
+    this->changeState(Running);
   });
 }
 void Boss::releaseFloatGun(const Vec2& pos, int& index){
@@ -397,8 +413,7 @@ void Boss::afterDamage()
 {
   if(hp < BOSS_STATE2_HP && !isState2){
     isState2 = true;
-    isGodmode = true;
-    onSpecialShoot(FLOAT_GUN_COUNT);
+    onSpecialShoot();
   }
   
 }
@@ -412,7 +427,7 @@ void Boss::onFloatGunDead(FloatGun* floatGun){
         //add new one
         //CCLOG("%d still exsist recreate",i);
         releaseFloatGun(center(),idx);
-        return ;
+        break ;
       }
     }
 
@@ -422,6 +437,10 @@ void Boss::onFloatGunDead(FloatGun* floatGun){
       isGodmode = false;
     }
     isHighAttackSpeedMode = false;
+    startAfterSecond(10.0f, [this]() ->bool{
+      this->onSpecialShoot();
+      return false;
+    });
   }
 }
 bool Boss::isAllFloatGunDead()
@@ -438,7 +457,7 @@ void Boss::clearFloatGun()
   GamePlay *play = GamePlay::sharedGamePlay();
   for(int i =0; i < FLOAT_GUN_COUNT; i++){
     FloatGun* gun = floatGunGroup[i];
-    if(gun != NULL && gun->mState != Dead){
+    if(gun != NULL && gun->currentState() != Dead){
       play->manager->removeGameObject(gun);
     }
     floatGunGroup[i] = NULL;
@@ -479,7 +498,7 @@ void FloatGun::afterDamage()
 }
 
 void FloatGun::onShooting(){
-  mState = Shooting;
+  changeState(Shooting);
   mSprite->playGTAnimation(5, false);
   repeatAction(3,0.3, [this](int idx) ->void {
     std::vector<Vec2> dirList;
@@ -491,7 +510,7 @@ void FloatGun::onShooting(){
     }
     this->shootDart(dirList);
   }, [this](int idx) ->void{
-    mState = Running;
+    changeState(Running);
   });
   
 }

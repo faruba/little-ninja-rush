@@ -12,49 +12,60 @@
 #include <stdio.h>
 #include "GameConstants.h"
 #include "Role.h"
-#define FLOAT_GUN_COUNT 5
+#define FLOAT_GUN_COUNT 10
 
 
 class Coroutine
 {
 public:
+  typedef std::function<bool()> callbackFunction;
+private:
+  struct excuteRecord{
+  public:
+    excuteRecord(float time, callbackFunction cb){
+      timer = 0;
+      excuteTime = time;
+      callback = cb;
+    }
+    excuteRecord(){
+      timer = excuteTime = 0;
+      callback = nullptr;
+    }
+    float timer;
+    float excuteTime;
+    callbackFunction callback = nullptr;
+  };
+public:
   Coroutine(){
     resetCoroutine();
   }
   // return true if loop
-  typedef std::function<bool()> callbackFunction;
   void resetCoroutine(){
-    callback = NULL;
-    timer = excuteTime = 0;
+    list.clear();
   }
-  bool startAfterSecond(float time, callbackFunction cb,bool replaceExist){
-    if(!replaceExist && callback != NULL){
-      return false;
-    }
-    
-    timer = 0;
-    excuteTime = time;
-    callback  =cb;
-    return true;
+  void startAfterSecond(float time, callbackFunction cb){
+    list.push_back(excuteRecord(time, cb));
   }
-  void safeStartAfterSecond(float time, callbackFunction cb){ assert(startAfterSecond(time, cb, true));}
   void onUpdateCoroutine(float delta){
-    if(callback == NULL ){
-      return;
-    }
-    timer += delta;
-    if(timer >= excuteTime){
-      if(callback()){
-        timer = 0;
-      }else{
-        callback = NULL;
+    for(excuteRecord& rec : list){
+      rec.timer += delta;
+      if(rec.timer >= rec.excuteTime){
+        if(!rec.callback){
+          continue;
+        }
+        if(rec.callback()){
+          rec.timer = 0;
+        }else{
+          rec.callback = nullptr;
+        }
       }
     }
+    auto pend = std::remove_if(list.begin(), list.end(),[](excuteRecord& rec) ->bool{return !rec.callback;});
+    list.erase(pend, list.end());
   }
 private:
-  float timer;
-  float excuteTime;
-  callbackFunction callback = NULL;
+  std::vector<excuteRecord> list;
+
 };
 
 typedef Vec2 Range;
@@ -100,6 +111,14 @@ public:
     this->hp = hp;
   }
   
+  void changeState(int state){
+    if(mState != Dead){
+      mState = state;
+    }
+  }
+  int currentState(){
+    return mState;
+  }
   
 protected:
   Vec2 getAttackDir();
@@ -118,6 +137,7 @@ protected:
   
   virtual void afterDamage() = 0;
 
+  
   //run and speed
   const float speedRate = 2;
   float  mSpeed;
@@ -159,11 +179,11 @@ public:
   virtual const char* animationSetName() { return "mninja"; }
 protected:
   virtual void onShooting();
-  void onSpecialShoot(int count);
+  void onSpecialShoot();
   void releaseFloatGun(const Vec2& pos, int& index);
   virtual void afterDamage();
 private:
-  FloatGun* floatGunGroup[FLOAT_GUN_COUNT];
+  std::vector<FloatGun*> floatGunGroup;
   bool isAllFloatGunDead();
   //flag
   bool isMakedSpecialShoot = false;
