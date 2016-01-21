@@ -656,7 +656,7 @@ void GamePlay::gestureRecognize(cocos2d::Point dir , int type)
 	float mw;
 	if( dir.x > 0 )
 	{
-		mw = UniversalFit::sharedUniversalFit()->playSize.width /*SCREEN_WIDTH*/ - mpx;
+		mw = /*UniversalFit::sharedUniversalFit()->playSize.width*/ SCREEN_WIDTH - mpx;
 	}
 	else {
 		mw = mpx;
@@ -738,7 +738,7 @@ void GamePlay::onTouchEnded(Touch * touch, Event * event)
     if( dir.lengthSquared() < CONTROL_MAXSLIDE * CONTROL_MAXSLIDE  )
     {
       mTouchProcessed = true;
-      dir = pos - mainrole->center();
+      dir = pos - mainrole->center() + UniversalFit::sharedUniversalFit()->sceneOffset;
       this->gestureRecognize(ccpNormalize(dir),TAP);
     }
   }
