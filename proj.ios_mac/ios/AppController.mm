@@ -27,7 +27,25 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
+#import "UserSetting.h"
 
+NSString* keyList[]{
+  
+  @"bossNormalSpeed",
+  @"bossHighSpeed",
+  @"stage1FloatGunHp",
+  @"stage2FloatGunHp",
+  @"roleHp",
+  
+  @"stage1FloatGunCount",
+  @"stage2FloatGunCount",
+  @"stage1Hp",
+  @"stage2Hp",
+  @"bossHP",
+  @"dartSpeedMul",
+  @"maxDartCount",
+  @"dartRecoveryCDMul"
+};
 @implementation AppController
 
 #pragma mark -
@@ -35,6 +53,7 @@
 
 // cocos2d application instance
 static AppDelegate s_sharedApplication;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 
@@ -83,13 +102,37 @@ static AppDelegate s_sharedApplication;
     // IMPORTANT: Setting the GLView should be done after creating the RootViewController
     cocos2d::GLView *glview = cocos2d::GLViewImpl::createWithEAGLView(eaglView);
     cocos2d::Director::getInstance()->setOpenGLView(glview);
-
+  
+  [self loadValuesFromSettingBundle ];
+  
     app->run();
 
     return YES;
 }
 
-
+- (void)loadValuesFromSettingBundle {
+  NSString *settingsBundle = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"bundle"];
+  NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
+  NSArray *preferences = [settings objectForKey:@"PreferenceSpecifiers"];
+  
+  NSMutableDictionary *defaultsToRegister = [[NSMutableDictionary alloc] initWithCapacity:[preferences count]];
+  
+  for(NSDictionary *prefSpecification in preferences) {
+    NSString *key = [prefSpecification objectForKey:@"Key"];
+    if(key) {
+      [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:key];
+     // NSLog(@"writing as default %@ to the key %@",[prefSpecification objectForKey:@"DefaultValue"],key);
+    }
+  }
+  
+  [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsToRegister];
+  NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+  for(NSString* key : keyList){
+    float data = [defaults floatForKey:key];
+    UserSetting::instance()->setData(std::string([key UTF8String]), data);
+    //NSLog(@"read  %f to the key %@", data ,key);
+  }
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

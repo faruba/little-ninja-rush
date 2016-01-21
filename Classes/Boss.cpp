@@ -15,6 +15,7 @@
 #include "GameRecord.h"
 #include "UniversalFit.h"
 #include "FootPrint.h"
+#include "UserSetting.h"
 
 #define  NOMAL_SHOOT_RATE 90
 #define MAX_BOSS_HP 10
@@ -25,6 +26,11 @@
 
 
 
+float  MoveAndAttackRole::speed() {
+  return isHighSpeedMode? \
+  UserSetting::instance()->getData<float>("bossHighSpeed"): \
+  UserSetting::instance()->getData<float>("bossNormalSpeed");
+}
 void MoveAndAttackRole::onEntering(float delta, bool playend){
   const Vec2& curPos = currentPos();
   const Vec2& targetPos = mTargetPos.getTarget();
@@ -357,13 +363,13 @@ void Boss::onCreate() {
 	mDartCount = 0;
 	mFlag = true;
 	mSpeed = ENEMY_NNRUNSPEED;
-  hp = MAX_BOSS_HP;
+  hp = UserSetting::instance()->getData<int>("bossHP");
   floatGunGroup.assign(FLOAT_GUN_COUNT, NULL);
 }
 
 void Boss::onShooting(){
   
-  if(hp <= BOSS_STATE1_HP && !isMakedSpecialShoot){
+  if(hp <= UserSetting::instance()->getData<int>("stage1Hp") && !isMakedSpecialShoot){
     onSpecialShoot();
   }else{
    if( randomInt(100) < NOMAL_SHOOT_RATE){
@@ -390,9 +396,9 @@ void Boss::onSpecialShoot(){
   int count;
   if (isState2) {
     isGodmode = true;
-    count = 10;
+    count = 4;
   }else{
-    count = 8;
+    count = 5;
   }
   repeatAction(count, 0.1f, [this](int index)->void{
     this->releaseFloatGun(this->center(), index);
@@ -411,7 +417,7 @@ void Boss::releaseFloatGun(const Vec2& pos, int& index){
 
 void Boss::afterDamage()
 {
-  if(hp < BOSS_STATE2_HP && !isState2){
+  if(hp < UserSetting::instance()->getData<int>("stage2Hp")&& !isState2){
     isState2 = true;
     onSpecialShoot();
   }
@@ -484,7 +490,9 @@ void FloatGun::onCreate() {
 	mDartCount = 0;
 	mFlag = true;
 	mSpeed = ENEMY_NNRUNSPEED/2;
-  setMaxHp(isOneStageAttackMode? FLOAT_GUN_HP1: FLOAT_GUN_HP2);
+  setMaxHp(isOneStageAttackMode? \
+           UserSetting::instance()->getData<int>("stage1FloatGunHp"): \
+           UserSetting::instance()->getData<int>("stage2FloatGunHp"));
 }
 
 

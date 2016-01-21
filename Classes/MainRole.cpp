@@ -16,6 +16,7 @@
 #include "TraceDart.h"
 #include "ReflectDart.h"
 #include "BombDart.h"
+#include "UserSetting.h"
 
 #include "PumpkinCircle.h"
 MainRole* MainRole::role(cocos2d::Node* parent) 
@@ -40,10 +41,13 @@ void MainRole::onCreate()
 	mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(GameData::roleAnimation(mRoleId).c_str()));
 
 	//HP = GameData::roleCurrHP(mRoleId);
-	HP = 20;
+  HP = UserSetting::instance()->getData<int>("roleHp");
 	maxHP = HP;
-	dart = GameData::roleCurrDart(mRoleId);
+	//dart = GameData::roleCurrDart(mRoleId);
+	dart = UserSetting::instance()->getData<int>("maxDartCount");
 	maxDart = dart;
+  
+  dartCD *= UserSetting::instance()->getData<int>("dartRecoveryCDMul");
 	runSpeed = GameData::roleRunSpeed(mRoleId);
 
 	//dart
@@ -116,7 +120,7 @@ void MainRole::setEquipDart(int tid)
 	Shuriken &sk = GameData::fetchShurikens()[tid];
 
 	dartCD = sk.reld;
-	dartSpeed = sk.flys;
+  dartSpeed = sk.flys * UserSetting::instance()->getData<float>("dartSpeedMul");
 	dartShap = sk.shap;
 	dartEffect = sk.efft;
 	//special dart
@@ -205,6 +209,7 @@ void MainRole::commitFire(cocos2d::Node* p, Node* pdata)
 
 		dir = play->autoAim(dir);//自动瞄准
 		Dart *d = Dart::dart(dartShap, this->center(), dir, dartEffect, mParent);
+    d->speed += 900.0f;
 		//d->traceRole(((GameObject*)[play->nearestEnemy(dir]) handler));
 		play->darts->addObject(play->manager->addGameObject(d));
 		if( dartEffect == 3 )

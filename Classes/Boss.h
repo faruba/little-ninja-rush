@@ -142,7 +142,7 @@ protected:
   const float speedRate = 2;
   float  mSpeed;
   bool isHighSpeedMode  = false;
-  float speed(){ return isHighSpeedMode? mSpeed * speedRate : mSpeed;}
+  float speed();
   const Vec2& currentPos(){return mSprite->getPosition();}
   void setCurrentPos(const Vec2& pos) { mSprite->setPosition(pos);}
   
