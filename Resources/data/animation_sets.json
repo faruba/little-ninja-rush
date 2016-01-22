@@ -733,5 +733,51 @@
           "frames" : ["xr_start0.png",  "xr_start1.png",  "xr_start2.png",  "xr_start3.png",  "xr_start4.png",  "xr_start5.png"]
         }
       ]
+    },
+    {
+      "name": "boss",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : [ "boss/attack_01.png", "boss/attack_02.png", "boss/attack_03.png", "boss/attack_04.png", "boss/attack_05.png", "boss/attack_06.png", "boss/attack_07.png", "boss/attack_08.png", "boss/attack_09.png", "boss/attack_10.png", "boss/attack_11.png", "boss/attack_12.png", "boss/attack_13.png", "boss/attack_14.png", "boss/attack_15.png", "boss/attack_16.png", "boss/attack_17.png", "boss/attack_18.png", "boss/attack_19.png", "boss/attack_20.png", "boss/attack_21.png", "boss/attack_22.png", "boss/attack_23.png", "boss/attack_24.png", "boss/attack_25.png"]
+        },
+				{
+					"duration_per_frame" : 0.05,
+					"frames" : [ "boss/dead_01.png", "boss/dead_02.png", "boss/dead_03.png", "boss/dead_04.png", "boss/dead_05.png", "boss/dead_06.png", "boss/dead_07.png", "boss/dead_08.png", "boss/dead_09.png", "boss/dead_10.png", "boss/dead_11.png", "boss/dead_12.png", "boss/dead_13.png", "boss/dead_14.png", "boss/dead_15.png", "boss/dead_16.png", "boss/dead_17.png", "boss/dead_18.png", "boss/dead_19.png", "boss/dead_20.png", "boss/dead_21.png", "boss/dead_22.png", "boss/dead_23.png", "boss/dead_24.png", "boss/dead_25.png"]
+				},
+				{
+					"duration_per_frame" : 0.05,
+					"frames" : [ "boss/stand_01.png", "boss/stand_02.png", "boss/stand_03.png", "boss/stand_04.png", "boss/stand_05.png", "boss/stand_06.png", "boss/stand_07.png" ]
+				},
+				{
+					"duration_per_frame" : 0.05,
+					"frames" : [ "boss/wounded_01.png", "boss/wounded_02.png", "boss/wounded_03.png", "boss/wounded_04.png", "boss/wounded_05.png", "boss/wounded_06.png", "boss/wounded_07.png", "boss/wounded_08.png", "boss/wounded_09.png", "boss/wounded_10.png", "boss/wounded_11.png", "boss/wounded_12.png", "boss/wounded_13.png", "boss/wounded_14.png", "boss/wounded_15.png", "boss/wounded_16.png", "boss/wounded_17.png", "boss/wounded_18.png", "boss/wounded_19.png", "boss/wounded_20.png", "boss/wounded_21.png", "boss/wounded_22.png", "boss/wounded_23.png", "boss/wounded_24.png", "boss/wounded_25.png"]
+				}
+				]
+			},
+			{
+				"name": "floatGun",
+				"animations" : [
+				{
+          "duration_per_frame" : 0.05,
+          "frames" : [ "floatGun/attack_01.png", "floatGun/attack_02.png", "floatGun/attack_03.png", "floatGun/attack_04.png", "floatGun/attack_05.png", "floatGun/attack_06.png", "floatGun/attack_07.png", "floatGun/attack_08.png", "floatGun/attack_09.png"]
+        },
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : [ "floatGun/dead_01.png", "floatGun/dead_02.png", "floatGun/dead_03.png", "floatGun/dead_04.png", "floatGun/dead_05.png", "floatGun/dead_06.png", "floatGun/dead_07.png", "floatGun/dead_08.png", "floatGun/dead_09.png", "floatGun/dead_10.png", "floatGun/dead_11.png", "floatGun/dead_12.png", "floatGun/dead_13.png", "floatGun/dead_14.png", "floatGun/dead_15.png", "floatGun/dead_16.png", "floatGun/dead_17.png", "floatGun/dead_18.png", "floatGun/dead_19.png", "floatGun/dead_20.png", "floatGun/dead_21.png" ]
+        },
+				{
+          "duration_per_frame" : 1.0,
+          "frames" : [ "floatGun/stand.png" ]
+        },
+				{
+          "duration_per_frame" : 0.05,
+          "frames" : [ "floatGun/wounded_01.png", "floatGun/wounded_02.png", "floatGun/wounded_03.png", "floatGun/wounded_04.png", "floatGun/wounded_05.png", "floatGun/wounded_06.png", "floatGun/wounded_07.png", "floatGun/wounded_08.png", "floatGun/wounded_09.png", "floatGun/wounded_10.png", "floatGun/wounded_11.png" ]
+        },
+				{
+          "duration_per_frame" : 0.05,
+          "frames" : [ "floatGun/out_01.png", "floatGun/out_02.png", "floatGun/out_03.png", "floatGun/out_04.png", "floatGun/out_05.png", "floatGun/out_06.png", "floatGun/out_07.png", "floatGun/out_08.png" ]
+        }
+      ]
     }
 ]

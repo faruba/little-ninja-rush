@@ -45,4 +45,8 @@ void assetBullets(const std::string  param, bool isload);
 void assetMisc(const std::string param, bool isload);
 
 void assetUI(const std::string param, bool isload);
+
+void assetBoss(const std::string param, bool isload);
+
+void assetFloatGun(const std::string param, bool isload);
 #endif

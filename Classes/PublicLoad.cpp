@@ -243,7 +243,19 @@ GTLoadList* PublicLoad::gameLoadingList()
  list.addSfx("sound/pumpkinfly.mp3");;
  list.addSfx("sound/pumpkinhurt.mp3");;
  list.addSfx("sound/pumpkindie.mp3");;
+  //========= boss===
+  
+ list.addSpriteSheet("boss/boss_attack.plist");;
+ list.addSpriteSheet("boss/boss_dead.plist");;
+ list.addSpriteSheet("boss/boss_stand.plist");;
+ list.addSpriteSheet("boss/boss_wounded.plist");;
+ list.addSpriteSheet("floatGun/fuyoupao_out.plist");;
+ list.addSpriteSheet("floatGun/fuyoupao_attack.plist");;
+ list.addSpriteSheet("floatGun/fuyoupao_dead.plist");;
+ list.addSpriteSheet("floatGun/fuyoupao_stand.plist");;
+ list.addSpriteSheet("floatGun/fuyoupao_wounded.plist");;
+ list.addLoadFunc(assetBoss);;
+ list.addLoadFunc(assetFloatGun);;
+ 
  return &list;
 }
-
-

@@ -41,7 +41,7 @@ void MoveAndAttackRole::onEntering(float delta, bool playend){
     if(dir.lengthSquared() <= dis*dis )
     {
       setCurrentPos(targetPos);
-      mSprite->playGTAnimation(8, false);
+      mSprite->playGTAnimation(4, false);
     }
     else {
       dir = ccpForAngle(PI*3.0f/5.0f);
@@ -83,11 +83,11 @@ void MoveAndAttackRole::onRunning(float dt, bool playend)
   
   if( playend )
   {
-    mSprite->playGTAnimation(0, true);
+    mSprite->playGTAnimation(2, true);
   }
 }
 void MoveAndAttackRole::playPrepareAnimation(){
-   mSprite->playGTAnimation(6, true);
+   mSprite->playGTAnimation(0, true);
   //play effect
   GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
   eff->setPosition(cocos2d::Vec2(47, 19));
@@ -296,7 +296,7 @@ bool MoveAndAttackRole::deliverHit(int type, cocos2d::Point dir)
   hp -= damage;
   if(isDead()){
     changeState(Dead);
-    mSprite->playGTAnimation(4 , false);
+    mSprite->playGTAnimation(1 , false);
 //		if( dir.x > 0 )
 //		{
 //			mSprite->playGTAnimation(3 , false);
@@ -320,6 +320,8 @@ bool MoveAndAttackRole::deliverHit(int type, cocos2d::Point dir)
     {
       play->runwithoutkill = play->distance/PLAY_DISMETER;
     }
+  }else{
+    mSprite->playGTAnimation(3, false);
   }
 
   afterDamage();
@@ -345,19 +347,19 @@ void MoveAndAttackRole::onDestroy()
 
 Range bossMoveRange(SCREEN_WIDTH * 0.0,SCREEN_WIDTH * 1.0);
 void Boss::onCreate() {
-	mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
-	mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 13));
+	mCollisionCircles.push_back(Circle(cocos2d::Vec2(70, 90), 59));
+	//mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 23));
 
 	Role::onCreate();
   attackTimeIntervalRange.set(2, 5);
-	int y = CCRANDOM_0_1()*RESPAWN_Y;
+	int y = CCRANDOM_0_1()*(RESPAWN_Y-50);
   
   mTargetPos.init(bossMoveRange, Vec2::ONE*(RESPAWN_YMIN + y));
 	//计算起跳点
 	cocos2d::Point rjp = ccpForAngle(PI*3.0f/5.0f);
 
 	mSprite->setPosition(mTargetPos.getTarget() +  rjp * 100);
-	mSprite->playGTAnimation(7, true);
+	//mSprite->playGTAnimation(7, true);
 	mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
 
 	mDartCount = 0;
@@ -470,8 +472,8 @@ void Boss::clearFloatGun()
   }
 }
 void FloatGun::onCreate() {
-	mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
-	mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 13));
+	//mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
+	mCollisionCircles.push_back(Circle(cocos2d::Vec2(20, 30), 18));
 
 	Role::onCreate();
 
@@ -482,7 +484,7 @@ void FloatGun::onCreate() {
 
   const Vec2& pos =mTargetPos.getTarget();
 	mSprite->setPosition(pos);
-	//mSprite->playGTAnimation(7, true);
+	mSprite->playGTAnimation(4, true);
 	mParent->addChild(mSprite,LAYER_ROLE+RESPAWN_Y);
 
   markIndex();
@@ -507,7 +509,7 @@ void FloatGun::afterDamage()
 
 void FloatGun::onShooting(){
   changeState(Shooting);
-  mSprite->playGTAnimation(5, false);
+  mSprite->playGTAnimation(0, false);
   repeatAction(3,0.3, [this](int idx) ->void {
     std::vector<Vec2> dirList;
     if(this->isOneStageAttackMode){

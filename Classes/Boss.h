@@ -176,7 +176,7 @@ public:
   CREATE_FUNC(Boss);
   virtual void onCreate();
   void onFloatGunDead(FloatGun* floatGun);
-  virtual const char* animationSetName() { return "mninja"; }
+  virtual const char* animationSetName() { return "boss"; }
 protected:
   virtual void onShooting();
   void onSpecialShoot();
@@ -196,7 +196,7 @@ class FloatGun :public  MoveAndAttackRole
 public:
   CREATE_FUNC(FloatGun);
   virtual void onCreate();
-  virtual const char* animationSetName() { return "hninja"; }
+  virtual const char* animationSetName() { return "floatGun"; }
   void setOwner(Boss* boss,int index,bool isOneStage){
     owner = boss;
     idx = index;

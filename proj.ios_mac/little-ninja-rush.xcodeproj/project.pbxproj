@@ -520,6 +520,8 @@
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
 		D4437E681C4F870E00ABAE0E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D4437E671C4F870E00ABAE0E /* Settings.bundle */; };
 		D4437E6B1C4F9AC500ABAE0E /* UserSetting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4437E691C4F9AC500ABAE0E /* UserSetting.cpp */; };
+		D4437E931C50E05B00ABAE0E /* boss in Resources */ = {isa = PBXBuildFile; fileRef = D4437E921C50E05B00ABAE0E /* boss */; };
+		D4437E951C50E07000ABAE0E /* floatGun in Resources */ = {isa = PBXBuildFile; fileRef = D4437E941C50E07000ABAE0E /* floatGun */; };
 		D446CC051C474D14008984DC /* Boss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D446CC031C474D14008984DC /* Boss.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
@@ -1169,6 +1171,8 @@
 		D4437E671C4F870E00ABAE0E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../Resources/Settings.bundle; sourceTree = "<group>"; };
 		D4437E691C4F9AC500ABAE0E /* UserSetting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserSetting.cpp; sourceTree = "<group>"; };
 		D4437E6A1C4F9AC500ABAE0E /* UserSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSetting.h; sourceTree = "<group>"; };
+		D4437E921C50E05B00ABAE0E /* boss */ = {isa = PBXFileReference; lastKnownFileType = folder; path = boss; sourceTree = "<group>"; };
+		D4437E941C50E07000ABAE0E /* floatGun */ = {isa = PBXFileReference; lastKnownFileType = folder; path = floatGun; sourceTree = "<group>"; };
 		D446CC031C474D14008984DC /* Boss.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Boss.cpp; sourceTree = "<group>"; };
 		D446CC041C474D14008984DC /* Boss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boss.h; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -1300,6 +1304,8 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D4437E941C50E07000ABAE0E /* floatGun */,
+				D4437E921C50E05B00ABAE0E /* boss */,
 				D4F1245B1C311D21005E2B36 /* Images.xcassets */,
 				BE01EA051C214851009CAF14 /* sound */,
 				BEF4E3B01C1FEAED00F8340C /* ab34_0.png */,
@@ -2196,6 +2202,7 @@
 				BEF4E6261C1FEAEE00F8340C /* item_21.png in Resources */,
 				BEF4E6471C1FEAEE00F8340C /* katanahdt.png in Resources */,
 				BEF4E5E91C1FEAEE00F8340C /* icon4.png in Resources */,
+				D4437E951C50E07000ABAE0E /* floatGun in Resources */,
 				BEF4E6B51C1FEAEE00F8340C /* shurikenbft.png in Resources */,
 				BEF4E72D1C1FEAEE00F8340C /* ui-change.plist in Resources */,
 				BEF4E7651C1FEAEE00F8340C /* zblade18.plist in Resources */,
@@ -2245,6 +2252,7 @@
 				BEF4E6A21C1FEAEE00F8340C /* scene5.plist in Resources */,
 				BEF4E5F71C1FEAEE00F8340C /* icon18.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
+				D4437E931C50E05B00ABAE0E /* boss in Resources */,
 				BEF4E5C11C1FEAEE00F8340C /* cjt30.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				BEF4E62C1C1FEAEE00F8340C /* item_27.png in Resources */,

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+						<key>floatGun/stand.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{81,82}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{81,82}}</string>
+                <key>sourceSize</key>
+                <string>{81,82}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>2</integer>
+            <key>realTextureFileName</key>
+            <string>fuyoupao_stand.png</string>
+            <key>size</key>
+            <string>{85,86}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:b72bc01e5a80e877b0f0c4f435234668:d1d5069c643e3a085f40a9e95bf691a3:e85ef0e262f91701a5afd83e946de397$</string>
+            <key>textureFileName</key>
+            <string>fuyoupao_stand.png</string>
+        </dict>
+    </dict>
+</plist>
