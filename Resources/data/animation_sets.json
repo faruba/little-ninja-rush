@@ -788,5 +788,42 @@
           "frames" : [ "floatGun/out_01.png", "floatGun/out_02.png", "floatGun/out_03.png", "floatGun/out_04.png", "floatGun/out_05.png", "floatGun/out_06.png", "floatGun/out_07.png", "floatGun/out_08.png" ]
         }
       ]
-    }
+    },
+		{
+      "name": "little_boss",
+      "animations" : [
+        {
+          "duration_per_frame" : 0.05,
+          "frames" : [ "little_boss/attack_01.png", "little_boss/attack_02.png", "little_boss/attack_03.png", "little_boss/attack_04.png", "little_boss/attack_05.png", "little_boss/attack_06.png", "little_boss/attack_07.png", "little_boss/attack_08.png", "little_boss/attack_09.png", "little_boss/attack_10.png", "little_boss/attack_11.png", "little_boss/attack_12.png", "little_boss/attack_13.png", "little_boss/attack_14.png", "little_boss/attack_15.png", "little_boss/attack_16.png", "little_boss/attack_17.png", "little_boss/attack_18.png", "little_boss/attack_19.png", "little_boss/attack_20.png", "little_boss/attack_21.png", "little_boss/attack_22.png", "little_boss/attack_23.png", "little_boss/attack_24.png", "little_boss/attack_25.png", "little_boss/attack_26.png", "little_boss/attack_27.png", "little_boss/attack_28.png"
+					]
+        },
+				{
+					"duration_per_frame" : 0.05,
+					"frames" : [ "little_boss/dead_01.png", "little_boss/dead_02.png", "little_boss/dead_03.png", "little_boss/dead_04.png", "little_boss/dead_05.png", "little_boss/dead_06.png", "little_boss/dead_07.png", "little_boss/dead_08.png", "little_boss/dead_09.png", "little_boss/dead_10.png", "little_boss/dead_11.png", "little_boss/dead_12.png", "little_boss/dead_13.png"]
+				},
+				{
+					"duration_per_frame" : 0.05,
+					"frames" : [ "little_boss/stand_01.png", "little_boss/stand_02.png", "little_boss/stand_03.png", "little_boss/stand_04.png", "little_boss/stand_05.png", "little_boss/stand_06.png", "little_boss/stand_07.png", "little_boss/stand_08.png", "little_boss/stand_09.png" ]
+				},
+				{
+					"duration_per_frame" : 0.05,
+					"frames" : [ "little_boss/wounded_01.png", "little_boss/wounded_02.png", "little_boss/wounded_03.png", "little_boss/wounded_04.png", "little_boss/wounded_05.png", "little_boss/wounded_06.png", "little_boss/wounded_07.png", "little_boss/wounded_08.png", "little_boss/wounded_09.png", "little_boss/wounded_10.png", "little_boss/wounded_11.png", "little_boss/wounded_12.png", "little_boss/wounded_13.png", "little_boss/wounded_14.png", "little_boss/wounded_15.png", "little_boss/wounded_16.png", "little_boss/wounded_17.png", "little_boss/wounded_18.png", "little_boss/wounded_19.png", "little_boss/wounded_20.png", "little_boss/wounded_21.png"]
+				}
+				]
+			},
+			{
+				"name": "littlebossEffect",
+				"animations" : [
+				{
+					"duration_per_frame" : 0.1,
+					"frames" : [ "littleboss/bigbeem_01.png", "littleboss/bigbeem_02.png", "littleboss/bigbeem_03.png", 
+					"littleboss/bigbeem_04.png", "littleboss/bigbeem_05.png", "littleboss/bigbeem_06.png", "littleboss/bigbeem_07.png", "littleboss/bigbeem_08.png", "littleboss/bigbeem_09.png", "littleboss/bigbeem_10.png", "littleboss/bigbeem_11.png", 
+					"littleboss/bigbeem_04.png", "littleboss/bigbeem_05.png", "littleboss/bigbeem_06.png", "littleboss/bigbeem_07.png", "littleboss/bigbeem_08.png", "littleboss/bigbeem_09.png", "littleboss/bigbeem_10.png", "littleboss/bigbeem_11.png", 
+					"littleboss/bigbeem_04.png", "littleboss/bigbeem_05.png", "littleboss/bigbeem_06.png", "littleboss/bigbeem_07.png", "littleboss/bigbeem_08.png", "littleboss/bigbeem_09.png", "littleboss/bigbeem_10.png", "littleboss/bigbeem_11.png", 
+					"littleboss/bigbeem_04.png", "littleboss/bigbeem_05.png", "littleboss/bigbeem_06.png", "littleboss/bigbeem_07.png", "littleboss/bigbeem_08.png", "littleboss/bigbeem_09.png", "littleboss/bigbeem_10.png", "littleboss/bigbeem_11.png", 
+					"littleboss/bigbeem_04.png", "littleboss/bigbeem_05.png", "littleboss/bigbeem_06.png", "littleboss/bigbeem_07.png", "littleboss/bigbeem_08.png", "littleboss/bigbeem_09.png", "littleboss/bigbeem_10.png", "littleboss/bigbeem_11.png", 
+					"littleboss/bigbeem_12.png", "littleboss/bigbeem_13.png", "littleboss/bigbeem_14.png", "littleboss/bigbeem_15.png", "littleboss/bigbeem_16.png" ]
+				}
+				]
+			}
 ]

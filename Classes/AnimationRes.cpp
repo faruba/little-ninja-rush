@@ -101,3 +101,8 @@ void assetBoss(const std::string param, bool isload) {
   gAnimationSets[21].load(isload);
 }
 void assetFloatGun(const std::string param, bool isload) { gAnimationSets[22].load(isload);  }
+
+void assetLittleBoss(const std::string param, bool isload) {
+  gAnimationSets[23].load(isload);
+  gAnimationSets[24].load(isload);
+}
