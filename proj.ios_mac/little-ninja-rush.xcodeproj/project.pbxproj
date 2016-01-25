@@ -526,6 +526,7 @@
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
+		D4BE8C9E1C5644D800AE1DB9 /* little_boss in Resources */ = {isa = PBXBuildFile; fileRef = D4BE8C9D1C5644D800AE1DB9 /* little_boss */; };
 		D4F1245C1C311D21005E2B36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4F1245B1C311D21005E2B36 /* Images.xcassets */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
@@ -1178,6 +1179,7 @@
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D4BE8C9D1C5644D800AE1DB9 /* little_boss */ = {isa = PBXFileReference; lastKnownFileType = folder; path = little_boss; sourceTree = "<group>"; };
 		D4F1245B1C311D21005E2B36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "little-ninja-rush-mobile/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
@@ -1304,6 +1306,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D4BE8C9D1C5644D800AE1DB9 /* little_boss */,
 				D4437E941C50E07000ABAE0E /* floatGun */,
 				D4437E921C50E05B00ABAE0E /* boss */,
 				D4F1245B1C311D21005E2B36 /* Images.xcassets */,
@@ -2404,6 +2407,7 @@
 				BEF4E6741C1FEAEE00F8340C /* menu-tips.ccbi in Resources */,
 				BEF4E74D1C1FEAEE00F8340C /* zblade6.plist in Resources */,
 				BEF4E6BB1C1FEAEE00F8340C /* shurikenht.png in Resources */,
+				D4BE8C9E1C5644D800AE1DB9 /* little_boss in Resources */,
 				BEF4E59F1C1FEAEE00F8340C /* ab56.fnt in Resources */,
 				BEF4E7771C1FEAEE00F8340C /* zsp4.plist in Resources */,
 				BEF4E6C31C1FEAEE00F8340C /* shurikenyt.png in Resources */,

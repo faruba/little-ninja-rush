@@ -44,7 +44,9 @@ NSString* keyList[]{
   @"bossHP",
   @"dartSpeedMul",
   @"maxDartCount",
-  @"dartRecoveryCDMul"
+  @"dartRecoveryCDMul",
+  
+  @"littleBossHp"
 };
 @implementation AppController
 

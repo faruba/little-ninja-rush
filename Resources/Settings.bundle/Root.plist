@@ -148,6 +148,16 @@
 			<key>DefaultValue</key>
 			<string>10</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>littleBossHp</string>
+			<key>Key</key>
+			<string>littleBossHp</string>
+			<key>DefaultValue</key>
+			<string>10</string>
+		</dict>
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>
