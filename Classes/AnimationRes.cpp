@@ -96,5 +96,8 @@ void assetItem(const std::string param, bool isload) { gAnimationSets[16].load(i
 void assetBullets(const std::string  param, bool isload) { gAnimationSets[17].load(isload);  }
 void assetMisc(const std::string param, bool isload) { gAnimationSets[18].load(isload);  }
 void assetUI(const std::string param, bool isload) { gAnimationSets[19].load(isload);  }
-void assetBoss(const std::string param, bool isload) { gAnimationSets[20].load(isload);  }
-void assetFloatGun(const std::string param, bool isload) { gAnimationSets[21].load(isload);  }
+void assetBoss(const std::string param, bool isload) {
+  gAnimationSets[20].load(isload);
+  gAnimationSets[21].load(isload);
+}
+void assetFloatGun(const std::string param, bool isload) { gAnimationSets[22].load(isload);  }

@@ -249,6 +249,7 @@ GTLoadList* PublicLoad::gameLoadingList()
  list.addSpriteSheet("boss/boss_dead.plist");;
  list.addSpriteSheet("boss/boss_stand.plist");;
  list.addSpriteSheet("boss/boss_wounded.plist");;
+ list.addSpriteSheet("boss/shell.plist");;
  list.addSpriteSheet("floatGun/fuyoupao_out.plist");;
  list.addSpriteSheet("floatGun/fuyoupao_attack.plist");;
  list.addSpriteSheet("floatGun/fuyoupao_dead.plist");;

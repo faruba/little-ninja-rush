@@ -7,11 +7,11 @@
             <key>floatGun/dead_01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1953},{81,83}}</string>
+                <string>{{2,2},{81,83}}</string>
                 <key>offset</key>
                 <string>{2,27}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{80,38},{81,83}}</string>
                 <key>sourceSize</key>
@@ -20,11 +20,11 @@
             <key>floatGun/dead_02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{87,1953},{81,83}}</string>
+                <string>{{85,2},{81,83}}</string>
                 <key>offset</key>
                 <string>{2,27}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{80,38},{81,83}}</string>
                 <key>sourceSize</key>
@@ -33,7 +33,7 @@
             <key>floatGun/dead_03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{117,1844},{81,83}}</string>
+                <string>{{168,2},{81,83}}</string>
                 <key>offset</key>
                 <string>{2,28}</string>
                 <key>rotated</key>
@@ -46,11 +46,11 @@
             <key>floatGun/dead_04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{155,1652},{81,83}}</string>
+                <string>{{251,2},{81,83}}</string>
                 <key>offset</key>
                 <string>{2,29}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{80,36},{81,83}}</string>
                 <key>sourceSize</key>
@@ -59,7 +59,7 @@
             <key>floatGun/dead_05.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{153,1735},{81,83}}</string>
+                <string>{{334,2},{81,83}}</string>
                 <key>offset</key>
                 <string>{2,31}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>floatGun/dead_06.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{172,1929},{81,83}}</string>
+                <string>{{417,2},{81,83}}</string>
                 <key>offset</key>
                 <string>{2,35}</string>
                 <key>rotated</key>
@@ -85,197 +85,197 @@
             <key>floatGun/dead_07.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{185,1372},{51,53}}</string>
+                <string>{{500,2},{70,73}}</string>
                 <key>offset</key>
-                <string>{2,23}</string>
+                <string>{2,33}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{95,57},{51,53}}</string>
+                <string>{{126,75},{70,73}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_08.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{155,1567},{83,83}}</string>
+                <string>{{572,2},{112,111}}</string>
                 <key>offset</key>
-                <string>{1,26}</string>
+                <string>{0,37}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{78,39},{83,83}}</string>
+                <string>{{103,52},{112,111}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_09.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{185,1297},{69,73}}</string>
+                <string>{{686,2},{92,99}}</string>
                 <key>offset</key>
-                <string>{1,26}</string>
+                <string>{2,36}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{85,44},{69,73}}</string>
+                <string>{{115,59},{92,99}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{155,1474},{91,99}}</string>
+                <string>{{780,2},{120,131}}</string>
                 <key>offset</key>
-                <string>{2,25}</string>
+                <string>{3,34}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{75,32},{91,99}}</string>
+                <string>{{102,45},{120,131}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_11.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1844},{113,107}}</string>
+                <string>{{902,2},{148,145}}</string>
                 <key>offset</key>
-                <string>{2,25}</string>
+                <string>{3,36}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{64,28},{113,107}}</string>
+                <string>{{88,36},{148,145}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_12.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1671},{171,149}}</string>
+                <string>{{1052,2},{224,195}}</string>
                 <key>offset</key>
-                <string>{-4,15}</string>
+                <string>{-5,21}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{29,17},{171,149}}</string>
+                <string>{{42,26},{224,195}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_13.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1474},{195,151}}</string>
+                <string>{{1278,2},{258,199}}</string>
                 <key>offset</key>
-                <string>{0,14}</string>
+                <string>{-1,21}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{21,17},{195,151}}</string>
+                <string>{{29,24},{258,199}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_14.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1132},{207,163}}</string>
+                <string>{{1538,2},{272,215}}</string>
                 <key>offset</key>
-                <string>{-4,14}</string>
+                <string>{-5,21}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{11,11},{207,163}}</string>
+                <string>{{18,16},{272,215}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_15.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,961},{217,169}}</string>
+                <string>{{2,219},{284,223}}</string>
                 <key>offset</key>
-                <string>{0,11}</string>
+                <string>{-1,16}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{10,11},{217,169}}</string>
+                <string>{{16,17},{284,223}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_16.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,786},{221,173}}</string>
+                <string>{{288,219},{292,229}}</string>
                 <key>offset</key>
-                <string>{0,10}</string>
+                <string>{-1,15}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{8,10},{221,173}}</string>
+                <string>{{12,15},{292,229}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_17.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,605},{227,179}}</string>
+                <string>{{582,219},{296,239}}</string>
                 <key>offset</key>
-                <string>{-1,6}</string>
+                <string>{-1,11}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{4,11},{227,179}}</string>
+                <string>{{10,14},{296,239}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_18.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,416},{229,187}}</string>
+                <string>{{880,219},{300,247}}</string>
                 <key>offset</key>
-                <string>{-1,4}</string>
+                <string>{-1,8}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{3,9},{229,187}}</string>
+                <string>{{8,13},{300,247}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_19.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,217},{233,197}}</string>
+                <string>{{1182,219},{304,259}}</string>
                 <key>offset</key>
-                <string>{0,1}</string>
+                <string>{0,3}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,7},{233,197}}</string>
+                <string>{{7,12},{304,259}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_20.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{235,213}}</string>
+                <string>{{1488,219},{312,281}}</string>
                 <key>offset</key>
-                <string>{-1,0}</string>
+                <string>{-2,2}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{235,213}}</string>
+                <string>{{1,2},{312,281}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
             <key>floatGun/dead_21.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1297},{181,175}}</string>
+                <string>{{1802,219},{240,231}}</string>
                 <key>offset</key>
-                <string>{4,15}</string>
+                <string>{5,23}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{32,4},{181,175}}</string>
+                <string>{{44,6},{240,231}}</string>
                 <key>sourceSize</key>
-                <string>{237,213}</string>
+                <string>{318,289}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -285,9 +285,9 @@
             <key>realTextureFileName</key>
             <string>fuyoupao_dead.png</string>
             <key>size</key>
-            <string>{256,2036}</string>
+            <string>{2044,502}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:fcfb147f51b462a0132597e35e1659b0:045c5fe5dc8a42ce9fb74674b4735900:d37a337003ac3e2ae0735e9bf63411f2$</string>
+            <string>$TexturePacker:SmartUpdate:308f4eabe1397ea71cbd5f00ea7b8b8e:bbf5f5448044c5a576b34297fc13bd2b:d37a337003ac3e2ae0735e9bf63411f2$</string>
             <key>textureFileName</key>
             <string>fuyoupao_dead.png</string>
         </dict>

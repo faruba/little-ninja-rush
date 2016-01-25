@@ -41,7 +41,6 @@ void MoveAndAttackRole::onEntering(float delta, bool playend){
     if(dir.lengthSquared() <= dis*dis )
     {
       setCurrentPos(targetPos);
-      mSprite->playGTAnimation(4, false);
     }
     else {
       dir = ccpForAngle(PI*3.0f/5.0f);
@@ -139,7 +138,7 @@ void MoveAndAttackRole::shootDart(std::vector<Vec2>& dirList){
 //    mSprite->playGTAnimation(5, false);
 }
 void MoveAndAttackRole::repeatAction(int times, float timeInterval,repeatCB cb, repeatCB onFinised){
-  CCLOG("=====  add repeatAction %f", timeInterval);
+  //CCLOG("=====  add repeatAction %f", timeInterval);
   int* currentCount = new int(0);
   startAfterSecond(timeInterval, [times,currentCount,cb, onFinised](){
     if(*currentCount == times){
@@ -398,6 +397,7 @@ void Boss::onSpecialShoot(){
   int count;
   if (isState2) {
     isGodmode = true;
+    playShellEffect();
     count = UserSetting::instance()->getData<float>("stage2FloatGunCount");
   }else{
     count = UserSetting::instance()->getData<float>("stage1FloatGunCount");
@@ -443,6 +443,7 @@ void Boss::onFloatGunDead(FloatGun* floatGun){
   if(isAllFloatGunDead()){
     if(isState2){
       isGodmode = false;
+      removeShellEffect();
     }
     isHighSpeedMode = false;
     startAfterSecond(10.0f, [this]() ->bool{
@@ -471,6 +472,12 @@ void Boss::clearFloatGun()
     floatGunGroup[i] = NULL;
   }
 }
+void Boss::onUpdate(float delta){
+  MoveAndAttackRole::onUpdate(delta);
+  if(shell != NULL){
+    shell->updateGTAnimation(delta);
+  }
+}
 void FloatGun::onCreate() {
 	//mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
 	mCollisionCircles.push_back(Circle(cocos2d::Vec2(20, 30), 18));
@@ -484,7 +491,7 @@ void FloatGun::onCreate() {
 
   const Vec2& pos =mTargetPos.getTarget();
 	mSprite->setPosition(pos);
-	mSprite->playGTAnimation(4, true);
+	mSprite->playGTAnimation(4, false);
 	mParent->addChild(mSprite,LAYER_ROLE+RESPAWN_Y);
 
   markIndex();

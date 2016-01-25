@@ -756,6 +756,15 @@
 				]
 			},
 			{
+				"name": "bossEffect",
+				"animations" : [
+				{
+					"duration_per_frame" : 0.05,
+					"frames" : [ "boss/shell_01.png", "boss/shell_02.png", "boss/shell_03.png", "boss/shell_04.png", "boss/shell_05.png", "boss/shell_06.png" ]
+				}
+				]
+			}
+			{
 				"name": "floatGun",
 				"animations" : [
 				{

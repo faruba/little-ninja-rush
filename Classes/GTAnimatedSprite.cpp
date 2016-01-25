@@ -24,7 +24,8 @@ bool GTAnimatedSprite::initWithTexture(cocos2d::Texture2D * texture, cocos2d::Re
 
 void GTAnimatedSprite::playGTAnimation(int AnimationId, bool LoopPlay)
 {
-	if( AnimationId < mAnimation->animationCount() )
+	if( AnimationId < mAnimation->animationCount()
+     && mAnimation->animationFrameCount(AnimationId)>0)
 	{
 		mAnimationId = AnimationId;
 		mLoopPlay = LoopPlay;

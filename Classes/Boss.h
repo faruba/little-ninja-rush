@@ -174,6 +174,7 @@ class Boss: public MoveAndAttackRole{
 public:
   CREATE_FUNC(Boss);
   virtual void onCreate();
+  virtual void onUpdate(float delta);
   void onFloatGunDead(FloatGun* floatGun);
   virtual const char* animationSetName() { return "boss"; }
   virtual bool supportAimAid(){return false;}
@@ -188,6 +189,18 @@ private:
   bool isMakedSpecialShoot = false;
   bool isState2 = false;
   void clearFloatGun();
+  GTAnimatedSprite* shell;
+  void playShellEffect(){
+    shell = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("bossEffect"));
+    shell->setScale(2);
+    shell->setPosition(80,80);
+    shell->playGTAnimation(0, true);
+    mSprite->addChild(shell);
+  }
+  void removeShellEffect(){
+    mSprite->removeChild(shell, true);
+    shell = NULL;
+  }
 
 };
 class FloatGun :public  MoveAndAttackRole
