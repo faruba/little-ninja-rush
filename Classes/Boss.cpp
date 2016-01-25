@@ -86,11 +86,11 @@ void MoveAndAttackRole::onRunning(float dt, bool playend)
   }
 }
 void MoveAndAttackRole::playPrepareAnimation(){
-   mSprite->playGTAnimation(0, true);
+   mSprite->playGTAnimation(0, false);
   //play effect
-  GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
-  eff->setPosition(cocos2d::Vec2(47, 19));
-  mSprite->addChild(eff); 
+  //GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
+  //eff->setPosition(cocos2d::Vec2(47, 19));
+  //mSprite->addChild(eff); 
 }
 
 void MoveAndAttackRole::onPreparingToShoot(float dt){
