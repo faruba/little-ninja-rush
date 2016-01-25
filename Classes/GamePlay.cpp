@@ -382,7 +382,7 @@ void GamePlay::update(float delta)
   }
   mAutoShootDelay -= delta;
   if (!mTouchProcessed && mAutoShootDelay <= 0) {
-    mAutoShootDelay = 0.3;
+    mAutoShootDelay = 0.1;
     auto dir = mTouchBegin - mainrole->center() + UniversalFit::sharedUniversalFit()->sceneOffset;
     this->gestureRecognize(ccpNormalize(dir),TAP);
   }
