@@ -72,7 +72,7 @@ bool GameRecord::init()
 		char_contract[i] = 0;
 		char_equip_dart[i] = 0;
 		char_equip_blade[i] = i;
-		char_equip_spell[i] = 0;
+		char_equip_spell[i] = SPELL_TRACEDART;
 		char_usecount[i] = 0;
 	}
 	char_contract[0] = 1;//角色1免费

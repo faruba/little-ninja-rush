@@ -457,6 +457,7 @@ void MainRole::spell(cocos2d::Point param)
 
 void MainRole::commitSpell(Vector2d* dir) 
 {
+    spellType = SPELL_TRACEDART; //TODO:
 	cocos2d::Point param = dir->value;
 	GamePlay *play = GamePlay::sharedGamePlay();
 	if( SP >= activeSP && !play->spelling )
