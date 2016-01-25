@@ -171,6 +171,7 @@ void MainRole::fire(cocos2d::Point dir)
 {
 	if( flag_dart )
 	{
+    mLoadTimer = dartCD;
 		Vector2d *d = Vector2d::create();
 		d->value = dir;
 		this->commitFire(NULL, d);
@@ -457,7 +458,7 @@ void MainRole::spell(cocos2d::Point param)
 
 void MainRole::commitSpell(Vector2d* dir) 
 {
-    spellType = SPELL_TRACEDART; //TODO:
+    spellType =  SPELL_REFLECTDART; //TODO:
 	cocos2d::Point param = dir->value;
 	GamePlay *play = GamePlay::sharedGamePlay();
 	if( SP >= activeSP && !play->spelling )
@@ -732,7 +733,7 @@ void MainRole::onUpdate(float delta)
 		{
 			if( dart < maxDart )
 			{
-				dart++;
+				dart = maxDart;
 			}
 			mLoadTimer = 0;
 		}

@@ -85,6 +85,7 @@ void MoveAndAttackRole::onRunning(float dt, bool playend)
     mSprite->playGTAnimation(2, true);
   }
 }
+
 void MoveAndAttackRole::playPrepareAnimation(){
    mSprite->playGTAnimation(0, false);
   //play effect
@@ -201,7 +202,6 @@ bool MoveAndAttackRole::onDead(float delta, bool playend) {
 
 void MoveAndAttackRole::onUpdate(float delta)
 {
-  drawCollision();
 	GamePlay* play = GamePlay::sharedGamePlay();
 	bool playend = mSprite->updateGTAnimation(delta);
 	bool removeflag = false;
@@ -386,16 +386,15 @@ void Boss::onShooting(){
     });
    } 
   }
-  
 }
 void Boss::onSpecialShoot(){
-
   clearFloatGun();
   changeState(Shooting);
   isHighSpeedMode = true;
   isMakedSpecialShoot = true;
   int count;
   if (isState2) {
+    if (isGodmode) return;
     isGodmode = true;
     playShellEffect();
     count = UserSetting::instance()->getData<float>("stage2FloatGunCount");
@@ -447,7 +446,9 @@ void Boss::onFloatGunDead(FloatGun* floatGun){
     }
     isHighSpeedMode = false;
     startAfterSecond(10.0f, [this]() ->bool{
-      this->onSpecialShoot();
+      if (!this->isDead()) {
+        this->onSpecialShoot();
+      }
       return false;
     });
   }
@@ -517,7 +518,7 @@ void FloatGun::afterDamage()
 void FloatGun::onShooting(){
   changeState(Shooting);
   mSprite->playGTAnimation(0, false);
-  repeatAction(3,0.3, [this](int idx) ->void {
+  repeatAction(1, 0.3, [this](int idx) ->void {
     std::vector<Vec2> dirList;
     if(this->isOneStageAttackMode){
       dirList.push_back(Vec2(0,-1));
