@@ -204,6 +204,7 @@ bool MoveAndAttackRole::onDead(float delta, bool playend) {
 
 void MoveAndAttackRole::onUpdate(float delta)
 {
+  drawCollision();
 	GamePlay* play = GamePlay::sharedGamePlay();
 	bool playend = mSprite->updateGTAnimation(delta);
 	bool removeflag = false;
@@ -351,6 +352,8 @@ void Boss::onCreate() {
 	//mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 23));
 
 	Role::onCreate();
+
+
   attackTimeIntervalRange.set(2, 5);
 	int y = CCRANDOM_0_1()*(RESPAWN_Y-50);
   
@@ -370,7 +373,6 @@ void Boss::onCreate() {
 }
 
 void Boss::onShooting(){
-  
   if(hp <= UserSetting::instance()->getData<int>("stage1Hp") && !isMakedSpecialShoot){
     onSpecialShoot();
   }else{

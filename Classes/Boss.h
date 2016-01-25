@@ -147,11 +147,11 @@ protected:
   void setCurrentPos(const Vec2& pos) { mSprite->setPosition(pos);}
   
   TargetPositionPlan mTargetPos;
-  
+
   //attack and speed
   const float attackRate = 0.5;
   Range attackTimeIntervalRange;
-  
+
   float nextAttackTimeInterval(){
     int minValue = attackTimeIntervalRange.x ;
     int maxValue = attackTimeIntervalRange.y ;
@@ -161,12 +161,11 @@ protected:
     }
     return cocos2d::random(minValue, maxValue);
   }
-  
+
   bool isGodmode = false;
-   // life
+  // life
   int hp ;
   bool isDead() {return hp <= 0;}
-  
 };
 
 class FloatGun;
@@ -181,6 +180,7 @@ public:
   void onSpecialShoot();
   void releaseFloatGun(const Vec2& pos, int& index);
   virtual void afterDamage();
+
 private:
   std::vector<FloatGun*> floatGunGroup;
   bool isAllFloatGunDead();

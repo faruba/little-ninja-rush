@@ -9,16 +9,17 @@
 
 Dart* Dart::dart(std::string& shap, cocos2d::Point pos, cocos2d::Point dir, int typ, Node* parent)
 {
-	Dart* ret = Dart::create();
-	ret->mParent = parent;
-	ret->pos = pos;
-	ret->direction = dir;
-	ret->type = typ;
-	ret->mTail = NULL;
-	ret->mTrace.index = -1;
-	ret->mTrace.uid = -1;
-	ret->mShap = shap;
-	return ret;
+  Dart* ret = Dart::create();
+  ret->mParent = parent;
+  ret->pos = pos;
+  ret->direction = dir;
+  ret->type = typ;
+  ret->mTail = NULL;
+  ret->mTrace.index = -1;
+  ret->mTrace.uid = -1;
+  ret->mShap = shap;
+
+  return ret;
 }
 
 void Dart::addTail() 
@@ -61,6 +62,10 @@ void Dart::onCreate()
 	mSprite->setPosition(pos);
 	mParent->addChild(mSprite, LAYER_MAINROLE+1);
 
+  //auto node = DrawNode::create();
+  //node->drawCircle(cocos2d::Vec2(0, 0), 7, 180, 30, false, 1, 1, cocos2d::Color4F::RED);
+  //mSprite->addChild(node);
+    
 	mHitEffect = 2;
 	mHitEffect2 = 1;
 	mParticle = 0;
