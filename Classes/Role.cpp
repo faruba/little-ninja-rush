@@ -2,6 +2,7 @@
 #include "GamePlay.h"
 #include "Bomb.h"
 #include "Item.h"
+#include "Pumpkin.h"
 
 //摔死的概率(%)
 #define FALLDOWN (15)
@@ -226,7 +227,42 @@ void MiddleNinjaEnteringStateDelegate::update (float delta) {
     }
   }
 }
-///// SantaRunningStateDelegate 
+///// PumpkinEnteringStateDelegate
+void PumpkinEnteringStateDelegate::onEnter(){
+  Pumpkin* pumkin = static_cast<Pumpkin*>(mRole);
+	pumkin->mTargetPos = Vec2(50, 210);
+  pumkin->mTargetSpeed = cocos2d::Point::forAngle(CC_DEGREES_TO_RADIANS(-45))* 100;
+	pumkin->mPumpkinSpeed =cocos2d::Point::forAngle(CC_DEGREES_TO_RADIANS(-90))* 50;
+	mFlySound = 3 + 7*CCRANDOM_0_1();
+  mTimer = 0;
+}
+
+#define FLOATING_TIME (45)
+static cocos2d::Vec2 fleeingPos =Vec2(UniversalFit::sharedUniversalFit()->playSize.width + 100, SCREEN_HEIGHT/2);
+void PumpkinEnteringStateDelegate::update(float delta){
+  //tick timer
+  mTimer += delta;
+  if( mTimer > FLOATING_TIME)
+  {
+    mRole->switchToState(Role::RoleState::Fleeing);
+    return;
+  }
+  
+  Pumpkin* pumkin = static_cast<Pumpkin*>(mRole);
+  pumkin->updateTargetPos(delta);
+  pumkin ->moveToTargetPos(delta);
+  //fly sound
+  {
+    mFlySound -= delta;
+    if( mFlySound < 0 )
+    {
+						GameTool::PlaySound("pumpkinfly.mp3");
+						mFlySound = 3 + 7*CCRANDOM_0_1();
+    }
+  }
+
+}
+///// SantaRunningStateDelegate
 void SantaRunningStateDelegate::onEnter () {
   mTimer = 3 + 3*CCRANDOM_0_1();
 }

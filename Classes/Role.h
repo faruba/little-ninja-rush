@@ -89,6 +89,14 @@ public:
 private:
 };
 
+class PumpkinEnteringStateDelegate: public RoleStateDelegate {
+public:
+  virtual void onEnter ();
+  virtual void update (float delta);
+private:
+  float mTimer;
+  float mFlySound;
+};
 class SantaRunningStateDelegate : public RoleStateDelegate {
 public:
   virtual void onEnter ();

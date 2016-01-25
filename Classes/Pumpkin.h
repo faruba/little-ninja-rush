@@ -7,30 +7,30 @@
 class Pumpkin:
   public Role
 {
-  public:
-    CREATE_FUNC(Pumpkin);
-
-    virtual void onCreate();
-    virtual void onUpdate(float delta);
-    virtual void onDestroy();
-
-    virtual const char* animationSetName() { return "pumpkin"; }
-
-    virtual bool deliverHit(int type, cocos2d::Point dir);
-    virtual cocos2d::Point center();
-    virtual bool supportAimAid();
-
-    float mTimer;
-    int mHitCount;
-    float mHurtTimer;
-
-    cocos2d::Point mPumpkinSpeed;
-    cocos2d::Point mTargetPos;
-    cocos2d::Point mTargetSpeed;
-
-    float mFlySound;
-
-    int mFacing;
-    int mCoinsCounter;
+public:
+  CREATE_FUNC(Pumpkin);
+  
+  virtual void onCreate();
+  virtual void onUpdate(float delta);
+  virtual void onDestroy();
+  
+  virtual const char* animationSetName() { return "pumpkin"; }
+  
+  virtual bool deliverHit(int type, cocos2d::Point dir);
+  virtual cocos2d::Point center();
+  virtual bool supportAimAid();
+  
+  void moveToTargetPos(float delta);
+  void updateTargetPos(float delta);
+  float mTimer;
+  int mHitCount;
+  float mHurtTimer;
+  
+  int mFacing;
+  int mCoinsCounter;
+  
+  cocos2d::Vec2 mTargetPos;
+  cocos2d::Vec2 mPumpkinSpeed;
+  cocos2d::Vec2 mTargetSpeed;
 };
 #endif

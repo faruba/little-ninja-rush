@@ -1766,8 +1766,6 @@
 				BE38EB4E1C1EB75D0087D38E /* PopKill.h */,
 				BE38EB4F1C1EB75D0087D38E /* PublicLoad.cpp */,
 				BE38EB501C1EB75D0087D38E /* PublicLoad.h */,
-				BE38EB511C1EB75D0087D38E /* Pumpkin.cpp */,
-				BE38EB521C1EB75D0087D38E /* Pumpkin.h */,
 				BE38EB531C1EB75D0087D38E /* PumpkinCircle.cpp */,
 				BE38EB541C1EB75D0087D38E /* PumpkinCircle.h */,
 				BE38EB551C1EB75D0087D38E /* PumpkinFire.cpp */,
@@ -1923,6 +1921,8 @@
 		BE3B880F1C329E9D003D67C3 /* Role */ = {
 			isa = PBXGroup;
 			children = (
+				BE38EB511C1EB75D0087D38E /* Pumpkin.cpp */,
+				BE38EB521C1EB75D0087D38E /* Pumpkin.h */,
 				BE3B88101C33CEC1003D67C3 /* Role.cpp */,
 				BE38EB451C1EB75D0087D38E /* NewbieNinja.cpp */,
 				BE38EB461C1EB75D0087D38E /* NewbieNinja.h */,

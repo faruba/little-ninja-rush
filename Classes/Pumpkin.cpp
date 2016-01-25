@@ -32,21 +32,57 @@ void Pumpkin::onCreate() {
 	mHurtTimer = -1;
 
 	//init parameters
-	mTargetPos = Vec2(50, 210);
-	mTargetSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-45)), 100);
-	mPumpkinSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-90)), 50);
-
 	GameTool::PlaySound("pumpkinstart.mp3");
 
-	mFlySound = 3 + 7*CCRANDOM_0_1();
+}
+void Pumpkin::updateTargetPos(float delta){
+  mTargetPos = mTargetPos + mTargetSpeed * delta;
+  //range check
+  //left && right
+  if( ( mTargetPos.x < 50 && mTargetSpeed.x < 0 ) || ( mTargetPos.x > 430 && mTargetSpeed.x > 0 ) )
+  {
+    mTargetSpeed.x *= -1;
+  }
+  //up && down
+  if( ( mTargetPos.y < 210 && mTargetSpeed.y < 0 ) || ( mTargetPos.y > 270 && mTargetSpeed.y > 0 ) )
+  {
+    mTargetSpeed.y *= -1;
+  }
 }
 
+void Pumpkin::moveToTargetPos(float delta){
+  if(!position().fuzzyEquals(mTargetPos, 0.1f)){//move with target
+    //merge speed
+    cocos2d::Point dr = mTargetPos - position();
+    float at = dr.length()*20*delta;
+    dr.normalize();
+    mPumpkinSpeed = mPumpkinSpeed + dr* at;
+    
+    //limit speed
+    {
+      if(mPumpkinSpeed.lengthSquared() > 100*100)
+      {
+        mPumpkinSpeed.normalize();
+        mPumpkinSpeed*=100;
+      }
+    }
+    
+    //move pumpkin
+    cocos2d::Point np = position() + mPumpkinSpeed * delta;
+    setPosition(np);
+  }
+}
 void Pumpkin::onUpdate(float delta) 
 {
 	GamePlay *play = GamePlay::sharedGamePlay();
 	bool removeflag = false;
 	bool playend = mSprite->updateGTAnimation(delta);
 
+  /*// begin
+  if(isState(Entering) && playend){
+   mSprite->playGTAnimation(0, true);
+   }
+  //end */
 	if( mHurtTimer >= 0 )
 	{
 		mHurtTimer += delta;
@@ -76,59 +112,59 @@ void Pumpkin::onUpdate(float delta)
 	}
 
 	switch (mState) {
-		case Entering://floating
-			{
-				//tick timer
-				mTimer += delta;
-				if( mTimer > FLOATING_TIME)
-				{
-					mState = Fleeing;
-					mTimer = 0;
-				}
-				if( playend )
-				{
-					mSprite->playGTAnimation(0, true);
-				}
-				{//move target
-					cocos2d::Point ntp = ccpAdd(mTargetPos, ccpMult(mTargetSpeed, delta));
-					mTargetPos = ntp;
-					//range check
-					//left && right
-					if( ( ntp.x < 50 && mTargetSpeed.x < 0 ) || ( ntp.x > 430 && mTargetSpeed.x > 0 ) )
-					{
-						mTargetSpeed.x *= -1;
-					}
-					//up && down
-					if( ( ntp.y < 210 && mTargetSpeed.y < 0 ) || ( ntp.y > 270 && mTargetSpeed.y > 0 ) )
-					{
-						mTargetSpeed.y *= -1;
-					}
-				}
+		//case Entering://floating
+		//	{
+		//		//tick timer
+		//		mTimer += delta;
+		//		if( mTimer > FLOATING_TIME)
+		//		{
+		//			mState = Fleeing;
+		//			mTimer = 0;
+		//		}
+		//		if( playend )
+		//		{
+		//			mSprite->playGTAnimation(0, true);
+		//		}
+		//		{//move target
+		//			cocos2d::Point ntp = ccpAdd(mTargetPos, ccpMult(mTargetSpeed, delta));
+		//			mTargetPos = ntp;
+		//			//range check
+		//			//left && right
+		//			if( ( ntp.x < 50 && mTargetSpeed.x < 0 ) || ( ntp.x > 430 && mTargetSpeed.x > 0 ) )
+		//			{
+		//				mTargetSpeed.x *= -1;
+		//			}
+		//			//up && down
+		//			if( ( ntp.y < 210 && mTargetSpeed.y < 0 ) || ( ntp.y > 270 && mTargetSpeed.y > 0 ) )
+		//			{
+		//				mTargetSpeed.y *= -1;
+		//			}
+		//		}
 
-				//fly sound
-				{
-					mFlySound -= delta;
-					if( mFlySound < 0 )
-					{
-						GameTool::PlaySound("pumpkinfly.mp3");
-						mFlySound = 3 + 7*CCRANDOM_0_1();
-					}
-				}
-			}
-			break;
-		case Fleeing://escape
-			{
-				mTargetPos = Vec2(UniversalFit::sharedUniversalFit()->playSize.width + 100, SCREEN_HEIGHT/2);
-				if( ccpDistance(mSprite->getPosition(), mTargetPos) < NEAR )
-				{
-					removeflag = true;
-				}
-				if( playend )
-				{
-					mSprite->playGTAnimation(0, true);
-				}
-			}
-			break;
+		//		//fly sound
+		//		{
+		//			mFlySound -= delta;
+		//			if( mFlySound < 0 )
+		//			{
+		//				GameTool::PlaySound("pumpkinfly.mp3");
+		//				mFlySound = 3 + 7*CCRANDOM_0_1();
+		//			}
+		//		}
+		//	}
+		//	break;
+		//case Fleeing://escape
+		//	{
+		//		mTargetPos = Vec2(UniversalFit::sharedUniversalFit()->playSize.width + 100, SCREEN_HEIGHT/2);
+		//		if( ccpDistance(mSprite->getPosition(), mTargetPos) < NEAR )
+		//		{
+		//			removeflag = true;
+		//		}
+		//		if( playend )
+		//		{
+		//			mSprite->playGTAnimation(0, true);
+		//		}
+		//	}
+		//	break;
 		case Dead://dying
 			{
 				mTimer += delta;
