@@ -393,14 +393,14 @@ void Boss::onSpecialShoot(){
 
   clearFloatGun();
   changeState(Shooting);
-  isHighAttackSpeedMode = true;
+  isHighSpeedMode = true;
   isMakedSpecialShoot = true;
   int count;
   if (isState2) {
     isGodmode = true;
-    count = 4;
+    count = UserSetting::instance()->getData<float>("stage2FloatGunCount");
   }else{
-    count = 5;
+    count = UserSetting::instance()->getData<float>("stage1FloatGunCount");
   }
   repeatAction(count, 0.1f, [this](int index)->void{
     this->releaseFloatGun(this->center(), index);
@@ -444,7 +444,7 @@ void Boss::onFloatGunDead(FloatGun* floatGun){
     if(isState2){
       isGodmode = false;
     }
-    isHighAttackSpeedMode = false;
+    isHighSpeedMode = false;
     startAfterSecond(10.0f, [this]() ->bool{
       this->onSpecialShoot();
       return false;

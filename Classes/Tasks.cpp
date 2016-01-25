@@ -181,7 +181,7 @@ void Tasks::doneReadObjectives()
 {
 	if( !mRecordRead )
 	{
-    CCASSERT(false,"if I'm right, this code will never be excuted");
+   // CCASSERT(false,"if I'm right, this code will never be excuted");
 	  //载入目标记录
 	  {
 	    prizeDate = 0;

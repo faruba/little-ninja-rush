@@ -151,7 +151,6 @@ protected:
   //attack and speed
   const float attackRate = 0.5;
   Range attackTimeIntervalRange;
-  bool isHighAttackSpeedMode = false;
   
   float nextAttackTimeInterval(){
     int minValue = attackTimeIntervalRange.x ;
@@ -177,7 +176,7 @@ public:
   virtual void onCreate();
   void onFloatGunDead(FloatGun* floatGun);
   virtual const char* animationSetName() { return "boss"; }
-protected:
+  virtual bool supportAimAid(){return false;}
   virtual void onShooting();
   void onSpecialShoot();
   void releaseFloatGun(const Vec2& pos, int& index);
@@ -197,6 +196,7 @@ public:
   CREATE_FUNC(FloatGun);
   virtual void onCreate();
   virtual const char* animationSetName() { return "floatGun"; }
+  virtual bool supportAimAid(){return false;}
   void setOwner(Boss* boss,int index,bool isOneStage){
     owner = boss;
     idx = index;
