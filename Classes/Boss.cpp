@@ -98,8 +98,6 @@ void MoveAndAttackRole::onPreparingToShoot(float dt){
   onShooting();
 }
 
-
-
 Vec2 MoveAndAttackRole::getAttackDir(){
   GamePlay* play = GamePlay::sharedGamePlay();
   Vec2 target = play->mainrole->center();
@@ -347,7 +345,7 @@ void MoveAndAttackRole::onDestroy()
 
 Range bossMoveRange(SCREEN_WIDTH * 0.0,SCREEN_WIDTH * 1.0);
 void Boss::onCreate() {
-	mCollisionCircles.push_back(Circle(cocos2d::Vec2(70, 90), 59));
+	mCollisionCircles.push_back(Circle(cocos2d::Vec2(0, 70), 59));
 	//mCollisionCircles.push_back(Circle(cocos2d::Vec2(17, 27), 23));
 
 	Role::onCreate();
