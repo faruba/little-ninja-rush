@@ -14,3 +14,8 @@ bool Role::handleGameOver (float delta) {
 	return false;
 }
 
+void Role::drawCollision () {
+  for (auto & circle : mCollisionCircles) {
+    static_cast<GamePlay*>(mParent)->drawCircle(circle.center + position(), circle.radius);
+  }
+}

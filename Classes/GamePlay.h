@@ -38,6 +38,10 @@ class GamePlay :
 		virtual void update(float);
 		virtual void onExit();
 
+    cocos2d::DrawNode *mDrawNode = nullptr;
+    void drawCircle(cocos2d::Vec2 center, float radius) {
+      mDrawNode->drawCircle(center, radius, 180, 30, false, 1, 1, cocos2d::Color4F::RED);
+    }
 		virtual bool onTouchBegan(Touch * touch, Event * event);
 		virtual void onTouchMoved(Touch * touch, Event * event);
   void onTouchEnded(Touch * touch, Event * event);

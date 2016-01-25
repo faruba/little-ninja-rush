@@ -54,13 +54,9 @@ class Role: public GameObject {
       mSprite = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet(animationSetName()));
       mSprite->setAnchorPoint(mAnchor);
       mState = Entering;
-
-      auto node = DrawNode::create();
-      for (auto & circle : mCollisionCircles) {
-        node->drawCircle(circle.center, circle.radius, 180, 30, false, 1, 1, cocos2d::Color4F::RED);
-      }
-      mSprite->addChild(node);
     }
+
+    void drawCollision();
 
     bool handleGameOver (float delta) ;
 

@@ -46,7 +46,6 @@ cocos2d::Scene* GamePlay::scene()
 	}else{
 		gPlay->removeFromParent();
 	}
-
 	//universal
 	ret->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
 	ret->setAnchorPoint(cocos2d::Vec2(0, 0));
@@ -88,6 +87,11 @@ bool GamePlay::init()
 {
 	if(cocos2d::Layer::init())
 	{
+    if (mDrawNode == nullptr) {
+      mDrawNode = DrawNode::create();
+      addChild(mDrawNode, 10000);
+    }
+
 		this->setAccelerometerEnabled(true);
 		state = -1;
 
@@ -211,183 +215,184 @@ void GamePlay::initGamePlay(int mod)
 
 void GamePlay::update(float delta)
 {
-	deltaTime = delta;
-	if(paused)
-	{
-		delta = 0;
-	}
+  mDrawNode->clear();
+  deltaTime = delta;
+  if(paused)
+  {
+    delta = 0;
+  }
 
-	//schedule spellmask
-	if( mScheduleSpellRelease >= 0 )
-	{
-		mScheduleSpellRelease -= delta;
-		delta = 0;
-		if( mScheduleSpellRelease < 0 )
-		{
-			spelling = false;
-			spellMask->setVisible(false);
-			if( mScheduleReleaseTarget != NULL )
-			{
-				cocos2d::CCCallFunc *callSelectorAction = cocos2d::CallFunc::create(mScheduleReleaseTarget, mScheduleReleaseSelector);
-				runAction(callSelectorAction);
-				mScheduleReleaseTarget = NULL;
-			}
-		}
-	}
-	//schedule mask
-	if( mScheduleMaskMode >= 0 )
-	{
-		mScheduleMaskTimer += delta;
-		if( mScheduleMaskTimer >= mScheduleMaskTime )
-		{
-			this->unscheduleMask();
-		}
-		else {
-			if( mScheduleMaskMode == 1 )
-			{
-				float k = 1.0f - mScheduleMaskTimer/mScheduleMaskTime;
-				mask->setOpacity(255*k);
-			}
-			else if( mScheduleMaskMode == 2 )
-			{
-				float k = mScheduleMaskTimer/mScheduleMaskTime;
-				mask->setOpacity(255*k);
-			}
-		}
-	}
-	//fever mask
-	if( mFeverMaskTimer >= 0 )
-	{
-		mFeverMaskTimer+= delta;
-		float circle = 0.5f;
-		float min = 0;
-		float max = 40;
-		int n = mFeverMaskTimer/circle;
-		float left = mFeverMaskTimer - circle*n;
-		if( left < circle/2 )
-		{
-			mFeverMask->setOpacity(min + left/(circle/2)*max);
-		}
-		else {
-			mFeverMask->setOpacity(min + (circle - left)/(circle/2)*max);
-		}
-	}
-	//scheduled vibrate
-	if( mScheduleVibrate >= 0 )
-	{
-		mScheduleVibrate -= deltaTime;
-		//do scale
-		mVibrateTimer += deltaTime;
-		int n = mVibrateTimer/VIBRATE_PERIOD;
-		float sc = mVibrateTimer - VIBRATE_PERIOD*n;
-		float k = 1;
-		if( sc < VIBRATE_PERIOD/2 )
-		{
-			k += VIBRATE_ZOOM*sc/VIBRATE_PERIOD/2;
-		}
-		else {
-			k += VIBRATE_ZOOM*(VIBRATE_PERIOD - sc)/VIBRATE_PERIOD/2;
-		}
-		this->setScale(k);
-		//do roll
-		float st = deltaTime*VIBRATE_MS;
-		cocos2d::Point np = this->getPosition();
-		np = np + (mVibrateDir * st);
-		if( np.x < -VIBRATE_MOVE )
-		{
-			np.x = -VIBRATE_MOVE;
-			mVibrateDir.x *= -1;
-		}
-		if( np.x > VIBRATE_MOVE )
-		{
-			np.x = VIBRATE_MOVE;
-			mVibrateDir.x *= -1;
-		}
-		if( np.y < -VIBRATE_MOVE )
-		{
-			np.y = -VIBRATE_MOVE;
-			mVibrateDir.y *= -1;
-		}
-		if( np.y > VIBRATE_MOVE )
-		{
-			np.y = VIBRATE_MOVE;
-			mVibrateDir.y *= -1;
-		}
-		this->setPosition(np);
+  //schedule spellmask
+  if( mScheduleSpellRelease >= 0 )
+  {
+    mScheduleSpellRelease -= delta;
+    delta = 0;
+    if( mScheduleSpellRelease < 0 )
+    {
+      spelling = false;
+      spellMask->setVisible(false);
+      if( mScheduleReleaseTarget != NULL )
+      {
+        cocos2d::CCCallFunc *callSelectorAction = cocos2d::CallFunc::create(mScheduleReleaseTarget, mScheduleReleaseSelector);
+        runAction(callSelectorAction);
+        mScheduleReleaseTarget = NULL;
+      }
+    }
+  }
+  //schedule mask
+  if( mScheduleMaskMode >= 0 )
+  {
+    mScheduleMaskTimer += delta;
+    if( mScheduleMaskTimer >= mScheduleMaskTime )
+    {
+      this->unscheduleMask();
+    }
+    else {
+      if( mScheduleMaskMode == 1 )
+      {
+        float k = 1.0f - mScheduleMaskTimer/mScheduleMaskTime;
+        mask->setOpacity(255*k);
+      }
+      else if( mScheduleMaskMode == 2 )
+      {
+        float k = mScheduleMaskTimer/mScheduleMaskTime;
+        mask->setOpacity(255*k);
+      }
+    }
+  }
+  //fever mask
+  if( mFeverMaskTimer >= 0 )
+  {
+    mFeverMaskTimer+= delta;
+    float circle = 0.5f;
+    float min = 0;
+    float max = 40;
+    int n = mFeverMaskTimer/circle;
+    float left = mFeverMaskTimer - circle*n;
+    if( left < circle/2 )
+    {
+      mFeverMask->setOpacity(min + left/(circle/2)*max);
+    }
+    else {
+      mFeverMask->setOpacity(min + (circle - left)/(circle/2)*max);
+    }
+  }
+  //scheduled vibrate
+  if( mScheduleVibrate >= 0 )
+  {
+    mScheduleVibrate -= deltaTime;
+    //do scale
+    mVibrateTimer += deltaTime;
+    int n = mVibrateTimer/VIBRATE_PERIOD;
+    float sc = mVibrateTimer - VIBRATE_PERIOD*n;
+    float k = 1;
+    if( sc < VIBRATE_PERIOD/2 )
+    {
+      k += VIBRATE_ZOOM*sc/VIBRATE_PERIOD/2;
+    }
+    else {
+      k += VIBRATE_ZOOM*(VIBRATE_PERIOD - sc)/VIBRATE_PERIOD/2;
+    }
+    this->setScale(k);
+    //do roll
+    float st = deltaTime*VIBRATE_MS;
+    cocos2d::Point np = this->getPosition();
+    np = np + (mVibrateDir * st);
+    if( np.x < -VIBRATE_MOVE )
+    {
+      np.x = -VIBRATE_MOVE;
+      mVibrateDir.x *= -1;
+    }
+    if( np.x > VIBRATE_MOVE )
+    {
+      np.x = VIBRATE_MOVE;
+      mVibrateDir.x *= -1;
+    }
+    if( np.y < -VIBRATE_MOVE )
+    {
+      np.y = -VIBRATE_MOVE;
+      mVibrateDir.y *= -1;
+    }
+    if( np.y > VIBRATE_MOVE )
+    {
+      np.y = VIBRATE_MOVE;
+      mVibrateDir.y *= -1;
+    }
+    this->setPosition(np);
 
-		if( mScheduleVibrate < 0 )
-		{
-			//clean up
-			this->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
-			this->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
-			//this->setScale(1);
-			//this->setPosition(cocos2d::Vec2(0, 0));
-		}
-	}
-	//scheduled slow
-	if( mScheduleSpeedMode >= 0 )
-	{
-		mScheduleSpeedTimer += delta;
-		if( mScheduleSpeedTimer >= mScheduleSpeedTime && mScheduleSpeedTime > 0 )
-		{
-			this->unscheduleSpeed();
-		}
-		else {
-			switch (mScheduleSpeedMode) {
-				case 0:
-					{
-						gamespeed = mScheduleSpeedOrigin*mScheduleSpeedTimer/mScheduleSpeedTime;
-					}
-					break;
-				case 2:
-					{
-						if( gamespeed != mScheduleSpeedTarget )
-						{
-							float ds = mScheduleSpeedTarget - gamespeed;
-							float dr = ds/fabsf(ds);
-							float mv = delta*dr;
-							if( fabsf(mv) >= fabsf(ds) )
-							{
-								gamespeed = mScheduleSpeedTarget;
-							}
-							else {
-								gamespeed += mv;
-							}
-						}
-					}
-					break;
-			}
-		}
-	}
-	delta *= gamespeed;
-	delta *= arcadeSpeed;
-	if( gameOverTimer >= 0 )
-	{
-		gameOverTimer += delta;
-	}
-	//--------
-	if( count_runscene <= 0 || (gameOverTimer>=0 && gameOverTimer<PLAY_GOSLIDETIME))
-	{
-		deltaDistance = delta*runspeed;
-	}
-	else
-	{
-		deltaDistance = 0;
-	}
-	//--------
-	manager->update(delta);
-	this->operate();
+    if( mScheduleVibrate < 0 )
+    {
+      //clean up
+      this->setScale(UniversalFit::sharedUniversalFit()->scaleFactor);
+      this->setPosition(UniversalFit::sharedUniversalFit()->sceneOffset);
+      //this->setScale(1);
+      //this->setPosition(cocos2d::Vec2(0, 0));
+    }
+  }
+  //scheduled slow
+  if( mScheduleSpeedMode >= 0 )
+  {
+    mScheduleSpeedTimer += delta;
+    if( mScheduleSpeedTimer >= mScheduleSpeedTime && mScheduleSpeedTime > 0 )
+    {
+      this->unscheduleSpeed();
+    }
+    else {
+      switch (mScheduleSpeedMode) {
+        case 0:
+          {
+            gamespeed = mScheduleSpeedOrigin*mScheduleSpeedTimer/mScheduleSpeedTime;
+          }
+          break;
+        case 2:
+          {
+            if( gamespeed != mScheduleSpeedTarget )
+            {
+              float ds = mScheduleSpeedTarget - gamespeed;
+              float dr = ds/fabsf(ds);
+              float mv = delta*dr;
+              if( fabsf(mv) >= fabsf(ds) )
+              {
+                gamespeed = mScheduleSpeedTarget;
+              }
+              else {
+                gamespeed += mv;
+              }
+            }
+          }
+          break;
+      }
+    }
+  }
+  delta *= gamespeed;
+  delta *= arcadeSpeed;
+  if( gameOverTimer >= 0 )
+  {
+    gameOverTimer += delta;
+  }
+  //--------
+  if( count_runscene <= 0 || (gameOverTimer>=0 && gameOverTimer<PLAY_GOSLIDETIME))
+  {
+    deltaDistance = delta*runspeed;
+  }
+  else
+  {
+    deltaDistance = 0;
+  }
+  //--------
+  manager->update(delta);
+  this->operate();
 
-	//update speed line
-	if( mFeverLevel > 0 )
-	{
-		mSpeedlineTimer+=delta;
-		if( mSpeedlineTimer > 0.05f )
-		{
-			manager->addGameObject(SpeedLine::create());
-			mSpeedlineTimer = 0;
-		}
-	}
+  //update speed line
+  if( mFeverLevel > 0 )
+  {
+    mSpeedlineTimer+=delta;
+    if( mSpeedlineTimer > 0.05f )
+    {
+      manager->addGameObject(SpeedLine::create());
+      mSpeedlineTimer = 0;
+    }
+  }
 }
 
 void GamePlay::fixGravity(float val)
