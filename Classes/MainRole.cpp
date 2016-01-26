@@ -47,7 +47,7 @@ void MainRole::onCreate()
 	dart = UserSetting::instance()->getData<int>("maxDartCount");
 	maxDart = dart;
   
-  dartCD *= UserSetting::instance()->getData<int>("dartRecoveryCDMul");
+  dartCD = 5;//UserSetting::instance()->getData<int>("dartRecoveryCDMul");
 	runSpeed = GameData::roleRunSpeed(mRoleId);
 
 	//dart
@@ -117,17 +117,17 @@ void MainRole::onCreate()
 
 void MainRole::setEquipDart(int tid) 
 {
-	Shuriken &sk = GameData::fetchShurikens()[tid];
+  Shuriken &sk = GameData::fetchShurikens()[tid];
 
-	dartCD = sk.reld;
-  dartSpeed = sk.flys * UserSetting::instance()->getData<float>("dartSpeedMul");
-	dartShap = sk.shap;
-	dartEffect = sk.efft;
-	//special dart
-	if( sk.uiid == mRoleId + 39 )
-	{
-		dartCD -= dartCD*0.3f;
-	}
+  dartCD = sk.reld * 4;
+  dartSpeed = sk.flys * 1.5;
+  dartShap = sk.shap;
+  dartEffect = sk.efft;
+  //special dart
+  if( sk.uiid == mRoleId + 39 )
+  {
+    dartCD -= dartCD*0.3f;
+  }
 }
 
 void MainRole::setEquipBlade(int tid) 
@@ -307,7 +307,6 @@ void MainRole::slice()
 	{
 		mBladeAction = !mBladeAction;
 	}
-	mLoadTimer = 0;//中断load
 	this->commitSlice();
 }
 

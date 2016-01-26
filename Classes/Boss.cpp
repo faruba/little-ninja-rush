@@ -71,7 +71,7 @@ void MoveAndAttackRole::onRunning(float dt, bool playend)
   }
   else {
     mTargetPos.genNextPlan();
-    if( randomInt(100) < 30)
+    if ( randomInt(100) < 30)
     {
       if( mDartCount < MNINJA_MAXDART && GamePlay::sharedGamePlay()->count_attack <= 0 )
       {
@@ -463,6 +463,7 @@ void Boss::clearFloatGun()
 }
 bool Boss::onDead(float delta, bool playend) {
   MoveAndAttackRole::onDead(delta, playend);
+  clearFloatGun();
   if (!playend) {
     GamePlay *play = GamePlay::sharedGamePlay();
     play->manager->addGameObject(Item::item(0, mSprite->getPosition(), play, true));
@@ -480,7 +481,6 @@ void FloatGun::onCreate() {
 
 	Role::onCreate();
 
-  
   attackTimeIntervalRange.set(4, 10);
   mTargetPos.init(bossMoveRange, Vec2(RESPAWN_YMIN * 0.4f, RESPAWN_YMIN + RESPAWN_Y));
 	//计算起跳点
@@ -500,11 +500,9 @@ void FloatGun::onCreate() {
            UserSetting::instance()->getData<int>("stage2FloatGunHp"));
 }
 
-
 void FloatGun::afterDamage()
 {
   if(isDead()){
-    //CCLOG("--floatGun %d dead %p",idx, this);
     resetCoroutine();
     owner->onFloatGunDead(this);
   }
@@ -514,10 +512,11 @@ void FloatGun::onShooting(){
   changeState(Shooting);
   mSprite->playGTAnimation(0, false);
   repeatAction(1, 0.3, [this](int idx) ->void {
+    if (randomInt(100) < 30) return ;
     std::vector<Vec2> dirList;
-    if(this->isOneStageAttackMode){
+    if (this->isOneStageAttackMode){
       dirList.push_back(Vec2(0,-1));
-    }else{
+    } else {
       dirList.push_back(Vec2(-1,-1));
       dirList.push_back(Vec2(1,-1));
     }
@@ -525,7 +524,6 @@ void FloatGun::onShooting(){
   }, [this](int idx) ->void{
     changeState(Running);
   });
-  
 }
 
 void LittleBoss::onCreate() {
@@ -534,7 +532,6 @@ void LittleBoss::onCreate() {
 
 	Role::onCreate();
 
-  
   attackTimeIntervalRange.set(4, 10);
   mTargetPos.init(bossMoveRange, Vec2(RESPAWN_YMIN * 0.6f, RESPAWN_YMIN + RESPAWN_Y));
 	//计算起跳点
@@ -544,11 +541,10 @@ void LittleBoss::onCreate() {
 	mSprite->playGTAnimation(4, false);
 	mParent->addChild(mSprite,LAYER_ROLE+RESPAWN_Y);
 
-  
 	mDartCount = 0;
 	mFlag = true;
 	mSpeed = ENEMY_NNRUNSPEED;
-  setMaxHp( UserSetting::instance()->getData<int>("littleBossHp"));
+  setMaxHp(200);
 }
 
 void LittleBoss::onUpdate(float delta){

@@ -315,10 +315,10 @@ void Respawn::updateArcade(float delta)
 	delta *= play->runspeed/play->levelspeed;
   
   // for little boss
-   respawnCreature(ENEMIES+4, littleboss, 20, 1, 10)
-   respawnCreature(0, staticNinjia, 0, 5, 5)
-   respawnCreature(1, redNinjia, 15, 3, 10)
-   respawnCreature(ENEMIES+2, pumkin, 10, 2, 10)
+  respawnCreature(ENEMIES+4, littleboss, 90, 1, 10)
+  respawnCreature(0, staticNinjia, 0, 5, 5)
+  respawnCreature(1, redNinjia, 15, 3, 10)
+  respawnCreature(ENEMIES+2, pumkin, 10, 2, 10)
   timer += delta;
   return;
   ///// end

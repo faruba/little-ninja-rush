@@ -27,14 +27,16 @@ void Dart::addTail()
 	if( mTail == NULL )
 	{
 		std::string tailstr = std::string_format("%s_tail.png", mShap.substr(0, mShap.length()-4).c_str());
-		mTail = cocos2d::Sprite::createWithSpriteFrameName(tailstr.c_str());
-		mTail->setAnchorPoint(cocos2d::Vec2(0.5f, 0.95f));
-		mTail->setPosition(mSprite->getPosition());
-		mTail->setOpacity(0);
-		mParent->addChild( mTail, LAYER_ROLE);
-		mTail->setRotation(90-CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
-		cocos2d::FadeIn *fi = cocos2d::FadeIn::create(0.5f);
-		mTail->runAction(fi);
+        if (SpriteFrameCache::getInstance()->getSpriteFrameByName(tailstr.c_str()) != nullptr) {
+            mTail = cocos2d::Sprite::createWithSpriteFrameName(tailstr.c_str());
+            mTail->setAnchorPoint(cocos2d::Vec2(0.5f, 0.95f));
+            mTail->setPosition(mSprite->getPosition());
+            mTail->setOpacity(0);
+            mParent->addChild( mTail, LAYER_ROLE);
+            mTail->setRotation(90-CC_RADIANS_TO_DEGREES(ccpToAngle(direction)));
+            cocos2d::FadeIn *fi = cocos2d::FadeIn::create(0.5f);
+            mTail->runAction(fi);
+        }
 	}
 }
 
