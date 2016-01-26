@@ -575,7 +575,8 @@ void LittleBoss::afterDamage(){
 }
 void LittleBoss::onShooting(){
   this->changeState(Shooting);
-  Vec2 dir = Vec2(0,-1); //getAttackDir(true);
+  Vec2 dir = getAttackDir(true);
+  //Vec2 dir = Vec2(0,-1); //getAttackDir(true);
   
   playBeamEffect(dir);
   this->isGodmode = false;

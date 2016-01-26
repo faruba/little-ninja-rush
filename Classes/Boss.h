@@ -244,10 +244,12 @@ protected:
 private:
   void playBeamEffect(const Vec2& dir){
     beam = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("littlebossEffect"));
-    //beam->setScale(2);
-    //beam->setAnchorPoint(Vec2(0.5,1));
-    beam->setPosition(100,-130);
-    //beam->setRotation(Vec2::angle(dir, center()));
+    beam->setScale(2);
+    beam->setAnchorPoint(Vec2(0.5,1));
+    //beam->setPosition(100,-130);
+    beam->setPosition(0,0);
+    float d =CC_RADIANS_TO_DEGREES(dir.getAngle()) - 90;
+		beam->setRotation(d);
     beam->playGTAnimation(0, true);
     mSprite->addChild(beam);   
   }
