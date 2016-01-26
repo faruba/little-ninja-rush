@@ -259,18 +259,5 @@ private:
   GTAnimatedSprite* beam;
  
 };
-class StaticNinjia : public MoveAndAttackRole{
-public:
-  CREATE_FUNC(StaticNinjia);
-  virtual void onCreate();
-  virtual const char* animationSetName() { return "mninja"; }
-  virtual bool supportAimAid(){return false;}
-  virtual void onRunning(float dt, bool playend){
-    mSprite->playGTAnimation(0, true);
-  }
-  
-protected:
-  virtual void afterDamage();
-};
 #endif /* defined(__little_ninja_rush__Boss__) */
 

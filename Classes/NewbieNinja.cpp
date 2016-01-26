@@ -64,26 +64,6 @@ void NewbieNinja::onUpdate(float delta) {
 			case Running:// run
 				{
 					mTimer += delta;
-					if( mTimer > NNINJA_POLLTIME )
-					{
-						if( randomInt(100) < NNINJA_AGGRISIVE )
-						{
-							if( mDartCount < NNINJA_MAXDART && GamePlay::sharedGamePlay()->count_attack <= 0 )
-							{
-								mState = PreparingToShoot;
-								mTimer = 0;
-								mSprite->playGTAnimation(6, true);
-								//play effect
-								GTAnimatedEffect *eff = GTAnimatedEffect::create(GTAnimation::loadedAnimationSet("effect"), 7, false);
-								eff->setPosition(cocos2d::Vec2(47, 19));
-								mSprite->addChild(eff);
-							}
-							else {
-								mState = Fleeing;
-							}
-						}
-						mTimer = 0;
-					}
 					if( playend )
 					{
 						mSprite->playGTAnimation(0, true);
@@ -256,7 +236,7 @@ bool NewbieNinja::deliverHit(int type, cocos2d::Point dir)
 		isCombo = true;
 	}
   // little boss
-  play->redNinjiaCount --;
+  play->staticNinjiaCount --;
   //end
 	// arcade combo
 	if( play->mode == MODE_ARCADE )

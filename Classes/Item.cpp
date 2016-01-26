@@ -408,7 +408,7 @@ void Item::onUpdate(float delta)
 				}
 				break;
 		}
-		if( mTid != 0 && mTid != 1 )
+		if( mTid >= 2 )
 		{
 			int index = mTid + GAME_UPGRADEOFFSET;
 			int level = GameRecord::sharedGameRecord()->item_upgrade[index];

@@ -112,10 +112,15 @@ void Pumpkin::onUpdate(float delta)
 					{
 						GameTool::PlaySound("pumpkinfly.mp3");
 						mFlySound = 3 + 7*CCRANDOM_0_1();
+            if (CCRANDOM_0_1() < 0.6) {
+              mState = Running;
+            }
 					}
 				}
 			}
 			break;
+    case Running:
+      break;
 		case Fleeing://escape
 			{
 				mTargetPos = Vec2(UniversalFit::sharedUniversalFit()->playSize.width + 100, SCREEN_HEIGHT/2);
