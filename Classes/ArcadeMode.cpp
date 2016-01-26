@@ -99,7 +99,9 @@ void ArcadeMode::onUpdate(float delta)
 				else
 				{
 					//run timer
-					timer -= deltatime;
+          // little boss
+					//timer -= deltatime;
+          //end
 					bool updatePiple = false;
 
 					//combo 衰减
