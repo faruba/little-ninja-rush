@@ -91,7 +91,8 @@ bool GamePlay::init()
       mDrawNode = DrawNode::create();
       addChild(mDrawNode, 10000);
     }
-
+    mAutoShootDelay = 0;
+    mTouchProcessed = true;
 		this->setAccelerometerEnabled(true);
 		state = -1;
 
@@ -378,6 +379,12 @@ void GamePlay::update(float delta)
   else
   {
     deltaDistance = 0;
+  }
+  mAutoShootDelay -= delta;
+  if (!mTouchProcessed && mAutoShootDelay <= 0) {
+    mAutoShootDelay = 0.1;
+    auto dir = mTouchBegin - mainrole->center() + UniversalFit::sharedUniversalFit()->sceneOffset;
+    this->gestureRecognize(ccpNormalize(dir),TAP);
   }
   //--------
   manager->update(delta);
@@ -728,18 +735,18 @@ cocos2d::Point GamePlay::autoAim(cocos2d::Point dir)
 
 bool GamePlay::onTouchBegan(Touch * touch, Event * event)
 {
-	if( paused )
-	{
-		return false;
-	}
+  if( paused )
+  {
+    return false;
+  }
 
-	if( count_control <= 0 )
-	{
-		LNR_GET_TOUCH_POS;
-		mTouchBegin = pos;
-		mTouchProcessed = false;
-	}
-	return true;
+  if( count_control <= 0 )
+  {
+    LNR_GET_TOUCH_POS;
+    mTouchBegin = pos;
+    mTouchProcessed = false;
+  }
+  return true;
 }
 
 void GamePlay::onTouchEnded(Touch * touch, Event * event)
@@ -757,25 +764,17 @@ void GamePlay::onTouchEnded(Touch * touch, Event * event)
 }
 void GamePlay::onTouchMoved(Touch * touch, Event * event)
 {
-	if( count_control <= 0)
-	{
-		if( mTouchProcessed == false )
-		{
-			LNR_GET_TOUCH_POS;
-      
-      cocos2d::Point dir = pos - mTouchBegin;
-      float len = ccpLength(dir);
-      if( len > CONTROL_MAXSLIDE )
-      {
-        mTouchProcessed = true;
-        this->gestureRecognize(ccpNormalize(dir),SLIDE);
-      }
-      
-		}
-	}
+  if( count_control <= 0)
+  {
+    if ( mTouchProcessed == false )
+    {
+      LNR_GET_TOUCH_POS;
+      mTouchBegin = pos;
+    }
+  }
   else {
-		mTouchProcessed = true;
-	}
+    mTouchProcessed = true;
+  }
 }
 
 void GamePlay::onAcceleration(Acceleration* pAccelerationValue, Event*)

@@ -39,6 +39,7 @@ class GamePlay :
 		virtual void onExit();
 
     cocos2d::DrawNode *mDrawNode = nullptr;
+    float mAutoShootDelay = 0;
     void drawCircle(cocos2d::Vec2 center, float radius) {
       mDrawNode->drawCircle(center, radius, 180, 30, false, 1, 1, cocos2d::Color4F::RED);
     }
