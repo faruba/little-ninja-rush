@@ -342,6 +342,9 @@ bool MiddleNinja::deliverHit(int type, cocos2d::Point dir)
 	//SP
 	play->mainrole->gainSP(3);
 
+  // little boss
+  play->redNinjiaCount --;
+  //end
 	mState = Dead;
 	//随机掉落道具
 	Item::triggerItem(1, mSprite->getPosition());

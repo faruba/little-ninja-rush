@@ -120,7 +120,7 @@ void ArcadeMode::onUpdate(float delta)
 						if( n != mRespawnLevCache )
 						{
 							mRespawn->setLevel(n);
-							mRespawnLevCache = n;
+							mRespawnLevCache = n % 8;
 							updatePiple = true;
 						}
 					}

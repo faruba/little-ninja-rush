@@ -482,6 +482,13 @@ void Boss::clearFloatGun()
     floatGunGroup[i] = NULL;
   }
 }
+bool Boss::onDead(float delta, bool playend) {
+  MoveAndAttackRole::onDead(delta, playend);
+  if (!playend) {
+    GamePlay *play = GamePlay::sharedGamePlay();
+    play->manager->addGameObject(Item::item(0, mSprite->getPosition(), play, true));
+  }
+}
 void Boss::onUpdate(float delta){
   MoveAndAttackRole::onUpdate(delta);
   if(shell != NULL){
@@ -590,28 +597,4 @@ void LittleBoss::onShooting(){
     this->playShellEffect();
     this->isGodmode = true;
   },0);
-}
-
-void StaticNinjia::onCreate(){
- 	mCollisionCircles.push_back(Circle(cocos2d::Vec2(20, 30), 18));
-
-	Role::onCreate();
-
-  
-  mTargetPos.init(bossMoveRange, Vec2(RESPAWN_YMIN * 0.4f, RESPAWN_YMIN + RESPAWN_Y));
-	//计算起跳点
-
-  const Vec2& pos =mTargetPos.getTarget();
-	mSprite->setPosition(pos);
-	mSprite->playGTAnimation(4, false);
-	mParent->addChild(mSprite,LAYER_ROLE+RESPAWN_Y);
-
-  
-	mDartCount = 0;
-	mFlag = true;
-	mSpeed =0;
-}
-void StaticNinjia::afterDamage(){
-  GamePlay* play = GamePlay::sharedGamePlay();
-  play->staticNinjiaCount --;
 }

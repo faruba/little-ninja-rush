@@ -291,11 +291,11 @@ void Respawn::updateClassic(float delta)
 
 #define respawnCreature(id,name, delay, maxCount, refresh) \
   if(!play->littlebossCount >=1) { \
-    if(play->name##Count < maxCount && (timer > delay) && /*((int)timer != lastGenTime) &&*/ ((int)timer - delay) % refresh == 0){ \
-      this->gen(id); \
-      play->name##Count ++; \
-      CCLOG("  create  " # name); \
-      lastGenTime = (int)timer; \
+		if(play->name##Count < maxCount && (timer > delay) && ((int)timer - delay) % refresh == 0){ \
+    this->gen(id); \
+    play->name##Count ++; \
+    CCLOG("  create  " # name); \
+    lastGenTime = (int)timer; \
     } \
   }
 void Respawn::updateArcade(float delta) 
@@ -315,8 +315,8 @@ void Respawn::updateArcade(float delta)
 	delta *= play->runspeed/play->levelspeed;
   
   // for little boss
-   respawnCreature(ENEMIES+5, staticNinjia, 0, 5, 5)
-   respawnCreature(0, redNinjia, 15, 3, 10)
+   respawnCreature(0, staticNinjia, 0, 5, 5)
+   respawnCreature(1, redNinjia, 15, 3, 10)
    respawnCreature(ENEMIES+2, pumkin, 10, 2, 10)
    //respawnCreature(ENEMIES+4, littleboss, 20, 1, 10)
    respawnCreature(ENEMIES+4, littleboss, 0, 1, 10)
@@ -449,10 +449,6 @@ void Respawn::gen(int tid) {
       play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<LittleBoss>(play)));
       CCLOG("after create Boss %d", play->enemies->count());
       break;
-     case ENEMIES + 5: //static
-      play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<StaticNinjia>(play)));
-      break;
-	
 	}
 }
 
