@@ -127,13 +127,13 @@ void MoveAndAttackRole::onShooting(){
 
 }
 
-void MoveAndAttackRole::shootDart(std::vector<Vec2>& dirList){
+void MoveAndAttackRole::shootDart(const std::vector<Vec2>& dirList,const std::string& shape){
   if(currentState() == Dead){
     return;
   }
   GamePlay* play = GamePlay::sharedGamePlay();
-  std::string shape = "tx_jb6.png";
-  for(Vec2& dir : dirList){
+  
+  for(const Vec2& dir : dirList){
     play->darts->addObject(play->manager->addGameObject(Dart::dart(shape, this->center(), dir, -2, mParent)));
   }
 //    mSprite->playGTAnimation(5, false);
@@ -589,12 +589,17 @@ void LittleBoss::onShooting(){
   
   float del = 0.2;
   playBeamEffect(dir);
+  dir *= 2;
+  Vec2 a1 = dir;
+  Vec2 a2 = dir;
+  a1.rotate(Vec2::ZERO, CC_DEGREES_TO_RADIANS(2)) ;
+  a2.rotate(Vec2::ZERO, CC_DEGREES_TO_RADIANS(-2));
+  std::vector<Vec2> dirList{dir,a1 ,a2};
   this->isGodmode = false;
   this->removeShellEffect();
-  repeatAction(16+3, 0.2, [this, dir](int idx)->void{
+  repeatAction(16+3, 0.2, [this, dirList](int idx)->void{
     if(idx <= 10){
-      std::vector<Vec2> dirList{dir*2};
-      this->shootDart(dirList);
+      this->shootDart(dirList,"tx_jb6.png");
     }
   }, [this](int idx)->void{
     this->changeState(Running);

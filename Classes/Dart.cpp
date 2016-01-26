@@ -7,7 +7,7 @@
 #include "GameRecord.h"
 #include "UniversalFit.h"
 
-Dart* Dart::dart(std::string& shap, cocos2d::Point pos, cocos2d::Point dir, int typ, Node* parent)
+Dart* Dart::dart(const std::string& shap, cocos2d::Point pos, cocos2d::Point dir, int typ, Node* parent)
 {
   Dart* ret = Dart::create();
   ret->mParent = parent;

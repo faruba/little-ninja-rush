@@ -130,7 +130,7 @@ protected:
   virtual void onShooting();
   virtual void onFleeing(){}
   virtual bool onDead(float delta, bool playend);
-  void shootDart(std::vector<Vec2>& dirList);
+  void shootDart(const std::vector<Vec2>& dirList, const std::string& shape = "dart.png");
   
   typedef std::function<void (int index)> repeatCB;
   void repeatAction(int times, float timeInterval, repeatCB cb, repeatCB onFinished, float delay = 0);

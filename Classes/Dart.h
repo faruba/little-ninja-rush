@@ -8,7 +8,7 @@ class Dart:
 {
 	public:
 		CREATE_FUNC(Dart);
-		static Dart* dart(std::string& shap, cocos2d::Point pos, cocos2d::Point dir, int typ, Node* parent);
+		static Dart* dart(const std::string& shap, cocos2d::Point pos, cocos2d::Point dir, int typ, Node* parent);
 
 		virtual bool isEnemy();
 		virtual cocos2d::Point position();
