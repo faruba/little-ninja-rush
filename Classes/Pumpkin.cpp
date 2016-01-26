@@ -32,9 +32,12 @@ void Pumpkin::onCreate() {
 	mHurtTimer = -1;
 
 	//init parameters
-	mTargetPos = Vec2(50, 210);
+	mTargetPos = Vec2(CCRANDOM_0_1()*0.8f*SCREEN_WIDTH+50 , 210);
+	//mTargetPos = Vec2(50, 210);
 	mTargetSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-45)), 100);
-	mPumpkinSpeed = ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-90)), 50);
+  //little boss
+  mPumpkinSpeed = Vec2::ZERO;//ccpMult(ccpForAngle(CC_DEGREES_TO_RADIANS(-90)), 50);
+  //end
 
 	GameTool::PlaySound("pumpkinstart.mp3");
 
@@ -91,7 +94,7 @@ void Pumpkin::onUpdate(float delta)
 				}
 				{//move target
 					cocos2d::Point ntp = ccpAdd(mTargetPos, ccpMult(mTargetSpeed, delta));
-					mTargetPos = ntp;
+					//mTargetPos = ntp;
 					//range check
 					//left && right
 					if( ( ntp.x < 50 && mTargetSpeed.x < 0 ) || ( ntp.x > 430 && mTargetSpeed.x > 0 ) )

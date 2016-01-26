@@ -587,6 +587,7 @@ void LittleBoss::onShooting(){
   Vec2 dir = getAttackDir(true);
   //Vec2 dir = Vec2(0,-1); //getAttackDir(true);
   
+  float del = 0.2;
   playBeamEffect(dir);
   this->isGodmode = false;
   this->removeShellEffect();
@@ -600,5 +601,5 @@ void LittleBoss::onShooting(){
     this->stopBeamEffect();
     this->playShellEffect();
     this->isGodmode = true;
-  },0.8);
+  },del);
 }
