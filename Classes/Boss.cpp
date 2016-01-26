@@ -111,7 +111,9 @@ Vec2 MoveAndAttackRole::getAttackDir(bool isAim /* = false */){
   }
   if(isAim || randomInt(3) )
   {
-    return target;
+    Vec2 temp = target - center();
+    temp.normalize();
+    return temp;
   }
   else {
     cocos2d::Point dir = ccpNormalize(ccpSub(target,center()));
@@ -130,7 +132,7 @@ void MoveAndAttackRole::shootDart(std::vector<Vec2>& dirList){
     return;
   }
   GamePlay* play = GamePlay::sharedGamePlay();
-  std::string shape = "dart.png";
+  std::string shape = "tx_jb6.png";
   for(Vec2& dir : dirList){
     play->darts->addObject(play->manager->addGameObject(Dart::dart(shape, this->center(), dir, -2, mParent)));
   }
@@ -557,7 +559,7 @@ void LittleBoss::onCreate() {
 
   
   attackTimeIntervalRange.set(4, 10);
-  mTargetPos.init(bossMoveRange, Vec2(RESPAWN_YMIN * 0.4f, RESPAWN_YMIN + RESPAWN_Y));
+  mTargetPos.init(bossMoveRange, Vec2(RESPAWN_YMIN * 0.6f, RESPAWN_YMIN + RESPAWN_Y));
 	//计算起跳点
 
   const Vec2& pos =mTargetPos.getTarget();
@@ -588,13 +590,15 @@ void LittleBoss::onShooting(){
   playBeamEffect(dir);
   this->isGodmode = false;
   this->removeShellEffect();
-  repeatAction(15, 0.2, [this, dir](int idx)->void{
-    std::vector<Vec2> dirList{dir};
-    this->shootDart(dirList);
+  repeatAction(16+3, 0.2, [this, dir](int idx)->void{
+    if(idx <= 10){
+      std::vector<Vec2> dirList{dir*2};
+      this->shootDart(dirList);
+    }
   }, [this](int idx)->void{
     this->changeState(Running);
     this->stopBeamEffect();
     this->playShellEffect();
     this->isGodmode = true;
-  },0);
+  },0.8);
 }

@@ -247,18 +247,22 @@ private:
     beam = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("littlebossEffect"));
     beam->setScale(2);
     beam->setAnchorPoint(Vec2(0.5,1));
-    //beam->setPosition(100,-130);
-    beam->setPosition(0,0);
-    float d =CC_RADIANS_TO_DEGREES(dir.getAngle()) - 90;
-		beam->setRotation(d);
+    beam->setPosition(90,50);
+    beam->setRotation(-(CC_RADIANS_TO_DEGREES(dir.getAngle())+90));
     beam->playGTAnimation(0, true);
-    mSprite->addChild(beam);   
+    mSprite->addChild(beam);
+    beamSoundId = GameTool::PlaySound("beem.mp3");
   }
   void stopBeamEffect(){
     mSprite->removeChild(beam, true);
     beam = NULL;
+    if(beamSoundId != 0){
+      GameTool::StopSound(beamSoundId);
+    }
   }
   GTAnimatedSprite* beam;
+  int beamSoundId = 0;
+
  
 };
 #endif /* defined(__little_ninja_rush__Boss__) */
