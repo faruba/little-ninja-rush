@@ -482,6 +482,13 @@ void Boss::clearFloatGun()
     floatGunGroup[i] = NULL;
   }
 }
+bool Boss::onDead(float delta, bool playend) {
+  MoveAndAttackRole::onDead(delta, playend);
+  if (!playend) {
+    GamePlay *play = GamePlay::sharedGamePlay();
+    play->manager->addGameObject(Item::item(0, mSprite->getPosition(), play, true));
+  }
+}
 void Boss::onUpdate(float delta){
   MoveAndAttackRole::onUpdate(delta);
   if(shell != NULL){

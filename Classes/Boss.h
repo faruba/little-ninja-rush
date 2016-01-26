@@ -196,6 +196,7 @@ protected:
     }
   }
 private:
+  virtual bool onDead(float delta, bool playend);
   std::vector<FloatGun*> floatGunGroup;
   bool isAllFloatGunDead();
   //flag
