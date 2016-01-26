@@ -9,6 +9,7 @@ cocos2d::Scene *Loading::loadTo(cocos2d::Scene* dst, GTLoadList* lst, GTLoadList
 	Loading *ll = Loading::create();
 	ll->mTip = tip;
 	ll->mFinish = false;
+  ll->mClicked = false;
 	ll->mScene = cocos2d::Scene::create();
 	ll->mDst = dst;
 	ll->mDst->retain();
@@ -126,24 +127,16 @@ void Loading::onEnter()
 }
 
 bool Loading::onTouchBegan(Touch * touch, Event * event) {
-	if ( mFinish ) {
-		return true;
-	}
-	return false;
+  return mFinish && !mClicked;
 }
 
 void Loading::onTouchEnded(Touch * touch, Event * event) {
-	if ( mFinish ) {
+	if ( mFinish && !mClicked) {
 		this->finishLoading();
+    mClicked = true;
 	}
 }
 
-void Loading::finishLoading() 
-{
+void Loading::finishLoading() {
 	cocos2d::CCDirector::getInstance()->replaceScene(mDst);
-	// TODO 不知道为毛： 此处崩溃直接原因是release 多来一次， 多的这一次源自
-	//DisplayLinkDirector::mainLoop()
-	if(mDst->getReferenceCount() > 0){
-		mDst->release();
-	}
 }

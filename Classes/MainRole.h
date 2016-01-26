@@ -25,7 +25,7 @@ class MainRole:
     void onHitArcade(int type);
 cocos2d::Sprite* sprite();
 cocos2d::Node *mParent;
-    GTAnimatedSprite *mSprite;
+
     int     mRoleId;
     int     mMoveFlag;
     float   mMoveSpeed;

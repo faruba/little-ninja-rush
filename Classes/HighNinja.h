@@ -22,11 +22,11 @@ class HighNinja:
     virtual bool supportAimAid();
     float  mTimer;
     int    mDartCount;
-    float  mTargetPos;
     bool   mFlag;
-    float  mSpeed;
     int   mSpell;
     cocos2d::Point mPoint;
+
+    RepositioningStateDelegate *mRepositionDelegate;
 
     float mStepSnow;
 

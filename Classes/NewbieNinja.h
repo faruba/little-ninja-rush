@@ -27,14 +27,9 @@ class NewbieNinja:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
 
-    float  mTimer;
     int    mDartCount;
-    float  mTargetPos;
     bool   mFlag;
-    float  mSpeed;
 
     float mStepSnow;
-
-
 };
 #endif

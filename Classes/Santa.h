@@ -19,7 +19,6 @@ class Santa:
     virtual bool supportAimAid();
 
     float  mTimer;
-    float  mSpeed;
 
     float mTargetPos;
     float mActionTimer;

@@ -358,7 +358,13 @@ void ClassicContinue::onUpdate(float delta)
 
 void ClassicContinue::onDestroy() 
 {
-	GamePlay::sharedGamePlay()->removeChild(mLayer, true);
+  //TODO:下面这两句是为了避免mLayer被提前释放的问题
+  //因为此处会从ControlLayer::onTouchEnded一路执行到这里
+  //也就是说，ControlLayer会触发自己的析构动作
+  //应该还有更好的结构
+  mLayer->retain();
+  mLayer->autorelease();
+  GamePlay::sharedGamePlay()->removeChild(mLayer, true);
 }
 
 void ClassicContinue::onUseCredit() 
