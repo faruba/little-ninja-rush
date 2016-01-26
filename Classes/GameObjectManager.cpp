@@ -77,7 +77,7 @@ void GameObjectManager::removeGameObject(GameObject* ObjId)
 		if( index != CC_INVALID_INDEX )
 		{
 			ObjId->onDestroy();
-			mList->replaceObjectAtIndex(index, GameObject::dummyObject());
+			mList->replaceObjectAtIndex(index, GameObject::dummyObject()); //TODO:This causes memory leak
 			cocos2d::CCInteger *num = cocos2d::CCInteger::create(index);
 			mFree->addObject(num);
 		}
