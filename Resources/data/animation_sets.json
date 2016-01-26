@@ -817,12 +817,14 @@
 				{
 					"duration_per_frame" : 0.1,
 					"frames" : [ "littleboss/bigbeem_01.png", "littleboss/bigbeem_02.png", "littleboss/bigbeem_03.png", 
-					"littleboss/bigbeem_04.png", "littleboss/bigbeem_05.png", "littleboss/bigbeem_06.png", "littleboss/bigbeem_07.png", "littleboss/bigbeem_08.png", "littleboss/bigbeem_09.png", "littleboss/bigbeem_10.png", "littleboss/bigbeem_11.png", 
-					"littleboss/bigbeem_04.png", "littleboss/bigbeem_05.png", "littleboss/bigbeem_06.png", "littleboss/bigbeem_07.png", "littleboss/bigbeem_08.png", "littleboss/bigbeem_09.png", "littleboss/bigbeem_10.png", "littleboss/bigbeem_11.png", 
-					"littleboss/bigbeem_04.png", "littleboss/bigbeem_05.png", "littleboss/bigbeem_06.png", "littleboss/bigbeem_07.png", "littleboss/bigbeem_08.png", "littleboss/bigbeem_09.png", "littleboss/bigbeem_10.png", "littleboss/bigbeem_11.png", 
-					"littleboss/bigbeem_04.png", "littleboss/bigbeem_05.png", "littleboss/bigbeem_06.png", "littleboss/bigbeem_07.png", "littleboss/bigbeem_08.png", "littleboss/bigbeem_09.png", "littleboss/bigbeem_10.png", "littleboss/bigbeem_11.png", 
-					"littleboss/bigbeem_04.png", "littleboss/bigbeem_05.png", "littleboss/bigbeem_06.png", "littleboss/bigbeem_07.png", "littleboss/bigbeem_08.png", "littleboss/bigbeem_09.png", "littleboss/bigbeem_10.png", "littleboss/bigbeem_11.png", 
-					"littleboss/bigbeem_12.png", "littleboss/bigbeem_13.png", "littleboss/bigbeem_14.png", "littleboss/bigbeem_15.png", "littleboss/bigbeem_16.png" ]
+					"littleboss/bigbeem_04.png", "littleboss/bigbeem_05.png", "littleboss/bigbeem_06.png",
+					"littleboss/bigbeem_07.png", "littleboss/bigbeem_08.png", "littleboss/bigbeem_09.png", "littleboss/bigbeem_10.png", "littleboss/bigbeem_11.png", 
+					"littleboss/bigbeem_12.png", "littleboss/bigbeem_13.png", "littleboss/bigbeem_14.png", "littleboss/bigbeem_15.png", "littleboss/bigbeem_16.png" , "littleboss/bigbeem_17.png" , "littleboss/bigbeem_18.png" , "littleboss/bigbeem_19.png" ,
+					"littleboss/bigbeem_12.png", "littleboss/bigbeem_13.png", "littleboss/bigbeem_14.png", "littleboss/bigbeem_15.png", "littleboss/bigbeem_16.png" , "littleboss/bigbeem_17.png" , "littleboss/bigbeem_18.png" , "littleboss/bigbeem_19.png" ,
+					"littleboss/bigbeem_12.png", "littleboss/bigbeem_13.png", "littleboss/bigbeem_14.png", "littleboss/bigbeem_15.png", "littleboss/bigbeem_16.png" , "littleboss/bigbeem_17.png" , "littleboss/bigbeem_18.png" , "littleboss/bigbeem_19.png" ,
+					"littleboss/bigbeem_12.png", "littleboss/bigbeem_13.png", "littleboss/bigbeem_14.png", "littleboss/bigbeem_15.png", "littleboss/bigbeem_16.png" , "littleboss/bigbeem_17.png" , "littleboss/bigbeem_18.png" , "littleboss/bigbeem_19.png" ,
+					"littleboss/bigbeem_20.png" , "littleboss/bigbeem_21.png" , "littleboss/bigbeem_22.png" , "littleboss/bigbeem_23.png" , "littleboss/bigbeem_24.png" 
+					]
 				}
 				]
 			}

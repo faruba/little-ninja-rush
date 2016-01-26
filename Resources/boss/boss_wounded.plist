@@ -7,327 +7,275 @@
             <key>boss/wounded_01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,394},{389,191}}</string>
+                <string>{{2,2},{390,191}}</string>
                 <key>offset</key>
-                <string>{16,7}</string>
+                <string>{39,-44}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{34,62},{389,191}}</string>
+                <string>{{80,149},{390,191}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{381,1007},{377,189}}</string>
+                <string>{{2,458},{280,299}}</string>
                 <key>offset</key>
-                <string>{6,7}</string>
+                <string>{-23,11}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{30,63},{377,189}}</string>
+                <string>{{73,40},{280,299}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{377,1389},{365,189}}</string>
+                <string>{{324,195},{236,337}}</string>
                 <key>offset</key>
-                <string>{-5,7}</string>
+                <string>{-59,30}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{25,63},{365,189}}</string>
+                <string>{{59,2},{236,337}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{377,1198},{373,189}}</string>
+                <string>{{284,628},{246,325}}</string>
                 <key>offset</key>
-                <string>{-5,7}</string>
+                <string>{-63,24}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{21,63},{373,189}}</string>
+                <string>{{50,14},{246,325}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_05.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1393},{365,187}}</string>
+                <string>{{278,876},{250,299}}</string>
                 <key>offset</key>
-                <string>{-5,6}</string>
+                <string>{-69,11}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{25,65},{365,187}}</string>
+                <string>{{42,40},{250,299}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_06.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{591,1580},{349,189}}</string>
+                <string>{{223,1397},{254,277}}</string>
                 <key>offset</key>
-                <string>{-9,2}</string>
+                <string>{-77,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{29,68},{349,189}}</string>
+                <string>{{32,62},{254,277}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_07.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{201,1582},{325,193}}</string>
+                <string>{{248,1128},{266,267}}</string>
                 <key>offset</key>
-                <string>{-17,-1}</string>
+                <string>{-87,-5}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{33,69},{325,193}}</string>
+                <string>{{16,72},{266,267}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_08.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{396,1580},{325,193}}</string>
+                <string>{{512,1457},{270,261}}</string>
                 <key>offset</key>
-                <string>{-20,-2}</string>
+                <string>{-91,-8}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{30,70},{325,193}}</string>
+                <string>{{10,78},{270,261}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_09.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1582},{327,197}}</string>
+                <string>{{512,1720},{272,259}}</string>
                 <key>offset</key>
-                <string>{-25,-4}</string>
+                <string>{-92,-9}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{24,70},{327,197}}</string>
+                <string>{{8,80},{272,259}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1194},{373,197}}</string>
+                <string>{{516,1208},{278,247}}</string>
                 <key>offset</key>
-                <string>{-4,0}</string>
+                <string>{-93,-15}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{22,66},{373,197}}</string>
+                <string>{{4,92},{278,247}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_11.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,587},{381,197}}</string>
+                <string>{{579,920},{286,223}}</string>
                 <key>offset</key>
-                <string>{3,2}</string>
+                <string>{-93,-27}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{25,64},{381,197}}</string>
+                <string>{{0,116},{286,223}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_12.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{766,742},{357,235}}</string>
+                <string>{{611,628},{290,205}}</string>
                 <key>offset</key>
-                <string>{-5,23}</string>
+                <string>{-91,-36}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{29,24},{357,235}}</string>
+                <string>{{0,134},{290,205}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_13.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{760,1101},{359,229}}</string>
+                <string>{{309,1676},{294,201}}</string>
                 <key>offset</key>
-                <string>{-2,20}</string>
+                <string>{-89,-39}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{31,30},{359,229}}</string>
+                <string>{{0,139},{294,201}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_14.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{788,375},{365,223}}</string>
+                <string>{{2,1751},{256,305}}</string>
                 <key>offset</key>
-                <string>{-1,18}</string>
+                <string>{-46,10}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{29,35},{365,223}}</string>
+                <string>{{62,38},{256,305}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_15.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{796,2},{371,219}}</string>
+                <string>{{2,1064},{244,331}}</string>
                 <key>offset</key>
-                <string>{-1,16}</string>
+                <string>{-42,22}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{26,39},{371,219}}</string>
+                <string>{{72,13},{244,331}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_16.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{385,593},{379,211}}</string>
+                <string>{{2,759},{274,303}}</string>
                 <key>offset</key>
-                <string>{-1,13}</string>
+                <string>{-20,9}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{22,46},{379,211}}</string>
+                <string>{{79,40},{274,303}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_17.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,786},{379,207}}</string>
+                <string>{{2,195},{320,261}}</string>
                 <key>offset</key>
-                <string>{2,11}</string>
+                <string>{7,-11}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{25,50},{379,207}}</string>
+                <string>{{83,81},{320,261}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_18.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{383,806},{377,199}}</string>
+                <string>{{2,1397},{352,219}}</string>
                 <key>offset</key>
-                <string>{6,8}</string>
+                <string>{27,-31}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{30,57},{377,199}}</string>
+                <string>{{87,122},{352,219}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_19.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,995},{377,197}}</string>
+                <string>{{324,433},{372,193}}</string>
                 <key>offset</key>
-                <string>{9,7}</string>
+                <string>{36,-44}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{33,59},{377,197}}</string>
+                <string>{{86,148},{372,193}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_20.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{393,396},{383,195}}</string>
+                <string>{{394,2},{384,191}}</string>
                 <key>offset</key>
-                <string>{9,7}</string>
+                <string>{39,-44}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{30,60},{383,195}}</string>
+                <string>{{83,149},{384,191}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
             <key>boss/wounded_21.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{397,199},{389,195}}</string>
+                <string>{{2,2},{390,191}}</string>
                 <key>offset</key>
-                <string>{8,7}</string>
+                <string>{39,-44}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{26,60},{389,195}}</string>
+                <string>{{80,149},{390,191}}</string>
                 <key>sourceSize</key>
-                <string>{425,329}</string>
-            </dict>
-            <key>boss/wounded_22.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{2,2},{397,195}}</string>
-                <key>offset</key>
-                <string>{7,8}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{21,59},{397,195}}</string>
-                <key>sourceSize</key>
-                <string>{425,329}</string>
-            </dict>
-            <key>boss/wounded_23.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{401,2},{393,195}}</string>
-                <key>offset</key>
-                <string>{10,8}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{26,59},{393,195}}</string>
-                <key>sourceSize</key>
-                <string>{425,329}</string>
-            </dict>
-            <key>boss/wounded_24.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{2,199},{393,193}}</string>
-                <key>offset</key>
-                <string>{13,8}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{29,60},{393,193}}</string>
-                <key>sourceSize</key>
-                <string>{425,329}</string>
-            </dict>
-            <key>boss/wounded_25.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{2,394},{389,191}}</string>
-                <key>offset</key>
-                <string>{16,7}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{34,62},{389,191}}</string>
-                <key>sourceSize</key>
-                <string>{425,329}</string>
+                <string>{472,401}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -337,9 +285,9 @@
             <key>realTextureFileName</key>
             <string>boss_wounded.png</string>
             <key>size</key>
-            <string>{1017,1917}</string>
+            <string>{824,2009}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:5ce0bccfcdc11e9d987cd17ed293c7ae:54e644fc2d4b2dbb0e62af68006fa963:11405db1c6b6f9df149cd8cd3148bf13$</string>
+            <string>$TexturePacker:SmartUpdate:7ae2ec224ce7c9f0c1bb6eafbb0b6d36:b97e4d951d1c71247f6901a85b6ff1e5:11405db1c6b6f9df149cd8cd3148bf13$</string>
             <key>textureFileName</key>
             <string>boss_wounded.png</string>
         </dict>

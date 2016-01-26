@@ -9,208 +9,312 @@
                 <key>frame</key>
                 <string>{{2,2},{108,68}}</string>
                 <key>offset</key>
-                <string>{0,330}</string>
+                <string>{0,370}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{97,6},{108,68}}</string>
+                <string>{{97,18},{108,68}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{112,2},{136,282}}</string>
+                <string>{{112,2},{136,594}}</string>
                 <key>offset</key>
-                <string>{3,222}</string>
+                <string>{3,104}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{86,7},{136,282}}</string>
+                <string>{{86,21},{136,594}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1456},{294,480}}</string>
+                <string>{{250,2},{294,784}}</string>
                 <key>offset</key>
-                <string>{-1,129}</string>
+                <string>{-1,17}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{3,1},{294,480}}</string>
+                <string>{{3,13},{294,784}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{342,2},{112,724}}</string>
+                <string>{{546,2},{242,802}}</string>
                 <key>offset</key>
-                <string>{8,2}</string>
+                <string>{-6,8}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{103,6},{112,724}}</string>
+                <string>{{24,13},{242,802}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_05.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{690,2},{118,724}}</string>
+                <string>{{790,2},{158,812}}</string>
                 <key>offset</key>
-                <string>{8,2}</string>
+                <string>{8,6}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{100,6},{118,724}}</string>
+                <string>{{80,10},{158,812}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_06.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{572,2},{116,724}}</string>
+                <string>{{950,2},{116,824}}</string>
                 <key>offset</key>
-                <string>{9,2}</string>
+                <string>{6,2}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{102,6},{116,724}}</string>
+                <string>{{99,8},{116,824}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_07.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{456,2},{114,724}}</string>
+                <string>{{1068,2},{126,792}}</string>
                 <key>offset</key>
-                <string>{6,2}</string>
+                <string>{1,21}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{100,6},{114,724}}</string>
+                <string>{{89,5},{126,792}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_08.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{810,2},{120,724}}</string>
+                <string>{{1196,2},{124,760}}</string>
                 <key>offset</key>
-                <string>{7,2}</string>
+                <string>{2,34}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{98,6},{120,724}}</string>
+                <string>{{91,8},{124,760}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_09.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,728},{134,724}}</string>
+                <string>{{1322,2},{158,770}}</string>
                 <key>offset</key>
-                <string>{3,2}</string>
+                <string>{8,27}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{87,6},{134,724}}</string>
+                <string>{{80,10},{158,770}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{138,728},{140,724}}</string>
+                <string>{{1482,2},{148,780}}</string>
                 <key>offset</key>
-                <string>{6,2}</string>
+                <string>{5,25}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{87,6},{140,724}}</string>
+                <string>{{82,7},{148,780}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_11.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{422,728},{146,706}}</string>
+                <string>{{1632,2},{148,778}}</string>
                 <key>offset</key>
-                <string>{7,-1}</string>
+                <string>{2,28}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{85,18},{146,706}}</string>
+                <string>{{79,5},{148,778}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_12.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{888,728},{162,722}}</string>
+                <string>{{1782,2},{192,740}}</string>
                 <key>offset</key>
-                <string>{5,3}</string>
+                <string>{1,50}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{75,6},{162,722}}</string>
+                <string>{{56,2},{192,740}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_13.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{250,2},{90,720}}</string>
+                <string>{{2,828},{200,742}}</string>
                 <key>offset</key>
-                <string>{2,2}</string>
+                <string>{1,51}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{108,8},{90,720}}</string>
+                <string>{{52,0},{200,742}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_14.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{280,728},{140,726}}</string>
+                <string>{{204,828},{196,740}}</string>
                 <key>offset</key>
-                <string>{-10,-2}</string>
+                <string>{-5,50}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{71,9},{140,726}}</string>
+                <string>{{48,2},{196,740}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_15.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{570,728},{144,718}}</string>
+                <string>{{402,828},{170,740}}</string>
                 <key>offset</key>
-                <string>{1,-1}</string>
+                <string>{16,50}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{80,12},{144,718}}</string>
+                <string>{{82,2},{170,740}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
             </dict>
             <key>littleboss/bigbeem_16.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{716,728},{170,672}}</string>
+                <string>{{574,828},{180,738}}</string>
                 <key>offset</key>
-                <string>{2,15}</string>
+                <string>{6,49}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{68,19},{170,672}}</string>
+                <string>{{67,4},{180,738}}</string>
                 <key>sourceSize</key>
-                <string>{302,740}</string>
+                <string>{302,844}</string>
+            </dict>
+            <key>littleboss/bigbeem_17.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{756,828},{160,740}}</string>
+                <key>offset</key>
+                <string>{-2,50}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{69,2},{160,740}}</string>
+                <key>sourceSize</key>
+                <string>{302,844}</string>
+            </dict>
+            <key>littleboss/bigbeem_18.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{918,828},{178,738}}</string>
+                <key>offset</key>
+                <string>{3,49}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{65,4},{178,738}}</string>
+                <key>sourceSize</key>
+                <string>{302,844}</string>
+            </dict>
+            <key>littleboss/bigbeem_19.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1098,828},{192,734}}</string>
+                <key>offset</key>
+                <string>{1,52}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{56,3},{192,734}}</string>
+                <key>sourceSize</key>
+                <string>{302,844}</string>
+            </dict>
+            <key>littleboss/bigbeem_20.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1292,828},{162,722}}</string>
+                <key>offset</key>
+                <string>{5,42}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{75,19},{162,722}}</string>
+                <key>sourceSize</key>
+                <string>{302,844}</string>
+            </dict>
+            <key>littleboss/bigbeem_21.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1456,828},{90,720}}</string>
+                <key>offset</key>
+                <string>{2,41}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{108,21},{90,720}}</string>
+                <key>sourceSize</key>
+                <string>{302,844}</string>
+            </dict>
+            <key>littleboss/bigbeem_22.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1548,828},{140,726}}</string>
+                <key>offset</key>
+                <string>{-10,37}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{71,22},{140,726}}</string>
+                <key>sourceSize</key>
+                <string>{302,844}</string>
+            </dict>
+            <key>littleboss/bigbeem_23.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1690,828},{144,718}}</string>
+                <key>offset</key>
+                <string>{1,39}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{80,24},{144,718}}</string>
+                <key>sourceSize</key>
+                <string>{302,844}</string>
+            </dict>
+            <key>littleboss/bigbeem_24.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1836,828},{170,672}}</string>
+                <key>offset</key>
+                <string>{2,54}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{68,32},{170,672}}</string>
+                <key>sourceSize</key>
+                <string>{302,844}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -220,9 +324,9 @@
             <key>realTextureFileName</key>
             <string>bigbeem.png</string>
             <key>size</key>
-            <string>{1052,1938}</string>
+            <string>{2008,1572}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:416395ea964125e8e7d7b27ccef191df:b7e399b9cd00553fe6ce427148a6d303:643e26b8c074db56cd3a36bc5d89f023$</string>
+            <string>$TexturePacker:SmartUpdate:d0fda222323316c9450a6a9182a5a53b:70500ee721d2a58c1336e85d3aadc322:643e26b8c074db56cd3a36bc5d89f023$</string>
             <key>textureFileName</key>
             <string>bigbeem.png</string>
         </dict>
