@@ -574,7 +574,7 @@ void LittleBoss::onShooting(){
   std::vector<Vec2> dirList{dir,a1 ,a2};
   this->isGodmode = false;
   this->removeShellEffect();
-  repeatAction(16+3, 0.2, [this, dirList](int idx)->void{
+  repeatAction(16+7, 0.2, [this, dirList](int idx)->void{
     if(idx <= 10){
       this->shootDart(dirList,"tx_jb6.png");
     }
