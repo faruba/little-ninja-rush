@@ -751,7 +751,7 @@
 				},
 				{
 					"duration_per_frame" : 0.05,
-					"frames" : [ "boss/wounded_01.png", "boss/wounded_02.png", "boss/wounded_03.png", "boss/wounded_04.png", "boss/wounded_05.png", "boss/wounded_06.png", "boss/wounded_07.png", "boss/wounded_08.png", "boss/wounded_09.png", "boss/wounded_10.png", "boss/wounded_11.png", "boss/wounded_12.png", "boss/wounded_13.png", "boss/wounded_14.png", "boss/wounded_15.png", "boss/wounded_16.png", "boss/wounded_17.png", "boss/wounded_18.png", "boss/wounded_19.png", "boss/wounded_20.png", "boss/wounded_21.png", "boss/wounded_22.png", "boss/wounded_23.png", "boss/wounded_24.png", "boss/wounded_25.png"]
+					"frames" : [ "boss/wounded_01.png", "boss/wounded_02.png", "boss/wounded_03.png", "boss/wounded_04.png", "boss/wounded_05.png", "boss/wounded_06.png", "boss/wounded_07.png", "boss/wounded_08.png", "boss/wounded_09.png", "boss/wounded_10.png", "boss/wounded_11.png", "boss/wounded_12.png", "boss/wounded_13.png", "boss/wounded_14.png", "boss/wounded_15.png", "boss/wounded_16.png", "boss/wounded_17.png", "boss/wounded_18.png", "boss/wounded_19.png", "boss/wounded_20.png", "boss/wounded_21.png"]
 				}
 				]
 			},
