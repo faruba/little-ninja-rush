@@ -49,7 +49,7 @@ class Respawn:
   
   float timer = 0;
   int lastGenTime =0;
-  
+  void removeOthers();
   //end
 
 };
