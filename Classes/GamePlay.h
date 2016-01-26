@@ -224,6 +224,16 @@ class GamePlay :
 		int count_attack;//是否攻击玩家
 		int count_respawn;//是否刷怪
 		int count_runscene;//是否滚动场景
+  
+  
+  
+  
+  // little boss
+  int staticNinjiaCount ;
+  int redNinjiaCount;
+  int pumkinCount;
+  int littlebossCount;
+  //end
 	private:
 		UISwapper mUISwapper;
 		float mGravityFix = 1;

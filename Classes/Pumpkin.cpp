@@ -221,6 +221,9 @@ bool Pumpkin::deliverHit(int type, cocos2d::Point dir)
 			mTimer = 0;
 			mCoinsCounter = 0;
 
+      // little boss
+      play->pumkinCount --;
+      //end
 			//achievement : kill pumpkin
 			play->killpumpkins++;
 			GameRecord::sharedGameRecord()->task->dispatchTask(ACH_KILLPUMPKINS, 1);

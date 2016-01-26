@@ -44,6 +44,13 @@ class Respawn:
     bool judge(int tid);
 
     void gen(int tid);
+  
+  //===== for little boss
+  
+  float timer = 0;
+  int lastGenTime =0;
+  
+  //end
 
 };
 #endif

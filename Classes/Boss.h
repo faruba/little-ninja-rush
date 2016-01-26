@@ -22,8 +22,8 @@ public:
 private:
   struct excuteRecord{
   public:
-    excuteRecord(float time, callbackFunction cb){
-      timer = 0;
+    excuteRecord(float time,float delay, callbackFunction cb){
+      timer = 0 - delay;
       excuteTime = time;
       callback = cb;
     }
@@ -43,8 +43,8 @@ public:
   void resetCoroutine(){
     list.clear();
   }
-  void startAfterSecond(float time, callbackFunction cb){
-    list.push_back(excuteRecord(time, cb));
+  void startAfterSecond(float time,float delay, callbackFunction cb){
+    list.push_back(excuteRecord(time, delay,cb));
   }
   void onUpdateCoroutine(float delta){
     for(excuteRecord& rec : list){
@@ -121,7 +121,7 @@ public:
   }
   
 protected:
-  Vec2 getAttackDir();
+  Vec2 getAttackDir(bool isAim = false);
   void playPrepareAnimation();
   
   virtual void onEntering(float dt, bool playend);
@@ -133,7 +133,7 @@ protected:
   void shootDart(std::vector<Vec2>& dirList);
   
   typedef std::function<void (int index)> repeatCB;
-  void repeatAction(int times, float timeInterval, repeatCB cb, repeatCB onFinished);
+  void repeatAction(int times, float timeInterval, repeatCB cb, repeatCB onFinished, float delay = 0);
   
   virtual void afterDamage() = 0;
 
@@ -180,16 +180,8 @@ public:
   virtual void onShooting();
   void onSpecialShoot();
   void releaseFloatGun(const Vec2& pos, int& index);
+protected:
   virtual void afterDamage();
-
-private:
-  std::vector<FloatGun*> floatGunGroup;
-  bool isAllFloatGunDead();
-  //flag
-  bool isMakedSpecialShoot = false;
-  bool isState2 = false;
-  void clearFloatGun();
-  GTAnimatedSprite* shell;
   void playShellEffect(){
     shell = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("bossEffect"));
     shell->setScale(2);
@@ -198,10 +190,19 @@ private:
     mSprite->addChild(shell);
   }
   void removeShellEffect(){
-    mSprite->removeChild(shell, true);
-    shell = NULL;
+    if(shell != NULL){
+      mSprite->removeChild(shell, true);
+      shell = NULL;
+    }
   }
-
+private:
+  std::vector<FloatGun*> floatGunGroup;
+  bool isAllFloatGunDead();
+  //flag
+  bool isMakedSpecialShoot = false;
+  bool isState2 = false;
+  void clearFloatGun();
+  GTAnimatedSprite* shell = NULL;
 };
 class FloatGun :public  MoveAndAttackRole
 {
@@ -227,6 +228,48 @@ private:
     mSprite->addChild(mark);
   }
   Boss* owner;
+};
+
+class LittleBoss :public  Boss
+{
+public:
+  CREATE_FUNC(LittleBoss);
+  virtual void onCreate();
+  virtual const char* animationSetName() { return "little_boss"; }
+  virtual bool supportAimAid(){return false;}
+  virtual void onShooting();
+  virtual void onUpdate(float delta);
+protected:
+  virtual void afterDamage();
+private:
+  void playBeamEffect(const Vec2& dir){
+    beam = GTAnimatedSprite::spriteWithGTAnimation(GTAnimation::loadedAnimationSet("littlebossEffect"));
+    //beam->setScale(2);
+    //beam->setAnchorPoint(Vec2(0.5,1));
+    beam->setPosition(100,-130);
+    //beam->setRotation(Vec2::angle(dir, center()));
+    beam->playGTAnimation(0, true);
+    mSprite->addChild(beam);   
+  }
+  void stopBeamEffect(){
+    mSprite->removeChild(beam, true);
+    beam = NULL;
+  }
+  GTAnimatedSprite* beam;
+ 
+};
+class StaticNinjia : public MoveAndAttackRole{
+public:
+  CREATE_FUNC(StaticNinjia);
+  virtual void onCreate();
+  virtual const char* animationSetName() { return "mninja"; }
+  virtual bool supportAimAid(){return false;}
+  virtual void onRunning(float dt, bool playend){
+    mSprite->playGTAnimation(0, true);
+  }
+  
+protected:
+  virtual void afterDamage();
 };
 #endif /* defined(__little_ninja_rush__Boss__) */
 

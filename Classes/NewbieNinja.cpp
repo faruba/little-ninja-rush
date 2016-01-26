@@ -255,6 +255,9 @@ bool NewbieNinja::deliverHit(int type, cocos2d::Point dir)
 		play->makeCombo();
 		isCombo = true;
 	}
+  // little boss
+  play->redNinjiaCount --;
+  //end
 	// arcade combo
 	if( play->mode == MODE_ARCADE )
 	{

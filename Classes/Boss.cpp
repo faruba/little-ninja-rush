@@ -17,7 +17,7 @@
 #include "FootPrint.h"
 #include "UserSetting.h"
 
-#define  NOMAL_SHOOT_RATE 90
+#define  NOMAL_SHOOT_RATE 40
 #define MAX_BOSS_HP 10
 #define BOSS_STATE1_HP 9
 #define BOSS_STATE2_HP 4
@@ -71,7 +71,7 @@ void MoveAndAttackRole::onRunning(float dt, bool playend)
   }
   else {
     mTargetPos.genNextPlan();
-    if( randomInt(900) < MNINJA_AGGRISIVE )
+    if( randomInt(100) < 30)
     {
       if( mDartCount < MNINJA_MAXDART && GamePlay::sharedGamePlay()->count_attack <= 0 )
       {
@@ -98,7 +98,7 @@ void MoveAndAttackRole::onPreparingToShoot(float dt){
   onShooting();
 }
 
-Vec2 MoveAndAttackRole::getAttackDir(){
+Vec2 MoveAndAttackRole::getAttackDir(bool isAim /* = false */){
   GamePlay* play = GamePlay::sharedGamePlay();
   Vec2 target = play->mainrole->center();
   if( play->mainrole2 != NULL )
@@ -108,7 +108,7 @@ Vec2 MoveAndAttackRole::getAttackDir(){
       target = play->mainrole2->center();
     }
   }
-  if( randomInt(3))
+  if(isAim || randomInt(3) )
   {
     return target;
   }
@@ -135,10 +135,10 @@ void MoveAndAttackRole::shootDart(std::vector<Vec2>& dirList){
   }
 //    mSprite->playGTAnimation(5, false);
 }
-void MoveAndAttackRole::repeatAction(int times, float timeInterval,repeatCB cb, repeatCB onFinised){
+void MoveAndAttackRole::repeatAction(int times, float timeInterval,repeatCB cb, repeatCB onFinised, float delay /*= 0*/){
   //CCLOG("=====  add repeatAction %f", timeInterval);
   int* currentCount = new int(0);
-  startAfterSecond(timeInterval, [times,currentCount,cb, onFinised](){
+  startAfterSecond(timeInterval, delay, [times,currentCount,cb, onFinised](){
     if(*currentCount == times){
       delete currentCount;
       onFinised(-1);
@@ -367,6 +367,9 @@ void Boss::onCreate() {
 	mSpeed = ENEMY_NNRUNSPEED;
   hp = UserSetting::instance()->getData<int>("bossHP");
   floatGunGroup.assign(FLOAT_GUN_COUNT, NULL);
+  
+  GamePlay* play = GamePlay::sharedGamePlay();
+  play->count_respawn ++;
 }
 
 void Boss::onShooting(){
@@ -384,7 +387,9 @@ void Boss::onShooting(){
     }, [this](int idx) ->void{
       this->changeState(Running);
     });
-   } 
+   }else{
+     this->changeState(Running);
+   }
   }
   
 }
@@ -423,6 +428,10 @@ void Boss::afterDamage()
     isState2 = true;
     onSpecialShoot();
   }
+  if(hp <= 0){
+    GamePlay* play = GamePlay::sharedGamePlay();
+    play->count_respawn = 0;
+  }
   
 }
 
@@ -446,7 +455,7 @@ void Boss::onFloatGunDead(FloatGun* floatGun){
       removeShellEffect();
     }
     isHighSpeedMode = false;
-    startAfterSecond(10.0f, [this]() ->bool{
+    startAfterSecond(10.0f,0, [this]() ->bool{
       this->onSpecialShoot();
       return false;
     });
@@ -530,4 +539,77 @@ void FloatGun::onShooting(){
     changeState(Running);
   });
   
+}
+
+void LittleBoss::onCreate() {
+	//mCollisionCircles.push_back(Circle(cocos2d::Vec2(6, 12), 9));
+	mCollisionCircles.push_back(Circle(cocos2d::Vec2(10, 30), 68));
+
+	Role::onCreate();
+
+  
+  attackTimeIntervalRange.set(4, 10);
+  mTargetPos.init(bossMoveRange, Vec2(RESPAWN_YMIN * 0.4f, RESPAWN_YMIN + RESPAWN_Y));
+	//计算起跳点
+
+  const Vec2& pos =mTargetPos.getTarget();
+	mSprite->setPosition(pos);
+	mSprite->playGTAnimation(4, false);
+	mParent->addChild(mSprite,LAYER_ROLE+RESPAWN_Y);
+
+  
+	mDartCount = 0;
+	mFlag = true;
+	mSpeed = ENEMY_NNRUNSPEED;
+  setMaxHp( UserSetting::instance()->getData<int>("littleBossHp"));
+}
+
+void LittleBoss::onUpdate(float delta){
+  Boss::onUpdate(delta);
+  if(beam!= NULL){
+    beam->updateGTAnimation(delta);
+  }
+}
+void LittleBoss::afterDamage(){
+}
+void LittleBoss::onShooting(){
+  this->changeState(Shooting);
+  Vec2 dir = Vec2(0,-1); //getAttackDir(true);
+  
+  playBeamEffect(dir);
+  this->isGodmode = false;
+  this->removeShellEffect();
+  repeatAction(15, 0.2, [this, dir](int idx)->void{
+    std::vector<Vec2> dirList{dir};
+    this->shootDart(dirList);
+  }, [this](int idx)->void{
+    this->changeState(Running);
+    this->stopBeamEffect();
+    this->playShellEffect();
+    this->isGodmode = true;
+  },0);
+}
+
+void StaticNinjia::onCreate(){
+ 	mCollisionCircles.push_back(Circle(cocos2d::Vec2(20, 30), 18));
+
+	Role::onCreate();
+
+  
+  mTargetPos.init(bossMoveRange, Vec2(RESPAWN_YMIN * 0.4f, RESPAWN_YMIN + RESPAWN_Y));
+	//计算起跳点
+
+  const Vec2& pos =mTargetPos.getTarget();
+	mSprite->setPosition(pos);
+	mSprite->playGTAnimation(4, false);
+	mParent->addChild(mSprite,LAYER_ROLE+RESPAWN_Y);
+
+  
+	mDartCount = 0;
+	mFlag = true;
+	mSpeed =0;
+}
+void StaticNinjia::afterDamage(){
+  GamePlay* play = GamePlay::sharedGamePlay();
+  play->staticNinjiaCount --;
 }

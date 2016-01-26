@@ -495,6 +495,13 @@ void GamePlay::resetGame()
 	count_attack = 0;
 	count_runscene = 0;
 
+  // little boss
+  staticNinjiaCount  = 0;
+  redNinjiaCount = 0;
+  pumkinCount = 0;
+  littlebossCount = 0;
+ 
+  //end
 	flag_samurai = false;
 
 	mainrole->HP = mainrole->maxHP;

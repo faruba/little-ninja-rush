@@ -190,8 +190,10 @@ void ArcadeMode::onUpdate(float delta)
 							{
 								//apply fever level
 								feverlevel = fl;
-								play->setFeverLevel(feverlevel);
-								updatePiple = true;
+                //little boss
+								//play->setFeverLevel(feverlevel);
+								//updatePiple = true;
+                //end
 								if( fl == 0 )
 								{
 									play->interface->setArcadeX(0);
@@ -271,12 +273,16 @@ void ArcadeMode::onUpdate(float delta)
 
 void ArcadeMode::onMainHit() 
 {
+    //little boss
+  return;
+  //end
 	GamePlay *play = GamePlay::sharedGamePlay();
 	//Apply Speed
 	speed = ARCADE_MINSPEED;
 	feverlevel = 0;
 	play->interface->setArcadeX(0);
 	play->setFeverLevel(0);
+
 	//this->updateSpeed();//speed will be updated every frame
 	//中断combo
 	play->stopCombo();

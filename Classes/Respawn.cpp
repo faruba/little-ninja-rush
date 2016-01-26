@@ -205,6 +205,10 @@ void Respawn::updateClassic(float delta)
 	//时间膨胀
 	delta *= play->runspeed/play->levelspeed;
 
+  // for boss
+  this->gen(ENEMIES +3);
+  return ;
+  ///// end
 	if( mReady >= 0 )
 	{
 		if( mReady == ENEMIES+1 )
@@ -285,6 +289,13 @@ void Respawn::updateClassic(float delta)
 	}
 }
 
+#define respawnCreature(id,name, delay, maxCount, refresh) \
+  if(play->name##Count < maxCount && (timer > delay) && /*((int)timer != lastGenTime) &&*/ ((int)timer - delay) % refresh == 0){ \
+    this->gen(id); \
+    play->name##Count ++; \
+    CCLOG("  create  " # name); \
+    lastGenTime = (int)timer; \
+  }
 void Respawn::updateArcade(float delta) 
 {
 	if( mPiple > 100 )
@@ -300,6 +311,15 @@ void Respawn::updateArcade(float delta)
 
 	//时间膨胀
 	delta *= play->runspeed/play->levelspeed;
+  
+  // for little boss
+   respawnCreature(ENEMIES+5, staticNinjia, 0, 5, 5)
+   respawnCreature(0, redNinjia, 15, 3, 10)
+   respawnCreature(ENEMIES+2, pumkin, 10, 2, 10)
+   respawnCreature(ENEMIES+4, littleboss, 20, 1, 10)
+  timer += delta;
+  return;
+  ///// end
 
 	if( mReady >= 0 )
 	{
@@ -366,17 +386,10 @@ bool Respawn::judge(int tid)
 typedef Role* (*RoleCreator)(cocos2d::Node*);
 
 void Respawn::gen(int tid) {
-  static int  time = 0;
-  if(time != 0){
-    return;
-  }
-  time ++;
 	RoleCreator creatorFunc[] = {
 		Role::CreateRole<NewbieNinja>, Role::CreateRole<MiddleNinja>, Role::CreateRole<HighNinja>
 	};
 	GamePlay *play = GamePlay::sharedGamePlay();
-  play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<Boss>(play)));
-  return ;
 	switch (tid) {
 		case 0:
 		case 1:
@@ -425,5 +438,15 @@ void Respawn::gen(int tid) {
 				}
 			}
 			break;
+    case ENEMIES + 3: //boss
+      play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<Boss>(play)));
+      break;
+    case ENEMIES + 4: //boss
+      play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<LittleBoss>(play)));
+     case ENEMIES + 5: //boss
+      play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<StaticNinjia>(play)));
+      break;
+	     break;
+	
 	}
 }
