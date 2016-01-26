@@ -22,6 +22,8 @@ void Santa::onCreate() {
 
 	Role::onCreate();
 
+  switchStateDelegate(Repositioning, RoleStateDelegate::CreateDelegate<RepositioningStateDelegate>());
+
 	GamePlay *play = GamePlay::sharedGamePlay();
 	int y = CCRANDOM_0_1()*RESPAWN_Y;
 	int x = (play->state == STATE_RUSH) ? UniversalFit::sharedUniversalFit()->playSize.width+100:-100;
@@ -30,16 +32,15 @@ void Santa::onCreate() {
 	mSprite->playGTAnimation(0, true);
 	mParent->addChild(mSprite, LAYER_ROLE+RESPAWN_Y-y);
 
-	mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
 	mSpeed = ENEMY_NNRUNSPEED;
 
 	mCoinTimer = 0;
-	mActionTimer = 0;
+	mActionTimer = -100;
 	mHited = false;
 }
 
-void Santa::onUpdate(float delta) 
-{
+void Santa::onUpdate(float delta) {
+  Role::onUpdate(delta);
 	bool playend = mSprite->updateGTAnimation(delta);
 	GamePlay* play = GamePlay::sharedGamePlay();
 	bool removeflag = false;
@@ -48,51 +49,28 @@ void Santa::onUpdate(float delta)
 
 	if (!gameOver) {//主角死亡的处理
 		switch (mState) {
-			case Entering:// run to position
-				{
-					float ds = delta*mSpeed;
-					float dis = mTargetPos - mSprite->getPosition().x;
-					cocos2d::Point np = mSprite->getPosition();
-					if( fabsf(dis) > ds )
-					{
-						if( dis > 0 )
-						{
-							np.x += ds;
-						}
-						else {
-							np.x -= ds;
-						}
-						mSprite->setPosition(np);
-					}
-					else {
-						np.x = mTargetPos;
-						//上场就奔跑
-						mState = Running;
-						mActionTimer = 2 + 3*CCRANDOM_0_1();
-					}
-					if( playend )
-					{
-						mSprite->playGTAnimation(0, true);
-					}
+			case Entering:
+      case Repositioning:
+        mStateDelegate[Repositioning]->update(delta);
 
-					dropcoins = true;
-					mTimer += delta;
-					if( mTimer > SANTA_LIFE )
-					{
-						mState = Fleeing;
-						mTargetPos = UniversalFit::sharedUniversalFit()->playSize.width+150;
-						mSpeed = ENEMY_NNRUNSPEED;
-					}
-				}
+        dropcoins = true;
+        if( mLifeSpan > SANTA_LIFE ) {
+          mState = Fleeing;
+          mTargetPos = UniversalFit::sharedUniversalFit()->playSize.width+150;
+          mSpeed = ENEMY_NNRUNSPEED;
+        }
 				break;
 			case Running:// stop
 				{
+          if (mActionTimer <= -99) {
+            mActionTimer = 2 + 3*CCRANDOM_0_1();
+          }
 					mActionTimer -= delta;
 					if( mActionTimer <= 0 )
 					{
-						mState = Entering;
-						mActionTimer = 0;
-						mTargetPos = 20+(UniversalFit::sharedUniversalFit()->playSize.width-40)*CCRANDOM_0_1();
+						switchToState(Entering);
+						mActionTimer = -100;
+            mStateDelegate[Repositioning]->reset();
 						mSpeed = (0.3f+0.4f*CCRANDOM_0_1())*ENEMY_NNRUNSPEED;
 					}
 					if( playend )
@@ -101,9 +79,7 @@ void Santa::onUpdate(float delta)
 					}
 
 					dropcoins = true;
-					mTimer += delta;
-					if( mTimer > SANTA_LIFE )
-					{
+					if ( mLifeSpan > SANTA_LIFE ) {
 						mState = Fleeing;
 						mTargetPos = UniversalFit::sharedUniversalFit()->playSize.width+150;
 						mSpeed = ENEMY_NNRUNSPEED;

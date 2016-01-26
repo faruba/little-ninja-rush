@@ -171,7 +171,6 @@ void MainRole::fire(cocos2d::Point dir)
 {
 	if( flag_dart )
 	{
-    mLoadTimer = dartCD;
 		Vector2d *d = Vector2d::create();
 		d->value = dir;
 		this->commitFire(NULL, d);

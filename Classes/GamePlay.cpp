@@ -144,6 +144,7 @@ void GamePlay::onExit()
 
 	cocos2d::Layer::onExit();
 	release();
+    removeFromParent();
 }
 
 //初始化游戏

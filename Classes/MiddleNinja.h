@@ -15,17 +15,17 @@ class MiddleNinja:
 
     virtual const char* animationSetName() { return "mninja"; }
 
+
     virtual bool deliverHit(int type, cocos2d::Point dir);
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
     float  mTimer;
     int    mDartCount;
-    cocos2d::Point  mTargetPos;
+    cocos2d::Point mTargetPos;
     bool   mFlag;
-    float  mSpeed;
+
+    RepositioningStateDelegate *mRepositionDelegate;
 
     float mStepSnow;
-
-
 };
 #endif

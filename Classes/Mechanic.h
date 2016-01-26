@@ -18,7 +18,6 @@ class Mechanic:
     virtual cocos2d::Point center();
     virtual bool supportAimAid();
 
-    GTAnimatedSprite *mSprite;
     float  mTimer;
     float  mSpeed;
     bool   mFlag;
