@@ -446,7 +446,6 @@ void Respawn::gen(int tid) {
     case ENEMIES + 4: // little boss
       removeOthers();
       play->enemies->addObject(play->manager->addGameObject(Role::CreateRole<LittleBoss>(play)));
-      CCLOG("after create Boss %d", play->enemies->count());
       break;
 	}
 }
@@ -455,14 +454,11 @@ void Respawn::removeOthers()
 {
 	GamePlay *play = GamePlay::sharedGamePlay();
   
-  CCLOG("befor remove %d", play->enemies->count());
   cocos2d::Ref* node = NULL;
   CCARRAY_FOREACH(play->enemies, node){
   //for(GameObject* enemy : play->enemies){
     play->manager->removeGameObject((GameObject*)node);
-    CCLOG("remove");
   }
   play->enemies->removeAllObjects();
-  CCLOG("after remove %d", play->enemies->count());
   
 }
