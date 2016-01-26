@@ -173,29 +173,6 @@ bool MoveAndAttackRole::onDead(float delta, bool playend) {
       GameTool::PlaySound(std::string_format("ahh%d.mp3", n).c_str());
       mFlag = false;
     }
-    //fix pos
-    cocos2d::Point np = mSprite->getPosition();
-    if( mSprite->animationId() == 3 )
-    {
-      float ra = mTimer/mSprite->playBackTime();
-      if( ra > 1 )
-      {
-        ra = 1;
-      }
-      ra = 1 - ra;
-      float ds = delta*200*ra;
-      np.x += ds;
-    }
-    else {
-      float ra = mTimer/mSprite->playBackTime();
-      if( ra > 1 )
-      {
-        ra = 1;
-      }
-      float ds = delta*300*ra;
-      np.x -= ds;
-    }
-    mSprite->setPosition(np);
   }
   return removeflag;
 }
