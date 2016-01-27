@@ -78,7 +78,7 @@ static AppDelegate s_sharedApplication;
                                      numberOfSamples: 0 ];
     
     // Enable or disable multiple touches
-    [eaglView setMultipleTouchEnabled:NO];
+    [eaglView setMultipleTouchEnabled:YES];
 
     // Use RootViewController manage CCEAGLView 
     _viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
@@ -129,9 +129,12 @@ static AppDelegate s_sharedApplication;
   
   [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsToRegister];
   NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-  for(NSString* key : keyList){
-    float data = [defaults floatForKey:key];
-    UserSetting::instance()->setData(std::string([key UTF8String]), data);
+  for(NSString* pref : preferences ){
+    NSString* key = [pref objectForKey:@"Key"];
+    if(key){
+      float data = [defaults floatForKey:key];
+      UserSetting::instance()->setData(std::string([key UTF8String]), data);
+    }
     //NSLog(@"read  %f to the key %@", data ,key);
   }
 }
