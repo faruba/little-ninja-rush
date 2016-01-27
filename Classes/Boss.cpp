@@ -503,6 +503,8 @@ void FloatGun::onCreate() {
 void FloatGun::afterDamage()
 {
   if(isDead()){
+    mFlag = false ;// playThisSound;
+    GameTool::PlaySound("floatGunDie.mp3");
     resetCoroutine();
     owner->onFloatGunDead(this);
   }
