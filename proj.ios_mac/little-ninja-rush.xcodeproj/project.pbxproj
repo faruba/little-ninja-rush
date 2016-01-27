@@ -52,8 +52,6 @@
 		521A8EAA19F11F5000D177D7 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 521A8EA819F11F5000D177D7 /* fonts */; };
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
 		808E90F21C57B6A30001994A /* Joystick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 808E90F01C57B6A30001994A /* Joystick.cpp */; };
-		80CC76DF1C57BAD0006BE533 /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = 80CC76DD1C57BAD0006BE533 /* joystick.png */; };
-		80CC76E01C57BAD1006BE533 /* joystickframebackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 80CC76DE1C57BAD0006BE533 /* joystickframebackground.png */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		BE01EA041C21466C009CAF14 /* data in Resources */ = {isa = PBXBuildFile; fileRef = BE01EA031C21466C009CAF14 /* data */; };
 		BE01EA061C214851009CAF14 /* sound in Resources */ = {isa = PBXBuildFile; fileRef = BE01EA051C214851009CAF14 /* sound */; };
@@ -615,8 +613,6 @@
 		52B47A461A53D09B004E4C60 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		808E90F01C57B6A30001994A /* Joystick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Joystick.cpp; path = joystick/Joystick.cpp; sourceTree = "<group>"; };
 		808E90F11C57B6A30001994A /* Joystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Joystick.h; path = joystick/Joystick.h; sourceTree = "<group>"; };
-		80CC76DD1C57BAD0006BE533 /* joystick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick.png; sourceTree = "<group>"; };
-		80CC76DE1C57BAD0006BE533 /* joystickframebackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystickframebackground.png; sourceTree = "<group>"; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BE01EA031C21466C009CAF14 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		BE01EA051C214851009CAF14 /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
@@ -1313,8 +1309,6 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				80CC76DD1C57BAD0006BE533 /* joystick.png */,
-				80CC76DE1C57BAD0006BE533 /* joystickframebackground.png */,
 				D4BE8C9D1C5644D800AE1DB9 /* little_boss */,
 				D4437E941C50E07000ABAE0E /* floatGun */,
 				D4437E921C50E05B00ABAE0E /* boss */,
@@ -2259,7 +2253,6 @@
 				BEF4E63C1C1FEAEE00F8340C /* jn_jybft.png in Resources */,
 				BEF4E5E31C1FEAEE00F8340C /* Icon.png in Resources */,
 				BEF4E68A1C1FEAEE00F8340C /* nt6.png in Resources */,
-				80CC76DF1C57BAD0006BE533 /* joystick.png in Resources */,
 				BEF4E6581C1FEAEE00F8340C /* mcwp4.png in Resources */,
 				BEF4E5A81C1FEAEE00F8340C /* cjt5.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
@@ -2448,7 +2441,6 @@
 				BEF4E6591C1FEAEE00F8340C /* mcwp5.png in Resources */,
 				BEF4E65A1C1FEAEE00F8340C /* mcwp6.png in Resources */,
 				BEF4E5C41C1FEAEE00F8340C /* cjt33.png in Resources */,
-				80CC76E01C57BAD1006BE533 /* joystickframebackground.png in Resources */,
 				BEF4E5AB1C1FEAEE00F8340C /* cjt8.png in Resources */,
 				BEF4E6501C1FEAEE00F8340C /* katanayt.png in Resources */,
 				BEF4E7331C1FEAEE00F8340C /* ui-gameover.plist in Resources */,

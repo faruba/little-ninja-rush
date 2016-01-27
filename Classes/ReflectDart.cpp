@@ -111,7 +111,7 @@ void ReflectDart::onUpdate(float delta)
 	node = NULL;
 	CCARRAY_FOREACH(play->darts, node)
 	{
-		Darts *dr = (Darts*)node;
+		Darts *dr = (Darts*)node;// TODO:可能出现未初始化完成的飞镖参与碰撞检测
 		if( dr->isEnemy() && exCollisionWithCircles(mSprite->getPosition(), 0, 0, 30, dr->position(), 7) && dr->position().y > mSprite->getPosition().y )
 		{
 			dr->onHitback(mSprite->getPosition());

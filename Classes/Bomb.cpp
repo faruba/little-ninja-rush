@@ -100,6 +100,7 @@ bool Bomb::isEnemy()
 
 cocos2d::Point Bomb::position() 
 {
+    if (mSprite == nullptr) return cocos2d::Vec2::ZERO;
 	return mSprite->getPosition();
 }
 
