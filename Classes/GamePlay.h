@@ -10,6 +10,7 @@
 #include "GameInterface.h"
 #include "Dart.h"
 #include "FootPrint.h"
+#include "joystick/Joystick.h"
 
 #define OP_RESET (0)
 
@@ -23,7 +24,7 @@ class PopQueue : public Ref {
 		int type;
 };
 
-class GamePlay : 
+class GamePlay :
 	public cocos2d::Layer
 {
 	public:
@@ -45,7 +46,7 @@ class GamePlay :
     }
 		virtual bool onTouchBegan(Touch * touch, Event * event);
 		virtual void onTouchMoved(Touch * touch, Event * event);
-  void onTouchEnded(Touch * touch, Event * event);
+    void onTouchEnded(Touch * touch, Event * event);
 		virtual void onAcceleration(Acceleration* acc, Event* unsedEvent);
 		static GamePlay *sharedGamePlay();
 
@@ -240,6 +241,12 @@ class GamePlay :
 		float mGravityFix = 1;
 		cocos2d::Node *mTaskComplete = NULL;
 		int mGameMode = MODE_CLASSIC;
+  
+  Joystick* joystick;
+  static void joystickHandler(const Vec2& newPos, const Vec2& lastPos);
+    
+    static Acceleration acc;
+  //SneakyButton
 };
 
 #endif

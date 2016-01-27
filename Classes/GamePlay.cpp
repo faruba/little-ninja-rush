@@ -17,6 +17,7 @@
 #include "StaticParticle.h"
 #include "UniversalFit.h"
 #include "SpeedLine.h"
+#include "joystick/Joystick.h"
 bool g_EnableTap = true;
 GamePlay* gPlay = NULL;
 
@@ -31,6 +32,7 @@ cocos2d::CCArray *gPopQueues = NULL;
 #define TAP 1
 #define SLIDE 2
 
+Acceleration GamePlay::acc;
 GamePlay::~GamePlay()
 {
 	gPlay = NULL;
@@ -147,6 +149,7 @@ void GamePlay::onExit()
     removeFromParent();
 }
 
+
 //初始化游戏
 void GamePlay::initGamePlay(int mod)
 {
@@ -209,10 +212,26 @@ void GamePlay::initGamePlay(int mod)
 	this->mMenu->addChild(xpause);
 	mMenu->setPosition(cocos2d::Vec2(-7, -7));
 	mUI->addChild(mMenu, LAYER_UI);
+  
+  
+    joystick =  Joystick::create();
+    joystick->retain();
+    joystick->setJoystickPositionChangeHandler( GamePlay::joystickHandler);
+    joystick->setPosition(Vec2(40,40));
+    this->addChild(joystick,LAYER_UI+290);
 
 	this->resetGame();
 
 	operation = -1;
+  
+}
+void GamePlay::joystickHandler(const Vec2& newPos, const Vec2& lastPos)
+{
+    acc.x = newPos.x*4;
+    if(newPos.fuzzyEquals(Vec2::ZERO, 0.1f)){
+        acc.x = acc.y = acc.z = 0;
+    }
+
 }
 
 void GamePlay::update(float delta)
@@ -224,6 +243,10 @@ void GamePlay::update(float delta)
     delta = 0;
   }
 
+    GamePlay* play = GamePlay::sharedGamePlay();
+    if(acc.x != 0){
+        play->onAcceleration(&acc, NULL);
+    }
   //schedule spellmask
   if( mScheduleSpellRelease >= 0 )
   {
