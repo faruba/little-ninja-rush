@@ -130,12 +130,14 @@ void Joystick::handleTouchChange(Touch* touch)
 }
 
 
-bool Button::init()
+bool JoyButton::init()
 {
   
   _touchEventListener = EventListenerTouchOneByOne::create();
-  _touchEventListener->onTouchEnded = CC_CALLBACK_2(Button::onTouchEnded, this);
-  _touchEventListener->onTouchCancelled = CC_CALLBACK_2(Button::onTouchCancelled, this);
+  _touchEventListener->onTouchBegan = CC_CALLBACK_2(JoyButton::onTouchBegan, this);
+  _touchEventListener->onTouchMoved = CC_CALLBACK_2(JoyButton::onTouchMoved, this);
+  _touchEventListener->onTouchEnded = CC_CALLBACK_2(JoyButton::onTouchEnded, this);
+  _touchEventListener->onTouchCancelled = CC_CALLBACK_2(JoyButton::onTouchCancelled, this);
   _touchEventListener->setSwallowTouches(true);
   
   Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(_touchEventListener, this);
@@ -143,17 +145,19 @@ bool Button::init()
   return true;
 }
 
-void Button::setJoystickPositionChangeHandler(ButtonHandler handler)
+void JoyButton::setButtonHandler(ButtonHandler handler)
 {
   _handler = handler;
 }
 
-void Button::setImg(const char* name){
-  button= cocos2d::Sprite::createWithSpriteFrameName(name);
-  button->setPosition(WIDTH(this) / 2, HEIGHT(this) / 2);
-  addChild(button);
+void JoyButton::setImg(const std::string& name){
+  
+  cocos2d::Sprite::initWithFile(name);
+  //button= cocos2d::Sprite::create(name);
+  //button->setPosition(WIDTH(this) / 2, HEIGHT(this) / 2);
+  //addChild(button);
 }
-void Button::onTouchEnded(Touch* touch, Event* event)
+void JoyButton::onTouchEnded(Touch* touch, Event* event)
 {
   
   if (_handler)
@@ -161,8 +165,18 @@ void Button::onTouchEnded(Touch* touch, Event* event)
   
 }
 
-void Button::onTouchCancelled(Touch* touch, Event* event)
+void JoyButton::onTouchCancelled(Touch* touch, Event* event)
 {
   onTouchEnded(touch, event);
+}
+
+bool JoyButton::onTouchBegan(Touch* touch, Event* event)
+{
+  if (this->getBoundingBox().containsPoint(touch->getLocation()))
+  {
+    return true;
+  }
+  
+  return false;
 }
 

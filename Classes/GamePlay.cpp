@@ -219,11 +219,45 @@ void GamePlay::initGamePlay(int mod)
     joystick->setJoystickPositionChangeHandler( GamePlay::joystickHandler);
     joystick->setPosition(Vec2(40,40));
     this->addChild(joystick,LAYER_UI+290);
+  
+  skillButton = JoyButton::create();
+  skillButton->retain();
+  skillButton->setImg("icon0.png");
+  skillButton->setButtonHandler(GamePlay::castSpell);
+  skillButton->setPosition(Vec2(SCREEN_WIDTH - 100, 40));
+  this->addChild(skillButton,LAYER_UI+290);
+  
+  slashButton = JoyButton::create();
+  slashButton->retain();
+  slashButton->setImg("icon32.png");
+  slashButton->setButtonHandler(GamePlay::slice);
+  slashButton->setPosition(Vec2(SCREEN_WIDTH - 40, 40));
+  this->addChild(slashButton,LAYER_UI+290);
+  
 
 	this->resetGame();
 
 	operation = -1;
   
+}
+
+void GamePlay::castSpell(){
+  
+  GamePlay* play = GamePlay::sharedGamePlay();
+  if( play->mainrole->spellType != SPELL_REPLEACE
+     && play->mainrole->spellType != SPELL_GODHAND)
+  {
+    play->mainrole->spell(cocos2d::Point::ZERO);
+  }
+}
+void GamePlay::slice(){
+  
+  GamePlay* play = GamePlay::sharedGamePlay();
+  play->mainrole->slice();
+  		if( play->mainrole2 != NULL )
+  		{
+  			play->mainrole2->slice();
+  		}
 }
 void GamePlay::joystickHandler(const Vec2& newPos, const Vec2& lastPos)
 {
@@ -244,9 +278,7 @@ void GamePlay::update(float delta)
   }
 
     GamePlay* play = GamePlay::sharedGamePlay();
-    if(acc.x != 0){
-        play->onAcceleration(&acc, NULL);
-    }
+  play->onAcceleration_Disabled(&acc, NULL);
   //schedule spellmask
   if( mScheduleSpellRelease >= 0 )
   {
@@ -715,6 +747,7 @@ void GamePlay::gestureRecognize(cocos2d::Point dir , int type)
   	}
   	if( dir.y >= PLAY_SLIDERELOAD )
   	{
+      return;
   		mainrole->slice();
   		if( mainrole2 != NULL )
   		{
@@ -723,6 +756,7 @@ void GamePlay::gestureRecognize(cocos2d::Point dir , int type)
   		return;
   	}
   }
+  return;
 	//发动技能
 	if( mainrole->spellType != SPELL_REPLEACE
 			&& mainrole->spellType != SPELL_GODHAND)
@@ -801,7 +835,7 @@ void GamePlay::onTouchMoved(Touch * touch, Event * event)
   }
 }
 
-void GamePlay::onAcceleration(Acceleration* pAccelerationValue, Event*)
+void GamePlay::onAcceleration_Disabled(Acceleration* pAccelerationValue, Event*)
 {
 	pAccelerationValue->y = pAccelerationValue->x;
 	if( count_control <= 0 )

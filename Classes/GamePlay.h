@@ -47,7 +47,7 @@ class GamePlay :
 		virtual bool onTouchBegan(Touch * touch, Event * event);
 		virtual void onTouchMoved(Touch * touch, Event * event);
     void onTouchEnded(Touch * touch, Event * event);
-		virtual void onAcceleration(Acceleration* acc, Event* unsedEvent);
+		/*virtual*/ void onAcceleration_Disabled(Acceleration* acc, Event* unsedEvent);
 		static GamePlay *sharedGamePlay();
 
 		void processNextNotification() {GamePlay::sharedGamePlay()->processNotificationQueue();};
@@ -236,16 +236,19 @@ class GamePlay :
   int pumkinCount;
   int littlebossCount;
   //end
-	private:
-		UISwapper mUISwapper;
-		float mGravityFix = 1;
-		cocos2d::Node *mTaskComplete = NULL;
-		int mGameMode = MODE_CLASSIC;
+private:
+  UISwapper mUISwapper;
+  float mGravityFix = 1;
+  cocos2d::Node *mTaskComplete = NULL;
+  int mGameMode = MODE_CLASSIC;
   
   Joystick* joystick;
   static void joystickHandler(const Vec2& newPos, const Vec2& lastPos);
-    
-    static Acceleration acc;
+  static Acceleration acc;
+  JoyButton* skillButton;
+  JoyButton* slashButton;
+  static void castSpell();
+  static void slice();
   //SneakyButton
 };
 
