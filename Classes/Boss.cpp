@@ -453,7 +453,7 @@ bool Boss::isAllFloatGunDead()
 void Boss::clearFloatGun()
 {
   GamePlay *play = GamePlay::sharedGamePlay();
-  for(int i =0; i < FLOAT_GUN_COUNT; i++){
+  for(int i =0; i < FLOAT_GUN_COUNT && i < floatGunGroup.size(); i++){
     FloatGun* gun = floatGunGroup[i];
     if(gun != NULL && gun->currentState() != Dead){
       play->manager->removeGameObject(gun);
