@@ -741,3 +741,74 @@ void PumpkinDeadDelegate::update(float delta) {
   mSprite->setPosition(pos);
   static_cast<Pumpkin*>(mRole)->mPumpkinSpeed = Vec2(0, 0);
 }
+
+void  SamuriOnEnteringStateDelegate::onEnter(){
+  mFlag  = false;
+	GameTool::PlaySound("samurai_warning.mp3");
+}
+void  SamuriOnEnteringStateDelegate::update(float delta){
+  if( !mFlag && mRole->mSprite->getPosition().x < UniversalFit::sharedUniversalFit()->playSize.width )
+  {
+    GameTool::PlaySound("samurai_attack.mp3");
+    mFlag = true;
+  }
+  
+  GamePlay *play = GamePlay::sharedGamePlay();
+  float rds = play->runspeed*0.5f;
+  if( mRole->mSprite->getPosition().x - play->mainrole->position().x < rds )
+  {
+    mRole->switchToState(Role::Running);
+    mRole->mSprite->playGTAnimation(1, false);
+  }
+}
+void  SamuriRunningStateDelegate::onEnter(){
+  isTouched = false;
+}
+void   SamuriRunningStateDelegate::update(float delta){
+  if(!isTouched){
+    bool hit = false;
+    GamePlay *play = GamePlay::sharedGamePlay();
+    auto mSprite = mRole->mSprite;
+    if( mSprite->getPosition().x < play->mainrole->position().x )
+    {
+      hit = true;
+    }
+    if( play->mainrole2 != NULL && mSprite->getPosition().x < play->mainrole2->position().x )
+    {
+      hit = true;
+    }
+    if( mAnimationIsOver )
+    {
+      hit = true;
+    }
+    if( hit )
+    {
+      GameTool::PlaySound("hit");
+      play->mainrole->deliverHit(HIT_BLADE, Vec2(0, 0));//武士总是对付第一个人物造成伤害
+      isTouched = true;
+    }
+  }
+ 
+}
+void  SamuriDeadStateDelegate::onEnter(){
+  mRole->mSprite->playGTAnimation(2, false);
+	mFlag = true;
+	mTimer = 0;
+  
+
+}
+void  SamuriDeadStateDelegate::update(float delta){
+  if(mFlag)
+  {
+    mTimer += delta;
+    if(mTimer>0.3f)
+    {
+      mTimer = 0;
+      mFlag = false;
+      GameTool::PlaySound("samurai_die.mp3");
+    }
+  }
+		
+}
+
+

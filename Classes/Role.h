@@ -237,6 +237,33 @@ private:
   int mCoinsCounter = 0;
   bool isCandyDroped;
 };
+
+class SamuriOnEnteringStateDelegate: public RoleStateDelegate{
+public:
+  virtual void onEnter();
+  virtual void update(float delta);
+private:
+  bool mFlag = false;
+};
+class SamuriRunningStateDelegate: public RoleStateDelegate{
+public:
+  virtual void onEnter();
+  virtual void update(float delta);
+private:
+  bool isTouched = false;
+};
+class SamuriDeadStateDelegate: public RoleStateDelegate{
+public:
+  virtual void onEnter();
+  virtual void update(float delta);
+private:
+  bool mFlag = true;
+	float mTimer = 0;
+ 
+};
+
+
+
 class Role: public GameObject {
   public:
     enum RoleState {

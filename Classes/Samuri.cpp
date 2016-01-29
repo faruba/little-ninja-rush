@@ -36,80 +36,34 @@ void Samuri::onCreate() {
 	cocos2d::RepeatForever *rp = cocos2d::RepeatForever::create(sq);
 	mHint->runAction(rp);
 
-	mTimer = 0;
-	mFlag = false;
-
+  switchStateDelegate(Entering, RoleStateDelegate::CreateDelegate<SamuriOnEnteringStateDelegate>());
+  switchStateDelegate(Repositioning, RoleStateDelegate::CreateDelegate<MessagerRepositioningStateDelegate>());
+  switchStateDelegate(Running, RoleStateDelegate::CreateDelegate< SamuriRunningStateDelegate>());
+  switchStateDelegate(Dead, RoleStateDelegate::CreateDelegate< SamuriDeadStateDelegate>());
+  
   switchToState(Entering);
-
-	GameTool::PlaySound("samurai_warning.mp3");
 }
 
 void Samuri::onUpdate(float delta) 
 {
+  Role::onUpdate(delta);
+  
+  if (mStateDelegate[mState] != nullptr) {
+    mStateDelegate[mState]->pre_update(delta);
+    bool gameOver = handleGameOver(delta);
+    if (!gameOver) {
+      mStateDelegate[mState]->update(delta);
+    }
+    mStateDelegate[mState]->after_update(delta);
+  }
+  
+  
 	GamePlay *play = GamePlay::sharedGamePlay();
-	bool playend = mSprite->updateGTAnimation(delta);
 	//fix pos
 	cocos2d::Point np = mSprite->getPosition();
 	np.x -= play->runspeed*delta;
 	mSprite->setPosition(np);
-	switch (mState) {
-		case Entering:
-			{
-				if( !mFlag && mSprite->getPosition().x < UniversalFit::sharedUniversalFit()->playSize.width )
-				{
-					GameTool::PlaySound("samurai_attack.mp3");
-					mFlag = true;
-				}
-				float rds = play->runspeed*0.5f;
-				if( mSprite->getPosition().x - play->mainrole->position().x < rds )
-				{
-					mState = Running;
-					mSprite->playGTAnimation(1, false);
-					mFlag = false;
-				}
-			}
-			break;
-		case Running:
-			{
-				if( mFlag == false )
-				{
-					bool hit = false;
-					if( mSprite->getPosition().x < play->mainrole->position().x )
-					{
-						hit = true;
-					}
-					if( play->mainrole2 != NULL && mSprite->getPosition().x < play->mainrole2->position().x )
-					{
-						hit = true;
-					}
-					if( playend )
-					{
-						hit = true;
-					}
-					if( hit )
-					{
-						GameTool::PlaySound("hit");
-						play->mainrole->deliverHit(HIT_BLADE, Vec2(0, 0));//武士总是对付第一个人物造成伤害
-						mFlag = true;
-					}
-				}
-			}
-			break;
-		case Dead:
-			{
-				if(mFlag)
-				{
-					mTimer += delta;
-					if(mTimer>0.3f)
-					{
-						mTimer = 0;
-						mFlag = false;
-						GameTool::PlaySound("samurai_die.mp3");
-					}
-				}
-			}
-			break;
-	}
+	
 	//clean mark
 	if( mHint != NULL && mSprite->getPosition().x < UniversalFit::sharedUniversalFit()->playSize.width )
 	{
@@ -150,11 +104,7 @@ bool Samuri::deliverHit(int type, cocos2d::Point dir)
 	if( mState != Dead )
 	{
 		GameTool::PlaySound(std::string_format("ahh%d.mp3", (randomInt(3)+1)).c_str());
-		mState = Dead;
-		mSprite->playGTAnimation(2, false);
-		mFlag = true;
-		mTimer = 0;
-
+    switchToState(Role::Dead);
 		GamePlay *play = GamePlay::sharedGamePlay();
 		play->mainrole->gainSP(5);
 
