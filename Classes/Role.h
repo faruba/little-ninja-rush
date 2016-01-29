@@ -97,6 +97,12 @@ private:
   float mTimer;
   float mFlySound;
 };
+class PumpkinFleeingStateDelegate: public RoleStateDelegate{
+public:
+  virtual void onEnter();
+  virtual void update(float delta);
+  Vec2 target;
+};
 class SantaRunningStateDelegate : public RoleStateDelegate {
 public:
   virtual void onEnter ();
@@ -222,6 +228,15 @@ private:
   bool  mFlag;
 };
 
+class PumpkinDeadDelegate: public RoleStateDelegate{
+public:
+  virtual void onEnter();
+  virtual void update(float delta);
+private:
+  float mTimer = 0;
+  int mCoinsCounter = 0;
+  bool isCandyDroped;
+};
 class Role: public GameObject {
   public:
     enum RoleState {
@@ -305,5 +320,6 @@ class Role: public GameObject {
         return role;
       }
 };
+
 
 #endif

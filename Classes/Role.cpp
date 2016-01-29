@@ -3,6 +3,7 @@
 #include "Bomb.h"
 #include "Item.h"
 #include "Pumpkin.h"
+#include "GameRecord.h"
 
 //摔死的概率(%)
 #define FALLDOWN (15)
@@ -233,6 +234,7 @@ void PumpkinEnteringStateDelegate::onEnter(){
 	pumkin->mTargetPos = Vec2(50, 210);
   pumkin->mTargetSpeed = cocos2d::Point::forAngle(CC_DEGREES_TO_RADIANS(-45))* 100;
 	pumkin->mPumpkinSpeed =cocos2d::Point::forAngle(CC_DEGREES_TO_RADIANS(-90))* 50;
+  GameTool::PlaySound("pumpkinstart.mp3");
 	mFlySound = 3 + 7*CCRANDOM_0_1();
   mTimer = 0;
 }
@@ -244,6 +246,8 @@ void PumpkinEnteringStateDelegate::update(float delta){
   mTimer += delta;
   if( mTimer > FLOATING_TIME)
   {
+    
+    
     mRole->switchToState(Role::RoleState::Fleeing);
     return;
   }
@@ -262,6 +266,17 @@ void PumpkinEnteringStateDelegate::update(float delta){
   }
 
 }
+void PumpkinFleeingStateDelegate::onEnter(){
+  target = Vec2(UniversalFit::sharedUniversalFit()->playSize.width + 100, SCREEN_HEIGHT/2);
+  mRole->mSprite->playGTAnimation(0, true);
+}
+void PumpkinFleeingStateDelegate::update(float delta){
+  if( mAnimationIsOver )
+  {
+    mRole->mSprite->playGTAnimation(0, true);
+  }
+}
+
 ///// SantaRunningStateDelegate
 void SantaRunningStateDelegate::onEnter () {
   mTimer = 3 + 3*CCRANDOM_0_1();
@@ -684,4 +699,45 @@ void DeadStateDelegate::update (float delta) {
     np.x += delta*ra;
     mRole->setPosition(np);
   }
+}
+
+void  PumpkinDeadDelegate::onEnter(){
+  mTimer = 0;
+  mCoinsCounter = 0;
+  isCandyDroped = false;
+  mRole->mSprite->playGTAnimation(1, true);
+  GameTool::PlaySound("pumpkindie.mp3");
+}
+void PumpkinDeadDelegate::update(float delta) {
+  
+  GamePlay *play = GamePlay::sharedGamePlay();
+  auto mSprite = mRole->mSprite;
+  mTimer += delta;
+  if( mTimer >= 1 && mSprite->animationId() == 1 )
+  {
+    mSprite->playGTAnimation(2, false);
+  }
+  if( mTimer < 1 )
+  {
+    if( mTimer > (1.0f/30)*mCoinsCounter )
+    {
+			play->manager->addGameObject(Item::item(0, mSprite->getPosition(), play, true));
+			mCoinsCounter++;
+    }
+  }
+  
+  if(mAnimationIsOver)
+  {
+    if( !GameRecord::sharedGameRecord()->collection->isItemCompleted(38) && !isCandyDroped )
+    {
+			play->manager->addGameObject(Item::item(-1, mSprite->getPosition(), play, false));
+      isCandyDroped = true;
+    }
+  }
+  //shake
+  Vec2 pos = mSprite->getPosition();
+  pos.x += -5 + CCRANDOM_0_1()*10;
+  pos.y += -5 + CCRANDOM_0_1()*10;
+  mSprite->setPosition(pos);
+  static_cast<Pumpkin*>(mRole)->mPumpkinSpeed = Vec2(0, 0);
 }

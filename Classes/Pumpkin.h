@@ -4,6 +4,7 @@
 #include "GameTool.h"
 #include "Role.h"
 
+class GamePlay;
 class Pumpkin:
   public Role
 {
@@ -32,5 +33,9 @@ public:
   cocos2d::Vec2 mTargetPos;
   cocos2d::Vec2 mPumpkinSpeed;
   cocos2d::Vec2 mTargetSpeed;
+  
+private:
+  void facePlayer(GamePlay* play);
+  void playHurtAnimation();
 };
 #endif
