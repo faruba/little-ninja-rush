@@ -73,7 +73,8 @@ int GTLoadList::loadSome()
     gettimeofday(&al, NULL);
     
     //cost += al-bl;
-    cost += gettimeofday(&bl, &al)/1000.0;
+		//
+    cost += GameTool::diffTimeval(bl, al)/1000.0;
     mLoadIndex++;
   }
   return mList.size() - mLoadIndex;
