@@ -16,6 +16,8 @@
  * =====================================================================================
  */
 #include "patch.h"
+#include <cstdlib>
+#include <cstring>
 
 namespace std{
 	std::string string_format(const std::string fmt_str, ...) {

@@ -103,18 +103,42 @@ public:
 
 template <typename T>
 void JsonWrapper::parseJsonFileForVector(const char filename[], std::vector<T> &vector) {
-  std::string path = cocos2d::FileUtils::getInstance()->fullPathForFilename(filename);
-  FILE* pFile = fopen(path.c_str(), "rb");
-  char buffer[65535];
-  rapidjson::FileReadStream is(pFile, buffer, sizeof(buffer));
-  rapidjson::Document doc;
-  doc.ParseStream<0, rapidjson::UTF8<>, rapidjson::FileReadStream>(is);
+/*
+	auto fileutils = cocos2d::FileUtils::getInstance();
+  std::string path = fileutils->fullPathForFilename(filename);
+  FILE* pFile = fopen(fileutils->getSuitableFOpen(path).c_str(), "rb");
+	cocos2d::CCLog(" parseJsonFileForVector %s %d ", filename,pFile);
+	if(pFile != NULL){
+		char readBuffer[65536];
+		rapidjson::FileReadStream is(pFile, readBuffer, sizeof(readBuffer));
+		rapidjson::Document doc;
+		doc.ParseStream<0, rapidjson::UTF8<>, rapidjson::FileReadStream>(is);
+		
+		if (doc.HasParseError()) {
+			cocos2d::CCLog("JsonWrapper: parse failed.");
+			throw "JsonWrapper: parse failed."; // TODO: Better exception handling
+		}
 
-  if (doc.HasParseError()) {
-    throw "JsonWrapper: parse failed."; // TODO: Better exception handling
-  }
+		parseValueForVector(doc, vector);
 
-  parseValueForVector(doc, vector);
+		fclose(pFile);
+	}
+	*/
+
+	auto data = cocos2d::FileUtils::getInstance()->getStringFromFile(filename);
+	if(data.size()!=0){
+		cocos2d::CCLog(" parseJsonFileForVector %s %d", filename,data.size());
+		rapidjson::Document doc;
+		doc.Parse<rapidjson::kParseDefaultFlags>(data.c_str());
+		
+		if (doc.HasParseError()) {
+			cocos2d::CCLog("JsonWrapper: parse failed.");
+			throw "JsonWrapper: parse failed."; // TODO: Better exception handling
+		}
+
+		parseValueForVector(doc, vector);
+
+	}
 }
 
 #endif /* defined(__LittleNinjaRushAP__JsonWrapper__) */

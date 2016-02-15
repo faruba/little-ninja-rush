@@ -150,7 +150,7 @@ class GameData : public cocos2d::Ref
 
 template <typename T>
 void loadVectorFromJsonFile(const char *filename, std::vector<T> &vector) {
-	CCLOG("Loading %s...", filename);
+	cocos2d::CCLog("Loading %s...", filename);
 	try {
 		JsonWrapper::parseJsonFileForVector(filename, vector);
 	} catch ( const char *err ) {
