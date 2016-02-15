@@ -137,6 +137,9 @@ void GameRecord::readLocal()
 	else
 	{
 		cocos2d::CCLog("Fail to parse");
+		writeLocal();
+		readLocal();
+		return;
 	}
 	task->doneReadObjectives();
 }
@@ -152,7 +155,7 @@ void GameRecord::writeLocal()
 
 	string path = cocos2d::CCFileUtils::sharedFileUtils()->getWritablePath();
 	path += GAME_RECORD_FILENAME;
-	cocos2d::CCLog("RECORD = %s", path.c_str());
+	cocos2d::CCLog("write RECORD = %s", path.c_str());
 	FILE *fp = fopen(path.c_str(), "w");
 	rapidjson::FileStream f(fp);
 	rapidjson::PrettyWriter<rapidjson::FileStream> writer(f);
